@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>LMD | Login</title>
+    <title>LMS | Login</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="<?php echo base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -19,11 +19,12 @@
 <body class="bg-silver-300">
     <div class="content">
         <div class="brand">
-            <a class="link" href="#" style="font-size: 24px;">LMD Management</a>
+            <a class="link" href="#" style="font-size: 24px;">LMS Management</a>
         </div>
-        <!-- <form id="login-form" action="javascript:;" method="post"> -->
-        <form action="<?php echo base_url(); ?>login" method="post">
+        <form id="login-form" action="javascript:;" method="post" novalidate="novalidate">
+        <!-- <form action="<?php echo base_url(); ?>loginMe" method="post"> -->
             <h4 class="login-title">Log in</h4>
+            <div class="alert_msg"></div> 
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
@@ -33,7 +34,7 @@
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-                    <input class="form-control" type="password" name="password" placeholder="Password">
+                    <input class="form-control" type="password" name="password" placeholder="Password" autocomplete="off">
                 </div>
             </div>
             <div class="form-group d-flex justify-content-between">
@@ -43,7 +44,7 @@
                 <a href="#">Forgot password?</a>
             </div>
             <div class="form-group">
-                <button class="btn btn-info btn-block" value="Login" type="submit">Login</button>
+                <button class="btn btn-info btn-block" id="login_btn" value="Login" type="submit">Login</button>
                 <!-- <a class="btn btn-info btn-block" href="<?php echo base_url(); ?>dashboard">Login</a> -->
             </div>
             <div class="social-auth-hr">
@@ -75,29 +76,8 @@
     <script src="<?php echo base_url(); ?>assets/vendors/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
     <!-- CORE SCRIPTS-->
     <script src="<?php echo base_url(); ?>assets/js/app.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/custom/login.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
-    <script type="text/javascript">
-        $(function() {
-            $('#login-form').validate({
-                errorClass: "help-block",
-                rules: {
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
-                        required: true
-                    }
-                },
-                highlight: function(e) {
-                    $(e).closest(".form-group").addClass("has-error")
-                },
-                unhighlight: function(e) {
-                    $(e).closest(".form-group").removeClass("has-error")
-                },
-            });
-        });
-    </script>
 </body>
 
 </html>

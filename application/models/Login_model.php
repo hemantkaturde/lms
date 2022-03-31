@@ -14,11 +14,11 @@ class Login_model extends CI_Model
         $user = $query->result();
         
         if(!empty($user)){
-            // if(verifyHashedPassword($password, $user[0]->password)){
+            if(verifyHashedPassword($password, $user[0]->password)){
                 return $user;
-            // } else {
-            //     return array();
-            // }
+            } else {
+                return array();
+            }
         } else {
             return array();
         }

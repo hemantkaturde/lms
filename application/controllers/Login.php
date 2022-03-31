@@ -91,7 +91,7 @@ class Login extends BaseController
             $password = $this->input->post('password');
             
             $result = $this->login_model->loginMe($email, $password);
-            
+
             if(count($result) > 0)
             {
                 foreach ($result as $res)
@@ -117,14 +117,16 @@ class Login extends BaseController
                     
                     $this->logrecord($process,$processFunction);
 
-                    redirect('/dashboard');
+                    // redirect('/dashboard');
+                   echo 1;
                 }
             }
             else
             {
-                $this->session->set_flashdata('error', 'Email address or Password is wrong');
+                echo 0;
+                // $this->session->set_flashdata('error', 'Email address or Password is wrong');
                 
-                redirect('/login');
+                // redirect('/login');
             }
         }
     }

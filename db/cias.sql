@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 08:06 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Mar 28, 2022 at 09:08 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lms`
+-- Database: `cias`
 --
 
 -- --------------------------------------------------------
@@ -52,6 +52,20 @@ INSERT INTO `tbl_access_control` (`id`, `module`, `parent_id`, `access`, `isDele
 (5, 'Users', 0, 'view', 0, 1, 1, '0000-00-00 00:00:00', NULL, NULL),
 (6, 'User', 5, 'view,add,edit,delete', 0, 1, 1, '0000-00-00 00:00:00', NULL, NULL),
 (7, 'Role', 5, 'view,add,edit,delete', 0, 1, 1, '0000-00-00 00:00:00', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_attachment`
+--
+
+CREATE TABLE `tbl_attachment` (
+  `id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `filename` text NOT NULL,
+  `flag` varchar(10) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1976,6 +1990,90 @@ INSERT INTO `tbl_log` (`id`, `userId`, `userName`, `process`, `processFunction`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_log_backup`
+--
+
+CREATE TABLE `tbl_log_backup` (
+  `id` bigint(20) NOT NULL,
+  `userId` bigint(20) NOT NULL,
+  `userName` varchar(128) NOT NULL,
+  `process` varchar(1024) NOT NULL,
+  `processFunction` varchar(1024) NOT NULL,
+  `userRoleId` bigint(20) NOT NULL,
+  `userRoleText` varchar(128) NOT NULL,
+  `userIp` varchar(1024) NOT NULL,
+  `userAgent` varchar(128) NOT NULL,
+  `agentString` varchar(1024) NOT NULL,
+  `platform` varchar(128) NOT NULL,
+  `createdDtm` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_orders`
+--
+
+CREATE TABLE `tbl_orders` (
+  `id` int(11) NOT NULL,
+  `orderid` text NOT NULL,
+  `waybill` text NOT NULL,
+  `consignee_name` varchar(100) NOT NULL,
+  `consignee_add` varchar(100) NOT NULL,
+  `consignee_address_type` varchar(20) NOT NULL,
+  `consignee_phone` int(15) NOT NULL,
+  `consignee_pin` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_pincode`
+--
+
+CREATE TABLE `tbl_pincode` (
+  `pincodeId` int(11) NOT NULL,
+  `pincode` int(6) NOT NULL,
+  `state_name` varchar(101) NOT NULL,
+  `state_code` varchar(50) NOT NULL,
+  `dist_name` varchar(101) NOT NULL,
+  `dist_code` varchar(50) NOT NULL,
+  `servciblty` varchar(101) NOT NULL,
+  `prepaid` text NOT NULL,
+  `cod` text NOT NULL,
+  `pickup` text NOT NULL,
+  `cash` text NOT NULL,
+  `repl` text NOT NULL,
+  `isDeleted` int(2) NOT NULL,
+  `status` int(2) NOT NULL,
+  `createdBy` int(12) NOT NULL,
+  `createdDtm` datetime NOT NULL,
+  `updatedBy` int(12) NOT NULL,
+  `updatedDtm` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_reset_password`
+--
+
+CREATE TABLE `tbl_reset_password` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `activation_id` varchar(32) NOT NULL,
+  `agent` varchar(512) NOT NULL,
+  `client_ip` varchar(32) NOT NULL,
+  `isDeleted` tinyint(4) NOT NULL DEFAULT 0,
+  `createdBy` bigint(20) NOT NULL DEFAULT 1,
+  `createdDtm` datetime NOT NULL,
+  `updatedBy` bigint(20) DEFAULT NULL,
+  `updatedDtm` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_roles`
 --
 
@@ -2008,6 +2106,63 @@ INSERT INTO `tbl_roles` (`roleId`, `role`, `discription`, `access`, `role_type`,
 (12, 'Superadmin', 'Role', '', '', 0, 0, 0, '2021-07-11 14:31:57', 9, '2021-07-25 19:56:14'),
 (19, 'Superadmin', 'Superadmin', '[\"homepagemodule\",\"companymodule\",\"companysubpage\",\"companysubadd\",\"companysubedit\",\"companysubdelete\",\"vendormodule\",\"vendorpage\",\"vendoradd\",\"vendoredit\",\"vendordelete\",\"usersmodule\",\"userpage\",\"useradd\",\"useredit\",\"userdelete\",\"rolepage\",\"roleadd\",\"roleedit\",\"roledelete\"]', '', 0, 0, 0, '2021-07-25 20:15:13', NULL, NULL),
 (20, 'Test Role With Type', 'THIS IS TEST Description', '[\"homepagemodule\",\"clientymodule\",\"clientpage\",\"clientadd\",\"clientedit\",\"clientdelete\",\"vendormodule\",\"vendorpage\",\"vendoradd\",\"vendoredit\",\"vendordelete\",\"warehousemodule\",\"warehousepage\",\"warehouseadd\",\"warehousedit\",\"warehousedelete\",\"pincodeAvailabilitymodule\",\"ordersmodule\",\"orderspage\",\"ordersadd\",\"ordersedit\",\"ordersdelete\",\"rolepage\",\"roleadd\",\"roleedit\",\"roledelete\",\"usersmodule\",\"userpage\",\"useradd\",\"useredit\",\"userdelete\",\"rolepage\",\"roleadd\",\"roleedit\",\"roledelete\"]', 'company', 0, 0, 0, '2021-07-30 17:10:02', 11, '2021-07-30 17:29:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_task`
+--
+
+CREATE TABLE `tbl_task` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(1024) NOT NULL,
+  `comment` varchar(2048) NOT NULL,
+  `statusId` int(11) NOT NULL,
+  `priorityId` int(11) NOT NULL,
+  `permalink` varchar(1024) NOT NULL,
+  `createdBy` bigint(20) NOT NULL,
+  `endDtm` datetime DEFAULT NULL,
+  `createdDtm` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tasks_prioritys`
+--
+
+CREATE TABLE `tbl_tasks_prioritys` (
+  `priorityId` bigint(20) NOT NULL,
+  `priority` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_tasks_prioritys`
+--
+
+INSERT INTO `tbl_tasks_prioritys` (`priorityId`, `priority`) VALUES
+(1, 'Acil'),
+(2, 'Orta'),
+(3, 'Normal');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tasks_situations`
+--
+
+CREATE TABLE `tbl_tasks_situations` (
+  `statusId` bigint(20) NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_tasks_situations`
+--
+
+INSERT INTO `tbl_tasks_situations` (`statusId`, `status`) VALUES
+(1, 'Açık'),
+(2, 'Tamamlandı');
 
 -- --------------------------------------------------------
 
@@ -2051,8 +2206,74 @@ INSERT INTO `tbl_users` (`userId`, `email`, `password`, `name`, `mobile`, `c_gst
 (1, 'admin@ornek.com', '$2y$10$HHJtVG1GOf.C1FLLAQuP3OBef.6/4qDdM/6BZsXnTCPtxWau94WIW', 'Süleyman Aydın', '9890098900', NULL, NULL, NULL, NULL, NULL, 'user', NULL, NULL, 0, '', '', '', '', 1, 0, 0, 0, '2015-07-01 18:56:49', 1, '2021-07-08 21:44:09'),
 (2, 'yonetici@ornek.com', '$2y$10$HHJtVG1GOf.C1FLLAQuP3OBef.6/4qDdM/6BZsXnTCPtxWau94WIW', 'Hakan Bakan', '9890098900', NULL, NULL, NULL, NULL, NULL, 'user', NULL, NULL, 0, '', '', '', '', 2, 1, 0, 1, '2016-12-09 17:49:56', 1, '2021-07-08 21:44:05'),
 (3, 'calisan@ornek.com', '$2y$10$HHJtVG1GOf.C1FLLAQuP3OBef.6/4qDdM/6BZsXnTCPtxWau94WIW', 'Cumhur Oltay', '9890098900', NULL, NULL, NULL, NULL, NULL, 'user', NULL, NULL, 0, '', '', '', '', 3, 1, 0, 1, '2016-12-09 17:50:22', 1, '2021-07-08 21:44:00'),
-(9, 'hemantkaturde@gmail.com', '$2y$10$tEqE.Yfz8XmZjGj68XAsk./Raj7tBV3cK/2fVnpD1C2GNj0EE2ZMm', 'Hemant Katurde', '8097404125', NULL, NULL, NULL, NULL, NULL, 'user', NULL, NULL, 0, '', '', '', '', 1, 0, 0, 1, '2021-07-08 21:43:53', 11, '2022-03-30 08:04:02'),
+(9, 'hemantkaturde@gmail.com', '$2y$10$bCfgx9tjprQqEl4Wa5HsnukzWs.4vltgtTm8eYQKCX2aZRkEPvbn2', 'Hemant Katurde', '8097404125', NULL, NULL, NULL, NULL, NULL, 'user', NULL, NULL, 0, '', '', '', '', 1, 0, 0, 1, '2021-07-08 21:43:53', 9, '2021-07-25 20:20:17'),
 (11, 'hemantkaturde123@gmail.com', '$2y$10$ErGmHsVIf.VEt.LK.Yk/XeE123byRpkHg4tDr1.6rMRjjJRSvXJGq', 'Company', '8097404125', 'scdscfsdcfsdcf', '', 500011, 'mumbai', 'Maharashtra', 'comp_user', '111111111111', 112, 0, '', '', '', '', 1, 0, 1, 9, '2021-07-25 22:53:28', 9, '2021-07-27 08:16:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_vendor`
+--
+
+CREATE TABLE `tbl_vendor` (
+  `vendorId` int(11) NOT NULL,
+  `vendor_name` varchar(128) NOT NULL,
+  `contact_person` varchar(128) NOT NULL,
+  `contact_no` varchar(20) NOT NULL,
+  `tel_no` varchar(20) NOT NULL,
+  `email1` varchar(128) NOT NULL,
+  `email2` varchar(128) NOT NULL,
+  `vm_pan_no` varchar(20) NOT NULL,
+  `vm_GST` varchar(101) NOT NULL,
+  `vm_TDS` varchar(101) NOT NULL,
+  `gumasta_no` varchar(128) NOT NULL,
+  `vendor_picture` text NOT NULL,
+  `bank_name` varchar(128) NOT NULL,
+  `bank_branch` varchar(128) NOT NULL,
+  `ifsc_code` varchar(20) NOT NULL,
+  `account_no` int(101) NOT NULL,
+  `notes` varchar(255) NOT NULL,
+  `isDeleted` int(2) NOT NULL,
+  `vm_status` int(2) NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `createdDtm` datetime NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `updatedDtm` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_vendor`
+--
+
+INSERT INTO `tbl_vendor` (`vendorId`, `vendor_name`, `contact_person`, `contact_no`, `tel_no`, `email1`, `email2`, `vm_pan_no`, `vm_GST`, `vm_TDS`, `gumasta_no`, `vendor_picture`, `bank_name`, `bank_branch`, `ifsc_code`, `account_no`, `notes`, `isDeleted`, `vm_status`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
+(2, 'Delivery', 'hemant', '8097404125', '144', 'hemant@gmail.com', 'ssss@gmail.com', 'sacfadfdf', 'svsdvdsdsff', 'nnnn', 'jjjjj', '', '', '', '', 0, 'kkjkkjkj', 0, 0, 1, '2021-07-08 21:24:15', 9, '2021-07-25 09:09:23'),
+(3, 'Test vendor', 'HEMANT Katurde', '8097404125', '08097404125', 'hkaturde@gmail.com', 'hkaturde@gmail.com', 'EBGP5058R', '1250000', 'HRMAN', 'h565656', 'vendor_1250000.png', '', '', '', 0, 'afdaf', 0, 0, 9, '2021-07-27 09:07:02', 0, '0000-00-00 00:00:00'),
+(4, 'Delivery', 'HEMANT Katurde', '8097404125', '5774224542', 'hkaturde@gmail.com', 'hkaturde@gmail.com', 'sdsd', 'sfsd', 'sfs', 'sdsds', 'vendor_sfsd.png', '', '', '', 0, 'sds', 1, 0, 9, '2021-07-27 09:09:08', 9, '2021-07-27 09:09:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_warehouse`
+--
+
+CREATE TABLE `tbl_warehouse` (
+  `warehouseId` int(11) NOT NULL,
+  `warehouse_name` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `locality` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `pincode` int(6) NOT NULL,
+  `contact_no` varchar(255) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
+  `isDeleted` int(2) NOT NULL,
+  `wh_status` int(2) NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `createdDtm` datetime NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `updatedDtm` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -2065,9 +2286,39 @@ ALTER TABLE `tbl_access_control`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_attachment`
+--
+ALTER TABLE `tbl_attachment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_log_backup`
+--
+ALTER TABLE `tbl_log_backup`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_orders`
+--
+ALTER TABLE `tbl_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_pincode`
+--
+ALTER TABLE `tbl_pincode`
+  ADD PRIMARY KEY (`pincodeId`);
+
+--
+-- Indexes for table `tbl_reset_password`
+--
+ALTER TABLE `tbl_reset_password`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2077,10 +2328,40 @@ ALTER TABLE `tbl_roles`
   ADD PRIMARY KEY (`roleId`);
 
 --
+-- Indexes for table `tbl_task`
+--
+ALTER TABLE `tbl_task`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_tasks_prioritys`
+--
+ALTER TABLE `tbl_tasks_prioritys`
+  ADD PRIMARY KEY (`priorityId`);
+
+--
+-- Indexes for table `tbl_tasks_situations`
+--
+ALTER TABLE `tbl_tasks_situations`
+  ADD PRIMARY KEY (`statusId`);
+
+--
 -- Indexes for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`userId`);
+
+--
+-- Indexes for table `tbl_vendor`
+--
+ALTER TABLE `tbl_vendor`
+  ADD PRIMARY KEY (`vendorId`);
+
+--
+-- Indexes for table `tbl_warehouse`
+--
+ALTER TABLE `tbl_warehouse`
+  ADD PRIMARY KEY (`warehouseId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -2093,10 +2374,40 @@ ALTER TABLE `tbl_access_control`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `tbl_attachment`
+--
+ALTER TABLE `tbl_attachment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1885;
+
+--
+-- AUTO_INCREMENT for table `tbl_log_backup`
+--
+ALTER TABLE `tbl_log_backup`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_orders`
+--
+ALTER TABLE `tbl_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_pincode`
+--
+ALTER TABLE `tbl_pincode`
+  MODIFY `pincodeId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_reset_password`
+--
+ALTER TABLE `tbl_reset_password`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
@@ -2105,10 +2416,40 @@ ALTER TABLE `tbl_roles`
   MODIFY `roleId` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT 'role id', AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `tbl_task`
+--
+ALTER TABLE `tbl_task`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_tasks_prioritys`
+--
+ALTER TABLE `tbl_tasks_prioritys`
+  MODIFY `priorityId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_tasks_situations`
+--
+ALTER TABLE `tbl_tasks_situations`
+  MODIFY `statusId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_vendor`
+--
+ALTER TABLE `tbl_vendor`
+  MODIFY `vendorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_warehouse`
+--
+ALTER TABLE `tbl_warehouse`
+  MODIFY `warehouseId` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
