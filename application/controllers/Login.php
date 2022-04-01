@@ -98,7 +98,7 @@ class Login extends BaseController
                 {
                     // $lastLogin = $this->login_model->lastLoginInfo($res->userId);
                     
-                    $process = 'Giriş';
+                    $process = 'Login';
                     $processFunction = 'Login/loginMe';
 
                     $sessionArray = array('userId'=>$res->userId,                    
@@ -112,21 +112,15 @@ class Login extends BaseController
                                     );
 
                     $this->session->set_userdata($sessionArray);
-
                     unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
                     
                     $this->logrecord($process,$processFunction);
-
-                    // redirect('/dashboard');
-                   echo 1;
+                   echo true;
                 }
             }
             else
             {
-                echo 0;
-                // $this->session->set_flashdata('error', 'Email address or Password is wrong');
-                
-                // redirect('/login');
+                echo false;
             }
         }
     }

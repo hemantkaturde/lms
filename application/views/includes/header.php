@@ -19,9 +19,50 @@
     <script type="text/javascript">
         var baseURL = "<?php echo base_url(); ?>";
     </script>
+    <style>
+        .modal-header
+        {
+            padding: 10px 36px;
+            color:#fff;
+        }
+    </style>
 </head>
 
 <body class="fixed-navbar">
+
+    <!-- ========================================================= -->
+<!-- Modal Large -->
+    <div class="modal fade" id="popup_modal_lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-info">
+            <h5 class="modal-title modal-title-lg" id="myLargeModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modal-body-lg"></div>
+        </div>
+      </div>
+    </div>
+   
+    <!-- modal small -->
+    <div class="modal fade" id="popup_modal_sm" tabindex="-1" role="dialog" aria-labelledby="smexampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-info">
+            <h5 class="modal-title modal-title-sm" id="smexampleModalLabel" style="font-weight: 600"></h5>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modal-body-sm"></div>
+          <!-- <div class="modal-footer modal-footer-sm"></div> -->
+        </div>
+      </div>
+    </div>
+    <!-- /Modal End -->
+<!-- ========================================================= -->
 
     <div class="page-wrapper">
         <!-- START HEADER-->
@@ -173,9 +214,9 @@
                             <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
                             <span></span><?php echo $role_text; ?><i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <!-- <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a> -->
-                            <!-- <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a> -->
-                            <!-- <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a> -->
+                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-user"></i>Profile</a>
+                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-cog"></i>Settings</a>
+                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
                             <li class="dropdown-divider"></li>
                             <a class="dropdown-item" href="<?php echo base_url(); ?>logout"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>

@@ -64,6 +64,12 @@ class Admin extends BaseController
             $this->loadViews("master/users", $this->global, $data, NULL);
     }
 
+    function get_assets_for_user()
+    {
+        $data['roles'] = $this->user_model->getUserRoles();
+        echo json_encode($data);
+    }
+
     function addNewUser()
     {
         $data['roles'] = $this->user_model->getUserRoles();
@@ -108,12 +114,12 @@ class Admin extends BaseController
                 $this->logrecord($process,$processFunction);
 
                 // $this->session->set_flashdata('success', 'UserCreated Successsfully');
-                echo 1;
+                   echo true;
                 }
                 else
                 {
                 // $this->session->set_flashdata('error', 'User oluşturma başarısız');
-                    echo 0;
+                    echo false;
                 }
             }else
             {
@@ -155,6 +161,13 @@ class Admin extends BaseController
     * This function is used load user edit information
     * @param number $userId : Optional : This is user id
     */
+    function get_signle_user_for_edit($userId = NULL)
+    {
+        $data['roles'] = $this->user_model->getUserRoles();
+        $data['userInfo'] = $this->user_model->getUserInfo($userId);
+        echo json_encode($data);
+    }
+
     function editOld($userId = NULL)
     {
         if($userId == null)

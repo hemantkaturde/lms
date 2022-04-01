@@ -16,7 +16,8 @@
                 <div class="ibox-title">Users Listing</div>
 
                 <!-- <div class="ibox-tools"> -->
-                    <a class="btn btn-primary text-white" href="<?php echo base_url(); ?>addNewUser"><i class="fa fa-plus"></i> Add User</a>
+                    <!-- <a class="btn btn-primary text-white" href="<?php echo base_url(); ?>addNewUser"><i class="fa fa-plus"></i> Add User</a> -->
+                    <a class="btn btn-primary text-white" onclick="add_update_user_master(0)"><i class="fa fa-plus"></i> Add User</a>
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
             </div>
@@ -78,7 +79,8 @@
                                        <!--  <a class="btn btn-xs btn-primary" href="<?= base_url().'log-history/'.$record->userId; ?>" title="Log Records">
                                             <i class="fa fa-history"></i>
                                         </a>  -->
-                                        <a class="btn btn-xs btn-info" href="<?= base_url().'editOld/'.$record->userId; ?>" title="Edit">
+                                        <!-- <a class="btn btn-xs btn-info" href="<?= base_url().'editOld/'.$record->userId; ?>" title="Edit"> -->
+                                        <a class="btn btn-xs btn-info" onclick="add_update_user_master(<?php echo $record->userId; ?>)" title="Edit">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a class="btn btn-xs btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete">
