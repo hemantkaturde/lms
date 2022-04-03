@@ -88,7 +88,6 @@ class Role extends BaseController
         }
         else
         {
-        
             $access_chk=$_POST['checkbox'];
         
             $role = $this->security->xss_clean($this->input->post('role'));
@@ -109,14 +108,16 @@ class Role extends BaseController
                 $process = 'Role / Role Adding';
                 $processFunction = 'Role/addNewRole';
                 $this->logrecord($process,$processFunction);
-                $this->session->set_flashdata('success', 'Role Successfully Created');
+                // $this->session->set_flashdata('success', 'Role Successfully Created');
             }
             else
             {
-                $this->session->set_flashdata('error', 'Role Failed to Create');
+                // $this->session->set_flashdata('error', 'Role Failed to Create');
+                echo false;
             }
                 
-            redirect('roleListing');
+            // redirect('roleListing');
+            echo true;
         }
     }
 
@@ -134,13 +135,12 @@ class Role extends BaseController
         $this->loadViews("role/editRole", $this->global, $data, NULL);
     }
 
-    // UPDATE ROLE RECORD
-    
-    function editRoleRecord()
+    // UPDATE ROLE RECORD    
+    function editRoleRecord($roleId)
     {
         $this->load->library('form_validation');
                 
-        $roleId = $this->input->post('roleId');
+        // $roleId = $this->input->post('roleId');
         $this->form_validation->set_rules('role','Role','trim|required|max_length[128]');
         
         if($this->form_validation->run() == FALSE)
@@ -171,21 +171,23 @@ class Role extends BaseController
                         $processFunction = 'Role/editRole';
                         $this->logrecord($process,$processFunction);
     
-                        $this->session->set_flashdata('success', 'Role Successfully Updated');
+                        // $this->session->set_flashdata('success', 'Role Successfully Updated');
+                        echo true;
                     }
                     else
                     {
-                        $this->session->set_flashdata('error', 'Please Check Details Properly');
+                        // $this->session->set_flashdata('error', 'Please Check Details Properly');
+                        echo false;
                     }
                     
-                    redirect('roleListing');
+                    // redirect('roleListing');
                 }
         }
 
     // === DELETE VENDOR ======
-    function deleteRole()
+    function deleteRole($roleId)
     {
-            $roleId = $this->input->post('roleId');
+            // $roleId = $this->input->post('roleId');
             $roleInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
             
             $result = $this->role_model->deleteRoleRecord($roleId, $roleInfo);

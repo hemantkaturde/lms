@@ -28,41 +28,75 @@
 // 	});
 // });
 
-
 jQuery(document).ready(function(){
+	jQuery(".deleteUser").click(function(){
+		var id = $(this).parents("tr").attr("id");
 	
-	jQuery(document).on("click", ".deleteUser", function(){
-		var userId = $(this).data("userid"),
-			hitURL = baseURL + "deleteUser",
-			currentRow = $(this);
-		
-		var confirmation = confirm("Are you sure to delete this user ?");
-		
-		if(confirmation)
-		{
-			jQuery.ajax({
-			type : "POST",
-			dataType : "json",
-			url : hitURL,
-			data : { userId : userId } 
-			}).done(function(data){
-				console.log(data);
-				currentRow.parents('tr').remove();
-				if(data.status = true) { alert("User successfully deleted"); }
-				else if(data.status = false) { alert("User deletion failed"); }
-				else { alert("Access denied..!"); }
-			});
+	   swal({
+		title: "Are you sure?",
+		text: "You will not be able to recover this imaginary file!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-sm btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		cancelButtonText: "No, cancel plx!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	  }).then( function(isConfirm) {
+		if (isConfirm) {
+		  $.ajax({
+			 url: baseURL+'deleteUser/'+id,
+			 type: 'DELETE',
+			 error: function() {
+				alert('Something is wrong');
+			 },
+			 success: function(data) {
+				  $("#"+id).remove();
+				  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+			 }
+		  });
+		} else {
+		  swal("Cancelled", "Your imaginary file is safe :)", "error");
 		}
+	  });
 	});
+
+	jQuery(".deleteRole").click(function(){
+		var id = $(this).parents("tr").attr("id");
 	
-	
-	jQuery(document).on("click", ".searchList", function(){
-		
+	   swal({
+		title: "Are you sure?",
+		text: "You will not be able to recover this imaginary file!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-sm btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		cancelButtonText: "No, cancel plx!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	  }).then( function(isConfirm) {
+		if (isConfirm) {
+		  $.ajax({
+			 url: baseURL+'deleteRole/'+id,
+			 type: 'DELETE',
+			 error: function() {
+				alert('Something is wrong');
+			 },
+			 success: function(data) {
+				  $("#"+id).remove();
+				  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+			 }
+		  });
+		} else {
+		  swal("Cancelled", "Your imaginary file is safe :)", "error");
+		}
+	  });
 	});
-	
 });
 
-function add_update_user_master(id)
+
+
+function users(id)
 {
     var path = baseURL+"admin/get_assets_for_user";
 
@@ -73,27 +107,27 @@ function add_update_user_master(id)
 	    data += '<div class="alert_msg"></div>';
 	    data += '<form class="form-material" id="user_form">';
 	    data += '<div class="row m-2">';
-	    	data += '<div class="col-md-12 mb-3">';
+	    	data += '<div class="form-group col-md-12 mb-3">';
 	    		data += '<label>Name</label>';
-	    		data += '<input type="text" class="form-control required" id="fname" name="fname" maxlength="128" placeholder="Enter Full Name Here" required>';
+	    		data += '<input type="text" class="form-control" id="fname" name="fname" maxlength="128" placeholder="Enter Full Name Here" required>';
 	   		 data += '</div>';
-	        data += '<div class="col-md-12 mb-3">';
+	        data += '<div class=" form-group col-md-12 mb-3">';
 	            data += '<label>Email Id</label>';
 	            data += '<input type="text" class="form-control required email" id="email" name="email" maxlength="128" placeholder="Eg. xyz@gmail.com" required>';
 	        data += '</div>';
-	        data += '<div class="col-md-12 mb-3">';
+	        data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Password</label>';
 	            data += '<input type="password" class="form-control required" id="password" name="password" maxlength="20" placeholder="Enter Password" required="">';
 	        data += '</div>';
-	        data += '<div class="col-md-12 mb-3">';
+	        data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Confirm Password</label>';
 	            data += '<input type="password" class="form-control required equalTo" id="cpassword" name="cpassword" maxlength="20" placeholder="Confirm Your Password" required="">';
 	        data += '</div>';
-	        data += '<div class="col-md-12 mb-3">';
+	        data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Telephone No</label>';
 	            data += '<input type="text" class="form-control required digits" id="mobile" name="mobile" placeholder="Enter 10 Digit Mobile Number" maxlength="10" required>';
 	        data += '</div>';
-	        data += '<div class="col-md-12 mb-3">';
+	        data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Role</label>';
 	            data += '<select class="form-control required" id="role" name="role" placeholder="Select Role" required="">';
 	            	data += '<option value="">Choose Role</option>';
@@ -106,10 +140,10 @@ function add_update_user_master(id)
 	    // data += '<div class="row">';
                 data += '<div class="col-md-12">';
                     if (id == 0) {
-                        data += '<button type="button" class="btn btn-sm btn-success" id="user_btn" onClick="add_user(0)" >Submit</button> ';
+                        data += '<button type="submit" class="btn btn-sm btn-success" id="user_btn" onClick="add_user(0)" >Submit</button> ';
                     }
                     else {
-                        data += '<button type="button" class="btn btn-sm btn-success" id="user_btn" onClick="add_user('+id+')" >Update</button> ';
+                        data += '<button type="submit" class="btn btn-sm btn-success" id="user_btn" onClick="add_user('+id+')" >Update</button> ';
                     }
                 // data += '</div>';
                 // data += '<div class="col-sm-3">';
@@ -155,15 +189,17 @@ function add_user(id)
 	var check = 1;
 	if($("#fname").val()=="")
 	{
-		check = 0;
+		check = 0;		
 	}else
 	{
 		check = 1;
 	}
-
 	if(check == 0)
 	{
-		alert("Please Enter required fields");
+		$("#popup_modal_sm").hide();
+		var msg = 'Please enter name';
+        display_alert('err',msg);
+        $("#popup_modal_sm").animate({'scrollTop':0},2000);
 	}
 	else
 	{
@@ -183,20 +219,133 @@ function add_user(id)
 				if(data.status = true) { 
 					if(id == 0)
 					{
-						var msg = 'User created successfully';
-                        display_alert('err',msg);
-                        $("#popup_modal_sm").animate({'scrollTop':0},2000);
-                         window.location.reload();
+						swal({
+							title: "User Created!",
+							text: "Suceess message sent!!",
+							icon: "success",
+							button: "Ok",
+							timer: 2000
+							}).then(function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
 					}
 					else
 					{
 						// alert("User successfully updated"); window.location.reload();
-						var msg = 'User updated successfully';
-                        display_alert('succ',msg);
-                        $("#popup_modal_sm").animate({'scrollTop':0},2000);
+						swal({
+							title: "User updated!",
+							text: "Suceess message sent!!",
+							icon: "success",
+							button: "Ok",
+							timer: 2000
+							}).then(function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+						// $("#popup_modal_sm").hide();
+						// var msg = 'User updated successfully';
+                        // display_alert('succ',msg);
+                        // $("#popup_modal_sm").animate({'scrollTop':0},2000);
 					}
 				}
 				else if(data.status = false) { alert("User Error"); }
+				else { alert("Access denied..!"); }
+		});
+	}
+}
+
+function add_role()
+{
+	var check = 1;
+	if($("#role").val()=="")
+	{
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+	if(check == 0)
+	{
+		var msg = 'Please enter name';
+        display_alert('err',msg);
+        $("#body, html").animate({'scrollTop':0},2000);
+	}
+	else
+	{
+		// var userId = $(this).data("userid"),
+		var userId = $("#role_form").serialize(),
+		hitURL = baseURL + "addNewRole/",
+		currentRow = $(this);
+		console.log(hitURL);
+		$("#role_btn").prop('disabled', true);
+		jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : userId  
+			}).done(function(data){
+				console.log(data);
+				if(data == 1) { 
+					swal({
+						title: "Role Created!",
+						text: "Suceess message sent!!",
+						icon: "success",
+						button: "Ok",
+						timer: 2000
+					}).then(function(){ 
+						window.location.href = baseURL+"roleListing";
+					});
+				}
+				else if(data.status = false) { alert("User Error"); }
+				else { alert("Access denied..!"); }
+		});
+	}
+}
+
+function update_role(id)
+{
+	var check = 1;
+	if($("#role").val()=="")
+	{
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+	if(check == 0)
+	{
+		var msg = 'Please enter name';
+        display_alert('err',msg);
+        $("#body, html").animate({'scrollTop':0},2000);
+	}
+	else
+	{
+		// var userId = $(this).data("userid"),
+		var userId = $("#role_form").serialize(),
+		hitURL = baseURL + "editRoleRecord/"+id,
+		currentRow = $(this);
+		console.log(hitURL);
+		$("#role_btn").prop('disabled', true);
+		jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : userId  
+			}).done(function(data){
+				console.log(data);
+				if(data == 1) { 
+					swal({
+						title: "Role Updated!",
+						text: "Suceess message sent!!",
+						icon: "success",
+						button: "Ok",
+						timer: 2000
+					}).then(function(){ 
+						window.location.href = baseURL+"roleListing";
+					});
+				}
+				else if(data.status = false) { alert("Role Error"); }
 				else { alert("Access denied..!"); }
 		});
 	}

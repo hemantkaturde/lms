@@ -6,7 +6,9 @@
                 <div class="ibox-title">Add Role</div>
             </div>
             <div class="ibox-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="role_form">
+                <div class="alert_msg"></div>
+                <!-- <form role="form" id="addUser" action="<?php echo base_url() ?>addNewRole" method="post" role="form"> -->
                     <div class="row">
                         <!-- <div class="col-md-12"> -->
                             <div class="col-md-4">
@@ -20,7 +22,7 @@
                                     <div class="form-group">
                                         <label for="role">Role</label>
                                         <input type="text" class="form-control required" id="role" name="role" placeholder="Eg. Manager"
-                                            maxlength="255">
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -110,7 +112,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <!-- ENTER BUTTON HERE -->
-                                    <input type="submit" class="btn btn-primary" value="SEND" />
+                                    <!-- <input type="submit" class="btn btn-primary" value="SEND" /> -->
+                                    <input type="button" onclick="add_role()" class="btn btn-primary" value="SEND" />
                                     <input type="reset" class="btn btn-default" value="CANCEL" />
                                 </div>
                             </div>

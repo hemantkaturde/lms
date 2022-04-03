@@ -25,7 +25,8 @@ if(!empty($roleInfo))
                 <div class="ibox-title">Add Role</div>
             </div>
             <div class="ibox-body">
-                <form role="form" id="addUser" action="<?php echo base_url() ?>editRoleRecord" method="post" role="form">
+                <!-- <form role="form" id="addUser" action="<?php echo base_url() ?>editRoleRecord" method="post" role="form"> -->
+                <form role="form" id="role_form">
                     <div class="row">
                         <!-- <div class="col-md-12"> -->
                             <div class="col-md-4">
@@ -131,7 +132,7 @@ if(!empty($roleInfo))
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <!-- ENTER BUTTON HERE -->
-                                    <input type="submit" class="btn btn-primary" value="UPDATE" />
+                                    <input type="button" onclick="update_role(<?php echo $roleId; ?>)" class="btn btn-primary" value="UPDATE" />
                                     <input type="reset" class="btn btn-default" value="CANCEL" />
                                 </div>
                             </div>

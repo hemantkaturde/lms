@@ -65,12 +65,12 @@ $route['userListing'] = 'admin/userListing';
 $route['addNewUser'] = 'admin/addNewUser';
 $route['editOld'] = "admin/editOld";
 $route['editOld/(:num)'] = "admin/editOld/$1";
-$route['deleteUser'] = "admin/deleteUser";
+$route['deleteUser/(:any)'] = "admin/deleteUser/$1";
 
 /*********** ROLE CONTROLLER ROUTES *******************/
 $route['roleListing'] = "role/roleListing";
 $route['addRole'] = "role/addRole";
 $route['addNewRole'] = "role/addNewRole";
 $route['editRole/(:num)'] = "role/editRole/$1";
-$route['editRoleRecord'] = "role/editRoleRecord";
-$route['deleteRole'] = "role/deleteRole";
+$route['editRoleRecord/(:any)'] = "role/editRoleRecord/$1";
+$route['deleteRole/(:any)'] = "role/deleteRole/$1";

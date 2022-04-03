@@ -60,7 +60,7 @@
                         {
                            
                     ?>
-                                <tr>
+                                <tr id="<?php echo $record->roleid; ?>">
                                     
                                     <td>
                                         <?php echo $record->role ?>

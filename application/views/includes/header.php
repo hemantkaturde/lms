@@ -25,6 +25,13 @@
             padding: 10px 36px;
             color:#fff;
         }
+        thead
+        {
+            background:#374f65;color:#fff;
+        }
+        .table td{
+            padding: 0.3rem 0.75rem;
+        }
     </style>
 </head>
 
@@ -239,19 +246,44 @@
                 <ul class="side-menu metismenu">
                     <li class="heading">DASHBOARD</li>
                     <li>
-                        <a class="active" href="#"><i class="sidebar-item-icon fa fa-th-large"></i>
+                        <a class="active" href="<?php echo base_url()."dashboard"; ?>"><i class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
                     <!--  -->
-                    <li class="treeview" style="height: auto;">
+                    <!-- <li class="heading">COURSE</li> -->
+                    <li>
+                        <a href="#"><i class="sidebar-item-icon fa fa-book"></i>
+                            <span class="nav-label">Courses</span>
+                        </a>
+                    </li>
+                    <!--  -->
+                    <!-- <li class="heading">STUDENTS</li> -->
+                    <li>
+                        <a href="#"><i class="sidebar-item-icon fa fa-users"></i>
+                            <span class="nav-label">Student</span>
+                        </a>
+                    </li>
+                     <!--  -->
+                     <li class="treeview" style="height: auto;">
                         <a href="#">
-                            <i class="fa fa-users"></i> <span>User</span>
+                            <i class="sidebar-item-icon fa fa-envelope"></i> <span>Email Setting</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu" >
-                          <li><a href="<?php echo base_url(); ?>userListing"  ><i class="fa fa-users"></i> Users</a></li>
-                          <li><a href="<?php echo base_url(); ?>roleListing" ><i class="fa fa-check-square-o"></i> Role</a></li>
+                          <li><a href="#"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>
+                          <li><a href="#"><i class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
+                        </ul>
+                    </li>
+                    <!--  -->
+                    <li class="treeview" style="height: auto;">
+                        <a href="#">
+                            <i class="sidebar-item-icon fa fa-user"></i> <span>User</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu" >
+                          <li><a href="<?php echo base_url(); ?>userListing"  ><i class="sidebar-item-icon fa fa-user"></i> Users</a></li>
+                          <li><a href="<?php echo base_url(); ?>roleListing" ><i class="sidebar-item-icon fa fa-check-square-o"></i> Role</a></li>
                         </ul>
                     </li>
                     <!--  -->

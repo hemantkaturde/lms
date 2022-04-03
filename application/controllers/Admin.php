@@ -143,12 +143,12 @@ class Admin extends BaseController
                     $process = 'User Update';
                     $processFunction = 'Admin/editUser';
                     $this->logrecord($process,$processFunction);
-                    echo 1;
+                    echo true;
                     // $this->session->set_flashdata('success', 'User başarıyla güncellendi');
                 }
                 else
                 {
-                    echo 0;
+                    echo false;
                     // $this->session->set_flashdata('error', 'User Update başarısız');
                 }
             }
@@ -187,13 +187,15 @@ class Admin extends BaseController
      * This function is used to delete the user using userId
      * @return boolean $result : TRUE / FALSE
      */
-    function deleteUser()
+    function deleteUser($userId)
     {
-            $userId = $this->input->post('userId');
-            $userInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-            
+            // $userId = $this->input->post('userId');
+            // $userId = $this->input->get('id');
+            // print_r($userId);
+            // exit;
+            $userInfo = array('isDeleted'=>1,'updatedBy'=>1, 'updatedDtm'=>date('Y-m-d H:i:s'));
             $result = $this->user_model->deleteUser($userId, $userInfo);
-            
+
             if ($result > 0) {
                  echo(json_encode(array('status'=>TRUE)));
 
