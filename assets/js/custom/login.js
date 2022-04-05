@@ -48,7 +48,10 @@ $('#login-form #login_btn').click(function(e) {
         unhighlight: function(e) {
             $(e).closest(".form-group").removeClass("has-error")
         },
-        submitHandler: function(form)
+        submitHandler: form
+        
+        });
+        function form()
          {
             var str = $("#login-form").serialize();
             var path = base_url+"login/loginMe";
@@ -74,5 +77,5 @@ $('#login-form #login_btn').click(function(e) {
                 }
             });
         }               
-    });
+    
 });

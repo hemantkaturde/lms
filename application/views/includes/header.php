@@ -15,6 +15,7 @@
     <!-- THEME STYLES-->
     <link href="<?php echo base_url(); ?>assets/css/main.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
     <!-- PAGE LEVEL STYLES-->
     <script type="text/javascript">
         var baseURL = "<?php echo base_url(); ?>";
@@ -25,10 +26,10 @@
             padding: 10px 36px;
             color:#fff;
         }
-        thead
+        /* thead
         {
             background:#374f65;color:#fff;
-        }
+        } */
         .table td{
             padding: 0.3rem 0.75rem;
         }
@@ -74,7 +75,7 @@
     <div class="page-wrapper">
         <!-- START HEADER-->
         <header class="header">
-            <div class="page-brand">
+            <div class="page-brand" style="place-content:center;">
                 <a class="link" href="#">
                     <!-- <span class="brand">Admin
                         <span class="brand-tip">CAST</span>
@@ -267,7 +268,7 @@
                      <!--  -->
                      <li class="treeview" style="height: auto;">
                         <a href="#">
-                            <i class="sidebar-item-icon fa fa-envelope"></i> <span>Email Setting</span>
+                            <i class="sidebar-item-icon fa fa-cog"></i> <span>Settings</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu" >

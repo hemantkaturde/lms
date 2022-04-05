@@ -37,12 +37,13 @@ jQuery(document).ready(function(){
 		text: "You will not be able to recover this imaginary file!",
 		type: "warning",
 		showCancelButton: true,
+		closeOnClickOutside: false,
 		confirmButtonClass: "btn-sm btn-danger",
 		confirmButtonText: "Yes, delete it!",
-		cancelButtonText: "No, cancel plx!",
+		cancelButtonText: "No, cancel plz!",
 		closeOnConfirm: false,
 		closeOnCancel: false
-	  }).then( function(isConfirm) {
+	  }, function(isConfirm) {
 		if (isConfirm) {
 		  $.ajax({
 			 url: baseURL+'deleteUser/'+id,
@@ -52,11 +53,12 @@ jQuery(document).ready(function(){
 			 },
 			 success: function(data) {
 				  $("#"+id).remove();
-				  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+				  swal("Deleted!", "User has been deleted.", "success");
 			 }
 		  });
-		} else {
-		  swal("Cancelled", "Your imaginary file is safe :)", "error");
+		} 
+		else {
+		  swal("Cancelled", "User deletion cancelled ", "error");
 		}
 	  });
 	});
@@ -69,12 +71,13 @@ jQuery(document).ready(function(){
 		text: "You will not be able to recover this imaginary file!",
 		type: "warning",
 		showCancelButton: true,
+		closeOnClickOutside: false,
 		confirmButtonClass: "btn-sm btn-danger",
 		confirmButtonText: "Yes, delete it!",
-		cancelButtonText: "No, cancel plx!",
+		cancelButtonText: "No, cancel plz!",
 		closeOnConfirm: false,
 		closeOnCancel: false
-	  }).then( function(isConfirm) {
+	  }, function(isConfirm) {
 		if (isConfirm) {
 		  $.ajax({
 			 url: baseURL+'deleteRole/'+id,
@@ -84,12 +87,13 @@ jQuery(document).ready(function(){
 			 },
 			 success: function(data) {
 				  $("#"+id).remove();
-				  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+				  swal("Deleted!", "Role has been deleted.", "success");
 			 }
 		  });
-		} else {
-		  swal("Cancelled", "Your imaginary file is safe :)", "error");
 		}
+		else {
+			swal("Cancelled", "Role deletion cancelled ", "error");
+		  }
 	  });
 	});
 });
@@ -225,7 +229,7 @@ function add_user(id)
 							icon: "success",
 							button: "Ok",
 							timer: 2000
-							}).then(function(){ 
+							},function(){ 
 								$("#popup_modal_sm").hide();
 								location.reload();
 						});
@@ -239,7 +243,7 @@ function add_user(id)
 							icon: "success",
 							button: "Ok",
 							timer: 2000
-							}).then(function(){ 
+							}, function(){ 
 								$("#popup_modal_sm").hide();
 								location.reload();
 						});

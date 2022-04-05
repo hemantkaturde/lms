@@ -32,7 +32,8 @@
     <script src="<?php echo base_url(); ?>assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
    <script src="<?php echo base_url(); ?>assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
    
-   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/common.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/master.js" type="text/javascript"></script>
