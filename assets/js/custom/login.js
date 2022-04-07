@@ -48,10 +48,7 @@ $('#login-form #login_btn').click(function(e) {
         unhighlight: function(e) {
             $(e).closest(".form-group").removeClass("has-error")
         },
-        submitHandler: form
-        
-        });
-        function form()
+        submitHandler: function(form)
          {
             var str = $("#login-form").serialize();
             var path = base_url+"login/loginMe";
@@ -77,5 +74,56 @@ $('#login-form #login_btn').click(function(e) {
                 }
             });
         }               
-    
+    });
 });
+
+// $('#login-form #login_btn').click(function(e) {
+
+//     $('#login-form').validate({
+//         errorClass: "help-block",
+//         rules: {
+//             email: {
+//                 required: true,
+//                 email: true
+//             },
+//             password: {
+//                 required: true
+//             }
+//         },
+//         highlight: function(e) {
+//             $(e).closest(".form-group").addClass("has-error")
+//         },
+//         unhighlight: function(e) {
+//             $(e).closest(".form-group").removeClass("has-error")
+//         },
+//         submitHandler: form
+        
+//         }),
+//         function form()
+//          {
+//             var str = $("#login-form").serialize();
+//             var path = base_url+"login/loginMe";
+           
+//             $.ajax({
+//                 type:"POST",
+//                 data:str,
+//                 url:path,
+//                 dataType:'JSON',
+//                 success:function(result)
+//                 {
+//                     console.log(result);
+//                     if(result == 1)
+//                     {
+//                         window.location.href=base_url+"dashboard";
+//                     }
+//                     else
+//                     {
+//                         var msg = 'Email address or Password is wrong';
+//                         display_alert('err',msg);
+//                         $("body, html").animate({'scrollTop':0},2000);
+//                     }
+//                 }
+//             });
+//         }               
+    
+// });

@@ -120,7 +120,7 @@ class Login extends BaseController
             }
             else
             {
-                echo false;
+                echo 0;
             }
         }
     }
