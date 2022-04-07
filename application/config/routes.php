@@ -74,3 +74,13 @@ $route['addNewRole'] = "role/addNewRole";
 $route['editRole/(:num)'] = "role/editRole/$1";
 $route['editRoleRecord/(:any)'] = "role/editRoleRecord/$1";
 $route['deleteRole/(:any)'] = "role/deleteRole/$1";
+
+/*********** COURSE CONTROLLER ROUTES *******************/
+$route['courseListing'] = "course/courseListing";
+$route['courseLinks/(:num)'] = "course/courseLinks/$1";
+$route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
+$route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
+
+/*********** COURSE CONTROLLER ROUTES *******************/
+$route['studentListing'] = "student/studentListing";
+$route['deleteStudent/(:any)'] = "student/deleteStudent/$1";

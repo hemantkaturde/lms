@@ -8,6 +8,23 @@ $(document).ready(function(){
     });
 
     // Bootstrap datepicker
+    $('#popup_modal_sm').on('shown.bs.modal', function() {
+		$('.datepicker').datepicker({
+		  format: "dd-mm-yyyy",
+		  todayBtn: "linked",
+		  autoclose: true,
+		  todayHighlight: true,
+		});
+	  });
+      
+    $('.datepicker').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     $('#date_1 .input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,

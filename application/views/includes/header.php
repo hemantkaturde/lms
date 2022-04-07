@@ -15,6 +15,9 @@
     <!-- THEME STYLES-->
     <link href="<?php echo base_url(); ?>assets/css/main.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+
+    <link href="<?php echo base_url(); ?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
     <!-- PAGE LEVEL STYLES-->
     <script type="text/javascript">
@@ -40,7 +43,7 @@
 
     <!-- ========================================================= -->
 <!-- Modal Large -->
-    <div class="modal fade" id="popup_modal_lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="popup_modal_lg" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header bg-info">
@@ -55,7 +58,7 @@
     </div>
    
     <!-- modal small -->
-    <div class="modal fade" id="popup_modal_sm" tabindex="-1" role="dialog" aria-labelledby="smexampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="popup_modal_sm" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="smexampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header bg-info">
@@ -254,14 +257,14 @@
                     <!--  -->
                     <!-- <li class="heading">COURSE</li> -->
                     <li>
-                        <a href="#"><i class="sidebar-item-icon fa fa-book"></i>
+                        <a href="<?php echo base_url()."courseListing"; ?>"><i class="sidebar-item-icon fa fa-book"></i>
                             <span class="nav-label">Courses</span>
                         </a>
                     </li>
                     <!--  -->
                     <!-- <li class="heading">STUDENTS</li> -->
                     <li>
-                        <a href="#"><i class="sidebar-item-icon fa fa-users"></i>
+                        <a href="<?php echo base_url()."studentListing"; ?>"><i class="sidebar-item-icon fa fa-users"></i>
                             <span class="nav-label">Student</span>
                         </a>
                     </li>
