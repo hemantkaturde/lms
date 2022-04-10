@@ -4,10 +4,10 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Course Management</div>
+                <div class="ibox-title">Email SMTP Management</div>
 
                 <!-- <div class="ibox-tools"> -->
-                    <a class="btn btn-primary text-white" onclick="courses(0)" ><i class="fa fa-plus"></i> Add Course</a>
+                    <a class="btn btn-primary text-white" onclick="email_smtp(0)" ><i class="fa fa-plus"></i> Add SMTP</a>
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
             </div>
@@ -22,38 +22,45 @@
                   <thead>
                             <tr>
                                 
-                                <th>Course Name</th>
-                                <th>Description</th>
-                                <th>Created Date</th>
+                                <th>SMTP Host</th>
+                                <th>SMTP Port</th>
+                                <th>SMTP Protocol</th>
+                                <th>SMTP Username</th>
+                                <th>SMTP Password</th>
                                 <th>Action</th>
                             </tr>
                   </thead>
                   <tbody>
                             <?php
-                    if(!empty($course))
+                    if(!empty($smtp))
                     {
-                        foreach($course as $record)
+                        foreach($smtp as $record)
                         {
                            
                     ?>
-                                <tr id="<?php echo $record->courseId; ?>">
+                                <tr id="<?php echo $record->smtpId; ?>">
                                     
                                     <td>
-                                        <?php echo $record->course_name ?>
+                                        <?php echo $record->smtp_host ?>
                                     </td>
                                     <td>
-                                        <?php echo $record->course_desc ?>
+                                        <?php echo $record->smtp_port ?>
                                     </td>
                                     <td>
-                                        <?php echo date('d-m-Y', strtotime($record->course_date)) ?>
+                                        <?php echo $record->smtp_protocol ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $record->smtp_username ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $record->smtp_password ?>
                                     </td>
                                   
                                     <td class="text-center">
-                                        <a href="<?php echo base_url().'courseLinks/'.$record->courseId ?>" class="btn btn-xs btn-info text-white"><i class="fa fa-external-link" aria-hidden="true"></i></a>
-                                        <a class="btn btn-xs btn-success text-white" onclick="courses(<?php echo $record->courseId; ?>)" title="Edit">
+                                        <a class="btn btn-xs btn-success text-white" onclick="email_smtp(<?php echo $record->smtpId; ?>)" title="Edit">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a class="btn btn-xs btn-danger deleteCourse" href="#" data-courseId="<?php echo $record->courseId; ?>" title="Delete">
+                                        <a class="btn btn-xs btn-danger deleteSmtp" href="#" data-smtpId="<?php echo $record->smtpId; ?>" title="Delete">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>

@@ -84,3 +84,12 @@ $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
 $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
+
+/*********** Email Setting CONTROLLER ROUTES *******************/
+// Template
+$route['emailtemplateListing'] = "emailSetting/emailtemplateListing";
+$route['deleteTemplate/(:any)'] = "emailSetting/deleteTemplate/$1";
+
+// SMTP
+$route['emailsmtpListing'] = "emailSetting/emailsmtpListing";
+$route['deleteSmtp/(:any)'] = "emailSetting/deleteSmtp/$1";

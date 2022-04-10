@@ -275,8 +275,8 @@
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu" >
-                          <li><a href="#"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>
-                          <li><a href="#"><i class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
+                          <li><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>
+                          <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
                         </ul>
                     </li>
                     <!--  -->

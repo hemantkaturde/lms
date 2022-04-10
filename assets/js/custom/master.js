@@ -343,7 +343,7 @@ function add_user(id)
 							text: "Suceess message sent!!",
 							icon: "success",
 							button: "Ok",
-							timer: 2000
+							// timer: 2000
 							},function(){ 
 								$("#popup_modal_sm").hide();
 								location.reload();
@@ -357,7 +357,7 @@ function add_user(id)
 							text: "Suceess message sent!!",
 							icon: "success",
 							button: "Ok",
-							timer: 2000
+							// timer: 2000
 							}, function(){ 
 								$("#popup_modal_sm").hide();
 								location.reload();
@@ -414,7 +414,7 @@ function add_role()
 						text: "Suceess message sent!!",
 						icon: "success",
 						button: "Ok",
-						timer: 2000
+						// timer: 2000
 					}).then(function(){ 
 						window.location.href = baseURL+"roleListing";
 					});
@@ -462,7 +462,7 @@ function update_role(id)
 						text: "Suceess message sent!!",
 						icon: "success",
 						button: "Ok",
-						timer: 2000
+						// timer: 2000
 					}).then(function(){ 
 						window.location.href = baseURL+"roleListing";
 					});

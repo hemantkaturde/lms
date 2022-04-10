@@ -40,6 +40,7 @@
     <script src="<?php echo base_url(); ?>assets/vendors/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/common.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/master.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/custom/setting.js" type="text/javascript"></script>
    <script type="text/javascript">
         $(function() {
             $('#example-table').DataTable({
