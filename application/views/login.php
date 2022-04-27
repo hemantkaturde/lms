@@ -19,7 +19,8 @@
 <body class="bg-silver-300">
     <div class="content">
         <div class="brand">
-            <a class="link" href="#" style="font-size: 24px;">LMS Management</a>
+        <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="100">
+            <!-- <a class="link" href="#" style="font-size: 24px;">LMS Management</a> -->
         </div>
         <form id="login-form" action="javascript:;" method="post" novalidate="novalidate">
         <!-- <form action="<?php echo base_url(); ?>loginMe" method="post"> -->

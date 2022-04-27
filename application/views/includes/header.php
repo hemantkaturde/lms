@@ -24,6 +24,11 @@
         var baseURL = "<?php echo base_url(); ?>";
     </script>
     <style>
+        .header .page-brand .brand {
+            background: #fff;
+            border-radius: 50%;
+            padding: 2px;
+        }
         .modal-header
         {
             padding: 10px 36px;
@@ -85,7 +90,9 @@
                     </span>
                     <span class="brand-mini">AC</span> -->
                     <span class="brand">
-                        <span class="brand-tip">LMS</span>
+                        <span class="brand-tip">
+                            <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="50">
+                        </span>
                     </span>
                     <span class="brand-mini">LMS</span>
                 </a>

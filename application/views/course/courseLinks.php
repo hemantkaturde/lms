@@ -13,7 +13,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Course Links </div>
+                <div class="ibox-title">Course - <?php echo $courseName; ?> </div>
 
                 <!-- <div class="ibox-tools"> -->
                     <a class="btn btn-primary text-white" onclick="courseLink(0, <?php echo $id ?>)" ><i class="fa fa-plus"></i> Add Link</a>
@@ -32,7 +32,9 @@
                             <tr>
                                 
                                 <th>Link Name</th>
-                                <th>Created Date</th>
+                                <th>Link URL</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>Action</th>
                             </tr>
                   </thead>
@@ -50,7 +52,13 @@
                                         <?php echo $record->link_name ?>
                                     </td>
                                     <td>
-                                        <?php echo date('d-m-Y', strtotime($record->link_date)) ?>
+                                        <?php echo $record->link_url ?>
+                                    </td>
+                                    <td>
+                                        <?php echo date('d-m-Y', strtotime($record->link_sdate)) ?>
+                                    </td>
+                                    <td>
+                                        <?php echo date('d-m-Y', strtotime($record->link_ldate)) ?>
                                     </td>
                                   
                                     <td class="text-center">

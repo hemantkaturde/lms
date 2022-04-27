@@ -80,7 +80,7 @@
                                             <i class="fa fa-history"></i>
                                         </a>  -->
                                         <!-- <a class="btn btn-xs btn-info" href="<?= base_url().'editOld/'.$record->userId; ?>" title="Edit"> -->
-                                        <a class="btn btn-xs btn-info" onclick="users(<?php echo $record->userId; ?>)" title="Edit">
+                                        <a class="btn btn-xs btn-success text-white" onclick="users(<?php echo $record->userId; ?>)" title="Edit">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a class="btn btn-xs btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete">

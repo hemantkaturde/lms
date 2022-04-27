@@ -111,8 +111,10 @@ pre {
   .btn.active .active-hidden {
     display: none; }
   .btn.btn-xs, .btn-group-xs .btn {
-    padding: 2px 5px;
-    font-size: 12px; }
+    padding: 2px 3px;
+    font-size: 12px; 
+    border: none;
+  }
 
 .btn-fix {
   min-width: 120px;

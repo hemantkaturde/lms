@@ -127,7 +127,10 @@
 			// $returns = $this->paginationCompress ( "roleListing/", $count, 10 );
             $data['id'] = $id;
             $data['courselink'] = $this->course_model->courseLinksListing($id, $searchText);
-            // $data['userRecords'] = $this->role_model->roleListing($searchText, $returns["page"], $returns["segment"]);
+            $course = $this->course_model->getCourseInfo($id);
+            $data['courseName'] = $course[0]->course_name;
+            // print_r($data['courseName']);exit;
+
             $process = 'Course Links Listing';
             $processFunction = 'Course/courseLinks';
             $this->logrecord($process,$processFunction);
@@ -147,9 +150,12 @@
             $this->load->library('form_validation');
         
                 $name = ucwords(strtolower($this->security->xss_clean($this->input->post('link_name'))));
+                $url = $this->security->xss_clean($this->input->post('link_url'));
+                $sdate = $this->security->xss_clean($this->input->post('link_sdate'));
+                $ldate = $this->security->xss_clean($this->input->post('link_ldate'));
                 if($linkId == 0)
                 {
-                    $courseInfo = array('course_id'=>$courseId, 'link_name'=>$name, 'link_date'=>date('Y-m-d'));
+                    $courseInfo = array('course_id'=>$courseId, 'link_name'=>$name, 'link_url'=>$url, 'link_date'=>date('Y-m-d'),'link_sdate'=>$sdate,'link_ldate'=>$ldate );
                         
                     // $result = $this->user_model->addNewUser($userInfo);
                     $result = $this->database->data_insert('tbl_course_link', $courseInfo);
@@ -166,7 +172,7 @@
                     }
                 }else
                 {
-                    $courseInfo = array( 'link_name'=>$name);
+                    $courseInfo = array( 'link_name'=>$name, 'link_url'=>$url, 'link_sdate'=>$sdate, 'link_ldate'=>$ldate);
 
                     $result = $this->course_model->data_update('tbl_course_link',$courseInfo,'link_id',$linkId);
                     

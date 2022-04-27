@@ -69,7 +69,7 @@
                                         <?php echo $record->student_course ?>
                                     </td> -->
                                     <td class="text-center">
-                                        <a class="btn btn-xs btn-info text-white" onclick="student(<?php echo $record->studentId; ?>)" title="Edit">
+                                        <a class="btn btn-xs btn-success text-white" onclick="student(<?php echo $record->studentId; ?>)" title="Edit">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a class="btn btn-xs btn-danger deleteStudent" href="#" data-studentId="<?php echo $record->studentId; ?>" title="Delete">

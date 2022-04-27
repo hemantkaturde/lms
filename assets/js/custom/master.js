@@ -637,6 +637,21 @@ function courseLink(linkId, id)
 	    		data += '<input type="text" class="form-control" id="link_name" name="link_name" maxlength="128" placeholder="Enter Link Here" required>';
 	   		 data += '</div>';
 
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Link URL</label>';
+	    		data += '<input type="text" class="form-control" id="link_url" name="link_url" placeholder="http://" required>';
+	   		 data += '</div>';
+
+				data += '<div class="form-group col-md-6 mb-3">';
+	    		data += '<label>Start Date</label>';
+	    		data += '<input type="text" class="form-control datepicker" id="link_sdate" name="link_sdate" placeholder="dd-mm-yyyy" required>';
+	   		 data += '</div>';
+
+				data += '<div class="form-group col-md-6 mb-3">';
+	    		data += '<label>End Date</label>';
+	    		data += '<input type="text" class="form-control datepicker" id="link_ldate" name="link_ldate" placeholder="dd-mm-yyyy" required>';
+	   		 data += '</div>';
+
 	    // data += '</div>';
 	    // data += '<div class="row">';
                 data += '<div class="col-md-12">';
@@ -665,6 +680,9 @@ function courseLink(linkId, id)
             {
                 console.log(resp);
                 $("#link_name").val(resp['linkInfo'][0]['link_name']);
+				$("#link_url").val(resp['linkInfo'][0]['link_url']);
+				$("#link_sdate").val(resp['linkInfo'][0]['link_sdate']);
+				$("#link_ldate").val(resp['linkInfo'][0]['link_ldate']);
             },
             function(errmsg)
             {

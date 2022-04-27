@@ -70,7 +70,7 @@ class Course_model extends CI_Model
 
         public function courseLinksListing($courseId)
         {
-            $this->db->select('BaseTbl.link_id , BaseTbl.course_id, BaseTbl.link_name, BaseTbl.link_date');
+            $this->db->select('BaseTbl.link_id , BaseTbl.course_id, BaseTbl.link_name, BaseTbl.link_url, BaseTbl.link_sdate, BaseTbl.link_ldate');
             $this->db->from('tbl_course_link as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
             $this->db->where('BaseTbl.course_id', $courseId);
@@ -81,7 +81,7 @@ class Course_model extends CI_Model
 
         public function getCourseLinkInfo($id)
         {
-            $this->db->select('BaseTbl.link_id, BaseTbl.link_name');
+            $this->db->select('BaseTbl.link_id, BaseTbl.link_name, BaseTbl.link_url, BaseTbl.link_sdate, BaseTbl.link_ldate');
             $this->db->from('tbl_course_link as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
             $this->db->where('BaseTbl.link_id', $id);
