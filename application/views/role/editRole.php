@@ -53,8 +53,8 @@ if(!empty($roleInfo))
                                                     System
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="roletype" id="roletypecompany" value="company" <?php if($role_type=='company'){ echo 'checked';}?>>
-                                                    Company
+                                                    <input class="form-check-input" type="radio" name="roletype" id="roletypecompany" value="student" <?php if($role_type=='student'){ echo 'checked';}?>>
+                                                    Student
                                                 </div>
                                     </div>
                                 </div>

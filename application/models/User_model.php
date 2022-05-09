@@ -9,7 +9,7 @@ class User_model extends CI_Model
      */
     function userListingCount($searchText = '')
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role, BaseTbl.user_flag');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
         if(!empty($searchText)) {
@@ -19,6 +19,7 @@ class User_model extends CI_Model
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where_in('BaseTbl.user_flag', 'user');
         $query = $this->db->get();
         
         return $query->num_rows();

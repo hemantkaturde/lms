@@ -34,8 +34,8 @@
                                                     System
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="roletype" id="roletypecompany" value="company">
-                                                    Company
+                                                    <input class="form-check-input" type="radio" name="roletype" id="roletypecompany" value="student">
+                                                    Student
                                                 </div>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                 <div class="form-group">
                                     <!-- ENTER BUTTON HERE -->
                                     <!-- <input type="submit" class="btn btn-primary" value="SEND" /> -->
-                                    <input type="button" onclick="add_role()" class="btn btn-primary" value="SEND" />
+                                    <input type="button" onclick="add_role()" class="btn btn-primary" value="SUBMIT" />
                                     <input type="reset" class="btn btn-default" value="CANCEL" />
                                 </div>
                             </div>

@@ -12,6 +12,8 @@ class Admin extends BaseController
         parent::__construct();
         $this->load->model('login_model');
         $this->load->model('user_model');
+        $this->load->model('course_model');
+        $this->load->model('student_model');
         // $this->load->config('additional');
         // $this->load->library('mail');
         // Datas -> libraries ->BaseController / This function used load user sessions
@@ -35,7 +37,10 @@ class Admin extends BaseController
     public function index()
     {
         $this->global['pageTitle'] = 'ADMIN : Home page';
-        $this->loadViews("dashboard", $this->global, '' , NULL);
+        $data['users'] = $this->user_model->userListingCount();
+        $data['courses'] = $this->course_model->courseListingCount();
+        $data['students'] = $this->student_model->studentListingCount();
+        $this->loadViews("dashboard", $this->global, $data , NULL);
     }
 
      /**
@@ -55,7 +60,8 @@ class Admin extends BaseController
             // $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             $data['userRecords'] = $this->user_model->userListing($searchText);
             
-            $process = 'User Listeleme';
+            
+            $process = 'User Listing';
             $processFunction = 'Admin/userListing';
             $this->logrecord($process,$processFunction);
 

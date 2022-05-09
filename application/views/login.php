@@ -48,7 +48,7 @@
                 <button class="btn btn-info btn-block" id="login_btn" value="Login" type="submit">Login</button>
                 <!-- <a class="btn btn-info btn-block" href="<?php echo base_url(); ?>dashboard">Login</a> -->
             </div>
-            <div class="social-auth-hr">
+            <!-- <div class="social-auth-hr">
                 <span>Or login with</span>
             </div>
             <div class="text-center social-auth m-b-20">
@@ -57,7 +57,7 @@
                 <a class="btn btn-social-icon btn-google m-r-5" href="javascript:;"><i class="fa fa-google-plus"></i></a>
                 <a class="btn btn-social-icon btn-linkedin m-r-5" href="javascript:;"><i class="fa fa-linkedin"></i></a>
                 <a class="btn btn-social-icon btn-vk" href="javascript:;"><i class="fa fa-vk"></i></a>
-            </div>
+            </div> -->
             <!-- <div class="text-center">Not a member? -->
                 <!-- <a class="color-blue" href="#">Create accaunt</a> -->
             <!-- </div> -->

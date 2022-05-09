@@ -13,7 +13,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Course Management</div>
+                <div class="ibox-title">Student Management</div>
 
                 <!-- <div class="ibox-tools"> -->
                     <a class="btn btn-primary text-white" onclick="student(0)" ><i class="fa fa-plus"></i> Add Student</a>
