@@ -493,10 +493,10 @@ function courses(id)
 	            data += '<textarea type="text" class="form-control required" id="course_desc" name="course_desc" placeholder="Enter Description" required></textarea>';
 	        data += '</div>';
 
-			data += '<div class="form-group col-md-12 mb-3">';
-	            data += '<label>Date</label>';
-	            data += '<input type="text" class="form-control required" id="course_date" name="course_date" placeholder="dd-mm-yyyy"  required>';
-	        data += '</div>';
+			// data += '<div class="form-group col-md-12 mb-3">';
+	        //     data += '<label>Date</label>';
+	        //     data += '<input type="text" class="form-control required" id="course_date" name="course_date" placeholder="dd-mm-yyyy"  required>';
+	        // data += '</div>';
 	       
 	    // data += '</div>';
 	    // data += '<div class="row">';

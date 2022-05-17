@@ -25,7 +25,7 @@
                                 <th>Course Name</th>
                                 <th>Description</th>
                                 <th>Created Date</th>
-                                <th width="12%">Action</th>
+                                <th width="20%">Action</th>
                             </tr>
                   </thead>
                   <tbody>
@@ -45,12 +45,12 @@
                                         <?php echo $record->course_desc ?>
                                     </td>
                                     <td>
-                                        <?php echo date('d-m-Y', strtotime($record->course_date)) ?>
+                                        <?php echo date('d-m-Y', strtotime($record->createdDtm)) ?>
                                     </td>
                                   
                                     <td class="text-center">
-                                    <a href="#" class="btn btn-xs btn-info text-white">Send Link</a>
-                                        <a href="<?php echo base_url().'courseLinks/'.$record->courseId ?>" class="btn btn-xs btn-info text-white"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                                        <a href="#" class="btn btn-xs btn-info text-white">Send Link</a>
+                                        <a href="<?php echo base_url().'courseLinks/'.$record->courseId ?>" class="btn btn-xs btn-info text-white">Add Links</a>
                                         <a class="btn btn-xs btn-success text-white" onclick="courses(<?php echo $record->courseId; ?>)" title="Edit">
                                             <i class="fa fa-pencil"></i>
                                         </a>
