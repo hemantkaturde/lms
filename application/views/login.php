@@ -51,7 +51,7 @@
             <!-- <div class="social-auth-hr">
                 <span>Or login with</span>
             </div>
-            <div class="text-center social-auth m-b-20">
+            <!-- <div class="text-center social-auth m-b-20">
                 <a class="btn btn-social-icon btn-twitter m-r-5" href="javascript:;"><i class="fa fa-twitter"></i></a>
                 <a class="btn btn-social-icon btn-facebook m-r-5" href="javascript:;"><i class="fa fa-facebook"></i></a>
                 <a class="btn btn-social-icon btn-google m-r-5" href="javascript:;"><i class="fa fa-google-plus"></i></a>

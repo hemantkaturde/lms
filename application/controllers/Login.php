@@ -48,7 +48,6 @@ class Login extends BaseController
         
         $this->global['pageTitle'] = 'ADMIN : Access Denied';
         $this->datas();
-
         $this->load->view ( 'includes/header', $this->global );
 		$this->load->view ( 'access' );
 		$this->load->view ( 'includes/footer' );
@@ -77,7 +76,6 @@ class Login extends BaseController
     public function loginMe()
     {
         $this->load->library('form_validation');
-        
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
         
@@ -115,7 +113,7 @@ class Login extends BaseController
                     // unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
                     
                     $this->logrecord($process,$processFunction);
-                   echo true;
+                    echo true;
                 }
             }
             else
@@ -128,7 +126,7 @@ class Login extends BaseController
     public function logout()
     {
         $this->session->sess_destroy();
-         redirect('/login');
+        redirect('login');
     }
 
 }

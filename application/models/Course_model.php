@@ -22,7 +22,7 @@ class Course_model extends CI_Model
 
     function courseListingCount($searchText = '')
     {
-        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date');
+        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm');
         $this->db->from('tbl_course as BaseTbl');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.course_name  LIKE '%".$searchText."%'
@@ -38,7 +38,7 @@ class Course_model extends CI_Model
 
     function courseListing($searchText = '')
     {
-        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date');
+        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm');
         $this->db->from('tbl_course as BaseTbl');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.course_name  LIKE '%".$searchText."%'
