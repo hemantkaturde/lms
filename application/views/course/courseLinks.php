@@ -55,10 +55,14 @@
                                         <?php echo $record->link_url ?>
                                     </td>
                                     <td>
-                                        <?php echo date('d-m-Y', strtotime($record->link_sdate)) ?>
+                                        <?php if((date('d-m-Y', strtotime($record->link_sdate)) =="30-11--0001") && ($record->link_sdate =="0000-00-00") && $record->link_sdate =="1970-01-01"):
+                                            echo date('d-m-Y', strtotime($record->link_sdate));
+                                        endif; ?>
                                     </td>
                                     <td>
-                                        <?php echo date('d-m-Y', strtotime($record->link_ldate)) ?>
+                                    <?php if((date('d-m-Y', strtotime($record->link_ldate)) =="30-11--0001") && ($record->link_ldate =="0000-00-00") && $record->link_ldate =="1970-01-01"):
+                                            echo date('d-m-Y', strtotime($record->link_ldate));
+                                        endif; ?>
                                     </td>
                                   
                                     <td class="text-center">

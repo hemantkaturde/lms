@@ -17,14 +17,14 @@
                     $error = $this->session->flashdata('error');
                 ?>
           
-              <div class="panel-body">
+              <div class="panel-body table-responsive ">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
                   <thead>
                             <tr>
                                 
                                 <th>Course Name</th>
                                 <th>Description</th>
-                                <th>Created Date</th>
+                                <!-- <th>Created Date</th> -->
                                 <th width="12%">Action</th>
                             </tr>
                   </thead>
@@ -44,10 +44,10 @@
                                     <td>
                                         <?php echo $record->course_desc ?>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <?php echo date('d-m-Y', strtotime($record->course_date)) ?>
                                     </td>
-                                  
+                                   -->
                                     <td class="text-center">
                                     <a href="#" class="btn btn-xs btn-info text-white">Send Link</a>
                                         <a href="<?php echo base_url().'courseLinks/'.$record->courseId ?>" class="btn btn-xs btn-info text-white"><i class="fa fa-external-link" aria-hidden="true"></i></a>

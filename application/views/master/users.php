@@ -43,7 +43,7 @@
                 <?php echo $this->session->flashdata('success'); ?>
                         </div>
               <?php } ?>
-              <div class="panel-body">
+              <div class="panel-body table-responsive">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
                   <thead>
                             <tr>

@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
 	
 	   swal({
 		title: "Are you sure?",
-		text: "You will not be able to recover this imaginary file!",
+		text: "You will not be able to recover this file!",
 		type: "warning",
 		showCancelButton: true,
 		closeOnClickOutside: false,
@@ -42,7 +42,7 @@ jQuery(document).ready(function(){
 	
 	   swal({
 		title: "Are you sure?",
-		text: "You will not be able to recover this imaginary file!",
+		text: "You will not be able to recover this file!",
 		type: "warning",
 		showCancelButton: true,
 		closeOnClickOutside: false,
@@ -195,7 +195,7 @@ function add_template(id)
 					{
 						swal({
 							title: "Email Template created!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -210,7 +210,7 @@ function add_template(id)
 					{
 						swal({
 							title: "Email Template updated!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -361,7 +361,7 @@ function add_smtp(id)
 					{
 						swal({
 							title: "Email SMTP Created!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -376,7 +376,7 @@ function add_smtp(id)
 					{
 						swal({
 							title: "Email SMTP updated!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000

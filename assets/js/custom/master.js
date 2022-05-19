@@ -238,6 +238,7 @@ function users(id)
 	        data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Password</label>';
 	            data += '<input type="password" class="form-control required" id="password" name="password" maxlength="20" placeholder="Enter Password" required="">';
+				data += '<span onclick="view_password();" style="float: right;margin-top: -26px;margin-right: 5px;"><i class="fa fa-eye"></i></span>';
 	        data += '</div>';
 	        data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Confirm Password</label>';
@@ -304,6 +305,15 @@ function users(id)
     });
 }
 
+function view_password() {
+	var x = document.getElementById("password");
+	if (x.type === "password") {
+	  x.type = "text";
+	} else {
+	  x.type = "password";
+	}
+  }
+
 function add_user(id)
 {
 	var check = 1;
@@ -340,7 +350,7 @@ function add_user(id)
 					{
 						swal({
 							title: "User Created!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -354,7 +364,7 @@ function add_user(id)
 						// alert("User successfully updated"); window.location.reload();
 						swal({
 							title: "User updated!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -411,7 +421,7 @@ function add_role()
 				if(data == 1) { 
 					swal({
 						title: "Role Created!",
-						text: "Suceess message sent!!",
+						text: "Success message sent!!",
 						icon: "success",
 						button: "Ok",
 						// timer: 2000
@@ -459,7 +469,7 @@ function update_role(id)
 				if(data == 1) { 
 					swal({
 						title: "Role Updated!",
-						text: "Suceess message sent!!",
+						text: "Success message sent!!",
 						icon: "success",
 						button: "Ok",
 						// timer: 2000
@@ -493,10 +503,10 @@ function courses(id)
 	            data += '<textarea type="text" class="form-control required" id="course_desc" name="course_desc" placeholder="Enter Description" required></textarea>';
 	        data += '</div>';
 
-			data += '<div class="form-group col-md-12 mb-3">';
-	            data += '<label>Date</label>';
-	            data += '<input type="text" class="form-control required" id="course_date" name="course_date" placeholder="dd-mm-yyyy"  required>';
-	        data += '</div>';
+			// data += '<div class="form-group col-md-12 mb-3">';
+	        //     data += '<label>Date</label>';
+	        //     data += '<input type="text" class="form-control required" id="course_date" name="course_date" placeholder="dd-mm-yyyy"  required>';
+	        // data += '</div>';
 	       
 	    // data += '</div>';
 	    // data += '<div class="row">';
@@ -527,7 +537,7 @@ function courses(id)
                 console.log(resp);
                 $("#course_name").val(resp['courseInfo'][0]['course_name']);
                 $("#course_desc").val(resp['courseInfo'][0]['course_desc']);
-                $("#course_date").val(resp['courseInfo'][0]['course_date']);
+                // $("#course_date").val(resp['courseInfo'][0]['course_date']);
             },
             function(errmsg)
             {
@@ -594,7 +604,7 @@ function add_course(id)
 					{
 						swal({
 							title: "Course Created!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -607,7 +617,7 @@ function add_course(id)
 					{
 						swal({
 							title: "Course updated!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -731,7 +741,7 @@ function add_link(linkId, id)
 					{
 						swal({
 							title: "Link Created!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -744,7 +754,7 @@ function add_link(linkId, id)
 					{
 						swal({
 							title: "Link updated!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -789,7 +799,7 @@ function student(id)
 	        data += '</div>';
 			data += '<div class="form-group col-md-12 mb-3">';
 	            data += '<label>Gender</label>';
-	            data += '<select class="form-control required" id="gender" name="gender[]" placeholder="Select Gender" required="">';
+	            data += '<select class="form-control required" id="gender" name="gender" placeholder="Select Gender" required="">';
 	            	data += '<option value="">Choose Gender</option>';
 					data += '<option value="Male">Male</option>';
 	            	data += '<option value="Female">Female</option>';
@@ -884,6 +894,15 @@ function add_student(id)
 		check = 1;
 	}
 
+	if($("#gender").val()=="")
+	{
+		var msg = 'Please Enter Gender';
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+
 	if($("#course").val()=="")
 	{
 		var msg = 'Please Enter Course';
@@ -918,7 +937,7 @@ function add_student(id)
 					{
 						swal({
 							title: "Student Created!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
@@ -931,7 +950,7 @@ function add_student(id)
 					{
 						swal({
 							title: "Student updated!",
-							text: "Suceess message sent!!",
+							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							// timer: 2000
