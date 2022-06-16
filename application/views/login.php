@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +18,7 @@
 <body class="bg-silver-300">
     <div class="content">
         <div class="brand">
-        <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="100">
+        <a href="https://doctor.iictn.org/"  target="_blank"><img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="100"></a>
             <!-- <a class="link" href="#" style="font-size: 24px;">LMS Management</a> -->
         </div>
         <form id="login-form" action="javascript:;" method="post" novalidate="novalidate">
@@ -27,13 +26,16 @@
             <h4 class="login-title">Log in</h4>
             <div class="alert_msg"></div> 
             <div class="form-group">
+                
                 <div class="input-group-icon right">
+                    <label for=""> Username / Email</label>
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
                     <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group-icon right">
+                    <label for="">Password</label>
                     <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
                     <input class="form-control" type="password" name="password" placeholder="Password" autocomplete="off">
                 </div>
@@ -42,7 +44,7 @@
                 <label class="ui-checkbox ui-checkbox-info">
                     <input type="checkbox">
                     <span class="input-span"></span>Remember me</label>
-                <a href="#">Forgot password?</a>
+                <!-- <a href="#">Forgot password?</a> -->
             </div>
             <div class="form-group">
                 <button class="btn btn-info btn-block" id="login_btn" value="Login" type="submit">Login</button>
@@ -80,5 +82,4 @@
     <script src="<?php echo base_url(); ?>assets/js/custom/login.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
 </body>
-
 </html>

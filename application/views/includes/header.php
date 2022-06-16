@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $pageUrl =$this->uri->segment(1);?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,63 +18,66 @@
     <link href="<?php echo base_url(); ?>assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
 
     <link href="<?php echo base_url(); ?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
     <script type="text/javascript">
-        var baseURL = "<?php echo base_url(); ?>";
+    var baseURL = "<?php echo base_url(); ?>";
     </script>
     <style>
-        .modal-header
-        {
-            padding: 10px 36px;
-            color:#fff;
-        }
-        /* thead
+    .modal-header {
+        padding: 10px 36px;
+        color: #fff;
+    }
+
+    /* thead
         {
             background:#374f65;color:#fff;
         } */
-        .table td{
-            padding: 0.3rem 0.75rem;
-        }
+    .table td {
+        padding: 0.3rem 0.75rem;
+    }
     </style>
 </head>
 
 <body class="fixed-navbar">
 
     <!-- ========================================================= -->
-<!-- Modal Large -->
-    <div class="modal fade" id="popup_modal_lg" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header bg-info">
-            <h5 class="modal-title modal-title-lg" id="myLargeModalLabel"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body modal-body-lg"></div>
+    <!-- Modal Large -->
+    <div class="modal fade" id="popup_modal_lg" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h5 class="modal-title modal-title-lg" id="myLargeModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-body-lg"></div>
+            </div>
         </div>
-      </div>
     </div>
-   
+
     <!-- modal small -->
-    <div class="modal fade" id="popup_modal_sm" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="smexampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header bg-info">
-            <h5 class="modal-title modal-title-sm" id="smexampleModalLabel" style="font-weight: 600"></h5>
-            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body modal-body-sm"></div>
-          <!-- <div class="modal-footer modal-footer-sm"></div> -->
+    <div class="modal fade" id="popup_modal_sm" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+        aria-labelledby="smexampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h5 class="modal-title modal-title-sm" id="smexampleModalLabel" style="font-weight: 600"></h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-body-sm"></div>
+                <!-- <div class="modal-footer modal-footer-sm"></div> -->
+            </div>
         </div>
-      </div>
     </div>
     <!-- /Modal End -->
-<!-- ========================================================= -->
+    <!-- ========================================================= -->
 
     <div class="page-wrapper">
         <!-- START HEADER-->
@@ -83,7 +87,7 @@
                     <span class="brand">IICTN
                         <!-- <span class="brand-tip">CAST</span> -->
                     </span>
-                    <span class="brand-mini">IICTN</span> 
+                    <span class="brand-mini">IICTN</span>
                     <!-- <span class="brand">
                         <span class="brand-tip">
                             <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="50">
@@ -110,7 +114,7 @@
                 <!-- END TOP-LEFT TOOLBAR-->
                 <!-- START TOP-RIGHT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
-                   <!--  <li class="dropdown dropdown-inbox">
+                    <!--  <li class="dropdown dropdown-inbox">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
                             <span class="badge badge-primary envelope-badge">9</span>
                         </a>
@@ -231,7 +235,8 @@
                             <a class="dropdown-item" href="javascript:;"><i class="fa fa-cog"></i>Settings</a>
                             <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
                             <li class="dropdown-divider"></li>
-                            <a class="dropdown-item" href="<?php echo base_url(); ?>logout"><i class="fa fa-power-off"></i>Logout</a>
+                            <a class="dropdown-item" href="<?php echo base_url(); ?>logout"><i
+                                    class="fa fa-power-off"></i>Logout</a>
                         </ul>
                     </li>
                 </ul>
@@ -247,53 +252,77 @@
                         <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
                     </div>
                     <div class="admin-info">
-                        <div class="font-strong"> <?php echo $name; ?></div><small><?php echo $role_text; ?></small></div>
+                        <div class="font-strong"> <?php echo $name; ?></div><small><?php echo $role_text; ?></small>
+                    </div>
                 </div>
                 <ul class="side-menu metismenu">
                     <li class="heading">DASHBOARD</li>
                     <li>
-                        <a class="active" href="<?php echo base_url()."dashboard"; ?>"><i class="sidebar-item-icon fa fa-th-large"></i>
+                        <a class="active" href="<?php echo base_url()."dashboard"; ?>"><i
+                                class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
-                    <!--  -->
-                    <!-- <li class="heading">COURSE</li> -->
+
                     <li>
                         <a href="<?php echo base_url()."courseListing"; ?>"><i class="sidebar-item-icon fa fa-book"></i>
                             <span class="nav-label">Courses</span>
                         </a>
                     </li>
-                    <!--  -->
-                    <!-- <li class="heading">STUDENTS</li> -->
+
+                    <li>
+                        <a href="#"><i class="sidebar-item-icon fa fa-user"></i>
+                            <span class="nav-label">Staff</span>
+                        </a>
+                    </li>
+
+                    
+                    <li>
+                        <a href="#"><i class="sidebar-item-icon fa fa-address-book"></i>
+                            <span class="nav-label">Inquiry / Leads</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="sidebar-item-icon fa fa-phone-square"></i>
+                            <span class="nav-label">Follow up</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="sidebar-item-icon fa fa-graduation-cap"></i>
+                            <span class="nav-label">Admission</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="<?php echo base_url()."studentListing"; ?>"><i class="sidebar-item-icon fa fa-users"></i>
                             <span class="nav-label">Student</span>
                         </a>
                     </li>
-                     <!--  -->
-                     <li class="treeview" style="height: auto;">
-                        <a href="#">
-                            <i class="sidebar-item-icon fa fa-cog"></i> <span>Settings</span>
-                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                        </a>
-                        <ul class="treeview-menu" >
-                          <li><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>
-                          <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
-                        </ul>
-                    </li>
-                    <!--  -->
+
                     <li class="treeview" style="height: auto;">
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-user"></i> <span>User</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
-                        <ul class="treeview-menu" >
-                          <li><a href="<?php echo base_url(); ?>userListing"  ><i class="sidebar-item-icon fa fa-user"></i> Users</a></li>
-                          <li><a href="<?php echo base_url(); ?>roleListing" ><i class="sidebar-item-icon fa fa-check-square-o"></i> Role</a></li>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i> Users</a></li>
+                            <li><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i> Role</a></li>
                         </ul>
                     </li>
-                    <!--  -->
-                
+
+                    <li class="treeview" style="height: auto;">
+                        <a href="#">
+                            <i class="sidebar-item-icon fa fa-cog"></i> <span>Settings</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>
+                            <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i  class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </nav>
