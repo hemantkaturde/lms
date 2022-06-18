@@ -271,6 +271,12 @@
                     </li>
 
                     <li>
+                        <a href="<?php echo base_url()."courseTypeListing"; ?>"><i class="sidebar-item-icon fa fa-book"></i>
+                            <span class="nav-label">Course Type</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="#"><i class="sidebar-item-icon fa fa-user"></i>
                             <span class="nav-label">Staff</span>
                         </a>

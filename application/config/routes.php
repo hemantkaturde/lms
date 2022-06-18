@@ -81,6 +81,9 @@ $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
 
+$route['courseTypeListing'] = "course/courseTypeListing";
+$route['deleteCourseType/(:any)'] = "course/deleteCourseType/$1";
+
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
 $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";

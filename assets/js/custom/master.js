@@ -177,6 +177,40 @@ jQuery(document).ready(function(){
 	  });
 	});
 
+	jQuery(".deleteCourseType").click(function(){
+		var id = $(this).parents("tr").attr("id");
+	
+	   swal({
+		title: "Are you sure?",
+		text: "You will not be able to recover this file!",
+		type: "warning",
+		showCancelButton: true,
+		closeOnClickOutside: false,
+		confirmButtonClass: "btn-sm btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		cancelButtonText: "No, cancel plz!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	  }, function(isConfirm) {
+		if (isConfirm) {
+		  $.ajax({
+			 url: baseURL+'deleteCourseType/'+id,
+			 type: 'DELETE',
+			 error: function() {
+				alert('Something is wrong');
+			 },
+			 success: function(data) {
+				  $("#"+id).remove();
+				  swal("Deleted!", "Course Type has been deleted.", "success");
+			 }
+		  });
+		}
+		else {
+			swal("Cancelled", "Course Type deletion cancelled ", "error");
+		  }
+	  });
+	});
+
 	jQuery(".deleteStudent").click(function(){
 		var id = $(this).parents("tr").attr("id");
 	
@@ -425,7 +459,7 @@ function add_role()
 						icon: "success",
 						button: "Ok",
 						// timer: 2000
-					}).then(function(){ 
+					}, function() {
 						window.location.href = baseURL+"roleListing";
 					});
 				}
@@ -473,9 +507,12 @@ function update_role(id)
 						icon: "success",
 						button: "Ok",
 						// timer: 2000
-					}).then(function(){ 
+					}, function() {
 						window.location.href = baseURL+"roleListing";
 					});
+					// .then(function(){ 
+					// 	window.location.href = baseURL+"roleListing";
+					// });
 				}
 				else if(data.status = false) { alert("Role Error"); }
 				else { alert("Access denied..!"); }
@@ -754,6 +791,119 @@ function add_link(linkId, id)
 					{
 						swal({
 							title: "Link updated!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							// timer: 2000
+							}, function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+					}
+				}
+				else if(data.status = false) { alert("User Error"); }
+				else { alert("Access denied..!"); }
+		});
+	}
+}
+
+// ====== Course Type
+function course_type(id)
+{
+    	//console.log(resp);
+	    var data = '';                      
+	    data += '<div class="alert_msg"></div>';
+	    data += '<form class="form-material" id="course_type_form">';
+	    data += '<div class="row m-2">';
+	    	data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Course Name</label>';
+	    		data += '<input type="text" class="form-control" id="ct_name" name="ct_name" maxlength="128" placeholder="Enter Course Type Here" required>';
+	   		data += '</div>';
+	        data += '<div class="col-md-12">';
+			if (id == 0) {
+				data += '<button type="submit" class="btn btn-sm btn-success" id="ct_btn" onClick="add_course_type(0)" >Submit</button> ';
+			}
+			else {
+				data += '<button type="submit" class="btn btn-sm btn-success" id="ct_btn" onClick="add_course_type('+id+')" >Update</button> ';
+			}
+        	data += '<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>';
+            data += '</div>';
+            data += '</div>';	    
+	    data += '</form>';
+
+	    $(".modal-body-sm").html(data);
+	    if(id == 0){
+            $(".modal-title-sm").html("ADD COURSE TYPE");
+        }
+        else
+        {
+            var path = baseURL+"course/get_signle_courseTypeData/"+id;
+
+            ajaxCall('GET',path,'','JSON',function(resp)
+            {
+                console.log(resp);
+                $("#ct_name").val(resp['courseTypeInfo'][0]['ct_name']);
+            },
+            function(errmsg)
+            {
+                console.log(errmsg);
+            });
+
+            $(".modal-title-sm").html("UPDATE COURSE TYPE");
+        }
+	    $("#popup_modal_sm").modal('show');
+}
+
+function add_course_type(id)
+{
+	var check = 1;
+	if($("#ct_name").val()=="")
+	{
+		var msg = 'Please Enter Course Type Name';
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+
+	if(check == 0)
+	{
+        display_alert('err',msg);
+        $("#popup_modal_sm").animate({'scrollTop':0},2000);
+	}
+	else
+	{
+		// var userId = $(this).data("userid"),
+		var userId = $("#course_type_form").serialize(),
+		hitURL = baseURL + "Course/course_type_insert/"+id,
+		currentRow = $(this);
+		console.log(hitURL);
+		$("#ct_btn").prop('disabled', true);
+		jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : userId  
+			}).done(function(data){
+
+				if(data.status = true) { 
+					if(id == 0)
+					{
+						swal({
+							title: "Course Type Created!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							// timer: 2000
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+					}
+					else
+					{
+						swal({
+							title: "Course Type updated!",
 							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",

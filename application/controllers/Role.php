@@ -55,7 +55,7 @@ class Role extends BaseController
             $data['userRecords'] = $this->role_model->roleListing($searchText);
             // $data['userRecords'] = $this->role_model->roleListing($searchText, $returns["page"], $returns["segment"]);
             
-            $process = 'User Listeleme';
+            $process = 'Role List';
             $processFunction = 'Role/roleListing';
             $this->logrecord($process,$processFunction);
 

@@ -89,6 +89,54 @@ class Course_model extends CI_Model
             
             return $query->result();
         }
+
+        // ====================================
+        function courseTypeListingCount($searchText = '')
+        {
+            $this->db->select('BaseTbl.ct_id , BaseTbl.ct_name');
+            $this->db->from('tbl_course_type as BaseTbl');
+            if(!empty($searchText)) {
+                $likeCriteria = "(BaseTbl.ct_name  LIKE '%".$searchText."%')";
+                $this->db->where($likeCriteria);
+            }
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->order_by('BaseTbl.ct_id', 'desc');
+            $query = $this->db->get();
+            
+            return $query->num_rows();
+        }
+
+        function courseTypeListing($searchText = '')
+        {
+            $this->db->select('BaseTbl.ct_id , BaseTbl.ct_name');
+            $this->db->from('tbl_course_type as BaseTbl');
+            if(!empty($searchText)) {
+                $likeCriteria = "(BaseTbl.ct_name  LIKE '%".$searchText."%')";
+                $this->db->where($likeCriteria);
+            }
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->order_by('BaseTbl.ct_id', 'desc');
+            // $this->db->limit($page, $segment);
+            $query = $this->db->get();
+            
+            $result = $query->result();
+            return $result;      
+        }
+
+        /*
+        Get Single course type
+        */ 
+        public function getCourseTypeInfo($courseId)
+        {
+            $this->db->select('BaseTbl.ct_id , BaseTbl.ct_name');
+            $this->db->from('tbl_course_type as BaseTbl');
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->where('BaseTbl.ct_id', $courseId);
+            $query = $this->db->get();
+            
+            return $query->result();
+        }
+        // ====================================
 }
 
 ?>
