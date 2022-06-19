@@ -67,6 +67,8 @@ $route['editOld'] = "admin/editOld";
 $route['editOld/(:num)'] = "admin/editOld/$1";
 $route['deleteUser/(:any)'] = "admin/deleteUser/$1";
 
+$route['staffListing'] = 'admin/staffListing';
+
 /*********** ROLE CONTROLLER ROUTES *******************/
 $route['roleListing'] = "role/roleListing";
 $route['addRole'] = "role/addRole";
@@ -88,6 +90,13 @@ $route['deleteCourseType/(:any)'] = "course/deleteCourseType/$1";
 $route['studentListing'] = "student/studentListing";
 $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
 
+/*********** ENQUIRY CONTROLLER ROUTES *******************/
+$route['enquiryListing'] = "enquiry/enquiryListing";
+$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
+
+/*********** ADMISSION CONTROLLER ROUTES *******************/
+$route['admissionListing'] = "admission/admissionListing";
+$route['deleteAdmission/(:any)'] = "admission/deleteAdmission/$1";
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
 $route['emailtemplateListing'] = "emailSetting/emailtemplateListing";

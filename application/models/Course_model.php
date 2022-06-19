@@ -22,11 +22,13 @@ class Course_model extends CI_Model
 
     function courseListingCount($searchText = '')
     {
-        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm');
+        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name');
         $this->db->from('tbl_course as BaseTbl');
+        $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.course_name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.course_desc  LIKE '%".$searchText."%')";
+                            OR  BaseTbl.course_desc  LIKE '%".$searchText."%'
+                            OR  Type.ct_name  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
@@ -38,11 +40,13 @@ class Course_model extends CI_Model
 
     function courseListing($searchText = '')
     {
-        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm');
+        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name');
         $this->db->from('tbl_course as BaseTbl');
+        $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.course_name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.course_desc  LIKE '%".$searchText."%')";
+                            OR  BaseTbl.course_desc  LIKE '%".$searchText."%'
+                            OR  Type.ct_name  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
@@ -59,7 +63,7 @@ class Course_model extends CI_Model
         */ 
         public function getCourseInfo($courseId)
         {
-            $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date');
+            $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books');
             $this->db->from('tbl_course as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
             $this->db->where('BaseTbl.courseId', $courseId);
@@ -121,6 +125,19 @@ class Course_model extends CI_Model
             
             $result = $query->result();
             return $result;      
+        }
+
+        /*
+        Get course type
+        */ 
+        public function getAllCourseTypeInfo()
+        {
+            $this->db->select('BaseTbl.ct_id , BaseTbl.ct_name');
+            $this->db->from('tbl_course_type as BaseTbl');
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $query = $this->db->get();
+            
+            return $query->result();
         }
 
         /*

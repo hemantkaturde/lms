@@ -57,10 +57,19 @@
         
                 $name = ucwords(strtolower($this->security->xss_clean($this->input->post('course_name'))));
                 $desc = $this->security->xss_clean($this->input->post('course_desc'));
-                $date = $this->security->xss_clean($this->input->post('course_date'));
+                // $date = $this->security->xss_clean($this->input->post('course_date'));
+                $fees = $this->security->xss_clean($this->input->post('course_fees'));
+                $cert_cost = $this->security->xss_clean($this->input->post('course_cert_cost'));
+                $ontime_adm_fees = $this->security->xss_clean($this->input->post('course_onetime_adm_fees'));
+                $kit_cost = $this->security->xss_clean($this->input->post('course_kit_cost'));
+                $remark = $this->security->xss_clean($this->input->post('course_remark'));
+                $type = $this->security->xss_clean($this->input->post('course_type_id'));
+                $books = $this->security->xss_clean($this->input->post('course_books'));
                 if($id == 0)
                 {
-                    $courseInfo = array('course_name'=>$name, 'course_desc'=>$desc, 'course_date'=> date('Y-m-d', strtotime($date)),
+                    $courseInfo = array('course_name'=>$name, 'course_desc'=>$desc, 'course_date'=> date('Y-m-d'),
+                                'course_fees' =>$fees,'course_cert_cost'=>$cert_cost, 'course_onetime_adm_fees'=>$ontime_adm_fees,'course_kit_cost'=> $kit_cost,
+                                'course_remark'=> $remark, 'course_type_id' => $type, 'course_books' => $books,
                                 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
                         
                     // $result = $this->user_model->addNewUser($userInfo);
@@ -78,7 +87,9 @@
                     }
                 }else
                 {
-                    $courseInfo = array('course_name'=>$name, 'course_desc'=>$desc, 'course_date'=> date('Y-m-d', strtotime($date)),
+                    $courseInfo = array('course_name'=>$name, 'course_desc'=>$desc,
+                                'course_fees' =>$fees,'course_cert_cost'=>$cert_cost, 'course_onetime_adm_fees'=>$ontime_adm_fees,'course_kit_cost'=> $kit_cost,
+                                'course_remark'=> $remark, 'course_type_id' => $type, 'course_books' => $books,
                                 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
 
                     $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$id);
@@ -233,6 +244,12 @@
         function get_signle_courseTypeData($cTypeId = NULL)
         {
             $data['courseTypeInfo'] = $this->course_model->getCourseTypeInfo($cTypeId);
+            echo json_encode($data);
+        }
+
+        function get_courseAllTypeData()
+        {
+            $data['courseTypeInfo'] = $this->course_model->getAllCourseTypeInfo();
             echo json_encode($data);
         }
 

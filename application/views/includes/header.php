@@ -277,14 +277,14 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="sidebar-item-icon fa fa-user"></i>
+                        <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user"></i>
                             <span class="nav-label">Staff</span>
                         </a>
                     </li>
 
                     
                     <li>
-                        <a href="#"><i class="sidebar-item-icon fa fa-address-book"></i>
+                        <a href="<?php echo base_url()."enquiryListing"; ?>"><i class="sidebar-item-icon fa fa-address-book"></i>
                             <span class="nav-label">Inquiry / Leads</span>
                         </a>
                     </li>
@@ -296,7 +296,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="sidebar-item-icon fa fa-graduation-cap"></i>
+                        <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap"></i>
                             <span class="nav-label">Admission</span>
                         </a>
                     </li>

@@ -105,11 +105,20 @@ class Admin extends BaseController
             $email = $this->security->xss_clean($this->input->post('email'));
             $password = $this->input->post('password');
             $roleId = $this->input->post('role');
+            if($this->input->post('user_flag') == "user")
+            {
+                $flag = $this->input->post('user_flag');
+            }
+            else if($this->input->post('user_flag') == "staff")
+            {
+                $flag = $this->input->post('user_flag');
+            }
+
             $mobile = $this->security->xss_clean($this->input->post('mobile'));
             if($id == 0)
             {
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
-                                'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'), 'user_flag' => "user",);
+                                'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'), 'user_flag' => $flag,);
                     
                 $result = $this->user_model->addNewUser($userInfo);
             
@@ -212,6 +221,37 @@ class Admin extends BaseController
                 }
             else { echo(json_encode(array('status'=>FALSE))); }
     }
+    
+    
+     /**
+     * This function is used to load the staff list
+     */
+    function staffListing()
+    {   
+            $searchText = $this->security->xss_clean($this->input->post('searchText'));
+            $data['searchText'] = $searchText;
+            
+   //          $this->load->library('pagination');
+            
+   //          $count = $this->user_model->userListingCount($searchText);
+
+			// $returns = $this->paginationCompress( "userListing/", $count, 10);
+            
+            // $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
+            $data['staffRecords'] = $this->user_model->staffListing($searchText);
+            
+            
+            $process = 'Staff Listing';
+            $processFunction = 'Admin/staffListing';
+            $this->logrecord($process,$processFunction);
+
+            $this->global['pageTitle'] = 'ADMIN : Staff List';
+            
+            $this->loadViews("master/staff", $this->global, $data, NULL);
+    }
+
+    // =======================================
+
 
 }
 

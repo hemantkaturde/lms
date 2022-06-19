@@ -44,6 +44,7 @@ class User_model extends CI_Model
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where_in('BaseTbl.user_flag', 'user');
         // $this->db->limit($page, $segment);
         $query = $this->db->get();
         
@@ -285,6 +286,45 @@ class User_model extends CI_Model
         return $query->row();
     }
 
+    // ====== Staff Listing  
+    function staffListingCount($searchText = '')
+    {
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role, BaseTbl.user_flag');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        if(!empty($searchText)) {
+            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
+                            OR  BaseTbl.name  LIKE '%".$searchText."%'
+                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+            $this->db->where($likeCriteria);
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where_in('BaseTbl.user_flag', 'staff');
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+    
+    function staffListing($searchText = '')
+    {
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role, BaseTbl.user_flag');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        if(!empty($searchText)) {
+            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
+                            OR  BaseTbl.name  LIKE '%".$searchText."%'
+                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+            $this->db->where($likeCriteria);
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where_in('BaseTbl.user_flag', 'staff');
+        // $this->db->limit($page, $segment);
+        $query = $this->db->get();
+        
+        $result = $query->result();        
+        return $result;
+    }
+    
    
     // ==============================
 }

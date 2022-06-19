@@ -244,6 +244,75 @@ jQuery(document).ready(function(){
 		  }
 	  });
 	});
+
+	jQuery(".deleteEnquiry").click(function(){
+		var id = $(this).parents("tr").attr("id");
+	
+	   swal({
+		title: "Are you sure?",
+		text: "You will not be able to recover this file!",
+		type: "warning",
+		showCancelButton: true,
+		closeOnClickOutside: false,
+		confirmButtonClass: "btn-sm btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		cancelButtonText: "No, cancel plz!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	  }, function(isConfirm) {
+		if (isConfirm) {
+		  $.ajax({
+			 url: baseURL+'deleteEnquiry/'+id,
+			 type: 'DELETE',
+			 error: function() {
+				alert('Something is wrong');
+			 },
+			 success: function(data) {
+				  $("#"+id).remove();
+				  swal("Deleted!", "Enquiry has been deleted.", "success");
+			 }
+		  });
+		}
+		else {
+			swal("Cancelled", "Enquiry deletion cancelled ", "error");
+		  }
+	  });
+	});
+
+	jQuery(".deleteAdmission").click(function(){
+		var id = $(this).parents("tr").attr("id");
+	
+	   swal({
+		title: "Are you sure?",
+		text: "You will not be able to recover this file!",
+		type: "warning",
+		showCancelButton: true,
+		closeOnClickOutside: false,
+		confirmButtonClass: "btn-sm btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		cancelButtonText: "No, cancel plz!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	  }, function(isConfirm) {
+		if (isConfirm) {
+		  $.ajax({
+			 url: baseURL+'deleteAdmission/'+id,
+			 type: 'DELETE',
+			 error: function() {
+				alert('Something is wrong');
+			 },
+			 success: function(data) {
+				  $("#"+id).remove();
+				  swal("Deleted!", "Admission has been deleted.", "success");
+			 }
+		  });
+		}
+		else {
+			swal("Cancelled", "Admission deletion cancelled ", "error");
+		  }
+	  });
+	});
+
 });
 
 // ===============================
@@ -263,6 +332,97 @@ function users(id)
 	    data += '<div class="row m-2">';
 	    	data += '<div class="form-group col-md-12 mb-3">';
 	    		data += '<label>Name</label>';
+	    		data += '<input type="hidden" class="form-control" id="user_flag" name="user_flag" value="user" readonly>';
+	    		data += '<input type="text" class="form-control" id="fname" name="fname" maxlength="128" placeholder="Enter Full Name Here" required>';
+	   		 data += '</div>';
+	        data += '<div class=" form-group col-md-12 mb-3">';
+	            data += '<label>Email Id</label>';
+	            data += '<input type="text" class="form-control required email" id="email" name="email" maxlength="128" placeholder="Eg. xyz@gmail.com" required>';
+	        data += '</div>';
+	        data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Password</label>';
+	            data += '<input type="password" class="form-control required" id="password" name="password" maxlength="20" placeholder="Enter Password" required="">';
+				data += '<span onclick="view_password();" style="float: right;margin-top: -26px;margin-right: 5px;"><i class="fa fa-eye"></i></span>';
+	        data += '</div>';
+	        data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Confirm Password</label>';
+	            data += '<input type="password" class="form-control required equalTo" id="cpassword" name="cpassword" maxlength="20" placeholder="Confirm Your Password" required="">';
+	        data += '</div>';
+	        data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Telephone No</label>';
+	            data += '<input type="text" class="form-control required digits" id="mobile" name="mobile" placeholder="Enter 10 Digit Mobile Number" maxlength="10" required>';
+	        data += '</div>';
+	        data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Role</label>';
+	            data += '<select class="form-control required" id="role" name="role" placeholder="Select Role" required="">';
+	            	data += '<option value="">Choose Role</option>';
+	            	$.each(resp['roles'], (index, value) => {
+            			data += '<option value="'+value['roleId']+'">'+value['role'] +'</option>';                        
+        			});
+	            data += '</select>';
+	        data += '</div>';
+	    // data += '</div>';
+	    // data += '<div class="row">';
+                data += '<div class="col-md-12">';
+                    if (id == 0) {
+                        data += '<button type="submit" class="btn btn-sm btn-success" id="user_btn" onClick="add_user(0)" >Submit</button> ';
+                    }
+                    else {
+                        data += '<button type="submit" class="btn btn-sm btn-success" id="user_btn" onClick="add_user('+id+')" >Update</button> ';
+                    }
+                // data += '</div>';
+                // data += '<div class="col-sm-3">';
+                    data += '<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>';
+                data += '</div>';
+            data += '</div>';	    
+	    data += '</form>';
+
+	    $(".modal-body-sm").html(data);
+	    if(id == 0){
+            $(".modal-title-sm").html("ADD USER");
+        }
+        else
+        {
+            var path = baseURL+"admin/get_signle_user_for_edit/"+id;
+
+            ajaxCall('GET',path,'','JSON',function(resp)
+            {
+                console.log(resp);
+                $("#fname").val(resp['userInfo'][0]['name']);
+                $("#email").val(resp['userInfo'][0]['email']);
+                $("#mobile").val(resp['userInfo'][0]['mobile']);
+                $("#role").val(resp['userInfo'][0]['roleId']);
+            },
+            function(errmsg)
+            {
+                console.log(errmsg);
+            });
+
+            $(".modal-title-sm").html("UPDATE USER");
+        }
+	    $("#popup_modal_sm").modal('show');
+
+	 },
+    function(errmsg)
+    {
+        console.log(errmsg);
+    });
+}
+
+function staff(id)
+{
+    var path = baseURL+"admin/get_assets_for_user";
+
+    ajaxCall('GET',path,'','JSON',function(resp)
+    {
+    	//console.log(resp);
+	    var data = '';                      
+	    data += '<div class="alert_msg"></div>';
+	    data += '<form class="form-material" id="user_form">';
+	    data += '<div class="row m-2">';
+	    	data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Name</label>';
+	    		data += '<input type="hidden" class="form-control" id="user_flag" name="user_flag" value="staff" readonly>';
 	    		data += '<input type="text" class="form-control" id="fname" name="fname" maxlength="128" placeholder="Enter Full Name Here" required>';
 	   		 data += '</div>';
 	        data += '<div class=" form-group col-md-12 mb-3">';
@@ -525,7 +685,11 @@ function update_role(id)
 // ===============================
 function courses(id)
 {
-    	//console.log(resp);
+    var path = baseURL+"course/get_courseAllTypeData";
+
+	ajaxCall('GET',path,'','JSON',function(resp)
+	{
+	console.log(resp);
 	    var data = '';                      
 	    data += '<div class="alert_msg"></div>';
 	    data += '<form class="form-material" id="course_form">';
@@ -540,11 +704,45 @@ function courses(id)
 	            data += '<textarea type="text" class="form-control required" id="course_desc" name="course_desc" placeholder="Enter Description" required></textarea>';
 	        data += '</div>';
 
-			// data += '<div class="form-group col-md-12 mb-3">';
-	        //     data += '<label>Date</label>';
-	        //     data += '<input type="text" class="form-control required" id="course_date" name="course_date" placeholder="dd-mm-yyyy"  required>';
-	        // data += '</div>';
-	       
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Fees</label>';
+	    		data += '<input type="text" class="form-control" id="course_fees" name="course_fees" placeholder="Enter Fees Here" required>';
+	   		 data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Certificate Cost</label>';
+	    		data += '<input type="text" class="form-control" id="course_cert_cost" name="course_cert_cost" placeholder="Enter Certificate Cost Here" required>';
+	   		data += '</div>';
+			data += '<div class="form-group col-md-12 mb-3">';
+			   data += '<label>One time admission fees</label>';
+			   data += '<input type="text" class="form-control" id="course_onetime_adm_fees" name="course_onetime_adm_fees" placeholder="Enter One time admission fees Here" required>';
+			data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+			   data += '<label>Kit cost</label>';
+			   data += '<input type="text" class="form-control" id="course_kit_cost" name="course_kit_cost" placeholder="Enter Kit Cost Here" required>';
+			data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Remarks</label>';
+	            data += '<textarea type="text" class="form-control" id="course_remark" name="course_remark" placeholder="Enter Remark"></textarea>';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Course Type</label>';
+				data += '<select class="form-control select2_demo_1 required" id="course_type_id" name="course_type_id" placeholder="Select Course Type" required="" multiple>';
+	            	data += '<option value="">Choose Course Type</option>';
+	            	$.each(resp['courseTypeInfo'], (index, value) => {
+            			data += '<option value="'+value['ct_id']+'">'+value['ct_name'] +'</option>';                        
+        			});
+	        	data += '</select>';
+			data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Books</label></br>';
+	            data += '<input type="checkbox" class="" id="course_books" name="course_books" value="YES" placeholder="Enter Books"> YES';
+				data += '<input type="checkbox" class="" id="course_books" name="course_books" value="NO" placeholder="Enter Books" style="margin-left:20px;"> NO';
+	        data += '</div>';
 	    // data += '</div>';
 	    // data += '<div class="row">';
                 data += '<div class="col-md-12">';
@@ -562,7 +760,8 @@ function courses(id)
 	    data += '</form>';
 
 	    $(".modal-body-sm").html(data);
-	    if(id == 0){
+	    if(id == 0)
+		{
             $(".modal-title-sm").html("ADD COURSE");
         }
         else
@@ -571,10 +770,16 @@ function courses(id)
 
             ajaxCall('GET',path,'','JSON',function(resp)
             {
-                console.log(resp);
                 $("#course_name").val(resp['courseInfo'][0]['course_name']);
                 $("#course_desc").val(resp['courseInfo'][0]['course_desc']);
-                // $("#course_date").val(resp['courseInfo'][0]['course_date']);
+
+				$("#course_fees").val(resp['courseInfo'][0]['course_fees']);
+				$("#course_cert_cost").val(resp['courseInfo'][0]['course_cert_cost']);
+				$("#course_onetime_adm_fees").val(resp['courseInfo'][0]['course_onetime_adm_fees']);
+				$("#course_kit_cost").val(resp['courseInfo'][0]['course_kit_cost']);
+				$("#course_remark").val(resp['courseInfo'][0]['course_remark']);
+				$("#course_type_id").val(resp['courseInfo'][0]['course_type_id']);
+				$("#course_books").val(resp['courseInfo'][0]['course_books']);
             },
             function(errmsg)
             {
@@ -584,6 +789,11 @@ function courses(id)
             $(".modal-title-sm").html("UPDATE COURSE");
         }
 	    $("#popup_modal_sm").modal('show');
+	},
+	function(errmsg)
+	{
+		console.log(errmsg);
+	});
 }
 
 function add_course(id)
@@ -1115,3 +1325,499 @@ function add_student(id)
 		});
 	}
 }
+
+
+// ===============================
+// 		ENQUIRY INSERT
+// ===============================
+
+function enquiry(id)
+{
+    var path = baseURL+"student/student_assets";
+
+    ajaxCall('GET',path,'','JSON',function(resp)
+    {
+    	//console.log(resp);
+	    var data = '';                      
+	    data += '<div class="alert_msg"></div>';
+	    data += '<form class="form-material" id="enquiry_form">';
+	    data += '<div class="row m-2">';
+	    	
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Name</label>';
+	    		data += '<input type="text" class="form-control" id="name" name="name" maxlength="128" placeholder="Enter Full Name Here" required>';
+	   		 data += '</div>';
+	        data += '<div class="form-group col-md-6 mb-3">';
+	            data += '<label>Mobile No</label>';
+	            data += '<input type="text" class="form-control required digits" id="mobile" name="mobile" placeholder="Enter 10 Digit Mobile Number" maxlength="10" required>';
+	        data += '</div>';
+			data += '<div class="form-group col-md-6 mb-3">';
+	            data += '<label>Alternate Mobile</label>';
+	            data += '<input type="text" class="form-control required digits" id="mobile1" name="mobile1" placeholder="Enter alternate Mobile Number" maxlength="10" required>';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-6 mb-3">';
+	            data += '<label>Email</label>';
+	            data += '<input type="text" class="form-control required" id="email" name="email" placeholder="Enter email"required>';
+	        data += '</div>';
+			data += '<div class="form-group col-md-6 mb-3">';
+	            data += '<label>Alternamte Email</label>';
+	            data += '<input type="text" class="form-control required digits" id="email1" name="email1" placeholder="Enter alternate email">';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Qualification</label>';
+	            data += '<input type="text" class="form-control required" id="qualification" name="qualification" placeholder="Enter Qualification">';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-4 mb-3">';
+	            data += '<label>Country</label>';
+	            data += '<input type="text" class="form-control " id="country" name="country" placeholder="Enter Country">';
+	        data += '</div>';
+			data += '<div class="form-group col-md-4 mb-3">';
+	            data += '<label>State</label>';
+	            data += '<input type="text" class="form-control " id="state" name="state" placeholder="Enter State">';
+	        data += '</div>';
+			data += '<div class="form-group col-md-4 mb-3">';
+	            data += '<label>City</label>';
+	            data += '<input type="text" class="form-control " id="city" name="city" placeholder="Enter City">';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	            data += '<label>Purpose</label>';
+	            data += '<input type="text" class="form-control required" id="purpose" name="purpose" placeholder="Enter Purpose">';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-6 mb-3">';
+	    		data += '<label>Date of Enquiry</label>';
+	    		data += '<input type="text" class="form-control datepicker" id="enq_date" name="enq_date" placeholder="dd-mm-yyyy" required>';
+	   		data += '</div>';
+
+			data += '<div class="form-group col-md-6 mb-3">';
+	            data += '<label>Enquiry Source</label>';
+	            data += '<select class="form-control required" id="source" name="source" placeholder="Select Source" required="">';
+	            	data += '<option value="">Choose Source</option>';
+					data += '<option value="Email">Email</option>';
+	            	data += '<option value="Friends">Friends</option>';
+	            	data += '<option value="Other">Other</option>';
+	            data += '</select>';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Remark</label>';
+	    		data += '<textarea type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" required></textarea>';
+	   		 data += '</div>';
+	        // data += '<div class="form-group col-md-12 mb-3">';
+	        //     data += '<label>Courses</label>';
+	        //     data += '<select class="form-control select2_demo_1 required" id="course" name="course[]" placeholder="Select Course" required="" multiple>';
+	        //     	data += '<option value="">Choose Courses</option>';
+	        //     	$.each(resp['courses'], (index, value) => {
+            // 			data += '<option value="'+value['courseId']+'">'+value['course_name'] +'</option>';                        
+        	// 		});
+	        //     data += '</select>';
+	        // data += '</div>';
+	    // data += '</div>';
+	    // data += '<div class="row">';
+                data += '<div class="col-md-12">';
+                    if (id == 0) {
+                        data += '<button type="button" class="btn btn-sm btn-success" id="user_btn" onClick="add_enquiry(0)" >Submit</button> ';
+                    }
+                    else {
+                        data += '<button type="button" class="btn btn-sm btn-success" id="user_btn" onClick="add_enquiry('+id+')" >Update</button> ';
+                    }
+                // data += '</div>';
+                // data += '<div class="col-sm-3">';
+                    data += '<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>';
+                data += '</div>';
+            data += '</div>';	    
+	    data += '</form>';
+
+	    $(".modal-body-sm").html(data);
+	    if(id == 0){
+            $(".modal-title-sm").html("ADD ENQUIRY");
+        }
+        else
+        {
+            var path = baseURL+"enquiry/get_signle_enquiry/"+id;
+
+            ajaxCall('GET',path,'','JSON',function(resp)
+            {
+                console.log(resp);
+                $("#name").val(resp['enquiryInfo'][0]['enq_fullname']);
+                $("#mobile").val(resp['enquiryInfo'][0]['enq_mobile']);
+				$("#mobile1").val(resp['enquiryInfo'][0]['enq_mobile1']);
+				$("#email").val(resp['enquiryInfo'][0]['enq_email']);
+                $("#email1").val(resp['enquiryInfo'][0]['enq_email1']);
+                $("#qualification").val(resp['enquiryInfo'][0]['enq_qualification']);
+				$("#purpose").val(resp['enquiryInfo'][0]['enq_purpose']);
+				$("#country").val(resp['enquiryInfo'][0]['enq_country']);
+				$("#state").val(resp['enquiryInfo'][0]['enq_state']);
+				$("#city").val(resp['enquiryInfo'][0]['enq_city']);
+				$("#enq_date").val(resp['enquiryInfo'][0]['enq_date']);
+				$("#source").val(resp['enquiryInfo'][0]['enq_source']);
+				$("#remark").val(resp['enquiryInfo'][0]['enq_remark']);
+            },
+            function(errmsg)
+            {
+                console.log(errmsg);
+            });
+
+            $(".modal-title-sm").html("UPDATE ENQUIRY");
+        }
+	    $("#popup_modal_sm").modal('show');
+
+	 },
+    function(errmsg)
+    {
+        console.log(errmsg);
+    });
+}
+
+function add_enquiry(id)
+{
+	var check = 1;
+	if($("#name").val()=="")
+	{
+		var msg = 'Please Enter Name';
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+
+	if($("#mobile").val()=="")
+	{
+		var msg = 'Please Enter Mobile Number';
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+
+	if($("#email").val()=="")
+	{
+		var msg = 'Please Enter Email';
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+
+	if(check == 0)
+	{
+        display_alert('err',msg);
+        $("#popup_modal_sm").animate({'scrollTop':0},2000);
+	}
+	else
+	{
+		// var userId = $(this).data("userid"),
+		var userId = $("#enquiry_form").serialize(),
+		hitURL = baseURL + "Enquiry/enquiry_insert/"+id,
+		currentRow = $(this);
+		console.log(hitURL);
+		$("#stBtn").prop('disabled', true);
+		jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : userId  
+			}).done(function(data){
+
+				if(data.status = true) { 
+					if(id == 0)
+					{
+						swal({
+							title: "Enquiry Created!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							// timer: 2000
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+					}
+					else
+					{
+						swal({
+							title: "Enquiry updated!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							// timer: 2000
+							}, function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+					}
+				}
+				else if(data.status = false) { alert("User Error"); }
+				else { alert("Access denied..!"); }
+		});
+	}
+}
+
+// ===============================
+// 		ENQUIRY INSERT
+// ===============================
+
+function admission(id)
+{
+    var path = baseURL+"student/student_assets";
+
+    ajaxCall('GET',path,'','JSON',function(resp)
+    {
+    	//console.log(resp);
+	    var data = '';
+		var img_path = baseURL+"uploads/admission/no_image.gif";
+	    data += '<div class="alert_msg"></div>';
+	    data += '<form class="form-material" id="admission_form">';
+	    data += '<div class="row m-2">';
+	    	
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Name</label>';
+	    		data += '<input type="text" class="form-control" id="full_name" name="full_name" maxlength="128" placeholder="Enter Full Name Here" required>';
+	   		 data += '</div>';
+
+			data += '<div class="form-group col-md-6 mb-3">';
+	    		data += '<label>Date of Admission</label>';
+	    		data += '<input type="text" class="form-control datepicker" id="adm_date" name="adm_date" placeholder="dd-mm-yyyy" required>';
+	   		data += '</div>';
+
+			data += '<div class="form-group col-md-6 mb-3">';
+	            data += '<label>Enquiry Source</label>';
+	            data += '<select class="form-control required" id="source" name="source" placeholder="Select Source" required="">';
+	            	data += '<option value="">Choose Source</option>';
+					data += '<option value="Email">Email</option>';
+	            	data += '<option value="Friends">Friends</option>';
+	            	data += '<option value="Other">Other</option>';
+	            data += '</select>';
+	        data += '</div>';
+
+			data += '<div class="form-group col-md-12 mb-3">';
+	    		data += '<label>Remark</label>';
+	    		data += '<textarea type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" required></textarea>';
+	   		data += '</div>';
+
+			data += '<div class="form-group col-md-4 mb-3">';
+			   data += '<label>Photo</label>';
+			   data += '<input type="file" class="form-control" id="photo" name="photo" onchange="readURL(this);">';
+			data += '</div>';
+
+			data += '<div class="form-group col-md-4 mb-3">';
+			   data += '<label>Adhar Card</label>';
+			   data += '<input type="file" class="form-control" id="adhar_card" name="adhar_card" onchange="readURL1(this);">';
+			data += '</div>';
+
+			data += '<div class="form-group col-md-4 mb-3">';
+			   data += '<label>Pan Card</label>';
+			   data += '<input type="file" class="form-control" id="pan_card" name="pan_card" onchange="readURL2(this);">';
+			data += '</div>';
+
+			data += '<div class="form-group col-md-4 mb-3">';
+			   data += '<img src="'+img_path+'" id="photo1" width="50%" alt="Photo"></img>';
+			data += '</div>';
+			
+			data += '<div class="form-group col-md-4 mb-3">';
+			   data += '<img src="'+img_path+'" id="adhar_card1" width="50%" alt="Photo"></img>';
+			data += '</div>';
+			
+			data += '<div class="form-group col-md-4 mb-3">';
+			   data += '<img src="'+img_path+'" id="pan_card1" width="50%" alt="Photo"></img>';
+			data += '</div>';
+
+            data += '<div class="col-md-12">';
+                    if (id == 0) {
+                        data += '<button type="button" class="btn btn-sm btn-success" id="user_btn" onClick="add_admission(0)" >Submit</button> ';
+                    }
+                    else {
+                        data += '<button type="button" class="btn btn-sm btn-success" id="user_btn" onClick="add_admission('+id+')" >Update</button> ';
+                    }
+                    data += '<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>';
+                data += '</div>';
+            data += '</div>';	    
+	    data += '</form>';
+
+	    $(".modal-body-sm").html(data);
+	    if(id == 0){
+            $(".modal-title-sm").html("ADD ADMISSION");
+        }
+        else
+        {
+            var path = baseURL+"admission/get_signle_admission/"+id;
+
+            ajaxCall('GET',path,'','JSON',function(resp)
+            {
+                console.log(resp);
+                $("#full_name").val(resp['admInfo'][0]['full_name']);
+				$("#adm_date").val(resp['admInfo'][0]['admission_date']);
+				$("#source").val(resp['admInfo'][0]['adm_source']);
+				$("#remark").val(resp['admInfo'][0]['admission_remark']);
+
+				if(resp['admInfo'][0]['adm_passportsize_photo'] != "")
+				{
+					var data = baseURL+"uploads/admission/"+resp[0]['adm_passportsize_photo'];
+				}
+				else
+				{
+					var data = baseURL+"uploads/admission/no_image.gif";
+				}
+
+				if(resp['admInfo'][0]['adm_adhar_photo'] != "")
+				{
+					var data1 = baseURL+"uploads/admission/"+resp[0]['adm_adhar_photo'];
+				}
+				else
+				{
+					var data1 = baseURL+"uploads/admission/no_image.gif";
+				}
+
+				if(resp['admInfo'][0]['adm_pan_photo'] != "")
+				{
+					var data2 = baseURL+"uploads/admission/"+resp[0]['adm_pan_photo'];
+				}
+				else
+				{
+					var data2 = baseURL+"uploads/admission/no_image.gif";
+				}
+
+
+				$("#photo1").attr('src',data);
+				$("#adhar_card1").attr('src',data1);
+				$("#pan_card1").attr('src',data2);
+
+            },
+            function(errmsg)
+            {
+                console.log(errmsg);
+            });
+
+            $(".modal-title-sm").html("UPDATE ADMISSION");
+        }
+	    $("#popup_modal_sm").modal('show');
+
+	 },
+    function(errmsg)
+    {
+        console.log(errmsg);
+    });
+}
+
+function add_admission(id)
+{
+	var check = 1;
+	if($("#full_name").val()=="")
+	{
+		var msg = 'Please Enter Name';
+		check = 0;		
+	}else
+	{
+		check = 1;
+	}
+
+	if(check == 0)
+	{
+        display_alert('err',msg);
+        $("#popup_modal_sm").animate({'scrollTop':0},2000);
+	}
+	else
+	{
+		// var userId = $(this).data("userid"),
+		var formid = document.getElementById('admission_form');
+    	var userId = new FormData(formid);
+
+		// var userId = $("#enquiry_form").serialize(),
+		hitURL = baseURL + "Admission/admission_insert/"+id,
+		currentRow = $(this);
+		console.log(hitURL);
+		$("#admissionBtn").prop('disabled', true);
+		jQuery.ajax({
+			type:'POST',
+			url:hitURL,
+			data : userId,
+			contentType : false,
+			processData : false,
+			dataType : 'json',
+			}).done(function(data){
+
+				if(data.status = true) { 
+					if(id == 0)
+					{
+						swal({
+							title: "Admission Created!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							// timer: 2000
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+					}
+					else
+					{
+						swal({
+							title: "Admission updated!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							// timer: 2000
+							}, function(){ 
+								$("#popup_modal_sm").hide();
+								location.reload();
+						});
+					}
+				}
+				else if(data.status = false) { alert("User Error"); }
+				else { alert("Access denied..!"); }
+		});
+	}
+}
+
+function readURL(input) 
+{
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function (e) {
+			$('#photo1')
+				.attr('src', e.target.result)
+				.width(150)
+				.height(150);
+		};
+
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+function readURL1(input) 
+	{
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+				$('#adhar_card1')
+				.attr('src', e.target.result)
+				.width(150)
+				.height(150);
+	        };
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
+	function readURL2(input) 
+	{
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+				$('#pan_card1')
+				.attr('src', e.target.result)
+				.width(150)
+				.height(150);
+	        };
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
