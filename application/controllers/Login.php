@@ -126,7 +126,7 @@ class Login extends BaseController
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('login');
+        redirect(base_url());
     }
 
 }

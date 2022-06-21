@@ -82,7 +82,7 @@
     <div class="page-wrapper">
         <!-- START HEADER-->
         <header class="header">
-            <div class="page-brand" style="place-content:center;">
+            <div class="page-brand" style="place-content:center;background-color: #ca9331;">
                 <a class="link" href="#">
                     <span class="brand">IICTN
                         <!-- <span class="brand-tip">CAST</span> -->
@@ -96,7 +96,7 @@
                     <span class="brand-mini">LMS</span> -->
                 </a>
             </div>
-            <div class="flexbox flex-1">
+            <div class="flexbox flex-1" style="background: #d2ae6d;">
                 <!-- START TOP-LEFT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
                     <li>
@@ -231,12 +231,11 @@
                             <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
                             <span></span><?php echo $role_text; ?><i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-user"></i>Profile</a>
+                            <!-- <a class="dropdown-item" href="javascript:;"><i class="fa fa-user"></i>Profile</a>
                             <a class="dropdown-item" href="javascript:;"><i class="fa fa-cog"></i>Settings</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
-                            <li class="dropdown-divider"></li>
-                            <a class="dropdown-item" href="<?php echo base_url(); ?>logout"><i
-                                    class="fa fa-power-off"></i>Logout</a>
+                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a> -->
+                            <!-- <li class="dropdown-divider"></li> -->
+                            <a class="dropdown-item" href="<?php echo base_url(); ?>logout"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>
                     </li>
                 </ul>
@@ -245,71 +244,79 @@
         </header>
         <!-- END HEADER-->
         <!-- START SIDEBAR-->
-        <nav class="page-sidebar" id="sidebar">
+        <nav class="page-sidebar" id="sidebar" style="background-color: #d2ae6d;">
             <div id="sidebar-collapse">
                 <div class="admin-block d-flex">
                     <div>
                         <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
                     </div>
-                    <div class="admin-info">
-                        <div class="font-strong"> <?php echo $name; ?></div><small><?php echo $role_text; ?></small>
+                    <div class="admin-info" >
+                        <div class="font-strong"> <?php echo $name; ?></div><small ><?php echo $role_text; ?></small>
                     </div>
                 </div>
-                <ul class="side-menu metismenu">
-                    <li class="heading">DASHBOARD</li>
+                <ul class="side-menu metismenu" >
+                    <!-- <li class="heading" >DASHBOARD</li> -->
                     <li>
                         <a class="active" href="<?php echo base_url()."dashboard"; ?>"><i
                                 class="sidebar-item-icon fa fa-th-large"></i>
-                            <span class="nav-label">Dashboard</span>
+                            <span class="nav-label" >Dashboard</span>
                         </a>
                     </li>
 
+                 
+                    <li class="treeview" style="height: auto; " >
+                        <a href="#">
+                            <i class="sidebar-item-icon fa fa-th-list" ></i> <span class="group-master">Masters</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu">
+                             <a href="<?php echo base_url()."courseTypeListing"; ?>"><i class="sidebar-item-icon fa fa-file" ></i>
+                                <span class="nav-label" >Course Type</span>
+                            </a>
+                        </ul>
+                    </li>
+
+
                     <li>
-                        <a href="<?php echo base_url()."courseListing"; ?>"><i class="sidebar-item-icon fa fa-book"></i>
+                        <a href="<?php echo base_url()."courseListing"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
                             <span class="nav-label">Courses</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="<?php echo base_url()."courseTypeListing"; ?>"><i class="sidebar-item-icon fa fa-book"></i>
-                            <span class="nav-label">Course Type</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user"></i>
+                        <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
                             <span class="nav-label">Staff</span>
                         </a>
                     </li>
 
                     
                     <li>
-                        <a href="<?php echo base_url()."enquiryListing"; ?>"><i class="sidebar-item-icon fa fa-address-book"></i>
+                        <a href="<?php echo base_url()."enquiryListing"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
                             <span class="nav-label">Inquiry / Leads</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="sidebar-item-icon fa fa-phone-square"></i>
+                        <a href="#"><i class="sidebar-item-icon fa fa-phone-square" ></i>
                             <span class="nav-label">Follow up</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap"></i>
+                        <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap" ></i>
                             <span class="nav-label">Admission</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="<?php echo base_url()."studentListing"; ?>"><i class="sidebar-item-icon fa fa-users"></i>
+                        <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
                             <span class="nav-label">Student</span>
                         </a>
                     </li>
 
-                    <li class="treeview" style="height: auto;">
+                    <li class="treeview" style="height: auto; " >
                         <a href="#">
-                            <i class="sidebar-item-icon fa fa-user"></i> <span>User</span>
+                            <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >User</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
@@ -320,8 +327,8 @@
 
                     <li class="treeview" style="height: auto;">
                         <a href="#">
-                            <i class="sidebar-item-icon fa fa-cog"></i> <span>Settings</span>
-                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                            <i class="sidebar-item-icon fa fa-cog" ></i> <span class="group-master">Settings</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right" ></i></span>
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>

@@ -10,7 +10,8 @@
     <link href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
     <!-- THEME STYLES-->
-    <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet" />
+    <!-- <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet" /> -->
+    <link href="<?php echo base_url(); ?>assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
     <link href="<?php echo base_url(); ?>assets/css/pages/auth-light.css" rel="stylesheet" />
 </head>
@@ -53,7 +54,7 @@
             <!-- <div class="social-auth-hr">
                 <span>Or login with</span>
             </div>
-            <!-- <div class="text-center social-auth m-b-20">
+            <div class="text-center social-auth m-b-20">
                 <a class="btn btn-social-icon btn-twitter m-r-5" href="javascript:;"><i class="fa fa-twitter"></i></a>
                 <a class="btn btn-social-icon btn-facebook m-r-5" href="javascript:;"><i class="fa fa-facebook"></i></a>
                 <a class="btn btn-social-icon btn-google m-r-5" href="javascript:;"><i class="fa fa-google-plus"></i></a>

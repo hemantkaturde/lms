@@ -3008,6 +3008,7 @@ a.text-danger:hover, a.text-danger:focus {
     line-height: 20px !important;
     font-size: 16px; }
   .side-menu li .nav-label {
+    color:#000;
     display: block; }
   .side-menu li .arrow {
     line-height: 18px;
@@ -3530,3 +3531,7 @@ table.dataTable {
     -webkit-justify-content: start !important;
     -ms-flex-pack: start !important;
     justify-content: start !important; } }
+
+ .group-master{
+  color: #000;
+ }
