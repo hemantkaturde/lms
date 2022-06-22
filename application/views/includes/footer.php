@@ -1,5 +1,4 @@
          
-           
             <footer class="page-footer">
                 <div class="font-13">2018 © <b>AdminCAST</b> - All rights reserved.</div>
                 <a class="px-4" href="http://themeforest.net/item/adminca-responsive-bootstrap-4-3-angular-4-admin-dashboard-template/20912589" target="_blank">BUY PREMIUM</a>
@@ -7,7 +6,6 @@
             </footer>
         </div>
     </div>
-  
     <!-- BEGIN PAGA BACKDROPS-->
     <div class="sidenav-backdrop backdrop"></div>
     <div class="preloader-backdrop">
@@ -32,16 +30,16 @@
     <script src="<?php echo base_url(); ?>assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
    <script src="<?php echo base_url(); ?>assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
    <script src="<?php echo base_url(); ?>assets/vendors/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
-   <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></
+   <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript">
    <script src="<?php echo base_url(); ?>assets/js/scripts/form-plugins.js" type="text/javascript"></script>
-   <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/common.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/master.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom/setting.js" type="text/javascript"></script>
-   <script type="text/javascript">
+    <script type="text/javascript">
         $(function() {
             $('#example-table').DataTable({
                 pageLength: 10,

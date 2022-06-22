@@ -1,73 +1,29 @@
-
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Course Management</div>
-
                 <!-- <div class="ibox-tools"> -->
-                    <a class="btn btn-primary text-white" onclick="courses(0)" ><i class="fa fa-plus"></i> Add Course</a>
-                    <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
+                <a class="btn btn-primary text-white"><i class="fa fa-plus"></i> Add Course</a>
+                <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
             </div>
             <div class="ibox-body">
-                 <?php
-                    $this->load->helper('form');
-                    $error = $this->session->flashdata('error');
-                ?>
-          
-              <div class="panel-body table-responsive ">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
-                  <thead>
+                <div class="panel-body table-responsive ">
+                    <table id="view_courselist" class="table table-striped table-bordered dtr-inline">
+                        <thead>
                             <tr>
-                                
                                 <th>Course Name</th>
                                 <th>Course Type</th>
                                 <th>Course Fees</th>
-                                <th width="12%">Action</th>
+                                <th>Action</th>
                             </tr>
-                  </thead>
-                  <tbody>
-                            <?php
-                    if(!empty($course))
-                    {
-                        foreach($course as $record)
-                        {
-                           
-                    ?>
-                                <tr id="<?php echo $record->courseId; ?>">
-                                    
-                                    <td>
-                                        <?php echo $record->course_name ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $record->ct_name ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $record->course_fees ?>
-                                    </td>
-                                   
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-xs btn-info text-white">Send Link</a>
-                                        <a href="<?php echo base_url().'courseLinks/'.$record->courseId ?>" class="btn btn-xs btn-info text-white">Add Links</a>
-                                        <a class="btn btn-xs btn-success text-white" onclick="courses(<?php echo $record->courseId; ?>)" title="Edit">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-danger deleteCourse" href="#" data-courseId="<?php echo $record->courseId; ?>" title="Delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
-                            
-                        }
-                    }
-                    ?>
-                  </tbody>
-                        </table>
-              </div>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+</div>
 <!-- END PAGE CONTENT-->

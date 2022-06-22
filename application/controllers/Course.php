@@ -26,23 +26,33 @@
 
         public function courseListing()
         {
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
-            $data['searchText'] = $searchText;
-            
-            // $this->load->library('pagination');
-            
-            // $count = $this->role_model->roleListingCount($searchText);
+            $this->global['pageTitle'] = 'Course Listing';
+            $this->loadViews("course/courseList",$this->global,NULL,NULL);
+        }
 
-			// $returns = $this->paginationCompress ( "roleListing/", $count, 10 );
-            
-            $data['course'] = $this->course_model->courseListing($searchText);
-            // $data['userRecords'] = $this->role_model->roleListing($searchText, $returns["page"], $returns["segment"]);
-            $process = 'Course Listing';
-            $processFunction = 'Course/courseListing';
-            $this->logrecord($process,$processFunction);
-
-            $this->global['pageTitle'] = 'ADMIN : Courses';
-            $this->loadViews("course/courseList", $this->global, $data , NULL);
+        public function fetchcourse()
+        {
+            $params = $_REQUEST;
+            $totalRecords = $this->course_model->getCourseCount($params); 
+            $queryRecords = $this->course_model->getCoursedata($params); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
         }
 
         function get_signle_courseData($courseId = NULL)

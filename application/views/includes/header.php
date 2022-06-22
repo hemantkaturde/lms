@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $pageUrl =$this->uri->segment(1);?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,10 +15,8 @@
     <!-- THEME STYLES-->
     <link href="<?php echo base_url(); ?>assets/css/main.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
-
     <link href="<?php echo base_url(); ?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"
-        rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
     <script type="text/javascript">
@@ -30,11 +27,6 @@
         padding: 10px 36px;
         color: #fff;
     }
-
-    /* thead
-        {
-            background:#374f65;color:#fff;
-        } */
     .table td {
         padding: 0.3rem 0.75rem;
     }
@@ -250,35 +242,36 @@
                     <div>
                         <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
                     </div>
-                    <div class="admin-info" >
+                    <!-- <div class="admin-info" >
                         <div class="font-strong"> <?php echo $name; ?></div><small ><?php echo $role_text; ?></small>
-                    </div>
+                    </div> -->
                 </div>
                 <ul class="side-menu metismenu" >
                     <!-- <li class="heading" >DASHBOARD</li> -->
-                    <li>
-                        <a class="active" href="<?php echo base_url()."dashboard"; ?>"><i
+
+                    <li  class="<?php if($pageUrl =='dashboard'){ echo 'active';} ?>">
+                        <a  href="<?php echo base_url()."dashboard"; ?>"><i
                                 class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label" >Dashboard</span>
                         </a>
                     </li>
 
-                 
-                    <li class="treeview" style="height: auto; " >
+                    <li class="treeview <?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>" style="height: auto; " >
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-th-list" ></i> <span class="group-master">Masters</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
-                             <a href="<?php echo base_url()."courseTypeListing"; ?>"><i class="sidebar-item-icon fa fa-file" ></i>
-                                <span class="nav-label" >Course Type</span>
-                            </a>
+                            <li class="<?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>">
+                                <a href="<?php echo base_url()."coursetypelisting"; ?>"><i class="sidebar-item-icon fa fa-file" ></i>
+                                    <span class="nav-label" >Course Type</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
-
-                    <li>
-                        <a href="<?php echo base_url()."courseListing"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
+                    <li class="<?php if($pageUrl =='courselisting'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url()."courselisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
                             <span class="nav-label">Courses</span>
                         </a>
                     </li>
@@ -289,7 +282,6 @@
                         </a>
                     </li>
 
-                    
                     <li>
                         <a href="<?php echo base_url()."enquiryListing"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
                             <span class="nav-label">Inquiry / Leads</span>

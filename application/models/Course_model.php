@@ -154,6 +154,71 @@ class Course_model extends CI_Model
             return $query->result();
         }
         // ====================================
+
+
+
+        public function  getCourseCount($params){
+            $this->db->select('*');
+            $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+
+            if($params['search']['value'] != "") 
+            {
+                $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+            }
+            $this->db->where(TBL_COURSE.'.isDeleted', 1);
+            $query = $this->db->get(TBL_COURSE);
+            $rowcount = $query->num_rows();
+            return $rowcount;
+
+        }
+
+        public function getCoursedata($params){
+            $this->db->select('*');
+            $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+            if($params['search']['value'] != "") 
+            {
+                $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+            }
+            $this->db->where(TBL_COURSE.'.isDeleted', 1);
+            $this->db->limit($params['length'],$params['start']);
+            $query = $this->db->get(TBL_COURSE);
+            $fetch_result = $query->result_array();
+            $data = array();
+            $counter = 0;
+            if(count($fetch_result) > 0)
+            {
+                foreach ($fetch_result as $key => $value)
+                {
+
+                    //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                     $data[$counter]['course_name'] = $value['course_name'];
+                     $data[$counter]['course_type'] = $value['ct_name'];
+                    //  $data[$counter]['course_desc'] = $value['course_desc'];
+                     $data[$counter]['course_date'] = $value['course_date'];
+                    
+                   
+            
+                    // $data[$counter]['equipment_name'] = $value['equipment_name'];
+                    $data[$counter]['action'] = '';
+                    // if(in_array("hospital/editequipment", $this->session->userdata('adminuser_access'))){
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".$value['course_date']."'><img width='20' src='".ADMIN_IMAGES_PATH."edit.png' alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                        // }
+    
+                    // if(in_array("hospital/deletequipment", $this->session->userdata('adminuser_access')))
+                    // {
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='' alt='Delete Equipment' title='Delete Equipment'></a>"; 
+                    // }
+    
+                    $counter++; 
+                }
+            }
+
+            return $data;
+        }
 }
 
 ?>
