@@ -234,19 +234,10 @@
         {
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;
-            
-            // $this->load->library('pagination');
-            
-            // $count = $this->role_model->roleListingCount($searchText);
-
-			// $returns = $this->paginationCompress ( "roleListing/", $count, 10 );
-            
             $data['course_type'] = $this->course_model->courseTypeListing($searchText);
-            // $data['userRecords'] = $this->role_model->roleListing($searchText, $returns["page"], $returns["segment"]);
             $process = 'Course Type Listing';
             $processFunction = 'Course/courseTypeListing';
             $this->logrecord($process,$processFunction);
-
             $this->global['pageTitle'] = 'ADMIN : Course Type';
             $this->loadViews("course/courseType", $this->global, $data , NULL);
         }

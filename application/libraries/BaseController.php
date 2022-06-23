@@ -206,4 +206,5 @@ class BaseController extends CI_Controller {
 		$this->load->model('login_model');
 		// $this->login_model->loginsert($logInfo);
 	}
+
 }

@@ -70,32 +70,31 @@ class Login extends BaseController
         }
     }
 
-    /**
-     * This function used to logged in user
-     */
+    public function login()
+    {
+        $this->load->view('login');
+    }
+
     public function loginMe()
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
-        
+    
         if($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->load->view('login');
         }
         else
         {
             $email = $this->security->xss_clean($this->input->post('email'));
             $password = $this->input->post('password');
-            
             $result = $this->login_model->loginMe($email, $password);
-
             if(count($result) > 0)
             {
                 foreach ($result as $res)
                 {
                     // $lastLogin = $this->login_model->lastLoginInfo($res->userId);
-                    
                     $process = 'Login';
                     $processFunction = 'Login/loginMe';
 
@@ -110,8 +109,7 @@ class Login extends BaseController
                                     );
 
                     $this->session->set_userdata($sessionArray);
-                    // unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
-                    
+                    //unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
                     $this->logrecord($process,$processFunction);
                     echo true;
                 }

@@ -27,15 +27,6 @@ $base  = "http://".$_SERVER['HTTP_HOST'];
 $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $base;
 
-$config['base_url']	= $ark_root;
-define("ADMIN_PATH",$config['base_url']);
-define("ADMIN_VIEWS_PATH",ADMIN_PATH.'views/');
-define("ADMIN_CSS_PATH",ADMIN_PATH.'assets/css/');
-define("ADMIN_JS_PATH",ADMIN_PATH.'assets/js/');
-define("ADMIN_IMAGES_PATH",ADMIN_PATH.'assets/images/');
-define("ADMIN_FONTS_PATH",ADMIN_PATH.'assets/fonts/');
-
-
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -1,6 +1,6 @@
 var l = window.location;
 var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1] + "/" + l.pathname.split('/')[2];
-base_url += '/';
+// base_url += '';
 
 function display_alert(type,message)
 {

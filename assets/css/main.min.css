@@ -4572,3 +4572,19 @@ table.dataTable {
 .fa-angle-left{
   color:black
 }
+
+.btn-primary{
+    background: #ca9331 !important;
+    border: 1px #ca9331 !important;
+    color: black !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    background: #d2ae6d !important;
+    border: 1px #d2ae6d !important;
+    color: black !important;
+}
+
+.table thead tr{
+    background: #d2ae6d; 
+}

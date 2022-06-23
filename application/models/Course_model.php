@@ -184,6 +184,7 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
             }
             $this->db->where(TBL_COURSE.'.isDeleted', 1);
+            $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
             $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_COURSE);
             $fetch_result = $query->result_array();
@@ -197,20 +198,26 @@ class Course_model extends CI_Model
                     //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                      $data[$counter]['course_name'] = $value['course_name'];
                      $data[$counter]['course_type'] = $value['ct_name'];
-                    //  $data[$counter]['course_desc'] = $value['course_desc'];
-                     $data[$counter]['course_date'] = $value['course_date'];
+                     $data[$counter]['course_fees'] = $value['course_fees'];
+
+
+                    //  $data[$counter]['course_date'] = date("d-m-Y",strtotime($value['createdDtm']));
+
                     
-                   
-            
+                    
                     // $data[$counter]['equipment_name'] = $value['equipment_name'];
                     $data[$counter]['action'] = '';
+
                     // if(in_array("hospital/editequipment", $this->session->userdata('adminuser_access'))){
-                        $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".$value['course_date']."'><img width='20' src='".ADMIN_IMAGES_PATH."edit.png' alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".$value['courseId']."'><img width='20' src='http://localhost/lms_2/assets/icons/edit.png' alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                         // }
-    
                     // if(in_array("hospital/deletequipment", $this->session->userdata('adminuser_access')))
                     // {
-                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='' alt='Delete Equipment' title='Delete Equipment'></a>"; 
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='http://localhost/lms_2/assets/icons/delete.png' alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
+
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='http://localhost/lms_2/assets/icons/add_links.png' alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
+
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='http://localhost/lms_2/assets/icons/view_doc.png' alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                     // }
     
                     $counter++; 
