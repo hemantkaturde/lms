@@ -21,7 +21,6 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
                   <thead>
                             <tr>
-                                
                                 <th>Course Type Name</th>
                                 <th width="12%">Action</th>
                             </tr>
@@ -35,7 +34,6 @@
                            
                     ?>
                                 <tr id="<?php echo $record->ct_id; ?>">
-                                    
                                     <td>
                                         <?php echo $record->ct_name ?>
                                     </td>

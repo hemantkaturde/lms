@@ -167,7 +167,7 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
             }
-            $this->db->where(TBL_COURSE.'.isDeleted', 1);
+            // $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $query = $this->db->get(TBL_COURSE);
             $rowcount = $query->num_rows();
             return $rowcount;
@@ -183,7 +183,7 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
             }
-            $this->db->where(TBL_COURSE.'.isDeleted', 1);
+            // $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
             $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_COURSE);
@@ -226,6 +226,26 @@ class Course_model extends CI_Model
 
             return $data;
         }
+
+    public function saveCoursedata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_COURSE, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_COURSE, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+       
 }
 
 ?>

@@ -1026,7 +1026,7 @@ function course_type(id)
 	    data += '<form class="form-material" id="course_type_form">';
 	    data += '<div class="row m-2">';
 	    	data += '<div class="form-group col-md-12 mb-3">';
-	    		data += '<label>Course Name</label>';
+	    		data += '<label>Course Name <span style="color:red">*</span></label>';
 	    		data += '<input type="text" class="form-control" id="ct_name" name="ct_name" maxlength="128" placeholder="Enter Course Type Here" required>';
 	   		data += '</div>';
 	        data += '<div class="col-md-12">';

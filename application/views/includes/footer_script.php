@@ -1,5 +1,5 @@
 <?php
-if($pageTitle=='Course Listing'){?>
+if($pageTitle=='Course Management'){?>
     <script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_courselist').DataTable({
@@ -10,7 +10,6 @@ if($pageTitle=='Course Listing'){?>
 	                 { "width": "8%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 	            ],
-
 	            responsive: true,
 	            "oLanguage": {
 	                "sEmptyTable": "<i>No Trips Found.</i>",
@@ -44,37 +43,59 @@ if($pageTitle=='Course Listing'){?>
 	            // ],
 
 	        });
+		});
 
-	        // var detailRows = [];
-	        // $('#view_courselist tbody').on( 'click', 'tr td.details-control', function () {
-	        //     var tr = $(this).closest('tr');
-	        //     var row = dt.row( tr );
-	        //     var idx = $.inArray( tr.attr('id'), detailRows );
 
-	        //     if ( row.child.isShown() ) {
-	        //         tr.removeClass( 'parent' );
-	        //         row.child.hide();
+		$(document).on('click','#save_course',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#course_form")[0]);
 
-	        //         // Remove from the 'open' array
-	        //         detailRows.splice( idx, 1 );
-	        //     }
-	        //     else {
-	        //         tr.addClass( 'parent' );
-	        //         row.child( format( row.data() ) ).show();
+			$.ajax({
+				url : "<?php echo base_url();?>createcourse",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
 
-	        //         // Add to the 'open' array
-	        //         if ( idx === -1 ) {
-	        //             detailRows.push( tr.attr('id') );
-	        //         }
-	        //     }
-	        // });
-	        // // On each draw, loop over the `detailRows` array and show any child rows
-	        // dt.on( 'draw', function () {
-	        //     $.each( detailRows, function ( i, id ) {
-	        //         $('#'+id+' td.details-control').trigger( 'click' );
-	        //     } );
-	        // });
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Course Created!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'courselisting'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
 
-		    });
+		
+			
+		
+
+
+
     </script>   
 <?php } ?>

@@ -13,6 +13,9 @@
             $this->load->model('login_model');
             $this->load->model('course_model');
             $this->load->model('database');
+            $this->load->helper(array('form', 'url'));
+
+            $this->load->library('form_validation');
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
             $this->datas();
@@ -26,8 +29,9 @@
 
         public function courseListing()
         {
-            $this->global['pageTitle'] = 'Course Listing';
-            $this->loadViews("course/courseList",$this->global,NULL,NULL);
+            $this->global['pageTitle'] = 'Course Management';
+            $data['course_type'] = $this->course_model->getAllCourseTypeInfo();
+            $this->loadViews("course/courseList",$this->global,$data,NULL);
         }
 
         public function fetchcourse()
@@ -117,6 +121,60 @@
                     }
                 }            
         }
+
+       
+        function createcourse(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+
+                $createcourse_response = array();
+
+                $data = array(
+                    'course_name' => $this->input->post('course_name'),
+                    'course_fees'=> $this->input->post('fees'),
+                    'course_type_id' => $this->input->post('course_type'),
+                    'course_desc'=> $this->input->post('description'),
+                    'course_cert_cost' => $this->input->post('certificate_cost'),
+                    'course_kit_cost'=> $this->input->post('kit_cost'),
+                    'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
+                    'course_books'=>$this->input->post('course_books'),
+                    'course_remark' => $this->input->post('remarks')
+                );
+
+                $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+                $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
+                $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('description', 'Description', 'trim|required');
+                $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|required|numeric');
+                $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|required|numeric');
+                $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|required|numeric');
+                $this->form_validation->set_rules('course_books', 'Course Books', 'trim|required|numeric');
+                $this->form_validation->set_rules('remarks', 'remarks', 'trim');
+
+                if($this->form_validation->run() == FALSE){
+                    $createcourse_response['status'] = 'failure';
+                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), 'description'=>strip_tags(form_error('description')),'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
+                }else{
+
+                    $saveCoursedata = $this->course_model->saveCoursedata('',$data);
+                   
+                    if($saveCoursedata){
+                        $createcourse_response['status'] = 'success';
+                        $createcourse_response['error'] = array('course_name'=>'', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                    }
+                }
+        
+                echo json_encode($createcourse_response);
+            }
+
+
+
+        }
+
+
+
+
+
 
         // ==== Delete Course
         public function deleteCourse($id)
@@ -235,9 +293,11 @@
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;
             $data['course_type'] = $this->course_model->courseTypeListing($searchText);
+
             $process = 'Course Type Listing';
             $processFunction = 'Course/courseTypeListing';
             $this->logrecord($process,$processFunction);
+
             $this->global['pageTitle'] = 'ADMIN : Course Type';
             $this->loadViews("course/courseType", $this->global, $data , NULL);
         }
