@@ -194,12 +194,12 @@ class Course_model extends CI_Model
             {
                 foreach ($fetch_result as $key => $value)
                 {
-
-                    //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                    //  $data[$counter]['courseId'] = $value['courseId'];
                      $data[$counter]['course_name'] = $value['course_name'];
                      $data[$counter]['course_type'] = $value['ct_name'];
                      $data[$counter]['course_fees'] = $value['course_fees'];
                      $data[$counter]['action'] = '';
+                    //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
@@ -215,7 +215,7 @@ class Course_model extends CI_Model
     public function saveCoursedata($id,$data){
 
         if($id != '') {
-            $this->db->where('id', $id);
+            $this->db->where('courseId', $id);
             if($this->db->update(TBL_COURSE, $data)){
                 return TRUE;
             } else {
@@ -237,7 +237,16 @@ class Course_model extends CI_Model
         $this->db->where('course_name', $course_name);
         $query = $this->db->get();
         return $query->result();
+    }
 
+    public function checkquniqecoursename_update($courseId,$course_name){
+        $this->db->select('courseId,course_name');
+        $this->db->from(TBL_COURSE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('courseId !=', $courseId);
+        $this->db->where('course_name', $course_name);
+        $query = $this->db->get();
+        return $query->result();
     }
 
 

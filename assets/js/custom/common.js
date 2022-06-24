@@ -1,10 +1,3 @@
-// var l = window.location;
-// var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1];
-// base_url += '/';
-// (function(){
-//     $("#"+link).addClass("active");
-//     $("#"+sub_link).addClass("active");
-// });
 // =============================
 /*    COMMON ALERT DIALOG     */ 
 // =============================

@@ -1,5 +1,5 @@
 var l = window.location;
-var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1] + "/" + l.pathname.split('/')[2];
+var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1] + "/" + l.pathname.split('/')[2] + "/" + l.pathname.split('/')[3];
 // base_url += '';
 
 function display_alert(type,message)
@@ -52,7 +52,7 @@ $('#login-form #login_btn').click(function(e) {
          {
             var str = $("#login-form").serialize();
             var path = base_url+"login/loginMe";
-           
+           console.log(path);
             $.ajax({
                 type:"POST",
                 data:str,
