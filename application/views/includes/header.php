@@ -276,15 +276,16 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
-                            <span class="nav-label">Staff</span>
+                    <li class="<?php if($pageUrl =='enquirylisting'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url()."enquirylisting"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
+                            <span class="nav-label">Inquiry / Leads</span>
                         </a>
                     </li>
 
+                    
                     <li>
-                        <a href="<?php echo base_url()."enquiryListing"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
-                            <span class="nav-label">Inquiry / Leads</span>
+                        <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
+                            <span class="nav-label">Staff</span>
                         </a>
                     </li>
 

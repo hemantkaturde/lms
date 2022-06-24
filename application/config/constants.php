@@ -86,21 +86,16 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 
-
-
-
-
-
-
-
-
-
 /*********** TABLES  *******************/
-
 define('TBL_COURSE', 'tbl_course');
 define('TBL_COURSE_TYPE', 'tbl_course_type');
+define('TBL_STATES', 'tbl_states');
+define('TBL_CITIES', 'tbl_cities');
 
-/**********/
-define('ADMIN_IMAGES_PATH', 'tbl_course_type');
+
+
+
+
+
 
 

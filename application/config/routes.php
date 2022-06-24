@@ -53,6 +53,11 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
+/*********** COMMAN ROUTES******************/
+$route['getstates'] = "comman/getstates";
+$route['getcities'] = "comman/getcities";
+
 /*********** USER DEFINED ROUTES *******************/
 
 $route['loginMe'] = 'login/loginMe';
@@ -85,20 +90,24 @@ $route['deleteCourseType/(:any)'] = "course/deleteCourseType/$1";
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['courselisting'] = "course/courseListing";
 $route['fetchcourse'] = "course/fetchcourse";
-
 $route['createcourse'] = "course/createcourse";
-
+$route['delete_course'] = "course/delete_course";
 
 $route['courseLinks/(:num)'] = "course/courseLinks/$1";
-$route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
+// $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
+
 
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
 $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
 
 /*********** ENQUIRY CONTROLLER ROUTES *******************/
-$route['enquiryListing'] = "enquiry/enquiryListing";
+$route['enquirylisting'] = "enquiry/enquirylisting";
+$route['fetchenquiry'] = "enquiry/fetchenquiry";
+$route['createenquiry'] = "enquiry/createenquiry";
+
+
 $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/

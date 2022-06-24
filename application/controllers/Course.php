@@ -10,11 +10,8 @@
         public function __construct()
         {
             parent::__construct();
-            $this->load->model('login_model');
-            $this->load->model('course_model');
-            $this->load->model('database');
+            $this->load->model(array('login_model', 'course_model', 'database'));
             $this->load->helper(array('form', 'url'));
-
             $this->load->library('form_validation');
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
@@ -65,63 +62,6 @@
             echo json_encode($data);
         }
 
-        public function course_insert($id)
-        {
-            $this->load->library('form_validation');
-        
-                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('course_name'))));
-                $desc = $this->security->xss_clean($this->input->post('course_desc'));
-                // $date = $this->security->xss_clean($this->input->post('course_date'));
-                $fees = $this->security->xss_clean($this->input->post('course_fees'));
-                $cert_cost = $this->security->xss_clean($this->input->post('course_cert_cost'));
-                $ontime_adm_fees = $this->security->xss_clean($this->input->post('course_onetime_adm_fees'));
-                $kit_cost = $this->security->xss_clean($this->input->post('course_kit_cost'));
-                $remark = $this->security->xss_clean($this->input->post('course_remark'));
-                $type = $this->security->xss_clean($this->input->post('course_type_id'));
-                $books = $this->security->xss_clean($this->input->post('course_books'));
-                if($id == 0)
-                {
-                    $courseInfo = array('course_name'=>$name, 'course_desc'=>$desc, 'course_date'=> date('Y-m-d'),
-                                'course_fees' =>$fees,'course_cert_cost'=>$cert_cost, 'course_onetime_adm_fees'=>$ontime_adm_fees,'course_kit_cost'=> $kit_cost,
-                                'course_remark'=> $remark, 'course_type_id' => $type, 'course_books' => $books,
-                                'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
-                        
-                    // $result = $this->user_model->addNewUser($userInfo);
-                    $result = $this->course_model->data_insert('tbl_course', $courseInfo);
-                    if($result > 0)
-                    {
-                    $process = 'Course Insert';
-                    $processFunction = 'Course/courseInsert';
-                    $this->logrecord($process,$processFunction);
-                       echo true;
-                    }
-                    else
-                    {
-                        echo false;
-                    }
-                }else
-                {
-                    $courseInfo = array('course_name'=>$name, 'course_desc'=>$desc,
-                                'course_fees' =>$fees,'course_cert_cost'=>$cert_cost, 'course_onetime_adm_fees'=>$ontime_adm_fees,'course_kit_cost'=> $kit_cost,
-                                'course_remark'=> $remark, 'course_type_id' => $type, 'course_books' => $books,
-                                'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-
-                    $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$id);
-                    
-                    if($result == true)
-                    {
-                        $process = 'Course Update';
-                        $processFunction = 'Course/course_insert';
-                        $this->logrecord($process,$processFunction);
-                        echo true;
-                    }
-                    else
-                    {
-                        echo false;
-                    }
-                }            
-        }
-
        
         function createcourse(){
             $post_submit = $this->input->post();
@@ -144,11 +84,12 @@
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
                 $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
-                $this->form_validation->set_rules('description', 'Description', 'trim|required');
-                $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|required|numeric');
-                $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|required|numeric');
-                $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|required|numeric');
-                $this->form_validation->set_rules('course_books', 'Course Books', 'trim|required|numeric');
+
+                $this->form_validation->set_rules('description', 'Description', 'trim');
+                $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
+                $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
+                $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
+                $this->form_validation->set_rules('course_books', 'Course Books', 'trim|');
                 $this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
                 if($this->form_validation->run() == FALSE){
@@ -156,42 +97,44 @@
                     $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), 'description'=>strip_tags(form_error('description')),'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
                 }else{
 
-                    $saveCoursedata = $this->course_model->saveCoursedata('',$data);
-                   
-                    if($saveCoursedata){
-                        $createcourse_response['status'] = 'success';
-                        $createcourse_response['error'] = array('course_name'=>'', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                    /*check If course name is unique*/
+                    $check_uniqe =  $this->course_model->checkquniqecoursename(trim($this->input->post('course_name')));
+
+                    if($check_uniqe){
+                        $createcourse_response['status'] = 'failure';
+                        $createcourse_response['error'] = array('course_name'=>'Couse Name Alreday Exits', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                    }else{
+                        $saveCoursedata = $this->course_model->saveCoursedata('',$data);
+                        if($saveCoursedata){
+                            $createcourse_response['status'] = 'success';
+                            $createcourse_response['error'] = array('course_name'=>'', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                        }
                     }
                 }
         
                 echo json_encode($createcourse_response);
             }
-
-
-
         }
 
+       public function delete_course(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
 
-
-
-
-
-        // ==== Delete Course
-        public function deleteCourse($id)
-        {
-            $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-            $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$id);
-
-            if ($result > 0) {
-                 echo(json_encode(array('status'=>TRUE)));
-
-                 $process = 'Course Delete';
-                 $processFunction = 'Course/deleteCourse';
-                 $this->logrecord($process,$processFunction);
-
+                $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$this->input->post('id'));
+                if($result){
+                    $deletecourse_response['status'] = 'success';
+                    $process = 'Course Delete';
+                    $processFunction = 'Course/deleteCourse';
+                    $this->logrecord($process,$processFunction);
+                }else
+                {
+                    $deletecourse_response['status'] = 'filure';
                 }
-            else { echo(json_encode(array('status'=>FALSE))); }
-        }
+                echo json_encode($deletecourse_response);
+            }
+       }
+
 
         // ===============================  
         public function courseLinks($id = null)

@@ -167,7 +167,7 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
             }
-            // $this->db->where(TBL_COURSE.'.isDeleted', 0);
+            $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $query = $this->db->get(TBL_COURSE);
             $rowcount = $query->num_rows();
             return $rowcount;
@@ -183,7 +183,7 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
             }
-            // $this->db->where(TBL_COURSE.'.isDeleted', 0);
+            $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
             $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_COURSE);
@@ -199,27 +199,12 @@ class Course_model extends CI_Model
                      $data[$counter]['course_name'] = $value['course_name'];
                      $data[$counter]['course_type'] = $value['ct_name'];
                      $data[$counter]['course_fees'] = $value['course_fees'];
-
-
-                    //  $data[$counter]['course_date'] = date("d-m-Y",strtotime($value['createdDtm']));
-
-                    
-                    
-                    // $data[$counter]['equipment_name'] = $value['equipment_name'];
-                    $data[$counter]['action'] = '';
-
-                    // if(in_array("hospital/editequipment", $this->session->userdata('adminuser_access'))){
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".$value['courseId']."'><img width='20' src='http://localhost/lms_2/assets/icons/edit.png' alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
-                        // }
-                    // if(in_array("hospital/deletequipment", $this->session->userdata('adminuser_access')))
-                    // {
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='http://localhost/lms_2/assets/icons/delete.png' alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
-
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='http://localhost/lms_2/assets/icons/add_links.png' alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
-
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletequipments' rg-id=''><img width='20' src='http://localhost/lms_2/assets/icons/view_doc.png' alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
-                    // }
-    
+                     $data[$counter]['action'] = '';
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
+                
                     $counter++; 
                 }
             }
@@ -243,8 +228,19 @@ class Course_model extends CI_Model
                 return FALSE;
             }
         }
+    }
+
+    public function checkquniqecoursename($course_name){
+        $this->db->select('course_name');
+        $this->db->from(TBL_COURSE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('course_name', $course_name);
+        $query = $this->db->get();
+        return $query->result();
 
     }
+
+
        
 }
 

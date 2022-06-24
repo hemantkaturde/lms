@@ -8,7 +8,7 @@
                 <!-- <a class="btn btn-primary addcourse"><i class="fa fa-plus"></i> Add Course</a> -->
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
-    
+
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourse">
                     <i class="fa fa-plus"></i> Add Course
                 </button>
@@ -73,7 +73,7 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees<span class="required">*</span>
+                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="one_time_admission_fees"  placeholder="Enter One time admission fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
@@ -94,7 +94,7 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="books">Books<span class="required">*</span>
+                     <label style="text-align: left;"  for="books">Books
                      </label>
                      <div >
                           <input type="radio" name="course_books" id="course_books" value="1"> Yes
@@ -106,7 +106,7 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="form-group">
-                     <label style="text-align: left;"  for="description">Description<span class="required">*</span>
+                     <label style="text-align: left;"  for="description">Description
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="description" name="description" placeholder="Enter Description" class="form-control col-md-12 col-xs-12">
@@ -115,7 +115,7 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="certificate_cost">Certificate Cost<span class="required">*</span>
+                     <label style="text-align: left;"  for="certificate_cost">Certificate Cost
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="certificate_cost" name="certificate_cost" placeholder="Enter Certificate Cost" class="form-control col-md-12 col-xs-12">
@@ -124,7 +124,7 @@
                    </div>
 
                    <div class="form-group">
-                     <label style="text-align: left;"  for="kit_cost">Kit cost<span class="required">*</span>
+                     <label style="text-align: left;"  for="kit_cost">Kit cost
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="kit_cost" name="kit_cost" placeholder="Enter Kit cost" class="form-control col-md-12 col-xs-12">

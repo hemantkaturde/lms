@@ -51,6 +51,71 @@ class Enquiry_model extends CI_Model
             
             return $query->result();
         }
+
+
+
+    public function getEnquiryCount(){
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $query = $this->db->get(TBL_COURSE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getEnquirydata(){
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_COURSE);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['course_type'] = $value['ct_name'];
+                 $data[$counter]['course_fees'] = $value['course_fees'];
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
+            
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
+   public function checkuniqeenquiryname(){
+
+    
+    
+   }
+
+     
 }
 
 ?>
