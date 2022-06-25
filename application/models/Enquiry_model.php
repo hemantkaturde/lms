@@ -95,6 +95,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['course_type'] = $value['ct_name'];
                  $data[$counter]['course_fees'] = $value['course_fees'];
+                 
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
