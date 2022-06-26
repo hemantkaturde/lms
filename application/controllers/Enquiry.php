@@ -12,6 +12,7 @@
             parent::__construct();
             $this->load->model(array('login_model', 'enquiry_model', 'database'));
             $this->load->library('form_validation');
+            $this->load->library('mail');
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
             $this->datas();
@@ -258,7 +259,7 @@
 
         }
 
-        // // ==== Delete Course
+        // ==== Delete Course
         public function deleteEnquiry()
         {
             $post_submit = $this->input->post();
@@ -271,6 +272,32 @@
 
                  $process = 'Enquiry Delete';
                  $processFunction = 'Enquiry/deleteEnquiry';
+                 $this->logrecord($process,$processFunction);
+
+                }
+            else { echo(json_encode(array('status'=>FALSE))); }
+        }
+
+        // ==== Delete Course
+        public function sendEnquiryLink()
+        {
+            $post_submit = $this->input->post();
+
+            $name = "Snehal More";
+            $to = "snehasmore3@gmail.com";
+            $Subject = 'Test Email -'.date('Y-m-d H:i:s');
+
+            $Body  = 'Demo Content';
+
+            $sendmail= $this->mail->sendMail($name,$to,$Subject,$Body);
+
+            // $result = $this->database->data_update('tbl_enquiry',$enquiryInfo,'enq_id',$this->input->post('id'));
+
+            if (!empty($sendmail)) {
+                 echo(json_encode(array('status'=>TRUE)));
+
+                 $process = 'Enquiry Link Sent';
+                 $processFunction = 'Enquiry/sendEnquiryLink';
                  $this->logrecord($process,$processFunction);
 
                 }
