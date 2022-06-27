@@ -453,5 +453,45 @@ $(document).on('change','.state',function(e){
 				});
 	    });
 
+		$(document).on('click','.add_links',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "You want to send link !",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, send it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>sendEnquiryLink",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											swal("Send!", "Link Sent Successfully.", "success");
+											// location.reload();
+										//}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					swal("Cancelled", "Link cancelled ", "error");
+					}
+				});
+	    });
+
 </script> 
 <?php } ?>

@@ -110,6 +110,7 @@ $route['createenquiry'] = "enquiry/createenquiry";
 $route['updateenquiry/(:any)'] = "enquiry/updateenquiry/$1";
 
 $route['deleteEnquiry'] = "enquiry/deleteEnquiry";
+$route['sendEnquiryLink'] = "enquiry/sendEnquiryLink";
 // $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/
