@@ -92,6 +92,7 @@ $route['courselisting'] = "course/courseListing";
 $route['fetchcourse'] = "course/fetchcourse";
 $route['createcourse'] = "course/createcourse";
 $route['delete_course'] = "course/delete_course";
+$route['updatecourse/(:num)'] = "course/updatecourse/$1";
 
 $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
@@ -106,9 +107,10 @@ $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
 $route['enquirylisting'] = "enquiry/enquirylisting";
 $route['fetchenquiry'] = "enquiry/fetchenquiry";
 $route['createenquiry'] = "enquiry/createenquiry";
+$route['updateenquiry/(:any)'] = "enquiry/updateenquiry/$1";
 
-
-$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
+$route['deleteEnquiry'] = "enquiry/deleteEnquiry";
+// $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/
 $route['admissionListing'] = "admission/admissionListing";

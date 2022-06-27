@@ -44,7 +44,7 @@
 
 
 
-<!-- Modal -->
+<!-- Add New Enquiry Modal -->
 <div class="modal fade" id="addEnquiry" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="addEnquiryLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -194,6 +194,163 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" id="save_enquiry" class="btn btn-primary save_enquiry">Save</button>
+      </div>
+      <?php echo form_close(); ?>
+    </div>
+  </div>
+</div>
+
+<!-- Update Enquiry Modal -->
+<div class="modal fade" id="editEnquiry" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="addEnquiryLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#d2ae6d">
+        <h5 class="modal-title" id="modlatitleLabel" style="color:#000">Update Enquiry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <?php
+            $attributes = array("name"=>"update_enquiry_form","id"=>"update_enquiry_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            echo form_open("", $attributes);
+         ?>
+
+      <div class="modal-body">
+            <div class="container">
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="full_name">Full Name<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="full_name1" name="full_name"  placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
+                        <p class="error full_name_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="mobile_no">Mobile No<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="mobile_no1" name="mobile_no"  placeholder="Enter Mobile No" class="form-control col-md-12 col-xs-12">
+                        <p class="error mobile_no_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="alternate_mobile">Alternate Mobile
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="alternate_mobile1"  placeholder="Enter Alternate Mobile" name="alternate_mobile" class="form-control col-md-12 col-xs-12">
+                        <p class="error alternate_mobile_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="qualification">Qualification<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="qualification1"  placeholder="Enter Qualification" name="qualification" class="form-control col-md-12 col-xs-12">
+                        <p class="error qualification_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="enquiry_type">Enquiry Source<span class="required">*</span></label>
+                         <select class="form-control" id="enquiry_type1" name="enquiry_type">
+                            <option value="">Select Enquiry Source</option>
+                            <option value="Email">Email</option>
+                            <option value="Friends">Friends</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <p class="error enquiry_type_error"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;" for="enq_date">Date of Enquiry</label><span class="required">*</span>
+                     <div >
+                          <input type="text" class="form-control datepicker" id="enq_date1" name="enq_date" placeholder="dd-mm-yyyy" required>
+                     </div>
+                     <p class="error enq_date_error"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="purpose">Purpose
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="purpose1"  placeholder="Enter Purpose" name="purpose" class="form-control col-md-12 col-xs-12">
+                        <p class="error purpose_error"></p>
+                     </div>
+                  </div>
+
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="email">Email<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="email1" name="email" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
+                        <p class="error email_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="alternamte_email">Alternamte Email
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="alternamte_email1" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
+                        <p class="error alternamte_email_error"></p>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="country">Country
+                     </label>
+                     <div >
+                         <select class="form-control country" id="country1" name="country">
+                            <option value="0">Select Country</option>
+                            <option value="101">India</option>
+                        </select>
+                        <p class="error enquiry_type_error"></p>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="state">State </label>
+                     <div >
+                        <select class="form-control state" name="state" id="state1">
+                            <option st-id="" value="0">Select State</option>
+                        </select>
+                        <p class="error state_error"></p>       
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="city">City </label>
+                     <div >
+                        <select class="form-control" name="city" id="city1">
+                            <option st-id="" value="0">Select City</option>
+                        </select>
+                        <p class="error city_error"></p>       
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label style="text-align: left;" for="remarks">Remarks
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="remarks1" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
+                        <p class="error remarks_error"></p>
+                        <input type="hidden" name="enq_id" id="enq_id">
+                     </div>
+                   </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="update_enquiry" class="btn btn-primary update_enquiry">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>

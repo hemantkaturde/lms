@@ -54,35 +54,33 @@ class Enquiry_model extends CI_Model
 
 
 
-    public function getEnquiryCount(){
+    public function getEnquiryCount($params){
         $this->db->select('*');
-        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
 
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $query = $this->db->get(TBL_COURSE);
+        $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        $query = $this->db->get(TBL_ENQUIRY);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getEnquirydata(){
+    public function getEnquirydata($params){
         $this->db->select('*');
-        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+        $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
-        $query = $this->db->get(TBL_COURSE);
+        $query = $this->db->get(TBL_ENQUIRY);
         $fetch_result = $query->result_array();
         $data = array();
         $counter = 0;
@@ -92,31 +90,58 @@ class Enquiry_model extends CI_Model
             {
 
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
-                 $data[$counter]['course_name'] = $value['course_name'];
-                 $data[$counter]['course_type'] = $value['ct_name'];
-                 $data[$counter]['course_fees'] = $value['course_fees'];
-                 
+                 $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                 $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+                 $data[$counter]['enq_email'] = $value['enq_email'];
+                 $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
-            
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
+               
                 $counter++; 
             }
         }
-
         return $data;
     }
 
+    public function saveEnquirydata($id,$data){
 
-   public function checkuniqeenquiryname(){
+        if($id != '') {
+            $this->db->where('enq_id', $id);
+            if($this->db->update(TBL_ENQUIRY, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ENQUIRY, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
-    
-    
-   }
+    public function checkuniqeenquiryname($enq_fullname){
+        $this->db->select('enq_fullname');
+        $this->db->from(TBL_ENQUIRY);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('enq_fullname', $enq_fullname);
+        $query = $this->db->get();
+        return $query->result();
+    }
 
-     
+    public function checkuniqeenquiryname_update($enq_id,$enq_fullname){
+        $this->db->select('enq_id,enq_fullname');
+        $this->db->from(TBL_ENQUIRY);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('enq_id !=', $enq_id);
+        $this->db->where('enq_fullname', $enq_fullname);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }
 
 ?>
