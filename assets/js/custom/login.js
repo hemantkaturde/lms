@@ -1,5 +1,5 @@
 var l = window.location;
-var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1] + "/" + l.pathname.split('/')[2] + "/" + l.pathname.split('/')[3];
+var base_url = 'http://localhost/lms_2/';
 // base_url += '';
 
 function display_alert(type,message)

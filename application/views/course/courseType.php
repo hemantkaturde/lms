@@ -1,59 +1,70 @@
-
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Course Type Management</div>
-
                 <!-- <div class="ibox-tools"> -->
-                    <a class="btn btn-primary text-white" onclick="course_type(0)" ><i class="fa fa-plus"></i> Add New</a>
-                    <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
+                <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseType">
+                    <i class="fa fa-plus"></i> Add Course Type
+                </button>
             </div>
             <div class="ibox-body">
-                 <?php
-                    $this->load->helper('form');
-                    $error = $this->session->flashdata('error');
-                ?>
-          
-              <div class="panel-body table-responsive ">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
-                  <thead>
+                <div class="panel-body table-responsive ">
+                    <table id="view_coursetypelist" class="table table-bordered">
+                        <thead>
                             <tr>
                                 <th>Course Type Name</th>
-                                <th width="12%">Action</th>
+                                <th>Action</th>
                             </tr>
-                  </thead>
-                  <tbody>
-                            <?php
-                    if(!empty($course_type))
-                    {
-                        foreach($course_type as $record)
-                        {
-                           
-                    ?>
-                                <tr id="<?php echo $record->ct_id; ?>">
-                                    <td>
-                                        <?php echo $record->ct_name ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="btn btn-xs btn-success text-white" onclick="course_type(<?php echo $record->ct_id; ?>)" title="Edit">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-danger deleteCourseType" href="#" data-ct_id="<?php echo $record->ct_id; ?>" title="Delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php 
-                        }
-                    }
-                    ?>
-                  </tbody>
-                        </table>
-              </div>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+
+<!-- Add New Course Modal -->
+<div class="modal fade" id="addCourseType" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="addCourseTypeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#d2ae6d">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Course Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <?php
+            $attributes = array("name"=>"course_type_form","id"=>"course_type_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            echo form_open("", $attributes);
+         ?>
+        <div class="modal-body">
+                <div class="container">
+                    <div class="row col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label style="text-align: left;"  for="course_type_name">Course Type<span class="required">*</span>
+                                </label>
+                                <div >
+                                    <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="course_type_name" name="course_type_name"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
+                                    <p class="error course_type_name_error"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" id="save_course_type" class="btn btn-primary save_course_type">Save</button>
+        </div>
+      <?php echo form_close(); ?>
     </div>
-<!-- END PAGE CONTENT-->
+  </div>
+</div>

@@ -250,7 +250,82 @@ class Course_model extends CI_Model
     }
 
 
-       
+    public function  getCoursetypeCount($params){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE_TYPE.'.isDeleted', 0);
+        $query = $this->db->get(TBL_COURSE_TYPE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getCoursetypedata($params){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE_TYPE.'.isDeleted', 0);
+        $this->db->order_by(TBL_COURSE_TYPE.'.ct_id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_COURSE_TYPE);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['course_type'] = $value['ct_name'];
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>&nbsp"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
+    public function checkquniqecoursetype($course_type_name){
+        $this->db->select('ct_name');
+        $this->db->from(TBL_COURSE_TYPE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('ct_name', $course_type_name);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+    public function saveCoursetypedata($id,$data){
+
+        if($id != '') {
+            $this->db->where('ct_id', $id);
+            if($this->db->update(TBL_COURSE_TYPE, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_COURSE_TYPE, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
 }
 
 ?>

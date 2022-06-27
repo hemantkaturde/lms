@@ -1,5 +1,4 @@
 <!-- Comman page javascript -->
-
 <script type="text/javascript">
 $(document).on('change','#country',function(e){  
 	e.preventDefault();
@@ -57,8 +56,6 @@ $(document).on('change','.state',function(e){
 	return false;
 });
 </script>
-
-
 
 <?php if($pageTitle=='Course Management'){?>
     <script type="text/javascript">
@@ -132,7 +129,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Course Created!",
-							text: "Success message sent!!",
+							//text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -319,7 +316,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Enquiry Created!",
-							text: "Success message sent!!",
+							//text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -494,4 +491,119 @@ $(document).on('change','.state',function(e){
 	    });
 
 </script> 
+<?php } ?>
+
+<?php if($pageTitle=='Course Type'){?>
+ <script type="text/javascript">
+	    $(document).ready(function() {
+				var dt = $('#view_coursetypelist').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "50%", "targets": 0 },
+						{ "width": "5%", "targets": 1 },
+
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Course Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>/fetchcoursetype",
+						type: "post",
+					},
+				});
+		});
+
+		$(document).on('click','#save_course_type',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#course_type_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>createcoursetype",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Course Type Created!",
+							//text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+	 $(document).on('click','.delete_course_type',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "You will not be able to recover this file!",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletecoursetype",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											swal("Deleted!", "Course Type has been deleted.", "success");
+											location.reload();
+										//}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					swal("Cancelled", "Course Type deletion cancelled ", "error");
+					}
+				});
+	    });
+
+</script>
 <?php } ?>

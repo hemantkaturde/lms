@@ -85,7 +85,14 @@ $route['deleteRole/(:any)'] = "role/deleteRole/$1";
 
 /*********** Masters CONTROLLER ROUTES *******************/
 $route['coursetypelisting'] = "course/courseTypeListing";
-$route['deleteCourseType/(:any)'] = "course/deleteCourseType/$1";
+
+$route['fetchcoursetype'] = "course/fetchcoursetype";
+$route['createcoursetype'] = "course/createcoursetype";
+$route['deletecoursetype'] = "course/deletecoursetype";
+
+
+
+
 
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['courselisting'] = "course/courseListing";
