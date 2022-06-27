@@ -259,7 +259,7 @@
 
         }
 
-        // ==== Delete Course
+        // ==== Delete Enquiry
         public function deleteEnquiry()
         {
             $post_submit = $this->input->post();
@@ -278,22 +278,37 @@
             else { echo(json_encode(array('status'=>FALSE))); }
         }
 
-        // ==== Delete Course
+        // ==== Send Enquiry Link
         public function sendEnquiryLink()
         {
             $post_submit = $this->input->post();
 
-            $name = "Snehal More";
+            $this->load->library('email');
+
+            $config = Array(        
+                'protocol' => 'smtp',
+                'smtp_host' => 'smtp.gmail.com',
+                'smtp_port' => 587,
+                'smtp_user' => '',
+                'smtp_pass' => '',
+                'mailtype'  => 'html', 
+                'charset'   => 'utf-8',
+                'send_multipart' => FALSE,
+              );
+           
+            $this->email->initialize($config);
+
             $to = "snehasmore3@gmail.com";
             $Subject = 'Test Email -'.date('Y-m-d H:i:s');
-
             $Body  = 'Demo Content';
 
-            $sendmail= $this->mail->sendMail($name,$to,$Subject,$Body);
+            $this->email->from('snehasmore3@gmail.com', 'LMS Management');
 
-            // $result = $this->database->data_update('tbl_enquiry',$enquiryInfo,'enq_id',$this->input->post('id'));
+	        $this->email->to($to);
+	        $this->email->subject($Subject);
+	        $this->email->message($Body);
 
-            if (!empty($sendmail)) {
+            if ($this->email->send()) {
                  echo(json_encode(array('status'=>TRUE)));
 
                  $process = 'Enquiry Link Sent';
