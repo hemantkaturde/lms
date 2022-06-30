@@ -68,3 +68,44 @@
     </div>
   </div>
 </div>
+
+
+<!-- Edit New Course Modal -->
+<div class="modal fade" id="editCourseType" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="editCourseTypeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#d2ae6d">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Course Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <?php
+            $attributes = array("name"=>"edit_course_type_form","id"=>"edit_course_type_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            echo form_open("", $attributes);
+         ?>
+        <div class="modal-body">
+                <div class="container">
+                    <div class="row col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label style="text-align: left;"  for="course_type_name">Course Type<span class="required">*</span>
+                                </label>
+                                <div >
+                                    <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="course_type_name_1" name="course_type_name_1"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
+                                    <p class="error course_type_name_1_error"></p>
+                                    <input autocomplete="off" autocomplete="off" maxlength="20" type="hidden" id="coursetype_id" name="coursetype_id"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" id="update_course_type" class="btn btn-primary update_course_type">Save</button>
+        </div>
+      <?php echo form_close(); ?>
+    </div>
+  </div>
+</div>

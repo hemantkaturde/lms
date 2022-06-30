@@ -152,7 +152,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="editCourse" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="addCourseLabel" aria-hidden="true">
+<div class="modal fade" id="editCourse" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="editCourseLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#d2ae6d">
@@ -212,8 +212,8 @@
                      <label style="text-align: left;"  for="books">Books
                      </label>
                      <div >
-                          <input type="radio" name="course_books" id="course_books1" value="1"> Yes
-                          <input type="radio" name="course_books" id="course_books1" value="0" style="margin-left:20px;"> No
+                          <input type="radio" class="radio_yes" name="course_books" id="course_books1" value="1"> Yes
+                          <input type="radio" class="radio_no" name="course_books" id="course_books1" value="0" style="margin-left:20px;"> No
                      </div>
                      <p class="error course_books_error"></p>
 

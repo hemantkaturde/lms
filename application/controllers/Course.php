@@ -90,7 +90,7 @@
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
                 $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
-                $this->form_validation->set_rules('course_books', 'Course Books', 'trim|');
+                $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
                 $this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
                 if($this->form_validation->run() == FALSE){
@@ -138,12 +138,11 @@
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
                 $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
-
                 $this->form_validation->set_rules('description', 'Description', 'trim');
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
                 $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
-                $this->form_validation->set_rules('course_books', 'Course Books', 'trim|');
+                $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
                 $this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
                 if($this->form_validation->run() == FALSE){
@@ -381,77 +380,58 @@
         }
 
 
-        // function get_signle_courseTypeData($cTypeId = NULL)
-        // {
-        //     $data['courseTypeInfo'] = $this->course_model->getCourseTypeInfo($cTypeId);
-        //     echo json_encode($data);
-        // }
+        public function get_signle_coursetypeData($cTypeId = NULL)
+        {
+            $cTypeId = $this->input->post('coursetypeId');
+            $data['courseTypeInfo'] = $this->course_model->getCourseTypeInfo($cTypeId);
+            echo json_encode($data);
+        }
 
-        // function get_courseAllTypeData()
-        // {
-        //     $data['courseTypeInfo'] = $this->course_model->getAllCourseTypeInfo();
-        //     echo json_encode($data);
-        // }
+        public function updatcoursetype($coursetypeid){
 
-        // public function course_type_insert($id)
-        // {
-        //     $this->load->library('form_validation');
-        
-        //         $name = ucwords(strtolower($this->security->xss_clean($this->input->post('ct_name'))));
-        //         if($id == 0)
-        //         {
-        //             $ctInfo = array('ct_name'=>$name);
-                        
-        //             // $result = $this->user_model->addNewUser($userInfo);
-        //             $result = $this->course_model->data_insert('tbl_course_type', $ctInfo);
-        //             if($result > 0)
-        //             {
-        //             $process = 'Course Type Insert';
-        //             $processFunction = 'Course/course_type_insert';
-        //             $this->logrecord($process,$processFunction);
-        //                echo true;
-        //             }
-        //             else
-        //             {
-        //                 echo false;
-        //             }
-        //         }else
-        //         {
-        //             $ctInfo = array('ct_name'=>$name);
+            $post_submit = $this->input->post();
 
-        //             $result = $this->course_model->data_update('tbl_course_type',$ctInfo,'ct_id',$id);
+            if(!empty($post_submit)){
+
+                $update_response = array();
+
+                $data = array(
+                    'ct_name' => $this->input->post('course_type_name_1')
+                );
+
+                $this->form_validation->set_rules('course_type_name_1', 'Course Type', 'trim|required');
+
+                if($this->form_validation->run() == FALSE){
+                    $update_response['status'] = 'failure';
+                    $update_response['error'] = array('course_type_name_1'=>strip_tags(form_error('course_type_name_1')));
+                }else{
+
+                    /*check If course name is unique*/
+                    if($coursetypeid == null)
+                    {
+                        $check_uniqe =  $this->course_model->checkquniqecoursetypename(trim($this->input->post('course_type_name_1')));
+                    }
+                    else
+                    {
+                        $check_uniqe =  $this->course_model->checkquniqecoursetypename_update($coursetypeid, trim($this->input->post('course_type_name_1')));
+                    }
                     
-        //             if($result == true)
-        //             {
-        //                 $process = 'Course Type Update';
-        //                 $processFunction = 'Course/course_type_insert';
-        //                 $this->logrecord($process,$processFunction);
-        //                 echo true;
-        //             }
-        //             else
-        //             {
-        //                 echo false;
-        //             }
-        //         }            
-        // }
+                    if($check_uniqe){
+                        $update_response['status'] = 'failure';
+                        $update_response['error'] = array('course_type_name_1'=>'Couse Type Alreday Exits');
+                    }else{
+                        $saveCoursetypedata = $this->course_model->saveCoursetypedata($coursetypeid,$data);
+                        if($saveCoursetypedata){
+                            $update_response['status'] = 'success';
+                            $update_response['error'] = array('course_type_name_1'=>'');
+                        }
+                    }
+                }
+        
+                echo json_encode($update_response);
+            }
 
-        // // ==== Delete Course Type
-        // public function deleteCourseType($id)
-        // {
-        //     $courseInfo = array('isDeleted'=>1);
-        //     $result = $this->course_model->data_update('tbl_course_type',$courseInfo,'ct_id',$id);
-
-        //     if ($result > 0) {
-        //          echo(json_encode(array('status'=>TRUE)));
-
-        //          $process = 'Course Type Delete';
-        //          $processFunction = 'Course/deleteCourseType';
-        //          $this->logrecord($process,$processFunction);
-
-        //         }
-        //     else { echo(json_encode(array('status'=>FALSE))); }
-        // }
-        // // ===============================
+        }
 
     }
 

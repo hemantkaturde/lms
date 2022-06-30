@@ -308,7 +308,6 @@ class Course_model extends CI_Model
 
 
     public function saveCoursetypedata($id,$data){
-
         if($id != '') {
             $this->db->where('ct_id', $id);
             if($this->db->update(TBL_COURSE_TYPE, $data)){
@@ -323,7 +322,26 @@ class Course_model extends CI_Model
                 return FALSE;
             }
         }
+    }
 
+
+    public function checkquniqecoursetypename($coursetype_name){
+        $this->db->select('ct_name');
+        $this->db->from(TBL_COURSE_TYPE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('ct_name', $coursetype_name);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function checkquniqecoursetypename_update($coursetypeId,$coursetype_name){
+        $this->db->select('ct_id,ct_name');
+        $this->db->from(TBL_COURSE_TYPE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('ct_id !=', $coursetypeId);
+        $this->db->where('ct_name', $coursetype_name);
+        $query = $this->db->get();
+        return $query->result();
     }
 
 }

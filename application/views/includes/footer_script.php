@@ -159,7 +159,6 @@ $(document).on('change','.state',function(e){
                 success:function(data)  
                 {  
                      $('#editCourse').modal('show');
-					 console.log(data);
                      $('#course_name1').val(data[0].course_name);  
                      $('#fees1').val(data[0].course_fees);  
                      $('#one_time_admission_fees1').val(data[0].course_onetime_adm_fees);  
@@ -168,8 +167,16 @@ $(document).on('change','.state',function(e){
                      $('#description1').val(data[0].course_desc);  
                      $('#certificate_cost1').val(data[0].course_cert_cost);  
                      $('#kit_cost1').val(data[0].course_kit_cost);  
-                     $('#remarks1').val(data[0].course_remark);
 
+					 if(data[0].course_books==1){
+						$('.radio_yes').attr("checked", "checked");
+					 }else{
+						if(data[0].course_books==0){
+							$('.radio_no').attr("checked", "checked");
+						}
+					 }
+
+                     $('#remarks1').val(data[0].course_remark);
                      $('#course_id').val(course_id);
                 }  
            })
@@ -243,9 +250,19 @@ $(document).on('change','.state',function(e){
 									success: function(data, textStatus, jqXHR)
 									{
 										// if(data.status=='success'){
-											swal("Deleted!", "User has been deleted.", "success");
-											location.reload();
+											//swal("Deleted!", "User has been deleted.", "success");
+											//location.reload();
 										//}
+										swal({
+											title: "Deleted!",
+											text: "User has been deleted.",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												$("#popup_modal_sm").hide();
+												window.location.href = "<?php echo base_url().'courselisting'?>";
+										});		
+
 									},
 									error: function (jqXHR, textStatus, errorThrown)
 									{
@@ -364,9 +381,9 @@ $(document).on('change','.state',function(e){
                      $('#enq_id').val(enq_id);
                 }  
            })
-        });
+    });
 
-		$(document).on('click','#update_enquiry',function(e){
+	$(document).on('click','#update_enquiry',function(e){
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			var formData = new FormData($("#update_enquiry_form")[0]);
@@ -408,9 +425,9 @@ $(document).on('change','.state',function(e){
 			    }
 			});
 			return false;
-		});
+	});
 
-		$(document).on('click','.delete_enquiry',function(e){
+	$(document).on('click','.delete_enquiry',function(e){
 			var elemF = $(this);
 			e.preventDefault();
 
@@ -448,9 +465,9 @@ $(document).on('change','.state',function(e){
 					swal("Cancelled", "Enquiry deletion cancelled ", "error");
 					}
 				});
-	    });
+	});
 
-		$(document).on('click','.add_links',function(e){
+	$(document).on('click','.add_links',function(e){
 			var elemF = $(this);
 			e.preventDefault();
 
@@ -488,7 +505,7 @@ $(document).on('change','.state',function(e){
 					swal("Cancelled", "Link cancelled ", "error");
 					}
 				});
-	    });
+	});
 
 </script> 
 <?php } ?>
@@ -565,45 +582,123 @@ $(document).on('change','.state',function(e){
 	    });
 
 
-	 $(document).on('click','.delete_course_type',function(e){
+		$(document).on('click','.edit_course_type',function(e){
 			var elemF = $(this);
 			e.preventDefault();
+			var coursetypeId = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>course/get_signle_coursetypeData",  
+                method:"POST",  
+                data:{coursetypeId:coursetypeId},
+                dataType:"json",  
+                success:function(data)  
+                {  
+					  $('#editCourseType').modal('show');
+				     // console.log(data.courseTypeInfo[0]);
+                     // $('#editCourseType').modal('show');
+                      $('#course_type_name_1').val(data.courseTypeInfo[0].ct_name);  
+                      $('#coursetype_id').val(data.courseTypeInfo[0].ct_id);
+                }  
+           })
+        });
 
-				swal({
-					title: "Are you sure?",
-					text: "You will not be able to recover this file!",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, delete it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
-								$.ajax({
-									url : "<?php echo base_url();?>deletecoursetype",
-									type: "POST",
-									data : 'id='+elemF.attr('data-id'),
-									success: function(data, textStatus, jqXHR)
-									{
-										// if(data.status=='success'){
-											swal("Deleted!", "Course Type has been deleted.", "success");
-											location.reload();
-										//}
-									},
-									error: function (jqXHR, textStatus, errorThrown)
-									{
-										//$(".loader_ajax").hide();
-									}
-							    })
-							}
-							else {
-					swal("Cancelled", "Course Type deletion cancelled ", "error");
-					}
-				});
+
+		$(document).on('click','#update_course_type',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#edit_course_type_form")[0]);
+			var id = $("#coursetype_id").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updatcoursetype/"+id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Course Updated!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
 	    });
+
+
+
+		$(document).on('click','.delete_course_type',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "You will not be able to recover this file!",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletecoursetype",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											// if(data.status=='success'){
+												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// location.reload();
+											//}
+											swal({
+												title: "Deleted!",
+												text: "User has been deleted.",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+											});	
+
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											//$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						}
+					});
+		});
 
 </script>
 <?php } ?>
