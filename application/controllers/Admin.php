@@ -47,27 +47,34 @@ class Admin extends BaseController
      * This function is used to load the user list
      */
     function userListing()
-    {   
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
-            $data['searchText'] = $searchText;
-            
-   //          $this->load->library('pagination');
-            
-   //          $count = $this->user_model->userListingCount($searchText);
-
-			// $returns = $this->paginationCompress( "userListing/", $count, 10);
-            
-            // $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            $data['userRecords'] = $this->user_model->userListing($searchText);
-            
-            
-            $process = 'User Listing';
-            $processFunction = 'Admin/userListing';
-            $this->logrecord($process,$processFunction);
-
+    {          
             $this->global['pageTitle'] = 'ADMIN : User List';
-            
-            $this->loadViews("master/users", $this->global, $data, NULL);
+            $this->loadViews("master/users", $this->global, '', NULL);
+    }
+
+    public function fetchUsers(){
+        
+        $params = $_REQUEST;
+        $totalRecords = $this->user_model->getUserCount($params); 
+        $queryRecords = $this->user_model->getUserdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
     }
 
     function get_assets_for_user()

@@ -93,10 +93,8 @@ define('TBL_STATES', 'tbl_states');
 define('TBL_CITIES', 'tbl_cities');
 define('TBL_ENQUIRY', 'tbl_enquiry');
 define('TBL_PAYMENT', 'payment_transaction');
-
-
-
-
+define('TBL_USER','tbl_users');
+define('TBL_ROLES','tbl_roles');
 
 
 define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com
@@ -114,8 +112,6 @@ define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 //rzp_test_MuaQbngB5NBp7h
 
 //a7TGyUNrmBIb67M4WZBVLkM0
-
-
 
 
 

@@ -67,6 +67,7 @@ $route['logout'] = 'login/logout';
 /*********** ADMIN CONTROLLER ROUTES *******************/
 
 $route['userListing'] = 'admin/userListing';
+$route['fetchUsers'] = 'admin/fetchUsers';
 $route['addNewUser'] = 'admin/addNewUser';
 $route['editOld'] = "admin/editOld";
 $route['editOld/(:num)'] = "admin/editOld/$1";
@@ -90,10 +91,6 @@ $route['createcoursetype'] = "course/createcoursetype";
 $route['deletecoursetype'] = "course/deletecoursetype";
 $route['get_signle_coursetypeData'] = "course/get_signle_coursetypeData";
 $route['updatcoursetype/(:num)'] = "course/updatcoursetype/$1";
-
-
-
-
 
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['courselisting'] = "course/courseListing";

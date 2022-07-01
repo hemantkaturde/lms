@@ -51,6 +51,59 @@ class User_model extends CI_Model
         $result = $query->result();        
         return $result;
     }
+
+    public function  getUserCount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $query = $this->db->get(TBL_USER);
+        $rowcount = $query->num_rows();
+        
+        return $rowcount;
+
+    }
+
+    public function getUserData($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->order_by(TBL_USER.'.userId', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['name']    = $value['name'];
+                 $data[$counter]['email']   = $value['email'];
+                 $data[$counter]['mobile']  = $value['mobile'];
+                 $data[$counter]['role']    = $value['role'];
+                 $data[$counter]['action']  = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_user' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit User' title='Edit User'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_user' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete User' title='Delete User'></a>&nbsp"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
     
     /**
      * This function is used to get the user roles information

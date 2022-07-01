@@ -44,7 +44,7 @@
                         </div>
               <?php } ?>
               <div class="panel-body table-responsive">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
+                <table width="100%" class="table table-bordered" id="userList">
                   <thead>
                             <tr>
                                 <th>Name</th>
@@ -55,45 +55,7 @@
                             </tr>
                   </thead>
                   <tbody>
-                            <?php
-                    if(!empty($userRecords))
-                    {
-                        foreach($userRecords as $record)
-                        {
-                            if($record->user_flag == "user"){
-                    ?>
-                                <tr id="<?php echo $record->userId; ?>">
-                                    <td>
-                                        <?php echo $record->name ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $record->email ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $record->mobile ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $record->role ?>
-                                    </td>
-                                    <td class="text-center">
-                                       <!--  <a class="btn btn-xs btn-primary" href="<?= base_url().'log-history/'.$record->userId; ?>" title="Log Records">
-                                            <i class="fa fa-history"></i>
-                                        </a>  -->
-                                        <!-- <a class="btn btn-xs btn-info" href="<?= base_url().'editOld/'.$record->userId; ?>" title="Edit"> -->
-                                        <a class="btn btn-xs btn-success text-white" onclick="users(<?php echo $record->userId; ?>)" title="Edit">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                        <!-- <a data-confirm='Are you sure you want to delete this post ?'href="deleteUser?id=<?php echo $record->userId; ?>"><i class="fa fa-trash"></i> </a> -->
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                        }
-                    }
-                    ?>
+                          
                   </tbody>
                         </table>
               </div>
