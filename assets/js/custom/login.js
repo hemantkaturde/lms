@@ -1,5 +1,5 @@
 var l = window.location;
-var base_url = 'http://localhost/lms_2/';
+var base_url = 'http://localhost/lms/lms/';
 // base_url += '';
 
 function display_alert(type,message)
