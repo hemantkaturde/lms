@@ -97,10 +97,13 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
-                 //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Send Payment Link'></a> &nbsp";
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> &nbsp";
-
+                
+                 if($value['payment_status']!=1){
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
+                    //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Send Payment Link'></a> &nbsp";
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> &nbsp";
+                 }
+                
                 $counter++; 
             }
         }
@@ -151,6 +154,38 @@ class Enquiry_model extends CI_Model
         $this->db->where('isDeleted', 0);
         $query = $this->db->get();
         return $query->result();
+    }
+
+
+    public function getEnquiryInfobyenqnumber($enqId){
+
+            $this->db->select('BaseTbl.* ');
+            $this->db->from('tbl_enquiry as BaseTbl');
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->where('BaseTbl.enq_number', $enqId);
+            $query = $this->db->get();
+            return $query->result();
+
+    }
+
+
+    public function payment($data){
+
+            if($this->db->insert(TBL_PAYMENT, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+    }
+
+    public function update_paymentstatus_enquiry($enquiry_number,$enquiry_data){
+        $this->db->where('enq_number', $enquiry_number);
+        if($this->db->update(TBL_ENQUIRY, $enquiry_data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+
     }
 
 }

@@ -92,6 +92,29 @@ define('TBL_COURSE_TYPE', 'tbl_course_type');
 define('TBL_STATES', 'tbl_states');
 define('TBL_CITIES', 'tbl_cities');
 define('TBL_ENQUIRY', 'tbl_enquiry');
+define('TBL_PAYMENT', 'payment_transaction');
+
+
+
+
+
+
+define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_USERNAME','test@qelocityindia.com');	// Your system name
+define('EMAIL_PASSWORD','Qelocity@420');	// Your email password
+define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
+define('FROM_EMAIL','test@qelocityindia.com');		// e.g. email@example.com
+define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
+
+
+define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+
+
+//rzp_test_MuaQbngB5NBp7h
+
+//a7TGyUNrmBIb67M4WZBVLkM0
+
 
 
 

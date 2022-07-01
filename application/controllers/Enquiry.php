@@ -2,6 +2,11 @@
 
     require APPPATH . '/libraries/BaseController.php';
 
+    require_once(APPPATH."third_party/razorpay/razorpay-php/Razorpay.php");  
+    use Razorpay\Api\Api;
+    use Razorpay\Api\Errors\SignatureVerificationError;
+
+
     class Enquiry extends BaseController
     {
     /**
@@ -227,54 +232,198 @@
             else { echo(json_encode(array('status'=>FALSE))); }
         }
 
-        // ==== Send Enquiry Link
-        public function sendEnquiryLink()
-        {
+        public function sendPaymentLink(){
             $post_submit = $this->input->post();
+                if($post_submit){
+                    $get_equiry_data =  $this->enquiry_model->getEnquiryInfo(trim($post_submit['id']))[0];
+                    $to = $get_equiry_data->enq_email;
+                    $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
+                    $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
+                                <head>
+                                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                                    <title>Invoice details</title>
+                                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                                </head>
+                    
+                                <body style="margin: 0; padding: 0; background-color:#eaeced " bgcolor="#eaeced">
+                                <table bgcolor="#eaeced" cellpadding="0" cellspacing="0" width="100%" style="background-color: #eaeced; ">
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                <tr>
+                                    <td>
+                                    <table align="center" bgcolor="#ffffff" cellpadding="20" cellspacing="0" width="600" 
+                                            style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #f0f0f0;">
+                                        <tr style="border-top: 4px solid #ff0000;">
+                                        <td align="left" style="padding: 15px 20px 20px;">
+                                        <table width="100%">
+                                            <tr>
+                                            <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
+                                            <td align="right">
+                                                <span>Enquiry Number: 1234</span><br>
+                                                <span style="padding: 5px 0; display: block;">'.$get_equiry_data->createdDtm.'</span>
+                                            </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td align="center" style="padding: 20px; border-top: 1px solid #f0f0f0; background: #fafafa;,; ">
+                                        <div>Total Course Fee:</div>
+                                        <h2 style="margin: 10px 0; color: #333; font-weight: 500; font-size: 48px;">
+                                        ₹ 500
+                                        </h2>
+                                        <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;">For Abc company, Issued on 1 Sept, 2017<br>by XYZ company</div>
+                                        </td>
+                                        </tr>
 
-            $this->load->library('email');
+                                        <tr style="">
+                                        <td align="center" style="padding: 15px 20px 20px;">
+                                        <table width="80%">
+                                            <tr>
+                                            <td>Full Name</td>
+                                            <td>'.$get_equiry_data->enq_fullname.'</td>
+                                            </tr>
 
-            $config = Array(        
-                'protocol' => 'smtp',
-                'smtp_host' => 'smtp.gmail.com',
-                'smtp_port' => 587,
-                'smtp_user' => '',
-                'smtp_pass' => '',
-                'mailtype'  => 'html', 
-                'charset'   => 'utf-8',
-                'send_multipart' => FALSE,
-              );
-           
-            $this->email->initialize($config);
+                                            <tr>
+                                            <td>Mobile Number</td>
+                                            <td>'.$get_equiry_data->enq_mobile.'</td>
+                                            </tr>
 
-            $to = "snehasmore3@gmail.com";
-            $Subject = 'Test Email -'.date('Y-m-d H:i:s');
-            $Body  = 'Demo Content';
+                                            <tr>
+                                            <td>Email id</td>
+                                            <td>'.$get_equiry_data->enq_email.'</td>
+                                            </tr>
 
-            $this->email->from('snehasmore3@gmail.com', 'LMS Management');
+                                            <tr>
+                                            <td>Course</td>
+                                            <td>fff</td>
+                                            </tr>
+                                        </table>
+                                        </td>
+                                        </tr>
 
-	        $this->email->to($to);
-	        $this->email->subject($Subject);
-	        $this->email->message($Body);
+                                        <tr>
+                                        <td align="center" style="padding: 20px 40px;font-size: 16px;line-height: 1.4;color: #333;">
+                                        <div>Note: For sales and marketing activity in July 2017 </div>
+                                        <div><br></div>
+                                        <div style="background: #ff0000; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
 
-            if ($this->email->send()) {
-                 echo(json_encode(array('status'=>TRUE)));
+                                        <a href="'.base_url().'pay/'.$get_equiry_data->enq_number.'" class="btn btn-sm btn-primary float-right pay_now"
+                                        data-amount="1000" data-id="1">Pay Now</a>
+                                        
+                                        </div>
+                                        <div style="color: #777; padding: 5px;">Due by 30 Sept, 2017</div>
+                                        <div><br></div>
+                                        </td>
+                                        </tr>
+                                        <tr style="border-top: 1px solid #eaeaea;">
+                                        <td align="center">
+                                            <div style="font-size: 14px;line-height: 1.4;color: #777;">
+                                            Regards,<br>
+                                            IICTN
+                                        </div>
+                                        </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                                </body>
+                        </html>';
+                            
+                    $sendmail= $this->mail->sendMail($get_equiry_data->enq_fullname,$to,$Subject,$Body);
 
-                 $process = 'Enquiry Link Sent';
-                 $processFunction = 'Enquiry/sendEnquiryLink';
-                 $this->logrecord($process,$processFunction);
+                    if($sendmail){
+                        $process = 'Enquiry Link Sent';
+                        $processFunction = 'Enquiry/sendEnquiryLink';
+                        $this->logrecord($process,$processFunction);
+                        echo(json_encode(array('status'=>'success')));
+                    }
+                }else{
+                    echo(json_encode(array('status'=>FALSE)));
 
                 }
-            else { echo(json_encode(array('status'=>FALSE))); }
         }
 
 
-       public function sendPaymentLink(){
-        $post_submit = $this->input->post();
-    
+        public function pay($id){
+            if($id){
 
+            
+               $process = 'Razorpay Payment ';
+               $processFunction = 'Enquiry/pay';
+               $this->logrecord($process,$processFunction);
+               $this->global['pageTitle'] = 'Razorpay';
+               $data['enquiry_data'] = $this->enquiry_model->getEnquiryInfobyenqnumber(trim($id));
+               $this->load->view("payment/razorpay", $data );
+            }else{
+               echo 'page not found';
+            }
+       }
+
+
+       public function razorpaysuccess(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $razorpay_payment_id = $post_submit['razorpay_payment_id'];
+            $totalAmount = $post_submit['totalAmount'];
+            $product_id = $post_submit['product_id'];
+            $enquiry_number = $post_submit['enquiry_number'];
+
+            $sucess_response = array();
+
+            $data = array(
+                'razorpay_payment_id' => $razorpay_payment_id,
+                'totalAmount'=> $totalAmount,
+                'product_id' => $product_id,
+                'enquiry_number' => $enquiry_number,
+                'payment_status' => 1
+            );
+
+            $payment = $this->enquiry_model->payment($data);
+
+            if($payment){
+                $enquiry_data = array('payment_status' => 1);
+                $update_paymentstatus_enquiry = $this->enquiry_model->update_paymentstatus_enquiry($enquiry_number,$enquiry_data);
+
+                if($update_paymentstatus_enquiry){
+                    $process = 'Razorpay Payment  success';
+                    $processFunction = 'Enquiry/pay';
+                    $this->logrecord($process,$processFunction);
+
+                    //$this->load->view("payment/success");
+
+                }else{
+
+                }
+            }
+
+        }else{
+
+        }
+       }
+
+
+       public function razorthankyou(){
+
+         $this->load->view("payment/success");
 
        }
+
 
 
     }

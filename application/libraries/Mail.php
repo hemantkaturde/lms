@@ -22,7 +22,7 @@ class Mail{
             $mail->Port       = EMAIL_SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom($mail->Username,"LMS Management");
+            $mail->setFrom(FROM_EMAIL, FROM_EMAIL_NAME);
             $mail->addAddress($to, $name);     //Add a recipient
             //$mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');

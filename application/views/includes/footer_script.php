@@ -285,7 +285,7 @@ $(document).on('change','.state',function(e){
             var dt = $('#view_enquirylist').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "10%", "targets": 0 },
+	                 { "width": "12%", "targets": 0 },
 	                 { "width": "30%", "targets": 1 },
 	                 { "width": "10%", "targets": 2 },
 	                 { "width": "15%", "targets": 3 },
@@ -526,25 +526,32 @@ $(document).on('change','.state',function(e){
 					closeOnCancel: false
 				}, function(isConfirm) {
 					if (isConfirm) {
+						$(".loader_ajax").show();
+
+						$(".sweet-alert").css({"z-index":"-99"});
+
 								$.ajax({
 									url : "<?php echo base_url();?>sendPaymentLink",
 									type: "POST",
 									data : 'id='+elemF.attr('data-id'),
 									success: function(data, textStatus, jqXHR)
 									{
-										// if(data.status=='success'){
+										//if(data.status=='success'){
+											$(".sweet-alert").css({"z-index":""});
+
+                                            $(".loader_ajax").hide();
 											swal("Send!", "Link Sent Successfully.", "success");
-											// location.reload();
+											//location.reload();
 										//}
 									},
 									error: function (jqXHR, textStatus, errorThrown)
 									{
-										//$(".loader_ajax").hide();
+										$(".loader_ajax").hide();
 									}
 							    })
 							}
 							else {
-					swal("Cancelled", "Link cancelled ", "error");
+					               swal("Cancelled", "Link cancelled ", "error");
 					}
 				});
 	});

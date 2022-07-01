@@ -116,10 +116,15 @@ $route['enquirylisting'] = "enquiry/enquirylisting";
 $route['fetchenquiry'] = "enquiry/fetchenquiry";
 $route['createenquiry'] = "enquiry/createenquiry";
 $route['updateenquiry/(:any)'] = "enquiry/updateenquiry/$1";
-
 $route['deleteEnquiry'] = "enquiry/deleteEnquiry";
 $route['sendEnquiryLink'] = "enquiry/sendEnquiryLink";
 $route['sendPaymentLink'] = "enquiry/sendPaymentLink";
+$route['pay/(:any)'] = "enquiry/pay/$1";
+$route['razorpaysuccess'] = "enquiry/razorpaysuccess";
+$route['razorthankyou'] = "enquiry/razorthankyou";
+
+
+
 // $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/
