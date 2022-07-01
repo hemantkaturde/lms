@@ -285,11 +285,12 @@ $(document).on('change','.state',function(e){
             var dt = $('#view_enquirylist').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "20%", "targets": 0 },
-	                 { "width": "15%", "targets": 1 },
-	                 { "width": "8%", "targets": 2 },
-	                 { "width": "10%", "targets": 3 },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "30%", "targets": 1 },
+	                 { "width": "10%", "targets": 2 },
+	                 { "width": "15%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -507,6 +508,48 @@ $(document).on('change','.state',function(e){
 				});
 	});
 
+
+	$(document).on('click','.send_payment_link',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "You want to send Payment Link to User !",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, send it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>sendPaymentLink",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											swal("Send!", "Link Sent Successfully.", "success");
+											// location.reload();
+										//}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					swal("Cancelled", "Link cancelled ", "error");
+					}
+				});
+	});
+
+
 </script> 
 <?php } ?>
 
@@ -581,7 +624,6 @@ $(document).on('change','.state',function(e){
 			return false;
 	    });
 
-
 		$(document).on('click','.edit_course_type',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -601,7 +643,6 @@ $(document).on('change','.state',function(e){
                 }  
            })
         });
-
 
 		$(document).on('click','#update_course_type',function(e){
 			e.preventDefault();
@@ -646,8 +687,6 @@ $(document).on('change','.state',function(e){
 			});
 			return false;
 	    });
-
-
 
 		$(document).on('click','.delete_course_type',function(e){
 				var elemF = $(this);

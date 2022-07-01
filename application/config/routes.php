@@ -89,7 +89,6 @@ $route['fetchcoursetype'] = "course/fetchcoursetype";
 $route['createcoursetype'] = "course/createcoursetype";
 $route['deletecoursetype'] = "course/deletecoursetype";
 $route['get_signle_coursetypeData'] = "course/get_signle_coursetypeData";
-
 $route['updatcoursetype/(:num)'] = "course/updatcoursetype/$1";
 
 
@@ -120,6 +119,7 @@ $route['updateenquiry/(:any)'] = "enquiry/updateenquiry/$1";
 
 $route['deleteEnquiry'] = "enquiry/deleteEnquiry";
 $route['sendEnquiryLink'] = "enquiry/sendEnquiryLink";
+$route['sendPaymentLink'] = "enquiry/sendPaymentLink";
 // $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/

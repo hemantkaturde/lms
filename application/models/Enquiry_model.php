@@ -90,6 +90,7 @@ class Enquiry_model extends CI_Model
             {
 
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['enq_number'] = $value['enq_number'];
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['enq_email'] = $value['enq_email'];
@@ -97,8 +98,9 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
-               
+                 //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Send Payment Link'></a> &nbsp";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> &nbsp";
+
                 $counter++; 
             }
         }
@@ -138,6 +140,15 @@ class Enquiry_model extends CI_Model
         $this->db->where('isDeleted', 0);
         $this->db->where('enq_id !=', $enq_id);
         $this->db->where('enq_fullname', $enq_fullname);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getautonumberfromEnquiry(){
+
+        $this->db->select('enq_number');
+        $this->db->from(TBL_ENQUIRY);
+        $this->db->where('isDeleted', 0);
         $query = $this->db->get();
         return $query->result();
     }

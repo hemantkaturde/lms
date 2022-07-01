@@ -26,6 +26,7 @@
                 <table id="view_enquirylist" class="table table-bordered">
                     <thead>
                                 <tr>
+                                    <th>Enquiry Number</th>
                                     <th>Name</th>
                                     <th>Mobile No</th>
                                     <th>Email</th>
@@ -67,7 +68,7 @@
                      <label style="text-align: left;"  for="full_name">Full Name<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="full_name" name="full_name"  placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="full_name" name="full_name"  placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
                         <p class="error full_name_error"></p>
                      </div>
                   </div>
@@ -76,7 +77,7 @@
                      <label style="text-align: left;"  for="mobile_no">Mobile No<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="mobile_no" name="mobile_no"  placeholder="Enter Mobile No" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="mobile_no" name="mobile_no"  placeholder="Enter Mobile No" class="form-control col-md-12 col-xs-12">
                         <p class="error mobile_no_error"></p>
                      </div>
                   </div>
@@ -85,7 +86,7 @@
                      <label style="text-align: left;"  for="alternate_mobile">Alternate Mobile
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="alternate_mobile"  placeholder="Enter Alternate Mobile" name="alternate_mobile" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="alternate_mobile"  placeholder="Enter Alternate Mobile" name="alternate_mobile" class="form-control col-md-12 col-xs-12">
                         <p class="error alternate_mobile_error"></p>
                      </div>
                   </div>
@@ -133,7 +134,7 @@
                      <label style="text-align: left;"  for="email">Email<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="email" name="email" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="email" name="email" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
                         <p class="error email_error"></p>
                      </div>
                   </div>
@@ -142,7 +143,7 @@
                      <label style="text-align: left;"  for="alternamte_email">Alternamte Email
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="alternamte_email" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="alternamte_email" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
                         <p class="error alternamte_email_error"></p>
                      </div>
                    </div>
@@ -223,7 +224,7 @@
                      <label style="text-align: left;"  for="full_name">Full Name<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="full_name1" name="full_name"  placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="full_name1" name="full_name"  placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
                         <p class="error full_name_error"></p>
                      </div>
                   </div>
@@ -232,7 +233,7 @@
                      <label style="text-align: left;"  for="mobile_no">Mobile No<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="mobile_no1" name="mobile_no"  placeholder="Enter Mobile No" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="mobile_no1" name="mobile_no"  placeholder="Enter Mobile No" class="form-control col-md-12 col-xs-12">
                         <p class="error mobile_no_error"></p>
                      </div>
                   </div>
@@ -241,7 +242,7 @@
                      <label style="text-align: left;"  for="alternate_mobile">Alternate Mobile
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="alternate_mobile1"  placeholder="Enter Alternate Mobile" name="alternate_mobile" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="alternate_mobile1"  placeholder="Enter Alternate Mobile" name="alternate_mobile" class="form-control col-md-12 col-xs-12">
                         <p class="error alternate_mobile_error"></p>
                      </div>
                   </div>
@@ -289,7 +290,7 @@
                      <label style="text-align: left;"  for="email">Email<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="email1" name="email" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="email1" name="email" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
                         <p class="error email_error"></p>
                      </div>
                   </div>
@@ -298,7 +299,7 @@
                      <label style="text-align: left;"  for="alternamte_email">Alternamte Email
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="alternamte_email1" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="alternamte_email1" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
                         <p class="error alternamte_email_error"></p>
                      </div>
                    </div>

@@ -67,74 +67,23 @@
             echo json_encode($data);
         }
 
-        public function enquiry_insert($id)
-        {
-            $this->load->library('form_validation');
-        
-                $name = $this->security->xss_clean($this->input->post('full_name'));
-                $mobile = $this->security->xss_clean($this->input->post('mobile_no'));
-                $mobile1 = $this->security->xss_clean($this->input->post('alternate_mobile'));
-                $email = $this->security->xss_clean($this->input->post('email'));
-                $email1 = $this->security->xss_clean($this->input->post('alternamte_email'));
-                $qualification = $this->security->xss_clean($this->input->post('qualification'));
-                $country = $this->security->xss_clean($this->input->post('country'));
-                $state = $this->security->xss_clean($this->input->post('state'));
-                $city = $this->security->xss_clean($this->input->post('city'));
-                $purpose = $this->security->xss_clean($this->input->post('purpose'));
-                $enq_date = $this->security->xss_clean($this->input->post('enq_date'));
-                $source = $this->security->xss_clean($this->input->post('enquiry_type'));
-                $remark = $this->security->xss_clean($this->input->post('remark'));
-
-                if($id == 0)
-                {
-                    $enquiryInfo = array('enq_fullname'=>$name, 'enq_mobile'=>$mobile, 'enq_mobile1'=>$mobile1, 'enq_date'=> date('Y-m-d', strtotime($enq_date)),
-                                'enq_email'=>$email, 'enq_email1'=>$email1,'enq_qualification'=> $qualification, 'enq_purpose'=>$purpose, 'enq_country'=>$country,'enq_state'=> $state, 'enq_city'=> $city,
-                                'enq_source'=>$source, 'enq_remark'=>$remark,
-                                'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
-                        
-                    // $result = $this->user_model->addNewUser($userInfo);
-                    $result = $this->database->data_insert('tbl_enquiry', $enquiryInfo);
-                    if($result > 0)
-                    {
-                    $process = 'Enquiry Insert';
-                    $processFunction = 'Enquiry/enquiry_insert';
-                    $this->logrecord($process,$processFunction);
-                       echo true;
-                    }
-                    else
-                    {
-                        echo false;
-                    }
-                }else
-                {
-                    $enquiryInfo = array('enq_fullname'=>$name, 'enq_mobile'=>$mobile, 'enq_mobile1'=>$mobile1, 'enq_date'=> date('Y-m-d', strtotime($enq_date)),
-                                'enq_email'=>$email, 'enq_email1'=>$email1,'enq_qualification'=> $qualification, 'enq_purpose'=>$purpose, 'enq_country'=>$country,'enq_state'=> $state, 'enq_city'=> $city,
-                                'enq_source'=>$source, 'enq_remark'=>$remark,
-                                'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-
-                    $result = $this->database->data_update('tbl_enquiry',$enquiryInfo,'enq_id',$id);
-                    
-                    if($result == true)
-                    {
-                        $process = 'Enquiry Update';
-                        $processFunction = 'Enquiry/enquiry_insert';
-                        $this->logrecord($process,$processFunction);
-                        echo true;
-                    }
-                    else
-                    {
-                        echo false;
-                    }
-                }            
-        }
-
 
         public function createenquiry(){
             $post_submit = $this->input->post();
 
             if(!empty($post_submit)){
                 $createenquiry_response = array();
+
+                    $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry()[0];
+                    if($check_enquiry_auto_number->enq_number){
+                        $enq_number =$check_enquiry_auto_number->enq_number +  1;
+                    }else{
+                        $enq_number = 1;
+                    }
+
                 $data = array(
+                    //'enq_number'=> DATE('Y').DATE('m').DATE('d').DATE('H').DATE('i').DATE('s'),
+                    'enq_number'=> $enq_number,
                     'enq_fullname' => $this->input->post('full_name'),
                     'enq_mobile'=> $this->input->post('mobile_no'),
                     'enq_mobile1' => $this->input->post('alternate_mobile'),
@@ -318,6 +267,16 @@
                 }
             else { echo(json_encode(array('status'=>FALSE))); }
         }
+
+
+       public function sendPaymentLink(){
+        $post_submit = $this->input->post();
+    
+
+
+       }
+
+
     }
 
 ?>
