@@ -14,6 +14,8 @@ class Admin extends BaseController
         $this->load->model('user_model');
         $this->load->model('course_model');
         $this->load->model('student_model');
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
         // $this->load->config('additional');
         // $this->load->library('mail');
         // Datas -> libraries ->BaseController / This function used load user sessions
@@ -49,7 +51,8 @@ class Admin extends BaseController
     function userListing()
     {          
             $this->global['pageTitle'] = 'ADMIN : User List';
-            $this->loadViews("master/users", $this->global, '', NULL);
+            $data['role'] = $this->user_model->getUserRoles();
+            $this->loadViews("master/users", $this->global, $data, NULL);
     }
 
     public function fetchUsers(){
@@ -81,6 +84,147 @@ class Admin extends BaseController
     {
         $data['roles'] = $this->user_model->getUserRoles();
         echo json_encode($data);
+    }
+
+    public function createUser()
+    {
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+
+            $createuser_response = array();
+            
+            $data = array(
+                'name'      => $this->input->post('name'),
+                'email'     => $this->input->post('email'),
+                'mobile'    => $this->input->post('mobile'),
+                'password'  => $this->input->post('password'),
+                'roleId'    => $this->input->post('role'),
+                'user_flag' =>$this->input->post('user_flag')
+            );
+
+            $this->form_validation->set_rules('name', 'User Name', 'trim|required');
+            $this->form_validation->set_rules('email', 'Email', 'trim|required');
+            $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
+            $this->form_validation->set_rules('role', 'Role', 'trim|required');
+            $this->form_validation->set_rules('password', 'Password', 'trim|required');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
+
+            if($this->form_validation->run() == FALSE){
+                $createuser_response['status'] = 'failure';
+                $createuser_response['error'] = array('name'=>strip_tags(form_error('name')), 'email'=>strip_tags(form_error('email')), 'mobile'=>strip_tags(form_error('mobile')), 'role'=>strip_tags(form_error('role')),'password'=>strip_tags(form_error('password')),'confirm_password'=>strip_tags(form_error('confirm_password')));
+            }else{
+
+                /*check If course name is unique*/
+                $check_uniqe =  $this->user_model->checkquniqeusername(trim($this->input->post('name')));
+                $check_uniqe1 =  $this->user_model->checkEmailExists(trim($this->input->post('email')));
+
+                if($check_uniqe){
+                    $createuser_response['status'] = 'failure';
+                    $createuser_response['error'] = array('name'=>'User Name Alreday Exits', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+                }
+                else if($check_uniqe1){
+                    $createuser_response['status'] = 'failure';
+                    $createuser_response['error'] = array('name'=>'', 'email'=>'Email already Exist', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+                }
+                else{
+                    $saveCoursedata = $this->user_model->saveUserdata('',$data);
+                    if($saveCoursedata){
+                        $createuser_response['status'] = 'success';
+                        $createuser_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+                    }
+                }
+            }
+    
+            echo json_encode($createuser_response);
+        }
+    }
+
+    public function updateUser($userId)
+    {
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+
+            $createuser_response = array();
+            if(empty($this->input->post('password1')))
+            {
+                $data = array(
+                    'name'      => $this->input->post('name1'),
+                    'email'     => $this->input->post('email1'),
+                    'mobile'    => $this->input->post('mobile1'),
+                    'roleId'    => $this->input->post('role1'),
+                    'user_flag' =>$this->input->post('user_flag1')
+                );
+            }else{
+                $data = array(
+                    'name'      => $this->input->post('name1'),
+                    'email'     => $this->input->post('email1'),
+                    'mobile'    => $this->input->post('mobile1'),
+                    'password'  => getHashedPassword($this->input->post('password1')),
+                    'roleId'    => $this->input->post('role1'),
+                    'user_flag' =>$this->input->post('user_flag1')
+                );
+            }
+
+            $this->form_validation->set_rules('name1', 'User Name', 'trim|required');
+            $this->form_validation->set_rules('email1', 'Email', 'trim|required');
+            $this->form_validation->set_rules('mobile1', 'Mobile No', 'trim|required|numeric');
+            $this->form_validation->set_rules('role1', 'Role', 'trim|required');
+            if(!empty($this->input->post('password1')))
+            {
+                $this->form_validation->set_rules('password1', 'Password', 'trim|required');
+                $this->form_validation->set_rules('confirm_password1', 'Confirm Password', 'trim|required|matches[password]');
+            }            
+
+            if($this->form_validation->run() == FALSE){
+                $createuser_response['status'] = 'failure';
+                $createuser_response['error'] = array('name1'=>strip_tags(form_error('name1')), 'email1'=>strip_tags(form_error('email1')), 'mobile1'=>strip_tags(form_error('mobile1')), 'role1'=>strip_tags(form_error('role1')),'password1'=>strip_tags(form_error('password1')),'confirm_password1'=>strip_tags(form_error('confirm_password1')));
+            }else{
+
+                /*check If user name & email is unique*/
+                
+                        $check_uniqe =  $this->user_model->checkquniqeusername_update($userId, trim($this->input->post('name1')));
+                        $check_uniqe1 =  $this->user_model->checkEmailExists_update($userId, trim($this->input->post('email1')));
+                
+                
+                if($check_uniqe){
+                    $createuser_response['status'] = 'failure';
+                    if(empty($this->input->post('password1')))
+                    {
+                        $createuser_response['error'] = array('name1'=>'User Name Alreday Exits', 'email1'=>'', 'mobile1'=>'', 'role1'=>'');
+                    }else
+                    {
+                        $createuser_response['error'] = array('name1'=>'User Name Alreday Exits', 'email1'=>'', 'mobile1'=>'', 'role1'=>'','password1'=>'','confirm_password1' =>'');
+                    }
+                }
+                else if($check_uniqe1){
+                    $createuser_response['status'] = 'failure';
+                    
+                    if(empty($this->input->post('password1')))
+                    {
+                        $createuser_response['error'] = array('name1'=>'', 'email1'=>'Email already Exist', 'mobile1'=>'', 'role1'=>'');
+                    }else
+                    {
+                        $createuser_response['error'] = array('name1'=>'', 'email1'=>'Email already Exist', 'mobile1'=>'', 'role1'=>'','password1'=>'','confirm_password1' =>'');
+                    }
+                }
+                else{
+                    $saveUserdata = $this->user_model->saveUserdata($userId,$data);
+                    if($saveUserdata){
+                        $createuser_response['status'] = 'success';
+                        
+                        if(empty($this->input->post('password1')))
+                        {
+                            $createuser_response['error'] = array('name1'=>'', 'email1'=>'', 'mobile1'=>'', 'role1'=>'');
+                        }else
+                        {
+                            $createuser_response['error'] = array('name1'=>'', 'email1'=>'', 'mobile1'=>'', 'role1'=>'','password1'=>'','confirm_password1' =>'');
+                        }
+                    }
+                }
+            }
+    
+            echo json_encode($createuser_response);
+        }
     }
 
     function addNewUser()
@@ -185,8 +329,8 @@ class Admin extends BaseController
     */
     function get_signle_user_for_edit($userId = NULL)
     {
-        $data['roles'] = $this->user_model->getUserRoles();
-        $data['userInfo'] = $this->user_model->getUserInfo($userId);
+        // $data['roles'] = $this->user_model->getUserRoles();
+        $data = $this->user_model->getUserInfo($userId);
         echo json_encode($data);
     }
 

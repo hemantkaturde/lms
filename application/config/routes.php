@@ -68,6 +68,9 @@ $route['logout'] = 'login/logout';
 
 $route['userListing'] = 'admin/userListing';
 $route['fetchUsers'] = 'admin/fetchUsers';
+$route['createUser'] = 'admin/createUser';
+$route['updateUser/(:num)'] = 'admin/updateUser/$1';
+
 $route['addNewUser'] = 'admin/addNewUser';
 $route['editOld'] = "admin/editOld";
 $route['editOld/(:num)'] = "admin/editOld/$1";

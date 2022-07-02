@@ -105,10 +105,6 @@ class User_model extends CI_Model
         return $data;
     }
     
-    /**
-     * This function is used to get the user roles information
-     * @return array $result : This is result of the query
-     */
     function getUserRoles()
     {
         $this->db->select('roleId, role');
@@ -119,27 +115,72 @@ class User_model extends CI_Model
         return $query->result();
     }
 
+    public function saveUserdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('userId', $id);
+            if($this->db->update(TBL_USER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_USER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
     /**
      * This function is used to check whether email id is already exist or not
      * @param {string} $email : This is email id
      * @param {number} $userId : This is user id
      * @return {mixed} $result : This is searched result
      */
-    function checkEmailExists($email, $userId = 0)
+    function checkEmailExists($email)
     {
-        $this->db->select("email");
-        $this->db->from("tbl_users");
-        $this->db->where("email", $email);   
-        $this->db->where("isDeleted", 0);
-        if($userId != 0){
-            $this->db->where("userId !=", $userId);
-        }
+        $this->db->select('email');
+        $this->db->from(TBL_USER);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('email', $email);
+        $this->db->where('user_flag', 'user');
         $query = $this->db->get();
+        return $query->result();
+    }
 
+    function checkEmailExists_update($userId, $email)
+    {
+        $this->db->select('email,userId');
+        $this->db->from(TBL_USER);
+        $this->db->where('userId', $userId);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('email', $email);
+        $this->db->where('user_flag', 'user');
+        $query = $this->db->get();
         return $query->result();
     }
     
-    
+    public function checkquniqeusername($name){
+        $this->db->select('name');
+        $this->db->from(TBL_USER);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('user_flag', 'user');
+        $this->db->where('name', $name);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function checkquniqeusername_update($userId,$name){
+        $this->db->select('name');
+        $this->db->from(TBL_USER);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('user_flag', 'user');
+        $this->db->where('name', $name);
+        $this->db->where('userId', $userId);
+        $query = $this->db->get();
+        return $query->result();
+    }
     /**
      * This function is used to add new user to system
      * @return number $insert_id : This is last inserted id

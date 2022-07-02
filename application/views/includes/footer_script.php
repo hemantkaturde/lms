@@ -777,5 +777,117 @@ $(document).on('change','.state',function(e){
 					},
 				});
 		});
+
+		$(document).on('click','#save_user',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#user_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>createUser",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "User Created!",
+							//text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'userListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.edit_user',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var userId = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>admin/get_signle_user_for_edit/"+userId,  
+                method:"POST",  
+                data:{userId:userId},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                     $('#editUser').modal('show');
+					 
+                     $('#name1').val(data[0].name);  
+                     $('#mobile1').val(data[0].mobile);  
+                     $('#email1').val(data[0].email);
+                     $('#role1').val(data[0].roleId);
+                     $('#password1').val(data[0].password);
+                     $('#confirm_password1').val(data[0].password);
+                     $('#userId').val(userId);
+                }  
+           })
+    });
+
+	$(document).on('click','#update_user',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#update_user_form")[0]);
+			var id = $("#userId").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateUser/"+id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "User Updated!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'userListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+		
+			    }
+			});
+			return false;
+	});
 	</script>
 <?php //} ?>
