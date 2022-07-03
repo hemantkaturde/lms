@@ -889,5 +889,221 @@ $(document).on('change','.state',function(e){
 			});
 			return false;
 	});
+
+		$(document).on('click','.delete_user',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this file!",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+					url : "<?php echo base_url();?>deleteUser",
+					type: "POST",
+					data : 'id='+elemF.attr('data-id'),
+					success: function(data, textStatus, jqXHR)
+					{
+						// if(data.status=='success'){
+												//swal("Deleted!", "User has been deleted.", "success");
+												//location.reload();
+											//}
+						swal({
+							title: "Deleted!",
+							text: "User has been deleted.",
+							icon: "success",
+							button: "Ok",
+						},function(){ 
+							$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'userListing'?>";
+							});		
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+										//$(".loader_ajax").hide();
+						}
+					})
+				}
+				else {
+					swal("Cancelled", "User deletion cancelled ", "error");
+				}
+			});
+		});
+	
+		// Staff 
+		$(document).ready(function() {
+				var dt = $('#staffList').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "20%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Staff Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchStaff",
+						type: "post",
+					},
+				});
+		});
+		
+		$(document).on('click','#save_staff',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#staff_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>createUser",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Staff Created!",
+							//text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'staffListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','#update_staff',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#update_staff_form")[0]);
+			var id = $("#userId").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateUser/"+id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Staff Updated!",
+							text: "Success message sent!!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'staffListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+		
+			    }
+			});
+			return false;
+	});
+
+	$(document).on('click','.delete_staff',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this file!",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+					url : "<?php echo base_url();?>deleteUser",
+					type: "POST",
+					data : 'id='+elemF.attr('data-id'),
+					success: function(data, textStatus, jqXHR)
+					{
+						// if(data.status=='success'){
+												//swal("Deleted!", "User has been deleted.", "success");
+												//location.reload();
+											//}
+						swal({
+							title: "Deleted!",
+							text: "Staff has been deleted.",
+							icon: "success",
+							button: "Ok",
+						},function(){ 
+							$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'staffListing'?>";
+							});		
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+										//$(".loader_ajax").hide();
+						}
+					})
+				}
+				else {
+					swal("Cancelled", "User deletion cancelled ", "error");
+				}
+			});
+		});
 	</script>
+
 <?php //} ?>
