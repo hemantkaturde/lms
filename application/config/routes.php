@@ -68,13 +68,12 @@ $route['logout'] = 'login/logout';
 
 $route['userListing'] = 'admin/userListing';
 $route['fetchUsers'] = 'admin/fetchUsers';
-$route['addNewUser'] = 'admin/addNewUser';
-$route['editOld'] = "admin/editOld";
-$route['editOld/(:num)'] = "admin/editOld/$1";
-$route['deleteUser/(:any)'] = "admin/deleteUser/$1";
+$route['createUser'] = 'admin/createUser';
+$route['updateUser/(:num)'] = 'admin/updateUser/$1';
+$route['deleteUser'] = "admin/deleteUser";
 
 $route['staffListing'] = 'admin/staffListing';
-
+$route['fetchStaff'] = 'admin/fetchStaff';
 /*********** ROLE CONTROLLER ROUTES *******************/
 $route['roleListing'] = "role/roleListing";
 $route['addRole'] = "role/addRole";

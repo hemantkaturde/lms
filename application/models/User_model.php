@@ -63,6 +63,7 @@ class User_model extends CI_Model
             $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'user');
         $query = $this->db->get(TBL_USER);
         $rowcount = $query->num_rows();
         
@@ -81,6 +82,7 @@ class User_model extends CI_Model
             $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'user');
         $this->db->order_by(TBL_USER.'.userId', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_USER);
@@ -105,10 +107,6 @@ class User_model extends CI_Model
         return $data;
     }
     
-    /**
-     * This function is used to get the user roles information
-     * @return array $result : This is result of the query
-     */
     function getUserRoles()
     {
         $this->db->select('roleId, role');
@@ -119,27 +117,65 @@ class User_model extends CI_Model
         return $query->result();
     }
 
-    /**
-     * This function is used to check whether email id is already exist or not
-     * @param {string} $email : This is email id
-     * @param {number} $userId : This is user id
-     * @return {mixed} $result : This is searched result
-     */
-    function checkEmailExists($email, $userId = 0)
+    public function saveUserdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('userId', $id);
+            if($this->db->update(TBL_USER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_USER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+    function checkEmailExists($userId=null,$email,$flag)
     {
-        $this->db->select("email");
-        $this->db->from("tbl_users");
-        $this->db->where("email", $email);   
-        $this->db->where("isDeleted", 0);
-        if($userId != 0){
-            $this->db->where("userId !=", $userId);
+        $this->db->select('email');
+        $this->db->from(TBL_USER);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('email', $email);
+        if($flag == "user")
+        {
+            $this->db->where('user_flag', 'user');
+        }else
+        {
+            $this->db->where('user_flag', 'staff');
+        }
+        
+        if($userId !='')
+        {
+            $this->db->where('userId !=', $userId);    
         }
         $query = $this->db->get();
-
         return $query->result();
     }
     
-    
+    public function checkquniqeusername($userId=null,$name,$flag){
+        $this->db->select('name');
+        $this->db->from(TBL_USER);
+        $this->db->where('isDeleted', 0);
+        if($flag == "user")
+        {
+            $this->db->where('user_flag', 'user');
+        }else
+        {
+            $this->db->where('user_flag', 'staff');
+        }
+        $this->db->where('name', $name);
+        if($userId !='')
+        {
+            $this->db->where('userId !=', $userId);    
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     /**
      * This function is used to add new user to system
      * @return number $insert_id : This is last inserted id
@@ -340,44 +376,60 @@ class User_model extends CI_Model
     }
 
     // ====== Staff Listing  
-    function staffListingCount($searchText = '')
-    {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role, BaseTbl.user_flag');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
-        if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
-            $this->db->where($likeCriteria);
+    public function  getStaffCount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where_in('BaseTbl.user_flag', 'staff');
-        $query = $this->db->get();
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'staff');
+        $query = $this->db->get(TBL_USER);
+        $rowcount = $query->num_rows();
         
-        return $query->num_rows();
+        return $rowcount;
+
     }
-    
-    function staffListing($searchText = '')
-    {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role, BaseTbl.user_flag');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
-        if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
-            $this->db->where($likeCriteria);
+
+    public function getStaffData($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where_in('BaseTbl.user_flag', 'staff');
-        // $this->db->limit($page, $segment);
-        $query = $this->db->get();
-        
-        $result = $query->result();        
-        return $result;
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'staff');
+        $this->db->order_by(TBL_USER.'.userId', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['name']    = $value['name'];
+                 $data[$counter]['email']   = $value['email'];
+                 $data[$counter]['mobile']  = $value['mobile'];
+                 $data[$counter]['role']    = $value['role'];
+                 $data[$counter]['action']  = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_user' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit User' title='Edit User'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_staff' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete User' title='Delete User'></a>&nbsp"; 
+                $counter++; 
+            }
+        }
+        return $data;
     }
-    
    
     // ==============================
 }
