@@ -1,5 +1,24 @@
 <!-- Comman page javascript -->
 <script type="text/javascript">
+	
+ $(function() {
+    $(".datepicker").datepicker({ 
+		minDate: 0,
+		todayHighlight: true,
+        format: 'dd-mm-yyyy' ,
+		startDate: new Date()
+	});
+});
+
+$(document).on('click','.close',function(e){  
+	history.go(0);
+});
+
+var myDrop = new drop({
+    selector:  '#myMulti'
+});
+
+
 $(document).on('change','#country',function(e){  
 	e.preventDefault();
 	//$(".loader_ajax").show();

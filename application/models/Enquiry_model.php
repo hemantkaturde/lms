@@ -43,12 +43,13 @@ class Enquiry_model extends CI_Model
         */ 
         public function getEnquiryInfo($enqId)
         {
-            $this->db->select('BaseTbl.* ');
-            $this->db->from('tbl_enquiry as BaseTbl');
-            $this->db->where('BaseTbl.isDeleted', 0);
-            $this->db->where('BaseTbl.enq_id', $enqId);
+            $this->db->select('*');
+            $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
+            $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
+            $this->db->from('tbl_enquiry');
+            $this->db->where('tbl_enquiry.isDeleted', 0);
+            $this->db->where('tbl_enquiry.enq_id', $enqId);
             $query = $this->db->get();
-            
             return $query->result();
         }
 
@@ -159,10 +160,19 @@ class Enquiry_model extends CI_Model
 
     public function getEnquiryInfobyenqnumber($enqId){
 
-            $this->db->select('BaseTbl.* ');
-            $this->db->from('tbl_enquiry as BaseTbl');
-            $this->db->where('BaseTbl.isDeleted', 0);
-            $this->db->where('BaseTbl.enq_number', $enqId);
+            // $this->db->select('BaseTbl.* ');
+            // $this->db->from('tbl_enquiry as BaseTbl');
+            // $this->db->where('BaseTbl.isDeleted', 0);
+            // $this->db->where('BaseTbl.enq_number', $enqId);
+            // $query = $this->db->get();
+            // return $query->result();
+
+            $this->db->select('*');
+            $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
+            $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
+            $this->db->from('tbl_enquiry');
+            $this->db->where('tbl_enquiry.isDeleted', 0);
+            $this->db->where('tbl_enquiry.enq_number', $enqId);
             $query = $this->db->get();
             return $query->result();
 
@@ -185,6 +195,18 @@ class Enquiry_model extends CI_Model
         } else {
             return FALSE;
         }
+    }
+
+    public function checkifpaymentdoneornot($id){
+
+        $this->db->select('tbl_enquiry.payment_status');
+        $this->db->from('tbl_enquiry');
+        $this->db->where('tbl_enquiry.isDeleted', 0);
+        //$this->db->where('tbl_enquiry.payment_status', 1);
+        $this->db->where('tbl_enquiry.enq_number', $id);
+        $query = $this->db->get();
+        return $query->result();
+
 
     }
 

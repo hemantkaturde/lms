@@ -37,6 +37,21 @@ class Comman_model extends CI_Model
             }
             return $query_result;
         }
+
+
+        public function getCourseList()
+        {
+            $this->db->select('*');
+            $this->db->from('tbl_course as BaseTbl');
+            $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->order_by('BaseTbl.courseId', 'desc');
+            // $this->db->limit($page, $segment);
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+
+
 }
 
 ?>

@@ -114,7 +114,7 @@
                   <div class="form-group">
                      <label style="text-align: left;" for="enq_date">Date of Enquiry</label><span class="required">*</span>
                      <div >
-                          <input type="text" class="form-control datepicker" id="enq_date" name="enq_date" placeholder="dd-mm-yyyy" required>
+                          <input type="text" class="form-control datepicker" id="enq_date" name="enq_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
                      </div>
                      <p class="error enq_date_error"></p>
                   </div>
@@ -149,6 +149,20 @@
                    </div>
 
                    <div class="form-group">
+                     <label style="text-align: left;"  for="country">Course
+                     </label>
+                     <div >
+                         <select class="form-control course" id="course" name="course">
+                            <option value="">Select Course</option>
+                            <?php foreach ($course_List as $key => $value) {?>
+                               <option value="<?php echo $value['courseId']; ?>"><?php echo $value['course_name']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <p class="error course_error"></p>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
                      <label style="text-align: left;"  for="country">Country
                      </label>
                      <div >
@@ -156,7 +170,7 @@
                             <option value="">Select Country</option>
                             <option value="101">India</option>
                         </select>
-                        <p class="error enquiry_type_error"></p>
+                        <p class="error Country_error"></p>
                      </div>
                    </div>
 
@@ -301,6 +315,20 @@
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="alternamte_email1" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
                         <p class="error alternamte_email_error"></p>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="country">Course
+                     </label>
+                     <div >
+                         <select class="form-control course" id="course" name="course">
+                            <option value="">Select Course</option>
+                            <?php foreach ($course_List as $key => $value) {?>
+                               <option value="<?php echo $value['courseId']; ?>"><?php echo $value['course_name']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <p class="error course_error"></p>
                      </div>
                    </div>
 

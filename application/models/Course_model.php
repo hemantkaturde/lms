@@ -15,9 +15,10 @@ class Course_model extends CI_Model
     }
 
     function data_update($table='',$arr='',$field='',$value=''){
-
-        $this->CI->db->where($field,$value);
-        return $this->CI->db->update($table,$arr);
+        // $this->CI->db->where($field,$value);
+        // return $this->CI->db->update($table,$arr);
+        $this->db->where($field, $value);
+        return  $this->db->delete($table);
     }
 
     function courseListingCount($searchText = '')
@@ -165,7 +166,7 @@ class Course_model extends CI_Model
             {
                 $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+                $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
             }
             $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $query = $this->db->get(TBL_COURSE);
@@ -181,7 +182,7 @@ class Course_model extends CI_Model
             {
                 $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+                $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
             }
             $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
@@ -197,7 +198,7 @@ class Course_model extends CI_Model
                     //  $data[$counter]['courseId'] = $value['courseId'];
                      $data[$counter]['course_name'] = $value['course_name'];
                      $data[$counter]['course_type'] = $value['ct_name'];
-                     $data[$counter]['course_fees'] = $value['course_fees'];
+                     $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
                      $data[$counter]['action'] = '';
                     //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";

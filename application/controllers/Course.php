@@ -70,6 +70,8 @@
 
                 $createcourse_response = array();
 
+                $total_fess_cost = $this->input->post('fees') + $this->input->post('certificate_cost') + $this->input->post('one_time_admission_fees') + $this->input->post('kit_cost') + $this->input->post('kit_cost');
+
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),
@@ -79,7 +81,8 @@
                     'course_kit_cost'=> $this->input->post('kit_cost'),
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
                     'course_books'=>$this->input->post('course_books'),
-                    'course_remark' => $this->input->post('remarks')
+                    'course_remark' => $this->input->post('remarks'),
+                    'course_total_fees' => $total_fess_cost
                 );
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
@@ -123,6 +126,9 @@
 
                 $createcourse_response = array();
 
+                $total_fess_cost = $this->input->post('fees') + $this->input->post('certificate_cost') + $this->input->post('one_time_admission_fees') + $this->input->post('kit_cost') + $this->input->post('kit_cost');
+
+
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),
@@ -132,7 +138,8 @@
                     'course_kit_cost'=> $this->input->post('kit_cost'),
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
                     'course_books'=>$this->input->post('course_books'),
-                    'course_remark' => $this->input->post('remarks')
+                    'course_remark' => $this->input->post('remarks'),
+                    'course_total_fees' => $total_fess_cost
                 );
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
@@ -196,100 +203,7 @@
        }
 
 
-        // // ===============================  
-        // public function courseLinks($id = null)
-        // {
-        //     $searchText = $this->security->xss_clean($this->input->post('searchText'));
-        //     $data['searchText'] = $searchText;
-            
-        //     // $this->load->library('pagination');
-            
-        //     // $count = $this->role_model->roleListingCount($searchText);
-
-		// 	// $returns = $this->paginationCompress ( "roleListing/", $count, 10 );
-        //     $data['id'] = $id;
-        //     $data['courselink'] = $this->course_model->courseLinksListing($id, $searchText);
-        //     $course = $this->course_model->getCourseInfo($id);
-        //     $data['courseName'] = $course[0]->course_name;
-        //     // print_r($data['courseName']);exit;
-
-        //     $process = 'Course Links Listing';
-        //     $processFunction = 'Course/courseLinks';
-        //     $this->logrecord($process,$processFunction);
-
-        //     $this->global['pageTitle'] = 'ADMIN : Course Links';
-        //     $this->loadViews("course/courseLinks", $this->global, $data , NULL);
-        // }
-
-        // public function get_course_link($linkId)
-        // {
-        //     $data['linkInfo'] = $this->course_model->getCourseLinkInfo($linkId);
-        //     echo json_encode($data);
-        // }
-
-        // public function course_link_insert($linkId, $courseId)
-        // {
-        //     $this->load->library('form_validation');
-        
-        //         $name = ucwords(strtolower($this->security->xss_clean($this->input->post('link_name'))));
-        //         $url = $this->security->xss_clean($this->input->post('link_url'));
-        //         $sdate = $this->security->xss_clean($this->input->post('link_sdate'));
-        //         $ldate = $this->security->xss_clean($this->input->post('link_ldate'));
-        //         if($linkId == 0)
-        //         {
-        //             $courseInfo = array('course_id'=>$courseId, 'link_name'=>$name, 'link_url'=>$url, 'link_date'=>date('Y-m-d'),'link_sdate'=>$sdate,'link_ldate'=>$ldate );
-                        
-        //             // $result = $this->user_model->addNewUser($userInfo);
-        //             $result = $this->database->data_insert('tbl_course_link', $courseInfo);
-        //             if($result > 0)
-        //             {
-        //             $process = 'Course Link Insert';
-        //             $processFunction = 'Course/course_link_insert';
-        //             $this->logrecord($process,$processFunction);
-        //                echo true;
-        //             }
-        //             else
-        //             {
-        //                 echo false;
-        //             }
-        //         }else
-        //         {
-        //             $courseInfo = array( 'link_name'=>$name, 'link_url'=>$url, 'link_sdate'=>$sdate, 'link_ldate'=>$ldate);
-
-        //             $result = $this->course_model->data_update('tbl_course_link',$courseInfo,'link_id',$linkId);
-                    
-        //             if($result == true)
-        //             {
-        //                 $process = 'Course Link Update';
-        //                 $processFunction = 'Course/course_link_insert';
-        //                 $this->logrecord($process,$processFunction);
-        //                 echo true;
-        //             }
-        //             else
-        //             {
-        //                 echo false;
-        //             }
-        //         }            
-        // }
-
-        // // ==== Delete Course
-        // public function deleteCourseLink($id)
-        // {
-        //     $courselinkInfo = array('isDeleted'=>1);
-        //     $result = $this->course_model->data_update('tbl_course_link',$courselinkInfo,'link_id',$id);
-
-        //     if ($result > 0) {
-        //          echo(json_encode(array('status'=>TRUE)));
-
-        //          $process = 'Course Link Delete';
-        //          $processFunction = 'Course/deleteCourseLink';
-        //          $this->logrecord($process,$processFunction);
-
-        //         }
-        //     else { echo(json_encode(array('status'=>FALSE))); }
-        // }
-
-        public function courseTypeListing()
+    public function courseTypeListing()
         {
             $process = 'Course Type Listing';
             $processFunction = 'Course/courseTypeListing';

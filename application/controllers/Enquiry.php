@@ -15,7 +15,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->load->model(array('login_model', 'enquiry_model', 'database'));
+            $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model'));
             $this->load->library('form_validation');
             $this->load->library('mail');
             // $this->load->library('dbOperations');
@@ -34,8 +34,9 @@
             $process = 'Enquiry Listing';
             $processFunction = 'Enquiry/enquirylisting';
             $this->logrecord($process,$processFunction);
+            $data['course_List'] = $this->comman_model->getCourseList();
             $this->global['pageTitle'] = 'Enquiry Management';
-            $this->loadViews("enquiry/enquiryList", $this->global, NULL , NULL);
+            $this->loadViews("enquiry/enquiryList", $this->global, $data , NULL);
         }
 
 
@@ -78,6 +79,27 @@
 
             if(!empty($post_submit)){
                 $createenquiry_response = array();
+            
+                $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
+                $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|numeric|greater_than[0]|exact_length[10]');
+                $this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
+                $this->form_validation->set_rules('email', 'Email', 'trim|required');
+                $this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
+                $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
+                $this->form_validation->set_rules('purpose', 'Purpose', 'trim');
+                $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
+                $this->form_validation->set_rules('country', 'Country', 'trim');
+                $this->form_validation->set_rules('state', 'State', 'trim');
+                $this->form_validation->set_rules('city', 'City', 'trim');
+                $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
+                $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
+                $this->form_validation->set_rules('course', 'Course', 'trim|required');
+
+
+                if($this->form_validation->run() == FALSE){
+                    $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>strip_tags(form_error('course')),'remarks'=>strip_tags(form_error('remarks')));
+                }else{
 
                     $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry()[0];
                     if($check_enquiry_auto_number->enq_number){
@@ -86,43 +108,24 @@
                         $enq_number = 1;
                     }
 
-                $data = array(
-                    //'enq_number'=> DATE('Y').DATE('m').DATE('d').DATE('H').DATE('i').DATE('s'),
-                    'enq_number'=> $enq_number,
-                    'enq_fullname' => $this->input->post('full_name'),
-                    'enq_mobile'=> $this->input->post('mobile_no'),
-                    'enq_mobile1' => $this->input->post('alternate_mobile'),
-                    'enq_email'=> $this->input->post('email'),
-                    'enq_email1' => $this->input->post('alternamte_email'),
-                    'enq_qualification' => $this->input->post('qualification'),
-                    'enq_purpose' => $this->input->post('purpose'),
-                    'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
-                    'enq_country'=> $this->input->post('country'),
-                    'enq_state'=>$this->input->post('state'),
-                    'enq_city'=>$this->input->post('city'),
-                    'enq_source'=>$this->input->post('enquiry_type'),
-                    'enq_remark' => $this->input->post('remarks')
-                );
-
-                $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
-                $this->form_validation->set_rules('mobile_no', 'Mobile_no', 'trim|required|numeric|greater_than[0]|exact_length[10]');
-                $this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
-                $this->form_validation->set_rules('email', 'Email', 'trim|required');
-                $this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
-                $this->form_validation->set_rules('qualification', 'Qualification', 'trim');
-                $this->form_validation->set_rules('purpose', 'Purpose', 'trim');
-                $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim');
-                $this->form_validation->set_rules('country', 'Country', 'trim');
-                $this->form_validation->set_rules('state', 'State', 'trim');
-                $this->form_validation->set_rules('city', 'City', 'trim');
-                $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim');
-                $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
-
-
-                if($this->form_validation->run() == FALSE){
-                    $createenquiry_response['status'] = 'failure';
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
-                }else{
+                    $data = array(
+                        //'enq_number'=> DATE('Y').DATE('m').DATE('d').DATE('H').DATE('i').DATE('s'),
+                        'enq_number'=> $enq_number,
+                        'enq_fullname' => $this->input->post('full_name'),
+                        'enq_mobile'=> $this->input->post('mobile_no'),
+                        'enq_mobile1' => $this->input->post('alternate_mobile'),
+                        'enq_email'=> $this->input->post('email'),
+                        'enq_email1' => $this->input->post('alternamte_email'),
+                        'enq_qualification' => $this->input->post('qualification'),
+                        'enq_purpose' => $this->input->post('purpose'),
+                        'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
+                        'enq_country'=> $this->input->post('country'),
+                        'enq_state'=>$this->input->post('state'),
+                        'enq_city'=>$this->input->post('city'),
+                        'enq_source'=>$this->input->post('enquiry_type'),
+                        'enq_remark' => $this->input->post('remarks'),
+                        'enq_course_id' => $this->input->post('course')
+                    );
 
                     /*check If course name is unique*/
                     $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
@@ -149,43 +152,44 @@
 
             if(!empty($post_submit)){
                 $createenquiry_response = array();
-                $data = array(
-                    'enq_fullname' => $this->input->post('full_name'),
-                    'enq_mobile'=> $this->input->post('mobile_no'),
-                    'enq_mobile1' => $this->input->post('alternate_mobile'),
-                    'enq_email'=> $this->input->post('email'),
-                    'enq_email1' => $this->input->post('alternamte_email'),
-                    'enq_qualification' => $this->input->post('qualification'),
-                    'enq_purpose' => $this->input->post('purpose'),
-                    'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
-                    'enq_country'=> $this->input->post('country'),
-                    'enq_state'=>$this->input->post('state'),
-                    'enq_city'=>$this->input->post('city'),
-                    'enq_source'=>$this->input->post('enquiry_type'),
-                    'enq_remark' => $this->input->post('remarks')
-                );
-
+               
                 $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
                 $this->form_validation->set_rules('mobile_no', 'Mobile_no', 'trim|required|numeric|greater_than[0]|exact_length[10]');
                 $this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
                 $this->form_validation->set_rules('email', 'Email', 'trim|required');
                 $this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
-                $this->form_validation->set_rules('qualification', 'Qualification', 'trim');
+                $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
                 $this->form_validation->set_rules('purpose', 'Purpose', 'trim');
-                $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim');
+                $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
                 $this->form_validation->set_rules('country', 'Country', 'trim');
                 $this->form_validation->set_rules('state', 'State', 'trim');
                 $this->form_validation->set_rules('city', 'City', 'trim');
-                $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim');
+                $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
                 $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
-
+                $this->form_validation->set_rules('course', 'Course', 'trim|required');
 
                 if($this->form_validation->run() == FALSE){
                     $createenquiry_response['status'] = 'failure';
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'course'=>strip_tags(form_error('course')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
                 }else{
 
                     /*check If enquiry name is unique*/
+                    $data = array(
+                        'enq_fullname' => $this->input->post('full_name'),
+                        'enq_mobile'=> $this->input->post('mobile_no'),
+                        'enq_mobile1' => $this->input->post('alternate_mobile'),
+                        'enq_email'=> $this->input->post('email'),
+                        'enq_email1' => $this->input->post('alternamte_email'),
+                        'enq_qualification' => $this->input->post('qualification'),
+                        'enq_purpose' => $this->input->post('purpose'),
+                        'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
+                        'enq_country'=> $this->input->post('country'),
+                        'enq_state'=>$this->input->post('state'),
+                        'enq_city'=>$this->input->post('city'),
+                        'enq_source'=>$this->input->post('enquiry_type'),
+                        'enq_remark' => $this->input->post('remarks'),
+                        'enq_course_id' => $this->input->post('course')
+                    );
                     
                     if($id == null)
                     {
@@ -236,6 +240,7 @@
             $post_submit = $this->input->post();
                 if($post_submit){
                     $get_equiry_data =  $this->enquiry_model->getEnquiryInfo(trim($post_submit['id']))[0];
+
                     $to = $get_equiry_data->enq_email;
                     $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
                     $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
@@ -263,7 +268,7 @@
                                             <tr>
                                             <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
                                             <td align="right">
-                                                <span>Enquiry Number: 1234</span><br>
+                                                <span>Enquiry Number: '.$get_equiry_data->enq_number.'</span><br>
                                                 <span style="padding: 5px 0; display: block;">'.$get_equiry_data->createdDtm.'</span>
                                             </td>
                                             </tr>
@@ -275,7 +280,7 @@
                                         <td align="center" style="padding: 20px; border-top: 1px solid #f0f0f0; background: #fafafa;,; ">
                                         <div>Total Course Fee:</div>
                                         <h2 style="margin: 10px 0; color: #333; font-weight: 500; font-size: 48px;">
-                                        ₹ 500
+                                        ₹  '.$get_equiry_data->course_total_fees.'
                                         </h2>
                                         <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;">For Abc company, Issued on 1 Sept, 2017<br>by XYZ company</div>
                                         </td>
@@ -301,7 +306,7 @@
 
                                             <tr>
                                             <td>Course</td>
-                                            <td>fff</td>
+                                            <td>'.$get_equiry_data->course_name.'</td>
                                             </tr>
                                         </table>
                                         </td>
@@ -360,14 +365,19 @@
 
         public function pay($id){
             if($id){
-
-            
-               $process = 'Razorpay Payment ';
-               $processFunction = 'Enquiry/pay';
-               $this->logrecord($process,$processFunction);
-               $this->global['pageTitle'] = 'Razorpay';
-               $data['enquiry_data'] = $this->enquiry_model->getEnquiryInfobyenqnumber(trim($id));
-               $this->load->view("payment/razorpay", $data );
+               /* check if payment is done or not*/
+               $chekcpayornot = $this->enquiry_model->checkifpaymentdoneornot(trim($id));
+               if($chekcpayornot[0]->payment_status==1){
+                      $this->load->view("payment/paymentdone");
+               }else{
+                    $process = 'Razorpay Payment ';
+                    $processFunction = 'Enquiry/pay';
+                    $this->logrecord($process,$processFunction);
+                    $this->global['pageTitle'] = 'Razorpay';
+                    $data['enquiry_data'] = $this->enquiry_model->getEnquiryInfobyenqnumber(trim($id));
+                    $this->load->view("payment/razorpay", $data );
+               }
+               
             }else{
                echo 'page not found';
             }
@@ -406,8 +416,10 @@
                     $this->logrecord($process,$processFunction);
 
                     //$this->load->view("payment/success");
+                    echo(json_encode(array('status'=>true)));
 
                 }else{
+                    echo(json_encode(array('status'=>false)));
 
                 }
             }

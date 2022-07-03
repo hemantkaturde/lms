@@ -27,6 +27,7 @@
                     <figcaption class="info-wrap">
                         <h4 class="title">Contact Infromation</h4>
                         <div class="rating-wrap">
+                            <div class="label-rating">Enquiry Number : <?php echo $enquiry_data[0]->enq_number; ?> </div><br>
                             <div class="label-rating">Name : <?php echo $enquiry_data[0]->enq_fullname; ?> </div><br>
                             <div class="label-rating">Mobile Number : <?php echo $enquiry_data[0]->enq_mobile; ?></div>
                         </div> <!-- rating-wrap.// -->
@@ -34,9 +35,9 @@
 
                     <div class="bottom-wrap">
                         <a href="javascript:void(0)" class="btn btn-sm btn-primary float-right pay_now"
-                            data-amount="1000" data-id="1">Pay Now</a>
+                            data-amount="<?php echo $enquiry_data[0]->course_total_fees; ?>" data-id="<?php echo $enquiry_data[0]->enq_number; ?>">Pay Now</a>
                         <div class="price-wrap h5">
-                            <span class="price-new">₹1000</span> <del class="price-old">₹1200</del>
+                            <span class="price-new">₹ <?php echo $enquiry_data[0]->course_total_fees; ?></span>
                         </div> <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>
@@ -57,7 +58,7 @@ $('body').on('click', '.pay_now', function(e) {
     var product_id = $(this).attr("data-id");
     var options = {
         "key": "<?php echo RAZORPAYKEY; ?>",
-        "amount": (1 * 100), // 2000 paise = INR 20
+        "amount": (<?php echo $enquiry_data[0]->course_total_fees ?> * 100), // 2000 paise = INR 20
         "name": "IICTN",
         "description": "Payment",
         "image": "https://iictn.in/assets/img/logos/iictn_lms.png",
@@ -72,7 +73,8 @@ $('body').on('click', '.pay_now', function(e) {
                     product_id: product_id,
                     enquiry_number: <?php echo $enquiry_data[0]->enq_number; ?>
                 },
-                success: function(msg) {
+                success: function(msg, textStatus, jqXHR) {
+                    
                     window.location.href = "<?php echo base_url();?>razorthankyou";
                 }
             });
