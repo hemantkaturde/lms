@@ -134,7 +134,7 @@ class User_model extends CI_Model
             }
         }
     }
-    function checkEmailExists($userId=null,$email,$flag)
+    function checkEmailExists($userId=null,$email=null,$flag=null)
     {
         $this->db->select('email');
         $this->db->from(TBL_USER);
@@ -156,7 +156,7 @@ class User_model extends CI_Model
         return $query->result();
     }
     
-    public function checkquniqeusername($userId=null,$name,$flag){
+    public function checkquniqeusername($userId=null,$name=null,$flag=null){
         $this->db->select('name');
         $this->db->from(TBL_USER);
         $this->db->where('isDeleted', 0);

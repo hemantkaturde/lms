@@ -262,14 +262,14 @@
                                     <td>
                                     <table align="center" bgcolor="#ffffff" cellpadding="20" cellspacing="0" width="600" 
                                             style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #f0f0f0;">
-                                        <tr style="border-top: 4px solid #ff0000;">
+                                        <tr style="border-top: 4px solid #ca9331;">
                                         <td align="left" style="padding: 15px 20px 20px;">
                                         <table width="100%">
                                             <tr>
                                             <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
                                             <td align="right">
                                                 <span>Enquiry Number: '.$get_equiry_data->enq_number.'</span><br>
-                                                <span style="padding: 5px 0; display: block;">'.$get_equiry_data->createdDtm.'</span>
+                                                <span style="padding: 5px 0; display: block;">'.$get_equiry_data->enq_date.'</span>
                                             </td>
                                             </tr>
                                         </table>
@@ -316,7 +316,7 @@
                                         <td align="center" style="padding: 20px 40px;font-size: 16px;line-height: 1.4;color: #333;">
                                         <div>Note: For sales and marketing activity in July 2017 </div>
                                         <div><br></div>
-                                        <div style="background: #ff0000; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
+                                        <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
 
                                         <a href="'.base_url().'pay/'.$get_equiry_data->enq_number.'" class="btn btn-sm btn-primary float-right pay_now"
                                         data-amount="1000" data-id="1">Pay Now</a>
@@ -429,12 +429,27 @@
         }
        }
 
-
        public function razorthankyou(){
+         $enquiry_number =$this->uri->segment(2);    
+         $getEquirydata =  $this->enquiry_model->getEnquiryInfobyenquirynumber(trim($enquiry_number))[0];
+         $data['enq_fullname'] = $getEquirydata->enq_fullname;
+         $data['enq_id']  = $enquiry_number;
+         $this->load->view("payment/success",$data);
+       }
 
-         $this->load->view("payment/success");
+       public function paymentrecipt(){
+
+        $enquiry_number =$this->uri->segment(2);  
 
        }
+
+       public function newregistrationstudent(){
+         $data['enquiry_number'] =$this->uri->segment(2);
+
+         $this->load->view("admission/admissionform",$data);
+
+       }
+
 
 
 

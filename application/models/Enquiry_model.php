@@ -153,6 +153,8 @@ class Enquiry_model extends CI_Model
         $this->db->select('enq_number');
         $this->db->from(TBL_ENQUIRY);
         $this->db->where('isDeleted', 0);
+        $this->db->order_by('enq_id', 'DESC');
+        $this->db->limit(1);
         $query = $this->db->get();
         return $query->result();
     }
@@ -206,9 +208,21 @@ class Enquiry_model extends CI_Model
         $this->db->where('tbl_enquiry.enq_number', $id);
         $query = $this->db->get();
         return $query->result();
-
-
     }
+
+
+    public function getEnquiryInfobyenquirynumber($enquiry_number){
+
+        $this->db->select('*');
+        $this->db->from('tbl_enquiry');
+        $this->db->where('tbl_enquiry.isDeleted', 0);
+        //$this->db->where('tbl_enquiry.payment_status', 1);
+        $this->db->where('tbl_enquiry.enq_number', $enquiry_number);
+        $query = $this->db->get();
+        return $query->result();
+        
+    }
+
 
 }
 

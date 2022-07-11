@@ -75,7 +75,7 @@ $('body').on('click', '.pay_now', function(e) {
                 },
                 success: function(msg, textStatus, jqXHR) {
                     
-                    window.location.href = "<?php echo base_url();?>razorthankyou";
+                    window.location.href = "<?php echo base_url();?>razorthankyou/"+product_id;
                 }
             });
         },

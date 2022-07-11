@@ -117,7 +117,9 @@ $route['sendEnquiryLink'] = "enquiry/sendEnquiryLink";
 $route['sendPaymentLink'] = "enquiry/sendPaymentLink";
 $route['pay/(:any)'] = "enquiry/pay/$1";
 $route['razorpaysuccess'] = "enquiry/razorpaysuccess";
-$route['razorthankyou'] = "enquiry/razorthankyou";
+$route['razorthankyou/(:any)'] = "enquiry/razorthankyou/(:any)";
+$route['paymentrecipt/(:any)'] = "enquiry/paymentrecipt";
+$route['new-registration-student/(:any)'] = "enquiry/newregistrationstudent";
 
 
 
