@@ -61,8 +61,8 @@ $('#login-form #login_btn').click(function(e) {
                 dataType:'JSON',
                 success:function(result)
                 {
-                    console.log(result);
-                    if(result == 1)
+                    //console.log(result);
+                    if(result)
                     {
                         window.location.href=base_url+"dashboard";
                     }

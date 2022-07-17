@@ -111,7 +111,7 @@ class Login extends BaseController
                     $this->session->set_userdata($sessionArray);
                     //unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
                     $this->logrecord($process,$processFunction);
-                    echo true;
+                    echo 1;
                 }
             }
             else
