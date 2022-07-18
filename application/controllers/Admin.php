@@ -10,10 +10,7 @@ class Admin extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('login_model');
-        $this->load->model('user_model');
-        $this->load->model('course_model');
-        $this->load->model('student_model');
+        $this->load->model(array('login_model', 'enquiry_model','user_model','student_model','course_model','database'));
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         // $this->load->config('additional');
@@ -41,6 +38,7 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'ADMIN : Home page';
         $data['users'] = $this->user_model->userListingCount();
         $data['courses'] = $this->course_model->courseListingCount();
+        $data['enquries'] = $this->enquiry_model->enquiryListingCount();
         $data['students'] = $this->student_model->studentListingCount();
         $this->loadViews("dashboard", $this->global, $data , NULL);
     }

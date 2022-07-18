@@ -120,7 +120,7 @@ $route['razorpaysuccess'] = "enquiry/razorpaysuccess";
 $route['razorthankyou/(:any)'] = "enquiry/razorthankyou/(:any)";
 $route['paymentrecipt/(:any)'] = "enquiry/paymentrecipt";
 $route['new-registration-student/(:any)'] = "enquiry/newregistrationstudent";
-
+$route['newregistrationstudentdetails'] = "enquiry/newregistrationstudentdetails";
 
 
 // $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";

@@ -4594,6 +4594,9 @@ table.dataTable {
 }
 
 .error{
-
     color:red; 
+}
+
+.dashbord-short-link{
+   color: #fff;
 }

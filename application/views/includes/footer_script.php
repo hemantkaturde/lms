@@ -1,5 +1,9 @@
 <!-- Comman page javascript -->
 <script type="text/javascript">
+
+$(document).ready(function(){
+	  $(".select2_demo_1").select2();
+});
 	
  $(function() {
     $(".datepicker").datepicker({ 
@@ -383,7 +387,6 @@ $(document).on('change','.state',function(e){
                 success:function(data)  
                 {  
                      $('#editEnquiry').modal('show');
-					 console.log(data);
                      $('#full_name1').val(data[0].enq_fullname);  
                      $('#mobile_no1').val(data[0].enq_mobile);  
                      $('#alternate_mobile1').val(data[0].enq_mobile1);  
@@ -397,7 +400,7 @@ $(document).on('change','.state',function(e){
                      $('#city1').val(data[0].enq_city);
                      $('#enquiry_type1').val(data[0].enq_source);
                      $('#remarks1').val(data[0].enq_remark);
-
+					 
                      $('#enq_id').val(enq_id);
                 }  
            })

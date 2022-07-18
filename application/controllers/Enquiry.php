@@ -93,20 +93,34 @@
                 $this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
                 $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
-                $this->form_validation->set_rules('course', 'Course', 'trim|required');
+                //$this->form_validation->set_rules('course', 'Course', 'trim|required');
 
-
+                $courses_multipal = $this->security->xss_clean($this->input->post('course'));
+                if($courses_multipal){
+                    $courses = implode(',', $courses_multipal);
+                }else{
+                    $courses = '';
+                }
+               
                 if($this->form_validation->run() == FALSE){
+                 
                     $createenquiry_response['status'] = 'failure';
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>strip_tags(form_error('course')),'remarks'=>strip_tags(form_error('remarks')));
+                    //$createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>strip_tags(form_error('course')),'remarks'=>strip_tags(form_error('remarks')));
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')));
                 }else{
 
-                    $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry()[0];
-                    if($check_enquiry_auto_number->enq_number){
-                        $enq_number =$check_enquiry_auto_number->enq_number +  1;
+                    $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry();
+                    if($check_enquiry_auto_number){
+                        if($check_enquiry_auto_number[0]->enq_number){
+                            $enq_number =$check_enquiry_auto_number[0]->enq_number +  1;
+                        }else{
+                            $enq_number = 1;
+                        }
+
                     }else{
                         $enq_number = 1;
                     }
+                   
 
                     $data = array(
                         //'enq_number'=> DATE('Y').DATE('m').DATE('d').DATE('H').DATE('i').DATE('s'),
@@ -124,7 +138,7 @@
                         'enq_city'=>$this->input->post('city'),
                         'enq_source'=>$this->input->post('enquiry_type'),
                         'enq_remark' => $this->input->post('remarks'),
-                        'enq_course_id' => $this->input->post('course')
+                        'enq_course_id' => $courses
                     );
 
                     /*check If course name is unique*/
@@ -166,11 +180,21 @@
                 $this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
                 $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
-                $this->form_validation->set_rules('course', 'Course', 'trim|required');
+                //$this->form_validation->set_rules('course', 'Course', 'trim|required');
+
+                
+                $courses_multipal = $this->security->xss_clean($this->input->post('course'));
+                if($courses_multipal){
+                    $courses = implode(',', $courses_multipal);
+                }else{
+                    $courses = '';
+                }
 
                 if($this->form_validation->run() == FALSE){
                     $createenquiry_response['status'] = 'failure';
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'course'=>strip_tags(form_error('course')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
+                    //$createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'course'=>strip_tags(form_error('course')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
+
                 }else{
 
                     /*check If enquiry name is unique*/
@@ -188,7 +212,7 @@
                         'enq_city'=>$this->input->post('city'),
                         'enq_source'=>$this->input->post('enquiry_type'),
                         'enq_remark' => $this->input->post('remarks'),
-                        'enq_course_id' => $this->input->post('course')
+                        'enq_course_id' => $courses
                     );
                     
                     if($id == null)
@@ -237,9 +261,21 @@
         }
 
         public function sendPaymentLink(){
-            $post_submit = $this->input->post();
+            $post_submit = 22;
                 if($post_submit){
-                    $get_equiry_data =  $this->enquiry_model->getEnquiryInfo(trim($post_submit['id']))[0];
+                    $get_equiry_data =  $this->enquiry_model->getEnquiryInfo('22')[0];
+
+                     $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+                     $total_fees = 0;
+                     $course_name = '';
+                     $i = 1;
+                        foreach($course_ids as $id)
+                        {
+                            $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                            $total_fees += $get_course_fees[0]->course_total_fees;
+                            $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';    
+                        }
+                    $all_course_name = trim($course_name, ', '); 
 
                     $to = $get_equiry_data->enq_email;
                     $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
@@ -280,9 +316,9 @@
                                         <td align="center" style="padding: 20px; border-top: 1px solid #f0f0f0; background: #fafafa;,; ">
                                         <div>Total Course Fee:</div>
                                         <h2 style="margin: 10px 0; color: #333; font-weight: 500; font-size: 48px;">
-                                        ₹  '.$get_equiry_data->course_total_fees.'
+                                        ₹  '.$total_fees.'
                                         </h2>
-                                        <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;">For Abc company, Issued on 1 Sept, 2017<br>by XYZ company</div>
+                                        <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;"></div>
                                         </td>
                                         </tr>
 
@@ -290,23 +326,23 @@
                                         <td align="center" style="padding: 15px 20px 20px;">
                                         <table width="80%">
                                             <tr>
-                                            <td>Full Name</td>
+                                            <td><b>Full Name</b></td>
                                             <td>'.$get_equiry_data->enq_fullname.'</td>
                                             </tr>
 
                                             <tr>
-                                            <td>Mobile Number</td>
+                                            <td><b>Mobile Number</b></td>
                                             <td>'.$get_equiry_data->enq_mobile.'</td>
                                             </tr>
 
                                             <tr>
-                                            <td>Email id</td>
+                                            <td><b>Email id</b></td>
                                             <td>'.$get_equiry_data->enq_email.'</td>
                                             </tr>
 
                                             <tr>
-                                            <td>Course</td>
-                                            <td>'.$get_equiry_data->course_name.'</td>
+                                            <td><b>Course</b></td>
+                                            <td>'.$all_course_name.'</td>
                                             </tr>
                                         </table>
                                         </td>
@@ -314,7 +350,7 @@
 
                                         <tr>
                                         <td align="center" style="padding: 20px 40px;font-size: 16px;line-height: 1.4;color: #333;">
-                                        <div>Note: For sales and marketing activity in July 2017 </div>
+                                        <div> </div>
                                         <div><br></div>
                                         <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
 
@@ -375,7 +411,23 @@
                     $this->logrecord($process,$processFunction);
                     $this->global['pageTitle'] = 'Razorpay';
                     $data['enquiry_data'] = $this->enquiry_model->getEnquiryInfobyenqnumber(trim($id));
-                    $this->load->view("payment/razorpay", $data );
+
+                    $course_ids    =   explode(',',$data['enquiry_data'][0]->enq_course_id);
+                    $total_fees = 0;
+                    $course_name = '';
+                    $i = 1;
+                       foreach($course_ids as $id)
+                       {
+                           $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                           $total_fees += $get_course_fees[0]->course_total_fees;
+                           $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';    
+                       }
+                   $all_course_name = trim($course_name, ', '); 
+
+                   $data['course_fees'] =$total_fees;
+                   $data['course_name'] =$course_name;
+
+                $this->load->view("payment/razorpay", $data );
                }
                
             }else{
@@ -445,13 +497,38 @@
 
        public function newregistrationstudent(){
          $data['enquiry_number'] =$this->uri->segment(2);
-
          $this->load->view("admission/admissionform",$data);
-
        }
 
 
+       public function newregistrationstudentdetails(){
 
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+
+            $this->form_validation->set_rules('name', 'Full Name', 'trim|required');
+            $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric|greater_than[0]|exact_length[10]');
+            $this->form_validation->set_rules('alt_mobile', 'Alternate Mobile', 'trim');
+            $this->form_validation->set_rules('email', 'Email', 'trim|required');
+            $this->form_validation->set_rules('dateofbirth', 'Alternamte Email', 'trim');
+            $this->form_validation->set_rules('counsellerName', 'CounsellerName', 'trim');
+            $this->form_validation->set_rules('address', 'Address', 'trim');
+            $this->form_validation->set_rules('country', 'Country', 'trim');
+            $this->form_validation->set_rules('state', 'State', 'trim');
+            $this->form_validation->set_rules('city', 'City', 'trim');
+            $this->form_validation->set_rules('pin', 'Pin', 'trim');
+            $this->form_validation->set_rules('source_about', 'Source About', 'trim');
+            $this->form_validation->set_rules('source_ans', 'Source Ans', 'trim');
+            $this->form_validation->set_rules('new_student', 'New Student', 'trim');
+
+
+            
+
+        }
+
+
+       }
 
     }
 

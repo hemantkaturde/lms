@@ -30,14 +30,15 @@
                             <div class="label-rating">Enquiry Number : <?php echo $enquiry_data[0]->enq_number; ?> </div><br>
                             <div class="label-rating">Name : <?php echo $enquiry_data[0]->enq_fullname; ?> </div><br>
                             <div class="label-rating">Mobile Number : <?php echo $enquiry_data[0]->enq_mobile; ?></div>
+                            <div class="label-rating">Selected Courses : <?php echo $course_name; ?></div>
                         </div> <!-- rating-wrap.// -->
                     </figcaption>
 
                     <div class="bottom-wrap">
                         <a href="javascript:void(0)" class="btn btn-sm btn-primary float-right pay_now"
-                            data-amount="<?php echo $enquiry_data[0]->course_total_fees; ?>" data-id="<?php echo $enquiry_data[0]->enq_number; ?>">Pay Now</a>
+                            data-amount="<?php echo $course_fees; ?>" data-id="<?php echo $enquiry_data[0]->enq_number; ?>">Pay Now</a>
                         <div class="price-wrap h5">
-                            <span class="price-new">₹ <?php echo $enquiry_data[0]->course_total_fees; ?></span>
+                            <span class="price-new">₹ <?php echo $course_fees; ?></span>
                         </div> <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>
@@ -58,7 +59,7 @@ $('body').on('click', '.pay_now', function(e) {
     var product_id = $(this).attr("data-id");
     var options = {
         "key": "<?php echo RAZORPAYKEY; ?>",
-        "amount": (<?php echo $enquiry_data[0]->course_total_fees ?> * 100), // 2000 paise = INR 20
+        "amount": (<?php echo $course_fees ?> * 100), // 2000 paise = INR 20
         "name": "IICTN",
         "description": "Payment",
         "image": "https://iictn.in/assets/img/logos/iictn_lms.png",

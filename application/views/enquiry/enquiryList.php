@@ -151,9 +151,9 @@
                    <div class="form-group">
                      <label style="text-align: left;"  for="country">Course
                      </label>
-                     <div >
-                         <select class="form-control course" id="course" name="course">
-                            <option value="">Select Course</option>
+                     <div class="form-group">
+                         <!-- <select class="form-control course" id="course" name="course" multiple> -->
+                         <select class="form-control select2_demo_1" id="course" name="course[]"  placeholder="Select Courses"  required="" multiple style="width: 320px; margin-left: -15px;">
                             <?php foreach ($course_List as $key => $value) {?>
                                <option value="<?php echo $value['courseId']; ?>"><?php echo $value['course_name']; ?></option>
                             <?php } ?>
@@ -318,11 +318,14 @@
                      </div>
                    </div>
 
+                   <?php echo $value['course_name']; ?>
+
                    <div class="form-group">
                      <label style="text-align: left;"  for="country">Course
                      </label>
                      <div >
-                         <select class="form-control course" id="course" name="course">
+                         <!-- <select class="form-control course" id="course" name="course"> -->
+                         <select class="form-control select2_demo_1" id="course" name="course[]"  placeholder="Select Courses"  required="" multiple style="width: 320px; margin-left: -15px;">
                             <option value="">Select Course</option>
                             <?php foreach ($course_List as $key => $value) {?>
                                <option value="<?php echo $value['courseId']; ?>"><?php echo $value['course_name']; ?></option>
@@ -385,3 +388,5 @@
     </div>
   </div>
 </div>
+
+	 

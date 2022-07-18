@@ -242,9 +242,9 @@
                     <div>
                         <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
                     </div>
-                    <!-- <div class="admin-info" >
+                    <div class="admin-info" >
                         <div class="font-strong"> <?php echo $name; ?></div><small ><?php echo $role_text; ?></small>
-                    </div> -->
+                    </div>
                 </div>
                 <ul class="side-menu metismenu" >
                     <!-- <li class="heading" >DASHBOARD</li> -->
@@ -283,13 +283,13 @@
                     </li>
 
 
-                    <li>
+                    <li class="<?php if($pageUrl =='admissionListing'){ echo 'active';} ?>">
                         <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap" ></i>
                             <span class="nav-label">Admission</span>
                         </a>
                     </li>
                     
-                    <li>
+                    <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                         <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
                             <span class="nav-label">Staff</span>
                         </a>
@@ -307,25 +307,25 @@
                         </a>
                     </li>
 
-                    <li class="treeview" style="height: auto; " >
+                    <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing'){ echo 'active';} ?>"  style="height: auto; " >
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >User</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i> Users</a></li>
-                            <li><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i> Role</a></li>
+                            <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
+                            <li class="<?php if($pageUrl =='roleListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Role </span></a></li>
                         </ul>
                     </li>
 
-                    <li class="treeview" style="height: auto;">
+                    <li class="treeview <?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>" style="height: auto;">
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-cog" ></i> <span class="group-master">Settings</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right" ></i></span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i> Email SMTP</a></li>
-                            <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i  class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
+                            <li class="<?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>"><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i><span class="nav-label"> Email SMTP </span></a></li>
+                            <!-- <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i  class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li> -->
                         </ul>
                     </li>
 
