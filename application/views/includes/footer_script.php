@@ -152,7 +152,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Course Created!",
-							//text: "Success message sent!!",
+							//text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -231,7 +231,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Course Updated!",
-							text: "Success message sent!!",
+							text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -255,7 +255,7 @@ $(document).on('change','.state',function(e){
 
 				swal({
 					title: "Are you sure?",
-					text: "You will not be able to recover this imaginary file!",
+					text: "",
 					type: "warning",
 					showCancelButton: true,
 					closeOnClickOutside: false,
@@ -273,12 +273,12 @@ $(document).on('change','.state',function(e){
 									success: function(data, textStatus, jqXHR)
 									{
 										// if(data.status=='success'){
-											//swal("Deleted!", "User has been deleted.", "success");
+											//swal("Deleted!", "", "success");
 											//location.reload();
 										//}
 										swal({
 											title: "Deleted!",
-											text: "User has been deleted.",
+											text: "",
 											icon: "success",
 											button: "Ok",
 											},function(){ 
@@ -294,7 +294,7 @@ $(document).on('change','.state',function(e){
 							    })
 							}
 							else {
-					swal("Cancelled", "User deletion cancelled ", "error");
+					swal("Cancelled", " ", "error");
 					}
 				});
 	    });
@@ -357,7 +357,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Enquiry Created!",
-							//text: "Success message sent!!",
+							//text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -432,7 +432,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Enquiry Updated!",
-							text: "Success message sent!!",
+							text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -456,7 +456,7 @@ $(document).on('change','.state',function(e){
 
 				swal({
 					title: "Are you sure?",
-					text: "You will not be able to recover this file!",
+					text: "",
 					type: "warning",
 					showCancelButton: true,
 					closeOnClickOutside: false,
@@ -635,7 +635,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Course Type Created!",
-							//text: "Success message sent!!",
+							//text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -699,7 +699,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Course Updated!",
-							text: "Success message sent!!",
+							text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -723,7 +723,7 @@ $(document).on('change','.state',function(e){
 
 					swal({
 						title: "Are you sure?",
-						text: "You will not be able to recover this file!",
+						text: "",
 						type: "warning",
 						showCancelButton: true,
 						closeOnClickOutside: false,
@@ -746,7 +746,7 @@ $(document).on('change','.state',function(e){
 											//}
 											swal({
 												title: "Deleted!",
-												text: "User has been deleted.",
+												text: "",
 												icon: "success",
 												button: "Ok",
 												},function(){ 
@@ -826,7 +826,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "User Created!",
-							//text: "Success message sent!!",
+							//text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -894,7 +894,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "User Updated!",
-							text: "Success message sent!!",
+							text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -918,7 +918,7 @@ $(document).on('change','.state',function(e){
 
 			swal({
 				title: "Are you sure?",
-				text: "You will not be able to recover this file!",
+				text: "",
 				type: "warning",
 				showCancelButton: true,
 				closeOnClickOutside: false,
@@ -936,12 +936,12 @@ $(document).on('change','.state',function(e){
 					success: function(data, textStatus, jqXHR)
 					{
 						// if(data.status=='success'){
-												//swal("Deleted!", "User has been deleted.", "success");
+												//swal("Deleted!", "", "success");
 												//location.reload();
 											//}
 						swal({
 							title: "Deleted!",
-							text: "User has been deleted.",
+							text: "",
 							icon: "success",
 							button: "Ok",
 						},function(){ 
@@ -956,7 +956,7 @@ $(document).on('change','.state',function(e){
 					})
 				}
 				else {
-					swal("Cancelled", "User deletion cancelled ", "error");
+					swal("Cancelled", " ", "error");
 				}
 			});
 		});
@@ -1016,7 +1016,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Staff Created!",
-							//text: "Success message sent!!",
+							//text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -1060,7 +1060,7 @@ $(document).on('change','.state',function(e){
 				    {
 						swal({
 							title: "Staff Updated!",
-							text: "Success message sent!!",
+							text: "",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -1084,7 +1084,7 @@ $(document).on('change','.state',function(e){
 
 			swal({
 				title: "Are you sure?",
-				text: "You will not be able to recover this file!",
+				text: "",
 				type: "warning",
 				showCancelButton: true,
 				closeOnClickOutside: false,
@@ -1102,7 +1102,7 @@ $(document).on('change','.state',function(e){
 					success: function(data, textStatus, jqXHR)
 					{
 						// if(data.status=='success'){
-												//swal("Deleted!", "User has been deleted.", "success");
+												//swal("Deleted!", "", "success");
 												//location.reload();
 											//}
 						swal({
@@ -1122,7 +1122,7 @@ $(document).on('change','.state',function(e){
 					})
 				}
 				else {
-					swal("Cancelled", "User deletion cancelled ", "error");
+					swal("Cancelled", " ", "error");
 				}
 			});
 		});

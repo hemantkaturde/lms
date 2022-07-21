@@ -93,11 +93,11 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="books">Books
+                     <label style="text-align: left;"  for="books">Books <span class="required">*</span>
                      </label>
                      <div >
                           <input type="radio" name="course_books" id="course_books" value="1"> Yes
-                          <input type="radio" name="course_books" id="course_books" value="0" style="margin-left:20px;"> No
+                          <input type="radio" name="course_books" id="course_books" value="0" style="margin-left:20px;" checked> No
                      </div>
                      <p class="error course_books_error"></p>
 
@@ -209,7 +209,7 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="books">Books
+                     <label style="text-align: left;"  for="books">Books <span class="required">*</span>
                      </label>
                      <div >
                           <input type="radio" class="radio_yes" name="course_books" id="course_books1" value="1"> Yes

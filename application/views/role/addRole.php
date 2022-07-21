@@ -114,7 +114,7 @@
                                     <!-- ENTER BUTTON HERE -->
                                     <!-- <input type="submit" class="btn btn-primary" value="SEND" /> -->
                                     <input type="button" onclick="add_role()" class="btn btn-primary" value="SUBMIT" />
-                                    <input type="reset" class="btn btn-default" value="CANCEL" />
+                                    <input type="button" onclick="location.href='<?php echo base_url().'roleListing'?>'" class="btn btn-default" value="CANCEL" />
                                 </div>
                             </div>
                             <div class="col-md-4">

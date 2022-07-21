@@ -92,25 +92,25 @@
                      <label style="text-align: left;"  for="email">Email<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="email" id="email" name="email"  placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="email" id="email" name="email"  placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
                         <p class="error email_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="password">Password
+                     <label style="text-align: left;"  for="password">Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="password"  placeholder="Enter Password" name="password" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="password"  placeholder="Enter Password" name="password" class="form-control col-md-12 col-xs-12">
                         <p class="error password_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="confirm_password">Confirm Password
+                     <label style="text-align: left;"  for="confirm_password">Confirm Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="confirm_password"  placeholder="Enter Confirm Password" name="confirm_password" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="confirm_password"  placeholder="Enter Confirm Password" name="confirm_password" class="form-control col-md-12 col-xs-12">
                         <p class="error confirm_password_error"></p>
                      </div>
                   </div>
@@ -119,7 +119,7 @@
                      <label style="text-align: left;"  for="mobile">Telephone No<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="mobile" name="mobile" placeholder="Enter 10 Digit Mobile Number" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="mobile" name="mobile" placeholder="Enter 10 Digit Mobile Number" class="form-control col-md-12 col-xs-12">
                         <p class="error mobile_error"></p>
                      </div>
                    </div>
@@ -182,25 +182,25 @@
                      <label style="text-align: left;"  for="email1">Email<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="email" id="email1" name="email1"  placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="email" id="email1" name="email1"  placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
                         <p class="error email1_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="password1">Password
+                     <label style="text-align: left;"  for="password1">Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="password1"  placeholder="Enter Password" name="password1" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="password1"  placeholder="Enter Password" name="password1" class="form-control col-md-12 col-xs-12">
                         <p class="error password1_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="confirm_password1">Confirm Password
+                     <label style="text-align: left;"  for="confirm_password1">Confirm Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="confirm_password1"  placeholder="Enter Confirm Password" name="confirm_password1" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="confirm_password1"  placeholder="Enter Confirm Password" name="confirm_password1" class="form-control col-md-12 col-xs-12">
                         <p class="error confirm_password1_error"></p>
                      </div>
                   </div>
@@ -209,7 +209,7 @@
                      <label style="text-align: left;"  for="mobile1">Telephone No<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="mobile1" name="mobile1" placeholder="Enter 10 Digit Mobile Number" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="mobile1" name="mobile1" placeholder="Enter 10 Digit Mobile Number" class="form-control col-md-12 col-xs-12">
                         <p class="error mobile1_error"></p>
                      </div>
                    </div>

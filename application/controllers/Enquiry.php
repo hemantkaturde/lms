@@ -261,11 +261,14 @@
         }
 
         public function sendPaymentLink(){
-            $post_submit = 22;
+            $post_submit = $this->input->post();
+
                 if($post_submit){
-                    $get_equiry_data =  $this->enquiry_model->getEnquiryInfo('22')[0];
+                    $enq_id =$post_submit['id'];
+                    $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
                      $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+                    
                      $total_fees = 0;
                      $course_name = '';
                      $i = 1;
@@ -383,10 +386,21 @@
                                 </table>
                                 </body>
                         </html>';
-                            
-                    $sendmail= $this->mail->sendMail($get_equiry_data->enq_fullname,$to,$Subject,$Body);
 
-                    if($sendmail){
+                        // $to = "hemantkaturde123@gmail.com";
+                        // $subject = "This is subject";
+                        
+                        // $message = "<b>This is HTML message.</b>";
+                        // $message .= "<h1>This is headline.</h1>";
+                        
+                        $header = "From: IICTN-Payment <enquiry@iictn.in> \r\n";
+                        //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                        $header .= "MIME-Version: 1.0\r\n";
+                        $header .= "Content-type: text/html\r\n";
+                        
+                        $retval = mail ($to,$Subject,$Body,$header);
+            
+                    if($retval){
                         $process = 'Enquiry Link Sent';
                         $processFunction = 'Enquiry/sendEnquiryLink';
                         $this->logrecord($process,$processFunction);

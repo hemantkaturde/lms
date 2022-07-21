@@ -70,7 +70,32 @@
 
                 $createcourse_response = array();
 
-                $total_fess_cost = $this->input->post('fees') + $this->input->post('certificate_cost') + $this->input->post('one_time_admission_fees') + $this->input->post('kit_cost') + $this->input->post('kit_cost');
+                if($this->input->post('fees')){
+                    $fess  = $this->input->post('fees');
+                }else{
+                    $fess  = 0;
+                }
+
+                if($this->input->post('certificate_cost')){
+                    $certificate_cost  = $this->input->post('certificate_cost');
+                }else{
+                    $certificate_cost  = 0;
+                }
+
+                if($this->input->post('one_time_admission_fees')){
+                    $one_time_admission_fees  = $this->input->post('one_time_admission_fees');
+                }else{
+                    $one_time_admission_fees  = 0;
+                }
+
+
+                if($this->input->post('kit_cost')){
+                    $kit_cost  = $this->input->post('kit_cost');
+                }else{
+                    $kit_cost  = 0;
+                }
+
+                $total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
 
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
@@ -106,7 +131,7 @@
 
                     if($check_uniqe){
                         $createcourse_response['status'] = 'failure';
-                        $createcourse_response['error'] = array('course_name'=>'Couse Name Alreday Exits', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                        $createcourse_response['error'] = array('course_name'=>'Course Name Already Exist', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
                     }else{
                         $saveCoursedata = $this->course_model->saveCoursedata('',$data);
                         if($saveCoursedata){
@@ -125,8 +150,35 @@
             if(!empty($post_submit)){
 
                 $createcourse_response = array();
+                $createcourse_response = array();
 
-                $total_fess_cost = $this->input->post('fees') + $this->input->post('certificate_cost') + $this->input->post('one_time_admission_fees') + $this->input->post('kit_cost') + $this->input->post('kit_cost');
+                if($this->input->post('fees')){
+                    $fess  = $this->input->post('fees');
+                }else{
+                    $fess  = 0;
+                }
+
+
+                if($this->input->post('certificate_cost')){
+                    $certificate_cost  = $this->input->post('certificate_cost');
+                }else{
+                    $certificate_cost  = 0;
+                }
+
+                if($this->input->post('one_time_admission_fees')){
+                    $one_time_admission_fees  = $this->input->post('one_time_admission_fees');
+                }else{
+                    $one_time_admission_fees  = 0;
+                }
+
+
+                if($this->input->post('kit_cost')){
+                    $kit_cost  = $this->input->post('kit_cost');
+                }else{
+                    $kit_cost  = 0;
+                }
+
+                $total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
 
 
                 $data = array(
@@ -169,7 +221,7 @@
                     
                     if($check_uniqe){
                         $createcourse_response['status'] = 'failure';
-                        $createcourse_response['error'] = array('course_name'=>'Couse Name Alreday Exits', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                        $createcourse_response['error'] = array('course_name'=>'Course Name Already Exist', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
                     }else{
                         $saveCoursedata = $this->course_model->saveCoursedata($courseId,$data);
                         if($saveCoursedata){
@@ -259,7 +311,7 @@
 
                        if($check_uniqe){
                            $createcoursetype_response['status'] = 'failure';
-                           $createcoursetype_response['error'] = array('course_type_name'=>'Couse Type Alreday Exits');
+                           $createcoursetype_response['error'] = array('course_type_name'=>'Course Type Already Exist');
                        }else{
                            $saveCoursetypedata = $this->course_model->saveCoursetypedata('',$data);
                            if($saveCoursetypedata){
@@ -332,7 +384,7 @@
                     
                     if($check_uniqe){
                         $update_response['status'] = 'failure';
-                        $update_response['error'] = array('course_type_name_1'=>'Couse Type Alreday Exits');
+                        $update_response['error'] = array('course_type_name_1'=>'Course Type Already Exist');
                     }else{
                         $saveCoursetypedata = $this->course_model->saveCoursetypedata($coursetypeid,$data);
                         if($saveCoursetypedata){
