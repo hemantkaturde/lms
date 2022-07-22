@@ -413,6 +413,7 @@
         }
 
 
+    
         public function pay($id){
             if($id){
                /* check if payment is done or not*/

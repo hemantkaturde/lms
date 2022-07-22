@@ -109,9 +109,12 @@ define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 
 
-//rzp_test_MuaQbngB5NBp7h
+if($_SERVER['HTTP_HOST']=='localhost'){
+    define('SERVER','http://localhost/lms_2/');
+}else{
+    define('SERVER','https://iictn.in/');
+}
 
-//a7TGyUNrmBIb67M4WZBVLkM0
 
 
 
