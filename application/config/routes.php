@@ -78,9 +78,13 @@ $route['fetchStaff'] = 'admin/fetchStaff';
 $route['roleListing'] = "role/roleListing";
 $route['addRole'] = "role/addRole";
 $route['addNewRole'] = "role/addNewRole";
+
+
+$route['fetchrolelisting'] = "role/fetchrolelisting";
+$route['createRole'] = "role/createRole";
 $route['editRole/(:num)'] = "role/editRole/$1";
-$route['editRoleRecord/(:any)'] = "role/editRoleRecord/$1";
-$route['deleteRole/(:any)'] = "role/deleteRole/$1";
+$route['editRolerecord/(:num)'] = "role/editRolerecord/$1";
+$route['deleteRole'] = "role/deleteRole";
 
 
 /*********** Masters CONTROLLER ROUTES *******************/

@@ -25,21 +25,25 @@ if(!empty($roleInfo))
                 <div class="ibox-title">Add Role</div>
             </div>
             <div class="ibox-body">
-                <!-- <form role="form" id="addUser" action="<?php echo base_url() ?>editRoleRecord" method="post" role="form"> -->
+                   <?php
+                        $attributes = array("name"=>"role_form","id"=>"role_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+                        echo form_open("", $attributes);
+                        
+                    ?>
                 <form role="form" id="role_form">
                     <div class="row">
                         <!-- <div class="col-md-12"> -->
                             <div class="col-md-4">
                                 <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Role</h3>
+                            <h3 class="box-title">Edit Role</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
                             <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="role">Role</label>
-                                        <input type="text" class="form-control required" id="role" name="role" value="<?php echo $role; ?>"
+                                        <input type="text" class="form-control" id="role" name="role" value="<?php echo $role; ?>"
                                             maxlength="255">
                                         <input type="hidden" name="roleId" id="roleId" value="<?php echo $roleId ?>">
                                     </div>
@@ -132,22 +136,13 @@ if(!empty($roleInfo))
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <!-- ENTER BUTTON HERE -->
-                                    <input type="button" onclick="update_role(<?php echo $roleId; ?>)" class="btn btn-primary" value="UPDATE" />
-                                    <input type="reset" class="btn btn-default" value="CANCEL" />
+                                    <input type="button" id="editRole" class="btn btn-primary" value="UPDATE" />
+                                    <input type="button" onclick="location.href='<?php echo base_url().'roleListing'?>'" class="btn btn-default" value="CANCEL" />
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- </div> -->
                     </div>
                 </form>
             </div>
         </div>
-
+        <?php echo form_close(); ?>
     </div>
-<script src="<?php echo base_url(); ?>assets/js/addUser.js" type="text/javascript"></script>

@@ -150,7 +150,6 @@
             if(!empty($post_submit)){
 
                 $createcourse_response = array();
-                $createcourse_response = array();
 
                 if($this->input->post('fees')){
                     $fess  = $this->input->post('fees');

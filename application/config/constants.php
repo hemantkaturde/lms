@@ -104,8 +104,6 @@ define('EMAIL_PASSWORD','hemant@12061994');	// Your email password
 define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
 define('FROM_EMAIL','hemantkaturde123@gmail.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
-
-
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 
 

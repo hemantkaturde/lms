@@ -22,7 +22,6 @@ var myDrop = new drop({
     selector:  '#myMulti'
 });
 
-
 $(document).on('change','#country',function(e){  
 	e.preventDefault();
 	//$(".loader_ajax").show();
@@ -770,7 +769,7 @@ $(document).on('change','.state',function(e){
 </script>
 <?php } ?>
 
-<?php //if($pageTitle=='Users'){?>
+<?php if($pageTitle=='User List'){?>
 	<script type="text/javascript">
 		$(document).ready(function() {
 				var dt = $('#userList').DataTable({
@@ -866,51 +865,51 @@ $(document).on('change','.state',function(e){
                      $('#userId').val(userId);
                 }  
            })
-    });
+        });
 
-	$(document).on('click','#update_user',function(e){
-			e.preventDefault();
-			//$(".loader_ajax").show();
-			var formData = new FormData($("#update_user_form")[0]);
-			var id = $("#userId").val();
-			$.ajax({
-				url : "<?php echo base_url();?>updateUser/"+id,
-				type: "POST",
-				data : formData,
-				cache: false,
-		        contentType: false,
-		        processData: false,
-				success: function(data, textStatus, jqXHR)
-				{
-					var fetchResponse = $.parseJSON(data);
-					if(fetchResponse.status == "failure")
-				    {
-				    	$.each(fetchResponse.error, function (i, v)
-		                {
-		                    $('.'+i+'_error').html(v);
-		                });
-				    }
-					else if(fetchResponse.status == 'success')
-				    {
-						swal({
-							title: "User Updated!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								$("#popup_modal_md").hide();
-								window.location.href = "<?php echo base_url().'userListing'?>";
-						});						
-				    }
-					
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-			    {
-		
-			    }
-			});
-			return false;
-	});
+		$(document).on('click','#update_user',function(e){
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				var formData = new FormData($("#update_user_form")[0]);
+				var id = $("#userId").val();
+				$.ajax({
+					url : "<?php echo base_url();?>updateUser/"+id,
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "User Updated!",
+								text: "",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									$("#popup_modal_md").hide();
+									window.location.href = "<?php echo base_url().'userListing'?>";
+							});						
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+			
+					}
+				});
+				return false;
+		});
 
 		$(document).on('click','.delete_user',function(e){
 			var elemF = $(this);
@@ -960,8 +959,11 @@ $(document).on('change','.state',function(e){
 				}
 			});
 		});
-	
-		// Staff 
+    </script>
+	<?php } ?>
+
+<?php if($pageTitle=='Staff List'){?>
+	<script type="text/javascript">
 		$(document).ready(function() {
 				var dt = $('#staffList').DataTable({
 					"columnDefs": [ 
@@ -1076,56 +1078,294 @@ $(document).on('change','.state',function(e){
 			    }
 			});
 			return false;
-	});
+	    });
 
-	$(document).on('click','.delete_staff',function(e){
-			var elemF = $(this);
-			e.preventDefault();
+		$(document).on('click','.delete_staff',function(e){
+				var elemF = $(this);
+				e.preventDefault();
 
-			swal({
-				title: "Are you sure?",
-				text: "",
-				type: "warning",
-				showCancelButton: true,
-				closeOnClickOutside: false,
-				confirmButtonClass: "btn-sm btn-danger",
-				confirmButtonText: "Yes, delete it!",
-				cancelButtonText: "No, cancel plz!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			}, function(isConfirm) {
-				if (isConfirm) {
-					$.ajax({
-					url : "<?php echo base_url();?>deleteUser",
-					type: "POST",
-					data : 'id='+elemF.attr('data-id'),
-					success: function(data, textStatus, jqXHR)
-					{
-						// if(data.status=='success'){
-												//swal("Deleted!", "", "success");
-												//location.reload();
-											//}
-						swal({
-							title: "Deleted!",
-							text: "Staff has been deleted.",
-							icon: "success",
-							button: "Ok",
-						},function(){ 
-							$("#popup_modal_md").hide();
-								window.location.href = "<?php echo base_url().'staffListing'?>";
-							});		
-						},
-						error: function (jqXHR, textStatus, errorThrown)
+				swal({
+					title: "Are you sure?",
+					text: "",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+						$.ajax({
+						url : "<?php echo base_url();?>deleteUser",
+						type: "POST",
+						data : 'id='+elemF.attr('data-id'),
+						success: function(data, textStatus, jqXHR)
 						{
-										//$(".loader_ajax").hide();
-						}
-					})
-				}
-				else {
-					swal("Cancelled", " ", "error");
-				}
-			});
+							// if(data.status=='success'){
+													//swal("Deleted!", "", "success");
+													//location.reload();
+												//}
+							swal({
+								title: "Deleted!",
+								text: "Staff has been deleted.",
+								icon: "success",
+								button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+									window.location.href = "<?php echo base_url().'staffListing'?>";
+								});		
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+											//$(".loader_ajax").hide();
+							}
+						})
+					}
+					else {
+						swal("Cancelled", " ", "error");
+					}
+				});
 		});
 	</script>
+<?php } ?>
 
-<?php //} ?>
+
+
+<?php
+if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit Role'){?>
+	<script type="text/javascript">
+
+	$('#clientymodule').click(function() {
+        if ($(this).is(':checked')) {
+		    $('#clientpage').prop('checked', true);
+			$('#clientadd').prop('checked', true);
+			$('#clientedit').prop('checked', true);
+			$('#clientdelete').prop('checked', true);
+		}else{
+			$('#clientpage').prop('checked', false);
+			$('#clientadd').prop('checked', false);
+			$('#clientedit').prop('checked', false);
+			$('#clientdelete').prop('checked', false);
+		}
+	});
+	
+	$('#clientpage,#clientadd,#clientedit,#clientdelete').click(function() {
+	    if ($('#clientpage').is(':checked') && $('#clientadd').is(':checked') && $('#clientedit').is(':checked') && $('#clientdelete').is(':checked')) {
+			$('#clientymodule').prop('checked', true);
+		}
+	});
+
+    $(document).ready(function() {
+            var dt = $('#view_roleList').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "20%", "targets": 0 },
+	                 { "width": "15%", "targets": 1 },
+	                 { "width": "8%", "targets": 2 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Course Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>/fetchrolelisting",
+                    type: "post",
+	            },
+
+	            // "columns": [
+	                // { "data": "course_name" },
+	                // { "data": "ttype" },
+	                // { "data": "user_full_name" },
+	                // { "data": "user_mobile_no" }
+	                // { "data": "driver_full_name" },
+	                // { "data": "driver_mobile_no" },
+	                // { "data": "source_address" },                
+	                // { "data": "dest_address" }, 
+				    // { "data": "journey_status" },
+					// { "data": "trip_flag" },  
+					// { "data": "gross_bill" },              
+	                // { "data": "dial4242_commision_charge" },
+					// { "data": "amount_paid" },
+	                // { "data": "action" },               
+	            // ],
+
+	        });
+	});
+
+	$(document).on('click','#save_role',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#role_form")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>createRole",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Role Created!",
+							//text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'roleListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+	$(document).on('click','#editRole',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#role_form")[0]);
+			var id = $("#roleId").val();
+			$.ajax({
+				url : "<?php echo base_url();?>editRolerecord/"+id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Role Updated!",
+							text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'roleListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+		
+			    }
+			});
+			return false;
+	});
+
+	$(document).on('click','.deleteRole',function(e){
+
+				var elemF = $(this);
+				e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deleteRole",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											// if(data.status=='success'){
+												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// location.reload();
+											//}
+											const obj = JSON.parse(data);
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'roleListing'?>";
+												});	
+										  }else if(obj.status=='linked') {
+												swal({
+													title: "Role Already In Use",
+													text: "",
+													icon: "error",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'roleListing'?>";
+												});	
+										  }else{
+											    swal({
+													title: "Not Deleted",
+													text: "",
+													icon: "error",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'roleListing'?>";
+												});	
+										  }
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											//$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						}
+					});
+	});
+
+   </script>
+<?php } ?>
+
+
+
+

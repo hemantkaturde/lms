@@ -48,7 +48,7 @@ class Admin extends BaseController
      */
     function userListing()
     {          
-            $this->global['pageTitle'] = 'ADMIN : User List';
+            $this->global['pageTitle'] = 'User List';
             $data['role'] = $this->user_model->getUserRoles();
             $this->loadViews("master/users", $this->global, $data, NULL);
     }
@@ -179,10 +179,8 @@ class Admin extends BaseController
             }else{
 
                 /*check If user name & email is unique*/
-                
-                        $check_uniqe =  $this->user_model->checkquniqeusername($userId, trim($this->input->post('name1')),$this->input->post('user_flag1'));
-                        $check_uniqe1 =  $this->user_model->checkEmailExists($userId, trim($this->input->post('email1')),$this->input->post('user_flag1'));
-                
+                $check_uniqe =  $this->user_model->checkquniqeusername($userId, trim($this->input->post('name1')),$this->input->post('user_flag1'));
+                $check_uniqe1 =  $this->user_model->checkEmailExists($userId, trim($this->input->post('email1')),$this->input->post('user_flag1'));
                 
                 if($check_uniqe){
                     $createuser_response['status'] = 'failure';

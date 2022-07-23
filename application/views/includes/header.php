@@ -307,17 +307,17 @@
                         </a>
                     </li>
 
-                    <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing'){ echo 'active';} ?>"  style="height: auto; " >
+                    <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >User</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
                             <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
-                            <li class="<?php if($pageUrl =='roleListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Role </span></a></li>
+                            <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Role </span></a></li>
                         </ul>
                     </li>
-
+ 
                     <li class="treeview <?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>" style="height: auto;">
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-cog" ></i> <span class="group-master">Settings</span>
