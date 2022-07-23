@@ -345,6 +345,28 @@ class Course_model extends CI_Model
         return $query->result();
     }
 
+    public function checkRelation($id){
+        $this->db->select('*');
+        $this->db->from(TBL_COURSE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('course_type_id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    
+    }
+
+    public function checkRelationcourse($id){
+        $this->db->select('*');
+        $this->db->from(TBL_ENQUIRY);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('enq_course_id', $id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+
+
 }
 
 ?>

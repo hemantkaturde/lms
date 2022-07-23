@@ -103,11 +103,18 @@
                 }
                
                 if($this->form_validation->run() == FALSE){
+
+                    if($this->input->post('course')){
+                        $createenquiry_response['status'] = 'failure';
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')));
+                    }else{
+                        $createenquiry_response['status'] = 'failure';
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')));
+                    }
                  
-                    $createenquiry_response['status'] = 'failure';
-                    //$createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>strip_tags(form_error('course')),'remarks'=>strip_tags(form_error('remarks')));
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')));
                 }else{
+
+                    if($this->input->post('course')){
 
                     $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry();
                     if($check_enquiry_auto_number){
@@ -151,9 +158,15 @@
                         $saveEnquirydata = $this->enquiry_model->saveEnquirydata('',$data);
                         if($saveEnquirydata){
                             $createenquiry_response['status'] = 'success';
-                            $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
+                            $createenquiry_response['error'] = array('full_name'=>'', 'mobile_no'=>'', 'alternate_mobile'=>'', 'email'=>'','alternamte_email'=>'','qualification'=>'','purpose'=>'','enq_date'=>'','country'=>'','state'=>'','city'=>'','remarks'=>'');
                         }
                     }
+                  }else{
+                    
+                    $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['error'] = array('full_name'=>'', 'mobile_no'=>'', 'alternate_mobile'=>'', 'email'=>'','alternamte_email'=>'','qualification'=>'','purpose'=>'','enq_date'=>'','country'=>'','state'=>'','city'=>'','city'=>'course Required','remarks'=>'');
+            
+                  }
                 }
         
                 echo json_encode($createenquiry_response);
@@ -261,6 +274,7 @@
         }
 
         public function sendPaymentLink(){
+
             $post_submit = $this->input->post();
 
                 if($post_submit){
@@ -357,7 +371,7 @@
                                         <div><br></div>
                                         <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
 
-                                        <a href="'.SERVER.'payment/pay.php?enq='.$get_equiry_data->enq_number.'" class="btn btn-sm btn-primary float-right pay_now"
+                                        <a href="https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'" class="btn btn-sm btn-primary float-right pay_now"
                                         data-amount="1000" data-id="1">Pay Now</a>
                                         
                                         </div>
@@ -398,7 +412,7 @@
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
                         
-                        $retval = mail ($to,$Subject,$Body,$header);
+                        $retval = mail($to,$Subject,$Body,$header);
             
                     if($retval){
                         $process = 'Enquiry Link Sent';

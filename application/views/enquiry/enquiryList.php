@@ -26,11 +26,13 @@
                 <table id="view_enquirylist" class="table table-bordered">
                     <thead>
                                 <tr>
-                                    <th>Enquiry Number</th>
+                                    <th>Enquiry No.</th>
+                                    <th>Enquiry Date</th>
                                     <th>Name</th>
                                     <th>Mobile No</th>
                                     <th>Email</th>
-                                    <th>Enquiry Date</th>
+                                    <th>Status</th>
+                                    <th>Fees</th>
                                     <th>Action</th>
                                 </tr>
                     </thead>
@@ -317,17 +319,16 @@
                         <p class="error alternamte_email_error"></p>
                      </div>
                    </div>
-
-                   <?php echo $value['course_name']; ?>
-
+                   
                    <div class="form-group">
                      <label style="text-align: left;"  for="country">Course
                      </label>
                      <div >
                          <!-- <select class="form-control course" id="course" name="course"> -->
-                         <select class="form-control select2_demo_1" id="course" name="course[]"  placeholder="Select Courses"  required="" multiple style="width: 320px; margin-left: -15px;">
+                         <select class="form-control select2_demo_1 c1" id="course" name="course[]"  placeholder="Select Courses"  required="" multiple style="width: 320px; margin-left: -15px;">
                             <option value="">Select Course</option>
-                            <?php foreach ($course_List as $key => $value) {?>
+                            <?php foreach ($course_List as $key => $value) {
+                              ?>
                                <option value="<?php echo $value['courseId']; ?>"><?php echo $value['course_name']; ?></option>
                             <?php } ?>
                         </select>

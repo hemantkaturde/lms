@@ -7,7 +7,6 @@ $sql = "SELECT enq_id,enq_fullname FROM tbl_enquiry where enq_id='".$id."' and i
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
-
 $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
 
 if ($conn->query($sql) === TRUE) {
@@ -15,7 +14,6 @@ if ($conn->query($sql) === TRUE) {
 } else {
   //echo "Error updating record: " . $conn->error;
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -28,30 +26,29 @@ if ($conn->query($sql) === TRUE) {
 </head>
 
 <body class="">
-    <br><br><br><br>
-    <article class="bg-secondary mb-3" style="background-color:#ca9331 !important">
+    <article class="bg-secondary mb-3" style="background-color:#fff !important">
         <div class="card-body text-center">
-            <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></br>
+            <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
 
-            <h2 class="text-white">!! Thank You for Joining IICTN !!<br></h2>
+            <h2 class="text-black"><b>!! Thank You for Joining IICTN !!</b><br></h2>
             <br>
             <p>Dear <b><?=$row['enq_fullname'];?></b>,</p>
             <p>Please check your Inbox / Spam on your Email with</p>
             <p>The subject name IICTN RECEIPT, We have attached the copy of your</p>
             <!-- <p>Payment Receipt</p> -->
-            <p>Payment Receipt : </p>
-            <p><a class="" target="_blank"  href="<?php echo SERVER.'paymentrecipt/'.$enq_id; ?>">Download Payment Receipt </a></p>
+            <p><b>Payment Receipt : </b></p>
+            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt/'.$enq_id; ?>">Download Payment Receipt </a></p>
 
-            <p>Addmission Form : </p>
-            <p><a class="" target="_blank"  href="<?php echo SERVER.'new-registration-student/'.$enq_id; ?>">Admission Form Link </a></p>
+            <p><b>Addmission Form : </b></p>
+            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student/'.$enq_id; ?>">Admission Form Link </a></p>
 
             <p>Kindly contact your councillors for more Details</p>
             <!-- <p><a class="btn btn-warning" target="_blank" href="https://doctor.iictn.org/"> <br> -->
-                <p>Thanks & Regards</p>
+                <p><b>Thanks & Regards</b></p>
                 <p><h2><a class="" target="_blank" href="https://doctor.iictn.org/"><b style="color:black">IICTN</b></a></h2></p>
             <i class="fa fa-window-restore "></i></a></p>
         </div>
-        <br><br><br>
+        
     </article>
 </body>
 

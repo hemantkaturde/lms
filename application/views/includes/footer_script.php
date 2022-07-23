@@ -275,15 +275,40 @@ $(document).on('change','.state',function(e){
 											//swal("Deleted!", "", "success");
 											//location.reload();
 										//}
-										swal({
-											title: "Deleted!",
-											text: "",
-											icon: "success",
-											button: "Ok",
-											},function(){ 
-												$("#popup_modal_sm").hide();
-												window.location.href = "<?php echo base_url().'courselisting'?>";
-										});		
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													swal({
+														title: "Deleted!",
+														text: "",
+														icon: "success",
+														button: "Ok",
+														},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'courselisting'?>";
+													});	
+											}else if(obj.status=='linked'){
+													swal({
+															title: "Course Alreday In use!",
+															text: "",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																$("#popup_modal_sm").hide();
+																window.location.href = "<?php echo base_url().'courselisting'?>";
+													});	
+											}else{
+
+												swal({
+														title: "Not Deleted!",
+														text: "",
+														icon: "success",
+														button: "Ok",
+														},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'courselisting'?>";
+													});	
+											}	
 
 									},
 									error: function (jqXHR, textStatus, errorThrown)
@@ -307,12 +332,14 @@ $(document).on('change','.state',function(e){
             var dt = $('#view_enquirylist').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "12%", "targets": 0 },
-	                 { "width": "30%", "targets": 1 },
-	                 { "width": "10%", "targets": 2 },
-	                 { "width": "15%", "targets": 3 },
-					 { "width": "10%", "targets": 4 },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+	                 { "width": "20%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "35%", "targets": 7 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -399,7 +426,13 @@ $(document).on('change','.state',function(e){
                      $('#city1').val(data[0].enq_city);
                      $('#enquiry_type1').val(data[0].enq_source);
                      $('#remarks1').val(data[0].enq_remark);
-					 
+
+					 var values=data[0].enq_course_id;
+					 $.each(values.split(","), function(i,e){
+							$(".c1 option[value='" + e + "']").prop("selected", true);
+					 });
+
+                     //$("#dropdownState").append(appenddata1);
                      $('#enq_id').val(enq_id);
                 }  
            })
@@ -529,7 +562,6 @@ $(document).on('change','.state',function(e){
 				});
 	});
 
-
 	$(document).on('click','.send_payment_link',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -576,7 +608,6 @@ $(document).on('change','.state',function(e){
 					}
 				});
 	});
-
 
 </script> 
 <?php } ?>
@@ -743,7 +774,9 @@ $(document).on('change','.state',function(e){
 												// swal("Deleted!", "Course Type has been deleted.", "success");
 												// location.reload();
 											//}
-											swal({
+											const obj = JSON.parse(data);
+											if(obj.status=='success'){
+												swal({
 												title: "Deleted!",
 												text: "",
 												icon: "success",
@@ -752,7 +785,29 @@ $(document).on('change','.state',function(e){
 													$("#popup_modal_sm").hide();
 													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
 											});	
+											}else if(obj.status=='linked'){
+												swal({
+												title: "Course Already In Use",
+												text: "",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+											});	
+											}else{
 
+												swal({
+												title: "Not Deleted",
+												text: "",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+											});	
+											}
+											
 
 										},
 										error: function (jqXHR, textStatus, errorThrown)

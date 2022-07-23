@@ -71,7 +71,7 @@
               ?>
 
             <div class="col-md-6 justify-content-center align-items-center">
-                <figure class="card card-product justify-content-center align-items-center">
+                <figure class="card card-product justify-content-center align-items-center" style="border: 1px solid #212529; background: #fff">
                     <div class="img-wrap"><img src="https://iictn.in/assets/img/logos/iictn_lms.png">
                     </div>
                     <figcaption class="info-wrap ">
@@ -84,11 +84,11 @@
                                     </div> <!-- rating-wrap.// -->
                     </figcaption><br>
 
-                    <div class="bottom-wrap">
+                    <div class="bottom-wrap col-md-6 justify-content-center align-items-center" style="margin-bottom:15px">
                         <a href="javascript:void(0)" class="btn btn-sm btn-primary float-right buy_now"
                             data-amount="<?php echo $total_fees; ?>" data-id="1">Pay Now</a>
                         <div class="price-wrap h5">
-                            <span class="price-new">₹ <?php echo $total_fees; ?></span> <del class="price-old">₹ <?php echo $total_fees; ?></del>
+                            <span class="price-new">₹ <?php echo $total_fees; ?></span>
                         </div> <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>

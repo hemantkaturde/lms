@@ -92,17 +92,28 @@ class Enquiry_model extends CI_Model
 
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['enq_number'] = $value['enq_number'];
+                 $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['enq_email'] = $value['enq_email'];
-                 $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+
+                 if($value['payment_status']=='0'){
+                    $data[$counter]['status'] = 'In Follow up';
+                 }else if($value['payment_status']=='1'){
+                    $data[$counter]['status'] = 'Admitted';
+                 }else{
+                    $data[$counter]['status'] = 'In Follow up';
+                 }
+               
+                 $data[$counter]['total_fees'] = '₹ ' ;
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
-                
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Follow Up' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/follow_up.png  alt='Follow Up' title='Follow Up'></a> &nbsp";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Follow Up' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> &nbsp";
+              
                  if($value['payment_status']!=1){
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
-                    //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Send Payment Link'></a> &nbsp";
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> &nbsp";
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> &nbsp";    
                  }
                 
                 $counter++; 

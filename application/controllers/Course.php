@@ -237,18 +237,23 @@
         public function delete_course(){
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
-
-                $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-                $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$this->input->post('id'));
-                if($result){
-                    $deletecourse_response['status'] = 'success';
-                    $process = 'Course Delete';
-                    $processFunction = 'Course/deleteCourse';
-                    $this->logrecord($process,$processFunction);
-                }else
-                {
-                    $deletecourse_response['status'] = 'filure';
-                }
+                $deletecourse_response =array();
+                $checkRelation = $this->course_model->checkRelationcourse($this->input->post('id'));
+                if($checkRelation){
+                       $deletecourse_response['status'] = 'linked';
+                }else{
+                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$this->input->post('id'));
+                    if($result){
+                        $deletecourse_response['status'] = 'success';
+                        $process = 'Course Delete';
+                        $processFunction = 'Course/deleteCourse';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $deletecourse_response['status'] = 'filure';
+                    }
+               }
                 echo json_encode($deletecourse_response);
             }
        }
@@ -327,17 +332,23 @@
 
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
-                // $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-                $courseInfo = array('isDeleted'=>1);
-                $result = $this->course_model->data_update('tbl_course_type',$courseInfo,'ct_id',$this->input->post('id'));
-                if($result){
-                    $deletecourse_response['status'] = 'success';
-                    $process = 'Course Delete';
-                    $processFunction = 'Course/deleteCourseType';
-                    $this->logrecord($process,$processFunction);
-                }else
-                {
-                    $deletecourse_response['status'] = 'filure';
+                $deletecourse_response =array();
+                $checkRelation = $this->course_model->checkRelation($this->input->post('id'));
+
+                if($checkRelation){
+                       $deletecourse_response['status'] = 'linked';
+                }else{
+                        $courseInfo = array('isDeleted'=>1);
+                        $result = $this->course_model->data_update('tbl_course_type',$courseInfo,'ct_id',$this->input->post('id'));
+                        if($result){
+                            $deletecourse_response['status'] = 'success';
+                            $process = 'Course Delete';
+                            $processFunction = 'Course/deleteCourseType';
+                            $this->logrecord($process,$processFunction);
+                        }else
+                        {
+                            $deletecourse_response['status'] = 'filure';
+                        }
                 }
                 echo json_encode($deletecourse_response);
             }
