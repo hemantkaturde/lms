@@ -155,6 +155,28 @@ class User_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    function checkquniqemobilenumber($userId=null,$mobile=null,$flag=null)
+    {
+        $this->db->select('mobile');
+        $this->db->from(TBL_USER);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('mobile', $mobile);
+        if($flag == "user")
+        {
+            $this->db->where('user_flag', 'user');
+        }else
+        {
+            $this->db->where('user_flag', 'staff');
+        }
+        
+        if($userId !='')
+        {
+            $this->db->where('userId !=', $userId);    
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
     
     public function checkquniqeusername($userId=null,$name=null,$flag=null){
         $this->db->select('name');
@@ -196,7 +218,7 @@ class User_model extends CI_Model
      */
     function getUserInfo($userId)
     {
-        $this->db->select('userId, name, email, mobile, roleId,c_vendorId, c_address, c_gst_number, c_pincode, c_city, c_state, adhar_no,pan_no,comp_bank_name, comp_bank_branch, comp_ifsc_code, comp_ac_number, status');
+        $this->db->select('*');
         $this->db->from('tbl_users');
         $this->db->where('isDeleted', 0);
         $this->db->where('userId', $userId);

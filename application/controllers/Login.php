@@ -78,7 +78,7 @@ class Login extends BaseController
     public function loginMe()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
+        $this->form_validation->set_rules('username', 'username', 'required|max_length[128]|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
     
         if($this->form_validation->run() == FALSE)
@@ -87,9 +87,9 @@ class Login extends BaseController
         }
         else
         {
-            $email = $this->security->xss_clean($this->input->post('email'));
+            $username = $this->security->xss_clean($this->input->post('username'));
             $password = $this->input->post('password');
-            $result = $this->login_model->loginMe($email, $password);
+            $result = $this->login_model->loginMe($username, $password);
             if(count($result) > 0)
             {
                 foreach ($result as $res)
@@ -105,6 +105,8 @@ class Login extends BaseController
                                             // 'lastLogin'=> $lastLogin->createdDtm,
                                             'status'=> $res->status,
                                             'access' => $res->access,
+                                            'profile_pic' => $res->profile_pic,
+                                            'username' => $res->username,
                                             'isLoggedIn' => TRUE
                                     );
 

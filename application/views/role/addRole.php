@@ -77,14 +77,52 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-
-                                                <td style="color:#a83131"><b>Home Page</b></td>
+                                                <td style="color:#a83131"><b>Dashboard</b></td>
                                                 <td><input type="checkbox" id="homepagemodule" name="checkbox[]" value="homepagemodule"></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
+
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Masters</b></td>
+                                                <td><input type="checkbox" id="mastermodule" name="checkbox[]" value="mastermodule"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>&nbsp&nbsp&nbsp&nbsp Course Type</td>
+                                                <td><input type="checkbox" id="coursemodule" name="checkbox[]" value="coursemodule"></td>
+                                                <td><input type="checkbox" id="coursepage" name="checkbox[]" value="coursepage"></td>
+                                                <td><input type="checkbox" id="courseadd" name="checkbox[]" value="courseadd"></td>
+                                                <td><input type="checkbox" id="coursedit" name="checkbox[]" value="coursedit"></td>
+                                                <td><input type="checkbox" id="coursedelete" name="checkbox[]" value="coursedelete"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Enquiry / Leads</b></td>
+                                                <td><input type="checkbox" id="enquirymodule" name="checkbox[]" value="enquirymodule"></td>
+                                                <td><input type="checkbox" id="enquirypage" name="checkbox[]" value="enquirypage"></td>
+                                                <td><input type="checkbox" id="enquiryadd" name="checkbox[]" value="enquiryadd"></td>
+                                                <td><input type="checkbox" id="enquiryedit" name="checkbox[]" value="enquiryedit"></td>
+                                                <td><input type="checkbox" id="enquirydelete" name="checkbox[]" value="enquirydelete"></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Admission</b></td>
+                                                <td><input type="checkbox" id="admissionmodule" name="checkbox[]" value="admissionmodule"></td>
+                                                <td><input type="checkbox" id="admissionpage" name="checkbox[]" value="admissionpage"></td>
+                                                <td><input type="checkbox" id="admissionadd" name="checkbox[]" value="admissionadd"></td>
+                                                <td><input type="checkbox" id="admissionedit" name="checkbox[]" value="admissionedit"></td>
+                                                <td><input type="checkbox" id="admissiondelete" name="checkbox[]" value="admissiondelete"></td>
+                                            </tr>
+                                        
 
                                             <tr>
                                                 <td style="color:#a83131"><b>Users</b></td>

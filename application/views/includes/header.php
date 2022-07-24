@@ -218,9 +218,15 @@
                             </li>
                         </ul>
                     </li> -->
+                    
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
+                            <?php if(!empty($this->session->userdata('profile_pic'))){ ?>\
+                                <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" />
+                            <?php }else{ ?>
+                                <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
+                            <?php } ?>
+
                             <span></span><?php echo $role_text; ?><i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <!-- <a class="dropdown-item" href="javascript:;"><i class="fa fa-user"></i>Profile</a>
@@ -240,7 +246,11 @@
             <div id="sidebar-collapse">
                 <div class="admin-block d-flex">
                     <div>
-                        <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
+                       <?php if(!empty($this->session->userdata('profile_pic'))){ ?>\
+                            <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" width="45px" />
+                       <?php }else{ ?>
+                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
+                       <?php } ?>
                     </div>
                     <div class="admin-info" >
                         <div class="font-strong"> <?php echo $name; ?></div><small ><?php echo $role_text; ?></small>
@@ -291,16 +301,14 @@
                     
                     <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                         <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
-                            <span class="nav-label">Staff</span>
+                            <span class="nav-label">Staff / counsellor</span>
                         </a>
                     </li>
-
-                    <li>
+                    <!-- <li>
                         <a href="#"><i class="sidebar-item-icon fa fa-phone-square" ></i>
                             <span class="nav-label">Follow up</span>
                         </a>
-                    </li>
-
+                    </li> -->
                     <li>
                         <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
                             <span class="nav-label">Student</span>

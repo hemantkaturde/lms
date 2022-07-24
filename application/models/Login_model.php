@@ -2,19 +2,25 @@
 
 class Login_model extends CI_Model
 {
-    function loginMe($email, $password)
+    function loginMe($username, $password)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name,BaseTbl.status,BaseTbl.roleId, Roles.role,Roles.access');
+        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name,BaseTbl.status,BaseTbl.roleId, Roles.role,Roles.access,BaseTbl.profile_pic,BaseTbl.username');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
-        $this->db->where('BaseTbl.email', $email);
+       
+        // $this->db->where('BaseTbl.email', $email);
+        
+        $likeCriteria = "(BaseTbl.email  LIKE '%".$username."%'
+        OR  BaseTbl.username  LIKE '%".$username."%'
+        OR  BaseTbl.mobile  LIKE '%".$username."%')";
+        $this->db->where($likeCriteria);
+
         $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
-        
         $user = $query->result();
-        
+
         if(!empty($user)){
-            if(verifyHashedPassword($password, $user[0]->password)){
+            if(trim($password)== base64_decode($user[0]->password)){
                 return $user;
             } else {
                 return array();

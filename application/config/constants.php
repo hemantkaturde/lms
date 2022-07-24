@@ -92,7 +92,7 @@ define('TBL_COURSE_TYPE', 'tbl_course_type');
 define('TBL_STATES', 'tbl_states');
 define('TBL_CITIES', 'tbl_cities');
 define('TBL_ENQUIRY', 'tbl_enquiry');
-define('TBL_PAYMENT', 'payment_transaction');
+define('TBL_PAYMENT', 'tbl_payment_transaction');
 define('TBL_USER','tbl_users');
 define('TBL_ROLES','tbl_roles');
 

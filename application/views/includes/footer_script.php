@@ -826,6 +826,17 @@ $(document).on('change','.state',function(e){
 
 <?php if($pageTitle=='User List'){?>
 	<script type="text/javascript">
+
+		var loadFile = function(event) {
+			var image = document.getElementById('output');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
+
+		var loadFile = function(event) {
+			var image = document.getElementById('output1');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
+		
 		$(document).ready(function() {
 				var dt = $('#userList').DataTable({
 					"columnDefs": [ 
@@ -915,8 +926,12 @@ $(document).on('change','.state',function(e){
                      $('#mobile1').val(data[0].mobile);  
                      $('#email1').val(data[0].email);
                      $('#role1').val(data[0].roleId);
-                     $('#password1').val(data[0].password);
-                     $('#confirm_password1').val(data[0].password);
+					 $('#username1').val(data[0].username);
+                     $('#password1').val(atob(data[0].password));
+                     $('#confirm_password1').val(atob(data[0].password));
+
+					 $('#output1').attr("src","<?php echo IMGPATH;?>/" + data[0].profile_pic);
+					 
                      $('#userId').val(userId);
                 }  
            })
@@ -1019,6 +1034,17 @@ $(document).on('change','.state',function(e){
 
 <?php if($pageTitle=='Staff List'){?>
 	<script type="text/javascript">
+
+		var loadFile = function(event) {
+			var image = document.getElementById('output');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
+
+		var loadFile = function(event) {
+			var image = document.getElementById('output1');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
+
 		$(document).ready(function() {
 				var dt = $('#staffList').DataTable({
 					"columnDefs": [ 

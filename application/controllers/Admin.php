@@ -90,14 +90,41 @@ class Admin extends BaseController
         if(!empty($post_submit)){
 
             $createuser_response = array();
-            
+
+            if(!empty($_FILES['profile_photo']['name'])){
+
+                $file = rand(1000,100000)."-".$this->input->post('name').$_FILES['profile_photo']['name'];
+                $filename = str_replace(' ','_',$file);
+
+                $config['upload_path'] = 'uploads/profile_pic'; 
+                $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                $config['max_size'] = '1000'; // max_size in kb 
+                $config['file_name'] = $filename; 
+       
+                // Load upload library 
+                $this->load->library('upload',$config); 
+        
+                // File upload
+                if($this->upload->do_upload('profile_photo')){ 
+                   $profile_pic = $filename; 
+                }else{
+                    $profile_pic ='';
+                }
+
+            }else{
+                $profile_pic = '';
+
+            }
+
             $data = array(
                 'name'      => $this->input->post('name'),
                 'email'     => $this->input->post('email'),
                 'mobile'    => $this->input->post('mobile'),
-                'password'  => $this->input->post('password'),
+                'password'  => base64_encode($this->input->post('password')),
                 'roleId'    => $this->input->post('role'),
-                'user_flag' =>$this->input->post('user_flag')
+                'user_flag' => $this->input->post('user_flag'),
+                'profile_pic' => $profile_pic,
+                'username'   => trim($this->input->post('username'))
             );
 
             $this->form_validation->set_rules('name', 'User Name', 'trim|required');
@@ -106,6 +133,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('role', 'Role', 'trim|required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
+            $this->form_validation->set_rules('username', 'Username', 'trim|required');
 
             if($this->form_validation->run() == FALSE){
                 $createuser_response['status'] = 'failure';
@@ -115,6 +143,8 @@ class Admin extends BaseController
                 /*check If course name is unique*/
                 $check_uniqe =  $this->user_model->checkquniqeusername('',trim($this->input->post('name')),$this->input->post('user_flag'));
                 $check_uniqe1 =  $this->user_model->checkEmailExists('',trim($this->input->post('email')),$this->input->post('user_flag'));
+                $check_uniqe2 =  $this->user_model->checkquniqemobilenumber('',trim($this->input->post('mobile')),$this->input->post('user_flag'));
+
 
                 if($check_uniqe){
                     $createuser_response['status'] = 'failure';
@@ -124,7 +154,11 @@ class Admin extends BaseController
                     $createuser_response['status'] = 'failure';
                     $createuser_response['error'] = array('name'=>'', 'email'=>'Email already Exist', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
                 }
-                else{
+                else if($check_uniqe2){
+                    $createuser_response['status'] = 'failure';
+                    $createuser_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'Mobile already Exist', 'role'=>'','password'=>'','confirm_password' =>'');
+            
+                }else{
                     $saveCoursedata = $this->user_model->saveUserdata('',$data);
                     if($saveCoursedata){
                         $createuser_response['status'] = 'success';
@@ -142,6 +176,31 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if(!empty($post_submit)){
 
+            if(!empty($_FILES['profile_photo1']['name'])){
+
+                $file = rand(1000,100000)."-".$this->input->post('name1').$_FILES['profile_photo1']['name'];
+                $filename = str_replace(' ','_',$file);
+
+                $config['upload_path'] = 'uploads/profile_pic'; 
+                $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                $config['max_size'] = '1000'; // max_size in kb 
+                $config['file_name'] = $filename; 
+       
+                // Load upload library 
+                $this->load->library('upload',$config); 
+        
+                // File upload
+                if($this->upload->do_upload('profile_photo1')){ 
+                   $profile_pic = $filename; 
+                }else{
+                    $profile_pic ='';
+                }
+
+            }else{
+                $profile_pic = '';
+
+            }
+
             $createuser_response = array();
             if(empty($this->input->post('password1')))
             {
@@ -150,16 +209,20 @@ class Admin extends BaseController
                     'email'     => $this->input->post('email1'),
                     'mobile'    => $this->input->post('mobile1'),
                     'roleId'    => $this->input->post('role1'),
-                    'user_flag' =>$this->input->post('user_flag1')
+                    'user_flag' =>$this->input->post('user_flag1'),
+                    'profile_pic' => $profile_pic,
+                    'username'   => trim($this->input->post('username1'))
                 );
             }else{
                 $data = array(
                     'name'      => $this->input->post('name1'),
                     'email'     => $this->input->post('email1'),
                     'mobile'    => $this->input->post('mobile1'),
-                    'password'  => getHashedPassword($this->input->post('password1')),
+                    'password'  => base64_encode($this->input->post('password1')),
                     'roleId'    => $this->input->post('role1'),
-                    'user_flag' =>$this->input->post('user_flag1')
+                    'user_flag' =>$this->input->post('user_flag1'),
+                    'profile_pic' => $profile_pic,
+                    'username'   => trim($this->input->post('username1'))
                 );
             }
 
@@ -170,7 +233,7 @@ class Admin extends BaseController
             if(!empty($this->input->post('password1')))
             {
                 $this->form_validation->set_rules('password1', 'Password', 'trim|required');
-                $this->form_validation->set_rules('confirm_password1', 'Confirm Password', 'trim|required|matches[password]');
+                $this->form_validation->set_rules('confirm_password1', 'Confirm Password', 'trim|required|matches[password1]');
             }            
 
             if($this->form_validation->run() == FALSE){
@@ -269,7 +332,7 @@ class Admin extends BaseController
     // }
     function staffListing()
     {          
-            $this->global['pageTitle'] = 'ADMIN : Staff List';
+            $this->global['pageTitle'] = 'Staff List';
             $data['role'] = $this->user_model->getUserRoles();
             $this->loadViews("master/staff", $this->global, $data, NULL);
     }

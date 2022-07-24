@@ -40,7 +40,7 @@
         </button>
       </div>
         <?php
-            $attributes = array("name"=>"user_form","id"=>"user_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            $attributes = array("name"=>"user_form","id"=>"user_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data", "autocomplete"=>"off"); 
             echo form_open("", $attributes);
          ?>
       <div class="modal-body">
@@ -52,7 +52,7 @@
                      </label>
                      <div>
                         <input type="hidden" name="user_flag" id="user_flag" value="user">
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="name" name="name" autocomplete="off" placeholder="Enter Full Name Here" class="form-control col-md-12 col-xs-12">
+                        <input  maxlength="20" type="text" id="name" name="name" autocomplete="off" placeholder="Enter Full Name Here" class="form-control col-md-12 col-xs-12">
                         <p class="error name_error"></p>
                      </div>
                   </div>
@@ -61,16 +61,27 @@
                      <label style="text-align: left;"  for="email">Email<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="100" type="email" id="email" name="email"  autocomplete="off" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
+                        <input  maxlength="100" type="email" id="email" name="email"  autocomplete="off" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
                         <p class="error email_error"></p>
                      </div>
                   </div>
 
+                  
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="username">Username<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input maxlength="100" type="username" id="username" autocomplete="off"  placeholder="Enter Username" name="username" class="form-control col-md-12 col-xs-12">
+                        <p class="error username_error"></p>
+                     </div>
+                  </div>
+
+   
                   <div class="form-group">
                      <label style="text-align: left;"  for="password">Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="password" autocomplete="off"  placeholder="Enter Password" name="password" class="form-control col-md-12 col-xs-12">
+                        <input maxlength="100" type="password" id="password" autocomplete="off"  placeholder="Enter Password" name="password" class="form-control col-md-12 col-xs-12">
                         <p class="error password_error"></p>
                      </div>
                   </div>
@@ -79,7 +90,7 @@
                      <label style="text-align: left;"  for="confirm_password">Confirm Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="confirm_password" autocomplete="off"  placeholder="Enter Confirm Password" name="confirm_password" class="form-control col-md-12 col-xs-12">
+                        <input maxlength="100" type="password" id="confirm_password" autocomplete="off"  placeholder="Enter Confirm Password" name="confirm_password" class="form-control col-md-12 col-xs-12">
                         <p class="error confirm_password_error"></p>
                      </div>
                   </div>
@@ -88,7 +99,7 @@
                      <label style="text-align: left;"  for="mobile">Telephone No<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="mobile" name="mobile" autocomplete="off" placeholder="Enter 10 Digit Mobile Number" class="form-control col-md-12 col-xs-12">
+                        <input maxlength="10" type="text" id="mobile" name="mobile" autocomplete="off" placeholder="Enter 10 Digit Mobile Number" class="form-control col-md-12 col-xs-12">
                         <p class="error mobile_error"></p>
                      </div>
                    </div>
@@ -105,6 +116,12 @@
                         <p class="error role_error"></p>
                   </div>
 
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="profile_photo">Profile Pic</label>
+                     <input type="file" id="profile_photo" name="profile_photo" class="form-control" ccept="image/*" onchange="loadFile(event)">
+                        <small class="text-default">( Upload photo as Show on Admin Panel)</small>
+                        <p><img id="output" width="200" /></p>
+                  </div>
               </div>
             </div>
           </div>
@@ -156,20 +173,31 @@
                      </div>
                   </div>
 
+                     
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="username1">Username<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input maxlength="100" type="username1" id="username1" autocomplete="off"  placeholder="Enter Username" name="username1" class="form-control col-md-12 col-xs-12">
+                        <p class="error username_error"></p>
+                     </div>
+                  </div>
+
                   <div class="form-group">
                      <label style="text-align: left;"  for="password1">Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="password1"  placeholder="Enter Password" name="password1" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="text" id="password1"  placeholder="Enter Password" name="password1" class="form-control col-md-12 col-xs-12">
                         <p class="error password1_error"></p>
                      </div>
+
                   </div>
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="confirm_password1">Confirm Password<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="100" type="password" id="confirm_password1"  placeholder="Enter Confirm Password" name="confirm_password1" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="100" type="text" id="confirm_password1"  placeholder="Enter Confirm Password" name="confirm_password1" class="form-control col-md-12 col-xs-12">
                         <p class="error confirm_password1_error"></p>
                      </div>
                   </div>
@@ -194,6 +222,14 @@
                         </select>
                         <p class="error role_error"></p>
                   </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="profile_photo1">Profile Pic</label>
+                     <input type="file" id="profile_photo1" name="profile_photo1" class="form-control" ccept="image/*" onchange="loadFile(event)">
+                        <small class="text-default">( Upload photo as Show on Admin Panel)</small>
+                        <p><img id="output1" width="200" /></p>
+                  </div>
+
 
               </div>
             </div>

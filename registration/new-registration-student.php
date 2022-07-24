@@ -31,8 +31,7 @@
     <!-- jQuery Circle-->
     <link rel="stylesheet" href="https://iictn.org.in/admission/css/grasp_mobile_progress_circle-1.0.0.min.css">
     <!-- Custom Scrollbar-->
-    <link rel="stylesheet"
-        href="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="https://iictn.org.in/admission/css/style.default.css" id="theme-stylesheet">
     <link id="new-stylesheet" rel="stylesheet">
@@ -94,6 +93,7 @@
         margin-right: auto;
         width: 50%;
     }
+    
     </style>
 </head>
 
@@ -106,7 +106,10 @@
     $url.= $_SERVER['HTTP_HOST'];   
     // Append the requested resource location to the URL   
     $url.= $_SERVER['REQUEST_URI'];    
-    $enq_id = substr($url, strrpos($url, '/') + 1);   
+    $enq_id = substr($url, strrpos($url, '/') + 1);  
+    
+    
+
   ?>   
 
 <body>
@@ -144,11 +147,10 @@
                             </div>
 
                             <div class="card-body">
-
-                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="http://localhost/lms_2/newregistrationstudentdetails" method="post"  enctype="multipart/form-data" autocomplete="off">
+                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="../registration_submit.php" method="POST"  enctype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" class="form-control" id="enq_id" name="enq_id" value="<?php echo $enq_id;?>">
                                     <div class="form-group row">
-                                        <label class="col-sm-12 form-control-label text-info">PERSONAL DETAILS</label>
+                                        <label class="col-sm-12 form-control-label text-info">PERSONAL DETAILS </label>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Full Name*" Required>
                                             <span class="text-default">( As Required In Certificates )</span>
@@ -612,7 +614,7 @@
                                       <div class="col-sm-4 offset-sm-2">
                                           <button type="reset" class="btn btn-secondary">Reset Form</button>
                                           <!-- <button type="submit" name="new_student" id="submit" class="btn btn-primary">Submit Registration Form</button>-->
-                                          <button type="submit" name="new_student" id="submit" class="btn btn-primary submit" disabled>Submit
+                                          <button type="submit" name="new_student" id="submit" value="submit" class="btn btn-primary submit">Submit
                                               Registration Form</button>
                                       </div>
                                   </div>
@@ -655,6 +657,11 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.submit').prop("disabled", true);
+    });
+	
     $(function() {
         $("#dateofbirth").datepicker({
             dateFormat: 'yy-mm-dd',
@@ -686,65 +693,47 @@
     }
     else if($(this).prop("checked") == false){
         $('.submit').prop("disabled", true);
+    }else{
+        $('.submit').prop("disabled", true);
     }
   });
 
 
-  $(document).on('change','#country',function(e){  
-	e.preventDefault();
-	//$(".loader_ajax").show();
-	var country_id = $('#country').val();
-	$.ajax({
-		url : "<?php echo ADMIN_PATH;?>getstates",
-		type: "POST",
-		data : {'country' : country_id},
-		success: function(data, textStatus, jqXHR)
-		{
-			$(".loader_ajax").hide();
-			if(data == "failure")
-			{
-				$('#state').html('<option value="">Select State</option>');
-			}
-			else
-			{
-				$('#state').html(data);
-			}
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			$('#state').html('<option value="">Select State</option>');
-			//$(".loader_ajax").hide();
-		}
-	});
-	return false;
+$(document).ready(function() {
+    $('#country').on('change', function() {
+            var country_id = this.value;
+            $.ajax({
+                url: "../states-by-country.php",
+                type: "POST",
+                data: {
+                    country_id: country_id
+                },
+                cache: false,
+                success: function(result){
+                    $("#state").html(result);
+                    $('#city').html('<option value="">Select State First</option>'); 
+                }
+            });
+        
+        
+    });    
+    $('#state').on('change', function() {
+            var state_id = this.value;
+            $.ajax({
+                url: "../cities-by-state.php",
+                type: "POST",
+                data: {
+                    state_id: state_id
+                },
+                cache: false,
+                success: function(result){
+                    $("#city").html(result);
+                }
+            });
+    });
 });
 
-$(document).on('change','.state',function(e){
-	e.preventDefault();
-	// $(".loader_ajax").show();
-	var state_id = $('#state').val();
-	$.ajax({
-		url : "<?php echo ADMIN_PATH;?>getcities",
-		type: "POST",
-		data : {'state_id' : state_id},
-		success: function(data, textStatus, jqXHR)
-		{
-			$(".loader_ajax").hide();
-			if(data == "failure") {
-				$('#cityid').html('<option value="">Select City</option>');
-			
-			} else {
-				$('#city').html(data);
-			}
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			$('#city').html('<option value="">Select City</option>');
-			//$(".loader_ajax").hide();
-		}
-	});
-	return false;
-});
+
 </script>
 
     </script>

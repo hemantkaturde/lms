@@ -98,6 +98,15 @@
                   </div>
 
                   <div class="form-group">
+                     <label style="text-align: left;"  for="username">Username<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input maxlength="100" type="username" id="username" autocomplete="off"  placeholder="Enter Username" name="username" class="form-control col-md-12 col-xs-12">
+                        <p class="error username_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
                      <label style="text-align: left;"  for="password">Password
                      </label>
                      <div >
@@ -134,6 +143,13 @@
                            <?php } ?>
                         </select>
                         <p class="error role_error"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="profile_photo">Profile Pic</label>
+                     <input type="file" id="profile_photo" name="profile_photo" class="form-control" ccept="image/*" onchange="loadFile(event)">
+                        <small class="text-default">( Upload photo as Show on Admin Panel)</small>
+                        <p><img id="output" width="200" /></p>
                   </div>
 
               </div>
@@ -188,6 +204,15 @@
                   </div>
 
                   <div class="form-group">
+                     <label style="text-align: left;"  for="username1">Username<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input maxlength="100" type="username1" id="username1" autocomplete="off"  placeholder="Enter Username" name="username1" class="form-control col-md-12 col-xs-12">
+                        <p class="error username_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
                      <label style="text-align: left;"  for="password1">Password
                      </label>
                      <div >
@@ -225,6 +250,15 @@
                         </select>
                         <p class="error role_error"></p>
                   </div>
+
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="profile_photo1">Profile Pic</label>
+                     <input type="file" id="profile_photo1" name="profile_photo1" class="form-control" ccept="image/*" onchange="loadFile(event)">
+                        <small class="text-default">( Upload photo as Show on Admin Panel)</small>
+                        <p><img id="output1" width="200" /></p>
+                  </div>
+
 
               </div>
             </div>
