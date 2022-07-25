@@ -325,7 +325,7 @@
                      </label>
                      <div >
                          <!-- <select class="form-control course" id="course" name="course"> -->
-                         <select class="form-control select2_demo_1 c1" id="course" name="course[]"  placeholder="Select Courses"  required="" multiple style="width: 320px; margin-left: -15px;">
+                         <select class="form-control select2_demo_1 c1" id="course1" name="course[]"  placeholder="Select Courses"  required="" multiple style="width: 320px; margin-left: -15px;">
                             <option value="">Select Course</option>
                             <?php foreach ($course_List as $key => $value) {
                               ?>

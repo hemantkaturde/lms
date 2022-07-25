@@ -428,10 +428,11 @@ $(document).on('change','.state',function(e){
                      $('#remarks1').val(data[0].enq_remark);
 
 					 var values=data[0].enq_course_id;
+					
 					 $.each(values.split(","), function(i,e){
 							$(".c1 option[value='" + e + "']").prop("selected", true);
 					 });
-
+					 
                      //$("#dropdownState").append(appenddata1);
                      $('#enq_id').val(enq_id);
                 }  

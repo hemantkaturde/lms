@@ -290,7 +290,8 @@
                         {
                             $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
                             $total_fees += $get_course_fees[0]->course_total_fees;
-                            $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';    
+                            $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
+                            $i++;  
                         }
                     $all_course_name = trim($course_name, ', '); 
 
