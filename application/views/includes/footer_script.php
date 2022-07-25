@@ -5,7 +5,7 @@ $(document).ready(function(){
 	  $(".select2_demo_1").select2();
 });
 	
- $(function() {
+$(function() {
     $(".datepicker").datepicker({ 
 		minDate: 0,
 		todayHighlight: true,
@@ -326,8 +326,66 @@ $(document).on('change','.state',function(e){
 <?php } ?>
 
 
-<?php if($pageTitle=='Enquiry Management'){?>
+<?php if($pageTitle=='Enquiry Management' || $pageTitle=='Enquiry Edit'){?>
 <script type="text/javascript">
+
+$(document).on('change','#countryEnquiry',function(e){  
+	e.preventDefault();
+	//$(".loader_ajax").show();
+	var country_id = $('#countryEnquiry').val();
+	$.ajax({
+		url : "<?php echo ADMIN_PATH;?>getstates",
+		type: "POST",
+		data : {'country' : country_id},
+		success: function(data, textStatus, jqXHR)
+		{
+			$(".loader_ajax").hide();
+			if(data == "failure")
+			{
+				$('#stateEnquiry').html('<option value="">Select State</option>');
+			}
+			else
+			{
+				$('#stateEnquiry').html(data);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown)
+		{
+			$('#stateEnquiry').html('<option value="">Select State</option>');
+			//$(".loader_ajax").hide();
+		}
+	});
+	return false;
+});
+
+$(document).on('change','#stateEnquiry',function(e){
+	e.preventDefault();
+	// $(".loader_ajax").show();
+	var state_id = $('#stateEnquiry').val();
+	$.ajax({
+		url : "<?php echo ADMIN_PATH;?>getcities",
+		type: "POST",
+		data : {'state_id' : state_id},
+		success: function(data, textStatus, jqXHR)
+		{
+			$(".loader_ajax").hide();
+			if(data == "failure") {
+				$('#cityid').html('<option value="">Select City</option>');
+			
+			} else {
+				$('#cityEnquiry').html(data);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown)
+		{
+			$('#cityEnquiry').html('<option value="">Select City</option>');
+			//$(".loader_ajax").hide();
+		}
+	});
+	return false;
+    });
+
+
     $(document).ready(function() {
             var dt = $('#view_enquirylist').DataTable({
 	            "columnDefs": [ 
@@ -1446,6 +1504,40 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	});
 
    </script>
+<?php } ?>
+
+<?php if($pageTitle=='Admission Listing'){?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+				var dt = $('#admissionList').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "12%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "20%", "targets": 3 },
+						{ "width": "20%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Admissions Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchadmissions",
+						type: "post",
+					},
+				});
+		});
+	
+</script>
 <?php } ?>
 
 

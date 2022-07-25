@@ -115,6 +115,7 @@ $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
 $route['enquirylisting'] = "enquiry/enquirylisting";
 $route['fetchenquiry'] = "enquiry/fetchenquiry";
 $route['createenquiry'] = "enquiry/createenquiry";
+$route['editenquiry/(:any)'] = "enquiry/editenquiry/$1";
 $route['updateenquiry/(:any)'] = "enquiry/updateenquiry/$1";
 $route['deleteEnquiry'] = "enquiry/deleteEnquiry";
 $route['sendEnquiryLink'] = "enquiry/sendEnquiryLink";
@@ -140,3 +141,9 @@ $route['deleteTemplate/(:any)'] = "emailSetting/deleteTemplate/$1";
 // SMTP
 $route['emailsmtpListing'] = "emailSetting/emailsmtpListing";
 $route['deleteSmtp/(:any)'] = "emailSetting/deleteSmtp/$1";
+
+
+
+/* */
+
+$route['fetchadmissions'] = "admission/fetchadmissions";

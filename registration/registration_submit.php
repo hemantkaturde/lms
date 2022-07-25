@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                VALUES ('$enq_id','$name','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
 
     if ($conn->query($sql) === TRUE) {
-      echo ("<script> window.alert('Succesfully Registerd');window.location.href='../success.php?enq='$enq_id;</script>");
+      echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
         //echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

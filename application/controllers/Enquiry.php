@@ -64,6 +64,20 @@
     
             echo json_encode($json_data);
         }
+
+       public function editenquiry($id){
+        
+            $process = 'Enquiry Edit';
+            $processFunction = 'Enquiry/enquiryEdit';
+            $this->logrecord($process,$processFunction);
+            $data['course_List'] = $this->comman_model->getCourseList();
+            $data['editDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            $data['state_List'] = $this->comman_model->selectAllStates($data['editDataenquiry'][0]->enq_country,$data['editDataenquiry'][0]->enq_state);
+            $data['city_List'] = $this->comman_model->selectAllCities($data['editDataenquiry'][0]->enq_state,$data['editDataenquiry'][0]->enq_city);
+            $this->global['pageTitle'] = 'Enquiry Management';
+            $this->loadViews("enquiry/enquiryEdit", $this->global, $data , NULL);
+
+       }
     
 
         function get_signle_enquiry($enqId = NULL)
@@ -196,58 +210,71 @@
                 //$this->form_validation->set_rules('course', 'Course', 'trim|required');
 
                 
-                $courses_multipal = $this->security->xss_clean($this->input->post('course'));
-                if($courses_multipal){
-                    $courses = implode(',', $courses_multipal);
-                }else{
-                    $courses = '';
-                }
+              
 
                 if($this->form_validation->run() == FALSE){
-                    $createenquiry_response['status'] = 'failure';
-                    //$createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'course'=>strip_tags(form_error('course')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
-
-                }else{
-
-                    /*check If enquiry name is unique*/
-                    $data = array(
-                        'enq_fullname' => $this->input->post('full_name'),
-                        'enq_mobile'=> $this->input->post('mobile_no'),
-                        'enq_mobile1' => $this->input->post('alternate_mobile'),
-                        'enq_email'=> $this->input->post('email'),
-                        'enq_email1' => $this->input->post('alternamte_email'),
-                        'enq_qualification' => $this->input->post('qualification'),
-                        'enq_purpose' => $this->input->post('purpose'),
-                        'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
-                        'enq_country'=> $this->input->post('country'),
-                        'enq_state'=>$this->input->post('state'),
-                        'enq_city'=>$this->input->post('city'),
-                        'enq_source'=>$this->input->post('enquiry_type'),
-                        'enq_remark' => $this->input->post('remarks'),
-                        'enq_course_id' => $courses
-                    );
-                    
-                    if($id == null)
-                    {
-                        $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
-                    }
-                    else
-                    {
-                        $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($id, trim($this->input->post('full_name')));
-                    }
-
-                    if($check_uniqe){
+                    if($this->input->post('course')){
                         $createenquiry_response['status'] = 'failure';
-                        $createenquiry_response['error'] = array('full_name'=>'Name Already Exists', 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
+                        //$createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'course'=>strip_tags(form_error('course')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
                     }else{
-                        $saveEnquirydata = $this->enquiry_model->saveEnquirydata($id,$data);
-                        if($saveEnquirydata){
-                            $createenquiry_response['status'] = 'success';
-                            $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
-                        }
+                        $createenquiry_response['status'] = 'failure';
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')));
                     }
+                }else{
+                    
+                    if($this->input->post('course')){
+                                $courses_multipal = $this->security->xss_clean($this->input->post('course'));
+                                if($courses_multipal){
+                                    $courses = implode(',', $courses_multipal);
+                                }else{
+                                    $courses = '';
+                                }
+
+                                /*check If enquiry name is unique*/
+                                $data = array(
+                                    'enq_fullname' => $this->input->post('full_name'),
+                                    'enq_mobile'=> $this->input->post('mobile_no'),
+                                    'enq_mobile1' => $this->input->post('alternate_mobile'),
+                                    'enq_email'=> $this->input->post('email'),
+                                    'enq_email1' => $this->input->post('alternamte_email'),
+                                    'enq_qualification' => $this->input->post('qualification'),
+                                    'enq_purpose' => $this->input->post('purpose'),
+                                    'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
+                                    'enq_country'=> $this->input->post('country'),
+                                    'enq_state'=>$this->input->post('state'),
+                                    'enq_city'=>$this->input->post('city'),
+                                    'enq_source'=>$this->input->post('enquiry_type'),
+                                    'enq_remark' => $this->input->post('remarks'),
+                                    'enq_course_id' => $courses
+                                );
+                                
+                                if($id == null)
+                                {
+                                    $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
+                                }
+                                else
+                                {
+                                    $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($id, trim($this->input->post('full_name')));
+                                }
+
+                                if($check_uniqe){
+                                    $createenquiry_response['status'] = 'failure';
+                                    $createenquiry_response['error'] = array('full_name'=>'Name Already Exists', 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
+                                }else{
+                                    $saveEnquirydata = $this->enquiry_model->saveEnquirydata($id,$data);
+                                    if($saveEnquirydata){
+                                        $createenquiry_response['status'] = 'success';
+                                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));
+                                    }
+                                }
+
+                    }else{
+                        $createenquiry_response['status'] = 'failure';
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')));
+                  }
                 }
+                
         
                 echo json_encode($createenquiry_response);
             }

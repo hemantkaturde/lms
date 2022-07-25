@@ -95,6 +95,8 @@ define('TBL_ENQUIRY', 'tbl_enquiry');
 define('TBL_PAYMENT', 'tbl_payment_transaction');
 define('TBL_USER','tbl_users');
 define('TBL_ROLES','tbl_roles');
+define('TBL_ADMISSION','tbl_admission');
+
 
 
 define('EMAIL_SMTP_HOST','smtp.gmail.com');		// your smtp host e.g. smtp.gmail.com
@@ -105,6 +107,8 @@ define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
 define('FROM_EMAIL','hemantkaturde123@gmail.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+
+
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){

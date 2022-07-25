@@ -26,23 +26,12 @@
 
         public function admissionListing()
         {
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
-            $data['searchText'] = $searchText;
-            
-            // $this->load->library('pagination');
-            
-            // $count = $this->role_model->roleListingCount($searchText);
-
-			// $returns = $this->paginationCompress ( "roleListing/", $count, 10 );
-            
-            $data['admission'] = $this->admission_model->admissionListing($searchText);
-            // $data['userRecords'] = $this->role_model->roleListing($searchText, $returns["page"], $returns["segment"]);
             $process = 'Admission Listing';
             $processFunction = 'Admission/admissionListing';
             $this->logrecord($process,$processFunction);
 
-            $this->global['pageTitle'] = 'ADMIN : Admission';
-            $this->loadViews("admission/admissionList", $this->global, $data , NULL);
+            $this->global['pageTitle'] = 'Admission Listing';
+            $this->loadViews("admission/admissionList", $this->global, NULL , NULL);
         }
 
         function get_signle_admission($admissionId = NULL)
@@ -219,7 +208,31 @@
             else { echo(json_encode(array('status'=>FALSE))); }
         }
 
-        // ===============================       
+     
+        public function fetchadmissions(){
+
+            $params = $_REQUEST;
+            $totalRecords = $this->admission_model->getAdmissionsCount($params); 
+            $queryRecords = $this->admission_model->getAdmissionsdata($params); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+        }
 
     }
 

@@ -1,77 +1,29 @@
 
 <div class="content-wrapper">
-    <!-- <div class="page-heading">
-        <h3 class="page-title">Users Listing</h3>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="index.html"><i class="la la-home font-20"></i></a>
-            </li>
-           <li class="breadcrumb-item">Users Listing</li> 
-        </ol>
-    </div> -->
-    <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Admission Management</div>
-
-                <!-- <div class="ibox-tools"> -->
-                    <a class="btn btn-primary text-white" onclick="admission(0)" ><i class="fa fa-plus"></i> Add New</a>
-                    <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
-                <!-- </div> -->
+                <div class="ibox-title">Admission Listing</div>
+                    <!-- <a class="btn btn-primary text-white" onclick="users(0)"><i class="fa fa-plus"></i> Add User</a> -->
+                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUsers">
+                        <i class="fa fa-plus"></i> Add User
+                    </button> -->
             </div>
             <div class="ibox-body">
-                 <?php
-                    $this->load->helper('form');
-                    $error = $this->session->flashdata('error');
-                ?>
-          
               <div class="panel-body table-responsive">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="example-table">
+                <table width="100%" class="table table-bordered" id="admissionList">
                   <thead>
                             <tr>
-                                
+                                <th>Mobile No.</th>
+                                <th>Date</th>
                                 <th>Name</th>
-                                <th>Admission Source</th>
-                                <th>Admission Date</th>
+                                <th>Email</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                   </thead>
-                  <tbody>
-                            <?php
-                    if(!empty($admission))
-                    {
-                        foreach($admission as $record)
-                        {
-                           
-                    ?>
-                                <tr id="<?php echo $record->admissionId; ?>">
-                                    
-                                    <td>
-                                        <?php echo $record->full_name ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $record->adm_source ?>
-                                    </td>
-                                    <td>
-                                        <?php echo date('d-m-Y', strtotime($record->admission_date)) ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="btn btn-xs btn-success text-white" onclick="admission(<?php echo $record->admissionId; ?>)" title="Edit">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-danger deleteAdmission" href="#" data-admissionId="<?php echo $record->admissionId; ?>" title="Delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
-                            
-                        }
-                    }
-                    ?>
-                  </tbody>
-                        </table>
+                  <tbody></tbody>
+                </table>
               </div>
             </div>
         </div>
