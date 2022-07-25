@@ -11,6 +11,7 @@ $enq_purpose  = '';
 $enq_email  = '';
 $alternet_email  = '';
 $enq_course_id  = '';
+$remark  = '';
 
 if(!empty($editDataenquiry))
 {
@@ -28,6 +29,7 @@ if(!empty($editDataenquiry))
         $enq_email  = $rf->enq_email;
         $alternet_email  =  $rf->enq_email1;
         $enq_course_id  =  $rf->enq_course_id;
+        $remark  =  $rf->enq_remark;
         // $role = $rf->role;
         // $role_type = $rf->role_type;
         // $discription = $rf->discription;
@@ -226,6 +228,7 @@ if(!empty($editDataenquiry))
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" maxlength="5000"
                                                         type="text" id="remarks1" name="remarks"
+                                                        value= "<?php  echo $remark;?>"
                                                         placeholder="Enter Remarks"
                                                         class="form-control col-md-12 col-xs-12">
                                                     <p class="error remarks_error"></p>

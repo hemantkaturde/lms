@@ -557,7 +557,6 @@
          $this->load->view("admission/admissionform",$data);
        }
 
-
        public function newregistrationstudentdetails(){
 
         $post_submit = $this->input->post();
@@ -578,14 +577,18 @@
             $this->form_validation->set_rules('source_about', 'Source About', 'trim');
             $this->form_validation->set_rules('source_ans', 'Source Ans', 'trim');
             $this->form_validation->set_rules('new_student', 'New Student', 'trim');
-
-
-            
-
         }
 
-
        }
+
+       public function followup($id){
+            $process = 'Enquiry Follow up';
+            $processFunction = 'Enquiry/enquiryEdit';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Enquiry Follow Up';
+            $this->loadViews("enquiry/enquiryFollowup", $this->global, NULL , NULL);
+       }
+
 
     }
 

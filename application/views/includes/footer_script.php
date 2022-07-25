@@ -370,7 +370,7 @@ $(document).on('change','#stateEnquiry',function(e){
 		{
 			$(".loader_ajax").hide();
 			if(data == "failure") {
-				$('#cityid').html('<option value="">Select City</option>');
+				$('#cityEnquiry').html('<option value="">Select City</option>');
 			
 			} else {
 				$('#cityEnquiry').html(data);

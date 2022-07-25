@@ -126,6 +126,8 @@ $route['razorthankyou/(:any)'] = "enquiry/razorthankyou/(:any)";
 $route['paymentrecipt/(:any)'] = "enquiry/paymentrecipt";
 $route['new-registration-student/(:any)'] = "enquiry/newregistrationstudent";
 $route['newregistrationstudentdetails'] = "enquiry/newregistrationstudentdetails";
+$route['followup/(:any)'] = "enquiry/followup/(:any)";
+
 
 
 // $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
