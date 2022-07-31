@@ -1,4 +1,7 @@
-<?php //echo $data; ?>
+<?php 
+$access = $this->session->userdata('access');
+$jsonstringtoArray = json_decode($access, true);
+?>
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
@@ -9,11 +12,11 @@
                 <!-- <a class="btn btn-primary addcourse"><i class="fa fa-plus"></i> Add Course</a> -->
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
-
+                <?php if (in_array("courseadd", $jsonstringtoArray)){?>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourse">
                     <i class="fa fa-plus"></i> Add Course
                 </button>
-            
+                <?php } ?>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">

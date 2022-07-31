@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="page-content fade-in-up">
@@ -85,7 +86,6 @@
                                                 <td></td>
                                             </tr>
 
-
                                             <tr>
                                                 <td style="color:#a83131"><b>Masters</b></td>
                                                 <td><input type="checkbox" id="mastermodule" name="checkbox[]" value="mastermodule"></td>
@@ -97,7 +97,16 @@
 
                                             <tr>
                                                 <td>&nbsp&nbsp&nbsp&nbsp Course Type</td>
-                                                <td><input type="checkbox" id="coursemodule" name="checkbox[]" value="coursemodule"></td>
+                                                <td><input type="checkbox" id="coursetypemodule" name="checkbox[]" value="coursetypemodule"></td>
+                                                <td><input type="checkbox" id="coursetypepage" name="checkbox[]" value="coursetypepage"></td>
+                                                <td><input type="checkbox" id="coursetypeadd" name="checkbox[]" value="coursetypeadd"></td>
+                                                <td><input type="checkbox" id="coursetypedit" name="checkbox[]" value="coursetypedit"></td>
+                                                <td><input type="checkbox" id="coursetypedelete" name="checkbox[]" value="coursetypedelete"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Course</b></td>
+                                                <td><input type="checkbox" id="coursepagemodule" name="checkbox[]" value="coursepagemodule"></td>
                                                 <td><input type="checkbox" id="coursepage" name="checkbox[]" value="coursepage"></td>
                                                 <td><input type="checkbox" id="courseadd" name="checkbox[]" value="courseadd"></td>
                                                 <td><input type="checkbox" id="coursedit" name="checkbox[]" value="coursedit"></td>
@@ -113,7 +122,6 @@
                                                 <td><input type="checkbox" id="enquirydelete" name="checkbox[]" value="enquirydelete"></td>
                                             </tr>
 
-
                                             <tr>
                                                 <td style="color:#a83131"><b>Admission</b></td>
                                                 <td><input type="checkbox" id="admissionmodule" name="checkbox[]" value="admissionmodule"></td>
@@ -122,8 +130,26 @@
                                                 <td><input type="checkbox" id="admissionedit" name="checkbox[]" value="admissionedit"></td>
                                                 <td><input type="checkbox" id="admissiondelete" name="checkbox[]" value="admissiondelete"></td>
                                             </tr>
-                                        
 
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Staff / Counseller</b></td>
+                                                <td><input type="checkbox" id="staffcounsellermodule" name="checkbox[]" value="staffcounsellermodule"></td>
+                                                <td><input type="checkbox" id="staffcounsellerpage" name="checkbox[]" value="staffcounsellerpage"></td>
+                                                <td><input type="checkbox" id="staffcounselleradd" name="checkbox[]" value="staffcounselleradd"></td>
+                                                <td><input type="checkbox" id="staffcounselleredit" name="checkbox[]" value="staffcounselleredit"></td>
+                                                <td><input type="checkbox" id="staffcounsellerdelete" name="checkbox[]" value="staffcounsellerdelete"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Student</b></td>
+                                                <td><input type="checkbox" id="studentmodule" name="checkbox[]" value="studentmodule"></td>
+                                                <td><input type="checkbox" id="studentpage" name="checkbox[]" value="studentpage"></td>
+                                                <td><input type="checkbox" id="studentadd" name="checkbox[]" value="studentadd"></td>
+                                                <td><input type="checkbox" id="studentedit" name="checkbox[]" value="studentedit"></td>
+                                                <td><input type="checkbox" id="tudentdelete" name="checkbox[]" value="tudentdelete"></td>
+                                            </tr>
+                                        
                                             <tr>
                                                 <td style="color:#a83131"><b>Users</b></td>
                                                 <td><input type="checkbox" id="usersmodule" name="checkbox[]" value="usersmodule"></td>
@@ -150,6 +176,25 @@
                                                 <td><input type="checkbox" id="roleedit" name="checkbox[]" value="roleedit"></td>
                                                 <td><input type="checkbox" id="roledelete" name="checkbox[]" value="roledelete"></td>
                                             </tr>
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Settings</b></td>
+                                                <td><input type="checkbox" id="settingsmodule" name="checkbox[]" value="settingsmodule"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>&nbsp&nbsp&nbsp&nbsp EMAIL SMTP</td>
+                                                <td></td>
+                                                <td><input type="checkbox" id="emilsmtppage" name="checkbox[]" value="emilsmtppage"></td>
+                                                <td><input type="checkbox" id="emilsmtpadd" name="checkbox[]" value="emilsmtpadd"></td>
+                                                <td><input type="checkbox" id="emilsmtpedit" name="checkbox[]" value="emilsmtpedit"></td>
+                                                <td><input type="checkbox" id="emilsmtpdelete" name="checkbox[]" value="emilsmtpdelete"></td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,5 +1,8 @@
+<?php include_once('../db/config.php'); 
+$sql = "SELECT * FROM tbl_users where  isDeleted='0' and  user_flag='staff'" ;
+$result = $conn->query($sql);
+?>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -204,8 +207,19 @@
                                     <div class="line"></div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 form-control-label text-info">COUNSELLOR NAME</label>
-                                        <div class="col-sm-3">
+                                        <!-- <div class="col-sm-3">
                                             <input type="text" id="counsellerName" name="counsellerName"  class="form-control" placeholder="Your Counsellor Name*">
+                                        </div> -->
+                                        <div class="col-sm-3">
+                                        <select class="form-control counsellerName" id="counsellerName" name="counsellerName">
+                                        <option value="">Select Your Counsellor Name*</option>
+                                            <?php
+                                            while($row = mysqli_fetch_array($result)) { ?>
+                                                <option value="<?php echo $row["userId"];?>"><?php echo $row["name"];?></option>
+                                            <?php
+                                            }
+                                        ?>
+                                        </select>
                                         </div>
                                     </div>
                                     <div class="line"></div>

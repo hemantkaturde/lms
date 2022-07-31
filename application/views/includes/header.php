@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $pageUrl =$this->uri->segment(1);?>
+<?php 
+$pageUrl =$this->uri->segment(1);
+$access = $this->session->userdata('access');
+$jsonstringtoArray = json_decode($access, true);
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -221,7 +225,7 @@
                     
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <?php if(!empty($this->session->userdata('profile_pic'))){ ?>\
+                            <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
                                 <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" />
                             <?php }else{ ?>
                                 <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
@@ -246,7 +250,7 @@
             <div id="sidebar-collapse">
                 <div class="admin-block d-flex">
                     <div>
-                       <?php if(!empty($this->session->userdata('profile_pic'))){ ?>\
+                       <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
                             <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" width="45px" />
                        <?php }else{ ?>
                             <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
@@ -259,18 +263,22 @@
                 <ul class="side-menu metismenu" >
                     <!-- <li class="heading" >DASHBOARD</li> -->
 
+                    <?php if (in_array("homepagemodule", $jsonstringtoArray)){?>
                     <li  class="<?php if($pageUrl =='dashboard'){ echo 'active';} ?>">
                         <a  href="<?php echo base_url()."dashboard"; ?>"><i
                                 class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label" >Dashboard</span>
                         </a>
                     </li>
+                    <?php } ?>
 
+                    <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
                     <li class="treeview <?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>" style="height: auto; " >
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-th-list" ></i> <span class="group-master">Masters</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
+                        <?php if (in_array("coursetypemodule", $jsonstringtoArray)){?>
                         <ul class="treeview-menu">
                             <li class="<?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>">
                                 <a href="<?php echo base_url()."coursetypelisting"; ?>"><i class="sidebar-item-icon fa fa-file" ></i>
@@ -278,64 +286,87 @@
                                 </a>
                             </li>
                         </ul>
+                        <?php } ?>
                     </li>
+                    <?php } ?>
 
+                    <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
                     <li class="<?php if($pageUrl =='courselisting'){ echo 'active';} ?>">
                         <a href="<?php echo base_url()."courselisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
                             <span class="nav-label">Courses</span>
                         </a>
                     </li>
+                    <?php } ?>
 
-                    <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry'){ echo 'active';} ?>">
+                    <?php if (in_array("enquirymodule", $jsonstringtoArray)){?>
+                    <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup'){ echo 'active';} ?>">
                         <a href="<?php echo base_url()."enquirylisting"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
                             <span class="nav-label">Inquiry / Leads</span>
                         </a>
                     </li>
+                    <?php } ?>
 
-
+                    <?php if (in_array("admissionmodule", $jsonstringtoArray)){?>
                     <li class="<?php if($pageUrl =='admissionListing'){ echo 'active';} ?>">
                         <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap" ></i>
                             <span class="nav-label">Admission</span>
                         </a>
                     </li>
+                    <?php } ?>
                     
+                    <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
                     <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                         <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
                             <span class="nav-label">Staff / counsellor</span>
                         </a>
                     </li>
+                    <?php } ?>
                     <!-- <li>
                         <a href="#"><i class="sidebar-item-icon fa fa-phone-square" ></i>
                             <span class="nav-label">Follow up</span>
                         </a>
                     </li> -->
+                    <?php if (in_array("studentmodule", $jsonstringtoArray)){?>
                     <li>
-                        <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
-                            <span class="nav-label">Student</span>
-                        </a>
+                        <li class="<?php if($pageUrl =='studentListing'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
+                                <span class="nav-label">Student</span>
+                            </a>
+                        </li>
                     </li>
+                    <?php } ?>
 
+                    <?php if (in_array("usersmodule", $jsonstringtoArray)){?>
                     <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >User</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
+                        <?php if (in_array("userpage", $jsonstringtoArray)){?>
                             <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
+                        <?php } ?>
+                        <?php if (in_array("rolepage", $jsonstringtoArray)){?>
                             <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Role </span></a></li>
+                        <?php } ?>
                         </ul>
                     </li>
+                    <?php } ?>
  
+                    <?php if (in_array("settingsmodule", $jsonstringtoArray)){?>
                     <li class="treeview <?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>" style="height: auto;">
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-cog" ></i> <span class="group-master">Settings</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right" ></i></span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="<?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>"><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i><span class="nav-label"> Email SMTP </span></a></li>
+                            <?php if (in_array("emilsmtppage", $jsonstringtoArray)){?>
+                               <li class="<?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>"><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i><span class="nav-label"> Email SMTP </span></a></li>
+                            <?php } ?>
                             <!-- <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i  class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li> -->
                         </ul>
                     </li>
+                    <?php } ?>
 
                 </ul>
             </div>

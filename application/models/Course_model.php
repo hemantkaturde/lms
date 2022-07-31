@@ -176,6 +176,9 @@ class Course_model extends CI_Model
         }
 
         public function getCoursedata($params){
+            $access = $this->session->userdata('access');
+            $jsonstringtoArray = json_decode($access, true);
+        
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
             if($params['search']['value'] != "") 
@@ -200,9 +203,13 @@ class Course_model extends CI_Model
                      $data[$counter]['course_type'] = $value['ct_name'];
                      $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
                      $data[$counter]['action'] = '';
-                    //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                     //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                     if(in_array("coursedit", $jsonstringtoArray)){
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a>&nbsp;";
+                     }
+                     if(in_array("coursedelete", $jsonstringtoArray)){
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course' title='Delete Course'></a>&nbsp"; 
+                     }
                      //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                      //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                 
@@ -267,6 +274,9 @@ class Course_model extends CI_Model
     }
 
     public function getCoursetypedata($params){
+        $access = $this->session->userdata('access');
+        $jsonstringtoArray = json_decode($access, true);
+        
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
@@ -287,8 +297,14 @@ class Course_model extends CI_Model
             {
                  $data[$counter]['course_type'] = $value['ct_name'];
                  $data[$counter]['action'] = '';
+
+                 if(in_array("coursetypedit", $jsonstringtoArray)){
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a>&nbsp;";
+                 }
+
+                 if(in_array("coursetypedelete", $jsonstringtoArray)){
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>&nbsp"; 
+                 }
                 $counter++; 
             }
         }

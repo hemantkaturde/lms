@@ -1176,6 +1176,34 @@ $(document).on('change','#stateEnquiry',function(e){
 			return false;
 	    });
 
+		$(document).on('click','.edit_staff',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var userId = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>admin/get_signle_user_for_edit/"+userId,  
+                method:"POST",  
+                data:{userId:userId},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                     $('#editUser').modal('show');
+					 
+                     $('#name1').val(data[0].name);  
+                     $('#mobile1').val(data[0].mobile);  
+                     $('#email1').val(data[0].email);
+                     $('#role1').val(data[0].roleId);
+					 $('#username1').val(data[0].username);
+                     $('#password1').val(atob(data[0].password));
+                     $('#confirm_password1').val(atob(data[0].password));
+
+					 $('#output1').attr("src","<?php echo IMGPATH;?>/" + data[0].profile_pic);
+					 
+                     $('#userId').val(userId);
+                }  
+           })
+        });
+
 		$(document).on('click','#update_staff',function(e){
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -1539,6 +1567,17 @@ $(document).ready(function() {
 	
 </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Enquiry Follow Up'){?>
+	<script type="text/javascript">
+
+
+
+	</script>
+<?php } ?>
+
+
 
 
 

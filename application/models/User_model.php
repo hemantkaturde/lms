@@ -445,7 +445,7 @@ class User_model extends CI_Model
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['role']    = $value['role'];
                  $data[$counter]['action']  = '';
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_user' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit User' title='Edit User'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_staff' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit User' title='Edit User'></a>&nbsp;";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_staff' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete User' title='Delete User'></a>&nbsp"; 
                 $counter++; 
             }

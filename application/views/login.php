@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>LMS | Login</title>
     <!-- GLOBAL MAINLY STYLES-->
+    <link rel="icon" type="image/x-icon" href="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>">
     <link href="<?php echo base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />

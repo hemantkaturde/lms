@@ -586,7 +586,8 @@
             $processFunction = 'Enquiry/enquiryEdit';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Enquiry Follow Up';
-            $this->loadViews("enquiry/enquiryFollowup", $this->global, NULL , NULL);
+            $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            $this->loadViews("enquiry/enquiryFollowup", $this->global, $data , NULL);
        }
 
 
