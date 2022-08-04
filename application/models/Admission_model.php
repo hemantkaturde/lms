@@ -96,22 +96,46 @@ class Admission_model extends CI_Model
                      $data[$counter]['name'] = $value['name'];
                      $data[$counter]['email'] = $value['email'];
                      $data[$counter]['address'] = $value['address'];
-    
-                
                      $data[$counter]['action'] = '';
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_enquiry_details' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Enquiry Details' title='View Enquiry Details'></a>&nbsp;";
-                    // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Follow Up' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/follow_up.png  alt='Follow Up' title='Follow Up'></a> &nbsp";
-                    // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Follow Up' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> &nbsp";
-                    // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> &nbsp"; 
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Equipment'></a>&nbsp"; 
-                    
-                    
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Admission' title='Edit Admission'></a>&nbsp;";
+                    // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_admission_details' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
+                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewadmissiondetails/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Admission' title='Delete Admission'></a>&nbsp"; 
                     $counter++; 
                 }
             }
             return $data;
         }
+       
+        public function checkRelationadmission($id){
+
+            $this->db->select('*');
+            $this->db->from(TBL_PAYMENT);
+            $this->db->where('payment_status', 1);
+            $this->db->where('enquiry_number', $id);
+            $query = $this->db->get();
+            return $query->result();
+        }
+
+        public function data_update($table='',$arr='',$field='',$value=''){
+            // $this->CI->db->where($field,$value);
+            // return $this->CI->db->update($table,$arr);
+            $this->db->where($field, $value);
+            return  $this->db->delete($table);
+        }
+
+        public function viewAdmissionDetails($id){
+
+            $this->db->select('*');
+            $this->db->from(TBL_ADMISSION);
+            $this->db->where('isDeleted', 0);
+            $this->db->where('id', $id);
+            $query = $this->db->get();
+            return $query->result();
+
+        }
+
+
 }
 
 ?>

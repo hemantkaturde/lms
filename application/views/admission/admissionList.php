@@ -1,4 +1,3 @@
-
 <div class="content-wrapper">
     <div class="page-content fade-in-up">
         <div class="ibox">

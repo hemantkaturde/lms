@@ -1,7 +1,6 @@
 <?php
 include_once('../db/config.php');
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     /*All post params here*/

@@ -329,62 +329,61 @@ $(document).on('change','.state',function(e){
 <?php if($pageTitle=='Enquiry Management' || $pageTitle=='Enquiry Edit'){?>
 <script type="text/javascript">
 
-$(document).on('change','#countryEnquiry',function(e){  
-	e.preventDefault();
-	//$(".loader_ajax").show();
-	var country_id = $('#countryEnquiry').val();
-	$.ajax({
-		url : "<?php echo ADMIN_PATH;?>getstates",
-		type: "POST",
-		data : {'country' : country_id},
-		success: function(data, textStatus, jqXHR)
-		{
-			$(".loader_ajax").hide();
-			if(data == "failure")
+	$(document).on('change','#countryEnquiry',function(e){  
+		e.preventDefault();
+		//$(".loader_ajax").show();
+		var country_id = $('#countryEnquiry').val();
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>getstates",
+			type: "POST",
+			data : {'country' : country_id},
+			success: function(data, textStatus, jqXHR)
+			{
+				$(".loader_ajax").hide();
+				if(data == "failure")
+				{
+					$('#stateEnquiry').html('<option value="">Select State</option>');
+				}
+				else
+				{
+					$('#stateEnquiry').html(data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown)
 			{
 				$('#stateEnquiry').html('<option value="">Select State</option>');
+				//$(".loader_ajax").hide();
 			}
-			else
+		});
+		return false;
+	});
+
+	$(document).on('change','#stateEnquiry',function(e){
+		e.preventDefault();
+		// $(".loader_ajax").show();
+		var state_id = $('#stateEnquiry').val();
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>getcities",
+			type: "POST",
+			data : {'state_id' : state_id},
+			success: function(data, textStatus, jqXHR)
 			{
-				$('#stateEnquiry').html(data);
-			}
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			$('#stateEnquiry').html('<option value="">Select State</option>');
-			//$(".loader_ajax").hide();
-		}
-	});
-	return false;
-});
-
-$(document).on('change','#stateEnquiry',function(e){
-	e.preventDefault();
-	// $(".loader_ajax").show();
-	var state_id = $('#stateEnquiry').val();
-	$.ajax({
-		url : "<?php echo ADMIN_PATH;?>getcities",
-		type: "POST",
-		data : {'state_id' : state_id},
-		success: function(data, textStatus, jqXHR)
-		{
-			$(".loader_ajax").hide();
-			if(data == "failure") {
+				$(".loader_ajax").hide();
+				if(data == "failure") {
+					$('#cityEnquiry').html('<option value="">Select City</option>');
+				
+				} else {
+					$('#cityEnquiry').html(data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
 				$('#cityEnquiry').html('<option value="">Select City</option>');
-			
-			} else {
-				$('#cityEnquiry').html(data);
+				//$(".loader_ajax").hide();
 			}
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			$('#cityEnquiry').html('<option value="">Select City</option>');
-			//$(".loader_ajax").hide();
-		}
+		});
+		return false;
 	});
-	return false;
-    });
-
 
     $(document).ready(function() {
             var dt = $('#view_enquirylist').DataTable({
@@ -1537,34 +1536,110 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Admission Listing'){?>
 <script type="text/javascript">
 
-$(document).ready(function() {
-				var dt = $('#admissionList').DataTable({
-					"columnDefs": [ 
-						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "12%", "targets": 1 },
-						{ "width": "20%", "targets": 2 },
-						{ "width": "20%", "targets": 3 },
-						{ "width": "20%", "targets": 4 },
-						{ "width": "10%", "targets": 5 },
-					],
-					responsive: true,
-					"oLanguage": {
-						"sEmptyTable": "<i>No Admissions Found.</i>",
-					}, 
-					"bSort" : false,
-					"bFilter":true,
-					"bLengthChange": true,
-					"iDisplayLength": 10,   
-					"bProcessing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"<?php echo base_url();?>fetchadmissions",
-						type: "post",
-					},
+	$(document).ready(function() {
+					var dt = $('#admissionList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "12%", "targets": 1 },
+							{ "width": "20%", "targets": 2 },
+							{ "width": "20%", "targets": 3 },
+							{ "width": "20%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Admissions Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchadmissions",
+							type: "post",
+						},
+					});
+	});
+
+	$(document).on('click','.delete_admission',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteAdmission",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											//swal("Deleted!", "", "success");
+											//location.reload();
+										//}
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													swal({
+														title: "Deleted!",
+														text: "",
+														icon: "success",
+														button: "Ok",
+														},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'admissionListing'?>";
+													});	
+											}else if(obj.status=='linked'){
+													swal({
+															title: "Admission Alreday In use!",
+															text: "",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																$("#popup_modal_sm").hide();
+																window.location.href = "<?php echo base_url().'admissionListing'?>";
+													});	
+											}else{
+
+												swal({
+														title: "Not Deleted!",
+														text: "",
+														icon: "success",
+														button: "Ok",
+														},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'admissionListing'?>";
+													});	
+											}	
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					swal("Cancelled", " ", "error");
+					}
 				});
-		});
-	
+	});
+
+
 </script>
 <?php } ?>
 

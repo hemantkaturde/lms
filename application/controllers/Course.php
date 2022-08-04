@@ -256,7 +256,7 @@
                }
                 echo json_encode($deletecourse_response);
             }
-       }
+        }
 
 
     public function courseTypeListing()

@@ -40,12 +40,6 @@
             echo json_encode($data);
         }
 
-        // function student_assets()
-        // {
-        //     $data['courses'] = $this->student_model->getCourses();
-        //     echo json_encode($data);
-        // }
-
         public function admission_insert($id)
         {
             $this->load->library('form_validation');
@@ -54,6 +48,7 @@
                 $enq_date = $this->security->xss_clean($this->input->post('adm_date'));
                 $source = $this->security->xss_clean($this->input->post('source'));
                 $remark = $this->security->xss_clean($this->input->post('remark'));
+                $alt_mobile = $this->security->xss_clean($this->input->post('alt_mobile'));
 
                 if(!empty($_FILES['photo']))
 	  			{
@@ -152,7 +147,7 @@
 	  			} 
                 if($id == 0)
                 {
-                    $admInfo = array('full_name'=>$name, 'admission_date'=> date('Y-m-d', strtotime($enq_date)), 'adm_source'=>$source, 'admission_remark'=>$remark,
+                    $admInfo = array('mobile'=>$mobile,'alt_mobile'=>$alt_mobile,'full_name'=>$name, 'admission_date'=> date('Y-m-d', strtotime($enq_date)), 'adm_source'=>$source, 'admission_remark'=>$remark,
                                 'adm_passportsize_photo'=>$photo, 'adm_adhar_photo'=>$adhar_card,'adm_pan_photo'=>$pan_card,
                                 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
                         
@@ -171,7 +166,7 @@
                     }
                 }else
                 {
-                    $admInfo = array('full_name'=>$name, 'admission_date'=> date('Y-m-d', strtotime($enq_date)),'adm_source'=>$source, 'admission_remark'=>$remark,
+                    $admInfo = array('mobile'=>$mobile,'alt_mobile'=>$alt_mobile,'full_name'=>$name, 'admission_date'=> date('Y-m-d', strtotime($enq_date)),'adm_source'=>$source, 'admission_remark'=>$remark,
                                 'adm_passportsize_photo'=>$photo, 'adm_adhar_photo'=>$adhar_card,'adm_pan_photo'=>$pan_card,
                                 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
 
@@ -191,47 +186,63 @@
                 }            
         }
 
-        // // ==== Delete Course
-        public function deleteAdmission($id)
-        {
-            $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-            $result = $this->database->data_update('tbl_admission',$enquiryInfo,'admissionId',$id);
-
-            if ($result > 0) {
-                 echo(json_encode(array('status'=>TRUE)));
-
-                 $process = 'Admission Delete';
-                 $processFunction = 'Admission/deleteAdmission';
-                 $this->logrecord($process,$processFunction);
-
+        public function deleteAdmission(){
+                $post_submit = $this->input->post();
+                if(!empty($post_submit)){
+                    $deleteadmission_response =array();
+                    $checkRelation = $this->admission_model->checkRelationadmission($this->input->post('id'));
+                    if($checkRelation){
+                        $deleteadmission_response['status'] = 'linked';
+                    }else{
+                        $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                        $result = $this->admission_model->data_update('tbl_admission',$courseInfo,'id',$this->input->post('id'));
+                        if($result){
+                            $deleteadmission_response['status'] = 'success';
+                            $process = 'Delete Admission';
+                            $processFunction = 'Admission/Delete Admission';
+                            $this->logrecord($process,$processFunction);
+                        }else
+                        {
+                            $deleteadmission_response['status'] = 'filure';
+                        }
                 }
-            else { echo(json_encode(array('status'=>FALSE))); }
+                    echo json_encode($deleteadmission_response);
+                }
         }
 
-     
         public function fetchadmissions(){
 
-            $params = $_REQUEST;
-            $totalRecords = $this->admission_model->getAdmissionsCount($params); 
-            $queryRecords = $this->admission_model->getAdmissionsdata($params); 
-            $data = array();
-            foreach ($queryRecords as $key => $value)
-            {
-                $i = 0;
-                foreach($value as $v)
+                $params = $_REQUEST;
+                $totalRecords = $this->admission_model->getAdmissionsCount($params); 
+                $queryRecords = $this->admission_model->getAdmissionsdata($params); 
+                $data = array();
+                foreach ($queryRecords as $key => $value)
                 {
-                    $data[$key][$i] = $v;
-                    $i++;
+                    $i = 0;
+                    foreach($value as $v)
+                    {
+                        $data[$key][$i] = $v;
+                        $i++;
+                    }
                 }
-            }
-            $json_data = array(
-                "draw"            => intval( $params['draw'] ),   
-                "recordsTotal"    => intval( $totalRecords ),  
-                "recordsFiltered" => intval($totalRecords),
-                "data"            => $data   // total data array
-                );
-    
-            echo json_encode($json_data);
+                $json_data = array(
+                    "draw"            => intval( $params['draw'] ),   
+                    "recordsTotal"    => intval( $totalRecords ),  
+                    "recordsFiltered" => intval($totalRecords),
+                    "data"            => $data   // total data array
+                    );
+        
+                echo json_encode($json_data);
+        }
+
+        public function viewadmissiondetails($id){
+
+            $process = 'View Admission Details';
+            $processFunction = 'Admission/viewadmissiondetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'View Admission Details';
+            $data['view_admission_details'] = $this->admission_model->viewAdmissionDetails($id);
+            $this->loadViews("admission/viewAdmissiondetails", $this->global, $data , NULL);
         }
 
     }

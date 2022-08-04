@@ -59,33 +59,28 @@ $route['getstates'] = "comman/getstates";
 $route['getcities'] = "comman/getcities";
 
 /*********** USER DEFINED ROUTES *******************/
-
 $route['loginMe'] = 'login/loginMe';
 $route['dashboard'] = 'admin';
 $route['logout'] = 'login/logout';
 
 /*********** ADMIN CONTROLLER ROUTES *******************/
-
 $route['userListing'] = 'admin/userListing';
 $route['fetchUsers'] = 'admin/fetchUsers';
 $route['createUser'] = 'admin/createUser';
 $route['updateUser/(:num)'] = 'admin/updateUser/$1';
 $route['deleteUser'] = "admin/deleteUser";
-
 $route['staffListing'] = 'admin/staffListing';
 $route['fetchStaff'] = 'admin/fetchStaff';
+
 /*********** ROLE CONTROLLER ROUTES *******************/
 $route['roleListing'] = "role/roleListing";
 $route['addRole'] = "role/addRole";
 $route['addNewRole'] = "role/addNewRole";
-
-
 $route['fetchrolelisting'] = "role/fetchrolelisting";
 $route['createRole'] = "role/createRole";
 $route['editRole/(:num)'] = "role/editRole/$1";
 $route['editRolerecord/(:num)'] = "role/editRolerecord/$1";
 $route['deleteRole'] = "role/deleteRole";
-
 
 /*********** Masters CONTROLLER ROUTES *******************/
 $route['coursetypelisting'] = "course/courseTypeListing";
@@ -101,11 +96,9 @@ $route['fetchcourse'] = "course/fetchcourse";
 $route['createcourse'] = "course/createcourse";
 $route['delete_course'] = "course/delete_course";
 $route['updatecourse/(:num)'] = "course/updatecourse/$1";
-
 $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
-
 
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
@@ -127,14 +120,14 @@ $route['paymentrecipt/(:any)'] = "enquiry/paymentrecipt";
 $route['new-registration-student/(:any)'] = "enquiry/newregistrationstudent";
 $route['newregistrationstudentdetails'] = "enquiry/newregistrationstudentdetails";
 $route['followup/(:any)'] = "enquiry/followup/$1";
-
-
-
-// $route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
+//$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/
 $route['admissionListing'] = "admission/admissionListing";
-$route['deleteAdmission/(:any)'] = "admission/deleteAdmission/$1";
+$route['fetchadmissions'] = "admission/fetchadmissions";
+$route['deleteAdmission'] = "admission/deleteAdmission";
+$route['viewadmissiondetails/(:any)'] = "admission/viewadmissiondetails/$1";
+
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
 $route['emailtemplateListing'] = "emailSetting/emailtemplateListing";
@@ -145,7 +138,3 @@ $route['emailsmtpListing'] = "emailSetting/emailsmtpListing";
 $route['deleteSmtp/(:any)'] = "emailSetting/deleteSmtp/$1";
 
 
-
-/* */
-
-$route['fetchadmissions'] = "admission/fetchadmissions";
