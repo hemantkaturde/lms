@@ -1,82 +1,82 @@
 <!-- Comman page javascript -->
 <script type="text/javascript">
 
-$(document).ready(function(){
-	  $(".select2_demo_1").select2();
-});
-	
-$(function() {
-    $(".datepicker").datepicker({ 
-		minDate: 0,
-		todayHighlight: true,
-        format: 'dd-mm-yyyy' ,
-		startDate: new Date()
-	});
-});
-
-$(document).on('click','.close',function(e){  
-	history.go(0);
-});
-
-var myDrop = new drop({
-    selector:  '#myMulti'
-});
-
-$(document).on('change','#country',function(e){  
-	e.preventDefault();
-	//$(".loader_ajax").show();
-	var country_id = $('#country').val();
-	$.ajax({
-		url : "<?php echo ADMIN_PATH;?>getstates",
-		type: "POST",
-		data : {'country' : country_id},
-		success: function(data, textStatus, jqXHR)
-		{
-			$(".loader_ajax").hide();
-			if(data == "failure")
-			{
-				$('#state').html('<option value="">Select State</option>');
-			}
-			else
-			{
-				$('#state').html(data);
-			}
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			$('#state').html('<option value="">Select State</option>');
-			//$(".loader_ajax").hide();
-		}
-	});
-	return false;
-});
-
-$(document).on('change','.state',function(e){
-	e.preventDefault();
-	// $(".loader_ajax").show();
-	var state_id = $('#state').val();
-	$.ajax({
-		url : "<?php echo ADMIN_PATH;?>getcities",
-		type: "POST",
-		data : {'state_id' : state_id},
-		success: function(data, textStatus, jqXHR)
-		{
-			$(".loader_ajax").hide();
-			if(data == "failure") {
-				$('#cityid').html('<option value="">Select City</option>');
+		$(document).ready(function(){
+			$(".select2_demo_1").select2();
+		});
 			
-			} else {
-				$('#city').html(data);
-			}
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			$('#city').html('<option value="">Select City</option>');
-			//$(".loader_ajax").hide();
-		}
-	});
-	return false;
-});
+		$(function() {
+			$(".datepicker").datepicker({ 
+				minDate: 0,
+				todayHighlight: true,
+				format: 'dd-mm-yyyy' ,
+				startDate: new Date()
+			});
+		});
+
+		$(document).on('click','.close',function(e){  
+			history.go(0);
+		});
+
+		var myDrop = new drop({
+			selector:  '#myMulti'
+		});
+
+		$(document).on('change','#country',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var country_id = $('#country').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getstates",
+				type: "POST",
+				data : {'country' : country_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#state').html('<option value="">Select State</option>');
+					}
+					else
+					{
+						$('#state').html(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#state').html('<option value="">Select State</option>');
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.state',function(e){
+			e.preventDefault();
+			// $(".loader_ajax").show();
+			var state_id = $('#state').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getcities",
+				type: "POST",
+				data : {'state_id' : state_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure") {
+						$('#cityid').html('<option value="">Select City</option>');
+					
+					} else {
+						$('#city').html(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#city').html('<option value="">Select City</option>');
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
 </script>
 
 <?php if($pageTitle=='Course Management'){?>
@@ -198,6 +198,19 @@ $(document).on('change','.state',function(e){
 						}
 					 }
 
+					 if(data[0].course_mode==1){
+						$('.radio_mode_yes').attr("checked", "checked");
+					 }else{
+						if(data[0].course_books==0){
+							$('.radio_mode_no').attr("checked", "checked");
+						}
+					 }
+
+					 $('#cgst1').val(data[0].course_cgst_tax_value);  
+					 $('#cgst_tax1').val(data[0].course_cgst); 
+					 $('#sgst1').val(data[0].course_sgst_tax_value);  
+					 $('#sgst_tax1').val(data[0].course_sgst);  
+					 $('#total_course_fees1').val(data[0].course_total_fees);  
                      $('#remarks1').val(data[0].course_remark);
                      $('#course_id').val(course_id);
                 }  
@@ -322,6 +335,106 @@ $(document).on('change','.state',function(e){
 					}
 				});
 	    });
+
+		$(document).on('blur', '#fees,#certificate_cost,#kit_cost,#one_time_admission_fees', function(){
+
+			if($("#fees").val()){
+				var fees = $("#fees").val();
+			}else{
+				var fees = 0;
+			}
+
+			if($("#certificate_cost").val()){
+				var certificate_cost = $("#certificate_cost").val();
+			}else{
+				var certificate_cost = 0;
+			}
+
+			if($("#kit_cost").val()){
+				var kit_cost = $("#kit_cost").val();
+			}else{
+				var kit_cost = 0;
+			}
+
+			if($("#one_time_admission_fees").val()){
+				var one_time_admission_fees = $("#one_time_admission_fees").val();
+			}else{
+				var one_time_admission_fees = 0;
+			}
+
+			if($("#cgst_tax").val()){
+				var cgst_tax = $("#cgst_tax").val();
+			}else{
+				var cgst_tax = 0;
+			}
+
+			if($("#sgst_tax").val()){
+				var sgst_tax = $("#sgst_tax").val();
+			}else{
+				var sgst_tax = 0;
+			}
+			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
+            var cgst_value = total_fees_befor_tax *  cgst_tax / 100 ;
+			$("#cgst").val(cgst_value);
+			var sgst_value = total_fees_befor_tax *  sgst_tax / 100 ;
+			$("#sgst").val(sgst_value);
+			var total_fees = total_fees_befor_tax + cgst_value +sgst_value;
+            $("#total_course_fees").val(total_fees);
+
+		});
+
+		$(document).on('blur', '#fees1,#certificate_cost1,#kit_cost1,#one_time_admission_fees1', function(){
+
+			if($("#fees1").val()){
+				var fees = $("#fees1").val();
+			}else{
+				var fees = 0;
+			}
+
+			if($("#certificate_cost1").val()){
+				var certificate_cost = $("#certificate_cost1").val();
+			}else{
+				var certificate_cost = 0;
+			}
+
+			if($("#kit_cost1").val()){
+				var kit_cost = $("#kit_cost1").val();
+			}else{
+				var kit_cost = 0;
+			}
+
+			if($("#one_time_admission_fees1").val()){
+				var one_time_admission_fees = $("#one_time_admission_fees1").val();
+			}else{
+				var one_time_admission_fees = 0;
+			}
+
+			if($("#cgst_tax1edit").val()){
+				var cgst_tax1edit = $("#cgst_tax1edit").val();
+			}else{
+				var cgst_tax1edit = 0;
+			}
+
+	
+			if($("#sgst_tax1edit").val()){
+				var sgst_tax1edit = $("#sgst_tax1edit").val();
+			}else{
+				var sgst_tax1edit = 0;
+			}
+
+			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
+
+            var cgst_value = total_fees_befor_tax *  cgst_tax1edit / 100 ;
+
+	
+			$("#cgst1").val(cgst_value);
+			var sgst_value = total_fees_befor_tax *  sgst_tax1edit / 100 ;
+			$("#sgst1").val(sgst_value);
+			var total_fees = total_fees_befor_tax + cgst_value +sgst_value;
+            $("#total_course_fees1").val(Math.round(total_fees));
+
+		});
+		
     </script>   
 <?php } ?>
 
@@ -392,11 +505,11 @@ $(document).on('change','.state',function(e){
 	                 { "width": "10%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
 	                 { "width": "20%", "targets": 2 },
-	                 { "width": "10%", "targets": 3 },
+	                 { "width": "8%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },
-					 { "width": "35%", "targets": 7 }
+					 { "width": "41%", "targets": 7 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -409,7 +522,7 @@ $(document).on('change','.state',function(e){
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>/fetchenquiry",
+                    url :"<?php echo base_url();?>fetchenquiry",
                     type: "post",
 	            },
 	        });
@@ -1535,7 +1648,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Admission Listing'){?>
 <script type="text/javascript">
-
 	$(document).ready(function() {
 					var dt = $('#admissionList').DataTable({
 						"columnDefs": [ 
@@ -1638,8 +1750,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 				});
 	});
-
-
 </script>
 <?php } ?>
 
@@ -1650,6 +1760,227 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 	</script>
+<?php } ?>
+
+<?php  if($pageTitle=='SMTP Configuration'){ ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+					var dt = $('#smtpsettingList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "15%", "targets": 0 },
+							{ "width": "8%", "targets": 1 },
+							{ "width": "20%", "targets": 2 },
+							{ "width": "20%", "targets": 3 },
+							{ "width": "20%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No User Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchSmtpsetting",
+							type: "post",
+						},
+					});
+		});
+
+		$(document).on('click','#save_smtp_setting',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#email_smtp_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>createemailsmtp",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "SMTP Configuration Created!",
+							//text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'emailsmtpListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.edit_smtp',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var smtpId = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>emailSetting/get_single_emailSmtp/"+smtpId,  
+                method:"POST",  
+                data:{smtpId:smtpId},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                     $('#editEmailSMTP').modal('show');
+                     $('#smtp_host1').val(data[0].smtp_host);  
+					 $('#smtp_port1').val(data[0].smtp_port);
+					 $('#protocol1').val(data[0].smtp_protocol);
+					 $('#smtp_username1').val(data[0].smtp_username);
+					 $('#smtp_password1').val(data[0].smtp_password);
+					 $('#from_name1').val(data[0].from_name);
+					 $('#email_name1').val(data[0].email_name);
+					 $('#cc_email1').val(data[0].cc_email);
+					 $('#bcc_email1').val(data[0].bcc_email);
+                     $('#smtpId').val(smtpId);
+                }  
+           })
+        });
+
+		$(document).on('click','#update_smtp_setting',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#edit_email_smtp_form")[0]);
+			var id = $("#userId").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateSMTP/"+id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "SMTP Configuaration Updated!",
+							text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'emailsmtpListing'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+		
+			    }
+			});
+			return false;
+	    });
+		
+		$(document).on('click','.delete_smtp',function(e){
+
+				var elemF = $(this);
+				e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletesmtp",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											// if(data.status=='success'){
+												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// location.reload();
+											//}
+											const obj = JSON.parse(data);
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'emailsmtpListing'?>";
+												});	
+										  }else if(obj.status=='linked') {
+												swal({
+													title: "Role Already In Use",
+													text: "",
+													icon: "error",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'emailsmtpListing'?>";
+												});	
+										  }else{
+											    swal({
+													title: "Not Deleted",
+													text: "",
+													icon: "error",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'emailsmtpListing'?>";
+												});	
+										  }
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											//$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						}
+					});
+	    });
+
+    </script>
 <?php } ?>
 
 

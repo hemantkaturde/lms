@@ -1,4 +1,17 @@
-<?php include_once('../db/config.php'); 
+<?php
+
+if($_SERVER['HTTP_HOST'] == 'localhost')
+{
+	$scheme = 'http://';
+}
+else
+{
+	$scheme = 'https://';
+}
+$ark_root  = $scheme.$_SERVER['HTTP_HOST'];
+$ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+
+include_once('../db/config.php'); 
 $sql = "SELECT * FROM tbl_users where  isDeleted='0' and  user_flag='staff'" ;
 $result = $conn->query($sql);
 ?>
@@ -150,7 +163,7 @@ $result = $conn->query($sql);
                             </div>
 
                             <div class="card-body">
-                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="../registration_submit.php" method="POST"  enctype="multipart/form-data" autocomplete="off">
+                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="./registration_submit.php" method="POST"  enctype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" class="form-control" id="enq_id" name="enq_id" value="<?php echo $enq_id;?>">
                                     <div class="form-group row">
                                         <label class="col-sm-12 form-control-label text-info">PERSONAL DETAILS </label>
@@ -717,7 +730,7 @@ $(document).ready(function() {
     $('#country').on('change', function() {
             var country_id = this.value;
             $.ajax({
-                url: "../states-by-country.php",
+                url: '<?php echo $ark_root;?>states-by-country.php',
                 type: "POST",
                 data: {
                     country_id: country_id
@@ -734,7 +747,7 @@ $(document).ready(function() {
     $('#state').on('change', function() {
             var state_id = this.value;
             $.ajax({
-                url: "../cities-by-state.php",
+                url: '<?php echo $ark_root;?>cities-by-state.php',
                 type: "POST",
                 data: {
                     state_id: state_id

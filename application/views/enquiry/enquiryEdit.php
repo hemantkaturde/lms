@@ -95,7 +95,7 @@ if(!empty($editDataenquiry))
                                                 <label style="text-align: left;" for="qualification">Qualification<span class="required">*</span>
                                                 </label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="20"
+                                                    <input autocomplete="off" autocomplete="off" 
                                                         type="text" id="qualification1"
                                                         placeholder="Enter Qualification" name="qualification"
                                                         value="<?php echo $enq_qualification; ?>"
@@ -245,7 +245,7 @@ if(!empty($editDataenquiry))
                             <div class="form-group">
                                 <!-- ENTER BUTTON HERE -->
                                 <input type="button" id="update_enquiry" class="btn btn-primary" value="UPDATE" />
-                                <input type="button" onclick="location.href='<?php echo base_url().'roleListing'?>'"
+                                <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
                                     class="btn btn-default" value="CANCEL" />
                             </div>
                         </div>

@@ -59,7 +59,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <label style="text-align: left;"  for="course_type_name">Course Type<span class="required">*</span>
                                 </label>
                                 <div >
-                                    <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="course_type_name" name="course_type_name"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
+                                    <input autocomplete="off" autocomplete="off"  type="text" id="course_type_name" name="course_type_name"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
                                     <p class="error course_type_name_error"></p>
                                 </div>
                             </div>
@@ -99,9 +99,9 @@ $jsonstringtoArray = json_decode($access, true);
                                 <label style="text-align: left;"  for="course_type_name">Course Type<span class="required">*</span>
                                 </label>
                                 <div >
-                                    <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="course_type_name_1" name="course_type_name_1"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
+                                    <input autocomplete="off" autocomplete="off"  type="text" id="course_type_name_1" name="course_type_name_1"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
                                     <p class="error course_type_name_1_error"></p>
-                                    <input autocomplete="off" autocomplete="off" maxlength="20" type="hidden" id="coursetype_id" name="coursetype_id"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
+                                    <input autocomplete="off" autocomplete="off"  type="hidden" id="coursetype_id" name="coursetype_id"  placeholder="Enter Course Type" class="form-control col-md-12 col-xs-12">
                                 </div>
                             </div>
                         </div>

@@ -65,7 +65,7 @@
                     $course_result = $conn->query($get_course_fees);
                     $row_course = $course_result->fetch_assoc(); 
                     $total_fees += $row_course['course_total_fees'];
-                    $course_name .= $i.'-'.$row_course['course_name']. ',';    
+                    $course_name .= $i++.'-'.$row_course['course_name']. ',';    
                 }
                   $all_course_name = trim($course_name, ', ');
               ?>

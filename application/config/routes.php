@@ -127,6 +127,7 @@ $route['admissionListing'] = "admission/admissionListing";
 $route['fetchadmissions'] = "admission/fetchadmissions";
 $route['deleteAdmission'] = "admission/deleteAdmission";
 $route['viewadmissiondetails/(:any)'] = "admission/viewadmissiondetails/$1";
+$route['editadmission/(:any)'] = "admission/editadmission/$1";
 
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
@@ -135,6 +136,10 @@ $route['deleteTemplate/(:any)'] = "emailSetting/deleteTemplate/$1";
 
 // SMTP
 $route['emailsmtpListing'] = "emailSetting/emailsmtpListing";
-$route['deleteSmtp/(:any)'] = "emailSetting/deleteSmtp/$1";
+//$route['deleteSmtp/(:any)'] = "emailSetting/deleteSmtp/$1";
+$route['fetchSmtpsetting'] = 'emailSetting/fetchSmtpsetting';
+$route['createemailsmtp'] = 'emailSetting/createemailsmtp';
+$route['deletesmtp'] = 'emailSetting/deletesmtp';
+$route['updateSMTP/(:any)'] = 'emailSetting/updateSMTP/$1';
 
 

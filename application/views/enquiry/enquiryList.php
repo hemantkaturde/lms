@@ -97,7 +97,7 @@
                      <label style="text-align: left;"  for="qualification">Qualification<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="qualification"  placeholder="Enter Qualification" name="qualification" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="text" id="qualification"  placeholder="Enter Qualification" name="qualification" class="form-control col-md-12 col-xs-12">
                         <p class="error qualification_error"></p>
                      </div>
                   </div>
@@ -125,7 +125,7 @@
                      <label style="text-align: left;"  for="purpose">Purpose
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="purpose"  placeholder="Enter Purpose" name="purpose" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="text" id="purpose"  placeholder="Enter Purpose" name="purpose" class="form-control col-md-12 col-xs-12">
                         <p class="error purpose_error"></p>
                      </div>
                   </div>
@@ -200,7 +200,7 @@
                      <label style="text-align: left;" for="remarks">Remarks
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="remarks" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="text" id="remarks" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
                         <p class="error remarks_error"></p>
                      </div>
                    </div>

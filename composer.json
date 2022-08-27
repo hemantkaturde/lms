@@ -13,7 +13,9 @@
 	"require": {
 		"php": ">=5.3.7",
 		"phpmailer/phpmailer": "^6.6",
-		"razorpay/razorpay": "2.*"
+		"razorpay/razorpay": "2.*",
+		"setasign/fpdf": "^1.8",
+		"setasign/fpdi-fpdf": "^2.3"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

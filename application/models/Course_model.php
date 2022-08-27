@@ -64,7 +64,7 @@ class Course_model extends CI_Model
         */ 
         public function getCourseInfo($courseId)
         {
-            $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books');
+            $this->db->select('BaseTbl.*,BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books');
             $this->db->from('tbl_course as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
             $this->db->where('BaseTbl.courseId', $courseId);
@@ -205,10 +205,10 @@ class Course_model extends CI_Model
                      $data[$counter]['action'] = '';
                      //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                      if(in_array("coursedit", $jsonstringtoArray)){
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a>&nbsp;";
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a> | ";
                      }
                      if(in_array("coursedelete", $jsonstringtoArray)){
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course' title='Delete Course'></a>&nbsp"; 
+                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course' title='Delete Course'></a>"; 
                      }
                      //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                      //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
@@ -299,11 +299,11 @@ class Course_model extends CI_Model
                  $data[$counter]['action'] = '';
 
                  if(in_array("coursetypedit", $jsonstringtoArray)){
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a>&nbsp;";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
                  }
 
                  if(in_array("coursetypedelete", $jsonstringtoArray)){
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>&nbsp"; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_type' data-id='".$value['ct_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>"; 
                  }
                 $counter++; 
             }

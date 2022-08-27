@@ -52,7 +52,7 @@
                      </label>
                      <div>
                         <input type="hidden" name="user_flag" id="user_flag" value="user">
-                        <input  maxlength="20" type="text" id="name" name="name" autocomplete="off" placeholder="Enter Full Name Here" class="form-control col-md-12 col-xs-12">
+                        <input   type="text" id="name" name="name" autocomplete="off" placeholder="Enter Full Name Here" class="form-control col-md-12 col-xs-12">
                         <p class="error name_error"></p>
                      </div>
                   </div>
@@ -159,7 +159,7 @@
                      <div>
                         <input type="hidden" name="user_flag1" id="user_flag1" value="user">
                         <input type="hidden" name="userId" id="userId">
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="name1" name="name1"  placeholder="Enter Full Name Here" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="text" id="name1" name="name1"  placeholder="Enter Full Name Here" class="form-control col-md-12 col-xs-12">
                         <p class="error name1_error"></p>
                      </div>
                   </div>

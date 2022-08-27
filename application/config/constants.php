@@ -89,6 +89,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 /*********** TABLES  *******************/
 define('TBL_COURSE', 'tbl_course');
 define('TBL_COURSE_TYPE', 'tbl_course_type');
+define('TBL_COUNTRY', 'tbl_countries');
 define('TBL_STATES', 'tbl_states');
 define('TBL_CITIES', 'tbl_cities');
 define('TBL_ENQUIRY', 'tbl_enquiry');
@@ -96,6 +97,8 @@ define('TBL_PAYMENT', 'tbl_payment_transaction');
 define('TBL_USER','tbl_users');
 define('TBL_ROLES','tbl_roles');
 define('TBL_ADMISSION','tbl_admission');
+define('TBL_EMAIL_SMTP','tbl_email_smtp');
+
 
 
 
@@ -107,8 +110,6 @@ define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
 define('FROM_EMAIL','hemantkaturde123@gmail.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
-
-
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){

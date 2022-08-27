@@ -26,7 +26,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">10</h2>
+                        <h2 class="m-b-5 font-strong"><?php echo $admissions; ?></h2>
                         <div class="m-b-5">ADMISSIONS</div><i class="fa fa-money widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div> -->
                         <div><i class="fa fa-level-up m-r-5"></i><small><a  class="dashbord-short-link totaladmissions" href="<?php echo base_url().'enquirylisting'?>">Total Admissions</a></small></div>

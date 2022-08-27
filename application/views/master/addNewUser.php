@@ -72,13 +72,13 @@ if(!empty($userInfo))
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password" class="form-control required" id="password" name="password" maxlength="20" placeholder="Enter Password" required="">
+                                        <input type="password" class="form-control required" id="password" name="password"  placeholder="Enter Password" required="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cpassword">Confirm Password</label>
-                                        <input type="password" class="form-control required equalTo" id="cpassword" name="cpassword" maxlength="20" placeholder="Confirm Your Password" required="">
+                                        <input type="password" class="form-control required equalTo" id="cpassword" name="cpassword"  placeholder="Confirm Your Password" required="">
                                     </div>
                                 </div>
                             </div>

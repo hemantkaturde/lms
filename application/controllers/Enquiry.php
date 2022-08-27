@@ -403,7 +403,7 @@
                                         data-amount="1000" data-id="1">Pay Now</a>
                                         
                                         </div>
-                                        <div style="color: #777; padding: 5px;">Due by 30 Sept, 2017</div>
+                                        <div style="color: #777; padding: 5px;"></div>
                                         <div><br></div>
                                         </td>
                                         </tr>

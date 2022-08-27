@@ -95,7 +95,15 @@
                     $kit_cost  = 0;
                 }
 
-                $total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
+                $total_course_fees  = $this->input->post('total_course_fees');
+
+                $sgst_tax  = $this->input->post('sgst_tax');
+                $sgst_tax_value  = $this->input->post('sgst');
+                
+                $cgst_tax  = $this->input->post('cgst_tax');
+                $cgst_tax_value   = $this->input->post('cgst');
+
+                //$total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
 
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
@@ -107,19 +115,25 @@
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
                     'course_books'=>$this->input->post('course_books'),
                     'course_remark' => $this->input->post('remarks'),
-                    'course_total_fees' => $total_fess_cost
+                    'course_mode'=>$this->input->post('course_mode'),
+                    'course_cgst' => $cgst_tax,
+                    'course_cgst_tax_value' => $cgst_tax_value,
+                    'course_sgst' => $sgst_tax,
+                    'course_sgst_tax_value' => $sgst_tax_value,
+                    'course_total_fees' => $total_course_fees
                 );
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
                 $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
-
                 $this->form_validation->set_rules('description', 'Description', 'trim');
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
                 $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
                 $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
                 $this->form_validation->set_rules('remarks', 'remarks', 'trim');
+                $this->form_validation->set_rules('total_course_fees', 'Total Course Fees', 'trim|required');
+                $this->form_validation->set_rules('course_mode', 'Course_mode', 'trim');
 
                 if($this->form_validation->run() == FALSE){
                     $createcourse_response['status'] = 'failure';
@@ -177,7 +191,15 @@
                     $kit_cost  = 0;
                 }
 
-                $total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
+               // $total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
+
+                $total_course_fees  = $this->input->post('total_course_fees');
+
+                $sgst_tax  = $this->input->post('sgst_tax');
+                $sgst_tax_value  = $this->input->post('sgst');
+                
+                $cgst_tax  = $this->input->post('cgst_tax');
+                $cgst_tax_value   = $this->input->post('cgst');
 
 
                 $data = array(
@@ -190,7 +212,12 @@
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
                     'course_books'=>$this->input->post('course_books'),
                     'course_remark' => $this->input->post('remarks'),
-                    'course_total_fees' => $total_fess_cost
+                    'course_mode'=>$this->input->post('course_mode'),
+                    'course_cgst' => $cgst_tax,
+                    'course_cgst_tax_value' => $cgst_tax_value,
+                    'course_sgst' => $sgst_tax,
+                    'course_sgst_tax_value' => $sgst_tax_value,
+                    'course_total_fees' => $total_course_fees
                 );
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');

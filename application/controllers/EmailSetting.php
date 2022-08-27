@@ -13,6 +13,7 @@
             $this->load->model('login_model');
             $this->load->model('emailSetting_model');
             $this->load->model('database');
+            $this->load->library('form_validation');
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
             $this->datas();
@@ -113,33 +114,22 @@
                 }
             else { echo(json_encode(array('status'=>FALSE))); }
         }
-
         // ===============================  
         //  SMTP Setting
         public function emailsmtpListing()
         {
-            $searchText = $this->security->xss_clean($this->input->post('searchText'));
-            $data['searchText'] = $searchText;
-            
-            // $this->load->library('pagination');
-            
-            // $count = $this->role_model->roleListingCount($searchText);
 
-			// $returns = $this->paginationCompress ( "roleListing/", $count, 10 );
-            
-            $data['smtp'] = $this->emailSetting_model->emailsmtpListing($searchText);
-            // $data['userRecords'] = $this->role_model->roleListing($searchText, $returns["page"], $returns["segment"]);
             $process = 'Email SMTP Listing';
             $processFunction = 'emailSetting/emailsmtpListing';
             $this->logrecord($process,$processFunction);
 
-            $this->global['pageTitle'] = 'ADMIN : Email SMTP';
-            $this->loadViews("emailSetting/emailsmtpList", $this->global, $data , NULL);
+            $this->global['pageTitle'] = 'SMTP Configuration';
+            $this->loadViews("emailSetting/emailsmtpList", $this->global, NULL , NULL);
         }
 
         function get_single_emailSmtp($smtpId = NULL)
         {
-            $data['smtpInfo'] = $this->emailSetting_model->getSmtpInfo($smtpId);
+            $data = $this->emailSetting_model->getSmtpInfo($smtpId);
             echo json_encode($data);
         }
 
@@ -191,25 +181,141 @@
                 }            
         }
 
-        // ==== Delete Course
-        public function deleteSmtp($id)
-        {
-            $smtpInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-            $result = $this->database->data_update('tbl_email_smtp',$smtpInfo,'smtpId',$id);
+        public function fetchSmtpsetting(){
+            $params = $_REQUEST;
+            $totalRecords = $this->emailSetting_model->getTemplateCount($params); 
+            $queryRecords = $this->emailSetting_model->getTemplatedata($params); 
 
-            if ($result > 0) {
-                 echo(json_encode(array('status'=>TRUE)));
-
-                 $process = 'Template Delete';
-                 $processFunction = 'EmailSetting/deleteSmtp';
-                 $this->logrecord($process,$processFunction);
-
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
                 }
-            else { echo(json_encode(array('status'=>FALSE))); }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+            echo json_encode($json_data);
         }
 
+        public function createemailsmtp(){
 
-        // ===============================
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $createsmtp_response = array();
+                $this->form_validation->set_rules('smtp_host', 'SMTP Host', 'trim|required');
+                $this->form_validation->set_rules('smtp_port', 'SMTP Port', 'trim|required');
+                $this->form_validation->set_rules('protocol', 'Protocol', 'trim|required');
+                $this->form_validation->set_rules('smtp_username', 'SMTP Username', 'trim|required');
+                $this->form_validation->set_rules('smtp_password', 'SMTP Password', 'trim|required');
+                $this->form_validation->set_rules('from_name', 'From Name', 'trim|required');
+                $this->form_validation->set_rules('email_name', 'Email Name', 'trim|required');
+                $this->form_validation->set_rules('cc_email', 'CC Email', 'trim');
+                $this->form_validation->set_rules('bcc_email', 'Bcc Email', 'trim');
+
+                if($this->form_validation->run() == FALSE){
+                    $createsmtp_response['status'] = 'failure';
+                    $createsmtp_response['error'] = array('smtp_host'=>strip_tags(form_error('smtp_host')), 'smtp_port'=>strip_tags(form_error('smtp_port')), 'protocol'=>strip_tags(form_error('protocol')), 'smtp_username'=>strip_tags(form_error('smtp_username')),'smtp_password'=>strip_tags(form_error('smtp_password')),'from_name'=>strip_tags(form_error('from_name')),'email_name'=>strip_tags(form_error('email_name')),'cc_email'=>strip_tags(form_error('cc_email')),'bcc_email'=>strip_tags(form_error('bcc_email')));
+                }else{
+
+                    $data = array(
+                        'smtp_host' => $this->input->post('smtp_host'),
+                        'smtp_port'=> $this->input->post('smtp_port'),
+                        'smtp_protocol' => $this->input->post('protocol'),
+                        'smtp_username'=> $this->input->post('smtp_username'),
+                        'smtp_password' => $this->input->post('smtp_password'),
+                        'from_name' => $this->input->post('from_name'),
+                        'email_name' => $this->input->post('email_name'),
+                        'cc_email' => $this->input->post('cc_email'),
+                        'bcc_email'=> $this->input->post('bcc_email'),
+                    );
+
+                    $saveSmtpdata = $this->emailSetting_model->saveSmtpdata('',$data);
+                    if($saveSmtpdata){
+                        $createsmtp_response['status'] = 'success';
+                        $createsmtp_response['error'] = array('smtp_host'=>'', 'smtp_port'=>'', 'protocol'=>'', 'smtp_username'=>'','smtp_password'=>'','from_name'=>'','email_name'=>'','cc_email'=>'','bcc_email'=>'');
+                    }else{
+                        $createsmtp_response['status'] = 'failure';
+                        $createsmtp_response['error'] = array('smtp_host'=>'', 'smtp_port'=>'', 'protocol'=>'', 'smtp_username'=>'','smtp_password'=>'','from_name'=>'','email_name'=>'','cc_email'=>'','bcc_email'=>'');
+                    }
+
+                }
+                echo json_encode($createsmtp_response);
+            }
+
+        }
+
+        public function deletesmtp(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $deletesmtp_response =array();
+                    $Info = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->emailSetting_model->data_update('tbl_email_smtp',$Info,'smtpId',$this->input->post('id'));
+                    if($result){
+                        $deletesmtp_response['status'] = 'success';
+                        $process = 'Delete SMTP';
+                        $processFunction = 'EmailSetting/Delete SMTP';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $deletesmtp_response['status'] = 'filure';
+                    }
+          
+                echo json_encode($deletesmtp_response);
+            }
+        }
+
+        public function updateSMTP(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $createsmtp_response = array();
+                $this->form_validation->set_rules('smtp_host', 'SMTP Host', 'trim|required');
+                $this->form_validation->set_rules('smtp_port', 'SMTP Port', 'trim|required');
+                $this->form_validation->set_rules('protocol', 'Protocol', 'trim|required');
+                $this->form_validation->set_rules('smtp_username', 'SMTP Username', 'trim|required');
+                $this->form_validation->set_rules('smtp_password', 'SMTP Password', 'trim|required');
+                $this->form_validation->set_rules('from_name', 'From Name', 'trim|required');
+                $this->form_validation->set_rules('email_name', 'Email Name', 'trim|required');
+                $this->form_validation->set_rules('cc_email', 'CC Email', 'trim');
+                $this->form_validation->set_rules('bcc_email', 'Bcc Email', 'trim');
+
+                if($this->form_validation->run() == FALSE){
+                    $createsmtp_response['status'] = 'failure';
+                    $createsmtp_response['error'] = array('smtp_host'=>strip_tags(form_error('smtp_host')), 'smtp_port'=>strip_tags(form_error('smtp_port')), 'protocol'=>strip_tags(form_error('protocol')), 'smtp_username'=>strip_tags(form_error('smtp_username')),'smtp_password'=>strip_tags(form_error('smtp_password')),'from_name'=>strip_tags(form_error('from_name')),'email_name'=>strip_tags(form_error('email_name')),'cc_email'=>strip_tags(form_error('cc_email')),'bcc_email'=>strip_tags(form_error('bcc_email')));
+                }else{
+
+                    $data = array(
+                        'smtp_host' => $this->input->post('smtp_host'),
+                        'smtp_port'=> $this->input->post('smtp_port'),
+                        'smtp_protocol' => $this->input->post('protocol'),
+                        'smtp_username'=> $this->input->post('smtp_username'),
+                        'smtp_password' => $this->input->post('smtp_password'),
+                        'from_name' => $this->input->post('from_name'),
+                        'email_name' => $this->input->post('email_name'),
+                        'cc_email' => $this->input->post('cc_email'),
+                        'bcc_email'=> $this->input->post('bcc_email'),
+                    );
+
+                    $saveSmtpdata = $this->emailSetting_model->saveSmtpdata($this->input->post('smtpId'),$data);
+                    if($saveSmtpdata){
+                        $createsmtp_response['status'] = 'success';
+                        $createsmtp_response['error'] = array('smtp_host'=>'', 'smtp_port'=>'', 'protocol'=>'', 'smtp_username'=>'','smtp_password'=>'','from_name'=>'','email_name'=>'','cc_email'=>'','bcc_email'=>'');
+                    }else{
+                        $createsmtp_response['status'] = 'failure';
+                        $createsmtp_response['error'] = array('smtp_host'=>'', 'smtp_port'=>'', 'protocol'=>'', 'smtp_username'=>'','smtp_password'=>'','from_name'=>'','email_name'=>'','cc_email'=>'','bcc_email'=>'');
+                    }
+
+                }
+                echo json_encode($createsmtp_response);
+            }
+        }
 
     }
 

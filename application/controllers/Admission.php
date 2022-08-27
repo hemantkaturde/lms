@@ -236,7 +236,6 @@
         }
 
         public function viewadmissiondetails($id){
-
             $process = 'View Admission Details';
             $processFunction = 'Admission/viewadmissiondetails';
             $this->logrecord($process,$processFunction);
@@ -244,6 +243,23 @@
             $data['view_admission_details'] = $this->admission_model->viewAdmissionDetails($id);
             $this->loadViews("admission/viewAdmissiondetails", $this->global, $data , NULL);
         }
+
+        public function editadmission($id){
+
+            
+            $process = 'Admission Edit';
+            $processFunction = 'Enquiry/enquiryEdit';
+            $this->logrecord($process,$processFunction);
+            // $data['course_List'] = $this->comman_model->getCourseList();
+            // $data['editDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            // $data['state_List'] = $this->comman_model->selectAllStates($data['editDataenquiry'][0]->enq_country,$data['editDataenquiry'][0]->enq_state);
+            // $data['city_List'] = $this->comman_model->selectAllCities($data['editDataenquiry'][0]->enq_state,$data['editDataenquiry'][0]->enq_city);
+            $this->global['pageTitle'] = 'Admission Management';
+            $this->loadViews("enquiry/enquiryEdit", $this->global, $data , NULL);
+
+
+        }
+
 
     }
 

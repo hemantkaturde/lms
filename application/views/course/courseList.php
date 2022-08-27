@@ -60,26 +60,17 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="course_name">Course Name<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="course_name" name="course_name"  placeholder="Enter Course Name" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="text" id="course_name" name="course_name"  placeholder="Enter Course Name" class="form-control col-md-12 col-xs-12">
                         <p class="error course_name_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="fees">Fees<span class="required">*</span>
+                     <label style="text-align: left;"  for="description">Description
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="fees" name="fees"  placeholder="Enter Fees" class="form-control col-md-12 col-xs-12">
-                        <p class="error fees_error"></p>
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees
-                     </label>
-                     <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="one_time_admission_fees"  placeholder="Enter One time admission fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
-                        <p class="error one_time_admission_fees_error"></p>
+                        <input autocomplete="off" autocomplete="off"  type="text" id="description" name="description" placeholder="Enter Description" class="form-control col-md-12 col-xs-12">
+                        <p class="error description_error"></p>
                      </div>
                   </div>
 
@@ -96,6 +87,15 @@ $jsonstringtoArray = json_decode($access, true);
                   </div>
 
                   <div class="form-group">
+                     <label style="text-align: left;" for="remarks">Remarks
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off"  type="text" id="remarks" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
+                        <p class="error remarks_error"></p>
+                     </div>
+                   </div>
+
+                  <div class="form-group">
                      <label style="text-align: left;"  for="books">Books <span class="required">*</span>
                      </label>
                      <div >
@@ -103,16 +103,27 @@ $jsonstringtoArray = json_decode($access, true);
                           <input type="radio" name="course_books" id="course_books" value="0" style="margin-left:20px;" checked> No
                      </div>
                      <p class="error course_books_error"></p>
-
                   </div>
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-12">
+
                   <div class="form-group">
-                     <label style="text-align: left;"  for="description">Description
+                     <label style="text-align: left;"  for="course_mode">Select Course Mode <span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="description" name="description" placeholder="Enter Description" class="form-control col-md-12 col-xs-12">
-                        <p class="error description_error"></p>
+                          <input type="radio" name="course_mode" id="course_mode" value="1"> Online
+                          <input type="radio" name="course_mode" id="course_mode" value="0" style="margin-left:20px;" checked> Offline
+                     </div>
+                     <p class="error course_mode_error"></p>
+                  </div>
+
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="fees">Fees<span class="required">*</span>
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off"  type="number" id="fees" name="fees"  placeholder="Enter Fees" class="form-control col-md-12 col-xs-12">
+                        <p class="error fees_error"></p>
                      </div>
                   </div>
 
@@ -120,7 +131,7 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="certificate_cost">Certificate Cost
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="certificate_cost" name="certificate_cost" placeholder="Enter Certificate Cost" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="certificate_cost" name="certificate_cost" placeholder="Enter Certificate Cost" class="form-control col-md-12 col-xs-12">
                         <p class="error certificate_cost_error"></p>
                      </div>
                    </div>
@@ -129,19 +140,51 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="kit_cost">Kit cost
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="kit_cost" name="kit_cost" placeholder="Enter Kit cost" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="kit_cost" name="kit_cost" placeholder="Enter Kit cost" class="form-control col-md-12 col-xs-12">
                         <p class="error kit_cost_error"></p>
                      </div>
                    </div>
 
-                   <div class="form-group">
-                     <label style="text-align: left;" for="remarks">Remarks
+                   
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="remarks" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
-                        <p class="error remarks_error"></p>
+                        <input autocomplete="off" autocomplete="off"  type="number" id="one_time_admission_fees"  placeholder="Enter One time admission fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
+                        <p class="error one_time_admission_fees_error"></p>
                      </div>
-                   </div>
+                  </div>
+           
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="cgst">CGST (9 %)
+                     </label>
+                     <div >
+                        <input type="hidden" id="cgst_tax" value="9" name="cgst_tax" >
+                        <input type="number" id="cgst" readonly placeholder="Enter CGST" name="cgst" class="form-control col-md-12 col-xs-12">
+                        <p class="error cgst_error"></p>
+                     </div>
+                  </div>
+
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="sgst">SGST (9 %)
+                     </label>
+                     <div>
+                        <input type="hidden" id="sgst_tax" value="9" name="sgst_tax" >
+                        <input type="number" id="sgst" readonly placeholder="Enter SGST" name="sgst" class="form-control col-md-12 col-xs-12">
+                        <p class="error sgst_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="sgst">Total Course Fees (All Inclusive)
+                     </label>
+                     <div>
+                        <input type="number" id="total_course_fees" readonly placeholder="Total Course Fees" name="total_course_fees" class="form-control col-md-12 col-xs-12">
+                        <p class="error total_course_fees_error"></p>
+                     </div>
+                  </div>
+
               </div>
             </div>
           </div>
@@ -176,28 +219,20 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="course_name">Course Name<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="course_name1" name="course_name"  placeholder="Enter Course Name" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="text" id="course_name1" name="course_name"  placeholder="Enter Course Name" class="form-control col-md-12 col-xs-12">
                         <p class="error course_name_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="fees">Fees<span class="required">*</span>
+                     <label style="text-align: left;"  for="description">Description
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="fees1" name="fees"  placeholder="Enter Fees" class="form-control col-md-12 col-xs-12">
-                        <p class="error fees_error"></p>
+                        <input autocomplete="off" autocomplete="off"  type="text" id="description1" name="description" placeholder="Enter Description" class="form-control col-md-12 col-xs-12">
+                        <p class="error description_error"></p>
                      </div>
                   </div>
-
-                  <div class="form-group">
-                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees
-                     </label>
-                     <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="one_time_admission_fees1"  placeholder="Enter One time admission fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
-                        <p class="error one_time_admission_fees_error"></p>
-                     </div>
-                  </div>
+                 
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="course_type">Course Type<span class="required">*</span>
@@ -212,6 +247,16 @@ $jsonstringtoArray = json_decode($access, true);
                   </div>
 
                   <div class="form-group">
+                     <label style="text-align: left;" for="remarks">Remarks
+                     </label>
+                     <div >
+                        <input autocomplete="off" autocomplete="off"  type="text" id="remarks1" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
+                        <p class="error remarks_error"></p>
+                        <input id="course_id" name="course_id" type="hidden">
+                     </div>
+                   </div>
+
+                  <div class="form-group">
                      <label style="text-align: left;"  for="books">Books <span class="required">*</span>
                      </label>
                      <div >
@@ -219,16 +264,26 @@ $jsonstringtoArray = json_decode($access, true);
                           <input type="radio" class="radio_no" name="course_books" id="course_books1" value="0" style="margin-left:20px;"> No
                      </div>
                      <p class="error course_books_error"></p>
-
                   </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="course_mode">Select Course Mode <span class="required">*</span>
+                     </label>
+                     <div >
+                          <input type="radio" class="radio_mode_yes" name="course_mode" id="course_mode1" value="1"> Online
+                          <input type="radio" class="radio_mode_no" name="course_mode" id="course_mode1" value="0" style="margin-left:20px;" checked> Offline
+                     </div>
+                     <p class="error course_mode_error"></p>
+                  </div>
+                  
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="form-group">
-                     <label style="text-align: left;"  for="description">Description
+                     <label style="text-align: left;"  for="fees">Fees<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="description1" name="description" placeholder="Enter Description" class="form-control col-md-12 col-xs-12">
-                        <p class="error description_error"></p>
+                        <input autocomplete="off" autocomplete="off"  type="number" id="fees1" name="fees"  placeholder="Enter Fees" class="form-control col-md-12 col-xs-12">
+                        <p class="error fees_error"></p>
                      </div>
                   </div>
 
@@ -236,7 +291,7 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="certificate_cost">Certificate Cost
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="certificate_cost1" name="certificate_cost" placeholder="Enter Certificate Cost" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="certificate_cost1" name="certificate_cost" placeholder="Enter Certificate Cost" class="form-control col-md-12 col-xs-12">
                         <p class="error certificate_cost_error"></p>
                      </div>
                    </div>
@@ -245,20 +300,50 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="kit_cost">Kit cost
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="kit_cost1" name="kit_cost" placeholder="Enter Kit cost" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="kit_cost1" name="kit_cost" placeholder="Enter Kit cost" class="form-control col-md-12 col-xs-12">
                         <p class="error kit_cost_error"></p>
                      </div>
                    </div>
 
                    <div class="form-group">
-                     <label style="text-align: left;" for="remarks">Remarks
+                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="20" type="text" id="remarks1" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
-                        <p class="error remarks_error"></p>
-                        <input id="course_id" name="course_id" type="hidden">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="one_time_admission_fees1"  placeholder="Enter One time admission fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
+                        <p class="error one_time_admission_fees_error"></p>
                      </div>
-                   </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="cgst">CGST (9 %)
+                     </label>
+                     <div>
+                        <input type="hidden" id="cgst_tax1edit" value="9" name="cgst_tax1edit" >
+                        <input type="number" id="cgst1"  placeholder="Enter CGST" name="cgst" class="form-control col-md-12 col-xs-12">
+                        <p class="error cgst_error"></p>
+                     </div>
+                  </div>
+
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="sgst">SGST (9 %)
+                     </label>
+                     <div>
+                        <input type="hidden" id="sgst_tax1edit" value="9" name="sgst_tax1edit" >
+                        <input type="number" id="sgst1"  placeholder="Enter SGST" name="sgst" class="form-control col-md-12 col-xs-12">
+                        <p class="error sgst_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="sgst">Total Course Fees (All Inclusive)
+                     </label>
+                     <div>
+                        <input type="number" id="total_course_fees1" readonly placeholder="Total Course Fees" name="total_course_fees" class="form-control col-md-12 col-xs-12">
+                        <p class="error total_course_fees_error"></p>
+                     </div>
+                  </div>
+                  
               </div>
             </div>
           </div>
