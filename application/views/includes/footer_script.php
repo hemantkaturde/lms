@@ -1983,6 +1983,223 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     </script>
 <?php } ?>
 
+<?php if($pageTitle=='Add Course Topics' || $pageTitle=='Topics Delete' || $pageTitle=='Edit Course Topics'){ ?>
+	<script type="text/javascript">
+		var course_id =$('#course_id_1_post').val();
+        $(document).ready(function() {	
+					var dt = $('#view_coursetopicsattAchmentList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "20%", "targets": 0 },
+							{ "width": "20%", "targets": 1 },
+							{ "width": "5%", "targets": 2 }
+
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Topics / Chapters Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchCourseAttchemant/"+course_id,
+							type: "post",
+						},
+					});
+		});
+
+		$(document).on('click','#save_course_topic',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#addCourseAttchment_form")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>savecoursetopicAttahcment",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Topic Successfully Added!",
+							//text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#modal-md").hide();
+								window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.edit_course_topic',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var topic_id = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>course/get_signle_course_topic",  
+                method:"POST",  
+                data:{topic_id:topic_id,course_id:course_id},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                     $('#editCourseAttchment').modal('show');
+                     $('#topic_name_1').val(data[0].topic_name);  
+                     $('#remark_1').val(data[0].remark);  
+                     $('#course_id_1_post').val(data[0].course_id);
+					 $('#topic_id').val(data[0].id);
+
+                }  
+           })
+        });
+
+		$(document).on('click','#update_course_topic',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#editCourseAttchment_form")[0]);
+			//var id = $("#userId").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updatecourseTopics",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Topic Updated!",
+							text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+		
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.delete_course_topic',function(e){
+
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteCourseTopics",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											// swal("Deleted!", "Course Type has been deleted.", "success");
+											// location.reload();
+										//}
+										const obj = JSON.parse(data);
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+											});	
+									}else if(obj.status=='linked') {
+											swal({
+												title: "Topics Already In Use",
+												text: "",
+												icon: "error",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+											});	
+									}else{
+											swal({
+												title: "Not Deleted",
+												text: "",
+												icon: "error",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+											});	
+									}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Topics deletion cancelled ", "error");
+					}
+				});
+		});
+
+    </script>
+<?php } ?>
+
+
 
 
 

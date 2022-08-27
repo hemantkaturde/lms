@@ -291,7 +291,7 @@ $jsonstringtoArray = json_decode($access, true);
                     <?php } ?>
 
                     <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
-                    <li class="<?php if($pageUrl =='courselisting'){ echo 'active';} ?>">
+                    <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' ||  $pageUrl =='topicattachmentListing' || $pageUrl="viewalltopicdocuments"){ echo 'active';} ?>">
                         <a href="<?php echo base_url()."courselisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
                             <span class="nav-label">Courses</span>
                         </a>

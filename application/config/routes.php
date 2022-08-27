@@ -99,6 +99,14 @@ $route['updatecourse/(:num)'] = "course/updatecourse/$1";
 $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
+$route['addchapters/(:any)'] = "course/addchapters/$1";
+$route['fetchCourseAttchemant/(:any)'] = "course/fetchCourseAttchemant/$1";
+$route['savecoursetopicAttahcment'] = "course/savecoursetopicAttahcment";
+$route['deleteCourseTopics'] = "course/deleteCourseTopics";
+$route['updatecourseTopics'] = "course/updatecourseTopics";
+$route['topicattachmentListing?(:any)'] = "course/topicattachmentListing/$1";
+$route['viewalltopicdocuments?(:any)'] = "course/viewalltopicdocuments/$1";
+
 
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";

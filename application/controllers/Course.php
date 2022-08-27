@@ -286,7 +286,7 @@
         }
 
 
-    public function courseTypeListing()
+        public function courseTypeListing()
         {
             $process = 'Course Type Listing';
             $processFunction = 'Course/courseTypeListing';
@@ -382,7 +382,6 @@
 
         }
 
-
         public function get_signle_coursetypeData($cTypeId = NULL)
         {
             $cTypeId = $this->input->post('coursetypeId');
@@ -435,6 +434,211 @@
             }
 
         }
+
+        public function addchapters($id){
+            $process = 'Add Course Topics';
+            $processFunction = 'Enquiry/enquiryEdit';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Course Topics';
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
+            $this->loadViews("course/CourseattachmentListing", $this->global, $data , NULL);
+        }
+
+        public function fetchCourseAttchemant($courseid){
+            $params = $_REQUEST;
+            $totalRecords = $this->course_model->getCourseattchmentCount($params,$courseid); 
+            $queryRecords = $this->course_model->getCourseattchmentdata($params,$courseid); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+        }
+
+        public function savecoursetopicAttahcment(){
+            $post_submit = $this->input->post();
+            if($post_submit){
+                $topic_attachemnt_response = array();
+                $data = array(
+                    'course_id' => $this->input->post('course_id_post'),
+                    'topic_name' => $this->input->post('topic_name'),
+                    'remark' => $this->input->post('remark'),
+                );
+
+                $this->form_validation->set_rules('topic_name', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('remark', 'Remark', 'trim');
+
+                if($this->form_validation->run() == FALSE){
+                    $topic_attachemnt_response['status'] = 'failure';
+                    $topic_attachemnt_response['error'] = array('topic_name'=>strip_tags(form_error('topic_name')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+
+                      /*check If course name is unique*/
+                        $check_uniqe =  $this->course_model->checkquniqecoursetopicname(trim($this->input->post('topic_name')));
+                        if( $check_uniqe ){
+                            $topic_attachemnt_response['status'] = 'failure';
+                            $topic_attachemnt_response['error'] = array('topic_name'=>'Topic Already Exits','remark'=>'');
+                        }else{
+
+                            $saveCoursetypedata = $this->course_model->saveCourseTopicsdata('',$data);
+                            if($saveCoursetypedata){
+                                $topic_attachemnt_response['status'] = 'success';
+                                $topic_attachemnt_response['error'] = array('topic_name'=>'','remark'=>'');
+                            }else{
+
+                                $topic_attachemnt_response['status'] = 'failure';
+                                $topic_attachemnt_response['error'] = array('topic_name'=>'','remark'=>'');
+                            }
+
+                        } 
+                }
+                echo json_encode($topic_attachemnt_response);
+            }
+            
+        }
+
+        public function get_signle_course_topic(){
+            $topic_id = $this->input->post('topic_id');
+            $course_id = $this->input->post('course_id');
+            $get_signle_course_topic = $this->course_model->get_signle_course_topic($topic_id,$course_id);
+            echo json_encode($get_signle_course_topic);
+        }
+
+        public function updatecourseTopics(){
+
+            $post_submit = $this->input->post();
+            if($post_submit){
+
+                $update_response = array();
+
+                $topic_id =  $this->input->post('topic_id');
+                $course_id_1_post =  $this->input->post('course_id_1_post');
+
+                $data = array(
+                    'course_id' => $this->input->post('course_id_1_post'),
+                    'topic_name' => $this->input->post('topic_name_1'),
+                    'remark' => $this->input->post('remark_1'),
+                );
+
+                $this->form_validation->set_rules('topic_name_1', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('remark_1', 'Remark', 'trim');
+
+                if($this->form_validation->run() == FALSE){
+                    $update_response['status'] = 'failure';
+                    $update_response['error'] = array('topic_name_1'=>strip_tags(form_error('topic_name_1')),'remark_1'=>strip_tags(form_error('remark_1')));
+                }else{
+
+                        $check_uniqe =  $this->course_model->checkquniqecoursetopicnameupdate($topic_id,$course_id_1_post,trim($this->input->post('topic_name_1')));
+
+                        if($check_uniqe){
+
+                            $updateCoursetypedata_1 = $this->course_model->updateCourseTopicsdata($topic_id,$course_id_1_post,$data);
+                            if($updateCoursetypedata_1){
+                                $update_response['status'] = 'success';
+                                $update_response['error'] = array('topic_name_1'=>'','remark_1'=>'');
+                            }else{
+
+                                $update_response['status'] = 'failure';
+                                $update_response['error'] = array('topic_name_1'=>'','remark_1'=>'');
+                            }
+                        }else{
+                            $check_uniqe_topic_name_1 =  $this->course_model->checkquniqecoursetopicname(trim($this->input->post('topic_name_1')));
+
+                            if($check_uniqe_topic_name_1){
+
+                                $update_response['status'] = 'failure';
+                                $update_response['error'] = array('topic_name_1'=>'Topic Already Exits','remark'=>'');
+
+                            }else{
+
+                                $updateCoursetypedata_2 = $this->course_model->updateCourseTopicsdata($topic_id,$course_id_1_post,$data);
+                                if($updateCoursetypedata_2){
+                                    $update_response['status'] = 'success';
+                                    $update_response['error'] = array('topic_name_1'=>'','remark_1'=>'');
+                                }else{
+    
+                                    $update_response['status'] = 'failure';
+                                    $update_response['error'] = array('topic_name_1'=>'','remark_1'=>'');
+                                }
+
+                            }
+                        }
+                }
+                echo json_encode($update_response);
+            }
+        }
+
+        public function deleteCourseTopics(){
+            $post_data = $this->input->post('id');
+
+            if(!empty($post_data)){
+                $deletecourse_response =array();
+                $checkRelation = $this->course_model->checktopicsRelation($this->input->post('id'));
+
+                if($checkRelation){
+                       $deletecourse_response['status'] = 'linked';
+                }else{
+                        $courseInfo = array('isDeleted'=>1);
+                        $result = $this->course_model->data_update('tbl_course_topics',$courseInfo,'id',$this->input->post('id'));
+                        if($result){
+                            $deletecourse_response['status'] = 'success';
+                            $process = 'Topics Delete';
+                            $processFunction = 'Course/deleteCourseType';
+                            $this->global['pageTitle'] = 'Topics Delete';
+                            $this->logrecord($process,$processFunction);
+                        }else
+                        {
+                            $deletecourse_response['status'] = 'filure';
+                        }
+                }
+                echo json_encode($deletecourse_response);
+            }
+          
+
+        }
+
+
+        public function topicattachmentListing(){
+
+            $topic_id = $this->input->get('topic_id');
+            $course_id = $this->input->get('course_id');
+            $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
+            $process = 'Topic Attachment Listing';
+            $processFunction = 'Course/topicattachmentListing';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Topic Attachment Listing';
+            $this->loadViews("course/topicattachmentListing", $this->global,$data , NULL);
+        }
+
+        public function viewalltopicdocuments(){
+
+            $topic_id = $this->input->get('topic_id');
+            $course_id = $this->input->get('course_id');
+            $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
+            $data['type'] =  $this->input->get('type');
+            $process = 'Topic Attachment Upload Listing';
+            $processFunction = 'Course/topicattachmentListing';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Topic Attachment Upload Listing';
+            $this->loadViews("course/attachmantListingUploading", $this->global,$data , NULL);
+
+            
+        }
+
 
     }
 
