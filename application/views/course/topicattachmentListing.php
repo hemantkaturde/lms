@@ -19,13 +19,13 @@
                                 <div class="card-body pt-2">
                                     <div class="widget-49">
                                         <div class="widget-49-title-wrapper">
-                                            <div class="widget-49-date-primary">
+                                            <div class="widget-49-date-success">
                                                 <span class="widget-49-date-day">09</span>
                                                 <!-- <span class="widget-49-date-month">apr</span> -->
                                             </div>
                                             <div class="widget-49-meeting-info">
                                                 <span class="widget-49-pro-title"><?=$course_topic_info[0]->topic_name;?></span>
-                                                <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                                                <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
                                             </div>
                                         </div>
                                         <ol class="widget-49-meeting-points">
@@ -51,20 +51,19 @@
                                 <div class="card-body pt-2">
                                     <div class="widget-49">
                                         <div class="widget-49-title-wrapper">
-                                            <div class="widget-49-date-warning">
+                                            <div class="widget-49-date-success">
                                                 <span class="widget-49-date-day">13</span>
                                                 <!-- <span class="widget-49-date-month">apr</span> -->
                                             </div>
                                             <div class="widget-49-meeting-info">
                                                 <span class="widget-49-pro-title"><?=$course_topic_info[0]->topic_name;?></span>
-                                                <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                                                <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
                                             </div>
                                         </div>
                                         <ol class="widget-49-meeting-points">
-                                            <li class="widget-49-meeting-item"><span>Scheming module is removed</span>
+                                            <li class="widget-49-meeting-item"><span>All Types of Videos</span>
                                             </li>
-                                            <li class="widget-49-meeting-item"><span>App design contract
-                                                    confirmed</span></li>
+                                            <li class="widget-49-meeting-item"><span>MP4</span></li>
                                             <!-- <li class="widget-49-meeting-item"><span>Client request to send
                                                     invoice</span></li> -->
                                         </ol>
@@ -89,13 +88,13 @@
                                             </div>
                                             <div class="widget-49-meeting-info">
                                                 <span class="widget-49-pro-title"><?=$course_topic_info[0]->topic_name;?></span>
-                                                <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                                                <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
                                             </div>
                                         </div>
                                         <ol class="widget-49-meeting-points">
-                                            <li class="widget-49-meeting-item"><span>Scope is revised and updated</span>
+                                            <li class="widget-49-meeting-item"><span>All Types of Books</span>
                                             </li>
-                                            <li class="widget-49-meeting-item"><span>Time-line has been changed</span>
+                                            <li class="widget-49-meeting-item"><span>Pdf,Word,PPT</span>
                                             </li>
                                             <!-- <li class="widget-49-meeting-item"><span>Received approval to start
                                                     wire-frame</span></li> -->

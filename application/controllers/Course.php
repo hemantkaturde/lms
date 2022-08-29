@@ -625,7 +625,6 @@
         }
 
         public function viewalltopicdocuments(){
-
             $topic_id = $this->input->get('topic_id');
             $course_id = $this->input->get('course_id');
             $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
@@ -635,8 +634,24 @@
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Topic Attachment Upload Listing';
             $this->loadViews("course/attachmantListingUploading", $this->global,$data , NULL);
+        }
 
-            
+        public function uploadSubmit(){
+              
+            if(!empty($_FILES))
+            {
+             if(is_uploaded_file($_FILES['uploadFile']['tmp_name']))
+             {
+              sleep(1);
+              $source_path = $_FILES['uploadFile']['tmp_name'];
+              $target_path = 'uploads/' . $_FILES['uploadFile']['name'];
+              if(move_uploaded_file($source_path, $target_path))
+              {
+               echo '<img src="'.$target_path.'" class="img-thumbnail" width="300" height="250" />';
+              }
+             }
+            }
+
         }
 
 
