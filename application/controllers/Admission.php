@@ -33,7 +33,7 @@
             $this->global['pageTitle'] = 'Admission Listing';
             $this->loadViews("admission/admissionList", $this->global, NULL , NULL);
         }
-
+        
         function get_signle_admission($admissionId = NULL)
         {
             $data['admInfo'] = $this->admission_model->getAdmissionInfo($admissionId);

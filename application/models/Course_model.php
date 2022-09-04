@@ -214,7 +214,9 @@ class Course_model extends CI_Model
                      //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                      //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                      
-                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchapters/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Add Topics' title='Add Topics'></a>&nbsp;";
+                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchapters/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Add Topics' title='Add Topics'></a> | ";
+                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."timetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Add Time Table' title='Add Time Table'></a>&nbsp;";
+
 
                      // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_attachment' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/attechment.png alt='Delete Course' title='Add Attachment'></a>"; 
                      

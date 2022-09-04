@@ -63,7 +63,6 @@
             echo json_encode($data);
         }
 
-       
         function createcourse(){
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
@@ -284,7 +283,6 @@
                 echo json_encode($deletecourse_response);
             }
         }
-
 
         public function courseTypeListing()
         {
@@ -611,7 +609,6 @@
 
         }
 
-
         public function topicattachmentListing(){
 
             $topic_id = $this->input->get('topic_id');
@@ -636,22 +633,57 @@
             $this->loadViews("course/attachmantListingUploading", $this->global,$data , NULL);
         }
 
-        public function uploadSubmit(){
-              
-            if(!empty($_FILES))
-            {
-             if(is_uploaded_file($_FILES['uploadFile']['tmp_name']))
-             {
-              sleep(1);
-              $source_path = $_FILES['uploadFile']['tmp_name'];
-              $target_path = 'uploads/' . $_FILES['uploadFile']['name'];
-              if(move_uploaded_file($source_path, $target_path))
-              {
-               echo '<img src="'.$target_path.'" class="img-thumbnail" width="300" height="250" />';
-              }
-             }
-            }
+        public function uploadSubmit()
+        {	
+                 
+            // if(!empty($_FILES['image_up']['name']))
+            // { 	
+            //     $config['upload_path']   = 'uploads/topic_documents/'; 
+            //     $config['allowed_types'] = '*'; 
+            //     $this->load->library('upload', $config);
+                
+            //     $file_name   		=   $_FILES['image_up']['name'];
+            //     $file_extension     =   pathinfo($file_name, PATHINFO_EXTENSION);
+            //     $allowed_extension  =   array('jpg','jpeg','png');
 
+            //     if(in_array($file_extension,$allowed_extension))
+            //     {
+
+            //         if ($this->upload->do_upload('image_up'))
+            //         {
+            //             echo base_url().'images/'.$file_name;
+            //         }
+            //         else
+            //         {
+            //             echo 'somethig went !wrong';
+            //         }	
+            //     }
+            //     else
+            //     {
+            //         echo 'please upload valid file';
+            //     }	
+                
+            // }	
+
+                $uploadfile = $_FILES["uploadImage"]["tmp_name"];
+                $folderPath = "uploads/";
+                
+                if (! is_writable($folderPath) || ! is_dir($folderPath)) {
+                    echo "error";
+                    exit();
+                }
+                if (move_uploaded_file($_FILES["uploadImage"]["tmp_name"], $folderPath . $_FILES["uploadImage"]["name"])) {
+                    echo '<img src="' . base_url() . "" . $_FILES["uploadImage"]["name"] . '">';
+                    exit();
+                }
+        }
+
+        public function timetableListing($id){
+            $process = 'Time Table Listing';
+            $processFunction = 'Course/addtimetableListing';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Time Table Listing';
+            $this->loadViews("course/timetableListing", $this->global, NULL , NULL);
         }
 
 
