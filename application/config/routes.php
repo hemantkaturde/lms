@@ -107,7 +107,7 @@ $route['updatecourseTopics'] = "course/updatecourseTopics";
 $route['topicattachmentListing?(:any)'] = "course/topicattachmentListing/$1";
 $route['viewalltopicdocuments?(:any)'] = "course/viewalltopicdocuments/$1";
 $route['timetableListing/(:any)'] = "course/timetableListing/$1";
-
+$route['fetchTimetable/(:any)'] = "course/fetchTimetable/$1";
 
 
 

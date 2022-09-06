@@ -438,7 +438,6 @@
     </script>   
 <?php } ?>
 
-
 <?php if($pageTitle=='Enquiry Management' || $pageTitle=='Enquiry Edit'){?>
 <script type="text/javascript">
 
@@ -2199,6 +2198,35 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     </script>
 <?php } ?>
 
+
+
+<?php if($pageTitle=='Time Table Listing'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+				var dt = $('#view_time_table_list').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "30%", "targets": 1 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Staff Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchTimetable",
+						type: "post",
+					},
+				});
+		});
+   </script>
+<?php } ?>
 
 
 

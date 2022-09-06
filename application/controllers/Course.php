@@ -681,9 +681,37 @@
         public function timetableListing($id){
             $process = 'Time Table Listing';
             $processFunction = 'Course/addtimetableListing';
+
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Time Table Listing';
             $this->loadViews("course/timetableListing", $this->global, NULL , NULL);
+            //echo "hemant";
+        }
+
+        public function fetchTimetable(){
+
+            $params = $_REQUEST;
+            $totalRecords = $this->course_model->gettimetableCount($params,$courseid); 
+            $queryRecords = $this->course_model->gettimetabledata($params,$courseid); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
         }
 
 
