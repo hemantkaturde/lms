@@ -99,6 +99,8 @@ define('TBL_ROLES','tbl_roles');
 define('TBL_ADMISSION','tbl_admission');
 define('TBL_EMAIL_SMTP','tbl_email_smtp');
 define('TBL_COURSE_TOPICS','tbl_course_topics');
+define('TBL_COURSE_TOPICS_DOCUMENT','tbl_topic_document');
+
 
 
 

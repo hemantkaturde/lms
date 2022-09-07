@@ -2198,8 +2198,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     </script>
 <?php } ?>
 
-
-
 <?php if($pageTitle=='Time Table Listing'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -2227,6 +2225,114 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		});
    </script>
 <?php } ?>
+
+<?php if($pageTitle=='Topic Attachment Upload Listing' || $pageTitle=='Document Listing Delete'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+
+			var course_id_form = $('#course_id_form').val();
+			var topic_id_form = $('#topic_id_form').val();
+			var doc_type_form = $('#doc_type_form').val();
+
+				var dt = $('#view_topic_document_document').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },
+						{ "width": "30%", "targets": 2 },
+						{ "width": "30%", "targets": 2 },
+						// { "width": "30%", "targets": 5 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Staff Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchTopicDocument?type="+doc_type_form+"&topic_id="+topic_id_form+"&course_id="+course_id_form+"",
+						type: "post",
+					},
+				});
+		});
+
+
+		$(document).on('click','.delete_topic_document',function(e){
+		var elemF = $(this);
+		e.preventDefault();
+
+		    var course_id_form = $('#course_id_form').val();
+			var topic_id_form = $('#topic_id_form').val();
+			var doc_type_form = $('#doc_type_form').val();
+
+			swal({
+				title: "Are you sure?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteTopicDocuments",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									// if(data.status=='success'){
+										// swal("Deleted!", "Course Type has been deleted.", "success");
+										// location.reload();
+									//}
+									const obj = JSON.parse(data);
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												$("#popup_modal_sm").hide();
+												window.location.href = "<?php echo base_url();?>viewalltopicdocuments?type="+doc_type_form+"&topic_id="+topic_id_form+"&course_id="+course_id_form+"";
+										});	
+								     }else{
+										swal({
+											title: "Not Deleted",
+											text: "",
+											icon: "error",
+											button: "Ok",
+											},function(){ 
+												$("#popup_modal_sm").hide();
+												window.location.href = "<?php echo base_url();?>viewalltopicdocuments?type="+doc_type_form+"&topic_id="+topic_id_form+"&course_id="+course_id_form+"";
+										});	
+								}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									//$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Course Type deletion cancelled ", "error");
+				}
+			});
+		});
+
+   </script>
+<?php }  ?>
+
+
+
 
 
 

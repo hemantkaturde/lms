@@ -20,7 +20,7 @@
                                     <div class="widget-49">
                                         <div class="widget-49-title-wrapper">
                                             <div class="widget-49-date-success">
-                                                <span class="widget-49-date-day">09</span>
+                                                <span class="widget-49-date-day"><?=$documents?></span>
                                                 <!-- <span class="widget-49-date-month">apr</span> -->
                                             </div>
                                             <div class="widget-49-meeting-info">
@@ -37,7 +37,7 @@
                                                     minutes</span></li> -->
                                         </ol>
                                         <div class="widget-49-meeting-action">
-                                            <a href="<?php echo ADMIN_PATH.'viewalltopicdocuments?type=docuements&topic_id='.$_GET['topic_id'].'&course_id='.$_GET['course_id']; ?>" class="btn btn-sm btn-flash-border-primary">View All</a>
+                                            <a href="<?php echo ADMIN_PATH.'viewalltopicdocuments?type=documents&topic_id='.$_GET['topic_id'].'&course_id='.$_GET['course_id']; ?>" class="btn btn-sm btn-flash-border-primary">View All</a>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                     <div class="widget-49">
                                         <div class="widget-49-title-wrapper">
                                             <div class="widget-49-date-success">
-                                                <span class="widget-49-date-day">13</span>
+                                                <span class="widget-49-date-day"><?=$videos?></span>
                                                 <!-- <span class="widget-49-date-month">apr</span> -->
                                             </div>
                                             <div class="widget-49-meeting-info">
@@ -83,7 +83,7 @@
                                     <div class="widget-49">
                                         <div class="widget-49-title-wrapper">
                                             <div class="widget-49-date-success">
-                                                <span class="widget-49-date-day">22</span>
+                                                <span class="widget-49-date-day"><?=$books?></span>
                                                 <!-- <span class="widget-49-date-month">apr</span> -->
                                             </div>
                                             <div class="widget-49-meeting-info">

@@ -614,6 +614,11 @@
             $topic_id = $this->input->get('topic_id');
             $course_id = $this->input->get('course_id');
             $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
+
+            $data['documents'] =  $this->course_model->getDocumentcount($topic_id,$course_id);
+            $data['videos'] =  $this->course_model->getVideoscount($topic_id,$course_id);
+            $data['books'] =  $this->course_model->getBookscount($topic_id,$course_id);
+
             $process = 'Topic Attachment Listing';
             $processFunction = 'Course/topicattachmentListing';
             $this->logrecord($process,$processFunction);
@@ -626,6 +631,8 @@
             $course_id = $this->input->get('course_id');
             $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
             $data['type'] =  $this->input->get('type');
+            $data['topic_id'] =  $topic_id;
+            $data['course_id'] =  $course_id;
             $process = 'Topic Attachment Upload Listing';
             $processFunction = 'Course/topicattachmentListing';
             $this->logrecord($process,$processFunction);
@@ -633,49 +640,111 @@
             $this->loadViews("course/attachmantListingUploading", $this->global,$data , NULL);
         }
 
+        public function fetchTopicDocument(){
+
+            $topic_id = $this->input->get('topic_id');
+            $course_id = $this->input->get('course_id');
+            $type =  $this->input->get('type');
+
+            $params = $_REQUEST;
+            $totalRecords = $this->course_model->getFetchtopicdocumentCount($params,$topic_id,$course_id,$type); 
+            $queryRecords = $this->course_model->getFetchtopicdocumentData($params,$topic_id,$course_id,$type); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+
+        }
+
         public function uploadSubmit()
         {	
-                 
-            // if(!empty($_FILES['image_up']['name']))
-            // { 	
-            //     $config['upload_path']   = 'uploads/topic_documents/'; 
-            //     $config['allowed_types'] = '*'; 
-            //     $this->load->library('upload', $config);
-                
-            //     $file_name   		=   $_FILES['image_up']['name'];
-            //     $file_extension     =   pathinfo($file_name, PATHINFO_EXTENSION);
-            //     $allowed_extension  =   array('jpg','jpeg','png');
+           $course_id = $this->input->post('course_id');
+           $topic_id =  $this->input->post('topic_id');
+           $doc_type =  $this->input->post('doc_type');
+           $upload = 'err'; 
 
-            //     if(in_array($file_extension,$allowed_extension))
-            //     {
+                //   $filesize = round($_FILES['file']['size'] / 1024 , 2); // kilobytes with two digits
 
-            //         if ($this->upload->do_upload('image_up'))
-            //         {
-            //             echo base_url().'images/'.$file_name;
-            //         }
-            //         else
-            //         {
-            //             echo 'somethig went !wrong';
-            //         }	
-            //     }
-            //     else
-            //     {
-            //         echo 'please upload valid file';
-            //     }	
-                
-            // }	
+                //   if($filesize  > 3000000){
+                //     echo $upload= 'big_file';
+                //   }else{
 
-                $uploadfile = $_FILES["uploadImage"]["tmp_name"];
-                $folderPath = "uploads/";
-                
-                if (! is_writable($folderPath) || ! is_dir($folderPath)) {
-                    echo "error";
-                    exit();
-                }
-                if (move_uploaded_file($_FILES["uploadImage"]["tmp_name"], $folderPath . $_FILES["uploadImage"]["name"])) {
-                    echo '<img src="' . base_url() . "" . $_FILES["uploadImage"]["name"] . '">';
-                    exit();
-                }
+                 // if(!empty($_FILES['file']['size'])){ 
+                  if($_FILES['file']['size'] > 0){ 
+                    // File upload configuration 
+                    $targetDir = "uploads/topic_documents/".$doc_type.'/'; 
+                    if($doc_type=='documents'){
+                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif'); 
+                    }
+
+                    if($doc_type=='videos'){
+                        $allowTypes = array('mp4', 'webm', 'ogv'); 
+                    }
+
+                    if($doc_type=='books'){
+                        $allowTypes = array('pdf', 'doc', 'docx'); 
+                    }
+                   
+                    
+                    $fileName_original = basename($_FILES['file']['name']); 
+                    $fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    $targetFilePath = $targetDir.$fileName; 
+                    
+                    // Check whether file type is valid 
+                    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+                    if(in_array($fileType, $allowTypes)){ 
+                        // Upload file to the server 
+                        if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){ 
+
+                                $data = array(
+                                    'course_id'=> $course_id,
+                                    'topic_id' => $topic_id,
+                                    'doc_type' => $fileType,
+                                    'module_name' => $doc_type,
+                                    'file_name' => $fileName,
+                                    'file_name_original' => $fileName_original,
+                                    'file_url' =>  base_url().$targetFilePath,
+                                    'createdBy' => $this->session->userdata('userId')
+                                );
+
+                                $insertDocumentData = $this->course_model->insertDocumentData($data); 
+                                if($insertDocumentData){
+
+                                    $upload = 'ok'; 
+                                }else{
+
+                                    $upload = 'err'; 
+                                }
+                                 echo $upload; 
+
+
+                            // $upload = 'ok'; 
+                        } 
+                    }else{
+
+                        echo 'type_missmatch';
+                    } 
+
+                   
+                }else{
+                    echo 'empty';
+                } 
+            
         }
 
         public function timetableListing($id){
@@ -712,6 +781,28 @@
                 );
     
             echo json_encode($json_data);
+        }
+
+
+        public function deleteTopicDocuments(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $deletecourse_response =array();
+              
+                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->course_model->data_update('tbl_topic_document',$courseInfo,'id',$this->input->post('id'));
+                    if($result){
+                        $deletecourse_response['status'] = 'success';
+                        $process = 'Document Listing Delete';
+                        $processFunction = 'Course/deleteTopicDocuments';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $deletecourse_response['status'] = 'filure';
+                    }
+               
+                echo json_encode($deletecourse_response);
+            }
         }
 
 
