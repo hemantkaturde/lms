@@ -2201,6 +2201,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Time Table Listing'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
+			    var course_id_form = $('#course_id_form').val();
 				var dt = $('#view_time_table_list').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
@@ -2209,7 +2210,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					],
 					responsive: true,
 					"oLanguage": {
-						"sEmptyTable": "<i>No Staff Found.</i>",
+						"sEmptyTable": "<i>No TimeTable List  Found.</i>",
 					}, 
 					"bSort" : false,
 					"bFilter":true,
@@ -2218,12 +2219,20 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>fetchTimetable",
+						url :"<?php echo base_url();?>fetchTimetable/"+course_id_form,
 						type: "post",
 					},
 				});
 		});
-   </script>
+    
+	
+	
+	
+	
+	
+	
+	
+	</script>
 <?php } ?>
 
 <?php if($pageTitle=='Topic Attachment Upload Listing' || $pageTitle=='Document Listing Delete'){ ?>

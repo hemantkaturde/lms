@@ -100,9 +100,7 @@ define('TBL_ADMISSION','tbl_admission');
 define('TBL_EMAIL_SMTP','tbl_email_smtp');
 define('TBL_COURSE_TOPICS','tbl_course_topics');
 define('TBL_COURSE_TOPICS_DOCUMENT','tbl_topic_document');
-
-
-
+define('TBL_TIMETABLE','tbl_timetable');
 
 
 define('EMAIL_SMTP_HOST','smtp.gmail.com');		// your smtp host e.g. smtp.gmail.com
@@ -113,6 +111,7 @@ define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
 define('FROM_EMAIL','hemantkaturde123@gmail.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){

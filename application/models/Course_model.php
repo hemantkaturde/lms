@@ -561,14 +561,15 @@ public function getBookscount($topic_id,$course_id){
 
 
   public function gettimetableCount($params,$courseid){
+
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_COURSE_TOPICS.".topic_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE_TOPICS.".ct_name LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_TIMETABLE.".from_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TIMETABLE.".to_date LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
-        $query = $this->db->get(TBL_COURSE_TOPICS);
+        $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
+        $query = $this->db->get(TBL_TIMETABLE);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -583,13 +584,13 @@ public function getBookscount($topic_id,$course_id){
     $this->db->select('*');
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_COURSE_TOPICS.".topic_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_COURSE_TOPICS.".ct_name LIKE '%".$params['search']['value']."%')");
+        $this->db->where("(".TBL_TIMETABLE.".from_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TIMETABLE.".to_date LIKE '%".$params['search']['value']."%')");
     }
-    $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
-    $this->db->order_by(TBL_COURSE_TOPICS.'.id', 'DESC');
+    $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
+    $this->db->order_by(TBL_TIMETABLE.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
-    $query = $this->db->get(TBL_COURSE_TOPICS);
+    $query = $this->db->get(TBL_TIMETABLE);
     $fetch_result = $query->result_array();
     $data = array();
     $counter = 0;
@@ -597,11 +598,11 @@ public function getBookscount($topic_id,$course_id){
     {
         foreach ($fetch_result as $key => $value)
         {
-             $data[$counter]['topic_name'] = $value['topic_name'];
-             $data[$counter]['remark'] = $value['remark'];
+             $data[$counter]['from_date'] = $value['from_date'];
+             $data[$counter]['to_date'] = $value['to_date'];
+             $data[$counter]['month_name'] = $value['month_name'];
              $data[$counter]['action'] = '';
              $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
-            //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_topic_attachment' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/attachment.png alt='Add Attachment' title='Add Attachment'></a> |";
              $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Attachment' title='Add Attachment'></a> |";
              $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>"; 
             

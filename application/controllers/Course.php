@@ -750,14 +750,14 @@
         public function timetableListing($id){
             $process = 'Time Table Listing';
             $processFunction = 'Course/addtimetableListing';
-
+            $data['course_id'] = $id;
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Time Table Listing';
-            $this->loadViews("course/timetableListing", $this->global, NULL , NULL);
-            //echo "hemant";
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
+            $this->loadViews("course/timetableListing", $this->global, $data , NULL);
         }
 
-        public function fetchTimetable(){
+        public function fetchTimetable($courseid){
 
             $params = $_REQUEST;
             $totalRecords = $this->course_model->gettimetableCount($params,$courseid); 
@@ -782,7 +782,6 @@
     
             echo json_encode($json_data);
         }
-
 
         public function deleteTopicDocuments(){
             $post_submit = $this->input->post();
