@@ -8,6 +8,8 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="ibox-head">
                 <!-- <div class="ibox-title">Time Table Management</div> -->
                 <div class="ibox-title">Time Table Management - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
+                <!-- <div><a href="<?php base_url().'/templates/Time_Table_Template.xlsx'?>" target="_blank">Download TimeTable Tempalte</a></div> -->
+                <div><a href="<?php echo TEMPALTE_PATH;?>/Time_Table_Template.xlsx">Download Excel Document</a></div>
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewtimetable">
                     <i class="fa fa-plus"></i> Add New Time Table
@@ -65,15 +67,15 @@ $jsonstringtoArray = json_decode($access, true);
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="to_name">To Date<span class="required">*</span>
+                     <label style="text-align: left;"  for="to_date">To Date<span class="required">*</span>
                      </label>
                      <div>
-                        <input  maxlength="25" type="text" id="to_name" name="to_name"  placeholder="Enter To Date" autocomplete="off" class="form-control datepicker col-md-12 col-xs-12">
-                        <p class="error to_name_error"></p>
+                        <input  maxlength="25" type="text" id="to_date" name="to_date"  placeholder="Enter To Date" autocomplete="off" class="form-control datepicker col-md-12 col-xs-12">
+                        <p class="error to_date_error"></p>
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="select_month">Month<span class="required">*</span>
                      </label>
                      <div>
@@ -94,9 +96,9 @@ $jsonstringtoArray = json_decode($access, true);
                         </select>
                         <p class="error select_month_error"></p>
                      </div>
-                  </div>
+                  </div> -->
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="year">Year<span class="required">*</span>
                      </label>
                      <div>
@@ -104,7 +106,7 @@ $jsonstringtoArray = json_decode($access, true);
                        
                         <p class="error year_name_error"></p>
                      </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="topic_name"> Upload File <span class="required">*</span>
@@ -114,14 +116,13 @@ $jsonstringtoArray = json_decode($access, true);
                         <p class="error topic_name_error"></p>
                      </div>
                   </div>
-
               </div>
             </div>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="save_course_topic" class="btn btn-primary save_course_topic">Save</button>
+        <button type="submit" id="save_timetable_listing" class="btn btn-primary save_timetable_listing">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>

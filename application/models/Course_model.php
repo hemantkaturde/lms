@@ -598,12 +598,12 @@ public function getBookscount($topic_id,$course_id){
     {
         foreach ($fetch_result as $key => $value)
         {
-             $data[$counter]['from_date'] = $value['from_date'];
-             $data[$counter]['to_date'] = $value['to_date'];
-             $data[$counter]['month_name'] = $value['month_name'];
+             $data[$counter]['from_date'] = date('d-m-Y', strtotime($value['from_date']));
+             $data[$counter]['to_date'] = date('d-m-Y', strtotime($value['to_date']));
+             $data[$counter]['month_name'] = '<b>'.$value['month_name'].'</b>';
              $data[$counter]['action'] = '';
-             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Attachment' title='Add Attachment'></a> |";
+
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='Viw TimeTable' title='Viw TimeTable'></a> | ";
              $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>"; 
             
             $counter++; 
@@ -681,6 +681,17 @@ public function getBookscount($topic_id,$course_id){
     }
 
     return $data;
+
+  }
+
+
+  public function saveTimetable($id,$data){
+
+        if($this->db->insert(TBL_TIMETABLE, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
 
   }
 

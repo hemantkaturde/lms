@@ -2198,7 +2198,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     </script>
 <?php } ?>
 
-<?php if($pageTitle=='Time Table Listing'){ ?>
+<?php if($pageTitle=='Time Table Listing' || $pageTitle=='Add New Time Table Listing'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
 			    var course_id_form = $('#course_id_form').val();
@@ -2227,7 +2227,50 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     
 	
 	
-	
+		$(document).on('click','#save_timetable_listing',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var course_id_form = $('#course_id_form').val();
+			var formData = new FormData($("#addNewtimetable_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>savenewtimetable",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Staff Created!",
+							//text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'timetableListing/'?>"+course_id_form;
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
 	
 	
 	

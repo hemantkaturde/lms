@@ -747,6 +747,27 @@
             
         }
 
+        public function deleteTopicDocuments(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $deletecourse_response =array();
+              
+                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->course_model->data_update('tbl_topic_document',$courseInfo,'id',$this->input->post('id'));
+                    if($result){
+                        $deletecourse_response['status'] = 'success';
+                        $process = 'Document Listing Delete';
+                        $processFunction = 'Course/deleteTopicDocuments';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $deletecourse_response['status'] = 'filure';
+                    }
+               
+                echo json_encode($deletecourse_response);
+            }
+        }
+
         public function timetableListing($id){
             $process = 'Time Table Listing';
             $processFunction = 'Course/addtimetableListing';
@@ -783,28 +804,57 @@
             echo json_encode($json_data);
         }
 
-        public function deleteTopicDocuments(){
+        public function savenewtimetable(){
+
             $post_submit = $this->input->post();
-            if(!empty($post_submit)){
-                $deletecourse_response =array();
-              
-                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
-                    $result = $this->course_model->data_update('tbl_topic_document',$courseInfo,'id',$this->input->post('id'));
-                    if($result){
-                        $deletecourse_response['status'] = 'success';
-                        $process = 'Document Listing Delete';
-                        $processFunction = 'Course/deleteTopicDocuments';
-                        $this->logrecord($process,$processFunction);
-                    }else
-                    {
-                        $deletecourse_response['status'] = 'filure';
-                    }
-               
-                echo json_encode($deletecourse_response);
+
+            if($post_submit){
+
+                $savetimetable_response = array();
+
+                $getMonth = date('F', strtotime($this->input->post('form_date')));
+                $getYear = date('Y',  strtotime($this->input->post('form_date')));
+
+                $data = array(
+                    'course_id' => $this->input->post('course_id_post'),
+                    'from_date' => date('Y-m-d', strtotime($this->input->post('form_date'))),
+                    'to_date' => date('Y-m-d', strtotime($this->input->post('to_date'))),
+                    'month_name' => $getMonth.'-'.$getYear
+                );
+
+                $this->form_validation->set_rules('form_date', 'From Date', 'trim|required');
+                $this->form_validation->set_rules('to_date', 'To Date', 'trim|required');
+
+                if($this->form_validation->run() == FALSE){
+                    $savetimetable_response['status'] = 'failure';
+                    $savetimetable_response['error'] = array('form_date'=>strip_tags(form_error('form_date')),'to_date'=>strip_tags(form_error('to_date')));
+                }else{
+
+                        // /*check If course name is unique*/
+                        // $check_uniqe =  $this->course_model->checkquniqecoursetopicname(trim($this->input->post('topic_name')));
+                        // if( $check_uniqe ){
+                        //     $topic_attachemnt_response['status'] = 'failure';
+                        //     $topic_attachemnt_response['error'] = array('topic_name'=>'Topic Already Exits','remark'=>'');
+                        // }else{
+
+                            $saveCoursetypedata = $this->course_model->saveTimetable('',$data);
+                            if($saveCoursetypedata){
+                                $savetimetable_response['status'] = 'success';
+                                $savetimetable_response['error'] = array('form_date'=>'','to_date'=>'');
+                            }else{
+
+                                $savetimetable_response['status'] = 'failure';
+                                $savetimetable_response['error'] = array('form_date'=>'','to_date'=>'');
+                           }
+
+                           // Excel Import
+                           // $_FILES['file']['size']
+
+                       // } 
+                }
+                echo json_encode($savetimetable_response);
             }
         }
-
-
     }
 
 ?>
