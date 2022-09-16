@@ -291,12 +291,24 @@ $jsonstringtoArray = json_decode($access, true);
                     <?php } ?>
 
                     <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
-                    <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' ||  $pageUrl =='topicattachmentListing' || $pageUrl=="viewalltopicdocuments" || $pageUrl=="timetableListing"){ echo 'active';} ?>">
+                    <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' ||  $pageUrl =='topicattachmentListing' || $pageUrl=="viewalltopicdocuments" || $pageUrl=="timetableListing" || $pageUrl=="viewtimetablelisting"){ echo 'active';} ?>">
                         <a href="<?php echo base_url()."courselisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
                             <span class="nav-label">Courses</span>
                         </a>
                     </li>
                     <?php } ?>
+
+                    <!-- <li class="">
+                        <a href="<?php echo base_url()."timetablemaster"; ?>"><i class="sidebar-item-icon fa fa-calendar" ></i>
+                            <span class="nav-label">Time Table</span>
+                        </a>
+                    </li> -->
+
+                    <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url()."examinationlisting"; ?>"><i class="sidebar-item-icon fa fa-file-text" ></i>
+                            <span class="nav-label">Examination</span>
+                        </a>
+                    </li>
 
                     <?php if (in_array("enquirymodule", $jsonstringtoArray)){?>
                     <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup'){ echo 'active';} ?>">

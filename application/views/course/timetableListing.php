@@ -9,7 +9,7 @@ $jsonstringtoArray = json_decode($access, true);
                 <!-- <div class="ibox-title">Time Table Management</div> -->
                 <div class="ibox-title">Time Table Management - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
                 <!-- <div><a href="<?php base_url().'/templates/Time_Table_Template.xlsx'?>" target="_blank">Download TimeTable Tempalte</a></div> -->
-                <div><a href="<?php echo TEMPALTE_PATH;?>/Time_Table_Template.xlsx">Download Excel Document</a></div>
+                <div><a href="<?php echo TEMPALTE_PATH;?>/Time_Table_Template.xlsx">Download Excel Template</a></div>
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewtimetable">
                     <i class="fa fa-plus"></i> Add New Time Table
@@ -112,9 +112,12 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="topic_name"> Upload File <span class="required">*</span>
                      </label>
                      <div>
-                         <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
+                         <input name="timetable" id="fileInput" type="file" class="demoInputBox form-control" required/>
                         <p class="error topic_name_error"></p>
                      </div>
+                  </div>
+                  <div class="form-group">
+                       <p class="error importing_error"></p>
                   </div>
               </div>
             </div>

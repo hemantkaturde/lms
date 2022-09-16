@@ -101,6 +101,8 @@ define('TBL_EMAIL_SMTP','tbl_email_smtp');
 define('TBL_COURSE_TOPICS','tbl_course_topics');
 define('TBL_COURSE_TOPICS_DOCUMENT','tbl_topic_document');
 define('TBL_TIMETABLE','tbl_timetable');
+define('TBL_TIMETABLE_TRANSECTIONS','tbl_timetable_transection');
+define('TBL_EXAMINATION','tbl_examination');
 
 
 define('EMAIL_SMTP_HOST','smtp.gmail.com');		// your smtp host e.g. smtp.gmail.com

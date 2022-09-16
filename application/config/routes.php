@@ -112,6 +112,19 @@ $route['fetchTimetable/(:any)'] = "course/fetchTimetable/$1";
 // $route['fetchTopicDocument/(:any)'] = "course/fetchTopicDocument/$1";
 $route['fetchTopicDocument?(:any)'] = "course/fetchTopicDocument/$1";
 $route['deleteTopicDocuments'] = "course/deleteTopicDocuments";
+$route['deletetopictimetable'] = "course/deletetopictimetable";
+$route['timetablemaster'] = "course/timetablemaster";
+$route['viewtimetablelisting?(:any)'] = "course/viewtimetablelisting/$1";
+$route['fetchTopicTimetableListing?(:any)'] = "course/fetchTopicTimetableListing/$1";
+
+
+
+/************ EXAMINATION MASTER ***********************/
+$route['examinationlisting'] = "examination/examinationlisting";
+$route['fetchExaminationListing'] = "examination/fetchExaminationListing";
+$route['createExamination'] = "examination/createExamination";
+$route['viewquestionpaper/(:any)'] = "examination/viewquestionpaper/$1";
+
 
 
 

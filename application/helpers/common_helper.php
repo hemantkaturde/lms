@@ -235,4 +235,31 @@ if(!function_exists('sef'))
     }   
 }
 
+if(!function_exists(('isFieldEmpty')))
+{
+    function isFieldEmpty($arr,$columnsArr,$mandateFields = array())
+    {
+        $emptyFields = "";
+        foreach ($arr as $key => $value) 
+        {
+            $value = trim($value);
+            if(!empty($mandateFields)){
+                if(in_array($key, $mandateFields)){
+                    if (empty($value))
+                    {
+                        $emptyFields.= $columnsArr[$key].",";
+                    }    
+                }
+            }else{
+                if (empty($value))
+                {
+                    $emptyFields.= $columnsArr[$key].",";
+                }
+            }
+        }
+        $emptyFields = rtrim($emptyFields,",");
+        return $emptyFields;
+    }
+}
+
 ?>
