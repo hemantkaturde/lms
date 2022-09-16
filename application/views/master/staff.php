@@ -157,8 +157,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="save_staff" class="btn btn-primary save_staff">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_staff" class="btn btn-primary save_staff">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
@@ -265,8 +264,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="update_staff" class="btn btn-primary update_staff">Update</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="update_staff" class="btn btn-primary update_staff">Update</button>
       </div>
       <?php echo form_close(); ?>
     </div>

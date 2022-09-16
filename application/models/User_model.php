@@ -59,7 +59,8 @@ class User_model extends CI_Model
         {
             $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_USER.'.isDeleted', 0);
@@ -78,7 +79,8 @@ class User_model extends CI_Model
         {
             $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_USER.'.isDeleted', 0);
@@ -96,6 +98,7 @@ class User_model extends CI_Model
             {
                  $data[$counter]['name']    = $value['name'];
                  $data[$counter]['email']   = $value['email'];
+                 $data[$counter]['username']  = $value['username'];
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['role']    = $value['role'];
                  $data[$counter]['action']  = '';

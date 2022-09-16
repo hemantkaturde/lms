@@ -14,8 +14,11 @@
 			});
 		});
 
-		$(document).on('click','.close',function(e){  
+		$(document).on('click','#close',function(e){  
 			history.go(0);
+			location.reload();
+
+			//alert('close');
 		});
 
 		var myDrop = new drop({
@@ -210,7 +213,7 @@
 					 $('#cgst_tax1').val(data[0].course_cgst); 
 					 $('#sgst1').val(data[0].course_sgst_tax_value);  
 					 $('#sgst_tax1').val(data[0].course_sgst);  
-					 $('#total_course_fees1').val(data[0].course_total_fees);  
+					 $('#total_course_fees1').val( Math.round(data[0].course_total_fees));  
                      $('#remarks1').val(data[0].course_remark);
                      $('#course_id').val(course_id);
                 }  
@@ -1012,10 +1015,11 @@
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "20%", "targets": 0 },
-						{ "width": "30%", "targets": 1 },
-						{ "width": "20%", "targets": 2 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "15%", "targets": 2 },
 						{ "width": "20%", "targets": 3 },
-						{ "width": "10%", "targets": 4 },
+						{ "width": "15%", "targets": 4 },
+						{ "width": "15%", "targets": 5 },
 
 					],
 					responsive: true,
@@ -1200,7 +1204,7 @@
 			});
 		});
     </script>
-	<?php } ?>
+<?php } ?>
 
 <?php if($pageTitle=='Staff List'){?>
 	<script type="text/javascript">
@@ -1409,8 +1413,6 @@
 		});
 	</script>
 <?php } ?>
-
-
 
 <?php
 if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit Role'){?>
@@ -1751,7 +1753,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	});
 </script>
 <?php } ?>
-
 
 <?php if($pageTitle=='Enquiry Follow Up'){?>
 	<script type="text/javascript">
@@ -2479,7 +2480,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 
 <?php } ?>
-
 
 <?php if($pageTitle=='Examination Management'){ ?>
 	<script type="text/javascript">

@@ -251,9 +251,9 @@ $jsonstringtoArray = json_decode($access, true);
                 <div class="admin-block d-flex">
                     <div>
                        <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
-                            <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" width="45px" />
+                            <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" width="50px"  height="50px"/>
                        <?php }else{ ?>
-                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="45px" />
+                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="50px" height="50px" />
                        <?php } ?>
                     </div>
                     <div class="admin-info" >
@@ -298,18 +298,6 @@ $jsonstringtoArray = json_decode($access, true);
                     </li>
                     <?php } ?>
 
-                    <!-- <li class="">
-                        <a href="<?php echo base_url()."timetablemaster"; ?>"><i class="sidebar-item-icon fa fa-calendar" ></i>
-                            <span class="nav-label">Time Table</span>
-                        </a>
-                    </li> -->
-
-                    <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
-                        <a href="<?php echo base_url()."examinationlisting"; ?>"><i class="sidebar-item-icon fa fa-file-text" ></i>
-                            <span class="nav-label">Examination</span>
-                        </a>
-                    </li>
-
                     <?php if (in_array("enquirymodule", $jsonstringtoArray)){?>
                     <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup'){ echo 'active';} ?>">
                         <a href="<?php echo base_url()."enquirylisting"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
@@ -325,28 +313,42 @@ $jsonstringtoArray = json_decode($access, true);
                         </a>
                     </li>
                     <?php } ?>
+
+                    <!-- <li class="">
+                        <a href="<?php echo base_url()."timetablemaster"; ?>"><i class="sidebar-item-icon fa fa-calendar" ></i>
+                            <span class="nav-label">Time Table</span>
+                        </a>
+                    </li> -->
+
+                    <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url()."examinationlisting"; ?>"><i class="sidebar-item-icon fa fa-file-text" ></i>
+                            <span class="nav-label">Examination</span>
+                        </a>
+                    </li>
+
+                    <?php if (in_array("studentmodule", $jsonstringtoArray)){?>
+                    <li>
+                        <li class="<?php if($pageUrl =='studentListing'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
+                                <span class="nav-label">Students</span>
+                            </a>
+                        </li>
+                    </li>
+                    <?php } ?>
                     
-                    <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
+                    <!-- <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
                     <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                         <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
                             <span class="nav-label">Staff / counsellor</span>
                         </a>
                     </li>
-                    <?php } ?>
+                    
+                    <?php } ?> -->
                     <!-- <li>
                         <a href="#"><i class="sidebar-item-icon fa fa-phone-square" ></i>
                             <span class="nav-label">Follow up</span>
                         </a>
                     </li> -->
-                    <?php if (in_array("studentmodule", $jsonstringtoArray)){?>
-                    <li>
-                        <li class="<?php if($pageUrl =='studentListing'){ echo 'active';} ?>">
-                            <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
-                                <span class="nav-label">Student</span>
-                            </a>
-                        </li>
-                    </li>
-                    <?php } ?>
 
                     <?php if (in_array("usersmodule", $jsonstringtoArray)){?>
                     <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
@@ -365,7 +367,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </li>
                     <?php } ?>
  
-                    <?php if (in_array("settingsmodule", $jsonstringtoArray)){?>
+                    <!-- <?php if (in_array("settingsmodule", $jsonstringtoArray)){?>
                     <li class="treeview <?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>" style="height: auto;">
                         <a href="#">
                             <i class="sidebar-item-icon fa fa-cog" ></i> <span class="group-master">Settings</span>
@@ -375,10 +377,10 @@ $jsonstringtoArray = json_decode($access, true);
                             <?php if (in_array("emilsmtppage", $jsonstringtoArray)){?>
                                <li class="<?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>"><a href="<?php echo base_url()."emailsmtpListing"; ?>"><i class="sidebar-item-icon fa fa-envelope-open"></i><span class="nav-label"> Email SMTP </span></a></li>
                             <?php } ?>
-                            <!-- <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i  class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li> -->
+                            <li><a href="<?php echo base_url()."emailtemplateListing"; ?>"><i  class="sidebar-item-icon fa fa-check-square-o"></i> Email Template</a></li>
                         </ul>
                     </li>
-                    <?php } ?>
+                    <?php } ?> -->
 
                 </ul>
             </div>

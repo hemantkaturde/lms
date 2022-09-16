@@ -11,11 +11,12 @@
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">
-                <table width="100%" class="table table-bordered" id="userList">
+                <table class="table table-bordered" id="userList">
                   <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Username</th>
                                 <th>Phone number</th>
                                 <th>Role</th>
                                 <th>Action</th>
@@ -127,8 +128,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="save_user" class="btn btn-primary save_user">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_user" class="btn btn-primary save_user">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
@@ -236,8 +236,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="update_user" class="btn btn-primary update_user">Update</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="update_user" class="btn btn-primary update_user">Update</button>
       </div>
       <?php echo form_close(); ?>
     </div>

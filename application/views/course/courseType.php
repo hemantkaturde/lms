@@ -68,8 +68,7 @@ $jsonstringtoArray = json_decode($access, true);
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" id="save_course_type" class="btn btn-primary save_course_type">Save</button>
+            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>            <button type="submit" id="save_course_type" class="btn btn-primary save_course_type">Save</button>
         </div>
       <?php echo form_close(); ?>
     </div>
@@ -109,10 +108,11 @@ $jsonstringtoArray = json_decode($access, true);
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>            
             <button type="submit" id="update_course_type" class="btn btn-primary update_course_type">Save</button>
         </div>
       <?php echo form_close(); ?>
     </div>
   </div>
 </div>
+ 

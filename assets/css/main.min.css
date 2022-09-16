@@ -66,7 +66,8 @@ a:focus, button:focus, input:focus, select:focus {
 }
 
 canvas, img, input, textarea {
-    max-width: 100%
+    max-width: 100%;
+    border-radius: 10px;
 }
 
 button.reset {
@@ -3765,14 +3766,23 @@ a.text-danger:focus, a.text-danger:hover {
 }
 
 .header .dropdown-user a.dropdown-toggle {
-    padding: 0 15px
+    padding: 0 15px;
+    color: black;
+    font-size: initial;
 }
 
 .header .dropdown-user a.dropdown-toggle img {
-    width: 30px;
+    /* width: 30px;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    margin-right: 10px
+    margin-right: 10px */
+
+    width: 40px;
+    -webkit-border-radius: 50%;
+    height: 38px;
+    border-radius: 50%;
+    margin-right: 10px;
+
 }
 
 .header .dropdown-user>.dropdown-menu .dropdown-item {

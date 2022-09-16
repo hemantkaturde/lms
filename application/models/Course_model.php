@@ -401,6 +401,7 @@ class Course_model extends CI_Model
             $this->db->or_where(TBL_COURSE_TOPICS.".ct_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
         $query = $this->db->get(TBL_COURSE_TOPICS);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -419,6 +420,7 @@ class Course_model extends CI_Model
             $this->db->or_where(TBL_COURSE_TOPICS.".ct_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
         $this->db->order_by(TBL_COURSE_TOPICS.'.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_COURSE_TOPICS);

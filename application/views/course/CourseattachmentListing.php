@@ -73,8 +73,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="save_course_topic" class="btn btn-primary save_course_topic">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_course_topic" class="btn btn-primary save_course_topic">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
@@ -125,8 +124,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="update_course_topic" class="btn btn-primary update_course_topic">Update</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="update_course_topic" class="btn btn-primary update_course_topic">Update</button>
       </div>
       <?php echo form_close(); ?>
     </div>
