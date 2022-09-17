@@ -1,7 +1,19 @@
 <?php
 include_once('../db/config.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+if($_SERVER['HTTP_HOST'] == 'localhost')
+{
+	$REQUEST_METHOD = 'POST';
+}
+else
+{
+	$REQUEST_METHOD = 'GET';
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == $REQUEST_METHOD ) {
 
     /*All post params here*/
     $enq_id = $_REQUEST["enq_id"];
