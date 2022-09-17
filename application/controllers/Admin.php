@@ -194,11 +194,11 @@ class Admin extends BaseController
                 if($this->upload->do_upload('profile_photo1')){ 
                    $profile_pic = $filename; 
                 }else{
-                    $profile_pic ='';
+                    $profile_pic =trim($this->input->post('existing_img'));
                 }
 
             }else{
-                $profile_pic = '';
+                $profile_pic = trim($this->input->post('existing_img'));
 
             }
 

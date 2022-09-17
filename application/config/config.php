@@ -27,10 +27,21 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     $base  = "http://".$_SERVER['HTTP_HOST'];
     $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
     $config['base_url'] = $base;
+
+    define('TH_DB_HOST','localhost');
+    define('TH_DB_USER','root');
+    define('TH_DB_PASSWORD','');
+    define('TH_DB_DBNAME','lms');
+
 }else{
     $base  = "https://".$_SERVER['HTTP_HOST'];
     $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
     $config['base_url'] = $base;
+
+    define('TH_DB_HOST','localhost');
+    define('TH_DB_USER','iictn');
+    define('TH_DB_PASSWORD','lms2022');
+    define('TH_DB_DBNAME','lmsiictn');
 }
 
 define("ADMIN_PATH",$config['base_url']);

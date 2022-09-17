@@ -227,9 +227,9 @@
                      <label style="text-align: left;"  for="profile_photo1">Profile Pic</label>
                      <input type="file" id="profile_photo1" name="profile_photo1" class="form-control" ccept="image/*" onchange="loadFile(event)">
                         <small class="text-default">( Upload photo as Show on Admin Panel)</small>
-                        <p><img id="output1" width="200" /></p>
+                        <input type="hidden" id="existing_img" name="existing_img" >
+                        <p><img id="output1" name="exsting_img" width="80" height="80" /></p>
                   </div>
-
 
               </div>
             </div>

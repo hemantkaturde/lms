@@ -1104,7 +1104,15 @@
                      $('#password1').val(atob(data[0].password));
                      $('#confirm_password1').val(atob(data[0].password));
 
-					 $('#output1').attr("src","<?php echo IMGPATH;?>/" + data[0].profile_pic);
+					 if(data[0].profile_pic){
+						const imgpath = data[0].profile_pic;
+					    $('#output1').attr("src","<?php echo IMGPATH;?>/" + data[0].profile_pic);
+						$('#existing_img').val(imgpath);
+					 }else{
+						const imgpathoptional = "<?php echo base_url(); ?>assets/img/admin-avatar.png";
+					    $('#output1').attr("src","<?php echo base_url(); ?>assets/img/admin-avatar.png");
+						$('#existing_img').val('admin-avatar.png');
+					 }
 					 
                      $('#userId').val(userId);
                 }  
