@@ -12,7 +12,7 @@ $ark_root  = $scheme.$_SERVER['HTTP_HOST'];
 $ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
 include_once('../db/config.php'); 
-$sql = "SELECT * FROM tbl_users where  isDeleted='0' and  user_flag='staff'" ;
+$sql = "SELECT * FROM tbl_users join tbl_roles on tbl_users.roleId=tbl_roles.roleId  where tbl_users.isDeleted='0' and tbl_roles.role='Counsellor'" ;
 $result = $conn->query($sql);
 ?>
 <html>
