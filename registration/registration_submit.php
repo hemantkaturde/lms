@@ -3,6 +3,7 @@ include_once('../db/config.php');
 
 
 
+
 if($_SERVER['HTTP_HOST'] == 'localhost')
 {
 	$REQUEST_METHOD = 'POST';
