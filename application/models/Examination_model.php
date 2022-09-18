@@ -151,6 +151,19 @@ class Examination_model extends CI_Model
         return  $this->db->delete($table);
     }
 
+
+    public function getExaminationinfo($id){
+
+        $this->db->select('*');
+        $this->db->from(TBL_EXAMINATION);
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId ='.TBL_EXAMINATION.'.course_id');
+        $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+        $this->db->where(TBL_EXAMINATION.'.id', $id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
 }
 
 ?>

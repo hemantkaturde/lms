@@ -2562,7 +2562,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			});
 			return false;
 	});
-
 	
 	$(document).on('click','.edit_examination',function(e){
 			var elemF = $(this);
@@ -2701,4 +2700,53 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
+<?php if($pageTitle=='View Question Paper'){ ?>
+	<script type="text/javascript">
+  
+  $(document).on('click','#addqestionapaper',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var examination_id = $('#examination_id').val();
+			var formData = new FormData($("#addqestionapaper_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>savenewtimetable",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Question Paper Successfully Uplaoded !",
+							//text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'viewquestionpaper/'?>"+examination_id;
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+	</script>
+<?php } ?>
 

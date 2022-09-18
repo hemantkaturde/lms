@@ -124,7 +124,8 @@ $jsonstringtoArray = json_decode($access, true);
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_timetable_listing" class="btn btn-primary save_timetable_listing">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="save_timetable_listing" class="btn btn-primary save_timetable_listing">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
