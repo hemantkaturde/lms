@@ -64,9 +64,9 @@ class Examination_model extends CI_Model
                  $data[$counter]['exam_status'] = $exam_status;
                  $data[$counter]['action'] = '';
 
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchapters/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Add Topics' title='Add Topics'></a> | ";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_examination' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a> | ";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewquestionpaper/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/examination.png' alt='View/ADD Question Paper' title='View/ADD Question Paper'></a> | ";
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Examination' title='Delete Examination'></a> "; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_examination' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Examination' title='Delete Examination'></a> "; 
               
                  $counter++; 
             }
@@ -105,16 +105,51 @@ class Examination_model extends CI_Model
         }
     }
 
-    public function getExaminationinfo($id){
+
+    public function getSingleExaminationInfo($exam_id)
+    {
+            $this->db->select('*,'.TBL_EXAMINATION.'.course_id as c_id');
+            $this->db->from(TBL_EXAMINATION);
+            $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId ='.TBL_EXAMINATION.'.course_id');
+            $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+            $this->db->where(TBL_EXAMINATION.'.id', $exam_id);
+            $query = $this->db->get();
+            return $query->result();
+    }
+
+
+    public function checkquniqeExaminationupdate($course_name,$examination_title){
         $this->db->select('*');
-        $this->db->from('tbl_examination as BaseTbl');
-        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.id', $id);
+        $this->db->from(TBL_EXAMINATION);
+        $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+        $this->db->where(TBL_EXAMINATION.'.course_id', $course_name);
+        $this->db->where(TBL_EXAMINATION.'.exam_title', $examination_title);
         $query = $this->db->get();
         return $query->result();
+
+
     }
-    
+
+    public function checkquniqeExaminationwithidupdate($id,$course_name,$examination_title){
+
+        $this->db->select('*');
+        $this->db->from(TBL_EXAMINATION);
+        $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+        $this->db->where(TBL_EXAMINATION.'.id', $id);
+        $this->db->where(TBL_EXAMINATION.'.course_id', $course_name);
+        $this->db->where(TBL_EXAMINATION.'.exam_title', $examination_title);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+
+    function data_update($table='',$arr='',$field='',$value=''){
+        // $this->CI->db->where($field,$value);
+        // return $this->CI->db->update($table,$arr);
+        $this->db->where($field, $value);
+        return  $this->db->delete($table);
+    }
 
 }
 

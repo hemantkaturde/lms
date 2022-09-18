@@ -2492,7 +2492,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Examination Management'){ ?>
 	<script type="text/javascript">
      $(document).ready(function() {
-		
 			var dt = $('#view_examinationlist').DataTable({
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
@@ -2517,10 +2516,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					type: "post",
 				},
 			});
-		});
+	});
 
 
-		$(document).on('click','#save_examination',function(e){
+	$(document).on('click','#save_examination',function(e){
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			var formData = new FormData($("#examination_form")[0]);
@@ -2562,8 +2561,141 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			    }
 			});
 			return false;
+	});
+
+	
+	$(document).on('click','.edit_examination',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var exam_id = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>examination/get_signle_examinationData",  
+                method:"POST",  
+                data:{exam_id:exam_id},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                     $('#editExamination').modal('show');
+
+                     $('#course_name1').val(data[0].c_id);  
+                     $('#examination_title1').val(data[0].exam_title);
+					 $('#examination_time1').val(data[0].exam_time);
+					 $('#examination_status1').val(data[0].exam_status);
+                     $('#exam_id1').val(exam_id);
+                }  
+           })
+    });
+
+
+	$(document).on('click','#update_examination',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#editexamination_form")[0]);
+			var id = $("#exam_id1").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateExamination/"+id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Examination Updated!",
+							text: "",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'examinationlisting'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+	$(document).on('click','.delete_examination',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>delete_examination",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											//swal("Deleted!", "", "success");
+											//location.reload();
+										//}
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													swal({
+														title: "Deleted!",
+														text: "",
+														icon: "success",
+														button: "Ok",
+														},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'examinationlisting'?>";
+													});	
+											}else{
+
+												swal({
+														title: "Not Deleted!",
+														text: "",
+														icon: "success",
+														button: "Ok",
+														},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'examinationlisting'?>";
+													});	
+											}	
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					swal("Cancelled", " ", "error");
+					}
+				});
 	    });
-   
+
 
 	</script>
 <?php } ?>

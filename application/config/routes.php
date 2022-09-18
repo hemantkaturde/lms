@@ -124,8 +124,8 @@ $route['examinationlisting'] = "examination/examinationlisting";
 $route['fetchExaminationListing'] = "examination/fetchExaminationListing";
 $route['createExamination'] = "examination/createExamination";
 $route['viewquestionpaper/(:any)'] = "examination/viewquestionpaper/$1";
-
-
+$route['updateExamination/(:any)'] = "examination/updateExamination/$1";
+$route['delete_examination'] = "examination/delete_examination";
 
 
 

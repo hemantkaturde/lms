@@ -67,7 +67,7 @@ a:focus, button:focus, input:focus, select:focus {
 
 canvas, img, input, textarea {
     max-width: 100%;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 button.reset {

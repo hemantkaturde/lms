@@ -41,7 +41,7 @@ $jsonstringtoArray = json_decode($access, true);
 <!-- END PAGE CONTENT-->
 
 
-<!-- Add New Course Modal -->
+<!-- Add Examination Modal -->
 <div class="modal fade" id="addNewExamination" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="addNewExaminationLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
@@ -77,9 +77,9 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
 
                     <div>
-                      <label style="text-align: left;"  for="examination_time">Examination Time<span class="required">*</span></label>
+                      <label style="text-align: left;"  for="examination_time">Examination Time (In Minuts)<span class="required">*</span></label>
                         <div >
-                            <input autocomplete="off" autocomplete="off"  type="time" id="examination_time" name="examination_time"  placeholder="Enter Examination Time" class="form-control col-md-12 col-xs-12">
+                            <input autocomplete="off" autocomplete="off"  type="number" id="examination_time" name="examination_time"  placeholder="Enter Examination Time" class="form-control col-md-12 col-xs-12">
                             <p class="error examination_time_error"></p>
                         </div>
                     </div>
@@ -99,6 +99,74 @@ $jsonstringtoArray = json_decode($access, true);
       </div>
       <div class="modal-footer">
         <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_examination" class="btn btn-primary save_examination">Save</button>
+      </div>
+      <?php echo form_close(); ?>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Edit Examination Modal -->
+<div class="modal fade" id="editExamination" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="editExaminationLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#d2ae6d">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#000"> Edit Examination</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <?php
+            $attributes = array("name"=>"editexamination_form","id"=>"editexamination_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            echo form_open("", $attributes);
+         ?>
+         <div class="modal-body">
+            <div class="container">
+                    <div class="form-group">
+                        <label style="text-align: left;"  for="course_name">Select Course Course<span class="required">*</span></label>
+                            <select class="form-control" id="course_name1" name="course_name">
+                            <option value="">Select Course Type</option>
+                            <?php foreach ($course_name as $key => $value) { ?>
+                            <option value="<?php echo $value->courseId; ?>"><?php echo ucwords($value->course_name); ?></option>
+                            <?php } ?>
+                            </select>
+                            <p class="error course_name_error"></p>
+                    </div>
+
+                    <div>
+                      <label style="text-align: left;"  for="examination_title">Examination Title<span class="required">*</span></label>
+                        <div >
+                            <input autocomplete="off" autocomplete="off"  type="text" id="examination_title1" name="examination_title"  placeholder="Enter Examination Name" class="form-control col-md-12 col-xs-12">
+                            <input type="hidden" id="exam_id1" name="exam_id1">
+                            <p class="error examination_title_error"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                      <label style="text-align: left;"  for="examination_time">Examination Time (In Minuts)<span class="required">*</span></label>
+                        <div >
+                            <input autocomplete="off" autocomplete="off"  type="number" id="examination_time1" name="examination_time"  placeholder="Enter Examination Time" class="form-control col-md-12 col-xs-12">
+                            <p class="error examination_time_error"></p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                      <label style="text-align: left;"  for="examination_status">Status<span class="required">*</span></label>
+                        <div>
+                          <select class="form-control" id="examination_status1" name="examination_status">
+                             <option value="">Select Course Type</option>
+                             <option value="1">Active</option>
+                             <option value="0">In-Active</option>
+                          </select>
+                        <p class="error examination_status_error"></p>
+                        </div>
+                    </div>
+          </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="update_examination" class="btn btn-primary update_examination">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
