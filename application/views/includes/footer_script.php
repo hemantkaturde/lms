@@ -382,7 +382,7 @@
 			var sgst_value = total_fees_befor_tax *  sgst_tax / 100 ;
 			$("#sgst").val(sgst_value);
 			var total_fees = total_fees_befor_tax + cgst_value +sgst_value;
-            $("#total_course_fees").val(total_fees);
+            $("#total_course_fees").val( Math.round(total_fees));
 
 		});
 
