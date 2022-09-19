@@ -111,7 +111,6 @@
             echo json_encode($data);
         }
 
-    
         public function updateExamination($id){
             $post_submit = $this->input->post();
 
@@ -181,10 +180,13 @@
         public function viewquestionpaper($id){
             $this->global['pageTitle'] = 'View Question Paper';
             $data['examination_info'] = $this->examination_model->getSingleExaminationInfo($id);
+            $course_id = $data['examination_info'][0]->course_id;
+            $examination_id = $data['examination_info'][0]->id;
+
+            $data['questionPaperListMCQ'] = $this->examination_model->getquestionPaperListMCQInfo($course_id,$examination_id);
+ 
             $this->loadViews("examination/view_questionpaper",$this->global,$data,NULL);
         }
-
-
 
         public function uploadquestionpaper(){
 
@@ -198,27 +200,24 @@
             if($post_submit){
 
                 $uploadquestionpaper_response = array();
+
+                if (!empty($_FILES['questionpaper']['name']))
+                {
                 if($_FILES['questionpaper']['error'] == 0)
                    {
 
-                    $fileExt = strtolower(pathinfo($_FILES['questionpaper']['name'], PATHINFO_EXTENSION));
+                        $fileExt = strtolower(pathinfo($_FILES['questionpaper']['name'], PATHINFO_EXTENSION));
 
                         if($fileExt != "xls" && $fileExt != "xlsx")
                         {
                             $uploadquestionpaper_response['status'] = "failure";
                             $uploadquestionpaper_response['error'] = array('importing'=>'Please upload file with extension xls or xlsx only');
                         }else{
-
-
-                            $data = array(
-                                'examination_id' => $this->input->post('examination_id'),
-                                'course_id' => $this->input->post('course_id'),
-                            );
-
-                            $filename = str_replace(" ", "_", $_FILES['timetable']['name']).'_'.time().".".$fileExt;
+                             
+                            $filename = str_replace(" ", "_", $_FILES['questionpaper']['name']).'_'.time().".".$fileExt;
                             $fileSavePath = './uploads/ExcelImport/'.$filename;
 
-                            if(move_uploaded_file($_FILES["timetable"]["tmp_name"], $fileSavePath)) 
+                            if(move_uploaded_file($_FILES["questionpaper"]["tmp_name"], $fileSavePath)) 
                             {
 
                                 $this->load->library('excel');
@@ -229,22 +228,21 @@
                                 $higheshColumn = $objPHPExcel->setActiveSheetIndex(0)->getHighestColumn();
                                 $higheshRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 
+                                
                                 if($higheshRow == 1 && $higheshColumn == "A") 
                                 { 
                                     unlink($fileSavePath);
-                                    $savetimetable_response['status'] = "failure";
-                                    $savetimetable_response['error'] = array('importing'=>'File is empty');
+                                    $uploadquestionpaper_response['status'] = "failure";
+                                    $uploadquestionpaper_response['error'] = array('importing'=>'File is empty');
                                 }else{
 
-
-
                                     $columnsArr = array('A'=>'Question List','B'=>'Option 1','C'=>'Option 2','D'=>'Option 3','E'=>'Option 4','F'=>'Answer','G'=>'Marks','H'=>'Question Type (MCQ,WRITTEN,MATCH_PAIR)');
-
+                                   
                                     $excel_errors='';   
-                                
+                                                        
                                     for($i = 2; $i <= count($allDataInSheet); $i++)
                                     {
-                                        $mandateFields = array('A', 'B', 'C');
+                                        $mandateFields = array('A', 'B', 'C','D', 'E', 'F','G','H');
 
                                         $getBlankFields =  $this->isFieldEmpty($allDataInSheet[$i],$columnsArr, $mandateFields);
 
@@ -265,69 +263,132 @@
                                         $excel_errors.="\n\n";
                                     }
 
-
                                     $excel_errors = rtrim($excel_errors,"\n\n");
 
                                     if(!empty($excel_errors))
-                                     {
-                                        unlink($fileSavePath);
-                                        $savetimetable_response['status'] = "failure";
-                                        $savetimetable_response['error'] = array('importing'=>$excel_errors);
-                                        // $createteachers_response['errorfilepath'] = $txtFilePath;
-                                        //$this->session->set_flashdata('error', $excel_errors);
-                                        //redirect('orderListing/'.$vendor_id);
+                                    {
+                                       unlink($fileSavePath);
+                                       $uploadquestionpaper_response['status'] = "failure";
+                                       $uploadquestionpaper_response['error'] = array('importing'=>$excel_errors);
+                                       // $createteachers_response['errorfilepath'] = $txtFilePath;
+                                       //$this->session->set_flashdata('error', $excel_errors);
+                                       //redirect('orderListing/'.$vendor_id);
 
-                                     }else{
+                                    }else{
                                         $countofdataupload = count($allDataInSheet);
-
                                         $toup = $countofdataupload-1;
 
                                         if( $toup > 0) {
-        
+
                                             $insertArr = array();
                                             //$timetabledata = array();
                                             for($i = 2; $i <= count($allDataInSheet); $i++)
                                              {
                                                     //$insertArr['vendor_id'] = $vendor_id;
-                                                    $insertArr['course_id'] =  $this->input->post('course_id_post');
-                                                    $insertArr['time_table_id'] = $saveCoursetimetabledata;
-                                                    $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
-                                                    $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
-                                                    $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
-                                                    $insertArr['timings'] =$allDataInSheet[$i]['B'];
-                                                    $insertArr['topic'] = $allDataInSheet[$i]['C'];
+                                                    $insertArr['course_id'] =  $this->input->post('course_id');
+                                                    $insertArr['examination_id'] =  $this->input->post('examination_id');
+                                                    $insertArr['question'] = $allDataInSheet[$i]['A'];
+                                                    $insertArr['option_1'] = $allDataInSheet[$i]['B'];
+                                                    $insertArr['option_2'] =  $allDataInSheet[$i]['C'];
+                                                    $insertArr['option_3'] =$allDataInSheet[$i]['D'];
+                                                    $insertArr['option_4'] = $allDataInSheet[$i]['E'];
+                                                    $insertArr['correct_ans'] = $allDataInSheet[$i]['F'];
+                                                    $insertArr['marks'] = $allDataInSheet[$i]['G'];
+                                                    $insertArr['question_type'] = $allDataInSheet[$i]['H'];
                                                     $timetabledata[] = $insertArr;
-                                                    $passdataToOrderAPi = $this->course_model->insertBlukTimetabledata($insertArr);
+                                                    $passdataToDatabse = $this->examination_model->insertBlukquestionpaperdata($insertArr);
                                              }
 
-                                             if($passdataToOrderAPi){
+                                             if($passdataToDatabse){
                                                 unlink($fileSavePath);
-                                                $savetimetable_response['status'] = 'success';
-                                                $savetimetable_response['error'] = array('form_date'=>'','to_date'=>'');
+                                                $uploadquestionpaper_response['status'] = 'success';
+                                                $uploadquestionpaper_response['error'] = array('importing'=>'','questionpaper'=>'');
+                                             }else{
+
+                                                $uploadquestionpaper_response['status'] = 'failure';
+                                                $uploadquestionpaper_response['error'] = array('importing'=>'Data not store to the database');
                                              }
                                         }else{
-                                            //$result = $this->course_model->delete_timetable($this->input->post('course_id_post'),$saveCoursetimetabledata);
-
                                             $uploadquestionpaper_response['status'] = 'failure';
                                             $uploadquestionpaper_response['error'] = array('importing'=>'Blank File');
                                         }
-                                     }
-
-
+                                    }
                                 }
-
                             }
-
                         }
-                        
-                        $uploadquestionpaper_response['status'] = 'failure';
-                        $uploadquestionpaper_response['error'] = array('form_date'=>'','to_date'=>'');
-
                    }
+                }else{
+                    $uploadquestionpaper_response['status'] = 'failure';
+                    $uploadquestionpaper_response['error'] = array('questionpaper'=>'File Required');
+
+                }
+                
+                echo json_encode($uploadquestionpaper_response);
 
             }
+
         }
 
+        public function isFieldEmpty($arr,$columnsArr,$mandateFields = array())
+        {
+                $emptyFields = "";
+                foreach ($arr as $key => $value) 
+                {
+                    $value = trim($value);
+                    if(!empty($mandateFields)){
+                        if(in_array($key, $mandateFields)){
+                            if (empty($value))
+                            {
+                                $emptyFields.= $columnsArr[$key].",";
+                            }    
+                        }
+                    }else{
+                        if (empty($value))
+                        {
+                            $emptyFields.= $columnsArr[$key].",";
+                        }
+                    }
+                }
+                $emptyFields = rtrim($emptyFields,",");
+                return $emptyFields;
+        }
+
+        public function getValidationErrors($arr,$columnsArr)
+        {
+            $valErrors = ""; 
+            // if(!empty($arr['A']) && !preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/", $arr['A'])) //Email
+            // {
+            //     $valErrors.= $columnsArr['A']." should contain valid information\n";
+            // }
+    
+            // if(!preg_match('/^[a-zA-Z\s]+$/',$arr['B'])) //Full Name
+            // {
+            //     $valErrors.= $columnsArr['B']." should contain only alphabets\n";
+            // }
+    
+            // if(strlen($arr['B']) < 2 || strlen($arr['B']) >100) //Full Name
+            // {
+            //     $valErrors.= $columnsArr['B']." should be min 2 characters & max 100 characters in length\n";
+            // }
+    
+            // if(strlen($arr['C']) != 10) //Mobile length
+            // {
+            //     $valErrors.= $columnsArr['C']." number should be 10 digit in length\n";
+            // }
+    
+            // if(!is_numeric($arr['C'])) //Mobile numeric check
+            // {
+            //     $valErrors.= $columnsArr['C']." number should be numeric\n";
+            // }
+    
+            // if((!empty($arr['D']) && strtolower($arr['D']) != 'new') && (!empty($arr['D']) && strtolower($arr['D']) != 'update') && (!empty($arr['D']) && strtolower($arr['D']) != 'delete')) // Action
+            // {
+            //     $valErrors.= $columnsArr['D']." should contain information as 'new', 'update', or 'delete'.";
+            // }
+    
+            //$valErrors = rtrim($valErrors,"\n");          
+            return $valErrors;
+        }
 
     }
 

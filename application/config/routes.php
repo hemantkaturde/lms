@@ -126,7 +126,7 @@ $route['createExamination'] = "examination/createExamination";
 $route['viewquestionpaper/(:any)'] = "examination/viewquestionpaper/$1";
 $route['updateExamination/(:any)'] = "examination/updateExamination/$1";
 $route['delete_examination'] = "examination/delete_examination";
-$route['uploadquestionpaper'] = "examination/examination";
+$route['uploadquestionpaper'] = "examination/uploadquestionpaper";
 
 
 /*********** COURSE CONTROLLER ROUTES *******************/

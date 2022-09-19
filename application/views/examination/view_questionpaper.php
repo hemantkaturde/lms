@@ -31,7 +31,44 @@ $jsonstringtoArray = json_decode($access, true);
                                             <h4>MCQ Quiz</h4><span>(20)</span>
                                         </div>
                                     </div>
+                                    <?php $i=1; foreach ($questionPaperListMCQ as $key => $value) { ?>
                                     <div class="question bg-white p-3 border-bottom">
+                                        <div class="d-flex flex-row align-items-center question-title">
+                                            <h3 class="text-danger">Q. <?php echo $i++; ?></h3>
+                                            <h5 class="mt-1 ml-2"><?= $value->question; ?>
+                                            </h5>
+                                        </div>
+                                        <div class="ans ml-2">
+                                            <label class="radio"> <input type="radio" name="brazil" value="brazil" readonly>
+                                                <span> <?= $value->option_1;?></span>
+                                            </label>
+                                        </div>
+                                        <div class="ans ml-2">
+                                            <label class="radio"> <input type="radio" name="Germany" value="Germany" readonly>
+                                            <span> <?= $value->option_2;?></span>
+                                            </label>
+                                        </div>
+                                        <div class="ans ml-2">
+                                            <label class="radio"> <input type="radio" name="Indonesia" value="Indonesia" readonly> 
+                                            <span> <?= $value->option_3;?></span>
+                                            </label>
+                                        </div>
+                                        <div class="ans ml-2">
+                                            <label class="radio"> <input type="radio" name="Russia" value="Russia" readonly>
+                                            <span> <?= $value->option_4;?></span>
+                                            </label>
+                                        </div>
+
+                                        <div class="ans ml-2">
+                                            <label class="radio"> Correct Answer : 
+                                            <span> <?= $value->correct_ans;?></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+
+
+                                    <!-- <div class="question bg-white p-3 border-bottom">
                                         <div class="d-flex flex-row align-items-center question-title">
                                             <h3 class="text-danger">Q. 1</h3>
                                             <h5 class="mt-1 ml-2">Which of the following country has largest population?
@@ -56,35 +93,7 @@ $jsonstringtoArray = json_decode($access, true);
                                                 <span>Russia</span>
                                             </label>
                                         </div>
-                                    </div>
-
-
-                                    <div class="question bg-white p-3 border-bottom">
-                                        <div class="d-flex flex-row align-items-center question-title">
-                                            <h3 class="text-danger">Q. 1</h3>
-                                            <h5 class="mt-1 ml-2">Which of the following country has largest population?
-                                            </h5>
-                                        </div>
-                                        <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="brazil" value="brazil" readonly>
-                                                <span>Brazil</span>
-                                            </label>
-                                        </div>
-                                        <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Germany" value="Germany" readonly>
-                                                <span>Germany</span>
-                                            </label>
-                                        </div>
-                                        <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Indonesia" value="Indonesia" readonly> <span>Indonesia</span>
-                                            </label>
-                                        </div>
-                                        <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Russia" value="Russia" readonly>
-                                                <span>Russia</span>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
                                         <button class="btn btn-primary d-flex align-items-center btn-danger" type="button"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
                                         <button  class="btn btn-primary border-success align-items-center btn-success" type="button">Next<i class="fa fa-angle-right ml-2"></i></button></div>
@@ -142,20 +151,16 @@ $jsonstringtoArray = json_decode($access, true);
                                 <label style="text-align: left;" for="examination_title">Examination Title<span
                                         class="required">*</span></label>
                                 <div>
-                                    <input autocomplete="off" autocomplete="off" type="text" id="examination_title"
-                                        name="examination_title" value="<?=$examination_info[0]->exam_title;?>" readonly
-                                        class="form-control col-md-12 col-xs-12">
+                                    <input autocomplete="off" autocomplete="off" type="text" id="examination_title" name="examination_title" value="<?=$examination_info[0]->exam_title;?>" readonly class="form-control col-md-12 col-xs-12">
                                     <p class="error examination_title_error"></p>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label style="text-align: left;" for="questionpaper"> Upload File <span
-                                        class="required">*</span>
+                                <label style="text-align: left;" for="questionpaper"> Upload File <span class="required">*</span>
                                 </label>
                                 <div>
-                                    <input name="questionpaper" id="fileInput" type="file" class="demoInputBox form-control"
-                                        required />
+                                    <input name="questionpaper" id="fileInput" type="file" class="demoInputBox form-control"  required />
                                     <p class="error questionpaper_error"></p>
                                 </div>
                             </div>
@@ -167,7 +172,7 @@ $jsonstringtoArray = json_decode($access, true);
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="addqestionapaper" class="btn btn-primary addqestionapaper">Save</button>
+                    <button type="submit" id="addqestionapaperexel" class="btn btn-primary addqestionapaperexel">Save</button>
                 </div>
                 <?php echo form_close(); ?>
             </div>

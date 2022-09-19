@@ -2703,13 +2703,13 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='View Question Paper'){ ?>
 	<script type="text/javascript">
   
-  $(document).on('click','#addqestionapaper',function(e){
+    $(document).on('click','#addqestionapaperexel',function(e){
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			var examination_id = $('#examination_id').val();
 			var formData = new FormData($("#addqestionapaper_form")[0]);
 			$.ajax({
-				url : "<?php echo base_url();?>savenewtimetable",
+				url : "<?php echo base_url();?>uploadquestionpaper",
 				type: "POST",
 				data : formData,
 				cache: false,
@@ -2745,7 +2745,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			    }
 			});
 			return false;
-	    });
+	});
+
+	
 
 	</script>
 <?php } ?>

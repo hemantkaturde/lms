@@ -164,6 +164,29 @@ class Examination_model extends CI_Model
 
     }
 
+    public function insertBlukquestionpaperdata($timetabledata){
+        if($this->db->insert(TBL_QUESTION_PAPER, $timetabledata)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    
+      }
+
+    public function getquestionPaperListMCQInfo($course_id,$examination_id){
+        
+        $this->db->select('*');
+        $this->db->from(TBL_QUESTION_PAPER);
+        //$this->db->join(TBL_COURSE, TBL_COURSE.'.courseId ='.TBL_QUESTION_PAPER.'.course_id');
+        // $this->db->where(TBL_QUESTION_PAPER.'.isDeleted', 0);
+        $this->db->where(TBL_QUESTION_PAPER.'.examination_id', $examination_id);
+        $this->db->where(TBL_QUESTION_PAPER.'.examination_id', $examination_id);
+        $this->db->where(TBL_QUESTION_PAPER.'.question_type', 'MCQ');
+        $query = $this->db->get();
+        return $query->result();
+
+    } 
+
 }
 
 ?>
