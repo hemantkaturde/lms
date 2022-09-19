@@ -5,6 +5,8 @@ if (!defined('PHPEXCEL_ROOT')) {
     define('PHPEXCEL_ROOT', dirname(__FILE__) . '/');
     require(PHPEXCEL_ROOT . 'PHPExcel/Autoloader.php');
 }
+PHPExcel_Settings::setZipClass(PHPExcel_Settings::PCLZIP);
+
 
 /**
  * PHPExcel
@@ -1150,4 +1152,6 @@ class PHPExcel
     {
         return $this->uniqueID;
     }
+
+    
 }
