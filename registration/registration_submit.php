@@ -1,9 +1,6 @@
 <?php
 include_once('../db/config.php');
 
-
-
-
 if($_SERVER['HTTP_HOST'] == 'localhost')
 {
 	$REQUEST_METHOD = 'POST';
@@ -94,7 +91,26 @@ if ($_SERVER["REQUEST_METHOD"] == $REQUEST_METHOD ) {
                                VALUES ('$enq_id','$name','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
 
     if ($conn->query($sql) === TRUE) {
-      echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+
+        $username = strtok($name, " ");
+        $year = date("Y"); 
+        $password = base64_encode($name.'@'.$year);
+
+        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,roleId,createdBy,isDeleted) 
+                              VALUES ('$email','$username',' $password','$name','$mobile','student','3','1','0')"; 
+                              
+
+                if ($conn->query($sql) === TRUE) {
+
+                    echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+
+                }else{
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+
+                }
+
+
+      //echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
         //echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

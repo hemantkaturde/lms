@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-    <div class="page-content fade-in-up col-md-10">
+    <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Course Topic / Chapter List - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
@@ -54,7 +54,7 @@
                      <label style="text-align: left;"  for="topic_name">Topic / Chapter Name<span class="required">*</span>
                      </label>
                      <div>
-                        <input  maxlength="25" type="text" id="topic_name" name="topic_name"  placeholder="Enter Topic / Chapter Name" autocomplete="off" class="form-control col-md-12 col-xs-12">
+                        <input  type="text" id="topic_name" name="topic_name"  placeholder="Enter Topic / Chapter Name" autocomplete="off" class="form-control col-md-12 col-xs-12">
                         <input type="hidden" id="course_id_post" name="course_id_post" value="<?=$getCourseinfo[0]->courseId;?>">
                         <p class="error topic_name_error"></p>
                      </div>
@@ -64,7 +64,7 @@
                      <label style="text-align: left;" for="remark">Remark
                      </label>
                      <div >
-                         <textarea class="form-control" id="remark"  placeholder="Enter Remark" name="remark" rows="5"></textarea>
+                         <textarea class="form-control" id="remark" placeholder="Enter Remark" name="remark" rows="5"></textarea>
                         <p class="error remark_error"></p>
                      </div>
                   </div>

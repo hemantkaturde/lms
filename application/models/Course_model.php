@@ -398,7 +398,7 @@ class Course_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_COURSE_TOPICS.".topic_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE_TOPICS.".ct_name LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_COURSE_TOPICS.".remark LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
         $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
@@ -417,7 +417,7 @@ class Course_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_COURSE_TOPICS.".topic_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COURSE_TOPICS.".ct_name LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_COURSE_TOPICS.".remark LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
         $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
