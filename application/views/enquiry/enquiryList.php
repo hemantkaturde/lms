@@ -108,6 +108,11 @@
                             <option value="">Select Enquiry Source</option>
                             <option value="Email">Email</option>
                             <option value="Friends">Friends</option>
+                            <option value="Google">Google</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Reference">Reference</option>
+                            <option value="Social Media">Social Media</option>
                             <option value="Other">Other</option>
                         </select>
                         <p class="error enquiry_type_error"></p>

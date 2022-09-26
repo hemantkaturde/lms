@@ -108,9 +108,17 @@ if(!empty($editDataenquiry))
                                                 <label style="text-align: left;" for="enquiry_type">Enquiry Source<span
                                                         class="required">*</span></label>
                                                 <select class="form-control" id="enquiry_type1" name="enquiry_type">
-                                                    <option value="">Select Enquiry Source</option>
+                                                    <!-- <option value="">Select Enquiry Source</option>
                                                     <option value="Email" <?php if($enq_source=='Email'){ echo 'selected';} ?>>Email</option>
                                                     <option value="Friends" <?php if($enq_source=='Friends'){ echo 'selected';} ?>>Friends</option>
+                                                    <option value="Other" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Other</option> -->
+                                                    <option value="Email" <?php if($enq_source=='Email'){ echo 'selected';} ?>>Email</option>
+                                                    <option value="Friends" <?php if($enq_source=='Friends'){ echo 'selected';} ?>>Friends</option>
+                                                    <option value="Google" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Google</option>
+                                                    <option value="Facebook" <?php if($enq_source=='Facebook'){ echo 'selected';} ?>>Facebook</option>
+                                                    <option value="Instagram" <?php if($enq_source=='Instagram'){ echo 'selected';} ?>>Instagram</option>
+                                                    <option value="Reference" <?php if($enq_source=='Reference'){ echo 'selected';} ?>>Reference</option>
+                                                    <option value="Social Media" <?php if($enq_source=='Social Media'){ echo 'selected';} ?>>Social Media</option>
                                                     <option value="Other" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Other</option>
                                                 </select>
                                                 <p class="error enquiry_type_error"></p>

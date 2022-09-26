@@ -157,7 +157,7 @@ $(document).ready(function(){
                 }else if(resp == 'big_file'){
                     $('#uploadStatus').html('<p style="color:#EA4335;">Image size exceeds 3GB.</p>');
                 }else if(resp == 'type_missmatch'){
-                    $('#uploadStatus').html('<p style="color:#EA4335;">Please select a valid file (MP4/webm/OGV).</p>');
+                    $('#uploadStatus').html('<p style="color:#EA4335;">Please select a valid file .</p>');
                 }
             }
         });
@@ -166,7 +166,7 @@ $(document).ready(function(){
     // File type validation
     $("#fileInput").change(function(){
          if($type=='documents'){
-            var allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+            var allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png', 'image/jpg', 'image/gif','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','	application/vnd.ms-excel.sheet.binary.macroEnabled.12','application/vnd.ms-excel','application/vnd.ms-excel.sheet.macroEnabled.12'];
          }
 
          if($type=='videos'){

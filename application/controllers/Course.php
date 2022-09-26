@@ -675,9 +675,12 @@
 
         public function uploadSubmit()
         {	
-           $course_id = $this->input->post('course_id');
-           $topic_id =  $this->input->post('topic_id');
-           $doc_type =  $this->input->post('doc_type');
+
+
+           $course_id =  $_POST['course_id'];
+           $topic_id =   $_POST['topic_id'];
+           $doc_type =   $_POST['doc_type'];
+
            $upload = 'err'; 
 
                 //   $filesize = round($_FILES['file']['size'] / 1024 , 2); // kilobytes with two digits
@@ -691,7 +694,7 @@
                     // File upload configuration 
                     $targetDir = "uploads/topic_documents/".$doc_type.'/'; 
                     if($doc_type=='documents'){
-                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif'); 
+                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx'); 
                     }
 
                     if($doc_type=='videos'){

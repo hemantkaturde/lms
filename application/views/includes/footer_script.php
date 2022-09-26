@@ -990,7 +990,7 @@
 									})
 								}
 								else {
-						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						swal("Cancelled", "Enquiry deletion cancelled ", "error");
 						}
 					});
 		});
@@ -1647,7 +1647,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									})
 								}
 								else {
-						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						swal("Cancelled", "Role deletion cancelled ", "error");
 						}
 					});
 	});
@@ -1983,7 +1983,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									})
 								}
 								else {
-						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						swal("Cancelled", "SMTP Configuration deletion cancelled ", "error");
 						}
 					});
 	    });
@@ -2340,7 +2340,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									})
 								}
 								else {
-						swal("Cancelled", "Course Type deletion cancelled ", "error");
+						swal("Cancelled", "Time Table deletion cancelled ", "error");
 						}
 					});
 	    });
