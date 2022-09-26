@@ -53,11 +53,11 @@ class Admin extends BaseController
 						'events'=> $cur_event
 					);
 
-                    $data['users'] = $this->user_model->userListingCount();
-                    $data['courses'] = $this->course_model->courseListingCount();
-                    $data['enquries'] = $this->enquiry_model->enquiryListingCount();
-                    $data['students'] = $this->student_model->studentListingCount();
-                    $data['admissions'] = $this->admission_model->admissionListingCount();
+        $data['users'] = $this->user_model->userListingCount();
+        $data['courses'] = $this->course_model->courseListingCount();
+        $data['enquries'] = $this->enquiry_model->enquiryListingCount();
+        $data['students'] = $this->student_model->studentListingCount();
+        $data['admissions'] = $this->admission_model->admissionListingCount();
 
 
         $this->loadViews("dashboard", $this->global, $data , NULL);
