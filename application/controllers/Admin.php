@@ -394,9 +394,9 @@ class Admin extends BaseController
             'day_type'     		=> 'short',
 			'template' 			=> '{table_open}<table class="date">{/table_open}
 								   {heading_row_start}&nbsp;{/heading_row_start}
-								   {heading_previous_cell}<caption><a href="{previous_url}" class="prev_date" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
+								   {heading_previous_cell}<caption><a href="{previous_url}" class="prev_date" title="Previous Month"></a>{/heading_previous_cell}
 								   {heading_title_cell}{heading}{/heading_title_cell}
-								   {heading_next_cell}<a href="{next_url}" class="next_date"  title="Next Month">Next&gt;&gt;</a></caption>{/heading_next_cell}
+								   {heading_next_cell}<a href="{next_url}" class="next_date"  title="Next Month"></a></caption>{/heading_next_cell}
 								   {heading_row_end}<col class="weekday" span="5"><col class="weekend_sat"><col class="weekend_sun">{/heading_row_end}
 								   {week_row_start}<thead><tr>{/week_row_start}
 								   {week_day_cell}<th>{week_day}</th>{/week_day_cell}

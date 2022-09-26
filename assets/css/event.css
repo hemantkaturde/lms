@@ -40,8 +40,9 @@ table.date {
 }
 caption {
 	font-size: 200%;
-	font-style: italic;
+	/* font-style: italic; */
 	margin-bottom:5px;
+	text-align: center;
 }
 
 a{
