@@ -26,6 +26,8 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Course Name</th>
                                 <th>Course Type</th>
                                 <th>Course Fees</th>
+                                <th>Course Mode</th>
+                                <th>Course Books</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -270,7 +272,7 @@ $jsonstringtoArray = json_decode($access, true);
                      </label>
                      <div >
                           <input type="radio" class="radio_mode_yes" name="course_mode" id="course_mode1" value="1"> Online
-                          <input type="radio" class="radio_mode_no" name="course_mode" id="course_mode1" value="0" style="margin-left:20px;" checked> Offline
+                          <input type="radio" class="radio_mode_no" name="course_mode" id="course_mode1" value="0" style="margin-left:20px;"> Offline
                      </div>
                      <p class="error course_mode_error"></p>
                   </div>
@@ -348,7 +350,8 @@ $jsonstringtoArray = json_decode($access, true);
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="update_course" class="btn btn-primary update_course">Update</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="update_course" class="btn btn-primary update_course">Update</button>
       </div>
       <?php echo form_close(); ?>
     </div>

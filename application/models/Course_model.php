@@ -199,14 +199,28 @@ class Course_model extends CI_Model
             {
                 foreach ($fetch_result as $key => $value)
                 {
-                     // $data[$counter]['courseId'] = $value['courseId'];
-                     $data[$counter]['course_name'] = $value['course_name'];
-                     $data[$counter]['course_type'] = $value['ct_name'];
-                     $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
-                     $data[$counter]['action'] = '';
+                        // $data[$counter]['courseId'] = $value['courseId'];
+                        $data[$counter]['course_name'] = $value['course_name'];
+                        $data[$counter]['course_type'] = $value['ct_name'];
+                        $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
 
-                        
-                   
+                        if($value['course_books']==1){
+                            $course_books = 'Books Available';
+                        }else{
+                            $course_books = '';
+                        }
+
+                        if($value['course_mode']==1){
+                            $course_mode = 'Online';
+                        }else{
+                            $course_mode = 'Offline';
+                        }
+
+                        $data[$counter]['course_mode'] = $course_mode;
+                        $data[$counter]['course_books'] = $course_books;
+
+                        $data[$counter]['action'] = '';
+
                         //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
                         if(in_array("coursedit", $jsonstringtoArray)){
                         $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a> | ";

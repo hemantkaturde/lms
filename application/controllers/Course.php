@@ -203,6 +203,8 @@
                 $cgst_tax  = $this->input->post('cgst_tax');
                 $cgst_tax_value   = $this->input->post('cgst');
 
+            
+
 
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
