@@ -64,6 +64,8 @@ class Course_model extends CI_Model
         */ 
         public function getCourseInfo($courseId)
         {
+
+
             $this->db->select('BaseTbl.*,BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books');
             $this->db->from('tbl_course as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
@@ -590,6 +592,8 @@ public function getBookscount($topic_id,$course_id){
             $this->db->or_where(TBL_TIMETABLE.".to_date LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
+        $this->db->where(TBL_TIMETABLE.'.course_id', $courseid);
+
         $query = $this->db->get(TBL_TIMETABLE);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -608,6 +612,7 @@ public function getBookscount($topic_id,$course_id){
         $this->db->where("(".TBL_TIMETABLE.".from_date LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_TIMETABLE.".to_date LIKE '%".$params['search']['value']."%')");
     }
+    $this->db->where(TBL_TIMETABLE.'.course_id', $courseid);
     $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
     $this->db->order_by(TBL_TIMETABLE.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
