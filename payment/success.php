@@ -40,7 +40,7 @@ if ($conn->query($sql) === TRUE) {
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/'.$enq_id; ?>">Download Payment Receipt </a></p>
 
             <p><b>Addmission Form : </b></p>
-            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php/'.$enq_id; ?>">Admission Form Link </a></p>
+            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php/enq='.$enq_id; ?>">Admission Form Link </a></p>
 
             <p>Kindly contact your councillors for more Details</p>
             <!-- <p><a class="btn btn-warning" target="_blank" href="https://doctor.iictn.org/"> <br> -->

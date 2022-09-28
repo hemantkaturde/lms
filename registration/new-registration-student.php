@@ -1,5 +1,8 @@
 <?php
 
+
+include_once('../db/config.php'); 
+
 if($_SERVER['HTTP_HOST'] == 'localhost')
 {
 	$scheme = 'http://';
@@ -11,7 +14,119 @@ else
 $ark_root  = $scheme.$_SERVER['HTTP_HOST'];
 $ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
-include_once('../db/config.php'); 
+
+
+if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
+
+    /*All post params here*/
+    $enq_id = $_REQUEST["enq_id"];
+    $name   = $_REQUEST["name"];
+    $mobile = $_REQUEST["mobile"];
+    $alt_mobile = $_REQUEST["alt_mobile"];
+    $email = $_REQUEST["email"];
+    $dateofbirth = $_REQUEST["dateofbirth"];
+    $counsellerName = $_REQUEST["counsellerName"];
+    $address = $_REQUEST["address"];
+    $country = $_REQUEST["country"];
+    $state =$_REQUEST["state"];
+    $city = $_REQUEST["city"];
+    $pin=  $_REQUEST["pin"];
+
+    if($_FILES['student_photo']['name']){
+        $file = rand(1000,100000)."-".$name.'-'.$_FILES['student_photo']['name'];
+        $file_loc = $_FILES['student_photo']['tmp_name'];
+        $file_size = $_FILES['student_photo']['size'];
+        $file_type = $_FILES['student_photo']['type'];
+        $folder="../uploads/admission/";
+        /* new file size in KB */
+        $new_size = $file_size/1024;  
+        /* new file size in KB */
+        /* make file name in lower case */
+        $new_file_name = strtolower($file);
+        /* make file name in lower case */
+        $final_file_student_photo=str_replace(' ','-',$new_file_name);
+        move_uploaded_file($file_loc,$folder.$final_file_student_photo);
+    }else{
+        $final_file_student_photo ="";
+    }
+
+
+    if($_FILES['marksheet_photo']['name']){
+        $file = rand(1000,100000)."-".$name.'-'.$_FILES['marksheet_photo']['name'];
+        $file_loc = $_FILES['marksheet_photo']['tmp_name'];
+        $file_size = $_FILES['marksheet_photo']['size'];
+        $file_type = $_FILES['marksheet_photo']['type'];
+        $folder="../uploads/admission/";
+        /* new file size in KB */
+        $new_size = $file_size/1024;  
+        /* new file size in KB */
+        /* make file name in lower case */
+        $new_file_name = strtolower($file);
+        /* make file name in lower case */
+        $final_file_marksheet_photo=str_replace(' ','-',$new_file_name);
+        move_uploaded_file($file_loc,$folder.$final_file_marksheet_photo);
+    }else{
+        $final_file_marksheet_photo ="";
+    }
+
+
+    if($_FILES['adhar_photo']['name']){
+        $file = rand(1000,100000)."-".$name.'-'.$_FILES['adhar_photo']['name'];
+        $file_loc = $_FILES['adhar_photo']['tmp_name'];
+        $file_size = $_FILES['adhar_photo']['size'];
+        $file_type = $_FILES['adhar_photo']['type'];
+        $folder="../uploads/admission/";
+        /* new file size in KB */
+        $new_size = $file_size/1024;  
+        /* new file size in KB */
+        /* make file name in lower case */
+        $new_file_name = strtolower($file);
+        /* make file name in lower case */
+        $final_file_adhar_photo=str_replace(' ','-',$new_file_name);
+        move_uploaded_file($file_loc,$folder.$final_file_adhar_photo);
+    }else{
+        $final_file_adhar_photo ="";
+    }
+
+    $source_about=  $_REQUEST["source_about"];
+    $source_ans=  $_REQUEST["source_ans"];
+    $accept_terms =$_REQUEST["accept_terms"];
+
+    $sql = "INSERT INTO tbl_admission (enq_id,`name`, mobile, alt_mobile,email,dateofbirth,counsellor_name,`address`,city,`state`,country,pin,source_about,source_ans,accept_terms,registration_type,document_1,document_2,document_3,isDeleted) 
+                               VALUES ('$enq_id','$name','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
+
+
+
+    if ($conn->query($sql) === TRUE) {
+
+        $username = strtok($name, " ");
+        $year = date("Y"); 
+        $password = base64_encode($name.'@'.$year);
+
+        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,roleId,createdBy,isDeleted) 
+                              VALUES ('$email','$username',' $password','$name','$mobile','student','3','1','0')"; 
+                 
+            
+                if ($conn->query($sql_create_user) === TRUE) {
+
+                    echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+
+                }else{
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+
+                }
+
+             
+
+    //   echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+    //     echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    $conn->close();
+}
+
 $sql = "SELECT * FROM tbl_users join tbl_roles on tbl_users.roleId=tbl_roles.roleId  where tbl_users.isDeleted='0' and tbl_roles.role='Counsellor'" ;
 $result = $conn->query($sql);
 ?>
@@ -163,7 +278,7 @@ $result = $conn->query($sql);
                             </div>
 
                             <div class="card-body">
-                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="./registration_submit.php" method="POST"  enctype="multipart/form-data" autocomplete="off">
+                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="" method="POST"  enctype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" class="form-control" id="enq_id" name="enq_id" value="<?php echo $enq_id;?>">
                                     <div class="form-group row">
                                         <label class="col-sm-12 form-control-label text-info">PERSONAL DETAILS </label>
