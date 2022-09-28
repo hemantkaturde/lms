@@ -96,22 +96,22 @@ if ($_SERVER["REQUEST_METHOD"] == $REQUEST_METHOD ) {
         $year = date("Y"); 
         $password = base64_encode($name.'@'.$year);
 
-        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,roleId,createdBy,isDeleted) 
-                              VALUES ('$email','$username',' $password','$name','$mobile','student','3','1','0')"; 
+        // $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,roleId,createdBy,isDeleted) 
+        //                       VALUES ('$email','$username',' $password','$name','$mobile','student','3','1','0')"; 
                               
 
-                if ($conn->query($sql) === TRUE) {
+        //         if ($conn->query($sql) === TRUE) {
 
-                    echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+        //             echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
 
-                }else{
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+        //         }else{
+        //             echo "Error: " . $sql . "<br>" . $conn->error;
 
-                }
+        //         }
 
 
-      //echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
-        //echo "New record created successfully";
+      echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+        echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
