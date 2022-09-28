@@ -119,6 +119,14 @@ if(!empty($editDataenquiry))
                                                     <option value="Instagram" <?php if($enq_source=='Instagram'){ echo 'selected';} ?>>Instagram</option>
                                                     <option value="Reference" <?php if($enq_source=='Reference'){ echo 'selected';} ?>>Reference</option>
                                                     <option value="Social Media" <?php if($enq_source=='Social Media'){ echo 'selected';} ?>>Social Media</option>
+                                                    <option value="Direct" <?php if($enq_source=='Direct'){ echo 'selected';} ?>>Direct</option>
+                                                    <option value="Call" <?php if($enq_source=='Call'){ echo 'selected';} ?>>Call</option>
+                                                    <option value="Chat" <?php if($enq_source=='Chat'){ echo 'selected';} ?>>Chat</option>
+                                                    <option value="Cold calling" <?php if($enq_source=='Cold calling'){ echo 'selected';} ?>>Cold calling</option>
+                                                    <option value="Ads Campaign" <?php if($enq_source=='Ads Campaign'){ echo 'selected';} ?>>Ads Campaign</option>
+                                                    <option value="WhatsApp" <?php if($enq_source=='WhatsApp'){ echo 'selected';} ?>>WhatsApp</option>
+
+
                                                     <option value="Other" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Other</option>
                                                 </select>
                                                 <p class="error enquiry_type_error"></p>

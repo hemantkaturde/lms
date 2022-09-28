@@ -113,6 +113,12 @@
                             <option value="Instagram">Instagram</option>
                             <option value="Reference">Reference</option>
                             <option value="Social Media">Social Media</option>
+                            <option value="Direct">Direct</option>
+                            <option value="Call">Call</option>
+                            <option value="Chat">Chat</option>
+                            <option value="Cold calling">Cold calling</option>
+                            <option value="Ads Campaign">Ads Campaign</option>
+                            <option value="WhatsApp">WhatsApp</option>
                             <option value="Other">Other</option>
                         </select>
                         <p class="error enquiry_type_error"></p>
