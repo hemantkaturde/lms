@@ -67,7 +67,10 @@ $returnpath = "-f" . $from;
 $mail = mail($to, $subject, $message, $headers, $returnpath);  
  
 // Email sending status 
-echo $mail?"<h1>Email Sent Successfully!</h1>":"<h1>Email sending failed.</h1>"; 
+
+print_r($mail);
+exit;
+//echo $mail?"<h1>Email Sent Successfully!</h1>":"<h1>Email sending failed.</h1>"; 
 
 
 } else {
