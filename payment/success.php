@@ -42,7 +42,7 @@ if ($conn->query($sql) === TRUE) {
 
   $fileatt     = "../invoices/payment_recipt_1.pdf"; //file location
   $fileatttype = "application/pdf";
-  $fileattname = "codexworld.pdf"; //name that you want to use to send or you can use the same name
+  $fileattname = "payment_recipt_1.pdf"; //name that you want to use to send or you can use the same name
   $headers = "From: $from";
   
   // File
