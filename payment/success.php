@@ -12,65 +12,58 @@ $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
 if ($conn->query($sql) === TRUE) {
   //echo "Record updated successfully";
 
-// Recipient 
-$to = 'hemantkaturde123@gmail.com'; 
- 
-// Sender 
-$from = 'hemantkaturde123@gmail.com'; 
-$fromName = 'hemant katurde'; 
- 
-// Email subject 
-$subject = 'PHP Email with Attachment by CodexWorld';  
- 
-// Attachment file 
-$file = "codexworld.pdf"; 
- 
-// Email body content 
-$htmlContent = ' 
-    <h3>PHP Email with Attachment by CodexWorld</h3> 
-    <p>This email is sent from the PHP script with attachment.</p> 
-'; 
- 
-// Header for sender info 
-$headers = "From: $fromName"." <".$from.">"; 
- 
-// Boundary  
-$semi_rand = md5(time());  
-$mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";  
- 
-// Headers for attachment  
-$headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\""; 
- 
-// Multipart boundary  
-$message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" . 
-"Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n";  
- 
-// Preparing attachment 
-if(!empty($file) > 0){ 
-    if(is_file($file)){ 
-        $message .= "--{$mime_boundary}\n"; 
-        $fp =    @fopen($file,"rb"); 
-        $data =  @fread($fp,filesize($file)); 
- 
-        @fclose($fp); 
-        $data = chunk_split(base64_encode($data)); 
-        $message .= "Content-Type: application/octet-stream; name=\"".basename($file)."\"\n" .  
-        "Content-Description: ".basename($file)."\n" . 
-        "Content-Disposition: attachment;\n" . " filename=\"".basename($file)."\"; size=".filesize($file).";\n" .  
-        "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n"; 
-    } 
-} 
-$message .= "--{$mime_boundary}--"; 
-$returnpath = "-f" . $from; 
- 
-// Send email 
-$mail = mail($to, $subject, $message, $headers, $returnpath);  
- 
-// Email sending status 
+  $name        = "Name goes here";
+  $email       = "someome@anadress.com";
+  $to          = "hemantkaturde123@gmail.com";
+  $from        = "hemantkaturde123@gmail.com";
+  $subject     = "Here is your attachment";
+  $mainMessage = "Hi, here's the file.";
+  $fileatt     = "./codexworld.pdf"; //file location
+  $fileatttype = "application/pdf";
+  $fileattname = "codexworld.pdf"; //name that you want to use to send or you can use the same name
+  $headers = "From: $from";
+  
+  // File
+  $file = fopen($fileatt, 'rb');
+  $data = fread($file, filesize($fileatt));
+  fclose($file);
+  
+  // This attaches the file
+  $semi_rand     = md5(time());
+  $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
+  $headers      .= "\nMIME-Version: 1.0\n" .
+    "Content-Type: multipart/mixed;\n" .
+    " boundary=\"{$mime_boundary}\"";
+    $message = "This is a multi-part message in MIME format.\n\n" .
+    "--{$mime_boundary}\n" .
+    "Content-Type: text/plain; charset=\"iso-8859-1\n" .
+    "Content-Transfer-Encoding: 7bit\n\n" .
+    $mainMessage  . "\n\n";
+  
+  $data = chunk_split(base64_encode($data));
+  $message .= "--{$mime_boundary}\n" .
+    "Content-Type: {$fileatttype};\n" .
+    " name=\"{$fileattname}\"\n" .
+    "Content-Disposition: attachment;\n" .
+    " filename=\"{$fileattname}\"\n" .
+    "Content-Transfer-Encoding: base64\n\n" .
+  $data . "\n\n" .
+   "--{$mime_boundary}--\n";
+  
+  // Send the email
+  if(mail($to, $subject, $message, $headers)) {
+  
+    echo "The email was sent.";
+  
+  }
+  else {
+  
+    echo "There was an error sending the mail.";
+  }
 
-print_r($mail);
-exit;
-//echo $mail?"<h1>Email Sent Successfully!</h1>":"<h1>Email sending failed.</h1>"; 
+
+
+
 
 
 } else {
