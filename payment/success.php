@@ -13,10 +13,10 @@ if ($conn->query($sql) === TRUE) {
   //echo "Record updated successfully";
 
 // Recipient 
-$to = 'hemantkaturde123@gamil.com'; 
+$to = 'hemantkaturde123@gmail.com'; 
  
 // Sender 
-$from = 'hemantkaturde123@gamil.com'; 
+$from = 'hemantkaturde123@gmail.com'; 
 $fromName = 'hemant katurde'; 
  
 // Email subject 
