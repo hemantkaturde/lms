@@ -23,7 +23,7 @@ $fromName = 'hemant katurde';
 $subject = 'PHP Email with Attachment by CodexWorld';  
  
 // Attachment file 
-$file = "/codexworld.pdf"; 
+$file = "codexworld.pdf"; 
  
 // Email body content 
 $htmlContent = ' 
