@@ -3,6 +3,20 @@
 
 include_once('../db/config.php'); 
 
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+$url = "https://";   
+else  
+$url = "http://";   
+// Append the host(domain name, ip) to the URL.   
+$url.= $_SERVER['HTTP_HOST'];   
+// Append the requested resource location to the URL   
+$url.= $_SERVER['REQUEST_URI'];    
+//$enq_id = substr($url, strrpos($url, '/') + 1);  
+$enq_id  = $_GET['enq'];
+
+// print_r($_GET['enq']);
+// exit;
+
 if($_SERVER['HTTP_HOST'] == 'localhost')
 {
 	$scheme = 'http://';
@@ -13,7 +27,6 @@ else
 }
 $ark_root  = $scheme.$_SERVER['HTTP_HOST'];
 $ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-
 
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
@@ -95,21 +108,127 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     $sql = "INSERT INTO tbl_admission (enq_id,`name`, mobile, alt_mobile,email,dateofbirth,counsellor_name,`address`,city,`state`,country,pin,source_about,source_ans,accept_terms,registration_type,document_1,document_2,document_3,isDeleted) 
                                VALUES ('$enq_id','$name','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
 
-
-
     if ($conn->query($sql) === TRUE) {
 
         $username = strtok($name, " ");
         $year = date("Y"); 
         $password = base64_encode($name.'@'.$year);
 
-        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,roleId,createdBy,isDeleted) 
-                              VALUES ('$email','$username',' $password','$name','$mobile','student','3','1','0')"; 
+        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,enq_id,roleId,createdBy,isDeleted) 
+                              VALUES ('$email','$username',' $password','$name','$mobile','student','$enq_id','3','1','0')"; 
                  
             
                 if ($conn->query($sql_create_user) === TRUE) {
 
-                    echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+
+
+                    $to = $email;
+                    $Subject = 'IICTN -  Login Link '.date('Y-m-d H:i:s');
+                    $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                        <title>Invoice details</title>
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    </head>
+        
+                    <body style="margin: 0; padding: 0; background-color:#eaeced " bgcolor="#eaeced">
+                    <table bgcolor="#eaeced" cellpadding="0" cellspacing="0" width="100%" style="background-color: #eaeced; ">
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                    <tr>
+                        <td>
+                        <table align="center" bgcolor="#ffffff" cellpadding="20" cellspacing="0" width="600" 
+                                style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #f0f0f0;">
+                            <tr style="border-top: 4px solid #ca9331;">
+                            <td align="left" style="padding: 15px 20px 20px;">
+                            <table width="100%">
+                                <tr>
+                                <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
+                                <td align="right">
+                                    <span>Enquiry Number: '.$get_equiry_data->enq_number.'</span><br>
+                                    <span style="padding: 5px 0; display: block;">'.$get_equiry_data->enq_date.'</span>
+                                </td>
+                                </tr>
+                            </table>
+                            
+                            </td>
+                            </tr>
+                            <tr>
+                            <td align="center" style="padding: 20px; border-top: 1px solid #f0f0f0; background: #fafafa;,; ">
+                            <div>Login Details:</div>
+                            <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;"></div>
+                            </td>
+                            </tr>
+
+                            <tr style="">
+                            <td align="center" style="padding: 15px 20px 20px;">
+                            <table width="80%">
+                                <tr>
+                                <td><b>User Name (First Name  or Email Id )</b></td>
+                                <td>'.$username.'or '.$email.'</td>
+                                </tr>
+
+                                <tr>
+                                <td><b>Password</b></td>
+                                <td>'.$password.'</td>
+                                </tr>
+                            </table>
+                            </td>
+                            </tr>
+
+                            <tr>
+                            <td align="center" style="padding: 20px 40px;font-size: 16px;line-height: 1.4;color: #333;">
+                            <div> </div>
+                            <div><br></div>
+                            <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
+
+                            <a href="https://iictn.in/" class="btn btn-sm btn-primary float-right pay_now"
+                            data-amount="1000" data-id="1">Login Lonk</a>
+                            
+                            </div>
+                            <div style="color: #777; padding: 5px;"></div>
+                            <div><br></div>
+                            </td>
+                            </tr>
+                            <tr style="border-top: 1px solid #eaeaea;">
+                            <td align="center">
+                                <div style="font-size: 14px;line-height: 1.4;color: #777;">
+                                Regards,<br>
+                                IICTN
+                            </div>
+                            </td>
+                            </tr>
+                        </table>
+                        
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    </body>
+            </html>';
+
+                    $header = "From: IICTN-Login <enquiry@iictn.in> \r\n";
+                    //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                    $header .= "MIME-Version: 1.0\r\n";
+                    $header .= "Content-type: text/html\r\n";
+                    
+                    $retval = mail($to,$Subject,$Body,$header);
+                     
+                    if($retval){
+                        echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+                    }else{
+
+                        echo ("<script> window.alert('No Record Store')");
+                    }
 
                 }else{
                     echo "Error: " . $sql . "<br>" . $conn->error;
@@ -127,10 +246,49 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     $conn->close();
 }
 
-$sql = "SELECT * FROM tbl_users join tbl_roles on tbl_users.roleId=tbl_roles.roleId  where tbl_users.isDeleted='0' and tbl_roles.role='Counsellor'" ;
-$result = $conn->query($sql);
 ?>
+
+
+<!-- check if Admission is allreday Done -->
+
+<?php
+$check_admission_is_alreday_exits = "SELECT *  FROM tbl_admission where enq_id=$enq_id and isDeleted=0" ;
+$result_check_admission_is_exits = $conn->query($check_admission_is_alreday_exits);
+
+
+if($result_check_admission_is_exits->num_rows > 0){ ?>
+
+
+<!DOCTYPE html>
 <html>
+
+<head>
+    <title>Admission Alreday Done</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+</head>
+
+<body class="">
+    <article class="bg-secondary mb-3" style="background-color:#fff !important">
+        <div class="card-body text-center">
+            <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
+
+            <h2 class="text-black"><b>!! Admission Alreday Done !!</b><br></h2>
+        </div>
+        
+    </article>
+</body>
+
+</html>
+
+
+
+
+
+<?php }else{ ?>
+
+<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -162,7 +320,8 @@ $result = $conn->query($sql);
     <!-- jQuery Circle-->
     <link rel="stylesheet" href="https://iictn.org.in/admission/css/grasp_mobile_progress_circle-1.0.0.min.css">
     <!-- Custom Scrollbar-->
-    <link rel="stylesheet" href="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet"
+        href="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="https://iictn.org.in/admission/css/style.default.css" id="theme-stylesheet">
     <link id="new-stylesheet" rel="stylesheet">
@@ -224,24 +383,8 @@ $result = $conn->query($sql);
         margin-right: auto;
         width: 50%;
     }
-    
     </style>
 </head>
-
-<?php  
-    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-         $url = "https://";   
-    else  
-         $url = "http://";   
-    // Append the host(domain name, ip) to the URL.   
-    $url.= $_SERVER['HTTP_HOST'];   
-    // Append the requested resource location to the URL   
-    $url.= $_SERVER['REQUEST_URI'];    
-    $enq_id = substr($url, strrpos($url, '/') + 1);  
-    
-    
-
-  ?>   
 
 <body>
     <!-- Side Navbar -->
@@ -278,12 +421,16 @@ $result = $conn->query($sql);
                             </div>
 
                             <div class="card-body">
-                                <form class="form-horizontal" name="registration_form_details" id="registration_form_details" action="" method="POST"  enctype="multipart/form-data" autocomplete="off">
-                                    <input type="hidden" class="form-control" id="enq_id" name="enq_id" value="<?php echo $enq_id;?>">
+                                <form class="form-horizontal" name="registration_form_details"
+                                    id="registration_form_details" action="" method="POST" enctype="multipart/form-data"
+                                    autocomplete="off">
+                                    <input type="hidden" class="form-control" id="enq_id" name="enq_id"
+                                        value="<?php echo $enq_id;?>">
                                     <div class="form-group row">
                                         <label class="col-sm-12 form-control-label text-info">PERSONAL DETAILS </label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Full Name*" Required>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                placeholder="Full Name*" Required>
                                             <span class="text-default">( As Required In Certificates )</span>
                                         </div>
 
@@ -296,20 +443,24 @@ $result = $conn->query($sql);
                                         </div>-->
 
                                         <div class="col-lg-2">
-                                            <input type="number" id="mobile" name="mobile" value="" class="form-control" placeholder="Mobile Number*" Required>
+                                            <input type="number" id="mobile" name="mobile" value="" class="form-control"
+                                                placeholder="Mobile Number*" Required>
                                         </div>
 
                                         <div class="col-lg-2">
-                                            <input type="number" id="alt_mobile" name="alt_mobile" class="form-control" placeholder="Alternate Contact No." Required>
+                                            <input type="number" id="alt_mobile" name="alt_mobile" class="form-control"
+                                                placeholder="Alternate Contact No." Required>
                                             <small class="text-default">( incase of emergency )</small>
                                         </div>
 
                                         <div class="col-sm-3">
-                                            <input type="email" id="email" name="email" class="form-control" placeholder="Email Address*" Required>
+                                            <input type="email" id="email" name="email" class="form-control"
+                                                placeholder="Email Address*" Required>
                                         </div>
 
                                         <div class="col-sm-2">
-                                            <input type="date" id="dateofbirth" name="dateofbirth" class="form-control hasDatepicker" placeholder="">
+                                            <input type="date" id="dateofbirth" name="dateofbirth"
+                                                class="form-control hasDatepicker" placeholder="">
                                         </div>
                                     </div>
 
@@ -339,15 +490,20 @@ $result = $conn->query($sql);
                                             <input type="text" id="counsellerName" name="counsellerName"  class="form-control" placeholder="Your Counsellor Name*">
                                         </div> -->
                                         <div class="col-sm-3">
-                                        <select class="form-control counsellerName" id="counsellerName" name="counsellerName">
-                                        <option value="">Select Your Counsellor Name*</option>
-                                            <?php
+                                            <select class="form-control counsellerName" id="counsellerName"
+                                                name="counsellerName">
+                                                <option value="">Select Your Counsellor Name*</option>
+                                                <?php
+            
+                                            $sql = "SELECT * FROM tbl_users join tbl_roles on tbl_users.roleId=tbl_roles.roleId  where tbl_users.isDeleted='0' and tbl_roles.role='Counsellor'" ;
+                                            $result = $conn->query($sql);
                                             while($row = mysqli_fetch_array($result)) { ?>
-                                                <option value="<?php echo $row["userId"];?>"><?php echo $row["name"];?></option>
-                                            <?php
+                                                <option value="<?php echo $row["userId"];?>"><?php echo $row["name"];?>
+                                                </option>
+                                                <?php
                                             }
                                         ?>
-                                        </select>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="line"></div>
@@ -362,16 +518,16 @@ $result = $conn->query($sql);
                                         <div class="col-sm-2">
                                             <!-- <input type="text" id="city" name="city" class="form-control"
                                                 placeholder="city"> -->
-                                                <select class="form-control country" id="country" name="country">
-                                                    <option value="">Select Country</option>
-                                                    <option value="101">India</option>
-                                                </select>
+                                            <select class="form-control country" id="country" name="country">
+                                                <option value="">Select Country</option>
+                                                <option value="101">India</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-sm-2">
                                             <!-- <input type="text" id="state" name="state" class="form-control"  placeholder="state"> -->
                                             <select class="form-control state" name="state" id="state">
-                                                    <option st-id="" value="">Select State</option>
+                                                <option st-id="" value="">Select State</option>
                                             </select>
                                         </div>
 
@@ -383,7 +539,8 @@ $result = $conn->query($sql);
                                         </div>
 
                                         <div class="col-sm-2">
-                                            <input type="text" id="pin" name="pin" class="form-control" placeholder="pin">
+                                            <input type="text" id="pin" name="pin" class="form-control"
+                                                placeholder="pin">
                                         </div>
 
                                     </div>
@@ -426,7 +583,8 @@ $result = $conn->query($sql);
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" id="source_ans" name="source_ans" class="form-control" placeholder="how did you know about us">
+                                            <input type="text" id="source_ans" name="source_ans" class="form-control"
+                                                placeholder="how did you know about us">
                                         </div>
                                     </div>
                                     <div class="line"></div>
@@ -742,7 +900,8 @@ $result = $conn->query($sql);
                                     <div class="form-group row has-warning">
                                         <div class="col-sm-12">
                                             <div>
-                                                <input id="accept_terms"  class="accept_terms" name="accept_terms" type="checkbox">
+                                                <input id="accept_terms" class="accept_terms" name="accept_terms"
+                                                    type="checkbox">
 
                                                 <!--<label for="accept_terms">I Accept <a class="show_terms" href="">Terms & Condition</a> Of IICTN</label>-->
                                                 <label for="accept_terms">I Accept Terms &amp; Condition Of
@@ -752,14 +911,15 @@ $result = $conn->query($sql);
                                     </div>
 
 
-                                  <div class="form-group row">
-                                      <div class="col-sm-4 offset-sm-2">
-                                          <button type="reset" class="btn btn-secondary">Reset Form</button>
-                                          <!-- <button type="submit" name="new_student" id="submit" class="btn btn-primary">Submit Registration Form</button>-->
-                                          <button type="submit" name="new_student" id="submit" value="submit" class="btn btn-primary submit">Submit
-                                              Registration Form</button>
-                                      </div>
-                                  </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4 offset-sm-2">
+                                            <button type="reset" class="btn btn-secondary">Reset Form</button>
+                                            <!-- <button type="submit" name="new_student" id="submit" class="btn btn-primary">Submit Registration Form</button>-->
+                                            <button type="submit" name="new_student" id="submit" value="submit"
+                                                class="btn btn-primary submit">Submit
+                                                Registration Form</button>
+                                        </div>
+                                    </div>
 
                                 </form>
                             </div>
@@ -792,18 +952,19 @@ $result = $conn->query($sql);
     <script src="https://iictn.org.in/admission/vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="https://iictn.org.in/admission/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
     <script src="https://iictn.org.in/admission/vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script
+        src="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js">
+    </script>
     <script src="https://iictn.org.in/admission/js/charts-home.js"></script>
     <script src="https://iictn.org.in/admission/js/front.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript">
-
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('.submit').prop("disabled", true);
     });
-	
+
     $(function() {
         $("#dateofbirth").datepicker({
             dateFormat: 'yy-mm-dd',
@@ -829,20 +990,19 @@ $result = $conn->query($sql);
     });
 
 
-    $(".accept_terms").click(function(){
-    if($(this).prop("checked") == true){
-        $('.submit').prop("disabled", false);
-    }
-    else if($(this).prop("checked") == false){
-        $('.submit').prop("disabled", true);
-    }else{
-        $('.submit').prop("disabled", true);
-    }
-  });
+    $(".accept_terms").click(function() {
+        if ($(this).prop("checked") == true) {
+            $('.submit').prop("disabled", false);
+        } else if ($(this).prop("checked") == false) {
+            $('.submit').prop("disabled", true);
+        } else {
+            $('.submit').prop("disabled", true);
+        }
+    });
 
 
-$(document).ready(function() {
-    $('#country').on('change', function() {
+    $(document).ready(function() {
+        $('#country').on('change', function() {
             var country_id = this.value;
             $.ajax({
                 url: '<?php echo $ark_root;?>states-by-country.php',
@@ -851,15 +1011,15 @@ $(document).ready(function() {
                     country_id: country_id
                 },
                 cache: false,
-                success: function(result){
+                success: function(result) {
                     $("#state").html(result);
-                    $('#city').html('<option value="">Select State First</option>'); 
+                    $('#city').html('<option value="">Select State First</option>');
                 }
             });
-        
-        
-    });    
-    $('#state').on('change', function() {
+
+
+        });
+        $('#state').on('change', function() {
             var state_id = this.value;
             $.ajax({
                 url: '<?php echo $ark_root;?>cities-by-state.php',
@@ -868,15 +1028,13 @@ $(document).ready(function() {
                     state_id: state_id
                 },
                 cache: false,
-                success: function(result){
+                success: function(result) {
                     $("#city").html(result);
                 }
             });
+        });
     });
-});
-
-
-</script>
+    </script>
 
     </script>
 
@@ -885,3 +1043,7 @@ $(document).ready(function() {
 </body>
 
 </html>
+
+<?php
+}
+?>

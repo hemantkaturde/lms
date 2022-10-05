@@ -417,18 +417,18 @@ class Admin extends BaseController
     function _month($month){
 		$month = (int) $month;
 		switch($month){
-			case 1 : $month = 'Januari'; Break;
-			case 2 : $month = 'Februari'; Break;
-			case 3 : $month = 'Maret'; Break;
+			case 1 : $month = 'January'; Break;
+			case 2 : $month = 'February'; Break;
+			case 3 : $month = 'March'; Break;
 			case 4 : $month = 'April'; Break;
-			case 5 : $month = 'Mei'; Break;
-			case 6 : $month = 'Juni'; Break;
-			case 7 : $month = 'Juli'; Break;
-			case 8 : $month = 'Agustus'; Break;
+			case 5 : $month = 'May'; Break;
+			case 6 : $month = 'June'; Break;
+			case 7 : $month = 'July'; Break;
+			case 8 : $month = 'August'; Break;
 			case 9 : $month = 'September'; Break;
-			case 10 : $month = 'Oktober'; Break;
+			case 10 : $month = 'October'; Break;
 			case 11 : $month = 'November'; Break;
-			case 12 : $month = 'Desember'; Break;
+			case 12 : $month = 'December'; Break;
 		}
 		return $month;
 	}
