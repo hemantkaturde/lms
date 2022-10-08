@@ -704,12 +704,14 @@
                     }
 
                     if($doc_type=='books'){
-                        $allowTypes = array('pdf', 'doc', 'docx'); 
+                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx'); 
                     }
                    
                     
                     $fileName_original = basename($_FILES['file']['name']); 
-                    $fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    $fileName =rand().'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    
                     $targetFilePath = $targetDir.$fileName; 
                     
                     // Check whether file type is valid 
