@@ -43,7 +43,7 @@ if(!empty($editDataenquiry))
     <div class="page-content fade-in-up col-md-8">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Edit Enquiry</div>
+                <div class="ibox-title">Edit Inquiry</div>
             </div>
             <div class="ibox-body">
                 <?php
@@ -105,7 +105,7 @@ if(!empty($editDataenquiry))
                                             </div>
 
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="enquiry_type">Enquiry Source<span
+                                                <label style="text-align: left;" for="enquiry_type">Inquiry Source<span
                                                         class="required">*</span></label>
                                                 <select class="form-control" id="enquiry_type1" name="enquiry_type">
                                                     <!-- <option value="">Select Enquiry Source</option>
@@ -134,7 +134,7 @@ if(!empty($editDataenquiry))
 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="enq_date">Date of
-                                                    Enquiry</label><span class="required">*</span>
+                                                    Inquiry</label><span class="required">*</span>
                                                 <div>
                                                     <input type="text" class="form-control datepicker" id="enq_date1"
                                                         name="enq_date" placeholder="dd-mm-yyyy" value="<?php echo  date("Y-m-d", strtotime($enq_date));?>" required>

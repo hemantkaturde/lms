@@ -168,15 +168,21 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
                             <tr style="">
                             <td align="center" style="padding: 15px 20px 20px;">
-                            <table width="80%">
+                            <table width="100%">
+
                                 <tr>
-                                <td><b>User Name (First Name  or Email Id )</b></td>
-                                <td>'.$username.' or '.$email.'</td>
+                                    <td><b>Login Link</b></td>
+                                    <td>https://www.iictn.in/</td>
                                 </tr>
 
                                 <tr>
-                                <td><b>Password</b></td>
-                                <td>'.$main_pass.'</td>
+                                    <td><b>User Name (First Name  or Email Id )</b></td>
+                                    <td>'.$username.' or '.$email.'</td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>Password</b></td>
+                                    <td>'.$main_pass.'</td>
                                 </tr>
                             </table>
                             </td>

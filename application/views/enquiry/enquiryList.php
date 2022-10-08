@@ -12,13 +12,13 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Enquiry Management</div>
+                <div class="ibox-title">Inquiry Management</div>
                 <!-- <div class="ibox-tools"> -->
                     <!-- <a class="btn btn-primary text-white" onclick="enquiry(0)" ><i class="fa fa-plus"></i> Add Enquiry</a> -->
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEnquiry">
-                    <i class="fa fa-plus"></i> Add Enquiry
+                    <i class="fa fa-plus"></i> Add Inquiry
                 </button>
             </div>
             <div class="ibox-body">
@@ -26,8 +26,8 @@
                 <table id="view_enquirylist" class="table table-bordered">
                     <thead>
                                 <tr>
-                                    <th>Enquiry No.</th>
-                                    <th>Enquiry Date</th>
+                                    <th>Inquiry No.</th>
+                                    <th>Inquiry Date</th>
                                     <th>Name</th>
                                     <th>Mobile No</th>
                                     <th>Email</th>
@@ -52,7 +52,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#d2ae6d">
-        <h5 class="modal-title" id="modlatitleLabel" style="color:#000">Add New Enquiry</h5>
+        <h5 class="modal-title" id="modlatitleLabel" style="color:#000">Add New Inquiry</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -103,7 +103,7 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="enquiry_type">Enquiry Source<span class="required">*</span></label>
+                     <label style="text-align: left;"  for="enquiry_type">Inquiry Source<span class="required">*</span></label>
                          <select class="form-control" id="enquiry_type" name="enquiry_type">
                             <option value="">Select Enquiry Source</option>
                             <option value="Email">Email</option>
@@ -125,7 +125,7 @@
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;" for="enq_date">Date of Enquiry</label><span class="required">*</span>
+                     <label style="text-align: left;" for="enq_date">Date of Inquiry</label><span class="required">*</span>
                      <div >
                           <input type="text" class="form-control datepicker" id="enq_date" name="enq_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
                      </div>

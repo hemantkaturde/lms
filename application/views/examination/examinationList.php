@@ -144,7 +144,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
 
                     <div>
-                      <label style="text-align: left;"  for="examination_time">Examination Time (In Minits)<span class="required">*</span></label>
+                      <label style="text-align: left;"  for="examination_time">Examination Time (In Mins)<span class="required">*</span></label>
                         <div >
                             <input autocomplete="off" autocomplete="off"  type="number" id="examination_time1" name="examination_time"  placeholder="Enter Examination Time" class="form-control col-md-12 col-xs-12">
                             <p class="error examination_time_error"></p>
