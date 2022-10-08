@@ -390,6 +390,24 @@
             return $valErrors;
         }
 
+        public function delete_examination(){
+            $post_submit = $this->input->post();
+
+            $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+            $result = $this->database->data_update('tbl_examination',$enquiryInfo,'id',$this->input->post('id'));
+
+            if ($result > 0) {
+                 echo(json_encode(array('status'=>TRUE)));
+
+                 $process = 'Examination Delete';
+                 $processFunction = 'Examination/delete_examination';
+                 $this->logrecord($process,$processFunction);
+
+                }
+            else { echo(json_encode(array('status'=>FALSE))); }
+
+        }
+
     }
 
 ?>
