@@ -3,7 +3,7 @@
 $enq_id =$_GET['enq'];
 include_once('../db/config.php');
 $id = $_GET['enq'];
-$sql = "SELECT enq_id,enq_fullname FROM tbl_enquiry where enq_id='".$id."' and isDeleted =0" ;
+$sql = "SELECT enq_id,enq_fullname,enq_email FROM tbl_enquiry where enq_id='".$id."' and isDeleted =0" ;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
@@ -14,7 +14,7 @@ if ($conn->query($sql) === TRUE) {
   //echo "Record updated successfully";
   $name        = "IICTN";
   $email       = "someome@anadress.com";
-  $to          = "hemantkaturde123@gmail.com";
+  $to          = $row['enq_email'];
   $from        = "hemantkaturde123@gmail.com";
   $subject     = "IICTN - Admission Payment Recipt".date();
 
@@ -71,10 +71,10 @@ if ($conn->query($sql) === TRUE) {
   // Send the email
   if(mail($to, $subject, $message, $headers)) {
   
-    echo "The email was sent.";
+    //echo "The email was sent.";
   }
   else {
-    echo "There was an error sending the mail.";
+    //echo "There was an error sending the mail.";
   }
 }
 ?>
@@ -99,7 +99,8 @@ if ($conn->query($sql) === TRUE) {
             <p>The subject name IICTN RECEIPT, We have attached the copy of your</p>
             <!-- <p>Payment Receipt</p> -->
             <p><b>Payment Receipt : </b></p>
-            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/'.$enq_id; ?>">Download Payment Receipt </a></p>
+            <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/'.$enq_id; ?>">Download Payment Receipt </a></p> -->
+            <p><a class="" target="_blank"  href="../invoices/PAYMENT_RECEIPT_1.pdf">Download Payment Receipt </a></p>
 
             <p><b>Addmission Form : </b></p>
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p>
