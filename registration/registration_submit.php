@@ -199,6 +199,12 @@ if ($_SERVER["REQUEST_METHOD"] == $REQUEST_METHOD ) {
                     </body>
             </html>';
 
+            $header = "From: IICTN-Payment <enquiry@iictn.in> \r\n";
+            //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+            $header .= "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html\r\n";
+            
+            $retval = mail($to,$Subject,$Body,$header);
 
 
 
