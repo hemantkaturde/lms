@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                             <table width="80%">
                                 <tr>
                                 <td><b>User Name (First Name  or Email Id )</b></td>
-                                <td>'.$username.'or '.$email.'</td>
+                                <td>'.$username.' or '.$email.'</td>
                                 </tr>
 
                                 <tr>
@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                             <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
 
                             <a href="https://iictn.in/" class="btn btn-sm btn-primary float-right pay_now"
-                            data-amount="1000" data-id="1">Login Lonk</a>
+                            data-amount="1000" data-id="1">Login Link</a>
                             
                             </div>
                             <div style="color: #777; padding: 5px;"></div>
