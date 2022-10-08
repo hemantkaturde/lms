@@ -349,7 +349,7 @@
                                             <tr>
                                             <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
                                             <td align="right">
-                                                <span>Enquiry Number: '.$get_equiry_data->enq_number.'</span><br>
+                                                <span>Inquiry Number: '.$get_equiry_data->enq_number.'</span><br>
                                                 <span style="padding: 5px 0; display: block;">'.$get_equiry_data->enq_date.'</span>
                                             </td>
                                             </tr>
@@ -435,7 +435,7 @@
                         // $message = "<b>This is HTML message.</b>";
                         // $message .= "<h1>This is headline.</h1>";
                         
-                        $header = "From: IICTN-Payment <enquiry@iictn.in> \r\n";
+                        $header = "From: IICTN-Payment Link <enquiry@iictn.in> \r\n";
                         //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
