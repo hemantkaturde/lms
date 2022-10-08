@@ -114,6 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
         $year = date("Y"); 
         $password = base64_encode($name.'@'.$year);
 
+        $main_pass = $name.'@'.$year;
+
         $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,enq_id,roleId,createdBy,isDeleted) 
                               VALUES ('$email','$username',' $password','$name','$mobile','student','$enq_id','3','1','0')"; 
                  
@@ -174,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
                                 <tr>
                                 <td><b>Password</b></td>
-                                <td>'.$password.'</td>
+                                <td>'.$main_pass.'</td>
                                 </tr>
                             </table>
                             </td>
