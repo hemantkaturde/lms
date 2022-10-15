@@ -720,16 +720,16 @@
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
                     if(in_array($fileType, $allowTypes)){ 
                         // Upload file to the server 
-                        if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){ 
+                        if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
 
                                 $data = array(
                                     'course_id'=> $course_id,
                                     'topic_id' => $topic_id,
                                     'doc_type' => $fileType,
                                     'module_name' => $doc_type,
-                                    'file_name' => $fileName_original_for_download,
-                                    'file_name_original' => $fileName_original,
-                                    'file_url' =>  base_url().$targetFilePath,
+                                    'file_name' => str_replace(' ', '_',$fileName_original_for_download),
+                                    'file_name_original' => str_replace(' ', '_',$fileName_original),
+                                    'file_url' =>  base_url().str_replace(' ', '_', $targetFilePath),
                                     'createdBy' => $this->session->userdata('userId')
                                 );
 
