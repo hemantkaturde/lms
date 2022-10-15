@@ -30,7 +30,7 @@ $jsonstringtoArray = json_decode($access, true);
                                     
                                     <div class="question bg-white p-3 border-bottom" style="color: red;">
                                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                            <h4>MATCH THE FOLLOWING COLUMN</h4><span>( 20 MARKS )</span>
+                                            <h4>MATCH THE FOLLOWING COLUMN</h4><span></span>
                                         </div>
                                     </div>
 
@@ -79,7 +79,7 @@ $jsonstringtoArray = json_decode($access, true);
 
                                     <div class="question bg-white p-3 border-bottom" style="color: red;">
                                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                            <h4>MULTIPLE CHOICE QUESTIONS</h4><span>( 20 MARKS )</span>
+                                            <h4>MULTIPLE CHOICE QUESTIONS</h4><span></span>
                                         </div>
                                     </div>
                                     <?php $i=1; foreach ($questionPaperListMCQ as $key => $value) { ?>
@@ -121,7 +121,7 @@ $jsonstringtoArray = json_decode($access, true);
 
                                     <div class="question bg-white p-3 border-bottom" style="color: red;">
                                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                            <h4>LONG ANSWER QUESTIONS </h4><span>( 50 MARKS )</span>
+                                            <h4>LONG ANSWER QUESTIONS </h4><span></span>
                                         </div>
                                     </div>
 
