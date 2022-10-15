@@ -26,6 +26,57 @@ $jsonstringtoArray = json_decode($access, true);
                         <div class="d-flex justify-content-center row">
                             <div class="col-md-10 col-lg-10">
                                 <div class="border">
+                                       
+                                    
+                                    <div class="question bg-white p-3 border-bottom" style="color: red;">
+                                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                                            <h4>MATCH THE FOLLOWING COLUMN</h4><span>( 20 MARKS )</span>
+                                        </div>
+                                    </div>
+
+                                    <?php $i=1; foreach ($questionPaperListMATCHPAIR as $keyMATCHPAIR => $valueMATCHPAIR) { ?>
+                                    <div class="question bg-white p-3 border-bottom">
+                                      
+                                        <!-- <div class="d-flex flex-row align-items-center question-title">
+                                            <h3 class="text-danger">Q. <?php echo $i++; ?></h3>
+                                            <h5 class="mt-1 ml-2"><?= $valueMATCHPAIR->question; ?>
+                                            </h5>
+                                        </div> -->
+
+                                        <!-- <div class="ans ml-2">
+                                            <textarea id="answer_<?php echo $valueMATCHPAIR->id; ?>" name="w3review" rows="5" cols="100" placeholder='Answer'></textarea>
+                                        </div> -->
+
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                      <?php  $right_side = explode (",", $valueMATCHPAIR->option_1); 
+                                                        
+                                                         foreach ( $right_side as $key_right_side => $value_right_side) {
+                                                             echo $value_right_side .'<br/>';
+                                                         }
+                                                      
+                                                      ?>
+                                                  
+                                                    </div>
+                                                    <div class="col-sm">
+                                                            <?php   $left_side = explode (",", $valueMATCHPAIR->option_2); 
+                                                            
+                                                                foreach ( $left_side as $key_left_side => $value_left_side) {
+                                                                    echo $value_left_side .'<br/>';
+                                                                }
+                                                            ?>
+                                                   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+
+                                    </div>
+                                    <?php } ?>
+
+
+
                                     <div class="question bg-white p-3 border-bottom" style="color: red;">
                                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
                                             <h4>MULTIPLE CHOICE QUESTIONS</h4><span>( 20 MARKS )</span>

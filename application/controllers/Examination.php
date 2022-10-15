@@ -185,6 +185,8 @@
 
             $data['questionPaperListMCQ'] = $this->examination_model->getquestionPaperListMCQInfo($course_id,$examination_id);
             $data['questionPaperListWRITTEN'] = $this->examination_model->getquestionPaperListWRITTENInfo($course_id,$examination_id);
+
+            $data['questionPaperListMATCHPAIR'] = $this->examination_model->getquestionPaperListMATCHPAIRInfo($course_id,$examination_id);
  
             $this->loadViews("examination/view_questionpaper",$this->global,$data,NULL);
         }

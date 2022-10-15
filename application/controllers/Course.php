@@ -713,7 +713,9 @@
                     $fileName_original_for_download = $_FILES['file']['name']; 
 
                     //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
-                    $fileName =basename($_FILES['file']['name']); 
+
+                    $fileName =$doc_type.'-'.$_FILES['file']['name']; 
+                   // $fileName =basename($_FILES['file']['name']); 
                     $targetFilePath = $targetDir.$fileName; 
                     
                     // Check whether file type is valid 
