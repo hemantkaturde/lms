@@ -184,6 +184,7 @@
             $examination_id = $data['examination_info'][0]->id;
 
             $data['questionPaperListMCQ'] = $this->examination_model->getquestionPaperListMCQInfo($course_id,$examination_id);
+            $data['questionPaperListWRITTEN'] = $this->examination_model->getquestionPaperListWRITTENInfo($course_id,$examination_id);
  
             $this->loadViews("examination/view_questionpaper",$this->global,$data,NULL);
         }
@@ -242,25 +243,33 @@
                                                         
                                     for($i = 2; $i <= count($allDataInSheet); $i++)
                                     {
-                                        $mandateFields = array('A', 'B', 'C','D', 'E', 'F','G','H');
 
-                                        $getBlankFields =  $this->isFieldEmpty($allDataInSheet[$i],$columnsArr, $mandateFields);
+                                        if($allDataInSheet[$i]['H']=='WRITTEN' || $allDataInSheet[$i]['H']=='MATCH_PAIR'){
 
-                                        if(!empty($getBlankFields))
-                                        {
-                                            $excel_errors .= "Row ".$i."=> Blank Fields: ".$getBlankFields."\n";
+                                            // print_r('ff');
+                                            // exit;
+
+                                        }else{
+                                            $mandateFields = array('A', 'B', 'C','D', 'E', 'F','G','H');
+
+                                            $getBlankFields =  $this->isFieldEmpty($allDataInSheet[$i],$columnsArr, $mandateFields);
+
+                                            if(!empty($getBlankFields))
+                                            {
+                                                $excel_errors .= "Row ".$i."=> Blank Fields: ".$getBlankFields."\n";
+                                            }
+                                            else
+                                            {
+                                                    //code to perform individual field validation
+                                                $validationErrors = $this->getValidationErrors($allDataInSheet[$i],$columnsArr);
+                                                if(!empty($validationErrors))
+                                                    {
+                                                        $excel_errors .= "Row ".$i."=> Validation Errors: ".$validationErrors."\n"."<br>";
+                                                    }                                    
+                                            }
+
+                                            $excel_errors.="\n\n";
                                         }
-                                        else
-                                        {
-                                                //code to perform individual field validation
-                                            $validationErrors = $this->getValidationErrors($allDataInSheet[$i],$columnsArr);
-                                            if(!empty($validationErrors))
-                                                {
-                                                    $excel_errors .= "Row ".$i."=> Validation Errors: ".$validationErrors."\n"."<br>";
-                                                }                                    
-                                        }
-
-                                        $excel_errors.="\n\n";
                                     }
 
                                     $excel_errors = rtrim($excel_errors,"\n\n");

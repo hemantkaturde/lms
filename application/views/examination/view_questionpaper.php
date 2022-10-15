@@ -26,9 +26,9 @@ $jsonstringtoArray = json_decode($access, true);
                         <div class="d-flex justify-content-center row">
                             <div class="col-md-10 col-lg-10">
                                 <div class="border">
-                                    <div class="question bg-white p-3 border-bottom">
+                                    <div class="question bg-white p-3 border-bottom" style="color: red;">
                                         <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                            <h4>MCQ Quiz</h4><span>(20)</span>
+                                            <h4>MULTIPLE CHOICE QUESTIONS</h4><span>( 20 MARKS )</span>
                                         </div>
                                     </div>
                                     <?php $i=1; foreach ($questionPaperListMCQ as $key => $value) { ?>
@@ -67,6 +67,27 @@ $jsonstringtoArray = json_decode($access, true);
                                     </div>
                                     <?php } ?>
 
+
+                                    <div class="question bg-white p-3 border-bottom" style="color: red;">
+                                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                                            <h4>LONG ANSWER QUESTIONS </h4><span>( 50 MARKS )</span>
+                                        </div>
+                                    </div>
+
+                                    <?php $i=1; foreach ($questionPaperListWRITTEN as $keyWRITTEN => $valueWRITTEN) { ?>
+                                    <div class="question bg-white p-3 border-bottom">
+                                      
+                                        <div class="d-flex flex-row align-items-center question-title">
+                                            <h3 class="text-danger">Q. <?php echo $i++; ?></h3>
+                                            <h5 class="mt-1 ml-2"><?= $valueWRITTEN->question; ?>
+                                            </h5>
+                                        </div>
+
+                                        <div class="ans ml-2">
+                                            <textarea id="answer_<?php echo $valueWRITTEN->id; ?>" name="w3review" rows="5" cols="100" placeholder='Answer'></textarea>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
 
                                     <!-- <div class="question bg-white p-3 border-bottom">
                                         <div class="d-flex flex-row align-items-center question-title">
