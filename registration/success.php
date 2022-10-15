@@ -30,7 +30,7 @@ $row = $result->fetch_assoc();
             <p>Please Contact To Administration</p>
             <!-- <p>Payment Receipt</p> -->
             <!-- <p><b>Payment Receipt : </b></p>
-            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/'.$enq_id; ?>">Download Payment Receipt </a></p>
+            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/?enq='.$enq_id; ?>">Download Payment Receipt </a></p>
 
             <p><b>Addmission Form : </b></p> -->
             <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p> -->

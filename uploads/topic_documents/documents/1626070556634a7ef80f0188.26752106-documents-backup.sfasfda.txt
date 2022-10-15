@@ -1,0 +1,2017 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Driver_model extends CI_Model 
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    function save($id,$data)
+    {
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_DRIVER, $data)){
+				$driver = $this->getDriverdata($id);
+				if($driver) {
+					if($driver['gcm_id'] != NULL && $driver['gcm_id'] != '') {
+						$reg_array = array($driver['gcm_id']);
+
+                        $data = array();
+                
+                        $description = array('origin'=>'admin', 'information'=>'Changes has been made to your profile. Please login!', 'sender_type'=>'admin', 'content_type'=>'driverupdate','data'=>$data);
+
+						$send_message = array('title' => 'Profile Updated','description'=>$description); 
+
+						if(!empty($reg_array))
+                        {
+                            sendpushnotification_android($reg_array, $send_message);
+                        }
+					}
+				}
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_DRIVER, $data)) {
+                $driver_id = $this->db->insert_id();
+				$this->db->insert(TBL_DRIVER_SOCKET, array('driver_id' => $driver_id,'date_modified' => DATEANDTIME)); //Create entry for registering websocket
+				$this->db->insert(TBL_DRIVER_LOCATION, array('driver_id' => $driver_id,'date_added' => DATEANDTIME));
+				return $driver_id;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function selectAll()
+    {
+    	$this->db->select('*');
+        $this->db->order_by('full_name','ASC');
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        return $query_result;
+    }
+    
+    public function selectAllEnabled()
+    {
+        $this->db->select('*');
+        $this->db->where('status', 1);
+        //$this->db->where('platform is NOT NULL', NULL, FALSE);
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        //echo $this->db->last_query();
+        return $query_result;
+    }
+
+    public function selectAllPendingdriver()
+    {
+        $this->db->select('*');
+        $this->db->where('status', 1);
+        $this->db->order_by('full_name','ASC');
+		//$this->db->where('platform is NOT NULL', NULL, FALSE);
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+		//echo $this->db->last_query();
+        return $query_result;
+    }
+	
+	public function getSettlementData() //Get overall settlement data
+    {
+		$sqlQuery = 'SELECT SUM(driver_payable) as dial4242_receivable,SUM(driver_receivable) as dial4242_payable FROM '.TBL_SETTLEMENT_REPORT.' WHERE id IN (SELECT MAX(id) FROM '.TBL_SETTLEMENT_REPORT.' WHERE settlement_status = "pending" GROUP BY driver_id)';
+		$query = $this->db->query($sqlQuery);
+		$result =  $query->result_array();	
+		return $result[0];	
+    }
+	
+	public function getCancellationPerMonth() //Get overall settlement data
+    {
+		$journeyTimeArr = explode(' ',DATEANDTIME);
+		$changeDate = explode('-',$journeyTimeArr[0]);
+		
+		$changeDate[2] = '01';
+		$monthStart = implode('-',$changeDate).' 00:00:00';
+		
+		$changeDate[2] = '31';
+		$monthEnd = implode('-',$changeDate).' 23:23:59';
+		
+		$sqlQuery = 'SELECT COUNT(id) as cancellation_count FROM '.TBL_TRIPS.' WHERE journey_status = 4 AND date_added >="'.$monthStart.'" AND date_added <= "'.$monthEnd.'"';
+        //$sqlQuery = 'SELECT COUNT(id) as cancellation_count FROM '.TBL_TRIPS.' WHERE journey_status = 4';
+		$query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result =  $query->result_array();
+            return $result[0]['cancellation_count'];
+        }else{
+            return 0;
+            //return FALSE;
+        }
+
+    }
+	
+	public function selectOfflineDrivers()
+    {
+        $this->db->select('*');
+		$this->db->from(TBL_DRIVER);
+		$this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_SOCKET.'.driver_id = '.TBL_DRIVER.'.id');
+		$this->db->where(TBL_DRIVER.'.status', 1);
+		//$this->db->where(TBL_DRIVER.'.availability', 0);
+		//$this->db->where(TBL_DRIVER.'.platform is NOT NULL', NULL, FALSE);
+        $this->db->where(TBL_DRIVER_SOCKET.'.status',0);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		$result = $query->result_array();
+		return $result;
+    }
+
+    public function selectActualOfflineDrivers()
+    {
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        $this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_SOCKET.'.driver_id = '.TBL_DRIVER.'.id');
+        $this->db->where(TBL_DRIVER.'.status', 1);
+        $this->db->where(TBL_DRIVER.'.availability', 0);
+        $this->db->where(TBL_DRIVER.'.platform is NOT NULL', NULL, FALSE);
+        $this->db->where(TBL_DRIVER_SOCKET.'.status',0);
+        $query = $this->db->get();
+
+        $result = $query->result_array();
+        return $result;
+    }
+	
+    public function selectAllbyplatform($platform = '')
+    {
+        $this->db->select('*');
+		$this->db->where('status', 1);
+        $this->db->where('platform', $platform);
+        $this->db->order_by('full_name','ASC');
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        return $query_result;
+    }
+
+    public function fetchAll()
+    {
+        $this->db->select('gcm_id,platform');
+        $this->db->where('status', 1);
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        return $query_result;
+    }
+
+    public function fetchAllbynumber($specific_number)
+    {
+        $this->db->select('gcm_id,platform');
+        $this->db->where('status', 1);
+        $this->db->where_in('mobile_no', $specific_number);
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        return $query_result;
+    }
+
+    public function getAmbulanceType() { //Get ambulance type
+        $this->db->select('*');
+        $this->db->from(TABLE_AMBULANCETYPE);
+        $this->db->where('status',1);
+        $query = $this->db->get();
+        $row = $query->result_array();
+        if (isset($row)) {
+            $returnarray = array();
+            foreach ($row as $key => $value) {
+                $returnarray[$value['id']] = $value['type'];
+            }
+            return $returnarray;
+        } else {
+            return false;
+        }
+    }
+
+    public function getDriverdataall($id) { //Get driver data
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $row = $query->row_array();
+        if (isset($row)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getDriverdata($id) { //Get driver data
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        $this->db->where('id', $id);
+        $this->db->where('status',1);
+        $query = $this->db->get();
+        $row = $query->row_array();
+        if (isset($row)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+	
+	public function getCompleteDriverdata($id) { //Get driver data
+        $this->db->select(TBL_DRIVER.'.*, '.TBL_AMBULANCE_OWNER.'.name, '.TBL_COUNTRIES.'.name as country_name, '.TBL_STATES.'.name as state_name, '.TBL_CITIES.'.name as city_name, '.TBL_AMBULANCE_OWNER.'.name as owner_name');
+        $this->db->from(TBL_DRIVER);
+		$this->db->join(TBL_COUNTRIES, TBL_COUNTRIES.'.country_id = '.TBL_DRIVER.'.country','left');
+		$this->db->join(TBL_STATES, TBL_STATES.'.id = '.TBL_DRIVER.'.state','left');
+		$this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city','left');
+		$this->db->join(TBL_AMBULANCE_OWNER, TBL_AMBULANCE_OWNER.'.id = '.TBL_DRIVER.'.ambulance_owner','left');
+        $this->db->where(TBL_DRIVER.'.id', $id);
+        //$this->db->where(TBL_DRIVER.'.status',1);
+        $query = $this->db->get();
+        $row = $query->row_array();
+        if (isset($row)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getDriverCount($params)
+    {
+        $ambulance_type = '';
+
+        if(strtolower($params['search']['value']) == 'online' || strtolower($params['search']['value']) == 'offline') {
+            $this->db->select(TBL_DRIVER.'.*, '.TBL_CITIES.'.name as city_name, '.TBL_AMBULANCE_OWNER.'.name as owner_name, '.TBL_AMBULANCE_OWNER.'.company_name as owner_company_name, '.TBL_AMBULANCE_OWNER.'.mobile_no as owner_mobile_no');
+            $this->db->join(TBL_AMBULANCE_OWNER, TBL_AMBULANCE_OWNER.'.id = '.TBL_DRIVER.'.ambulance_owner');
+            $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+            $this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_SOCKET.'.driver_id = '.TBL_DRIVER.'.id');
+            $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER.'.id');
+
+            if(strtolower($params['search']['value']) == 'online'){
+                $this->db->where(TBL_DRIVER_SOCKET.'.status', '1');
+                $this->db->where(TBL_DRIVER.'.availability', '1');
+                $this->db->where(TBL_DRIVER_LOCATION.'.date_added BETWEEN "'. date('Y-m-d H:i:s', strtotime('-'.TIMEFORLOCATIONS_DRIVERONLINEOFFLINE.' minutes')).'" and "'. DATEANDTIME. '"');
+            }else{
+                $this->db->where(TBL_DRIVER_LOCATION.'.date_added <= "'. date('Y-m-d H:i:s', strtotime('-'.TIMEFORLOCATIONS_DRIVERONLINEOFFLINE.' minutes')).'"');
+            }
+
+            if($this->session->userdata('adminuser_role') != '1' && $this->session->userdata('adminuser_role') != '2'){
+                $this->db->where(TBL_DRIVER.'.status', '1');
+            }
+            $this->db->where(TBL_DRIVER.'.toapprove <> 0');
+            $query = $this->db->get(TBL_DRIVER);
+        }else{
+            $tochcek = date('Y-m-d H:i:s', strtotime('-'.TIMEFORLOCATIONS_DRIVERONLINEOFFLINE.' minutes'));
+            $this->db->select(TBL_DRIVER.'.*, '.TBL_DRIVER_SOCKET.'.status as socketstatus, (case when ('.TBL_DRIVER_LOCATION.'.date_added <= "'.$tochcek.'") THEN "0"  ELSE "1" END) as locationstatus, '.TBL_CITIES.'.name as city_name, '.TBL_AMBULANCE_OWNER.'.name as owner_name, '.TBL_AMBULANCE_OWNER.'.company_name as owner_company_name, '.TBL_AMBULANCE_OWNER.'.mobile_no as owner_mobile_no');
+            $this->db->join(TBL_AMBULANCE_OWNER, TBL_AMBULANCE_OWNER.'.id = '.TBL_DRIVER.'.ambulance_owner');
+            $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+            $this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_SOCKET.'.driver_id = '.TBL_DRIVER.'.id');
+            $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER.'.id');
+            if($params['search']['value'] != "") 
+            {
+                if($params['search']['value'] == 'BASIC')
+                    $ambulance_type = 1;
+                else if($params['search']['value'] == 'ICU')
+                    $ambulance_type = 2;
+                else if($params['search']['value'] == 'PEDIATRIC')
+                    $ambulance_type = 4;
+                else if($params['search']['value'] == 'EVENTS')
+                    $ambulance_type = 5;
+                else if($params['search']['value'] == 'DEADBODY')
+                    $ambulance_type = 6;
+                else 
+                    $ambulance_type = $params['search']['value'];
+
+                $this->db->where("(".TBL_DRIVER.".full_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".email_id LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".grade LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".mobile_no LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_CITIES.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".suburb LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".phone_type LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_AMBULANCE_OWNER.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_AMBULANCE_OWNER.".company_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_AMBULANCE_OWNER.".mobile_no LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".ambulance_type LIKE '%".$ambulance_type."%'");
+                $this->db->or_where(TBL_DRIVER.".date_added LIKE '%".$params['search']['value']."%')");
+            }
+            
+            if($this->session->userdata('adminuser_role') == '6'){
+                $this->db->where(TBL_DRIVER.'.added_by', $this->session->userdata('adminuser_id'));
+            }else{
+                $this->db->where(TBL_DRIVER.'.toapprove <> 0');
+            }
+
+            if($this->session->userdata('adminuser_role') != '1' && $this->session->userdata('adminuser_role') != '2'){
+                $this->db->where(TBL_DRIVER.'.status', '1');
+            }
+
+            $query = $this->db->get(TBL_DRIVER);
+            $fetch_result = $query->result_array();
+        }
+
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getDriver($params)
+    {
+        $ambulance_type = '';
+
+        $tochcek = date('Y-m-d H:i:s', strtotime('-'.TIMEFORLOCATIONS_DRIVERONLINEOFFLINE.' minutes'));
+
+        if(strtolower($params['search']['value']) == 'online' || strtolower($params['search']['value']) == 'offline') 
+        {
+            $this->db->select(TBL_DRIVER.'.*, '.TBL_CITIES.'.name as city_name, '.TBL_AMBULANCE_OWNER.'.name as owner_name, '.TBL_AMBULANCE_OWNER.'.company_name as owner_company_name, '.TBL_AMBULANCE_OWNER.'.mobile_no as owner_mobile_no, '.TBL_DRIVER_SOCKET.'.status as socketstatus, (case when ('.TBL_DRIVER_LOCATION.'.date_added <= "'.$tochcek.'") THEN "0"  ELSE "1" END) as locationstatus');
+            $this->db->join(TBL_AMBULANCE_OWNER, TBL_AMBULANCE_OWNER.'.id = '.TBL_DRIVER.'.ambulance_owner');
+            $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+            $this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_SOCKET.'.driver_id = '.TBL_DRIVER.'.id');
+            $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER.'.id');
+
+            if(strtolower($params['search']['value']) == 'online')
+            {
+                $this->db->where(TBL_DRIVER_SOCKET.'.status', '1');
+                $this->db->where(TBL_DRIVER.'.availability', '1');
+                $this->db->where(TBL_DRIVER_LOCATION.'.date_added BETWEEN "'. $tochcek.'" and "'. DATEANDTIME. '"');
+            }
+            else
+            {
+                $this->db->where(TBL_DRIVER_SOCKET.'.status', '0');
+                $this->db->or_where(TBL_DRIVER.'.availability', '0');
+                $this->db->or_where(TBL_DRIVER_LOCATION.'.date_added <= "'. $tochcek.'"');
+            }
+
+            if($this->session->userdata('adminuser_role') != '1' && $this->session->userdata('adminuser_role') != '2'){
+                $this->db->where(TBL_DRIVER.'.status', '1');
+            }
+            $this->db->where(TBL_DRIVER.'.toapprove <> 0');
+            $this->db->order_by('id', 'DESC');
+            $this->db->limit($params['length'],$params['start']);
+            $query = $this->db->get(TBL_DRIVER);
+
+            $fetch_result = $query->result_array();
+        }
+        else
+        {
+            // $this->db->select(TBL_DRIVER.'.*, '.TBL_DRIVER_SOCKET.'.status as socketstatus, (case when ('.TBL_DRIVER_LOCATION.'.date_added <= "'.$tochcek.'") THEN "0"  ELSE "1" END) as locationstatus, '.TBL_CITIES.'.name as city_name, '.TBL_AMBULANCE_OWNER.'.name as owner_name, '.TBL_AMBULANCE_OWNER.'.company_name as owner_company_name, '.TBL_AMBULANCE_OWNER.'.mobile_no as owner_mobile_no');
+            // $this->db->join(TBL_AMBULANCE_OWNER, TBL_AMBULANCE_OWNER.'.id = '.TBL_DRIVER.'.ambulance_owner');
+            // $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+            // $this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_SOCKET.'.driver_id = '.TBL_DRIVER.'.id');
+            // $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER.'.id');
+
+
+            $this->db->select(TBL_DRIVER.'.*, (case when ('.TBL_DRIVER_LOCATION.'.date_added <= "'.$tochcek.'") THEN "0"  ELSE "1" END) as locationstatus, '.TBL_CITIES.'.name as city_name, '.TBL_AMBULANCE_OWNER.'.name as owner_name, '.TBL_AMBULANCE_OWNER.'.company_name as owner_company_name, '.TBL_AMBULANCE_OWNER.'.mobile_no as owner_mobile_no');
+            $this->db->join(TBL_AMBULANCE_OWNER, TBL_AMBULANCE_OWNER.'.id = '.TBL_DRIVER.'.ambulance_owner');
+            $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+            $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER.'.id');
+
+
+            if($params['search']['value'] != "") 
+            {
+                if($params['search']['value'] == 'BASIC')
+                    $ambulance_type = 1;
+                else if($params['search']['value'] == 'ICU')
+                    $ambulance_type = 2;
+                else if($params['search']['value'] == 'PEDIATRIC')
+                    $ambulance_type = 4;
+                else if($params['search']['value'] == 'EVENTS')
+                    $ambulance_type = 5;
+                else if($params['search']['value'] == 'DEADBODY')
+                    $ambulance_type = 6;
+                else 
+                    $ambulance_type = $params['search']['value'];
+
+                $this->db->where("(".TBL_DRIVER.".full_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".email_id LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".mobile_no LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".grade LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_CITIES.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".suburb LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".phone_type LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_AMBULANCE_OWNER.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_AMBULANCE_OWNER.".company_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_AMBULANCE_OWNER.".mobile_no LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_DRIVER.".ambulance_type LIKE '%".$ambulance_type."%'");
+                $this->db->or_where(TBL_DRIVER.".date_added LIKE '%".$params['search']['value']."%')");
+            }
+            
+            if($this->session->userdata('adminuser_role') == '6'){
+                $this->db->where(TBL_DRIVER.'.added_by', $this->session->userdata('adminuser_id'));
+            }else{
+                $this->db->where(TBL_DRIVER.'.toapprove <> 0');
+            }
+
+            if($this->session->userdata('adminuser_role') != '1' && $this->session->userdata('adminuser_role') != '2'){
+                $this->db->where(TBL_DRIVER.'.status', '1');
+            }
+
+            $this->db->order_by(TBL_DRIVER.'.id', 'DESC');
+            $this->db->limit($params['length'],$params['start']);
+            $query = $this->db->get(TBL_DRIVER);
+            $fetch_result = $query->result_array();
+        }
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $data[$counter]['full_name'] = $value['full_name'];
+                $data[$counter]['mobile_no'] = $value['mobile_no'];
+                $data[$counter]['suburb'] = $value['suburb'];
+                $data[$counter]['city_name'] = $value['city_name'];
+
+                $data[$counter]['owner_name'] = $value['owner_name'];
+                $data[$counter]['owner_company_name'] = $value['owner_company_name'];
+                $data[$counter]['owner_mobile_no'] = $value['owner_mobile_no'];
+
+                if($value['ambulance_type'] == 1)
+                    $ambulance_type = 'BASIC';
+                if($value['ambulance_type'] == 2)
+                    $ambulance_type = 'ICU';
+                if($value['ambulance_type'] == 4)
+                    $ambulance_type = 'PEDIATRIC';
+                if($value['ambulance_type'] == 5)
+                    $ambulance_type = 'EVENTS';
+                if($value['ambulance_type'] == 6)
+                    $ambulance_type = 'DEADBODY';
+                $data[$counter]['ambulance_type'] = $ambulance_type;
+                $data[$counter]['phone_type'] = $value['phone_type'] ? $value['phone_type'] : '-';
+                $data[$counter]['grade'] = $value['grade'];
+
+                /*if(strtolower($params['search']['value']) == 'online' || strtolower($params['search']['value']) == 'offline') {
+                    $data[$counter]['status'] = $params['search']['value'];
+                }else{*/
+                    if($value['availability'] == 1 && $value['locationstatus'] == 1){
+                        $data[$counter]['status'] = 'online';
+                    }else{
+                        $issue = '';
+                        if($value['locationstatus'] == 0){
+                            $issue .= "GPS or Internet is not working. &#013;";
+                        }
+                        if($value['availability'] == 0){
+                            $issue .= "Driver has forcibly put the app offline. &#013;";
+                        }
+                        if($value['availability'] == 1){
+                            $issue .= "App is in idle state for long time.";
+                        }else{
+                            $issue .= "App is in idle state for long time.";
+                        }
+                        $data[$counter]['status'] = '<a href="javascript:void(0);" style="color:black; cursor:default;" title="'.$issue.'" >offline</p>';
+                    }
+                //}
+
+                $data[$counter]['action'] = '';
+
+                if(in_array("driver/details", $this->session->userdata('adminuser_access')))
+                    {
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."driver/details/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ADMIN_IMAGES_PATH."view.png' alt='View Driver Details' class='driverdetails' data-id=".$value['id']." title='View Driver Details'></a>&nbsp;";
+                }
+                
+                if(in_array("driver/edit", $this->session->userdata('adminuser_access'))){
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".ADMIN_PATH."driver/edit/".$value['id']."'><img width='20' src='".ADMIN_IMAGES_PATH."edit.png' alt='Edit Driver' title='Edit Driver'></a>&nbsp;";
+                }
+
+                if(in_array("driver/history", $this->session->userdata('adminuser_access'))){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."driver/history/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ADMIN_IMAGES_PATH."history.png' alt='View History' class='driverhistory' data-id=".$value['id']." title='View History'></a>&nbsp;";
+                }
+
+                if(in_array("settlement/index", $this->session->userdata('adminuser_access'))){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."settlement/".$value['id']."' style='cursor: pointer;'><img width='25' src='".ADMIN_IMAGES_PATH."settlement.png' alt='Settlement Report' class='settlementreport' data-id=".$value['id']." title='Settlement Report'></a>";
+                }
+
+                if($this->session->userdata('adminuser_role') == '6'){
+                    if($value['status'] == "1"){
+                        $data[$counter]['action'] .= "<img width='20' src='".ADMIN_IMAGES_PATH."enable.png' alt='Verified' title='Verified'>";
+                    }else{
+                        $data[$counter]['action'] .= "<img width='20' src='".ADMIN_IMAGES_PATH."disable.png' alt='UnVerified' title='UnVerified'>";
+                    }
+                }
+
+                
+                if(in_array("driver/viewequipmentdetails", $this->session->userdata('adminuser_access')))
+                {
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."driver/viewequipmentdetails/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ADMIN_IMAGES_PATH."view_doc.png' alt='View Equipment Details' class='viewequipmentdetails' data-id=".$value['id']." title='View Equipment Details'></a>&nbsp;";
+                }
+
+
+                if(in_array("driver/refreshdriver", $this->session->userdata('adminuser_access')))
+                {
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='refreshdriver' rg-id='".$value['id']."'><img width='20' src='".ADMIN_IMAGES_PATH."refresh.png' alt='Refresh Driver' title='Refresh Driver'></a>"; 
+                }
+
+
+                if($value['status'] == "1")
+                {
+                    if(in_array("driver/enabledisable", $this->session->userdata('adminuser_access'))){
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='disabledriver' id='".$value['id']."' forapproval='no'><img width='20' src='".ADMIN_IMAGES_PATH."disable.png' alt='Disable Driver' title='Disable Driver'></a>"; 
+                    }
+                }
+                else
+                {
+                    if(in_array("driver/enabledisable", $this->session->userdata('adminuser_access'))){
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='enabledriver' data-by='ad' id='".$value['id']."' forapproval='no'><img width='20' src='".ADMIN_IMAGES_PATH."enable.png' alt='Enable Driver' title='Enable Driver'></a>";
+                    }
+                }
+
+                if(in_array("driver/deletedriver", $this->session->userdata('adminuser_access')))
+                {
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletedriver' rg-id='".$value['id']."'><img width='20' src='".ADMIN_IMAGES_PATH."delete1.png' alt='Delete Driver' title='Delete Driver'></a>"; 
+                }
+
+
+                if(in_array("driver/vehicleinsurance", $this->session->userdata('adminuser_access')))
+                {
+                    $count = $this->ambulance_model->checkinsurancecount($value['id'], 'count');
+                    if($count['count'] != 0){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."driver/vehicleinsurance/".$value['id']."' style='cursor: pointer;' class='vehicleinsurance' rg-id='".$value['id']."'><img width='20' src='".ADMIN_IMAGES_PATH."health.png' alt='Vehicle Insurance' title='Vehicle Insurance'></a>"; 
+                    }
+                }
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function getDrivertoapproavalCount($params)
+    {
+        $ambulance_type = '';
+        $this->db->select(TBL_CITIES.'.name as city_name,'.TBL_DRIVER.'.*');
+         //$this->db->join(TABLE_ADMIN_USERS, TABLE_ADMIN_USERS.'.id = '.TBL_DRIVER.'.added_by');
+         $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+        if($params['search']['value'] != "") 
+        {   
+            if(strtolower($params['search']['value']) == 'online') {
+                $this->db->where(TBL_DRIVER.'.availability',1);
+            } 
+            else if(strtolower($params['search']['value']) == 'offline') {
+                $this->db->where(TBL_DRIVER.'.availability',0);
+            }else{
+                if($params['search']['value'] == 'BASIC')
+                    $ambulance_type = 1;
+                else if($params['search']['value'] == 'ICU')
+                    $ambulance_type = 2;
+                else if($params['search']['value'] == 'PEDIATRIC')
+                    $ambulance_type = 4;
+                else if($params['search']['value'] == 'EVENTS')
+                    $ambulance_type = 5;
+                else if($params['search']['value'] == 'DEADBODY')
+                    $ambulance_type = 6;
+                else 
+                    $ambulance_type = $params['search']['value'];
+                
+                $this->db->where("(".TBL_DRIVER.".full_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".email_id LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".mobile_no LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".suburb LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".phone_type LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".ambulance_type LIKE '%".$ambulance_type."%'");
+                $this->db->or_where("".TBL_DRIVER.".date_added LIKE '%".$params['search']['value']."%')");
+            } 
+        }
+
+        //$this->db->where(TBL_DRIVER.'.added_by <> 1');
+        $this->db->where(TBL_DRIVER.'.toapprove', 0);
+
+        $query = $this->db->get(TBL_DRIVER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getDrivertoapproaval($params)
+    {
+        $ambulance_type = '';
+        $this->db->select(TBL_CITIES.'.name as city_name,'.TBL_DRIVER.'.*');
+         //$this->db->join(TABLE_ADMIN_USERS, TABLE_ADMIN_USERS.'.id = '.TBL_DRIVER.'.added_by');
+         $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_DRIVER.'.city');
+        if($params['search']['value'] != "") 
+        {
+            if(strtolower($params['search']['value']) == 'online') {
+                $this->db->where(TBL_DRIVER.'.availability',1);
+            } 
+            else if(strtolower($params['search']['value']) == 'offline') {
+                $this->db->where(TBL_DRIVER.'.availability',0);
+            } 
+            else {
+                if($params['search']['value'] == 'BASIC')
+                    $ambulance_type = 1;
+                else if($params['search']['value'] == 'ICU')
+                    $ambulance_type = 2;
+                else if($params['search']['value'] == 'PEDIATRIC')
+                    $ambulance_type = 4;
+                else if($params['search']['value'] == 'EVENTS')
+                    $ambulance_type = 5;
+                else if($params['search']['value'] == 'DEADBODY')
+                    $ambulance_type = 6;
+                else 
+                    $ambulance_type = $params['search']['value'];
+
+                $this->db->where("(".TBL_DRIVER.".full_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".email_id LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".mobile_no LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".suburb LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".phone_type LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where("".TBL_DRIVER.".ambulance_type LIKE '%".$ambulance_type."%'");
+				$this->db->or_where("".TBL_DRIVER.".date_added LIKE '%".$params['search']['value']."%')");
+			}
+        }
+        
+        //$this->db->where(TBL_DRIVER.'.added_by <> 1');
+        $this->db->where(TBL_DRIVER.'.toapprove', 0);
+
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_DRIVER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['full_name'] = $value['full_name'];
+                $data[$counter]['email_id'] = $value['email_id'];
+                $data[$counter]['mobile_no'] = $value['mobile_no'];
+                $data[$counter]['city'] = $value['city_name'];
+                $data[$counter]['suburb'] = $value['suburb'];
+
+                if($value['ambulance_type'] == 1)
+                    $ambulance_type = 'BASIC';
+                if($value['ambulance_type'] == 2)
+                    $ambulance_type = 'ICU';
+                if($value['ambulance_type'] == 4)
+                    $ambulance_type = 'PEDIATRIC';
+                if($value['ambulance_type'] == 5)
+                    $ambulance_type = 'EVENTS';
+                if($value['ambulance_type'] == 6)
+                    $ambulance_type = 'DEADBODY';
+
+                $data[$counter]['ambulance_type'] = $ambulance_type;
+
+				$data[$counter]['phone_type'] = $value['phone_type'] ? $value['phone_type'] : '-';
+                if($value['added_by_number'])
+                    $data[$counter]['added_by'] = $value['added_by_name']." : ".$value['added_by_number'];
+                else
+                    $data[$counter]['added_by'] = $value['added_by_name'];
+
+                $data[$counter]['date_added'] = $value['date_added'];
+
+                $data[$counter]['action'] = '';
+
+                if(in_array("driver/details", $this->session->userdata('adminuser_access')))
+                    {
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."driver/details/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ADMIN_IMAGES_PATH."view.png' alt='View Driver Details' class='driverdetails' data-id=".$value['id']." title='View Driver Details'></a>&nbsp;";
+                }
+                
+                if($value['toapprove'] == "1")
+                {
+                    if(in_array("driver/enabledisable", $this->session->userdata('adminuser_access'))){
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='disabledriver' id='".$value['id']."' forapproval='yes'><img width='20' src='".ADMIN_IMAGES_PATH."disable.png' alt='Disapprove Driver' title='Disapprove Driver'></a>"; 
+                    }
+                }
+                else
+                {
+                    if(in_array("driver/enabledisable", $this->session->userdata('adminuser_access'))){
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='enabledriver' data-by='fp' id='".$value['id']."' forapproval='yes'><img width='20' src='".ADMIN_IMAGES_PATH."enable.png' alt='Approve Driver' title='Approve Driver'></a>";
+                    }
+                }
+
+                if(in_array("driver/deletedriver", $this->session->userdata('adminuser_access')))
+                {
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletedriver' rg-id='".$value['id']."'><img width='20' src='".ADMIN_IMAGES_PATH."delete1.png' alt='Delete Driver' title='Delete Driver'></a>"; 
+                }
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function deleteDriver($id) //delete driver
+    {
+        $this->db-> where('id', $id);
+        if($this->db->update(TBL_DRIVER, array('status' => 0))) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function getHistoryCount($params, $id)
+    {
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(crn LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("journey_type LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("status LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where('driver_id', $id);
+        $query = $this->db->get('view_journeyinfo');
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getDriverhistory($params, $id) //get User info
+    {
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(crn LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("journey_type LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("status LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where('driver_id', $id);
+        $this->db->order_by('journey_date_added', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get('view_journeyinfo');
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['crn'] = $value['crn'];
+                $data[$counter]['journey_type'] = $value['journey_type'];
+
+                if($value['payment_status'] == 0) {
+                    $data[$counter]['payment_status'] = "Unpaid";
+                } else if($value['payment_status'] == 1) {
+                    $data[$counter]['payment_status'] = "Paid";
+                } else if($value['payment_status'] == 2) {
+                    $data[$counter]['payment_status'] = "Processing";
+                }
+
+                if($value['status'] == 0) {
+                    $data[$counter]['status'] = "Booked";
+                } else if($value['status'] == 1) {
+                    $data[$counter]['status'] = "Started";
+                } else if($value['status'] == 2) {
+                    $data[$counter]['status'] = "In Progress";
+                } else if($value['status'] == 3) {
+                    $data[$counter]['status'] = "Ended";
+                } else if($value['status'] == 4) {
+                    $data[$counter]['status'] = "Cancelled";
+                } 
+
+                $data[$counter]['action'] = "";
+                if(in_array("driver/journeydetails", $this->session->userdata('adminuser_access')))
+                    {
+                    $data[$counter]['action'] = "<a href='".ADMIN_PATH."driver/journeydetails/".$value['crn']."' style='cursor: pointer;'><img width='20' src='".ADMIN_IMAGES_PATH."view.png' alt='View journey History Details' class='driverhistoryjourney' data-crn=".$value['crn']." title='View journey History Details'></a>";
+                }
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function getHistoryCountmanual($params, $id)
+    {
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("crn LIKE '%".$params['search']['value']."%'");
+        }
+        $this->db->where('driver_id', $id);
+        $query = $this->db->get(TBL_TRIPS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getDriverhistorymanual($params, $id) //get User info
+    {
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("crn LIKE '%".$params['search']['value']."%'");
+        }
+        $this->db->where('driver_id', $id);
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_TRIPS);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['crn'] = $value['crn'];
+                $data[$counter]['journey_type'] = 'One Way Return';
+                $data[$counter]['payment_status'] = "Paid";
+                $data[$counter]['status'] = "Ended";
+                $data[$counter]['action'] = "";
+                if(in_array("driver/journeydetails", $this->session->userdata('adminuser_access')))
+                    {
+                        //if($value['user_email_id'])
+                            $data[$counter]['action'] = "<a href='".ADMIN_PATH."driver/journeydetails/".$value['crn']."' style='cursor: pointer;'><img width='20' src='".ADMIN_IMAGES_PATH."view.png' alt='View manual journey history details' class='driverhistoryjourney' data-crn=".$value['crn']." title='View manual journey history details'></a>";
+                }
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function fetchAllByAmbulanceType($ambulancetype_id)
+    {
+        $this->db->select('gcm_id,platform');
+        $this->db->where('ambulance_type', $ambulancetype_id);
+        $this->db->where('status', 1);
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        return $query_result;
+    }
+
+    public function selectAllByCity($city)
+    {
+        $this->db->select('count(*) as count, suburb');
+        $this->db->where('city', $city);
+        $this->db->where('suburb is NOT NULL', NULL, FALSE);
+        $this->db->where('status', 1);
+        $this->db->order_by('count', 'ASC');
+        $this->db->group_by('suburb');
+        //$this->db->limit(10);
+
+        $query_result = $this->db->get(TBL_DRIVER)->result_array();
+        return $query_result;
+    }
+
+    public function getSettlementData_month($city) //Get overall settlement data
+    {
+        // $sqlQuery = "SELECT user_journey.crn, user_journey.date_added, 
+        // settlement_report.driver_id, settlement_report.driver_payable, 
+        // settlement_report.driver_receivable 
+        // FROM user_journey, 
+        // settlement_report 
+        // WHERE user_journey.crn = settlement_report.crn 
+        // AND (user_journey.date_added 
+        // like '%".date('Y-m')."%' OR user_journey.date_added
+        //  like '%".date('Y-m', strtotime(date('Y-m')." -1 month"))."%' 
+        //  OR user_journey.date_added like '%".date('Y-m', strtotime(date('Y-m')." -2 month"))."%') 
+        //  AND settlement_report.id IN (SELECT MAX(id) FROM settlement_report 
+        //  where driver_id IN (Select id from driver where city='".$city."') 
+        //  GROUP BY driver_id HAVING settlement_status = 'pending') 
+        //  order by settlement_report.id desc";
+        // $result_array = $this->db->query($sqlQuery)->result_array();
+        // return $result_array;
+       
+        $sqlQuery =  "SELECT trips.crn, trips.date_added, 
+        settlement_report.driver_id, settlement_report.driver_payable, 
+        settlement_report.driver_receivable FROM trips JOIN settlement_report ON trips.crn = settlement_report.crn 
+        where  (trips.date_added 
+        like '%".date('Y-m')."%' OR trips.date_added
+         like '%".date('Y-m', strtotime(date('Y-m')." -1 month"))."%' 
+         OR trips.date_added like '%".date('Y-m', strtotime(date('Y-m')." -2 month"))."%') 
+         AND settlement_report.id IN (SELECT MAX(id) FROM settlement_report 
+         where driver_id IN (Select id from driver where city='".$city."') 
+         GROUP BY driver_id HAVING settlement_status = 'pending') 
+         order by settlement_report.id desc";
+         $result_array = $this->db->query($sqlQuery)->result_array();
+         return $result_array;
+    }
+
+    public function selectonlineByCity($city) //Get overall settlement data
+    {
+        $sqlQuery = "SELECT count(*) as count FROM driver WHERE city = '".$city."' and driver.status = '1' and driver.availability = '1'";
+        //$sqlQuery = "SELECT count(*) as count FROM driver, driver_socket WHERE driver_socket.driver_id = driver.id and driver.city = '".$city."' and driver.status = '1' and driver_socket.status = '1'";
+
+        // $result_array = $this->db->query($sqlQuery)->result_array();
+        // return $result_array;
+
+        $result_array = $this->db->query($sqlQuery);
+        if($result_array){
+         return $result_array->result_array();
+        }else{
+         return $result_array =array();
+        }
+    }
+
+    public function selectofflineByCity($city) //Get overall settlement data
+    {
+        $sqlQuery = "SELECT count(*) as count FROM driver WHERE city = '".$city."' and driver.status = '1' and driver.availability = '0'";
+        //$sqlQuery = "SELECT count(*) as count FROM driver, driver_socket WHERE driver_socket.driver_id = driver.id and driver.city = '".$city."' and driver.status = '1' and driver_socket.status = '0'";
+
+        // $result_array = $this->db->query($sqlQuery)->result_array();
+       
+        // return $result_array;
+        $result_array = $this->db->query($sqlQuery);
+        if($result_array){
+         return $result_array->result_array();
+        }else{
+         return $result_array =array();
+        }
+       
+    }
+
+    public function getSettlementData_fy($city) //Get overall settlement data
+    {
+        $m1 = date('Y').'-04'; $m5 = date('Y').'-08'; $m9 = date('Y').'-12'; 
+        $m2 = date('Y').'-05'; $m6 = date('Y').'-09'; $m10 = date('Y', strtotime('+1 year')).'-01';
+        $m3 = date('Y').'-06'; $m7 = date('Y').'-10'; $m11 = date('Y', strtotime('+1 year')).'-02'; 
+        $m4 = date('Y').'-07'; $m8 = date('Y').'-11'; $m12 = date('Y', strtotime('+1 year')).'-03'; 
+
+        // $sqlQuery = "SELECT user_journey.crn, user_journey.date_added, settlement_report.driver_id, 
+        // settlement_report.driver_payable, settlement_report.driver_receivable 
+        // FROM user_journey, settlement_report WHERE user_journey.crn = settlement_report.crn 
+        // AND (user_journey.date_added like '%".$m1."%' OR user_journey.date_added like '%".$m2."%' 
+        // OR user_journey.date_added like '%".$m3."%' OR user_journey.date_added like '%".$m4."%' 
+        // OR user_journey.date_added like '%".$m5."%' OR user_journey.date_added like '%".$m6."%' 
+        // OR user_journey.date_added like '%".$m7."%' OR user_journey.date_added like '%".$m8."%' 
+        // OR user_journey.date_added like '%".$m9."%' OR user_journey.date_added like '%".$m10."%' 
+        // OR user_journey.date_added like '%".$m11."%' OR user_journey.date_added like '%".$m12."%') 
+        // AND settlement_report.id IN (SELECT MAX(id) FROM settlement_report where 
+        // driver_id IN (Select id from driver where city='".$city."') GROUP BY driver_id) 
+        // order by settlement_report.id desc";
+
+        $sqlQuery = "SELECT trips.crn, trips.date_added, settlement_report.driver_id, 
+        settlement_report.driver_payable, settlement_report.driver_receivable 
+        FROM trips JOIN trips.crn = settlement_report.crn 
+        WHERE (trips.date_added like '%".$m1."%' OR trips.date_added like '%".$m2."%' 
+        OR trips.date_added like '%".$m3."%' OR trips.date_added like '%".$m4."%' 
+        OR trips.date_added like '%".$m5."%' OR trips.date_added like '%".$m6."%' 
+        OR trips.date_added like '%".$m7."%' OR trips.date_added like '%".$m8."%' 
+        OR trips.date_added like '%".$m9."%' OR trips.date_added like '%".$m10."%' 
+        OR trips.date_added like '%".$m11."%' OR trips.date_added like '%".$m12."%') 
+        AND settlement_report.id IN (SELECT MAX(id) FROM settlement_report where 
+        driver_id IN (Select id from driver where city='".$city."') GROUP BY driver_id) 
+        order by settlement_report.id desc";
+
+       $result_array = $this->db->query($sqlQuery);
+       if($result_array){
+        return $result_array->result_array();
+       }else{
+        return $result_array =array();
+       }
+        //return $result_array;
+    }
+
+    public function getDriverbyarea($suburb)
+    {
+        return $this->db->query("SELECT driver.id as 'driverid', driver.full_name as 'driverfullname', driver.mobile_no as 'drivermobileno', ambulance_owner.name as 'ownername', ambulance_owner.id as 'ownerid', ambulance_owner.mobile_no as 'ownermobileno', ambulance_type.type, ambulance_type.id as 'ambulancetype_id' FROM driver, ambulance_owner, ambulance_type WHERE driver.ambulance_owner = ambulance_owner.id and driver.ambulance_type = ambulance_type.id and driver.suburb = '".$suburb."' and driver.status = '1' and driver.platform IS NOT NULL")->result_array();
+    }
+
+    public function checkdriverentry($id)
+    {
+        $this->db->select('count(*) as count');
+        $this->db->where('driver_id', $id);
+        $query_result = $this->db->get(TBL_USER_JOURNEY)->row_array();
+        return $query_result;
+    }
+
+    public function getDriverByEmailId($email_id) { //This method is used to check if driver(email_id) is already registered in the database
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        $this->db->where('status',1);
+        $this->db->where('email_id',$email_id);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        $row = $query->row();
+        if (isset($row)) {
+            return $row->id;
+        } else {
+            return false;
+        }
+    }
+
+    public function getdriverlatestlocationdata($driver_id){
+        $this->db->select('lat,long,date_added');
+        $this->db->where('driver_id',$driver_id);
+        $this->db->order_by('id',"DESC");
+        $this->db->limit(1);
+        $driverLocationData = $this->db->get(TBL_DRIVER_LOCATION);
+
+        if(!empty($driverLocationData)) {
+            return $driverLocationData->result();
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function checkdriverstatus($driver_id) {
+        $this->db->select('availability');
+        $this->db->where('id', $driver_id);
+        $availability_status = $this->db->get(TBL_DRIVER)->row_array();
+
+        // $this->db->select('status');
+        // $this->db->where('driver_id', $driver_id);
+        // $status_status = $this->db->get(TBL_DRIVER_SOCKET)->row_array();
+
+        // if($availability_status['availability'] == 0 && $status_status['status'] == 0){
+        //     return true;
+        // }else if($availability_status['availability'] == 1 && $status_status['status'] == 0){
+        //     return false;
+        // }else if($availability_status['availability'] == 0 && $status_status['status'] == 1){
+        //     return false;
+        // }else{
+        //     return false;
+        // }
+
+        if($availability_status['availability'] == 0){
+            return false;
+         }else if($availability_status['availability'] == 1){
+            return true;
+         }
+
+
+    }
+
+    public function isBusy($driver_id) {
+        $this->db->select('*');
+        $this->db->where('driver_id', $driver_id);
+
+        $array = array('3','4');
+        $this->db->where_not_in('journey_status', $array);
+        $isBusy = $this->db->get(TBL_TRIPS)->result_array();
+        if(!empty($isBusy)){
+            return $isBusy;
+        }else{
+            return false;
+        }
+    }
+
+    function checkdriverfield($data)
+    {
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        foreach ($data as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        $this->db->where('status',1);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getManualtriprevenue_fy($city) //Get overall settlement data
+    {
+        $city = getCityname($city)['name'];
+
+        if(date('m') > 3){
+            $year = date('Y');
+            $year2 = date('Y', strtotime('+1 year'));
+        }else{
+            $year = date('Y') - (int)1;
+            $year2 = date('Y');
+        }
+
+        $m1 = $year.'-04'; $m5 = $year.'-08'; $m9 = $year.'-12'; 
+        $m2 = $year.'-05'; $m6 = $year.'-09'; $m10 = $year2.'-01';
+        $m3 = $year.'-06'; $m7 = $year.'-10'; $m11 = $year2.'-02'; 
+        $m4 = $year.'-07'; $m8 = $year.'-11'; $m12 = $year2.'-03'; 
+
+        $sqlQuery = "SELECT dial4242_commision_charge as driver_payable, date_added FROM ".TBL_TRIPS." WHERE (date_added like '%".$m1."%' OR date_added like '%".$m2."%' OR date_added like '%".$m3."%' OR date_added like '%".$m4."%' OR date_added like '%".$m5."%' OR date_added like '%".$m6."%' OR date_added like '%".$m7."%' OR date_added like '%".$m8."%' OR date_added like '%".$m9."%' OR date_added like '%".$m10."%' OR date_added like '%".$m11."%' OR date_added like '%".$m12."%') AND (source_address LIKE '%".$city."%' OR dest_address LIKE '%".$city."%')";
+        $result_array = $this->db->query($sqlQuery)->result_array();
+
+        return $result_array;
+    }
+
+    public function checkentrydriverbyowner($owner_ids) //Get overall settlement data
+    {
+        $this->db->select('id');
+        $this->db->from(TBL_DRIVER);
+        $this->db->where_in('ambulance_owner', $owner_ids);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function driverlist($owner_id, $driver_id = '', $ambulance_type = '') //Get overall settlement data
+    {
+
+        $this->load->model('hospital_model'); // Load Model
+
+        $hospitaldata = $this->hospital_model->fetchAllbyfield('hospitalname', $this->session->userdata('adminuser_name'));
+        $hospitaldriverlinking = $this->hospital_model->getHospitallinking($hospitaldata['id']);
+
+        $driverlist = array();
+        foreach ($hospitaldriverlinking as $key => $value) {
+            $driverlist[] = $value['driver_id'];
+        }
+
+        if($this->session->userdata('adminuser_role') == '5'){
+
+        $this->db->select('id, mobile_no, full_name');
+        $this->db->from(TBL_DRIVER);
+        $this->db->where_in('ambulance_owner', $owner_id);
+        $this->db->where_in('id', $driverlist);
+        if($ambulance_type){
+            $this->db->where('ambulance_type', $ambulance_type);
+        }
+        $this->db->where('status', 1);
+        $result = $this->db->get()->result_array();
+
+        if($driver_id != '') {
+            $result = array_map(function($query_result_one){ return $query_result_one + ['selected' => '']; }, $result);
+
+            foreach ($result as $keyquery_result => $valuequery_result) {
+                if($driver_id == $valuequery_result['id']){
+                    $result[$keyquery_result]['selected'] = 'selected';
+                }
+            }
+        }
+        
+        return $result;
+    }else{
+
+            $this->db->select('id, mobile_no, full_name');
+            $this->db->from(TBL_DRIVER);
+            $this->db->where_in('ambulance_owner', $owner_id);
+            if($ambulance_type){
+                $this->db->where('ambulance_type', $ambulance_type);
+            }
+            $this->db->where('status', 1);
+            $result = $this->db->get()->result_array();
+
+            if($driver_id != '') {
+                $result = array_map(function($query_result_one){ return $query_result_one + ['selected' => '']; }, $result);
+
+                foreach ($result as $keyquery_result => $valuequery_result) {
+                    if($driver_id == $valuequery_result['id']){
+                        $result[$keyquery_result]['selected'] = 'selected';
+                    }
+                }
+            }
+            
+            return $result;
+
+    }
+
+    }
+
+    public function getVehicleInsuranceCount($params, $driver_id)
+    {
+        $this->db->select('*');
+        $this->db->where('status', 1);
+        $this->db->where('driver_id', $driver_id);
+        $query = $this->db->get(TBL_INSURANCE_AMBULANCE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getVehicleInsurance($params, $driver_id)
+    {
+        $this->db->select('*');
+        $this->db->where('status',1);
+        $this->db->where('driver_id', $driver_id);
+        $this->db->order_by('insurance_ambulance_id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
+        $query = $this->db->get(TBL_INSURANCE_AMBULANCE);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['policycompanyname'] = $value['policycompanyname'];
+                $data[$counter]['policy_no'] = $value['policy_no'];
+                $data[$counter]['start_date'] = $value['start_date'];
+                $data[$counter]['end_date'] = $value['end_date'];
+                $data[$counter]['amount_paid'] = $value['amount_paid'];
+                if($value['policy_image']){
+                    $data[$counter]['policy_image'] = '<a href="'.$value['policy_image'].'" target="_blank" style="text-decoration:none;" title="Click to open"><img height="20px" width="20px" src="'.$value['policy_image'].'" alt="Vehicle Insurance Policy No '.$value['policy_no'].'"/></a>';
+                }else{
+                    $data[$counter]['policy_image'] = '';
+                }
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function lastlocations($data = array()) //Get overall settlement data
+    {
+        $sqlQuery = "SELECT driver_location.lat, driver_location.long FROM driver, driver_location WHERE driver.id = driver_location.driver_id";
+        if(!empty($data)){
+            foreach ($data as $key => $value) {
+                $sqlQuery .= ' AND driver.'.$key.' = "'.$value.'"';
+            }
+        }
+        $row_array = $this->db->query($sqlQuery)->row_array();
+        return $row_array;
+    }
+
+    public function getdrivers($searchfields) { //Get Owner Data
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        foreach ($searchfields as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        $this->db->where('status',1);
+        $query = $this->db->get();
+        $row = $query->result_array();
+        if (isset($row)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getDriverdataallSettlement() { //Get driver data
+        $this->db->select('*');
+        $this->db->from(TBL_DRIVER);
+        $query = $this->db->get();
+        $row = $query->row_array();
+        if (isset($row)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    public function getPendingdataCount($params) { //Get driver data
+        $this->db->select(TBL_SETTLEMENT_REPORT.'.*, '.TBL_TRIPS.'.date_added, '.TBL_TRIPS.'.source_address, '.TBL_TRIPS.'.dest_address');
+        $this->db->join(TBL_TRIPS, TBL_TRIPS.'.crn = '.TBL_SETTLEMENT_REPORT.'.crn');
+        //$this->db->join(TBL_JOURNEY_BILL, TBL_JOURNEY_BILL.'.id = '.TBL_USER_JOURNEY.'.jouney_bill_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SETTLEMENT_REPORT.".crn LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".activity LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".payment_method LIKE '%".$params['search']['value']."%')");
+        }
+        if($params['start_date'] != "" and $params['end_date']){
+            $start_date_a = explode('/', $params['start_date']);
+            $start_date = $start_date_a[2].'-'.$start_date_a[0].'-'.$start_date_a[1];
+
+            $end_date_a = explode('/', $params['end_date']);
+            $end_date = $end_date_a[2].'-'.$end_date_a[0].'-'.$end_date_a[1]; 
+            $this->db->where(TBL_TRIPS.'.date_added BETWEEN "'. $start_date.'" and "'. $end_date. '"');
+        }
+        if($params['driver_id'] != ""){
+            $this->db->where(TBL_TRIPS.'.driver_id = "'. $params['driver_id'].'"');
+        }
+        $this->db->where(TBL_SETTLEMENT_REPORT.'.settlement_status', 'pending');
+        $query = $this->db->get(TBL_SETTLEMENT_REPORT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getPendingdata($params)
+    {
+        $this->db->select(TBL_SETTLEMENT_REPORT.'.*, '.TBL_TRIPS.'.date_added, '.TBL_TRIPS.'.source_address, '.TBL_TRIPS.'.dest_address,'.TBL_DRIVER.'.full_name,'.TBL_DRIVER.'.mobile_no');
+        $this->db->join(TBL_TRIPS, TBL_TRIPS.'.crn = '.TBL_SETTLEMENT_REPORT.'.crn');
+        //$this->db->join(TBL_TRIPS, TBL_TRIPS.'.id = '.TBL_USER_JOURNEY.'.jouney_bill_id');
+        $this->db->join(TBL_DRIVER, TBL_DRIVER.'.id = '.TBL_TRIPS.'.driver_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SETTLEMENT_REPORT.".crn LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".activity LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".payment_method LIKE '%".$params['search']['value']."%')");
+        }
+        if($params['start_date'] != "" and $params['end_date']){
+            $start_date_a = explode('/', $params['start_date']);
+            $start_date = $start_date_a[2].'-'.$start_date_a[0].'-'.$start_date_a[1];
+
+            $end_date_a = explode('/', $params['end_date']);
+            $end_date = $end_date_a[2].'-'.$end_date_a[0].'-'.$end_date_a[1]; 
+            $this->db->where(TBL_TRIPS.'.date_added BETWEEN "'. $start_date.'" and "'. $end_date. '"');
+        }
+        if($params['driver_id'] != ""){
+            $this->db->where(TBL_TRIPS.'.driver_id = "'. $params['driver_id'].'"');
+        }
+        $this->db->where(TBL_SETTLEMENT_REPORT.'.settlement_status', 'pending');
+
+        $this->db->order_by(TBL_TRIPS.'.date_added', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_SETTLEMENT_REPORT);
+        $fetch_result = $query->result_array();
+        
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['full_name'] = $value['full_name'];
+                $data[$counter]['mobile_no'] = $value['mobile_no'];
+                $data[$counter]['crn'] = $value['crn'];
+                $data[$counter]['source_address'] = $value['source_address'];
+                $data[$counter]['dest_address'] = $value['dest_address'];
+                $data[$counter]['payment_method'] = $value['payment_method'];
+
+                $data[$counter]['driver_receivable'] = $value['driver_receivable'];
+                $data[$counter]['driver_payable'] = $value['driver_payable'];
+
+                // if($value['activity'] == 'cancellation'){
+                //     $data[$counter]['payment_method'] = '-';
+                // }else{
+                //     $data[$counter]['payment_method'] = ($value['payment_method'] == '') ? 'cash' : $value['payment_method'];
+                // }
+
+                // if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] == 0)
+                // {
+                //     $data[$counter]['driver_receivable'] = '0';
+                //     $data[$counter]['driver_payable'] = $value['dial4242_commision_charge'];
+
+                //    // $data[$counter]['driver_receivable'] =  $value['dial4242_commision_charge']; 
+                //    // $data[$counter]['driver_payable'] ='0';
+                // }
+                // else if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] != 0)
+                // {
+                //    $data[$counter]['driver_receivable'] = $value['settlebydial4242'];
+                //    $data[$counter]['driver_payable'] = '0';
+
+                //   //  $data[$counter]['driver_receivable'] = '0';
+                //   //  $data[$counter]['driver_payable'] = $value['settlebydial4242'];
+                // }
+                // else if(strtolower($value['payment_method']) == 'razorpay')
+                // {
+                //     $data[$counter]['driver_receivable'] = $value['driver_income'];
+                //     $data[$counter]['driver_payable'] = '0';
+
+                //     //$data[$counter]['driver_receivable'] = '0';
+                //     //$data[$counter]['driver_payable'] =  $value['driver_income']; 
+                // }else{
+                //     if($value['discounted_bill'] == ($value['driver_income'] + $value['dial4242_commision_charge'])){
+                //         $data[$counter]['driver_receivable'] = '0';
+                //         $data[$counter]['driver_payable'] = '0';  
+                //     }
+                // }
+
+                // if(strtolower($value['activity']) == 'cancellation'){
+                //     if($value['discounted_bill'] == 0){
+                //         $data[$counter]['driver_receivable'] = 0;
+                //         $data[$counter]['driver_payable'] = 0;
+                //     }else{
+                //         if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] == 0){
+                //             $data[$counter]['driver_receivable'] = '0';
+                //             $data[$counter]['driver_payable'] = $value['dial4242_commision_charge'];
+
+
+                //            // $data[$counter]['driver_receivable'] = $value['dial4242_commision_charge']; 
+                //            // $data[$counter]['driver_payable'] = '0';
+                //         }
+                //         else if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] != 0)
+                //         {
+                //             $data[$counter]['driver_receivable'] = $value['settlebydial4242'];
+                //             $data[$counter]['driver_payable'] = '0';
+
+                //             //$data[$counter]['driver_receivable'] = '0';
+                //             //$data[$counter]['driver_payable'] = $value['settlebydial4242']; 
+                //         }
+                //         else if(strtolower($value['payment_method']) == 'razorpay')
+                //         {
+                //             $data[$counter]['driver_receivable'] = $value['driver_income'];
+                //             $data[$counter]['driver_payable'] = '0';
+
+                //             //$data[$counter]['driver_receivable'] = '0';
+                //             //$data[$counter]['driver_payable'] =  $value['driver_income'];
+                //         }
+                //         else
+                //         {
+                //             if($value['discounted_bill'] == ($value['driver_income'] + $value['dial4242_commision_charge'])){
+                //                 $data[$counter]['driver_receivable'] = '0';
+                //                 $data[$counter]['driver_payable'] = '0';  
+                //             }
+                //         }
+                //     }
+                // }
+                $toadjust = ($data[$counter]['driver_receivable'] > 0) ? $data[$counter]['driver_receivable'] : "-".$data[$counter]['driver_payable'];
+
+                $data[$counter]['date_added'] = $value['date_added'];
+                $data[$counter]['action'] = '<input type="checkbox" class="topay" name="topay" id="topay" data-toadjust="'.$toadjust.'" data-ttype="in-app" data-crn="'.$value['crn'].'" data-dial4242_commision_charge="'.$value['dial4242_commision_charge'].'" data-value="0">';
+                
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+    public function getPendingdataManualCount($params) { //Get driver data
+        // $this->db->select('*');
+        // $this->db->where('(`amount_paid_by_driver` != `dial4242_commision_charge` OR `amount_paid_by_driver` IS NULL)');
+        // if($params['start_date'] != "" and $params['end_date']){
+        //     $start_date_a = explode('/', $params['start_date']);
+        //     $start_date = $start_date_a[2].'-'.$start_date_a[0].'-'.$start_date_a[1];
+
+        //     $end_date_a = explode('/', $params['end_date']);
+        //     $end_date = $end_date_a[2].'-'.$end_date_a[0].'-'.$end_date_a[1]; 
+        //     $this->db->where(' date_added BETWEEN "'. $start_date.'" and "'. $end_date. '"');
+        // }
+        // if($params['driver_id'] != ""){
+        //     $this->db->where('driver_id = "'. $params['driver_id'].'"');
+        // }
+        // $query = $this->db->get(TBL_MANUAL_TRIP);
+        // $rowcount = $query->num_rows();
+        // return $rowcount;
+
+
+        $this->db->select(TBL_SETTLEMENT_REPORT.'.*, '.TBL_TRIPS.'.date_added, '.TBL_TRIPS.'.source_address, '.TBL_TRIPS.'.dest_address');
+        $this->db->join(TBL_TRIPS, TBL_TRIPS.'.crn = '.TBL_SETTLEMENT_REPORT.'.crn');
+        //$this->db->join(TBL_JOURNEY_BILL, TBL_JOURNEY_BILL.'.id = '.TBL_USER_JOURNEY.'.jouney_bill_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SETTLEMENT_REPORT.".crn LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".activity LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".payment_method LIKE '%".$params['search']['value']."%')");
+        }
+        if($params['start_date'] != "" and $params['end_date']){
+            $start_date_a = explode('/', $params['start_date']);
+            $start_date = $start_date_a[2].'-'.$start_date_a[0].'-'.$start_date_a[1];
+
+            $end_date_a = explode('/', $params['end_date']);
+            $end_date = $end_date_a[2].'-'.$end_date_a[0].'-'.$end_date_a[1]; 
+            $this->db->where(TBL_TRIPS.'.date_added BETWEEN "'. $start_date.'" and "'. $end_date. '"');
+        }
+        if($params['driver_id'] != ""){
+            $this->db->where(TBL_TRIPS.'.driver_id = "'. $params['driver_id'].'"');
+        }
+        $this->db->where(TBL_SETTLEMENT_REPORT.'.settlement_status', 'completed');
+        $this->db->group_by(TBL_TRIPS.'.crn');
+        $query = $this->db->get(TBL_SETTLEMENT_REPORT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+    }
+
+    public function getPendingdataManual($params)
+    {
+    //     $this->db->select('*');
+    //     //$this->db->where('(`amount_paid_by_driver` != `dial4242_commision_charge_sg` OR `amount_paid_by_driver` IS NULL)');
+    //     if($params['start_date'] != "" and $params['end_date']){
+    //         $start_date_a = explode('/', $params['start_date']);
+    //         $start_date = $start_date_a[2].'-'.$start_date_a[0].'-'.$start_date_a[1];
+
+    //         $end_date_a = explode('/', $params['end_date']);
+    //         $end_date = $end_date_a[2].'-'.$end_date_a[0].'-'.$end_date_a[1]; 
+    //         $this->db->where(' date_added BETWEEN "'. $start_date.'" and "'. $end_date. '"');
+    //     }
+    //     if($params['driver_id'] != ""){
+    //         $this->db->where('driver_id = "'. $params['driver_id'].'"');
+    //     }
+    //     $this->db->order_by('ride_start', 'DESC');
+    //     $this->db->limit($params['length'],$params['start']);
+    //     $query = $this->db->get(TBL_MANUAL_TRIP);
+    //     $fetch_result = $query->result_array();
+    //     $data = array();
+    //     $counter = 0;
+
+    //     //print_r($fetch_result);
+    //     if(count($fetch_result) > 0)
+    //     {
+    //         foreach ($fetch_result as $key => $value)
+    //         {
+    //             $data[$counter]['driver_full_name'] = $value['driver_full_name'];
+    //             $data[$counter]['driver_mobile_no'] = $value['driver_mobile_no'];
+    //             $data[$counter]['crn'] = $value['crn'];
+    //             $data[$counter]['source_address'] = $value['source_address'];
+    //             $data[$counter]['dest_address'] = $value['dest_address'];
+    //             $data[$counter]['payment_method'] = $value['payment_method'];
+
+
+    //            // print_r($data[$counter]['payment_method']);
+
+    //             // old logic
+
+    //             // if(strtolower($value['payment_method']) == 'cash' && $value['dial4242_commision_charge'] > 0)
+    //             // {
+    //             //     $data[$counter]['driver_receivable'] = '0';
+    //             //     $data[$counter]['driver_payable'] = abs($value['dial4242_commision_charge']);
+    //             // }
+    //             // else if(strtolower($value['payment_method']) == 'cash' && $value['dial4242_commision_charge'] < 0)
+    //             // {
+    //             //     $data[$counter]['driver_receivable'] = abs($value['dial4242_commision_charge']);
+    //             //     $data[$counter]['driver_payable'] = '0';
+    //             // }
+    //             // else if(strtolower($value['payment_method']) == 'razorpay')
+    //             // {
+    //             //     $data[$counter]['driver_receivable'] = abs($value['gross_bill']);
+    //             //     $data[$counter]['driver_payable'] = '0';
+    //             // }else{
+    //             //     if($value['discounted_amount'] == ($value['gross_bill'] + $value['dial4242_commision_charge'])){
+    //             //         $data[$counter]['driver_receivable'] = abs($value['gross_bill']);
+    //             //         $data[$counter]['driver_payable'] = '0';  
+    //             //     }
+    //             //     else if($value['total_bill'] == $value['amount_paid']){
+    //             //         $data[$counter]['driver_receivable'] = '0';
+    //             //         $data[$counter]['driver_payable'] = '0';  
+    //             //     }
+    //             // }
+                
+    //             // $toadjust = ($data[$counter]['driver_receivable'] > 0) ? $data[$counter]['driver_receivable'] : "-".$data[$counter]['driver_payable'];
+
+
+    //              /* New Logic start here*/
+    //             //  if(strtolower($value['payment_method']) =='cash' && $value['dial4242_commision_charge_sg'] > 0){
+                      
+    //             //     if($value['amount_paid_sg']==0 ){
+    //             //             $data[$counter]['driver_receivable'] = $value['gross_bill_sg'];
+    //             //             $data[$counter]['driver_payable'] = '0';
+    //             //     }else if($value['amount_paid_sg'] > 0 && $value['deducted_from_wallet_sg'] == $value['total_bill_sg'])
+    //             //     {
+    //             //             $data[$counter]['driver_receivable'] = $value['gross_bill_sg'];
+    //             //             $data[$counter]['driver_payable'] = '0';
+
+    //             //     }
+    //             // }else if(strtolower($value['payment_method']) == 'razorpay'){
+
+    //             //    // print_r('hemant');
+    //             // }
+
+    //             if(strtolower($value['payment_method']) == 'cash' && $value['dial4242_commision_charge_sg'] > 0)
+    //             {
+    //                 if($value['amount_paid_sg']==0){
+    //                         $data[$counter]['driver_receivable'] = $value['gross_bill_sg'];
+    //                         $data[$counter]['driver_payable'] = '0';
+    //                   }else if($value['amount_paid_sg']!=0){
+    //                          if( $value['deducted_from_wallet_sg'] !=0 && $value['deducted_from_wallet_sg'] < $value['total_bill_sg'] && $value['discountpercentage']==0){
+
+    //                             if( $value['gross_bill_sg']==$value['deducted_from_wallet_sg']){
+    //                                 $data[$counter]['driver_receivable'] =  $value['gross_bill_sg'] -$value['amount_paid_sg'] ;
+    //                                 $data[$counter]['driver_payable'] ='0';
+
+    //                             }else
+    //                             {
+    //                                 $data[$counter]['driver_receivable'] = abs($value['gross_bill_sg'] -$value['amount_paid_sg']) ;
+    //                                 $data[$counter]['driver_payable'] = 0;
+    //                             }
+                               
+    //                          }else {
+                           
+                            
+    //                               if($value['discountpercentage']!=0){
+
+    //                                 $data[$counter]['driver_receivable'] = '0';
+
+    //                                // $total_amount = $value['gross_bill_sg']+$value['deducted_from_wallet_sg'];
+
+    //                                 $discounted_amount  =  $value['discounted_amount'];
+
+    //                                 $data[$counter]['driver_payable'] = $value['amount_paid_sg']- $value['gross_bill_sg'];
+
+    //                               }
+    //                               else
+    //                               {
+
+    //                                 $data[$counter]['driver_receivable'] = '0';
+    //                                 $data[$counter]['driver_payable'] = $value['dial4242_commision_charge_sg'];
+    //                               }
+
+
+    //                          }
+
+                           
+    //                  }
+    //             }
+    //             // else if(strtolower($value['payment_method']) == 'cash' && $value['dial4242_commision_charge'] < 0)
+    //             // {
+    //             //     $data[$counter]['driver_receivable'] = abs($value['dial4242_commision_charge']);
+    //             //     $data[$counter]['driver_payable'] = '0';
+    //             // }
+    //             else if(strtolower($value['payment_method']) == 'razorpay')
+    //             {
+    //                 $data[$counter]['driver_receivable'] = abs($value['gross_bill_sg']);
+    //                 $data[$counter]['driver_payable'] = '0';
+    //             }else{
+    //                 if($value['discounted_amount'] == ($value['gross_bill_sg'] + $value['dial4242_commision_charge_sg'])){
+    //                     $data[$counter]['driver_receivable'] = abs($value['gross_bill_sg']);
+    //                     $data[$counter]['driver_payable'] = '0';  
+    //                 }
+    //                 else if($value['total_bill'] == $value['amount_paid']){
+    //                     $data[$counter]['driver_receivable'] = '0';
+    //                     $data[$counter]['driver_payable'] = '0';  
+    //                 }
+    //             }
+                
+    //             $toadjust = ($data[$counter]['driver_receivable'] > 0) ? $data[$counter]['driver_receivable'] : "-".$data[$counter]['driver_payable'];
+
+    //              /* New Logic end here */
+    //           // $toadjust = ($data[$counter]['driver_receivable'] > 0) ? $data[$counter]['driver_receivable'] : "-".$data[$counter]['driver_payable'];
+
+
+    //             $data[$counter]['date_added'] = $value['date_added'];
+    //             $data[$counter]['action'] = '<input type="checkbox" class="topay" name="topay" id="topay" data-toadjust="'.$toadjust.'" data-ttype="manual" data-crn="'.$value['crn'].'" data-dial4242_commision_charge="'.$value['dial4242_commision_charge'].'" data-value="0">';
+                
+    //             $counter++; 
+    //         }
+    //     }
+    //     return $data;
+
+
+
+        $this->db->select(TBL_SETTLEMENT_REPORT.'.*, '.TBL_TRIPS.'.date_added, '.TBL_TRIPS.'.source_address, '.TBL_TRIPS.'.dest_address,'.TBL_DRIVER.'.full_name,'.TBL_DRIVER.'.mobile_no');
+        $this->db->join(TBL_TRIPS, TBL_TRIPS.'.crn = '.TBL_SETTLEMENT_REPORT.'.crn');
+        //$this->db->join(TBL_TRIPS, TBL_TRIPS.'.id = '.TBL_USER_JOURNEY.'.jouney_bill_id');
+        $this->db->join(TBL_DRIVER, TBL_DRIVER.'.id = '.TBL_TRIPS.'.driver_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SETTLEMENT_REPORT.".crn LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".activity LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SETTLEMENT_REPORT.".payment_method LIKE '%".$params['search']['value']."%')");
+        }
+        if($params['start_date'] != "" and $params['end_date']){
+            $start_date_a = explode('/', $params['start_date']);
+            $start_date = $start_date_a[2].'-'.$start_date_a[0].'-'.$start_date_a[1];
+
+            $end_date_a = explode('/', $params['end_date']);
+            $end_date = $end_date_a[2].'-'.$end_date_a[0].'-'.$end_date_a[1]; 
+            $this->db->where(TBL_TRIPS.'.date_added BETWEEN "'. $start_date.'" and "'. $end_date. '"');
+        }
+        if($params['driver_id'] != ""){
+            $this->db->where(TBL_TRIPS.'.driver_id = "'. $params['driver_id'].'"');
+        }
+        $this->db->where(TBL_SETTLEMENT_REPORT.'.settlement_status', 'completed');
+        $this->db->group_by(TBL_TRIPS.'.crn');
+        $this->db->order_by(TBL_TRIPS.'.date_added', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_SETTLEMENT_REPORT);
+        $fetch_result = $query->result_array();
+        
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['full_name'] = $value['full_name'];
+                $data[$counter]['mobile_no'] = $value['mobile_no'];
+                $data[$counter]['crn'] = $value['crn'];
+                $data[$counter]['source_address'] = $value['source_address'];
+                $data[$counter]['dest_address'] = $value['dest_address'];
+                $data[$counter]['payment_method'] = $value['payment_method'];
+
+                $data[$counter]['driver_receivable'] = $value['driver_receivable'];
+                $data[$counter]['driver_payable'] = $value['driver_payable'];
+
+                // if($value['activity'] == 'cancellation'){
+                //     $data[$counter]['payment_method'] = '-';
+                // }else{
+                //     $data[$counter]['payment_method'] = ($value['payment_method'] == '') ? 'cash' : $value['payment_method'];
+                // }
+
+                // if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] == 0)
+                // {
+                //     $data[$counter]['driver_receivable'] = '0';
+                //     $data[$counter]['driver_payable'] = $value['dial4242_commision_charge'];
+
+                //    // $data[$counter]['driver_receivable'] =  $value['dial4242_commision_charge']; 
+                //    // $data[$counter]['driver_payable'] ='0';
+                // }
+                // else if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] != 0)
+                // {
+                //    $data[$counter]['driver_receivable'] = $value['settlebydial4242'];
+                //    $data[$counter]['driver_payable'] = '0';
+
+                //   //  $data[$counter]['driver_receivable'] = '0';
+                //   //  $data[$counter]['driver_payable'] = $value['settlebydial4242'];
+                // }
+                // else if(strtolower($value['payment_method']) == 'razorpay')
+                // {
+                //     $data[$counter]['driver_receivable'] = $value['driver_income'];
+                //     $data[$counter]['driver_payable'] = '0';
+
+                //     //$data[$counter]['driver_receivable'] = '0';
+                //     //$data[$counter]['driver_payable'] =  $value['driver_income']; 
+                // }else{
+                //     if($value['discounted_bill'] == ($value['driver_income'] + $value['dial4242_commision_charge'])){
+                //         $data[$counter]['driver_receivable'] = '0';
+                //         $data[$counter]['driver_payable'] = '0';  
+                //     }
+                // }
+
+                // if(strtolower($value['activity']) == 'cancellation'){
+                //     if($value['discounted_bill'] == 0){
+                //         $data[$counter]['driver_receivable'] = 0;
+                //         $data[$counter]['driver_payable'] = 0;
+                //     }else{
+                //         if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] == 0){
+                //             $data[$counter]['driver_receivable'] = '0';
+                //             $data[$counter]['driver_payable'] = $value['dial4242_commision_charge'];
+
+
+                //            // $data[$counter]['driver_receivable'] = $value['dial4242_commision_charge']; 
+                //            // $data[$counter]['driver_payable'] = '0';
+                //         }
+                //         else if(strtolower($value['payment_method']) == 'cash' && $value['settlebydial4242'] != 0)
+                //         {
+                //             $data[$counter]['driver_receivable'] = $value['settlebydial4242'];
+                //             $data[$counter]['driver_payable'] = '0';
+
+                //             //$data[$counter]['driver_receivable'] = '0';
+                //             //$data[$counter]['driver_payable'] = $value['settlebydial4242']; 
+                //         }
+                //         else if(strtolower($value['payment_method']) == 'razorpay')
+                //         {
+                //             $data[$counter]['driver_receivable'] = $value['driver_income'];
+                //             $data[$counter]['driver_payable'] = '0';
+
+                //             //$data[$counter]['driver_receivable'] = '0';
+                //             //$data[$counter]['driver_payable'] =  $value['driver_income'];
+                //         }
+                //         else
+                //         {
+                //             if($value['discounted_bill'] == ($value['driver_income'] + $value['dial4242_commision_charge'])){
+                //                 $data[$counter]['driver_receivable'] = '0';
+                //                 $data[$counter]['driver_payable'] = '0';  
+                //             }
+                //         }
+                //     }
+                // }
+                $toadjust = ($data[$counter]['driver_receivable'] > 0) ? $data[$counter]['driver_receivable'] : "-".$data[$counter]['driver_payable'];
+
+                $data[$counter]['date_added'] = $value['date_added'];
+                $data[$counter]['action'] = '<input type="checkbox" class="topay" name="topay" id="topay" data-toadjust="'.$toadjust.'" data-ttype="in-app" data-crn="'.$value['crn'].'" data-dial4242_commision_charge="'.$value['dial4242_commision_charge'].'" data-value="0">';
+                
+                $counter++; 
+            }
+        }
+        return $data;
+     }
+
+
+     public function selectAlllinkeddrivers($data=array(),$parenthospitalid)
+     {
+         $this->db->select('*');
+         $this->db->order_by('full_name','ASC');
+         $query_result = $this->db->get(TBL_DRIVER)->result_array();
+         return $query_result;
+     }
+
+     public function getDriverequipmentdetails($id)
+     {
+         $this->db->select('equipments');
+         $this->db->where(TBL_DRIVER.'.id', $id);
+         $query_result = $this->db->get(TBL_DRIVER)->result_array();
+         return $query_result;
+     }
+
+     public function checkIfdriverisalredayLinked($driver_id,$childhospitalList){
+
+        $this->db->select('*');
+        $this->db->where_in(TBL_HOSPITALDRIVERLINK.".driver_id ", array($driver_id));
+        $this->db->where_in(TBL_HOSPITALDRIVERLINK.".hospital_id", $childhospitalList);
+        $query_result = $this->db->get(TBL_HOSPITALDRIVERLINK);
+        
+        if($query_result){
+            $fetch_result = $query_result->result_array();
+            return $fetch_result;
+        }else{
+            return false;
+        }
+
+     }
+
+
+     public function getAppstatusCount($params,$dest_address_latlong)
+     {
+
+        //$this->load->helper('common_helper');
+        //$source_addess =  $this->input->post('source_addess');
+        if($dest_address_latlong){
+        
+            $ignore = array(3, 4);
+            $this->db->distinct();
+            $this->db->select('driver_id');
+            $this->db->from(TBL_TRIPS);
+            $this->db->where_not_in('journey_status',$ignore);
+            $query = $this->db->get();
+            $driver_ids = $query->result_array();
+            
+            $driver_ids_array = array(0);
+            foreach($driver_ids as $key => $value) {
+                $driver_ids_array[] = $value['driver_id'];
+            }
+
+            if($this->session->userdata('adminuser_role') == '5'){
+                $hospitaldata = $this->hospital_model->fetchAllbyfield('hospitalname', $this->session->userdata('adminuser_name'));
+                $hospitaldriverlinking = $this->hospital_model->getHospitallinking($hospitaldata['id']);
+    
+                $hospitallinkeddriveridsarray = array(0);
+                foreach($hospitaldriverlinking as $key_linked_driver => $value_linked_driver) {
+                    $hospitallinkeddriveridsarray[] = $value_linked_driver['driver_id'];
+                }
+            }
+
+            $this->db->select(TBL_DRIVER_LOCATION.'.lat,'
+            .TBL_DRIVER_LOCATION.'.long,'
+            .TBL_DRIVER.'.full_name as driver_name,'
+            .TBL_DRIVER.'.id,'
+            .TBL_DRIVER.'.mobile_no as driver_mobile_no,'
+            .TBL_DRIVER_LOCATION.'.ambulance_type,'
+            .TBL_DRIVER_LOCATION.'.date_added, '
+            .TBL_DRIVER_LOCATION.'.id, '
+            .TBL_DRIVER_LOCATION.'.driver_id,'
+            .TBL_AMBULANCE_TYPE.'.type as ambulance_type,'
+            .TBL_DRIVER_LOCATIONS.'.lat as locslat,'
+            .TBL_DRIVER_LOCATIONS.'.long as locslong,'
+            .TBL_DRIVER_LOCATIONS.'.date_added as locsdate_added,'
+            .TBL_HOSPITALDRIVERLINK.'.hospital_id,'
+            .TBL_HOSPITAL.'.hospitalname');
+            $this->db->from(TBL_DRIVER);
+            $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER.'.id = '.TBL_DRIVER_LOCATION.'.driver_id','inner');
+            //$this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER_SOCKET.'.driver_id','inner');
+            $this->db->join(TBL_AMBULANCE_OWNER, TBL_DRIVER.'.ambulance_owner = '.TBL_AMBULANCE_OWNER.'.id','inner');
+            $this->db->join(TBL_AMBULANCE_TYPE, TBL_DRIVER.'.ambulance_type = '.TBL_AMBULANCE_TYPE.'.id');
+            $this->db->join(TBL_HOSPITALDRIVERLINK, TBL_DRIVER.'.id = '.TBL_HOSPITALDRIVERLINK.'.driver_id','left');
+            $this->db->join(TBL_HOSPITAL, TBL_HOSPITALDRIVERLINK.'.hospital_id = '.TBL_HOSPITAL.'.id','left');
+            $this->db->join(TBL_DRIVER_LOCATIONS, TBL_DRIVER_LOCATION.'.driver_id='.TBL_DRIVER_LOCATIONS.'.driver_id','left');
+            $this->db->where(TBL_DRIVER_LOCATIONS.'.date_added < '.TBL_DRIVER_LOCATION.'.date_added');
+            //$this->db->where(TBL_DRIVER.'.availability',1);
+             $this->db->where(TBL_DRIVER.'.gcm_id!=',"");
+        
+             $this->db->group_by(TBL_DRIVER_LOCATION.'.driver_id'); 
+             $this->db->order_by(TBL_DRIVER_LOCATION.'.date_added','DESC'); 
+
+            //$this->db->limit($params['length'],$params['start']);
+            $query = $this->db->get();
+            $fetch_result = $query->result_array();
+          
+            if ($query->num_rows() > 0)
+            {
+                
+                foreach($fetch_result as $key => $result) {
+                
+                    $interval_minutes   = getDateDifferenceInMinutes(DATEANDTIME,$result['date_added']);
+                    $distance = round(actualDistanceByLatLong($dest_address_latlong['latitude'], $dest_address_latlong['longitude'], $result['lat'], $result['long']));
+
+                    if( $distance <= 5 || $distance <= 10 || $distance <= 15) {
+                        //unset($result['id'],$result['date_added']);
+                        $result['distance'] =$distance;
+                        //unset($result['date_added']);
+                        $driver_locations[] =  $result;
+
+                    }
+                // else if( $distance <= 10) {
+                //         //unset($result['id'],$result['date_added']);
+                //         $result['distance'] =$distance;
+                //         unset($result['date_added']);
+                //         $driver_locations[] =  $result;
+                //     }
+                    
+                // else if( $distance <= 15) {
+                //     //unset($result['id'],$result['date_added']);
+                //     $result['distance'] =$distance;
+                //     unset($result['date_added']);
+                //     $driver_locations[] =  $result;
+                // }
+                    //     // $result['distance'] =$distance;
+                    //$driver_locations[] =  $result;
+                }
+
+
+                if($driver_locations) {
+                    
+                    return count($driver_locations);
+                
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+
+
+
+            // $query = $this->db->get();
+            // $rowcount = $query->num_rows();
+            // return $rowcount;
+        }else{
+
+            return false;
+
+        }
+     }
+ 
+     public function getAppstatusData($params,$dest_address_latlong)
+     {
+       
+        if($dest_address_latlong){
+           $ignore = array(3, 4);
+            $this->db->distinct();
+            $this->db->select('driver_id');
+            $this->db->from(TBL_TRIPS);
+            $this->db->where_not_in('journey_status',$ignore);
+            $query = $this->db->get();
+            $driver_ids = $query->result_array();
+            
+            $driver_ids_array = array(0);
+            foreach($driver_ids as $key => $value) {
+                $driver_ids_array[] = $value['driver_id'];
+            }
+
+            if($this->session->userdata('adminuser_role') == '5'){
+                $hospitaldata = $this->hospital_model->fetchAllbyfield('hospitalname', $this->session->userdata('adminuser_name'));
+                $hospitaldriverlinking = $this->hospital_model->getHospitallinking($hospitaldata['id']);
+    
+                $hospitallinkeddriveridsarray = array(0);
+                foreach($hospitaldriverlinking as $key_linked_driver => $value_linked_driver) {
+                    $hospitallinkeddriveridsarray[] = $value_linked_driver['driver_id'];
+                }
+            }
+
+            $this->db->select(TBL_DRIVER_LOCATION.'.lat,'
+            .TBL_DRIVER_LOCATION.'.long,'
+            .TBL_DRIVER.'.full_name as driver_name,'
+            .TBL_DRIVER.'.id,'
+            .TBL_DRIVER.'.mobile_no as driver_mobile_no,'
+            .TBL_DRIVER_LOCATION.'.ambulance_type,'
+            .TBL_DRIVER_LOCATION.'.date_added, '
+            .TBL_DRIVER_LOCATION.'.id, '
+            .TBL_DRIVER_LOCATION.'.driver_id,'
+            // .TBL_AMBULANCE_OWNER.'.name as owner_name,'
+            // .TBL_AMBULANCE_OWNER.'.mobile_no as owner_mobile,'
+            .TBL_AMBULANCE_TYPE.'.type as ambulance_type,'
+            .TBL_DRIVER_LOCATIONS.'.lat as locslat,'
+            .TBL_DRIVER_LOCATIONS.'.long as locslong,'
+            .TBL_DRIVER_LOCATIONS.'.date_added as locsdate_added,'
+            .TBL_HOSPITALDRIVERLINK.'.hospital_id,'
+            .TBL_HOSPITAL.'.hospitalname');
+            $this->db->from(TBL_DRIVER);
+            $this->db->join(TBL_DRIVER_LOCATION, TBL_DRIVER.'.id = '.TBL_DRIVER_LOCATION.'.driver_id','inner');
+            //$this->db->join(TBL_DRIVER_SOCKET, TBL_DRIVER_LOCATION.'.driver_id = '.TBL_DRIVER_SOCKET.'.driver_id','inner');
+            $this->db->join(TBL_AMBULANCE_OWNER, TBL_DRIVER.'.ambulance_owner = '.TBL_AMBULANCE_OWNER.'.id','inner');
+            $this->db->join(TBL_AMBULANCE_TYPE, TBL_DRIVER.'.ambulance_type = '.TBL_AMBULANCE_TYPE.'.id');
+            $this->db->join(TBL_HOSPITALDRIVERLINK, TBL_DRIVER.'.id = '.TBL_HOSPITALDRIVERLINK.'.driver_id','left');
+            $this->db->join(TBL_HOSPITAL, TBL_HOSPITALDRIVERLINK.'.hospital_id = '.TBL_HOSPITAL.'.id','left');
+            $this->db->join(TBL_DRIVER_LOCATIONS, TBL_DRIVER_LOCATION.'.driver_id='.TBL_DRIVER_LOCATIONS.'.driver_id','left');
+            $this->db->where(TBL_DRIVER_LOCATIONS.'.date_added < '.TBL_DRIVER_LOCATION.'.date_added');
+            //$this->db->where(TBL_DRIVER.'.availability',1);
+             $this->db->where(TBL_DRIVER.'.gcm_id!=',"");
+        
+             $this->db->group_by(TBL_DRIVER_LOCATION.'.driver_id'); 
+             $this->db->order_by(TBL_DRIVER_LOCATION.'.date_added','DESC'); 
+             $this->db->limit($params['length'],$params['start']);
+             $query = $this->db->get();
+             $fetch_result = $query->result_array();
+
+            if ($query->num_rows() > 0)
+                {
+                    
+                    foreach($fetch_result as $key => $result) {
+                    
+                        $interval_minutes   = getDateDifferenceInMinutes(DATEANDTIME,$result['date_added']);
+                        $result['DriverCurrentAddress'] = getDetailAddressBylatlong($result['locslat'], $result['locslong']);
+
+                
+                        $distance = round(actualDistanceByLatLong($dest_address_latlong['latitude'], $dest_address_latlong['longitude'], $result['locslat'], $result['locslong']));
+
+                        if( $distance <= 5 || $distance <= 10 || $distance <= 15) {
+                            //unset($result['id'],$result['date_added']);
+                            $result['distance'] =$distance;
+                            //unset($result['date_added']);
+                            $driver_locations[] =  $result;
+
+                        }
+                       
+                        // else if( $distance <= 10) {
+                        //     //unset($result['id'],$result['date_added']);
+                        //     $result['distance'] =$distance;
+                        //     unset($result['date_added']);
+                        //     $driver_locations[] =  $result;
+                        // }
+                        
+                        // else if( $distance <= 15) {
+                        //     //unset($result['id'],$result['date_added']);
+                        //     $result['distance'] =$distance;
+                        //     unset($result['date_added']);
+                        //     $driver_locations[] =  $result;
+                        // }
+                        //$result['distance'] =$distance;
+                        //$driver_locations[] =  $result;
+                    }
+
+                    if($driver_locations) {
+                        
+                        $counter = 0;
+                        $data = array();
+                                if(count($driver_locations) > 0)
+                                {
+                                    foreach ($driver_locations as $key => $value)
+                                    {
+                                        $data[$counter]['DT_RowId'] = 'row_'.$value['id'];
+                                        $data[$counter]['driver_name'] = $value['driver_name'];
+                                        $data[$counter]['driver_mobile_no'] = $value['driver_mobile_no'];
+                                        $data[$counter]['ambulance_type'] = $value['ambulance_type'];
+                                        $data[$counter]['email_id'] = $value['email_id'];
+                                        $data[$counter]['address'] = $value['DriverCurrentAddress'];
+                    
+                                        if($value['availability']==1){
+                                            $availability ='<b style="color:green">Online</b>';
+                                        }else{
+                                            $availability ='<b style="color:red">Offline</b>';
+                                        }
+
+                                        if($value['hospitalname']){
+                                            $linkedhospital =$value['hospitalname'];
+                                        }else{
+                                            $linkedhospital ='';
+                                        }
+
+                                        $data[$counter]['kilometer'] = '<b style="color:green">'.round($value['distance']).'</b>';
+
+                                        $data[$counter]['linkedhospital'] =$linkedhospital;
+                                        $data[$counter]['availability'] =$availability;
+                                        // $data[$counter]['last_login'] ='';
+                                        $data[$counter]['action'] = '';
+
+                                        $counter++; 
+                                    }
+                                }
+                                return $data;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+
+
+
+        }else{
+
+            return false;
+        }
+     }
+
+   
+
+}

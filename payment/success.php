@@ -102,7 +102,7 @@ if ($conn->query($sql) === TRUE) {
             <p>The subject name IICTN RECEIPT, We have attached the copy of your</p>
             <!-- <p>Payment Receipt</p> -->
             <p><b>Payment Receipt : </b></p>
-            <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/'.$enq_id; ?>">Download Payment Receipt </a></p> -->
+            <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php?enq='.$enq_id; ?>">Download Payment Receipt </a></p> -->
             <p><a class="" target="_blank"  href="../invoices/PAYMENT_RECEIPT_1.pdf">Download Payment Receipt </a></p>
 
             <p><b>Addmission Form : </b></p>

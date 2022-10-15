@@ -696,7 +696,7 @@
                     // File upload configuration 
                     $targetDir = "uploads/topic_documents/".$doc_type.'/'; 
                     if($doc_type=='documents'){
-                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx'); 
+                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
                     }
 
                     if($doc_type=='videos'){
@@ -704,12 +704,16 @@
                     }
 
                     if($doc_type=='books'){
-                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx'); 
+                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
                     }
                    
                     
                     $fileName_original = basename($_FILES['file']['name']); 
-                    $fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+
+                    $fileName_original_for_download = $_FILES['file']['name']; 
+
+                    //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    $fileName =basename($_FILES['file']['name']); 
                     $targetFilePath = $targetDir.$fileName; 
                     
                     // Check whether file type is valid 
@@ -723,7 +727,7 @@
                                     'topic_id' => $topic_id,
                                     'doc_type' => $fileType,
                                     'module_name' => $doc_type,
-                                    'file_name' => $fileName,
+                                    'file_name' => $fileName_original_for_download,
                                     'file_name_original' => $fileName_original,
                                     'file_url' =>  base_url().$targetFilePath,
                                     'createdBy' => $this->session->userdata('userId')

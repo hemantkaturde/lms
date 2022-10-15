@@ -546,9 +546,14 @@
          $this->load->view("payment/success",$data);
        }
 
-       public function paymentrecipt(){
+       public function paymentrecipt($i){
 
-        $enquiry_number =$this->uri->segment(2);  
+        //$enquiry_number =$this->uri->segment(2);  
+
+        $mpdf = new \Mpdf\Mpdf();
+        $html = $this->load->view('genpdf_view',[],true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
 
        }
 

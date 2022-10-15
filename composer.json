@@ -15,22 +15,12 @@
 		"phpmailer/phpmailer": "^6.6",
 		"razorpay/razorpay": "2.*",
 		"setasign/fpdf": "^1.8",
-		"setasign/fpdi-fpdf": "^2.3"
+		"setasign/fpdi-fpdf": "^2.3",
+		"mpdf/mpdf": "^8.1",
+		"setasign/fpdi": "2.*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
-	},
-	"scripts": {
-		"test:coverage": [
-			"@putenv XDEBUG_MODE=coverage",
-			"phpunit --color=always --coverage-text --configuration tests/travis/sqlite.phpunit.xml"
-		],
-		"post-install-cmd": [
-			"sed -i s/name{0}/name[0]/ vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php"
-		],
-		"post-update-cmd": [
-			"sed -i s/name{0}/name[0]/ vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php"
-		]
 	},
 	"require-dev": {
 		"mikey179/vfsstream": "1.6.*",
