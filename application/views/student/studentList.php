@@ -13,12 +13,25 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Student Management</div>
+               
+                <div>
 
-                <!-- <div class="ibox-tools"> -->
-                    <a class="btn btn-primary text-white" onclick="student(0)" ><i class="fa fa-plus"></i> Add Student</a>
+                  <!-- <div class="ibox-tools"> -->
+                  <a class="btn btn-primary text-white" onclick="student(0)" ><i class="fa fa-plus"></i> Add Student</a>
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
+
+                <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                  </button>
+
+
+                </div>
+
+
+
+                <div class="ibox-title">Student Management</div>
+
             </div>
             <div class="ibox-body">
                  <?php

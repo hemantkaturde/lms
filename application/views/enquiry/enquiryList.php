@@ -16,9 +16,18 @@
                     <!-- <a class="btn btn-primary text-white" onclick="enquiry(0)" ><i class="fa fa-plus"></i> Add Enquiry</a> -->
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEnquiry">
-                    <i class="fa fa-plus"></i> Add Inquiry
-                </button>
+                <div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEnquiry">
+                     <i class="fa fa-plus"></i> Add Inquiry
+                  </button>
+
+                  <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
+                                class="fa fa-arrow-left"></i> Back</a>
+                    </button>
+
+                </div>
+              
 
                 <div class="ibox-title">Inquiry Management</div>
             </div>

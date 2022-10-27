@@ -231,6 +231,7 @@ if(!empty($roleInfo))
                                 <div class="form-group">
                                     <!-- ENTER BUTTON HERE -->
                                     <input type="button" id="editRole" class="btn btn-primary" value="UPDATE" />
+                                    <input type="button" onclick="location.href='<?php echo base_url().'roleListing'?>'" class="btn btn-default" value="BACK" />
                                     <input type="button" onclick="location.href='<?php echo base_url().'roleListing'?>'" class="btn btn-default" value="CANCEL" />
                                 </div>
                             </div>

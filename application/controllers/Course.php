@@ -124,7 +124,6 @@
                     $course_mode_offline=0;
                 }
 
-            
                 //$total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
 
                 $data = array(
@@ -238,6 +237,7 @@
                     $course_mode_offline=0;
                 }
 
+               
 
     
                 $data = array(

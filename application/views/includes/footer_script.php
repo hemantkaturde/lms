@@ -202,10 +202,11 @@
 
 					 if(data[0].course_books==1){
 						$('.radio_yes1').attr("checked", "checked");
-					 }else{
-					    //$('.radio_no1').attr("checked", "checked");	
 					 }
 
+					 if(data[0].course_books==0){
+						$('.radio_no1').attr("checked", "checked");	
+					 }
 					 
 
 					 if(data[0].course_mode_online==1){

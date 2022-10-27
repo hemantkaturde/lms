@@ -21,7 +21,7 @@
                                     <th>Document Name</th>
                                     <th>Document Type</th>
                                     <th>Doctor / Non-Doctor</th>
-                                    <th>Remark</th>
+                                    <th>Document Url / Linl</th>
                                     <th>Action</th>
                                 </tr>
                     </thead>
