@@ -6,14 +6,23 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
+
+                <div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewtimetable">
+                      <i class="fa fa-plus"></i> Add New Time Table
+                  </button>
+
+                  <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/courselisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                  </button>
+                </div>
+                
+
                 <!-- <div class="ibox-title">Time Table Management</div> -->
-                <div class="ibox-title">Time Table Management - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
                 <!-- <div><a href="<?php base_url().'/templates/Time_Table_Template.xlsx'?>" target="_blank">Download TimeTable Tempalte</a></div> -->
                 <div><a href="<?php echo TEMPALTE_PATH;?>/Time_Table_Template.xlsx">Download Excel Template</a></div>
+                <div class="ibox-title">Time Table Management - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewtimetable">
-                    <i class="fa fa-plus"></i> Add New Time Table
-                </button>
                 <input name="course_id_form" id="course_id_form" type="hidden" value="<?php echo $course_id; ?>" />
             </div>
             <div class="ibox-body">

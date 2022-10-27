@@ -2,16 +2,22 @@
     <div class="page-content fade-in-up col-md-8">
         <div class="ibox">
             <div class="ibox-head">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseAttchment">
-                    <i class="fa fa-plus"></i> Add Topic / Chapter
-                </button>
+
+                <div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseAttchment">
+                      <i class="fa fa-plus"></i> Add Topic / Chapter
+                  </button>
+
+                  <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/courselisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                  </button>
+
+                </div>
+                
 
                 <div class="ibox-title">Course Topic / Chapter List - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
                 <input type="hidden" id="course_id" name="course_id" value="<?=$getCourseinfo[0]->courseId;?>">
-                <!-- <div class="ibox-tools"> -->
-                    <!-- <a class="btn btn-primary text-white" onclick="enquiry(0)" ><i class="fa fa-plus"></i> Add Enquiry</a> -->
-                    <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
-                <!-- </div> -->
+              
               
             </div>
             <div class="ibox-body">

@@ -11,13 +11,17 @@ $jsonstringtoArray = json_decode($access, true);
                 <!-- <div class="ibox-tools"> -->
                 <!-- <a class="btn btn-primary addcourse"><i class="fa fa-plus"></i> Add Course</a> -->
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
-                <!-- </div> -->
-                <?php if (in_array("courseadd", $jsonstringtoArray)){?>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourse">
-                    <i class="fa fa-plus"></i> Add Course
-                </button>
-                <?php } ?>
+                <!-- </div> -->  
+                <div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourse">
+                     <i class="fa fa-plus"></i> Add Course
+                  </button>
 
+                  <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                  </button>
+                </div> 
+            
                 <div class="ibox-title">Course Management</div>
             </div>
             <div class="ibox-body">

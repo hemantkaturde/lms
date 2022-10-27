@@ -2,6 +2,12 @@
     <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
+
+
+                  <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/addchapters/'.$course_topic_info[0]->courseId;?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                  </button>
+
                 <div class="ibox-title">Attachments- <?=$course_topic_info[0]->topic_name;?> <small>( <?=$course_topic_info[0]->course_name?> )</small></div>
 
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseAttchment">
