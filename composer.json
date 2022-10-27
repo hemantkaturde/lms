@@ -17,7 +17,8 @@
 		"setasign/fpdf": "^1.8",
 		"setasign/fpdi-fpdf": "^2.3",
 		"mpdf/mpdf": "^8.1",
-		"setasign/fpdi": "2.*"
+		"setasign/fpdi": "2.*",
+		"spipu/html2pdf": "^5.2"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

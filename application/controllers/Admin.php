@@ -59,7 +59,14 @@ class Admin extends BaseController
         $data['students'] = $this->student_model->studentListingCount();
         $data['admissions'] = $this->admission_model->admissionListingCount();
 
+        $query =  $this->db->query('SELECT `createdDtm` AS `date`, COUNT(`id`) as count FROM `tbl_admission`  GROUP BY DATE(`createdDtm`) ORDER BY `id` ASC'); 
+        $records = $query->result_array();
 
+        $data1 = [];
+        foreach($records as $row) {
+         $data1[] = ['date' => $row['date'], 'count' =>$row['count']];
+        }
+        $data['chart_data'] = json_encode($data1);
         $this->loadViews("dashboard", $this->global, $data , NULL);
     }
 

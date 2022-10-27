@@ -98,6 +98,9 @@ $route['delete_course'] = "course/delete_course";
 $route['updatecourse/(:num)'] = "course/updatecourse/$1";
 $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
+
+$route['addcourseListing/(:num)'] = "course/addcourseListing/$1";
+
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
 $route['addchapters/(:any)'] = "course/addchapters/$1";
 $route['fetchCourseAttchemant/(:any)'] = "course/fetchCourseAttchemant/$1";

@@ -59,6 +59,13 @@
             echo json_encode($json_data);
         }
 
+        public function addcourseListing($id){
+            $this->global['pageTitle'] = 'Course Management';
+            //$data['course_type'] = $this->course_model->getAllCourseTypeInfo();
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
+            $this->loadViews("course/courseAttachment",$this->global,$data,NULL);
+        }
+
         function get_signle_courseData($courseId = NULL)
         {
             $courseId = $this->input->post('courseId');
@@ -105,19 +112,33 @@
                 $cgst_tax  = $this->input->post('cgst_tax');
                 $cgst_tax_value   = $this->input->post('cgst');
 
+                if($this->input->post('course_mode_online')==1){
+                    $course_mode_online=1;
+                }else{
+                    $course_mode_online=0;
+                }
+
+                if($this->input->post('course_mode_offline')==1){
+                    $course_mode_offline=1;
+                }else{
+                    $course_mode_offline=0;
+                }
+
+            
                 //$total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
 
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),
                     'course_type_id' => $this->input->post('course_type'),
-                    'course_desc'=> $this->input->post('description'),
+                    //'course_desc'=> $this->input->post('description'),
                     'course_cert_cost' => $this->input->post('certificate_cost'),
                     'course_kit_cost'=> $this->input->post('kit_cost'),
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
                     'course_books'=>$this->input->post('course_books'),
-                    'course_remark' => $this->input->post('remarks'),
-                    'course_mode'=>$this->input->post('course_mode'),
+                    //'course_remark' => $this->input->post('remarks'),
+                    'course_mode_online'=>$course_mode_online,
+                    'course_mode_offline'=>$course_mode_offline,
                     'course_cgst' => $cgst_tax,
                     'course_cgst_tax_value' => $cgst_tax_value,
                     'course_sgst' => $sgst_tax,
@@ -128,18 +149,18 @@
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
                 $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
-                $this->form_validation->set_rules('description', 'Description', 'trim');
+                //$this->form_validation->set_rules('description', 'Description', 'trim');
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
                 $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
                 $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
-                $this->form_validation->set_rules('remarks', 'remarks', 'trim');
+                //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
                 $this->form_validation->set_rules('total_course_fees', 'Total Course Fees', 'trim|required');
                 $this->form_validation->set_rules('course_mode', 'Course_mode', 'trim');
 
                 if($this->form_validation->run() == FALSE){
                     $createcourse_response['status'] = 'failure';
-                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), 'description'=>strip_tags(form_error('description')),'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
+                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
                 }else{
 
                     /*check If course name is unique*/
@@ -162,6 +183,7 @@
         }
 
         function updatecourse($courseId){
+
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
 
@@ -204,19 +226,32 @@
                 $cgst_tax_value   = $this->input->post('cgst');
 
             
+                if($this->input->post('course_mode_online1')==1){
+                    $course_mode_online=1;
+                }else{
+                    $course_mode_online=0;
+                }
+
+                if($this->input->post('course_mode_offline1')==1){
+                    $course_mode_offline=1;
+                }else{
+                    $course_mode_offline=0;
+                }
 
 
+    
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),
                     'course_type_id' => $this->input->post('course_type'),
-                    'course_desc'=> $this->input->post('description'),
+                    //'course_desc'=> $this->input->post('description'),
                     'course_cert_cost' => $this->input->post('certificate_cost'),
                     'course_kit_cost'=> $this->input->post('kit_cost'),
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
-                    'course_books'=>$this->input->post('course_books'),
-                    'course_remark' => $this->input->post('remarks'),
-                    'course_mode'=>$this->input->post('course_mode'),
+                    'course_books'=>$this->input->post('course_books1'),
+                    //'course_remark' => $this->input->post('remarks'),
+                    'course_mode_online'=>$course_mode_online,
+                    'course_mode_offline'=>$course_mode_offline,
                     'course_cgst' => $cgst_tax,
                     'course_cgst_tax_value' => $cgst_tax_value,
                     'course_sgst' => $sgst_tax,
@@ -227,16 +262,16 @@
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
                 $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
-                $this->form_validation->set_rules('description', 'Description', 'trim');
+                //$this->form_validation->set_rules('description', 'Description', 'trim');
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
                 $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
                 $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
-                $this->form_validation->set_rules('remarks', 'remarks', 'trim');
+                //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
                 if($this->form_validation->run() == FALSE){
                     $createcourse_response['status'] = 'failure';
-                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), 'description'=>strip_tags(form_error('description')),'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
+                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
                 }else{
 
                     /*check If course name is unique*/
@@ -269,10 +304,10 @@
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
                 $deletecourse_response =array();
-                $checkRelation = $this->course_model->checkRelationcourse($this->input->post('id'));
-                if($checkRelation){
-                       $deletecourse_response['status'] = 'linked';
-                }else{
+                // $checkRelation = $this->course_model->checkRelationcourse($this->input->post('id'));
+                // if($checkRelation){
+                //        $deletecourse_response['status'] = 'linked';
+                // }else{
                     $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
                     $result = $this->course_model->data_update('tbl_course',$courseInfo,'courseId',$this->input->post('id'));
                     if($result){
@@ -284,7 +319,7 @@
                     {
                         $deletecourse_response['status'] = 'filure';
                     }
-               }
+              // }
                 echo json_encode($deletecourse_response);
             }
         }
@@ -363,11 +398,11 @@
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
                 $deletecourse_response =array();
-                $checkRelation = $this->course_model->checkRelation($this->input->post('id'));
+                // $checkRelation = $this->course_model->checkRelation($this->input->post('id'));
 
-                if($checkRelation){
-                       $deletecourse_response['status'] = 'linked';
-                }else{
+                // if($checkRelation){
+                //        $deletecourse_response['status'] = 'linked';
+                // }else{
                         $courseInfo = array('isDeleted'=>1);
                         $result = $this->course_model->data_update('tbl_course_type',$courseInfo,'ct_id',$this->input->post('id'));
                         if($result){
@@ -379,7 +414,7 @@
                         {
                             $deletecourse_response['status'] = 'filure';
                         }
-                }
+               // }
                 echo json_encode($deletecourse_response);
             }
 
@@ -592,9 +627,9 @@
                 $deletecourse_response =array();
                 $checkRelation = $this->course_model->checktopicsRelation($this->input->post('id'));
 
-                if($checkRelation){
-                       $deletecourse_response['status'] = 'linked';
-                }else{
+                // if($checkRelation){
+                //        $deletecourse_response['status'] = 'linked';
+                // }else{
                         $courseInfo = array('isDeleted'=>1);
                         $result = $this->course_model->data_update('tbl_course_topics',$courseInfo,'id',$this->input->post('id'));
                         if($result){
@@ -607,7 +642,7 @@
                         {
                             $deletecourse_response['status'] = 'filure';
                         }
-                }
+               // }
                 echo json_encode($deletecourse_response);
             }
           

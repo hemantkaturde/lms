@@ -93,7 +93,7 @@
 	                 { "width": "8%", "targets": 2 },
 	                 { "width": "8%", "targets": 3 },
 					 { "width": "8%", "targets": 4 },
-					 { "width": "8%", "targets": 5 },
+					 { "width": "10%", "targets": 5 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -154,15 +154,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Course Created!",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								$("#popup_modal_sm").hide();
+						// swal({
+						// 	title: "Course Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'courselisting'?>";
-						});						
+						//});						
 				    }
 					
 				},
@@ -185,6 +185,9 @@
                 dataType:"json",  
                 success:function(data)  
                 {  
+
+					//alert(data[0].course_books);
+
                      $('#editCourse').modal('show');
                      $('#course_name1').val(data[0].course_name);  
                      $('#fees1').val(data[0].course_fees);  
@@ -195,21 +198,28 @@
                      $('#certificate_cost1').val(data[0].course_cert_cost);  
                      $('#kit_cost1').val(data[0].course_kit_cost);  
 
+                    
+
 					 if(data[0].course_books==1){
-						$('.radio_yes').attr("checked", "checked");
+						$('.radio_yes1').attr("checked", "checked");
 					 }else{
-						if(data[0].course_books==0){
-							$('.radio_no').attr("checked", "checked");
-						}
+					    //$('.radio_no1').attr("checked", "checked");	
 					 }
 
-					 if(data[0].course_mode==1){
-						$('.radio_mode_yes').attr("checked", "checked");
+					 
+
+					 if(data[0].course_mode_online==1){
+						$(".course_mode_online1").attr("checked", "true");
 					 }else{
-						if(data[0].course_books==0){
-							$('.radio_mode_no').attr("checked", "checked");
-						}
+						//$(".course_mode_online1").attr("checked", "flase");
 					 }
+
+					 if(data[0].course_mode_offline==1){
+						$(".course_mode_offline1").attr("checked", "true");
+					 }else{
+						//$(".course_mode_offline1").attr("checked", "flase");
+					 }
+
 
 					 $('#cgst1').val(data[0].course_cgst_tax_value);  
 					 $('#cgst_tax1').val(data[0].course_cgst); 
@@ -246,15 +256,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Course Updated!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								$("#popup_modal_sm").hide();
+						// swal({
+						// 	title: "Course Updated!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'courselisting'?>";
-						});						
+						//});						
 				    }
 					
 				},
@@ -270,19 +280,19 @@
 			var elemF = $(this);
 			e.preventDefault();
 
-				swal({
-					title: "Are you sure?",
-					text: "",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, delete it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
 								$.ajax({
 									url : "<?php echo base_url();?>delete_course",
 									type: "POST",
@@ -296,36 +306,36 @@
 										const obj = JSON.parse(data);
 											if(obj.status=='success'){
 															
-													swal({
-														title: "Deleted!",
-														text: "",
-														icon: "success",
-														button: "Ok",
-														},function(){ 
-															$("#popup_modal_sm").hide();
+													// swal({
+													// 	title: "Deleted!",
+													// 	text: "",
+													// 	icon: "success",
+													// 	button: "Ok",
+													// 	},function(){ 
+													// 		$("#popup_modal_sm").hide();
 															window.location.href = "<?php echo base_url().'courselisting'?>";
-													});	
+													//});	
 											}else if(obj.status=='linked'){
-													swal({
-															title: "Course Alreday In use!",
-															text: "",
-															icon: "success",
-															button: "Ok",
-															},function(){ 
-																$("#popup_modal_sm").hide();
+													// swal({
+													// 		title: "Course Alreday In use!",
+													// 		text: "",
+													// 		icon: "success",
+													// 		button: "Ok",
+													// 		},function(){ 
+													// 			$("#popup_modal_sm").hide();
 																window.location.href = "<?php echo base_url().'courselisting'?>";
-													});	
+													//});	
 											}else{
 
-												swal({
-														title: "Not Deleted!",
-														text: "",
-														icon: "success",
-														button: "Ok",
-														},function(){ 
-															$("#popup_modal_sm").hide();
+												// swal({
+												// 		title: "Not Deleted!",
+												// 		text: "",
+												// 		icon: "success",
+												// 		button: "Ok",
+												// 		},function(){ 
+												// 			$("#popup_modal_sm").hide();
 															window.location.href = "<?php echo base_url().'courselisting'?>";
-													});	
+												//});	
 											}	
 
 									},
@@ -334,11 +344,11 @@
 										//$(".loader_ajax").hide();
 									}
 							    })
-							}
-							else {
-					swal("Cancelled", " ", "error");
-					}
-				});
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", " ", "error");
+				// 	}
+				// });
 	    });
 
 		$(document).on('blur', '#fees,#certificate_cost,#kit_cost,#one_time_admission_fees', function(){
@@ -838,15 +848,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Course Type Created!",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								$("#popup_modal_sm").hide();
+						// swal({
+						// 	title: "Course Type Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'coursetypelisting'?>";
-						});						
+						//});						
 				    }
 					
 				},
@@ -902,15 +912,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Course Updated!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Course Updated!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'coursetypelisting'?>";
-						});						
+						//});						
 				    }
 					
 				},
@@ -926,19 +936,19 @@
 				var elemF = $(this);
 				e.preventDefault();
 
-					swal({
-						title: "Are you sure?",
-						text: "",
-						type: "warning",
-						showCancelButton: true,
-						closeOnClickOutside: false,
-						confirmButtonClass: "btn-sm btn-danger",
-						confirmButtonText: "Yes, delete it!",
-						cancelButtonText: "No, cancel plz!",
-						closeOnConfirm: false,
-						closeOnCancel: false
-					}, function(isConfirm) {
-						if (isConfirm) {
+					// swal({
+					// 	title: "Are you sure?",
+					// 	text: "",
+					// 	type: "warning",
+					// 	showCancelButton: true,
+					// 	closeOnClickOutside: false,
+					// 	confirmButtonClass: "btn-sm btn-danger",
+					// 	confirmButtonText: "Yes, delete it!",
+					// 	cancelButtonText: "No, cancel plz!",
+					// 	closeOnConfirm: false,
+					// 	closeOnCancel: false
+					// }, function(isConfirm) {
+						//if (isConfirm) {
 									$.ajax({
 										url : "<?php echo base_url();?>deletecoursetype",
 										type: "POST",
@@ -950,38 +960,38 @@
 												// location.reload();
 											//}
 											const obj = JSON.parse(data);
-											if(obj.status=='success'){
-												swal({
-												title: "Deleted!",
-												text: "",
-												icon: "success",
-												button: "Ok",
-												},function(){ 
-													$("#popup_modal_sm").hide();
-													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
-											});	
-											}else if(obj.status=='linked'){
-												swal({
-												title: "Course Already In Use",
-												text: "",
-												icon: "success",
-												button: "Ok",
-												},function(){ 
-													$("#popup_modal_sm").hide();
-													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
-											});	
-											}else{
+											// if(obj.status=='success'){
+											// 	swal({
+											// 	title: "Deleted!",
+											// 	text: "",
+											// 	icon: "success",
+											// 	button: "Ok",
+											// 	},function(){ 
+											// 		$("#popup_modal_sm").hide();
+											// 		window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+											// });	
+											// }else if(obj.status=='linked'){
+											// 	swal({
+											// 	title: "Course Already In Use",
+											// 	text: "",
+											// 	icon: "success",
+											// 	button: "Ok",
+											// 	},function(){ 
+											// 		$("#popup_modal_sm").hide();
+											// 		window.location.href = "<?php echo base_url().'coursetypelisting'?>";
+											// });	
+											// }else{
 
-												swal({
-												title: "Not Deleted",
-												text: "",
-												icon: "success",
-												button: "Ok",
-												},function(){ 
-													$("#popup_modal_sm").hide();
+											// 	swal({
+											// 	title: "Not Deleted",
+											// 	text: "",
+											// 	icon: "success",
+											// 	button: "Ok",
+											// 	},function(){ 
+											// 		$("#popup_modal_sm").hide();
 													window.location.href = "<?php echo base_url().'coursetypelisting'?>";
-											});	
-											}
+											// });	
+											// }
 											
 
 										},
@@ -990,11 +1000,11 @@
 											//$(".loader_ajax").hide();
 										}
 									})
-								}
-								else {
-						swal("Cancelled", "Enquiry deletion cancelled ", "error");
-						}
-					});
+								//}
+								//else {
+						//swal("Cancelled", "Enquiry deletion cancelled ", "error");
+						//}
+					//});
 		});
 </script>
 <?php } ?>
@@ -2000,9 +2010,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var dt = $('#view_coursetopicsattAchmentList').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "20%", "targets": 0 },
+							{ "width": "85%", "targets": 0 },
 							{ "width": "20%", "targets": 1 },
-							{ "width": "5%", "targets": 2 }
+							// { "width": "5%", "targets": 2 }
 
 						],
 						responsive: true,
@@ -2047,15 +2057,17 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Topic Successfully Added!",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								$("#modal-md").hide();
-								window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
-						});						
+						// swal({
+						// 	title: "Topic Successfully Added!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#modal-md").hide();
+						// 		window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+						// });		
+						$("#modal-md").hide();
+						window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;				
 				    }
 					
 				},
@@ -2112,15 +2124,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Topic Updated!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Topic Updated!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_md").hide();
 								window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
-						});						
+						//});						
 				    }
 					
 				},
@@ -2137,61 +2149,64 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			var elemF = $(this);
 			e.preventDefault();
 
-				swal({
-					title: "Are you sure?",
-					text: "",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, delete it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
 								$.ajax({
 									url : "<?php echo base_url();?>deleteCourseTopics",
 									type: "POST",
 									data : 'id='+elemF.attr('data-id'),
 									success: function(data, textStatus, jqXHR)
 									{
-										// if(data.status=='success'){
-											// swal("Deleted!", "Course Type has been deleted.", "success");
-											// location.reload();
-										//}
 										const obj = JSON.parse(data);
 										if(obj.status=='success'){
-											swal({
-												title: "Deleted!",
-												text: "",
-												icon: "success",
-												button: "Ok",
-												},function(){ 
-													$("#popup_modal_sm").hide();
-													window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
-											});	
-									}else if(obj.status=='linked') {
-											swal({
-												title: "Topics Already In Use",
-												text: "",
-												icon: "error",
-												button: "Ok",
-												},function(){ 
-													$("#popup_modal_sm").hide();
-													window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
-											});	
-									}else{
-											swal({
-												title: "Not Deleted",
-												text: "",
-												icon: "error",
-												button: "Ok",
-												},function(){ 
-													$("#popup_modal_sm").hide();
-													window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
-											});	
-									}
+											//swal("Deleted!", "Course Type has been deleted.", "success");
+											//location.reload();
+											window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+
+										}
+									// 	const obj = JSON.parse(data);
+									// 	if(obj.status=='success'){
+									// 		swal({
+									// 			title: "Deleted!",
+									// 			text: "",
+									// 			icon: "success",
+									// 			button: "Ok",
+									// 			},function(){ 
+									// 				$("#popup_modal_sm").hide();
+									// 				window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+									// 		});	
+									// }else if(obj.status=='linked') {
+									// 		swal({
+									// 			title: "Topics Already In Use",
+									// 			text: "",
+									// 			icon: "error",
+									// 			button: "Ok",
+									// 			},function(){ 
+									// 				$("#popup_modal_sm").hide();
+									// 				window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+									// 		});	
+									// }else{
+									// 		swal({
+									// 			title: "Not Deleted",
+									// 			text: "",
+									// 			icon: "error",
+									// 			button: "Ok",
+									// 			},function(){ 
+									// 				$("#popup_modal_sm").hide();
+									// 				window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+									// 		});	
+									// }
 
 									},
 									error: function (jqXHR, textStatus, errorThrown)
@@ -2199,11 +2214,11 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 										//$(".loader_ajax").hide();
 									}
 								})
-							}
-							else {
-					swal("Cancelled", "Topics deletion cancelled ", "error");
-					}
-				});
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", "Topics deletion cancelled ", "error");
+				// 	}
+				// });
 		});
 
     </script>

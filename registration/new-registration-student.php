@@ -151,8 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                                 <tr>
                                 <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
                                 <td align="right">
-                                    <span>Inquiry Number: '.$get_equiry_data->enq_number.'</span><br>
-                                    <span style="padding: 5px 0; display: block;">'.$get_equiry_data->enq_date.'</span>
+                                 
                                 </td>
                                 </tr>
                             </table>

@@ -212,33 +212,49 @@ class Course_model extends CI_Model
                             $course_books = '';
                         }
 
-                        if($value['course_mode']==1){
-                            $course_mode = 'Online';
+                       
+                        if($value['course_mode_online']==1){
+
+                            $course_mode_online ='Online';
                         }else{
-                            $course_mode = 'Offline';
+
+                            $course_mode_online ='';
                         }
 
-                        $data[$counter]['course_mode'] = $course_mode;
+
+                        if($value['course_mode_offline']==1){
+
+                            $course_mode_offline = 'Offline';
+                        }else{
+
+                            $course_mode_offline = '';
+                        }
+
+
+                        $data[$counter]['course_mode'] = $course_mode_online.' '.$course_mode_offline;
                         $data[$counter]['course_books'] = $course_books;
 
                         $data[$counter]['action'] = '';
 
-                        //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
-                        if(in_array("coursedit", $jsonstringtoArray)){
-                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a> | ";
-                        }
-
-                        if(in_array("coursedelete", $jsonstringtoArray)){
-                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course' title='Delete Course'></a> | "; 
-                        }
+                      
                         //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_links' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/add_links.png  alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
                         //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_document' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/view_doc.png alt='Delete Equipment' title='Delete Equipment'></a> &nbsp"; 
 
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchapters/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Add Topics' title='Add Topics'></a> | ";
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."timetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Add Time Table' title='Add Time Table'></a>&nbsp;";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addcourseListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Attachment' title='Add Attachment'></a> | ";
 
-                        //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_attachment' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/attechment.png alt='Delete Course' title='Add Attachment'></a>"; 
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchapters/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Add Topics' title='Add Topics'></a> | ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."timetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Add Time Table' title='Add Time Table'></a> | ";
+
                         
+                          //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."' data-toggle='modal' data-target='#editCourse'><img width='20' src=".ICONPATH."/edit.png alt='Edit Equipment' title='Edit Equipment'></a>&nbsp;";
+                        if(in_array("coursedit", $jsonstringtoArray)){
+                            $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a> | ";
+                        }
+    
+                        if(in_array("coursedelete", $jsonstringtoArray)){
+                            $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course' title='Delete Course'></a>&nbsp"; 
+                        }
+
                      $counter++; 
                 }
             }
@@ -448,11 +464,11 @@ class Course_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                  $data[$counter]['topic_name'] = $value['topic_name'];
-                 $data[$counter]['remark'] = $value['remark'];
+                //  $data[$counter]['remark'] = $value['remark'];
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Attachment' title='Add Attachment'></a> | ";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> | ";
                 //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_topic_attachment' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/attachment.png alt='Add Attachment' title='Add Attachment'></a> |";
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Attachment' title='Add Attachment'></a> |";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>"; 
                 
                 $counter++; 

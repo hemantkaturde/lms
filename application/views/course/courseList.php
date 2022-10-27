@@ -7,7 +7,7 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Course Management</div>
+                
                 <!-- <div class="ibox-tools"> -->
                 <!-- <a class="btn btn-primary addcourse"><i class="fa fa-plus"></i> Add Course</a> -->
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
@@ -17,6 +17,8 @@ $jsonstringtoArray = json_decode($access, true);
                     <i class="fa fa-plus"></i> Add Course
                 </button>
                 <?php } ?>
+
+                <div class="ibox-title">Course Management</div>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
@@ -67,14 +69,14 @@ $jsonstringtoArray = json_decode($access, true);
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="description">Description
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off"  type="text" id="description" name="description" placeholder="Enter Description" class="form-control col-md-12 col-xs-12">
                         <p class="error description_error"></p>
                      </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="course_type">Course Type<span class="required">*</span>
@@ -88,14 +90,14 @@ $jsonstringtoArray = json_decode($access, true);
                         <p class="error course_type_error"></p>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;" for="remarks">Remarks
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off"  type="text" id="remarks" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
                         <p class="error remarks_error"></p>
                      </div>
-                   </div>
+                   </div> -->
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="books">Books <span class="required">*</span>
@@ -111,8 +113,10 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="course_mode">Select Course Mode <span class="required">*</span>
                      </label>
                      <div >
-                          <input type="radio" name="course_mode" id="course_mode" value="1"> Online
-                          <input type="radio" name="course_mode" id="course_mode" value="0" style="margin-left:20px;" checked> Offline
+                           <input type="checkbox" class="course_mode_online" id="course_mode_online" name="course_mode_online" value="1"> Online
+                           <input type="checkbox" class="course_mode_offline" id="course_mode_offline" name="course_mode_offline" value="1"> Offline
+                          <!-- <input type="radio" name="course_mode" id="course_mode" value="1"> Online
+                          <input type="radio" name="course_mode" id="course_mode" value="0" style="margin-left:20px;" checked> Offline -->
                      </div>
                      <p class="error course_mode_error"></p>
                   </div>
@@ -192,7 +196,8 @@ $jsonstringtoArray = json_decode($access, true);
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_course" class="btn btn-primary save_course">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="save_course" class="btn btn-primary save_course">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
@@ -225,7 +230,7 @@ $jsonstringtoArray = json_decode($access, true);
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="description">Description
                      </label>
                      <div >
@@ -233,7 +238,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <p class="error description_error"></p>
                      </div>
                   </div>
-                 
+                  -->
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="course_type">Course Type<span class="required">*</span>
@@ -247,22 +252,23 @@ $jsonstringtoArray = json_decode($access, true);
                         <p class="error course_type_error"></p>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;" for="remarks">Remarks
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off"  type="text" id="remarks1" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
                         <p class="error remarks_error"></p>
-                        <input id="course_id" name="course_id" type="hidden">
+                      
                      </div>
-                   </div>
+                   </div> -->
 
+                     <input id="course_id" name="course_id" type="hidden">
                   <div class="form-group">
                      <label style="text-align: left;"  for="books">Books <span class="required">*</span>
                      </label>
                      <div >
-                          <input type="radio" class="radio_yes" name="course_books" id="course_books1" value="1"> Yes
-                          <input type="radio" class="radio_no" name="course_books" id="course_books1" value="0" style="margin-left:20px;"> No
+                          <input type="radio" class="radio_yes1" name="course_books" id="course_books1" value="1"> Yes
+                          <input type="radio" class="radio_no1" name="course_books" id="course_books1" value="1" style="margin-left:20px;"> No
                      </div>
                      <p class="error course_books_error"></p>
                   </div>
@@ -271,8 +277,10 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="course_mode">Select Course Mode <span class="required">*</span>
                      </label>
                      <div >
-                          <input type="radio" class="radio_mode_yes" name="course_mode" id="course_mode1" value="1"> Online
-                          <input type="radio" class="radio_mode_no" name="course_mode" id="course_mode1" value="0" style="margin-left:20px;"> Offline
+                          <!-- <input type="radio" class="radio_mode_yes" name="course_mode" id="course_mode1" value="1"> Online
+                          <input type="radio" class="radio_mode_no" name="course_mode" id="course_mode1" value="0" style="margin-left:20px;"> Offline -->
+                          <input type="checkbox" class="course_mode_online1" id="course_mode_online" name="course_mode_online1" value="1"> Online
+                           <input type="checkbox" class="course_mode_offline1" id="course_mode_offline" name="course_mode_offline1" value="1"> Offline
                      </div>
                      <p class="error course_mode_error"></p>
                   </div>

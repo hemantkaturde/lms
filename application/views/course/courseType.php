@@ -8,7 +8,6 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Course Type Management</div>
                 <!-- <div class="ibox-tools"> -->
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
@@ -17,6 +16,8 @@ $jsonstringtoArray = json_decode($access, true);
                     <i class="fa fa-plus"></i> Add Course Type
                 </button>
                 <?php } ?>
+
+                <div class="ibox-title">Course Type Management</div>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">

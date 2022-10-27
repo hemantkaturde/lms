@@ -13,7 +13,7 @@ $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
 if ($conn->query($sql) === TRUE) {
   //echo "Record updated successfully";
   $name        = "IICTN";
-  $email       = "someome@anadress.com";
+  $email       = "hemantkaturde123@gmail.com";
   $to          = $row['enq_email'];
   $from        = "hemantkaturde123@gmail.com";
   $subject     = "IICTN - Admission Payment Recipt".date();

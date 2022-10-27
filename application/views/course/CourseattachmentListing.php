@@ -1,16 +1,18 @@
 <div class="content-wrapper">
-    <div class="page-content fade-in-up col-md-12">
+    <div class="page-content fade-in-up col-md-8">
         <div class="ibox">
             <div class="ibox-head">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseAttchment">
+                    <i class="fa fa-plus"></i> Add Topic / Chapter
+                </button>
+
                 <div class="ibox-title">Course Topic / Chapter List - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small></div>
                 <input type="hidden" id="course_id" name="course_id" value="<?=$getCourseinfo[0]->courseId;?>">
                 <!-- <div class="ibox-tools"> -->
                     <!-- <a class="btn btn-primary text-white" onclick="enquiry(0)" ><i class="fa fa-plus"></i> Add Enquiry</a> -->
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseAttchment">
-                    <i class="fa fa-plus"></i> Add Topic / Chapter
-                </button>
+              
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">
@@ -18,7 +20,7 @@
                     <thead>
                                 <tr>
                                     <th>Topic / Chapter Name</th>
-                                    <th>Remark</th>
+                                    <!-- <th>Remark</th> -->
                                     <th>Action</th>
                                 </tr>
                     </thead>
@@ -60,14 +62,14 @@
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;" for="remark">Remark
                      </label>
                      <div >
                          <textarea class="form-control" id="remark" placeholder="Enter Remark" name="remark" rows="5"></textarea>
                         <p class="error remark_error"></p>
                      </div>
-                  </div>
+                  </div> -->
               </div>
             </div>
           </div>
@@ -111,14 +113,14 @@
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;" for="remark_1">Remark
                      </label>
                      <div >
                          <textarea class="form-control" id="remark_1"  placeholder="Enter Remark" name="remark_1" rows="5"></textarea>
                         <p class="error remark_1_error"></p>
                      </div>
-                  </div>
+                  </div> -->
               </div>
             </div>
           </div>

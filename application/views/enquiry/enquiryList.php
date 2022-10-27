@@ -12,7 +12,6 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Inquiry Management</div>
                 <!-- <div class="ibox-tools"> -->
                     <!-- <a class="btn btn-primary text-white" onclick="enquiry(0)" ><i class="fa fa-plus"></i> Add Enquiry</a> -->
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
@@ -20,6 +19,8 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEnquiry">
                     <i class="fa fa-plus"></i> Add Inquiry
                 </button>
+
+                <div class="ibox-title">Inquiry Management</div>
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">

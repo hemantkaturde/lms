@@ -92,7 +92,8 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_follow_up" class="btn btn-primary save_follow_up">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="save_follow_up" class="btn btn-primary save_follow_up">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
