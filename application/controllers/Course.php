@@ -157,9 +157,15 @@
                 $this->form_validation->set_rules('total_course_fees', 'Total Course Fees', 'trim|required');
                 $this->form_validation->set_rules('course_mode', 'Course_mode', 'trim');
 
+                if($this->input->post('course_mode_online')!=1 && $this->input->post('course_mode_offline')!=1){
+                    $required_checkbox = 'Course Mode Required';
+                }else{
+                    $required_checkbox = '';
+                }
+
                 if($this->form_validation->run() == FALSE){
                     $createcourse_response['status'] = 'failure';
-                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
+                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox);
                 }else{
 
                     /*check If course name is unique*/
@@ -237,6 +243,8 @@
                     $course_mode_offline=0;
                 }
 
+                
+
             
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
@@ -267,9 +275,17 @@
                 $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
                 //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
+
+                
+                if($this->input->post('course_mode_online1')!=1 && $this->input->post('course_mode_offline1')!=1){
+                    $required_checkbox = 'Course Mode Required';
+                }else{
+                    $required_checkbox = '';
+                }
+
                 if($this->form_validation->run() == FALSE){
                     $createcourse_response['status'] = 'failure';
-                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
+                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox);
                 }else{
 
                     /*check If course name is unique*/
