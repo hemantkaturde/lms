@@ -11,7 +11,7 @@
     <!-- START PAGE CONTENT-->
 
 
-    <div class="page-content fade-in-up col-md-8">
+    <div class="page-content fade-in-up col-md-10">
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Enquiry Follow Up - <?=$followDataenquiry[0]->enq_number;?> <small>( <?=$followDataenquiry[0]->enq_fullname?> )</small></div>
@@ -25,7 +25,7 @@
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">
-                <table id="view_enquirylist" class="table table-bordered">
+                <table id="view_enquiryFollowuplist" class="table table-bordered">
                     <thead>
                                 <tr>
                                     <th>Enquiry No.</th>
@@ -76,11 +76,14 @@
                      <div >
                           <input type="text" class="form-control datepicker" id="follow_up_date" value="<?php echo date('d-m-Y')?>" name="follow_up_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
                      </div>
-                     <p class="error enq_date_error"></p>
+                     <p class="error follow_up_date_error"></p>
                   </div>
+
+                  <input type="hidden" name="enquiry_id" id="enquiry_id" value="<?php echo $enquiry_id;?>">
+
                   
                   <div class="form-group">
-                     <label style="text-align: left;"  for="username">Remark<span class="required">*</span>
+                     <label style="text-align: left;"  for="required">Remark<span class="required">*</span>
                      </label>
                      <div >
                          <textarea class="form-control" id="remark" name="remark" rows="5"></textarea>

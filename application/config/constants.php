@@ -104,6 +104,7 @@ define('TBL_TIMETABLE','tbl_timetable');
 define('TBL_TIMETABLE_TRANSECTIONS','tbl_timetable_transection');
 define('TBL_EXAMINATION','tbl_examination');
 define('TBL_QUESTION_PAPER','tbl_course_question_paper');
+define('TBL_ENQUIRY_FOLLOW_UP', 'tbl_enquiry_follow_up');
 
 
 define('EMAIL_SMTP_HOST','smtp.gmail.com');		// your smtp host e.g. smtp.gmail.com

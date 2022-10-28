@@ -514,9 +514,9 @@
             var dt = $('#view_enquirylist').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "10%", "targets": 0 },
+	                 { "width": "8%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
-	                 { "width": "20%", "targets": 2 },
+	                 { "width": "15%", "targets": 2 },
 	                 { "width": "8%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
@@ -2766,4 +2766,110 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	</script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Enquiry Follow Up'){ ?>
+	<script type="text/javascript">
+
+
+        $(document).ready(function() {
+
+			var enquiry_id = $('#enquiry_id').val();
+
+            var dt = $('#view_enquiryFollowuplist').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "8%", "targets": 0 },
+	                 { "width": "8%", "targets": 1 },
+	                 { "width": "20%", "targets": 2 },
+	                 { "width": "8%", "targets": 3 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Follow up Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>/fetchEnquiryFollowup/"+enquiry_id,
+                    type: "post",
+	            },
+
+	            // "columns": [
+	                // { "data": "course_name" },
+	                // { "data": "ttype" },
+	                // { "data": "user_full_name" },
+	                // { "data": "user_mobile_no" }
+	                // { "data": "driver_full_name" },
+	                // { "data": "driver_mobile_no" },
+	                // { "data": "source_address" },                
+	                // { "data": "dest_address" }, 
+				    // { "data": "journey_status" },
+					// { "data": "trip_flag" },  
+					// { "data": "gross_bill" },              
+	                // { "data": "dial4242_commision_charge" },
+					// { "data": "amount_paid" },
+	                // { "data": "action" },               
+	            // ],
+
+	        });
+		});
+
+		$(document).on('click','#save_follow_up',function(e){
+					e.preventDefault();
+					//$(".loader_ajax").show();
+
+					var enquiry_id = $('#enquiry_id').val();
+
+					var formData = new FormData($("#followup_form")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>createFollowup",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								// swal({
+								// 	title: "Examination Created!",
+								// 	//text: "",
+								// 	icon: "success",
+								// 	button: "Ok",
+								// 	},function(){ 
+										$("#popup_modal_md").hide();
+										window.location.href = "<?php echo base_url().'followup/'?>"+enquiry_id;
+								//});						
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
+
+	</script>
+<?php } ?>
+
+
+
+
 

@@ -275,6 +275,78 @@ class Enquiry_model extends CI_Model
     }
 
 
+    public function saveEnquiryFollowupdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_ENQUIRY_FOLLOW_UP, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ENQUIRY_FOLLOW_UP, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
+    public function getEnquiryFollowupCount($params,$id){
+        $this->db->select('*');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENQUIRY_FOLLOW_UP.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
+        $query = $this->db->get(TBL_ENQUIRY_FOLLOW_UP);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getEnquiryFollowup($params,$id){
+
+        $this->db->select('*');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENQUIRY_FOLLOW_UP.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
+        $this->db->order_by(TBL_ENQUIRY_FOLLOW_UP.'.id', 'DESC');
+
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_ENQUIRY_FOLLOW_UP);
+        
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['enq_number'] = $value['enquiry_number'];
+                 $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['date']));
+                 $data[$counter]['remark'] = $value['remark'];
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Enquiry Follow' title='Delete Enquiry Follow'></a> "; 
+                $counter++; 
+            }
+        }
+        return $data;
+
+
+    }
+
 }
 
 ?>

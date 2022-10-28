@@ -597,8 +597,74 @@
             $processFunction = 'Enquiry/enquiryEdit';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Enquiry Follow Up';
+            $data['enquiry_id'] = $id;
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
             $this->loadViews("enquiry/enquiryFollowup", $this->global, $data , NULL);
+       }
+
+       public function createFollowup(){
+ 
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+            
+            $createfollow_response = array();
+            $post_submit['enquiry_id'];
+            
+            $this->form_validation->set_rules('follow_up_date', 'Follow Up Date', 'trim|required');
+            $this->form_validation->set_rules('remark', 'Remark', 'trim|required');
+
+            if($this->form_validation->run() == FALSE){
+
+                $createfollow_response['status'] = 'failure';
+                $createfollow_response['error'] = array('follow_up_date'=>strip_tags(form_error('follow_up_date')), 'remark'=>strip_tags(form_error('remark')));
+        
+            }else{
+                $data = array(
+                    'enq_id' => $this->input->post('enquiry_id'),
+                    'date'  => date('Y-m-d', strtotime($this->input->post('follow_up_date'))),
+                    'remark' => $this->input->post('remark'),
+                    'enquiry_number'=> $this->input->post('enquiry_number'),
+                    //'createdBy'=>
+                );
+
+                $saveFollowdata = $this->enquiry_model->saveEnquiryFollowupdata('',$data);
+                if($saveFollowdata){
+                    $createfollow_response['status'] = 'success';
+                    $createfollow_response['error'] = array('follow_up_date'=>'', 'remark'=>'');
+                }
+                   
+            }
+            echo json_encode($createfollow_response);
+        }
+     
+       }
+
+       public function fetchEnquiryFollowup($id){
+
+            $params = $_REQUEST;
+            $totalRecords = $this->enquiry_model->getEnquiryFollowupCount($params,$id);
+
+            $queryRecords = $this->enquiry_model->getEnquiryFollowup($params,$id); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+
+            echo json_encode($json_data);
+
        }
 
 

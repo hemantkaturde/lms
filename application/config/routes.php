@@ -152,6 +152,10 @@ $route['paymentrecipt/(:any)'] = "enquiry/paymentrecipt/$1";
 $route['new-registration-student/(:any)'] = "enquiry/newregistrationstudent";
 $route['newregistrationstudentdetails'] = "enquiry/newregistrationstudentdetails";
 $route['followup/(:any)'] = "enquiry/followup/$1";
+$route['createFollowup'] = "enquiry/createFollowup";
+$route['fetchEnquiryFollowup/(:any)'] = "enquiry/fetchEnquiryFollowup/$1";
+
+
 //$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 
 /*********** ADMISSION CONTROLLER ROUTES *******************/
