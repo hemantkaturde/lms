@@ -60,7 +60,7 @@
         }
 
         public function addcourseListing($id){
-            $this->global['pageTitle'] = 'Course Management';
+            $this->global['pageTitle'] = 'Course Listing Attachment';
             //$data['course_type'] = $this->course_model->getAllCourseTypeInfo();
             $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
             $this->loadViews("course/courseAttachment",$this->global,$data,NULL);
