@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-    <div class="page-content fade-in-up col-md-8">
+    <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
 
