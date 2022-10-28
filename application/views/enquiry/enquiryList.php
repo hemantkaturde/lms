@@ -42,7 +42,7 @@
                                     <th>Mobile No</th>
                                     <th>Email</th>
                                     <th>Status</th>
-                                    <th>Fees</th>
+                                    <!-- <th>Fees</th> -->
                                     <th>Action</th>
                                 </tr>
                     </thead>
