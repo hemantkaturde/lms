@@ -2407,19 +2407,19 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			var topic_id_form = $('#topic_id_form').val();
 			var doc_type_form = $('#doc_type_form').val();
 
-			swal({
-				title: "Are you sure?",
-				text: "",
-				type: "warning",
-				showCancelButton: true,
-				closeOnClickOutside: false,
-				confirmButtonClass: "btn-sm btn-danger",
-				confirmButtonText: "Yes, delete it!",
-				cancelButtonText: "No, cancel plz!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			}, function(isConfirm) {
-				if (isConfirm) {
+			// swal({
+			// 	title: "Are you sure?",
+			// 	text: "",
+			// 	type: "warning",
+			// 	showCancelButton: true,
+			// 	closeOnClickOutside: false,
+			// 	confirmButtonClass: "btn-sm btn-danger",
+			// 	confirmButtonText: "Yes, delete it!",
+			// 	cancelButtonText: "No, cancel plz!",
+			// 	closeOnConfirm: false,
+			// 	closeOnCancel: false
+			// }, function(isConfirm) {
+			// 	if (isConfirm) {
 							$.ajax({
 								url : "<?php echo base_url();?>deleteTopicDocuments",
 								type: "POST",
@@ -2432,25 +2432,25 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									//}
 									const obj = JSON.parse(data);
 									if(obj.status=='success'){
-										swal({
-											title: "Deleted!",
-											text: "",
-											icon: "success",
-											button: "Ok",
-											},function(){ 
+										// swal({
+										// 	title: "Deleted!",
+										// 	text: "",
+										// 	icon: "success",
+										// 	button: "Ok",
+										// 	},function(){ 
 												$("#popup_modal_sm").hide();
 												window.location.href = "<?php echo base_url();?>viewalltopicdocuments?type="+doc_type_form+"&topic_id="+topic_id_form+"&course_id="+course_id_form+"";
-										});	
+										//});	
 								     }else{
-										swal({
-											title: "Not Deleted",
-											text: "",
-											icon: "error",
-											button: "Ok",
-											},function(){ 
+										// swal({
+										// 	title: "Not Deleted",
+										// 	text: "",
+										// 	icon: "error",
+										// 	button: "Ok",
+										// 	},function(){ 
 												$("#popup_modal_sm").hide();
 												window.location.href = "<?php echo base_url();?>viewalltopicdocuments?type="+doc_type_form+"&topic_id="+topic_id_form+"&course_id="+course_id_form+"";
-										});	
+										//});	
 								}
 
 								},
@@ -2459,11 +2459,11 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									//$(".loader_ajax").hide();
 								}
 							})
-						}
-						else {
-				swal("Cancelled", "Course Type deletion cancelled ", "error");
-				}
-			});
+			// 			}
+			// 			else {
+			// 	swal("Cancelled", "Course Type deletion cancelled ", "error");
+			// 	}
+			// });
 		});
 
    </script>
