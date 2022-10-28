@@ -184,6 +184,19 @@
                         <p class="error course_error"></p>
                      </div>
                    </div>
+
+                   
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="doctor_non_doctor">Doctor / Non- Doctor<span class="required">*</span></label>
+                         <select class="form-control" id="doctor_non_doctor" name="doctor_non_doctor">
+                            <option value="">Select Doctor / Non- Doctor</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="non-doctor">Non-Doctor</option>
+                        </select>
+                        <p class="error doctor_non_doctor_error"></p>
+                  </div>
+
+
 <!-- 
                    <div class="form-group">
                      <label style="text-align: left;"  for="country">Country

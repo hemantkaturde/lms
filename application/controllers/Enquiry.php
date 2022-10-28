@@ -106,6 +106,7 @@
                 //$this->form_validation->set_rules('state', 'State', 'trim');
                 //$this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
+                $this->form_validation->set_rules('doctor_non_doctor', 'Doctor Non Doctor', 'trim|required');
                 //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
                 //$this->form_validation->set_rules('course', 'Course', 'trim|required');
 
@@ -120,10 +121,10 @@
 
                     if($this->input->post('course')){
                         $createenquiry_response['status'] = 'failure';
-                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')));
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')));
                     }else{
                         $createenquiry_response['status'] = 'failure';
-                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')));
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')));
                     }
                  
                 }else{
@@ -154,6 +155,7 @@
                         'enq_qualification' => $this->input->post('qualification'),
                         //'enq_purpose' => $this->input->post('purpose'),
                         'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
+                        'doctor_non_doctor'=>$this->input->post('doctor_non_doctor'),
                         //'enq_country'=> $this->input->post('country'),
                         //'enq_state'=>$this->input->post('state'),
                         //'enq_city'=>$this->input->post('city'),
@@ -196,17 +198,18 @@
                
                 $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
                 $this->form_validation->set_rules('mobile_no', 'Mobile_no', 'trim|required|numeric|greater_than[0]|exact_length[10]');
-                $this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
+                //$this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
                 $this->form_validation->set_rules('email', 'Email', 'trim|required');
-                $this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
+                //$this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
                 $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
-                $this->form_validation->set_rules('purpose', 'Purpose', 'trim');
+                //$this->form_validation->set_rules('purpose', 'Purpose', 'trim');
                 $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
-                $this->form_validation->set_rules('country', 'Country', 'trim');
-                $this->form_validation->set_rules('state', 'State', 'trim');
-                $this->form_validation->set_rules('city', 'City', 'trim');
+                //$this->form_validation->set_rules('country', 'Country', 'trim');
+                //$this->form_validation->set_rules('state', 'State', 'trim');
+                //$this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
-                $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
+                $this->form_validation->set_rules('doctor_non_doctor', 'Doctor Non Doctor', 'trim|required');
+                //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
                 //$this->form_validation->set_rules('course', 'Course', 'trim|required');
 
                 
@@ -216,10 +219,10 @@
                     if($this->input->post('course')){
                         $createenquiry_response['status'] = 'failure';
                         //$createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'course'=>strip_tags(form_error('course')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
-                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'enquiry_type'=>strip_tags(form_error('enquiry_type')));
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')));
                     }else{
                         $createenquiry_response['status'] = 'failure';
-                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')));
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')));
                     }
                 }else{
                     
@@ -235,18 +238,19 @@
                                 $data = array(
                                     'enq_fullname' => $this->input->post('full_name'),
                                     'enq_mobile'=> $this->input->post('mobile_no'),
-                                    'enq_mobile1' => $this->input->post('alternate_mobile'),
+                                    //'enq_mobile1' => $this->input->post('alternate_mobile'),
                                     'enq_email'=> $this->input->post('email'),
-                                    'enq_email1' => $this->input->post('alternamte_email'),
+                                    //'enq_email1' => $this->input->post('alternamte_email'),
                                     'enq_qualification' => $this->input->post('qualification'),
-                                    'enq_purpose' => $this->input->post('purpose'),
+                                    //'enq_purpose' => $this->input->post('purpose'),
                                     'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
-                                    'enq_country'=> $this->input->post('country'),
-                                    'enq_state'=>$this->input->post('state'),
-                                    'enq_city'=>$this->input->post('city'),
+                                    //'enq_country'=> $this->input->post('country'),
+                                    //'enq_state'=>$this->input->post('state'),
+                                    //'enq_city'=>$this->input->post('city'),
                                     'enq_source'=>$this->input->post('enquiry_type'),
-                                    'enq_remark' => $this->input->post('remarks'),
-                                    'enq_course_id' => $courses
+                                    //'enq_remark' => $this->input->post('remarks'),
+                                    'enq_course_id' => $courses,
+                                    'doctor_non_doctor'=>$this->input->post('doctor_non_doctor'),
                                 );
                                 
                                 if($id == null)

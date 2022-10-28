@@ -30,6 +30,7 @@ if(!empty($editDataenquiry))
         $alternet_email  =  $rf->enq_email1;
         $enq_course_id  =  $rf->enq_course_id;
         $remark  =  $rf->enq_remark;
+        $doctor_non_doctor	  =  $rf->doctor_non_doctor;
         // $role = $rf->role;
         // $role_type = $rf->role_type;
         // $discription = $rf->discription;
@@ -63,21 +64,31 @@ if(!empty($editDataenquiry))
                                     <div class="row col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="full_name">Full Name<span class="required">*</span>
+                                                <label style="text-align: left;" for="full_name">Full Name<span
+                                                        class="required">*</span>
                                                 </label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="100" type="text" id="full_name1" name="full_name" placeholder="Enter Full name Name" value="<?php echo $enq_fullname;?>" class="form-control col-md-12 col-xs-12">
+                                                    <input autocomplete="off" autocomplete="off" maxlength="100"
+                                                        type="text" id="full_name1" name="full_name"
+                                                        placeholder="Enter Full name Name"
+                                                        value="<?php echo $enq_fullname;?>"
+                                                        class="form-control col-md-12 col-xs-12">
                                                     <p class="error full_name_error"></p>
-                                                    <input type="hidden" id="enq_id" name="enq_id"  value="<?php echo $enquiryId;?>">
+                                                    <input type="hidden" id="enq_id" name="enq_id"
+                                                        value="<?php echo $enquiryId;?>">
                                                     <p class="error full_name_error"></p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="mobile_no">Mobile No<span class="required">*</span>
+                                                <label style="text-align: left;" for="mobile_no">Mobile No<span
+                                                        class="required">*</span>
                                                 </label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="mobile_no1" name="mobile_no" placeholder="Enter Mobile No" value="<?php echo $enq_mobile;?>" class="form-control col-md-12 col-xs-12">
+                                                    <input autocomplete="off" autocomplete="off" maxlength="10"
+                                                        type="text" id="mobile_no1" name="mobile_no"
+                                                        placeholder="Enter Mobile No" value="<?php echo $enq_mobile;?>"
+                                                        class="form-control col-md-12 col-xs-12">
                                                     <p class="error mobile_no_error"></p>
                                                 </div>
                                             </div>
@@ -92,13 +103,13 @@ if(!empty($editDataenquiry))
                                             </div> -->
 
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="qualification">Qualification<span class="required">*</span>
+                                                <label style="text-align: left;" for="qualification">Qualification<span
+                                                        class="required">*</span>
                                                 </label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" 
-                                                        type="text" id="qualification1"
-                                                        placeholder="Enter Qualification" name="qualification"
-                                                        value="<?php echo $enq_qualification; ?>"
+                                                    <input autocomplete="off" autocomplete="off" type="text"
+                                                        id="qualification1" placeholder="Enter Qualification"
+                                                        name="qualification" value="<?php echo $enq_qualification; ?>"
                                                         class="form-control col-md-12 col-xs-12">
                                                     <p class="error qualification_error"></p>
                                                 </div>
@@ -112,22 +123,50 @@ if(!empty($editDataenquiry))
                                                     <option value="Email" <?php if($enq_source=='Email'){ echo 'selected';} ?>>Email</option>
                                                     <option value="Friends" <?php if($enq_source=='Friends'){ echo 'selected';} ?>>Friends</option>
                                                     <option value="Other" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Other</option> -->
-                                                    <option value="Email" <?php if($enq_source=='Email'){ echo 'selected';} ?>>Email</option>
-                                                    <option value="Friends" <?php if($enq_source=='Friends'){ echo 'selected';} ?>>Friends</option>
-                                                    <option value="Google" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Google</option>
-                                                    <option value="Facebook" <?php if($enq_source=='Facebook'){ echo 'selected';} ?>>Facebook</option>
-                                                    <option value="Instagram" <?php if($enq_source=='Instagram'){ echo 'selected';} ?>>Instagram</option>
-                                                    <option value="Reference" <?php if($enq_source=='Reference'){ echo 'selected';} ?>>Reference</option>
-                                                    <option value="Social Media" <?php if($enq_source=='Social Media'){ echo 'selected';} ?>>Social Media</option>
-                                                    <option value="Direct" <?php if($enq_source=='Direct'){ echo 'selected';} ?>>Direct</option>
-                                                    <option value="Call" <?php if($enq_source=='Call'){ echo 'selected';} ?>>Call</option>
-                                                    <option value="Chat" <?php if($enq_source=='Chat'){ echo 'selected';} ?>>Chat</option>
-                                                    <option value="Cold calling" <?php if($enq_source=='Cold calling'){ echo 'selected';} ?>>Cold calling</option>
-                                                    <option value="Ads Campaign" <?php if($enq_source=='Ads Campaign'){ echo 'selected';} ?>>Ads Campaign</option>
-                                                    <option value="WhatsApp" <?php if($enq_source=='WhatsApp'){ echo 'selected';} ?>>WhatsApp</option>
+                                                    <option value="Email"
+                                                        <?php if($enq_source=='Email'){ echo 'selected';} ?>>Email
+                                                    </option>
+                                                    <option value="Friends"
+                                                        <?php if($enq_source=='Friends'){ echo 'selected';} ?>>Friends
+                                                    </option>
+                                                    <option value="Google"
+                                                        <?php if($enq_source=='Other'){ echo 'selected';} ?>>Google
+                                                    </option>
+                                                    <option value="Facebook"
+                                                        <?php if($enq_source=='Facebook'){ echo 'selected';} ?>>Facebook
+                                                    </option>
+                                                    <option value="Instagram"
+                                                        <?php if($enq_source=='Instagram'){ echo 'selected';} ?>>
+                                                        Instagram</option>
+                                                    <option value="Reference"
+                                                        <?php if($enq_source=='Reference'){ echo 'selected';} ?>>
+                                                        Reference</option>
+                                                    <option value="Social Media"
+                                                        <?php if($enq_source=='Social Media'){ echo 'selected';} ?>>
+                                                        Social Media</option>
+                                                    <option value="Direct"
+                                                        <?php if($enq_source=='Direct'){ echo 'selected';} ?>>Direct
+                                                    </option>
+                                                    <option value="Call"
+                                                        <?php if($enq_source=='Call'){ echo 'selected';} ?>>Call
+                                                    </option>
+                                                    <option value="Chat"
+                                                        <?php if($enq_source=='Chat'){ echo 'selected';} ?>>Chat
+                                                    </option>
+                                                    <option value="Cold calling"
+                                                        <?php if($enq_source=='Cold calling'){ echo 'selected';} ?>>Cold
+                                                        calling</option>
+                                                    <option value="Ads Campaign"
+                                                        <?php if($enq_source=='Ads Campaign'){ echo 'selected';} ?>>Ads
+                                                        Campaign</option>
+                                                    <option value="WhatsApp"
+                                                        <?php if($enq_source=='WhatsApp'){ echo 'selected';} ?>>WhatsApp
+                                                    </option>
 
 
-                                                    <option value="Other" <?php if($enq_source=='Other'){ echo 'selected';} ?>>Other</option>
+                                                    <option value="Other"
+                                                        <?php if($enq_source=='Other'){ echo 'selected';} ?>>Other
+                                                    </option>
                                                 </select>
                                                 <p class="error enquiry_type_error"></p>
                                             </div>
@@ -137,7 +176,9 @@ if(!empty($editDataenquiry))
                                                     Inquiry</label><span class="required">*</span>
                                                 <div>
                                                     <input type="text" class="form-control datepicker" id="enq_date1"
-                                                        name="enq_date" placeholder="dd-mm-yyyy" value="<?php echo  date("Y-m-d", strtotime($enq_date));?>" required>
+                                                        name="enq_date" placeholder="dd-mm-yyyy"
+                                                        value="<?php echo  date("Y-m-d", strtotime($enq_date));?>"
+                                                        required>
                                                 </div>
                                                 <p class="error enq_date_error"></p>
                                             </div>
@@ -164,7 +205,7 @@ if(!empty($editDataenquiry))
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" maxlength="100"
                                                         type="text" id="email1" name="email" placeholder="Enter Email"
-                                                        value= "<?php echo $enq_email;?>"
+                                                        value="<?php echo $enq_email;?>"
                                                         class="form-control col-md-12 col-xs-12">
                                                     <p class="error email_error"></p>
                                                 </div>
@@ -184,7 +225,8 @@ if(!empty($editDataenquiry))
                                             </div> -->
 
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="country">Course<span class="required">*</span>
+                                                <label style="text-align: left;" for="country">Course<span
+                                                        class="required">*</span>
                                                 </label>
                                                 <div>
                                                     <!-- <select class="form-control course" id="course" name="course"> -->
@@ -192,13 +234,28 @@ if(!empty($editDataenquiry))
                                                         name="course[]" placeholder="Select Courses" required=""
                                                         multiple style="width: 320px; margin-left: -15px;">
                                                         <option value="">Select Course</option>
-                                                        <?php foreach ($course_List as $key => $value) { ?>                
-                                                            <option value="<?php echo $value['courseId']; ?>" <?php if(in_array($value['courseId'], explode(',', $enq_course_id))){ echo 'selected';} ?> > <?php echo $value['course_name']; ?></option>
+                                                        <?php foreach ($course_List as $key => $value) { ?>
+                                                        <option value="<?php echo $value['courseId']; ?>"
+                                                            <?php if(in_array($value['courseId'], explode(',', $enq_course_id))){ echo 'selected';} ?>>
+                                                            <?php echo $value['course_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <p class="error course_error"></p>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label style="text-align: left;" for="doctor_non_doctor">Doctor / Non-
+                                                    Doctor<span class="required">*</span></label>
+                                                <select class="form-control" id="doctor_non_doctor"
+                                                    name="doctor_non_doctor">
+                                                    <option value="">Select Doctor / Non- Doctor</option>
+                                                    <option value="doctor" <?php if($doctor_non_doctor=='doctor'){ echo 'selected';} ?>>Doctor</option>
+                                                    <option value="non-doctor" <?php if($doctor_non_doctor=='non-doctor'){ echo 'selected';} ?>>Non-Doctor</option>
+                                                </select>
+                                                <p class="error doctor_non_doctor_error"></p>
+                                            </div>
+
 
                                             <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="country">Country
@@ -237,7 +294,7 @@ if(!empty($editDataenquiry))
                                                     <p class="error city_error"></p>
                                                 </div>
                                             </div> -->
-<!-- 
+                                            <!-- 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="remarks">Remarks
                                                 </label>
