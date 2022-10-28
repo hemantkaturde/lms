@@ -2275,15 +2275,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Time Table Successfully Uplaoded !",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Time Table Successfully Uplaoded !",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_md").hide();
 								window.location.href = "<?php echo base_url().'timetableListing/'?>"+course_id_form;
-						});						
+						//});						
 				    }
 					
 				},
@@ -2300,19 +2300,19 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				var elemF = $(this);
 				e.preventDefault();
 
-					swal({
-						title: "Are you sure?",
-						text: "",
-						type: "warning",
-						showCancelButton: true,
-						closeOnClickOutside: false,
-						confirmButtonClass: "btn-sm btn-danger",
-						confirmButtonText: "Yes, delete it!",
-						cancelButtonText: "No, cancel plz!",
-						closeOnConfirm: false,
-						closeOnCancel: false
-					}, function(isConfirm) {
-						if (isConfirm) {
+					// swal({
+					// 	title: "Are you sure?",
+					// 	text: "",
+					// 	type: "warning",
+					// 	showCancelButton: true,
+					// 	closeOnClickOutside: false,
+					// 	confirmButtonClass: "btn-sm btn-danger",
+					// 	confirmButtonText: "Yes, delete it!",
+					// 	cancelButtonText: "No, cancel plz!",
+					// 	closeOnConfirm: false,
+					// 	closeOnCancel: false
+					// }, function(isConfirm) {
+					// 	if (isConfirm) {
 									$.ajax({
 										url : "<?php echo base_url();?>deletetopictimetable",
 										type: "POST",
@@ -2326,25 +2326,25 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 											//}
 											const obj = JSON.parse(data);
 											if(obj.status=='success'){
-												swal({
-													title: "Deleted!",
-													text: "",
-													icon: "success",
-													button: "Ok",
-													},function(){ 
+												// swal({
+												// 	title: "Deleted!",
+												// 	text: "",
+												// 	icon: "success",
+												// 	button: "Ok",
+												// 	},function(){ 
 														$("#popup_modal_sm").hide();
 														window.location.href = "<?php echo base_url().'timetableListing/'?>"+elemF.attr('course_id');
-												});	
+												//});	
 										    }else{
-											    swal({
-													title: "Not Deleted",
-													text: "",
-													icon: "error",
-													button: "Ok",
-													},function(){ 
+											    // swal({
+												// 	title: "Not Deleted",
+												// 	text: "",
+												// 	icon: "error",
+												// 	button: "Ok",
+												// 	},function(){ 
 														$("#popup_modal_sm").hide();
 														window.location.href = "<?php echo base_url().'timetableListing'?>"+elemF.attr('course_id');
-												});	
+												//});	
 										  }
 
 										},
@@ -2353,11 +2353,11 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 											//$(".loader_ajax").hide();
 										}
 									})
-								}
-								else {
-						swal("Cancelled", "Time Table deletion cancelled ", "error");
-						}
-					});
+					// 			}
+					// 			else {
+					// 	swal("Cancelled", "Time Table deletion cancelled ", "error");
+					// 	}
+					// });
 	    });
 
 	
