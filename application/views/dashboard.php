@@ -114,7 +114,57 @@
                 </div>
             </div>
         </div> -->
-
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">
+                            <h2>Detail Event </h2>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="row align-items-center" style="margin-left: 21px;">
+                            <div class="calendar">
+                                <?php echo $notes?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">
+                            <h2 class="s_date">Detail Event <?php echo "$day $month $year";?></h2>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="col-lg-12">
+                            <div class="event_detail">
+                                <!-- <h2 class="s_date">Detail Event <?php echo "$day $month $year";?></h2> -->
+                                <div class="detail_event">
+                                    <?php 
+                                        if(isset($events)){
+                                            $i = 1;
+                                            foreach($events as $e){
+                                            if($i % 2 == 0){
+                                                    echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
+                                                }else{
+                                                    echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
+                                                } 
+                                                $i++;
+                                            }
+                                        }else{
+                                            echo '<div class="message"><h4>No Event</h4><p>There\'s no event in this date</p></div>';
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-8">
@@ -198,58 +248,6 @@
             </div>
         </div>
 
-
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="ibox">
-                    <div class="ibox-head">
-                        <div class="ibox-title">
-                            <h2>Detail Event </h2>
-                        </div>
-                    </div>
-                    <div class="ibox-body">
-                        <div class="row align-items-center" style="margin-left: 21px;">
-                            <div class="calendar">
-                                <?php echo $notes?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="ibox">
-                    <div class="ibox-head">
-                        <div class="ibox-title">
-                            <h2 class="s_date">Detail Event <?php echo "$day $month $year";?></h2>
-                        </div>
-                    </div>
-                    <div class="ibox-body">
-                        <div class="col-lg-12">
-                            <div class="event_detail">
-                                <!-- <h2 class="s_date">Detail Event <?php echo "$day $month $year";?></h2> -->
-                                <div class="detail_event">
-                                    <?php 
-                                        if(isset($events)){
-                                            $i = 1;
-                                            foreach($events as $e){
-                                            if($i % 2 == 0){
-                                                    echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
-                                                }else{
-                                                    echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
-                                                } 
-                                                $i++;
-                                            }
-                                        }else{
-                                            echo '<div class="message"><h4>No Event</h4><p>There\'s no event in this date</p></div>';
-                                        }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- 
         <div class="row">
             <div id="evencal">
