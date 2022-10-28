@@ -17,10 +17,10 @@
             <div class="ibox-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="card card-margin">
                                 <div class="card-header no-border">
-                                    <h5 class="card-title"><i class="fa fa-file-text" aria-hidden="true"></i> DOCUMENT</h5>
+                                    <h5 class="card-title"><i class="fa fa-file-text" aria-hidden="true"></i> NOTES</h5>
                                 </div>
                                 <div class="card-body pt-2">
                                     <div class="widget-49">
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="card card-margin">
                                 <div class="card-header no-border">
                                     <h5 class="card-title"><i class="fa fa-video-camera" aria-hidden="true"></i> VIDEOS</h5>
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <!-- <div class="col-lg-4">
                             <div class="card card-margin">
                                 <div class="card-header no-border">
                                     <h5 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> BOOKS</h5>
@@ -90,28 +90,29 @@
                                         <div class="widget-49-title-wrapper">
                                             <div class="widget-49-date-success">
                                                 <span class="widget-49-date-day"><?=$books?></span>
-                                                <!-- <span class="widget-49-date-month">apr</span> -->
+                                                <span class="widget-49-date-month">apr</span>
                                             </div>
                                             <div class="widget-49-meeting-info">
                                                 <span class="widget-49-pro-title"><?=$course_topic_info[0]->topic_name;?></span>
-                                                <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
+                                              <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> 
                                             </div>
                                         </div>
                                         <ol class="widget-49-meeting-points">
                                             <li class="widget-49-meeting-item"><span>All Types of Books</span>
                                             </li>
                                             <li class="widget-49-meeting-item"><span>Pdf,Word,PPT</span>
-                                            </li>
+                                            </li> -->
                                             <!-- <li class="widget-49-meeting-item"><span>Received approval to start
                                                     wire-frame</span></li> -->
-                                        </ol>
+                                        <!-- </ol>
                                         <div class="widget-49-meeting-action">
                                             <a href="<?php echo ADMIN_PATH.'viewalltopicdocuments?type=books&topic_id='.$_GET['topic_id'].'&course_id='.$_GET['course_id']; ?>" class="btn btn-sm btn-flash-border-success">View All</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+
                     </div>
                 </div>
             </div>
