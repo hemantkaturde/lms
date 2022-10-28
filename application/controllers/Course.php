@@ -237,9 +237,7 @@
                     $course_mode_offline=0;
                 }
 
-               
-
-    
+            
                 $data = array(
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),

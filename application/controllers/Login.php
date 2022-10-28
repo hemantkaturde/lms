@@ -90,6 +90,7 @@ class Login extends BaseController
             $username = $this->security->xss_clean($this->input->post('username'));
             $password = $this->input->post('password');
             $result = $this->login_model->loginMe($username, $password);
+            
             if(count($result) > 0)
             {
                 foreach ($result as $res)

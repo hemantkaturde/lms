@@ -82,14 +82,14 @@ if(!empty($editDataenquiry))
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="alternate_mobile">Alternate Mobile
                                                 </label>
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" maxlength="100" type="text" id="alternate_mobile1" placeholder="Enter Alternate Mobile" name="alternate_mobile" value="<?php echo $enq_mobile1;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error alternate_mobile_error"></p>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="qualification">Qualification<span class="required">*</span>
@@ -142,7 +142,7 @@ if(!empty($editDataenquiry))
                                                 <p class="error enq_date_error"></p>
                                             </div>
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="purpose">Purpose
                                                 </label>
                                                 <div>
@@ -153,7 +153,7 @@ if(!empty($editDataenquiry))
                                                         name="purpose" class="form-control col-md-12 col-xs-12">
                                                     <p class="error purpose_error"></p>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -170,7 +170,7 @@ if(!empty($editDataenquiry))
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="alternamte_email">Alternamte Email
                                                 </label>
                                                 <div>
@@ -181,10 +181,10 @@ if(!empty($editDataenquiry))
                                                         class="form-control col-md-12 col-xs-12">
                                                     <p class="error alternamte_email_error"></p>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="country">Course
+                                                <label style="text-align: left;" for="country">Course<span class="required">*</span>
                                                 </label>
                                                 <div>
                                                     <!-- <select class="form-control course" id="course" name="course"> -->
@@ -200,7 +200,7 @@ if(!empty($editDataenquiry))
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="country">Country
                                                 </label>
                                                 <div>
@@ -210,9 +210,9 @@ if(!empty($editDataenquiry))
                                                     </select>
                                                     <p class="error enquiry_type_error"></p>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="state">State </label>
                                                 <div>
                                                     <select class="form-control state" name="state" id="stateEnquiry">
@@ -223,9 +223,9 @@ if(!empty($editDataenquiry))
                                                     </select>
                                                     <p class="error state_error"></p>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="city">City </label>
                                                 <div>
                                                     <select class="form-control" name="city" id="cityEnquiry">
@@ -236,8 +236,8 @@ if(!empty($editDataenquiry))
                                                     </select>
                                                     <p class="error city_error"></p>
                                                 </div>
-                                            </div>
-
+                                            </div> -->
+<!-- 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="remarks">Remarks
                                                 </label>
@@ -250,7 +250,7 @@ if(!empty($editDataenquiry))
                                                     <p class="error remarks_error"></p>
                                                     <input type="hidden" name="enq_id" id="enq_id">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -261,6 +261,8 @@ if(!empty($editDataenquiry))
                             <div class="form-group">
                                 <!-- ENTER BUTTON HERE -->
                                 <input type="button" id="update_enquiry" class="btn btn-primary" value="UPDATE" />
+                                <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
+                                    class="btn btn-default" value="BACK" />
                                 <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
                                     class="btn btn-default" value="CANCEL" />
                             </div>

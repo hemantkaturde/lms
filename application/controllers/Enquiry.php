@@ -96,17 +96,17 @@
             
                 $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
                 $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|numeric|greater_than[0]|exact_length[10]');
-                $this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
+                //$this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
                 $this->form_validation->set_rules('email', 'Email', 'trim|required');
-                $this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
+                //$this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
                 $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
-                $this->form_validation->set_rules('purpose', 'Purpose', 'trim');
+                //$this->form_validation->set_rules('purpose', 'Purpose', 'trim');
                 $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
-                $this->form_validation->set_rules('country', 'Country', 'trim');
-                $this->form_validation->set_rules('state', 'State', 'trim');
-                $this->form_validation->set_rules('city', 'City', 'trim');
+                //$this->form_validation->set_rules('country', 'Country', 'trim');
+                //$this->form_validation->set_rules('state', 'State', 'trim');
+                //$this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
-                $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
+                //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
                 //$this->form_validation->set_rules('course', 'Course', 'trim|required');
 
                 $courses_multipal = $this->security->xss_clean($this->input->post('course'));
@@ -148,17 +148,17 @@
                         'enq_number'=> $enq_number,
                         'enq_fullname' => $this->input->post('full_name'),
                         'enq_mobile'=> $this->input->post('mobile_no'),
-                        'enq_mobile1' => $this->input->post('alternate_mobile'),
+                        //'enq_mobile1' => $this->input->post('alternate_mobile'),
                         'enq_email'=> $this->input->post('email'),
-                        'enq_email1' => $this->input->post('alternamte_email'),
+                        //'enq_email1' => $this->input->post('alternamte_email'),
                         'enq_qualification' => $this->input->post('qualification'),
-                        'enq_purpose' => $this->input->post('purpose'),
+                        //'enq_purpose' => $this->input->post('purpose'),
                         'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
-                        'enq_country'=> $this->input->post('country'),
-                        'enq_state'=>$this->input->post('state'),
-                        'enq_city'=>$this->input->post('city'),
+                        //'enq_country'=> $this->input->post('country'),
+                        //'enq_state'=>$this->input->post('state'),
+                        //'enq_city'=>$this->input->post('city'),
                         'enq_source'=>$this->input->post('enquiry_type'),
-                        'enq_remark' => $this->input->post('remarks'),
+                        //'enq_remark' => $this->input->post('remarks'),
                         'enq_course_id' => $courses
                     );
 

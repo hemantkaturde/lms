@@ -30,7 +30,7 @@
             <div class="form-group">
                 
                 <div class="input-group-icon right">
-                    <label for=""> Username / Email</label>
+                    <label for=""> Mobile Number / Username / Email </label>
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
                     <input class="form-control" type="username" name="username" placeholder="Username" autocomplete="off">
                 </div>

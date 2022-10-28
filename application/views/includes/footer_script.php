@@ -198,8 +198,6 @@
                      $('#certificate_cost1').val(data[0].course_cert_cost);  
                      $('#kit_cost1').val(data[0].course_kit_cost);  
 
-                    
-
 					 if(data[0].course_books==1){
 						$('.radio_yes1').attr("checked", "checked");
 					 }
@@ -208,7 +206,6 @@
 						$('.radio_no1').attr("checked", "checked");	
 					 }
 					 
-
 					 if(data[0].course_mode_online==1){
 						$(".course_mode_online1").attr("checked", "true");
 					 }else{
@@ -566,15 +563,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Enquiry Created!",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Enquiry Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'enquirylisting'?>";
-						});						
+						//});						
 				    }
 					
 				},
@@ -648,15 +645,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Enquiry Updated!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Enquiry Updated!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'enquirylisting'?>";
-						});						
+						//});						
 				    }
 					
 				},

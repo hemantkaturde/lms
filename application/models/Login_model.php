@@ -18,7 +18,7 @@ class Login_model extends CI_Model
         $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
         $user = $query->result();
-
+        
         if(!empty($user)){
             if(trim($password)== base64_decode($user[0]->password)){
                 return $user;

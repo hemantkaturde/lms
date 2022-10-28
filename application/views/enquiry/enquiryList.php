@@ -94,14 +94,14 @@
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="alternate_mobile">Alternate Mobile
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="10" type="text" id="alternate_mobile"  placeholder="Enter Alternate Mobile" name="alternate_mobile" class="form-control col-md-12 col-xs-12">
                         <p class="error alternate_mobile_error"></p>
                      </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="qualification">Qualification<span class="required">*</span>
@@ -142,14 +142,14 @@
                      <p class="error enq_date_error"></p>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="purpose">Purpose
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off"  type="text" id="purpose"  placeholder="Enter Purpose" name="purpose" class="form-control col-md-12 col-xs-12">
                         <p class="error purpose_error"></p>
                      </div>
-                  </div>
+                  </div> -->
 
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -162,17 +162,17 @@
                      </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="alternamte_email">Alternamte Email
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="alternamte_email" name="alternamte_email" placeholder="Enter Alternamte Email" class="form-control col-md-12 col-xs-12">
                         <p class="error alternamte_email_error"></p>
                      </div>
-                   </div>
+                   </div> -->
 
                    <div class="form-group">
-                     <label style="text-align: left;"  for="country">Course
+                     <label style="text-align: left;"  for="country">Course<span class="required">*</span>
                      </label>
                      <div class="form-group">
                          <!-- <select class="form-control course" id="course" name="course" multiple> -->
@@ -184,7 +184,7 @@
                         <p class="error course_error"></p>
                      </div>
                    </div>
-
+<!-- 
                    <div class="form-group">
                      <label style="text-align: left;"  for="country">Country
                      </label>
@@ -195,9 +195,9 @@
                         </select>
                         <p class="error Country_error"></p>
                      </div>
-                   </div>
+                   </div> -->
 
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                      <label style="text-align: left;"  for="state">State </label>
                      <div >
                         <select class="form-control state" name="state" id="stateEnquiry">
@@ -205,9 +205,9 @@
                         </select>
                         <p class="error state_error"></p>       
                      </div>
-                   </div>
+                   </div> -->
 
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                      <label style="text-align: left;"  for="city">City </label>
                      <div >
                         <select class="form-control" name="city" id="cityEnquiry">
@@ -215,22 +215,23 @@
                         </select>
                         <p class="error city_error"></p>       
                      </div>
-                   </div>
+                   </div> -->
 
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                      <label style="text-align: left;" for="remarks">Remarks
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off"  type="text" id="remarks" name="remarks"  placeholder="Enter Remarks" class="form-control col-md-12 col-xs-12">
                         <p class="error remarks_error"></p>
                      </div>
-                   </div>
+                   </div> -->
               </div>
             </div>
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="submit" id="save_enquiry" class="btn btn-primary save_enquiry">Save</button>
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="save_enquiry" class="btn btn-primary save_enquiry">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>
