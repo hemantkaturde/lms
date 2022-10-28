@@ -669,19 +669,19 @@
 			var elemF = $(this);
 			e.preventDefault();
 
-				swal({
-					title: "Are you sure?",
-					text: "",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, delete it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
 								$.ajax({
 									url : "<?php echo base_url();?>deleteEnquiry",
 									type: "POST",
@@ -689,7 +689,7 @@
 									success: function(data, textStatus, jqXHR)
 									{
 										// if(data.status=='success'){
-											swal("Deleted!", "Enquiry has been deleted.", "success");
+											//swal("Deleted!", "Enquiry has been deleted.", "success");
 											location.reload();
 										//}
 									},
@@ -698,11 +698,11 @@
 										//$(".loader_ajax").hide();
 									}
 							    })
-							}
-							else {
-					swal("Cancelled", "Enquiry deletion cancelled ", "error");
-					}
-				});
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", "Enquiry deletion cancelled ", "error");
+				// 	}
+				// });
 	});
 
 	$(document).on('click','.add_links',function(e){
