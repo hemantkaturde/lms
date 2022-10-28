@@ -6,13 +6,9 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-
-                
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url().'/timetableListing/'.$course_id;?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
-
-
 
                 <!-- <div class="ibox-title">Time Table Management</div> -->
                 <div class="ibox-title">Time Table List - <?=$getCourseinfo[0]->course_name;?> <small>( <?=$getCourseinfo[0]->course_name?> )</small> - <?=$getTimetableInfo[0]->month_name?> ( From Date : <?=date('d-m-Y', strtotime($getTimetableInfo[0]->from_date));?> To Date : <?=date('d-m-Y', strtotime($getTimetableInfo[0]->to_date));?> )</div>

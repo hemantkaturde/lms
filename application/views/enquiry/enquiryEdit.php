@@ -31,6 +31,8 @@ if(!empty($editDataenquiry))
         $enq_course_id  =  $rf->enq_course_id;
         $remark  =  $rf->enq_remark;
         $doctor_non_doctor	  =  $rf->doctor_non_doctor;
+
+        $enq_city	  =  $rf->enq_city;
         // $role = $rf->role;
         // $role_type = $rf->role_type;
         // $discription = $rf->discription;
@@ -199,8 +201,7 @@ if(!empty($editDataenquiry))
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="email">Email<span
-                                                        class="required">*</span>
+                                                <label style="text-align: left;" for="email">Email
                                                 </label>
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" maxlength="100"
@@ -282,18 +283,20 @@ if(!empty($editDataenquiry))
                                                 </div>
                                             </div> -->
 
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <label style="text-align: left;" for="city">City </label>
                                                 <div>
                                                     <select class="form-control" name="city" id="cityEnquiry">
                                                         <option st-id="" value="0">Select City</option>
                                                         <?php foreach ($city_List as $key => $value) { ?>   
-                                                            <option st-id="" value="<?php echo $value['id'] ?>" <?php echo $value['selected'];?>><?php echo $value['name'] ?></option>
+                                                            <option st-id="" value="<?php echo $value['id'] ?>"  <?php if($enq_city==$value['id']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <p class="error city_error"></p>
                                                 </div>
-                                            </div> -->
+                                            </div>
+
+
                                             <!-- 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="remarks">Remarks
@@ -320,8 +323,8 @@ if(!empty($editDataenquiry))
                                 <input type="button" id="update_enquiry" class="btn btn-primary" value="UPDATE" />
                                 <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
                                     class="btn btn-default" value="BACK" />
-                                <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
-                                    class="btn btn-default" value="CANCEL" />
+                                <!-- <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
+                                    class="btn btn-default" value="CANCEL" /> -->
                             </div>
                         </div>
                     </div>

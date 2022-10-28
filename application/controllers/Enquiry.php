@@ -35,6 +35,7 @@
             $processFunction = 'Enquiry/enquirylisting';
             $this->logrecord($process,$processFunction);
             $data['course_List'] = $this->comman_model->getCourseList();
+            $data['city_List'] = $this->comman_model->getCityList();
             $this->global['pageTitle'] = 'Enquiry Management';
             $this->loadViews("enquiry/enquiryList", $this->global, $data , NULL);
         }
@@ -73,7 +74,8 @@
             $data['course_List'] = $this->comman_model->getCourseList();
             $data['editDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
             $data['state_List'] = $this->comman_model->selectAllStates($data['editDataenquiry'][0]->enq_country,$data['editDataenquiry'][0]->enq_state);
-            $data['city_List'] = $this->comman_model->selectAllCities($data['editDataenquiry'][0]->enq_state,$data['editDataenquiry'][0]->enq_city);
+            // $data['city_List'] = $this->comman_model->selectAllCities($data['editDataenquiry'][0]->enq_state,$data['editDataenquiry'][0]->enq_city);
+            $data['city_List'] = $this->comman_model->getCityList();
             $this->global['pageTitle'] = 'Enquiry Management';
             $this->loadViews("enquiry/enquiryEdit", $this->global, $data , NULL);
 
@@ -97,14 +99,14 @@
                 $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
                 $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|numeric|greater_than[0]|exact_length[10]');
                 //$this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
-                $this->form_validation->set_rules('email', 'Email', 'trim|required');
+                $this->form_validation->set_rules('email', 'Email', 'trim');
                 //$this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
                 $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
                 //$this->form_validation->set_rules('purpose', 'Purpose', 'trim');
                 $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
                 //$this->form_validation->set_rules('country', 'Country', 'trim');
                 //$this->form_validation->set_rules('state', 'State', 'trim');
-                //$this->form_validation->set_rules('city', 'City', 'trim');
+                $this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
                 $this->form_validation->set_rules('doctor_non_doctor', 'Doctor Non Doctor', 'trim|required');
                 //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
@@ -158,7 +160,7 @@
                         'doctor_non_doctor'=>$this->input->post('doctor_non_doctor'),
                         //'enq_country'=> $this->input->post('country'),
                         //'enq_state'=>$this->input->post('state'),
-                        //'enq_city'=>$this->input->post('city'),
+                        'enq_city'=>$this->input->post('city'),
                         'enq_source'=>$this->input->post('enquiry_type'),
                         //'enq_remark' => $this->input->post('remarks'),
                         'enq_course_id' => $courses
@@ -199,14 +201,14 @@
                 $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
                 $this->form_validation->set_rules('mobile_no', 'Mobile_no', 'trim|required|numeric|greater_than[0]|exact_length[10]');
                 //$this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
-                $this->form_validation->set_rules('email', 'Email', 'trim|required');
+                $this->form_validation->set_rules('email', 'Email', 'trim');
                 //$this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
                 $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
                 //$this->form_validation->set_rules('purpose', 'Purpose', 'trim');
                 $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
                 //$this->form_validation->set_rules('country', 'Country', 'trim');
                 //$this->form_validation->set_rules('state', 'State', 'trim');
-                //$this->form_validation->set_rules('city', 'City', 'trim');
+                $this->form_validation->set_rules('city', 'City', 'trim');
                 $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
                 $this->form_validation->set_rules('doctor_non_doctor', 'Doctor Non Doctor', 'trim|required');
                 //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
@@ -246,7 +248,7 @@
                                     'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
                                     //'enq_country'=> $this->input->post('country'),
                                     //'enq_state'=>$this->input->post('state'),
-                                    //'enq_city'=>$this->input->post('city'),
+                                    'enq_city'=>$this->input->post('city'),
                                     'enq_source'=>$this->input->post('enquiry_type'),
                                     //'enq_remark' => $this->input->post('remarks'),
                                     'enq_course_id' => $courses,

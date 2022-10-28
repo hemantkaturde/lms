@@ -52,6 +52,16 @@ class Comman_model extends CI_Model
         }
 
 
+        public function getCityList()
+        {
+            $this->db->select('*');
+            $this->db->order_by('name','ASC');
+            $query_result = $this->db->get(TBL_CITIES)->result_array();
+            return $query_result;
+        }
+
+
+
 }
 
 ?>

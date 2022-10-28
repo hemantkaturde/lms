@@ -154,7 +154,7 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="form-group">
-                     <label style="text-align: left;"  for="email">Email<span class="required">*</span>
+                     <label style="text-align: left;"  for="email">Email
                      </label>
                      <div >
                         <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="email" name="email" placeholder="Enter Email" class="form-control col-md-12 col-xs-12">
@@ -172,7 +172,7 @@
                    </div> -->
 
                    <div class="form-group">
-                     <label style="text-align: left;"  for="country">Course<span class="required">*</span>
+                     <label style="text-align: left;" for="course">Course<span class="required">*</span>
                      </label>
                      <div class="form-group">
                          <!-- <select class="form-control course" id="course" name="course" multiple> -->
@@ -220,15 +220,19 @@
                      </div>
                    </div> -->
 
-                   <!-- <div class="form-group">
+                   <div class="form-group">
                      <label style="text-align: left;"  for="city">City </label>
                      <div >
                         <select class="form-control" name="city" id="cityEnquiry">
-                            <option st-id="" value="">Select City</option>
+                            <!-- <option st-id="" value="">Select City</option> -->
+
+                            <?php foreach ($city_List as $key => $value) {?>
+                               <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                            <?php } ?>
                         </select>
                         <p class="error city_error"></p>       
                      </div>
-                   </div> -->
+                   </div>
 
                    <!-- <div class="form-group">
                      <label style="text-align: left;" for="remarks">Remarks
