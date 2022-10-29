@@ -154,10 +154,9 @@ $route['newregistrationstudentdetails'] = "enquiry/newregistrationstudentdetails
 $route['followup/(:any)'] = "enquiry/followup/$1";
 $route['createFollowup'] = "enquiry/createFollowup";
 $route['fetchEnquiryFollowup/(:any)'] = "enquiry/fetchEnquiryFollowup/$1";
-
+$route['delete_enquiry_followup'] = "enquiry/delete_enquiry_followup";
 
 //$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
-
 /*********** ADMISSION CONTROLLER ROUTES *******************/
 $route['admissionListing'] = "admission/admissionListing";
 $route['fetchadmissions'] = "admission/fetchadmissions";

@@ -2770,12 +2770,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Enquiry Follow Up'){ ?>
 	<script type="text/javascript">
-
-
         $(document).ready(function() {
-
 			var enquiry_id = $('#enquiry_id').val();
-
             var dt = $('#view_enquiryFollowuplist').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -2865,6 +2861,79 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					});
 					return false;
 		});
+
+
+		$(document).on('click','.delete_enquiry_followup',function(e){
+
+			var enquiry_id = $('#enquiry_id').val();
+
+			var elemF = $(this);
+			e.preventDefault();
+
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>delete_enquiry_followup",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											//swal("Deleted!", "", "success");
+											//location.reload();
+										//}
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													// swal({
+													// 	title: "Deleted!",
+													// 	text: "",
+													// 	icon: "success",
+													// 	button: "Ok",
+													// 	},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'followup/'?>"+enquiry_id;
+													//});	
+											}else{
+
+												// swal({
+												// 		title: "Not Deleted!",
+												// 		text: "",
+												// 		icon: "success",
+												// 		button: "Ok",
+												// 		},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'followup/'?>"+enquiry_id;
+												//});	
+											}	
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", " ", "error");
+				// 	}
+				// });
+	    });
+
+
+	</script>
+
 
 	</script>
 <?php } ?>
