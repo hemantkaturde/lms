@@ -644,7 +644,6 @@
 
             $params = $_REQUEST;
             $totalRecords = $this->enquiry_model->getEnquiryFollowupCount($params,$id);
-
             $queryRecords = $this->enquiry_model->getEnquiryFollowup($params,$id); 
             $data = array();
             foreach ($queryRecords as $key => $value)
@@ -682,6 +681,54 @@
 
             }
         else { echo(json_encode(array('status'=>FALSE))); }
+
+
+       }
+
+       public function get_signle_followupData(){ 
+            $followup_id = $this->input->post('followup_id');
+            $data = $this->enquiry_model->getsignlefollowupData($followup_id);
+            echo json_encode($data);
+       }
+
+       public function updatefollowupdata(){
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+
+            $createfollow_response = array();
+         
+            $enquiry_id = $this->input->post('enquiry_id1');
+            $followup_id = $this->input->post('followup_id1');
+
+            $this->form_validation->set_rules('follow_up_date1', 'Follow Up Date', 'trim|required');
+            $this->form_validation->set_rules('remark1', 'Remark', 'trim|required');
+
+            if($this->form_validation->run() == FALSE){
+
+                $createfollow_response['status'] = 'failure';
+                $createfollow_response['error'] = array('follow_up_date'=>strip_tags(form_error('follow_up_date1')), 'remark'=>strip_tags(form_error('remark1')));
+        
+            }else{
+                $data = array(
+                    'enq_id' => $this->input->post('enquiry_id1'),
+                    'date'  => date('Y-m-d', strtotime($this->input->post('follow_up_date1'))),
+                    'remark' => $this->input->post('remark1'),
+                    'enquiry_number'=> $this->input->post('enquiry_number1'),
+                    //'createdBy'=>
+                );
+
+                $saveFollowdata = $this->enquiry_model->saveEnquiryFollowupdata($followup_id,$data);
+                if($saveFollowdata){
+                    $createfollow_response['status'] = 'success';
+                    $createfollow_response['error'] = array('follow_up_date'=>'', 'remark'=>'');
+                }
+                   
+            }
+            echo json_encode($createfollow_response);
+          
+
+        }
 
 
        }

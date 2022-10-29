@@ -81,7 +81,6 @@
 
                   <input type="hidden" name="enquiry_id" id="enquiry_id" value="<?php echo $enquiry_id;?>">
 
-                  
                   <div class="form-group">
                      <label style="text-align: left;"  for="required">Remark<span class="required">*</span>
                      </label>
@@ -97,6 +96,66 @@
       <div class="modal-footer">
         <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
         <button type="submit" id="save_follow_up" class="btn btn-primary save_follow_up">Save</button>
+      </div>
+      <?php echo form_close(); ?>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="edit_enquiry_followup" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="edit_enquiry_followupLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#d2ae6d">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Follow Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <?php
+            $attributes = array("name"=>"update_followup_form","id"=>"update_followup_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data", "autocomplete"=>"off"); 
+            echo form_open("", $attributes);
+         ?>
+      <div class="modal-body">
+            <div class="container">
+            <div class="row col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="enquiry_number">Enquiry Number<span class="required">*</span>
+                     </label>
+                     <div>
+                        <input  maxlength="25" type="text" id="enquiry_number1" name="enquiry_number1" autocomplete="off" value="<?=$followDataenquiry[0]->enq_number;?>" class="form-control col-md-12 col-xs-12" readonly>
+                        <p class="error enquiry_number_error"></p>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label style="text-align: left;" for="follow_up_date">Follow Up Date</label><span class="required">*</span>
+                     <div >
+                          <input type="text" class="form-control datepicker" id="follow_up_date1" name="follow_up_date1" placeholder="dd-mm-yyyy" autocomplete="off" required>
+                     </div>
+                     <p class="error follow_up_date_error"></p>
+                  </div>
+
+                  <input type="hidden" name="enquiry_id1" id="enquiry_id1" value="<?php echo $enquiry_id;?>">
+                  <input type="hidden" name="followup_id1" id="followup_id1">
+                  
+                  <div class="form-group">
+                     <label style="text-align: left;"  for="required">Remark<span class="required">*</span>
+                     </label>
+                     <div >
+                         <textarea class="form-control" id="remark1" name="remark1" rows="5"></textarea>
+                        <p class="error remark_error"></p>
+                     </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <button type="submit" id="upadate_follow_up" class="btn btn-primary upadate_follow_up">Upadte</button>
       </div>
       <?php echo form_close(); ?>
     </div>

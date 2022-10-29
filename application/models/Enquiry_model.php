@@ -338,12 +338,24 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['date']));
                  $data[$counter]['remark'] = $value['remark'];
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry_followup' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_enquiry_followup' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry_followup' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Enquiry Follow' title='Delete Enquiry Follow'></a> "; 
                 $counter++; 
             }
         }
         return $data;
+
+
+    }
+
+    public function getsignlefollowupData($followup_id){
+
+        $this->db->select('*');
+        $this->db->from('tbl_enquiry_follow_up');
+       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('id', $followup_id);
+        $query = $this->db->get();
+        return $query->result();
 
 
     }

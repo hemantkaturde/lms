@@ -2862,7 +2862,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					return false;
 		});
 
-
 		$(document).on('click','.delete_enquiry_followup',function(e){
 
 			var enquiry_id = $('#enquiry_id').val();
@@ -2930,6 +2929,69 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				// 	}
 				// });
 	    });
+
+		$(document).on('click','.edit_enquiry_followup',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var followup_id = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>enquiry/get_signle_followupData",  
+                method:"POST",  
+                data:{followup_id:followup_id},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                     $('#edit_enquiry_followup').modal('show');
+					 $('#follow_up_date1').val(data[0].date);
+					 $('#remark1').val(data[0].remark);
+                     $('#followup_id1').val(followup_id);
+                }  
+           })
+        });
+
+		$(document).on('click','#upadate_follow_up',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#update_followup_form")[0]);
+			var id = $("#enquiry_id1").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updatefollowupdata",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Updated!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'followup/'?>"+id;
+						//});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
 
 
 	</script>
