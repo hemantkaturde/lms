@@ -121,7 +121,6 @@ $route['viewtimetablelisting?(:any)'] = "course/viewtimetablelisting/$1";
 $route['fetchTopicTimetableListing?(:any)'] = "course/fetchTopicTimetableListing/$1";
 
 
-
 /************ EXAMINATION MASTER ***********************/
 $route['examinationlisting'] = "examination/examinationlisting";
 $route['fetchExaminationListing'] = "examination/fetchExaminationListing";
@@ -145,6 +144,7 @@ $route['updateenquiry/(:any)'] = "enquiry/updateenquiry/$1";
 $route['deleteEnquiry'] = "enquiry/deleteEnquiry";
 $route['sendEnquiryLink'] = "enquiry/sendEnquiryLink";
 $route['sendPaymentLink'] = "enquiry/sendPaymentLink";
+$route['sendBrochureLink'] = "enquiry/sendBrochureLink";
 $route['pay/(:any)'] = "enquiry/pay/$1";
 $route['razorpaysuccess'] = "enquiry/razorpaysuccess";
 $route['razorthankyou/(:any)'] = "enquiry/razorthankyou/$1";
@@ -178,5 +178,10 @@ $route['fetchSmtpsetting'] = 'emailSetting/fetchSmtpsetting';
 $route['createemailsmtp'] = 'emailSetting/createemailsmtp';
 $route['deletesmtp'] = 'emailSetting/deletesmtp';
 $route['updateSMTP/(:any)'] = 'emailSetting/updateSMTP/$1';
+
+
+// Payment 
+$route['payment_details/(:any)'] = 'enquiry/payment_details/$1';
+
 
 

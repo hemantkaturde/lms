@@ -14,14 +14,23 @@
     <div class="page-content fade-in-up col-md-10">
         <div class="ibox">
             <div class="ibox-head">
+
+                   <div>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFollowup">
+                        <i class="fa fa-plus"></i> Add Follow Up
+                      </button>
+
+                      <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                      </button>
+                   </div>
+
                 <div class="ibox-title">Enquiry Follow Up - <?=$followDataenquiry[0]->enq_number;?> <small>( <?=$followDataenquiry[0]->enq_fullname?> )</small></div>
                 <!-- <div class="ibox-tools"> -->
                     <!-- <a class="btn btn-primary text-white" onclick="enquiry(0)" ><i class="fa fa-plus"></i> Add Enquiry</a> -->
                     <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFollowup">
-                    <i class="fa fa-plus"></i> Add Follow Up
-                </button>
+               
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">

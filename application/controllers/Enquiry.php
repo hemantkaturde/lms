@@ -81,7 +81,6 @@
 
        }
     
-
         function get_signle_enquiry($enqId = NULL)
         {
             $enqId = $this->input->post('enq_id');
@@ -460,8 +459,6 @@
                 }
         }
 
-
-    
         public function pay($id){
             if($id){
                /* check if payment is done or not*/
@@ -733,6 +730,66 @@
 
        }
 
+
+       public function payment_details($id){
+
+            $process = 'Enquiry Payment Details';
+            $processFunction = 'Enquiry/enquiryEdit';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Enquiry Payment Details';
+            $data['enquiry_id'] = $id;
+            $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            $this->loadViews("payment/payment_details", $this->global, $data , NULL);
+
+       }
+
+
+       public function sendBrochureLink(){
+
+        $post_submit = $this->input->post();
+
+            if($post_submit){
+                $enq_id =$post_submit['id'];
+                $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
+
+                 $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+                
+                 $total_fees = 0;
+                 $course_name = '';
+                 $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                        $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                        $total_fees += $get_course_fees[0]->course_total_fees;
+                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
+                        $i++;  
+                    }
+                $all_course_name = trim($course_name, ', '); 
+
+                $to = $get_equiry_data->enq_email;
+                $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
+
+                
+              
+                $header = "From: IICTN-Payment Link <enquiry@iictn.in> \r\n";
+                //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                $header .= "MIME-Version: 1.0\r\n";
+                $header .= "Content-type: text/html\r\n";
+                
+                $retval = mail($to,$Subject,$Body,$header);    
+                  
+        
+                if($retval){
+                    $process = 'Enquiry Link Sent';
+                    $processFunction = 'Enquiry/sendEnquiryLink';
+                    $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            }else{
+                echo(json_encode(array('status'=>FALSE)));
+
+            }
+    }
 
     }
 

@@ -792,6 +792,54 @@
 				});
 	});
 
+
+	$(document).on('click','.send_brochure_link',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "You want to Brochure link to User !",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, send it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+						$(".loader_ajax").show();
+
+						$(".sweet-alert").css({"z-index":"-99"});
+
+								$.ajax({
+									url : "<?php echo base_url();?>sendBrochureLink",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										//if(data.status=='success'){
+											$(".sweet-alert").css({"z-index":""});
+
+                                            $(".loader_ajax").hide();
+											swal("Send!", "Brochure Sent Successfully.", "success");
+											//location.reload();
+										//}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					               swal("Cancelled", "Brochure cancelled ", "error");
+					}
+				});
+	});
+
 </script> 
 <?php } ?>
 
