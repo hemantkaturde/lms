@@ -299,7 +299,7 @@ $jsonstringtoArray = json_decode($access, true);
                     <?php } ?>
 
                     <?php if (in_array("enquirymodule", $jsonstringtoArray)){?>
-                    <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup'){ echo 'active';} ?>">
+                    <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup' || $pageUrl=='payment_details'){ echo 'active';} ?>">
                         <a href="<?php echo base_url()."enquirylisting"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
                             <span class="nav-label">Inquiry / Leads</span>
                         </a>
