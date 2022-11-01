@@ -749,46 +749,50 @@
                 //   }else{
 
                  // if(!empty($_FILES['file']['size'])){ 
-                  if($_FILES['file']['size'] > 0){ 
+                //   if($_FILES['file']['size'] > 0){ 
                     // File upload configuration 
-                    $targetDir = "uploads/topic_documents/".$doc_type.'/'; 
-                    if($doc_type=='documents'){
-                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
-                    }
+                //     $targetDir = "uploads/topic_documents/".$doc_type.'/'; 
+                //     if($doc_type=='documents'){
+                //         $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                //     }
 
-                    if($doc_type=='videos'){
-                        $allowTypes = array('mp4', 'webm', 'ogv'); 
-                    }
+                //     if($doc_type=='videos'){
+                //         $allowTypes = array('mp4', 'webm', 'ogv'); 
+                //     }
 
-                    if($doc_type=='books'){
-                        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
-                    }
+                //     if($doc_type=='books'){
+                //         $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                //     }
                    
                     
-                    $fileName_original = basename($_FILES['file']['name']); 
+                //     $fileName_original = basename($_FILES['file']['name']); 
 
-                    $fileName_original_for_download = $_FILES['file']['name']; 
+                //     $fileName_original_for_download = $_FILES['file']['name']; 
 
-                    //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                //     //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
 
-                    $fileName =$doc_type.'-'.$_FILES['file']['name']; 
-                   // $fileName =basename($_FILES['file']['name']); 
-                    $targetFilePath = $targetDir.$fileName; 
+                //     $fileName =$doc_type.'-'.$_FILES['file']['name']; 
+                //    // $fileName =basename($_FILES['file']['name']); 
+                //     $targetFilePath = $targetDir.$fileName; 
                     
-                    // Check whether file type is valid 
-                    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
-                    if(in_array($fileType, $allowTypes)){ 
-                        // Upload file to the server 
-                        if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
+                //     // Check whether file type is valid 
+                //     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+                //     if(in_array($fileType, $allowTypes)){ 
+                //         // Upload file to the server 
+                //         if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
 
                                 $data = array(
                                     'course_id'=> $course_id,
                                     'topic_id' => $topic_id,
-                                    'doc_type' => $fileType,
+                                    'doc_type' => $_POST['video_text'],
                                     'module_name' => $doc_type,
-                                    'file_name' => str_replace(' ', '_',$fileName_original_for_download),
-                                    'file_name_original' => str_replace(' ', '_',$fileName_original),
-                                    'file_url' =>  base_url().str_replace(' ', '_', $targetFilePath),
+                                    // 'file_name' => str_replace(' ', '_',$fileName_original_for_download),
+                                    // 'file_name_original' => str_replace(' ', '_',$fileName_original),
+                                    // 'file_url' =>  base_url().str_replace(' ', '_', $targetFilePath),
+                                    'file_name' =>  $_POST['video_text'],
+                                    'file_name_original' =>  $_POST['video_text'],
+                                    'file_url' =>  $_POST['video_url'],
+
                                     'createdBy' => $this->session->userdata('userId')
                                 );
 
@@ -804,16 +808,16 @@
 
 
                             // $upload = 'ok'; 
-                        } 
-                    }else{
+                    //     } 
+                    // }else{
 
-                        echo 'type_missmatch';
-                    } 
+                        //echo 'type_missmatch';
+                    // } 
 
                    
-                }else{
-                    echo 'empty';
-                } 
+                // }else{
+                //     echo 'empty';
+                // } 
             
         }
 

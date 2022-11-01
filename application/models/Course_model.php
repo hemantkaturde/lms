@@ -708,9 +708,11 @@ public function getBookscount($topic_id,$course_id){
     {
         foreach ($fetch_result as $key => $value)
         {
-             $data[$counter]['file_name_original'] = $value['file_name_original'];
+             //$data[$counter]['file_name_original'] = $value['file_name_original'];
              $data[$counter]['doc_type'] = $value['doc_type'];
              $data[$counter]['file_url'] = "<a  href=".trim($value['file_url'])." target=_blank>".$value['file_url']."</a>";
+
+             $data[$counter]['video'] ='<iframe width="100" height="100" src="'.$value['file_url'].'"></iframe>';
              
              $data[$counter]['action'] = '';
              //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";

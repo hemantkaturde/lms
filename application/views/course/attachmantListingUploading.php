@@ -33,10 +33,10 @@
                     <table id="view_topic_document_document" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Topic / Chapter Name</th>
+                                <!-- <th>Topic / Chapter Name</th> -->
                                 <th>File Name</th>
                                 <th>Link</th>
-                                <!-- <th>Downlaod</th> -->
+                                <th>Downlaod</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -75,7 +75,27 @@
                                 </div>
                             </div>
 
+
+                              
                             <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label for="image">Video Title</label>
+                                    <input name="video_text" id="video_text" type="text" class="form-control" required/>
+                                </div>
+                            </div>
+
+                              
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label for="image">Video URL</label>
+                                    <input name="video_url" id="video_url" type="text" class="form-control" required/>
+                                    <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
+                                    <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
+                                    <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
+                                </div>
+                            </div>
+                            
+                            <!-- <div class="col-sm-9">
                                 <div class="form-group">
                                     <label for="image">Upload <?=ucfirst($type);?></label>
                                     <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
@@ -83,7 +103,7 @@
                                     <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
                                     <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="row">
@@ -98,7 +118,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-9">
                                 <div class="form-group">
                                     <div id="imageDiv" style="display:none;color:red;"><strong>Your Uploaded <?=ucfirst($type);?>
@@ -115,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>
