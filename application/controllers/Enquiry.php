@@ -769,7 +769,7 @@
                     // $to = $get_equiry_data->enq_email;
                     // $from = 'enquiry@iictn.in'; 
                     // $fromName = 'IICTN'; 
-                    // $enq_fullname = $get_equiry_data->enq_fullname;
+                    $enq_fullname = $get_equiry_data->enq_fullname;
                     $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
 
                     $to = 'hemantkaturde123@gmail.com'; 
