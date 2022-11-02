@@ -1,13 +1,13 @@
 <?php
  
- $to = "xyz@somedomain.com";
+ $to = "hemantkaturde123@gamil.com";
  $subject = "This is subject";
  
  $message = "<b>This is HTML message.</b>";
  $message .= "<h1>This is headline.</h1>";
  
- $header = "From:abc@somedomain.com \r\n";
- $header .= "Cc:afgh@somedomain.com \r\n";
+ $header = "From:hemantkaturde123@gamil.com \r\n";
+ $header .= "Cc:hemantkaturde123@gamil.com \r\n";
  $header .= "MIME-Version: 1.0\r\n";
  $header .= "Content-type: text/html\r\n";
  
