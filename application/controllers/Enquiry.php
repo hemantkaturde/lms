@@ -779,7 +779,9 @@
                 <p>Thank You for the inquiry.</p>
                 <p>Please find attached is the brochure and details of our courses and institute.</p>
                 <p>Kindly contact your councilors for more Details.</p></div>';
-               
+               // Boundary  
+    $semi_rand = md5(time());  
+    $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";  
                
                    // Headers for attachment  
     $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\"";  
