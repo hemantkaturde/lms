@@ -71,8 +71,8 @@ $subject = 'Send Email with Multiple Attachments in PHP by CodexWorld';
  
 // Attachment files 
 $files = array( 
-    'files/codex-web-view.png', 
-    'files/codex-site.pdf' 
+    'https://iictn.in/markating_material/Doctors_Brochure.pdf', 
+    'https://iictn.in/markating_material/Doctors_Brochure.pdf' 
 ); 
  
 $htmlContent = ' 
