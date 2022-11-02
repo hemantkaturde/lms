@@ -781,7 +781,7 @@
                     <p><b>Dear, </b> '.$enq_fullname.'</p>
                     <p>Thank You for the inquiry.</p>
                     <p>Please find attached is the brochure and details of our courses and institute.</p>
-                    <p>Kindly contact your councilors for more Details.</p></div>  <p> Total Files '.count($files).'</p>'; 
+                    <p>Kindly contact your councilors for more Details.</p></div>'; 
                     
                     $retval = mail($to,$Subject,$Body,$header);
             
