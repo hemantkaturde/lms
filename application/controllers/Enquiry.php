@@ -767,9 +767,9 @@
 
                 $to = $get_equiry_data->enq_email;
                 $enq_fullname = $get_equiry_data->enq_fullname;
-                $subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
+                $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                 
-                $header = "From: IICTN-Payment Link <enquiry@iictn.in> \r\n";
+                $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
                 //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                 $header .= "MIME-Version: 1.0\r\n";
                 $header .= "Content-type: text/html\r\n";
