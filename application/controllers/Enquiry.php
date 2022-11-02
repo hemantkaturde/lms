@@ -873,7 +873,7 @@
     $returnpath = "-f" . 'enquiry@iictn.in'; 
      
     // Send email 
-    $retva = mail($to, $subject, $message, $headers, $returnpath);  
+    $retval = mail($to, $subject, $message, $headers, $returnpath);  
      
     // Return true if email sent, otherwise return false 
                   if($retval){
