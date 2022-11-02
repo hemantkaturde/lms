@@ -6,7 +6,6 @@
     use Razorpay\Api\Api;
     use Razorpay\Api\Errors\SignatureVerificationError;
 
-
     class Enquiry extends BaseController
     {
     /**
@@ -767,24 +766,33 @@
                 $all_course_name = trim($course_name, ', '); 
 
                 $to = $get_equiry_data->enq_email;
-                $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
-
+                $enq_fullname = $get_equiry_data->enq_fullname;
+                $subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
                 
-              
                 $header = "From: IICTN-Payment Link <enquiry@iictn.in> \r\n";
                 //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                 $header .= "MIME-Version: 1.0\r\n";
                 $header .= "Content-type: text/html\r\n";
-                
-                $retval = mail($to,$Subject,$Body,$header);    
-                  
-        
+
+                $body ='<div><p><b>Dear</b> '.$enq_fullname.' </p>,
+                <p>Thank You for the inquiry.</p>
+                <p>Please find attached is the brochure and details of our courses and institute.</p>
+                <p>Kindly contact your councilors for more Details.</p></div>';
+               
+                $attchment1 ='';
+                $attchment2 ='';
+
+                $retval = mail($to,$subject,$body,$header);    
+
                 if($retval){
                     $process = 'Enquiry Link Sent';
                     $processFunction = 'Enquiry/sendEnquiryLink';
                     $this->logrecord($process,$processFunction);
                     echo(json_encode(array('status'=>'success')));
                 }
+
+                //sendmail($to,$subject,$body,$attchment1,$attchment2);
+
             }else{
                 echo(json_encode(array('status'=>FALSE)));
 

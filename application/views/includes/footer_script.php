@@ -1121,15 +1121,15 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "User Created!",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "User Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_md").hide();
 								window.location.href = "<?php echo base_url().'userListing'?>";
-						});						
+						//});						
 				    }
 					
 				},
@@ -1201,15 +1201,15 @@
 						}
 						else if(fetchResponse.status == 'success')
 						{
-							swal({
-								title: "User Updated!",
-								text: "",
-								icon: "success",
-								button: "Ok",
-								},function(){ 
+							// swal({
+							// 	title: "User Updated!",
+							// 	text: "",
+							// 	icon: "success",
+							// 	button: "Ok",
+							// 	},function(){ 
 									$("#popup_modal_md").hide();
 									window.location.href = "<?php echo base_url().'userListing'?>";
-							});						
+							//});						
 						}
 						
 					},
@@ -1225,19 +1225,19 @@
 			var elemF = $(this);
 			e.preventDefault();
 
-			swal({
-				title: "Are you sure?",
-				text: "",
-				type: "warning",
-				showCancelButton: true,
-				closeOnClickOutside: false,
-				confirmButtonClass: "btn-sm btn-danger",
-				confirmButtonText: "Yes, delete it!",
-				cancelButtonText: "No, cancel plz!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			}, function(isConfirm) {
-				if (isConfirm) {
+			// swal({
+			// 	title: "Are you sure?",
+			// 	text: "",
+			// 	type: "warning",
+			// 	showCancelButton: true,
+			// 	closeOnClickOutside: false,
+			// 	confirmButtonClass: "btn-sm btn-danger",
+			// 	confirmButtonText: "Yes, delete it!",
+			// 	cancelButtonText: "No, cancel plz!",
+			// 	closeOnConfirm: false,
+			// 	closeOnCancel: false
+			// }, function(isConfirm) {
+			// 	if (isConfirm) {
 					$.ajax({
 					url : "<?php echo base_url();?>deleteUser",
 					type: "POST",
@@ -1248,26 +1248,26 @@
 												//swal("Deleted!", "", "success");
 												//location.reload();
 											//}
-						swal({
-							title: "Deleted!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-						},function(){ 
+						// swal({
+						// 	title: "Deleted!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// },function(){ 
 							$("#popup_modal_md").hide();
 								window.location.href = "<?php echo base_url().'userListing'?>";
-							});		
+							//});		
 						},
 						error: function (jqXHR, textStatus, errorThrown)
 						{
 										//$(".loader_ajax").hide();
 						}
 					})
-				}
-				else {
-					swal("Cancelled", " ", "error");
-				}
-			});
+				// }
+				// else {
+				// 	swal("Cancelled", " ", "error");
+				// }
+			//});
 		});
     </script>
 <?php } ?>

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ac3e818386a6672ca9900e429bacf9576303821c',
+        'reference' => '86f52672d3f05859658de380df454c78dac9385a',
         'name' => 'codeigniter/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ac3e818386a6672ca9900e429bacf9576303821c',
+            'reference' => '86f52672d3f05859658de380df454c78dac9385a',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
@@ -128,12 +128,12 @@
             'dev_requirement' => true,
         ),
         'phpmailer/phpmailer' => array(
-            'pretty_version' => 'v6.6.3',
-            'version' => '6.6.3.0',
+            'pretty_version' => 'v6.6.5',
+            'version' => '6.6.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),
-            'reference' => '9400f305a898f194caff5521f64e5dfa926626f3',
+            'reference' => '8b6386d7417526d1ea4da9edb70b8352f7543627',
             'dev_requirement' => false,
         ),
         'phpspec/prophecy' => array(

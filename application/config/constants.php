@@ -107,13 +107,16 @@ define('TBL_QUESTION_PAPER','tbl_course_question_paper');
 define('TBL_ENQUIRY_FOLLOW_UP', 'tbl_enquiry_follow_up');
 
 
-define('EMAIL_SMTP_HOST','smtp.gmail.com');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
-define('EMAIL_USERNAME','hemantkaturde123@gmail.com');	// Your system name
-define('EMAIL_PASSWORD','hemant@12061994');	// Your email password
+define('EMAIL_USERNAME','test@qelocityindia.com');	// Your system name
+define('EMAIL_PASSWORD','Qelocity@420');	// Your email password
 define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
-define('FROM_EMAIL','hemantkaturde123@gmail.com');		// e.g. email@example.com
+define('FROM_EMAIL','test@qelocityindia.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
+
+
+
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 
 
