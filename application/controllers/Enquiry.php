@@ -771,8 +771,8 @@
                 
                 $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
                 //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
-                $header .= "MIME-Version: 1.0\r\n";
-                $header .= "Content-type: text/html\r\n";
+               //$header .= "MIME-Version: 1.0\r\n";
+               // $header .= "Content-type: text/html\r\n";
 
                 $body ='<div>
                 <p><b>Dear, </b> '.$enq_fullname.'</p>
