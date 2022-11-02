@@ -13,8 +13,8 @@
         'https://iictn.in/markating_material/Doctors_Brochure.pdf', 
         'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf' 
 ); 
-   
-   
+
+
     // Sender info  
     $from = $senderName." <".$senderEmail.">";  
     $headers = "From: $from"; 
@@ -33,10 +33,12 @@
     // Preparing attachment 
     if(!empty($files)){ 
         for($i=0;$i<count($files);$i++){ 
-            if(is_file($files[$i])){ 
+            //if(is_file($files[$i])){ 
+
+                // print_r($files );
+                // exit;
                 $file_name = basename($files[$i]); 
                 $file_size = filesize($files[$i]); 
-                 
                 $message .= "--{$mime_boundary}\n"; 
                 $fp =    @fopen($files[$i], "rb"); 
                 $data =  @fread($fp, $file_size); 
@@ -46,9 +48,11 @@
                 "Content-Description: ".$file_name."\n" . 
                 "Content-Disposition: attachment;\n" . " filename=\"".$file_name."\"; size=".$file_size.";\n" .  
                 "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n"; 
-            } 
+           // } 
         } 
     } 
+
+    //exit;
      
     $message .= "--{$mime_boundary}--"; 
     $returnpath = "-f" . $senderEmail; 
