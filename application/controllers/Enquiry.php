@@ -783,7 +783,7 @@
                     <p>Please find attached is the brochure and details of our courses and institute.</p>
                     <p>Kindly contact your councilors for more Details.</p></div>'; 
                     
-                    $retval = mail($to,$Subject,$Body,$header);
+                    $retval = mail($to,$subject,$htmlContent,$header);
             
                     if($retval){
                         $process = 'Enquiry Link Sent';
