@@ -763,129 +763,44 @@
                         $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
                         $i++;  
                     }
-                $all_course_name = trim($course_name, ', '); 
 
-                $to = $get_equiry_data->enq_email;
-                $enq_fullname = $get_equiry_data->enq_fullname;
-                $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
-                
-               // $headers = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
-                //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
-               //$header .= "MIME-Version: 1.0\r\n";
-               // $header .= "Content-type: text/html\r\n";
+                    $all_course_name = trim($course_name, ', '); 
 
-                $body ='<div>
-                <p><b>Dear, </b> '.$enq_fullname.'</p>
-                <p>Thank You for the inquiry.</p>
-                <p>Please find attached is the brochure and details of our courses and institute.</p>
-                <p>Kindly contact your councilors for more Details.</p></div>';
-               // Boundary  
-    // $semi_rand = md5(time());  
-    // $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";  
-               
-    //                // Headers for attachment  
-    // $headers .= "\nMIME-Version: 1.0\n" ."Content-Type: multipart/mixed;\n" ." boundary=\"{$mime_boundary}\""; 
-    // // Multipart boundary  
-    // $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" . 
-    // "Content-Transfer-Encoding: 7bit\n\n" . $body . "\n\n";  
+                    $to = $get_equiry_data->enq_email;
+                    $from = 'enquiry@iictn.in'; 
+                    $fromName = 'IICTN'; 
+                    $enq_fullname = $get_equiry_data->enq_fullname;
+                    $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
+                    
+                    $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
+                    //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                    $header .= "MIME-Version: 1.0\r\n";
+                    $header .= "Content-type: text/html\r\n";
 
-    // $file1     = "../markating_material/Doctors_Brochure.pdf";
-    // $file2     = "../markating_material/Non_Doctors_Brochure.pdf";
-
-    // $files =array($file1, $file2);
- 
-    // // Preparing attachment 
-    // if(!empty($files)){ 
-    //     for($i=0;$i<count($files);$i++){ 
-    //         if(is_file($files[$i])){ 
-    //             $file_name = basename($files[$i]); 
-    //             $file_size = filesize($files[$i]); 
-                 
-    //             $message .= "--{$mime_boundary}\n"; 
-    //             $fp =    @fopen($files[$i], "rb"); 
-    //             $data =  @fread($fp, $file_size); 
-    //             @fclose($fp); 
-    //             $data = chunk_split(base64_encode($data)); 
-    //             $message .= "Content-Type: application/octet-stream; name=\"".$file_name."\"\n" .  
-    //             "Content-Description: ".$file_name."\n" . 
-    //             "Content-Disposition: attachment;\n" . " filename=\"".$file_name."\"; size=".$file_size.";\n" .  
-    //             "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n"; 
-    //         } 
-    //     } 
-    // } 
-     
-    // $message .= "--{$mime_boundary}--"; 
-    // $returnpath = "-f" . 'enquiry@iictn.in'; 
+                    // Attachment files 
+                    $files = array( 
+                            '../markating_material/Doctors_Brochure.pdf', 
+                            '../markating_material/Non_Doctors_Brochure.pdf' 
+                    ); 
+                    
+                    $htmlContent = ' 
+                    <div>
+                    <p><b>Dear, </b> '.$enq_fullname.'</p>
+                    <p>Thank You for the inquiry.</p>
+                    <p>Please find attached is the brochure and details of our courses and institute.</p>
+                    <p>Kindly contact your councilors for more Details.</p></div>  <p> Total Files '.count($files).'</p>'; 
+                    
+                    // Call function and pass the required arguments 
+                    $sendEmail = multi_attach_mail($to, $subject, $htmlContent, $from, $fromName, $files); 
+                    
+                    // Email sending status 
+                    if($sendEmail){ 
+                       echo(json_encode(array('status'=>'success')));
+                    }else{ 
+                        echo(json_encode(array('status'=>'fail')));
+                    }
 
 
-
-    //             $retval = mail($to,$subject,$message,$headers,$returnpath);    
-
-    //             if($retval){
-    //                 $process = 'Enquiry Link Sent';
-    //                 $processFunction = 'Enquiry/sendEnquiryLink';
-    //                 $this->logrecord($process,$processFunction);
-    //                 echo(json_encode(array('status'=>'success')));
-    //             }
-
-
-
-    $file1     = "../markating_material/Doctors_Brochure.pdf";
-    $file2     = "../markating_material/Non_Doctors_Brochure.pdf";
-
-    $files = array($file1,$file2);
-
-    $from = 'Hemant'." <".'enquiry@iictn.in'.">";  
-    $headers = "From: $from"; 
- 
-    // Boundary  
-    $semi_rand = md5(time());  
-    $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";  
- 
-    // Headers for attachment  
-    $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\"";  
- 
-    // Multipart boundary  
-    $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" . 
-    "Content-Transfer-Encoding: 7bit\n\n" . $body . "\n\n";  
- 
-    // Preparing attachment 
-    if(!empty($files)){ 
-        for($i=0;$i<count($files);$i++){ 
-            if(is_file($files[$i])){ 
-                $file_name = basename($files[$i]); 
-                $file_size = filesize($files[$i]); 
-                 
-                $message .= "--{$mime_boundary}\n"; 
-                $fp =    @fopen($files[$i], "rb"); 
-                $data =  @fread($fp, $file_size); 
-                @fclose($fp); 
-                $data = chunk_split(base64_encode($data)); 
-                $message .= "Content-Type: application/octet-stream; name=\"".$file_name."\"\n" .  
-                "Content-Description: ".$file_name."\n" . 
-                "Content-Disposition: attachment;\n" . " filename=\"".$file_name."\"; size=".$file_size.";\n" .  
-                "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n"; 
-            } 
-        } 
-    } 
-     
-    $message .= "--{$mime_boundary}--"; 
-    $returnpath = "-f" . 'enquiry@iictn.in'; 
-     
-    // Send email 
-    $retval = mail($to, $subject, $message, $headers, $returnpath);  
-     
-    // Return true if email sent, otherwise return false 
-                  if($retval){
-                    $process = 'Enquiry Link Sent';
-                    $processFunction = 'Enquiry/sendEnquiryLink';
-                    $this->logrecord($process,$processFunction);
-                    echo(json_encode(array('status'=>'success')));
-                }
-
-
-
-                //sendmail($to,$subject,$body,$attchment1,$attchment2);
 
             }else{
                 echo(json_encode(array('status'=>FALSE)));
