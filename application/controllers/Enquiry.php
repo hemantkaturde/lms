@@ -767,7 +767,7 @@
 
                 $to = $get_equiry_data->enq_email;
                 $enq_fullname = $get_equiry_data->enq_fullname;
-               // $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
+                $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                 
                // $headers = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
                 //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
