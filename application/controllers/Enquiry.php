@@ -788,7 +788,7 @@
  
     // Multipart boundary  
     $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" . 
-    "Content-Transfer-Encoding: 7bit\n\n" . $message . "\n\n";  
+    "Content-Transfer-Encoding: 7bit\n\n" . $body . "\n\n";  
 
     $file1     = "../markating_material/Doctors_Brochure.pdf";
     $file2     = "../markating_material/Non_Doctors_Brochure.pdf";
@@ -820,7 +820,7 @@
 
 
 
-                $retval = mail($to,$subject,$body,$header,$returnpath);    
+                $retval = mail($to,$subject,$message,$header,$returnpath);    
 
                 if($retval){
                     $process = 'Enquiry Link Sent';
