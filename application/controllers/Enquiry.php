@@ -742,7 +742,6 @@
 
        }
 
-
        public function sendBrochureLink(){
 
         $post_submit = $this->input->post();
@@ -766,27 +765,17 @@
 
                     $all_course_name = trim($course_name, ', '); 
 
-                    // $to = $get_equiry_data->enq_email;
-                    // $from = 'enquiry@iictn.in'; 
-                    // $fromName = 'IICTN'; 
+                    $to = $get_equiry_data->enq_email;
+                    $from = 'enquiry@iictn.in'; 
+                    $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
                     $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
-
-                    $to = 'hemantkaturde123@gmail.com'; 
-$from = 'sender@example.com'; 
-$fromName = 'Sender Name'; 
                     
                     // $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
                     // //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     // $header .= "MIME-Version: 1.0\r\n";
                     // $header .= "Content-type: text/html\r\n";
 
-                    // Attachment files 
-                    $files = array( 
-                            'https://iictn.in/markating_material/Doctors_Brochure.pdf', 
-                            'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf' 
-                    ); 
-                    
                     $htmlContent = ' 
                     <div>
                     <p><b>Dear, </b> '.$enq_fullname.'</p>
@@ -794,23 +783,20 @@ $fromName = 'Sender Name';
                     <p>Please find attached is the brochure and details of our courses and institute.</p>
                     <p>Kindly contact your councilors for more Details.</p></div>  <p> Total Files '.count($files).'</p>'; 
                     
-                    // Call function and pass the required arguments 
-                    $sendEmail = multi_attach_mail($to, $subject, $htmlContent, $from, $fromName, $files); 
-                    
-                    // Email sending status 
-                    if($sendEmail){ 
-                       echo(json_encode(array('status'=>'success')));
-                    }else{ 
-                        echo(json_encode(array('status'=>'fail')));
+                    $retval = mail($to,$Subject,$Body,$header);
+            
+                    if($retval){
+                        $process = 'Enquiry Link Sent';
+                        $processFunction = 'Enquiry/sendEnquiryLink';
+                        $this->logrecord($process,$processFunction);
+                        echo(json_encode(array('status'=>'success')));
                     }
-
-
 
             }else{
                 echo(json_encode(array('status'=>FALSE)));
 
             }
-    }
+       }
 
     }
 
