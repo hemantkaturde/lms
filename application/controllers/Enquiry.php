@@ -873,14 +873,16 @@
     $returnpath = "-f" . 'enquiry@iictn.in'; 
      
     // Send email 
-    $mail = mail($to, $subject, $message, $headers, $returnpath);  
+    $retva = mail($to, $subject, $message, $headers, $returnpath);  
      
     // Return true if email sent, otherwise return false 
-    if($mail){ 
-        return true; 
-    }else{ 
-        return false; 
-    } 
+                  if($retval){
+                    $process = 'Enquiry Link Sent';
+                    $processFunction = 'Enquiry/sendEnquiryLink';
+                    $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+
 
 
                 //sendmail($to,$subject,$body,$attchment1,$attchment2);
