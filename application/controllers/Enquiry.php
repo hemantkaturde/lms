@@ -783,8 +783,8 @@ $fromName = 'Sender Name';
 
                     // Attachment files 
                     $files = array( 
-                            '../markating_material/Doctors_Brochure.pdf', 
-                            '../markating_material/Non_Doctors_Brochure.pdf' 
+                            'https://iictn.in/markating_material/Doctors_Brochure.pdf', 
+                            'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf' 
                     ); 
                     
                     $htmlContent = ' 
