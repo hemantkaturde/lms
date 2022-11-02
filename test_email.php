@@ -6,11 +6,13 @@
   $from        = "hemantkaturde123@gmail.com";
   $subject     = "IICTN - Admission Payment Recipt";
 
+  $mainMessage = 'Hello';
 
-  $fileatt     = "../invoices/PAYMENT_RECEIPT_1.pdf"; //file location
+
+  $fileatt     = "invoices/PAYMENT_RECEIPT_1.pdf"; //file location
   $fileatttype = "application/pdf";
   $fileattname = "PAYMENT_RECEIPT_1.pdf"; //name that you want to use to send or you can use the same name
-  // $headers = "From: $from";
+    $headers = "From: $from";
 
   $header = "From: IICTN-Payment Receipt <enquiry@iictn.in> \r\n";
 
