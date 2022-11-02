@@ -5,7 +5,7 @@
 $to = 'hemantkaturde123@gmail.com'; 
  
 // Sender 
-$from = 'hemantkaturde123@gmail.com'; 
+$from = 'enquiry@iictn.in'; 
 $fromName = 'CodexWorld'; 
  
 // Email subject 
