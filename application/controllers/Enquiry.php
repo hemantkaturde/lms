@@ -776,8 +776,7 @@
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
 
-                    $htmlContent = ' 
-                    <div>
+                    $htmlContent = '<div>
                     <p><b>Dear, </b> '.$enq_fullname.'</p>
                     <p>Thank You for the inquiry.</p>
                     <p>Please find attached is the brochure and details of our courses and institute.</p>
