@@ -38,7 +38,7 @@
                 // print_r($files );
                 // exit;
                 $file_name = basename($files[$i]); 
-                $file_size = filesize($files[$i]); 
+                //$file_size = filesize($files[$i]); 
                 $message .= "--{$mime_boundary}\n"; 
                 $fp =    @fopen($files[$i], "rb"); 
                 $data =  @fread($fp, $file_size); 
@@ -46,7 +46,7 @@
                 $data = chunk_split(base64_encode($data)); 
                 $message .= "Content-Type: application/octet-stream; name=\"".$file_name."\"\n" .  
                 "Content-Description: ".$file_name."\n" . 
-                "Content-Disposition: attachment;\n" . " filename=\"".$file_name."\"; size=".$file_size.";\n" .  
+                "Content-Disposition: attachment;\n" . " filename=\"".$file_name."\"\n" .  
                 "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n"; 
            // } 
         } 
