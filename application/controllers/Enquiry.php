@@ -358,7 +358,7 @@
         public function sendPaymentLink(){
 
             $post_submit = $this->input->post();
-
+        
                 if($post_submit){
                     $enq_id =$post_submit['id'];
                     $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];

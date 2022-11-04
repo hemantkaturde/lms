@@ -162,8 +162,7 @@
                                                     style="text-align: center;">
                                                     <div>
                                                         <h4 style="color: #d2ae6d;"><a style='cursor: pointer;'
-                                                                class='send_payment_link'
-                                                                data-id=<?php $followDataenquiry[0]->enq_id;?>><i
+                                                                class='send_payment_link' data-id=<?php echo $followDataenquiry[0]->enq_id;?>><i
                                                                     class="fa fa-paper-plane-o"
                                                                     aria-hidden="true"></i></a></h4>Payment Link
                                                     </div>
