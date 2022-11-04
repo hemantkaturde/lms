@@ -362,6 +362,28 @@ class Enquiry_model extends CI_Model
 
     }
 
+    public function update_originanl_amount($enq_id,$total_fees){
+
+     print_r($enq_id);
+     exit;
+
+    }
+
+ 
+    public function update_enquiry_discount($data,$enquiry_id){
+
+        $this->db->where('enq_id', $enquiry_id);
+        if($this->db->update(TBL_ENQUIRY, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+   
+       }
+
+
+
+
 }
 
 ?>

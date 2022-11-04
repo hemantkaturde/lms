@@ -4611,5 +4611,14 @@ table.dataTable {
    color: #fff;
 }
 
-
-
+.card.card-body.card-buttons{
+    box-shadow: 10px 5px 5px #d2ae6d;
+    border-color: #d2ae6d;
+    
+  }
+  
+  
+  .ibox-body.banner-box{
+  
+    box-shadow: 8px 5px 5px #d2ae6d;
+  }

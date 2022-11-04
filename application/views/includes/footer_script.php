@@ -745,53 +745,52 @@
 				});
 	});
 
-	$(document).on('click','.send_payment_link',function(e){
-			var elemF = $(this);
-			e.preventDefault();
+	// $(document).on('click','.send_payment_link',function(e){
+	// 		var elemF = $(this);
+	// 		e.preventDefault();
 
-				swal({
-					title: "Are you sure?",
-					text: "You want to send Payment Link to User !",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, send it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
-						$(".loader_ajax").show();
+	// 			swal({
+	// 				title: "Are you sure?",
+	// 				text: "You want to send Payment Link to User !",
+	// 				type: "warning",
+	// 				showCancelButton: true,
+	// 				closeOnClickOutside: false,
+	// 				confirmButtonClass: "btn-sm btn-danger",
+	// 				confirmButtonText: "Yes, send it!",
+	// 				cancelButtonText: "No, cancel plz!",
+	// 				closeOnConfirm: false,
+	// 				closeOnCancel: false
+	// 			}, function(isConfirm) {
+	// 				if (isConfirm) {
+	// 					$(".loader_ajax").show();
 
-						$(".sweet-alert").css({"z-index":"-99"});
+	// 					$(".sweet-alert").css({"z-index":"-99"});
 
-								$.ajax({
-									url : "<?php echo base_url();?>sendPaymentLink",
-									type: "POST",
-									data : 'id='+elemF.attr('data-id'),
-									success: function(data, textStatus, jqXHR)
-									{
-										//if(data.status=='success'){
-											$(".sweet-alert").css({"z-index":""});
+	// 							$.ajax({
+	// 								url : "<?php echo base_url();?>sendPaymentLink",
+	// 								type: "POST",
+	// 								data : 'id='+elemF.attr('data-id'),
+	// 								success: function(data, textStatus, jqXHR)
+	// 								{
+	// 									//if(data.status=='success'){
+	// 										$(".sweet-alert").css({"z-index":""});
 
-                                            $(".loader_ajax").hide();
-											swal("Send!", "Link Sent Successfully.", "success");
-											//location.reload();
-										//}
-									},
-									error: function (jqXHR, textStatus, errorThrown)
-									{
-										$(".loader_ajax").hide();
-									}
-							    })
-							}
-							else {
-					               swal("Cancelled", "Link cancelled ", "error");
-					}
-				});
-	});
-
+    //                                         $(".loader_ajax").hide();
+	// 										swal("Send!", "Link Sent Successfully.", "success");
+	// 										//location.reload();
+	// 									//}
+	// 								},
+	// 								error: function (jqXHR, textStatus, errorThrown)
+	// 								{
+	// 									$(".loader_ajax").hide();
+	// 								}
+	// 						    })
+	// 						}
+	// 						else {
+	// 				               swal("Cancelled", "Link cancelled ", "error");
+	// 				}
+	// 			});
+	// });
 
 	$(document).on('click','.send_brochure_link',function(e){
 			var elemF = $(this);
@@ -2762,7 +2761,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-
 <?php if($pageTitle=='View Question Paper'){ ?>
 	<script type="text/javascript">
   
@@ -2814,7 +2812,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	</script>
 <?php } ?>
-
 
 <?php if($pageTitle=='Enquiry Follow Up'){ ?>
 	<script type="text/javascript">
@@ -3048,6 +3045,116 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
+<?php if($pageTitle=='Enquiry Payment Details'){ ?>
+	<script type="text/javascript">
+	$(document).on('click','#update_discount',function(e){
+			e.preventDefault();
+			 //$(".loader_ajax").show();
+			var formData = new FormData($("#update_enquiry_form")[0]);
+			var enquiry_id =  $('#enquiry_id').val();
+		
+			$.ajax({
+				url : "<?php echo base_url();?>update_discount",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'payment_details/'?>"+enquiry_id;
+						//});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+
+
+	$(document).on('blur', '#discounted_amount', function(){
+		if($("#discounted_amount").val()){
+			var total_amount =  parseFloat($("#total_amount").val());
+			var discounted_amount =  parseFloat($("#discounted_amount").val());
+			var final_cost_to_the_usr = total_amount - discounted_amount;
+			$("#total_benifit").val(Math.round(discounted_amount));
+			$("#final_student_amount").val(Math.round(final_cost_to_the_usr));
+		}
+	});
+
+	
+	$(document).on('click','.send_payment_link',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "You want to send Payment Link to User !",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, send it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+						$(".loader_ajax").show();
+
+						$(".sweet-alert").css({"z-index":"-99"});
+
+								$.ajax({
+									url : "<?php echo base_url();?>sendPaymentLink",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										//if(data.status=='success'){
+											$(".sweet-alert").css({"z-index":""});
+
+                                            $(".loader_ajax").hide();
+											swal("Send!", "Link Sent Successfully.", "success");
+											//location.reload();
+										//}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					               swal("Cancelled", "Link cancelled ", "error");
+					}
+				});
+	});
+
+  </script>
+
+<?php } ?>
 
 
 
