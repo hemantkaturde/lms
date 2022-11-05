@@ -65,7 +65,7 @@
                     $course_result = $conn->query($get_course_fees);
                     $row_course = $course_result->fetch_assoc(); 
                     $total_fees += $row_course['course_total_fees'];
-                    $course_name .= $i++.'-'.$row_course['course_name']. ',';    
+                    $course_name .= $i++.'-'.$row_course['course_name'].' ₹ '.$row_course['course_total_fees']. ',   ';    
                 }
                   $all_course_name = trim($course_name, ', ');
               ?>
@@ -81,15 +81,33 @@
                                         <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
                                         <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
                                         <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div>
+                                        
                                     </div> <!-- rating-wrap.// -->
                     </figcaption><br>
+                   
+                                    <h4 class="title">Total Course Fees</h4>
+                                    <div class="rating-wrap">
+                                       <div class="label-rating"><H4><b><?php echo '₹ '.$total_fees; ?> </b></H4></div><br>
+                                        <!-- <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
+                                        <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
+                                        <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div> -->
+                                        
+                                    </div> <!-- rating-wrap.// -->
+                
 
                     <div class="bottom-wrap col-md-6 justify-content-center align-items-center" style="margin-bottom:15px">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-primary float-right buy_now"
-                            data-amount="<?php echo $total_fees; ?>" data-id="1">Pay Now</a>
+                       
                         <div class="price-wrap h5">
-                            <span class="price-new">₹ <?php echo $total_fees; ?></span>
-                        </div> <!-- price-wrap.// -->
+                           <input type="number" id="final_student_amount" name="final_student_amount" class="form-control col-md-12 col-xs-12" >
+                           <span id="error"> <span>
+                        </div>
+                        <div style="text-align: center;"> 
+                         <!-- <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
+                            data-amount="<?php echo $total_fees; ?>" data-id="1">Pay Now</a> -->
+                            <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
+                            data-amount="" data-id="1">Pay Now</a>
+                        </div>     
+                        <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>
             </div> <!-- col // -->
@@ -100,11 +118,20 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
     $('body').on('click', '.buy_now', function(e) {
-        var totalAmount = $(this).attr("data-amount");
+
+        var final_amt = $("#final_student_amount").val();
+
+        if(final_amt){
+
+            
+        // var totalAmount = $(this).attr("data-amount");
+        var totalAmount =final_amt;
+        
         var product_id = $(this).attr("data-id");
         var options = {
             "key": "<?php echo RAZORPAYKEY;?>",
-            "amount": (<?php echo $total_fees; ?> * 100), // 2000 paise = INR 20
+            //"amount": (<?php echo $total_fees; ?> * 100), // 2000 paise = INR 20
+            "amount": (totalAmount * 100), // 2000 paise = INR 20
             "name": "IICTN",
             "description": "Payment",
             "image": "https://iictn.in/assets/img/logos/iictn_lms.png",
@@ -117,6 +144,8 @@
                         razorpay_payment_id: response.razorpay_payment_id,
                         totalAmount: totalAmount,
                         product_id: product_id,
+                        enq_id: <?php echo $row['enq_id']; ?>,
+                        enq_number: <?php echo $row['enq_number']; ?>
                     },
                     success: function(msg) {
                         window.location.href = '<?php echo SERVER;?>payment/success.php?enq=<?=$row['enq_id'];?>';
@@ -128,9 +157,14 @@
                 "color": "#528FF0"
             }
         };
+       
         var rzp1 = new Razorpay(options);
         rzp1.open();
         e.preventDefault();
+
+        }else{
+          alert('Custom Payment is Required');
+        }
     });
     </script>
 </body>

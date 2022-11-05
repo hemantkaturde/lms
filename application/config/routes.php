@@ -157,6 +157,8 @@ $route['fetchEnquiryFollowup/(:any)'] = "enquiry/fetchEnquiryFollowup/$1";
 $route['delete_enquiry_followup'] = "enquiry/delete_enquiry_followup";
 $route['updatefollowupdata'] = "enquiry/updatefollowupdata";
 
+$route['addmanualpayment'] = "enquiry/addmanualpayment";
+$route['deleteEnquiryTransaction'] = "enquiry/deleteEnquirypaymentTransaction";
 
 //$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 /*********** ADMISSION CONTROLLER ROUTES *******************/

@@ -20,6 +20,15 @@ class Database extends CI_Model
             $this->db->where($field, $value);
             return  $this->db->delete($table);
     }
+
+    function data_update_onlyupdate($table='',$arr='',$field='',$value=''){
+        $this->CI->db->where($field,$value);
+        return $this->CI->db->update($table,$arr);
+        // $this->db->where($field, $value);
+        // return  $this->db->delete($table);
+}
+
+
 }
 
 ?>

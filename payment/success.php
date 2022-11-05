@@ -8,8 +8,6 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
 $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
-
-
 if ($conn->query($sql) === TRUE) {
   //echo "Record updated successfully";
   $name        = "IICTN";

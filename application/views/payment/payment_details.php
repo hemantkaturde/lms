@@ -115,8 +115,9 @@
                                     <div class="form-group">
                                         <button type="submit" id="update_discount"
                                             class="btn btn-primary update_discount">Update Discount</button>
-                                        <button type="button" id="close" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">
+                                                <a href="<?php echo base_url().'/enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                                            </button>
                                     </div>
 
                                 </div>
@@ -140,7 +141,7 @@
                                                     style="text-align: center;">
                                                     <div>
                                                         <h4 style="color: #d2ae6d;">
-                                                            <b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></h4>
+                                                            <b><?='₹ '.$gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;?></b></h4>
                                                         Total Received
                                                     </div>
                                                 </div>
@@ -151,7 +152,7 @@
                                                     style="text-align: center;">
                                                     <div>
                                                         <h4 style="color: #d2ae6d;">
-                                                            <b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></h4>
+                                                            <b><?='₹ '.$followDataenquiry[0]->final_amount - $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;?></b></h4>
                                                         Pending Payment
                                                     </div>
                                                 </div>
@@ -160,75 +161,78 @@
                                             <div class="col-3 mx-auto">
                                                 <div class="card card-body card-buttons payment_box"
                                                     style="text-align: center;">
-                                                    <div>
-                                                        <h4 style="color: #d2ae6d;"><a style='cursor: pointer;'
-                                                                class='send_payment_link' data-id=<?php echo $followDataenquiry[0]->enq_id;?>><i
-                                                                    class="fa fa-paper-plane-o"
-                                                                    aria-hidden="true"></i></a></h4>Payment Link
-                                                    </div>
+                                                    <?php 
+                                                    $pending_amount = $followDataenquiry[0]->final_amount - $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;
+                                                    if($pending_amount > 0){ ?>
+                                                        <div>
+                                                            <h4 style="color: #d2ae6d;"><a style='cursor: pointer;' class='send_payment_link' data-id=<?php echo $followDataenquiry[0]->enq_id;?>><i class="fa fa-paper-plane-o"   aria-hidden="true"></i></a></h4>Payment Link
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <div>
+                                                            <h4 style="color: #d2ae6d;"><i class="fa fa-wpforms"   aria-hidden="true"></i></a></h4>All Payment Done
+                                                        </div>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row mt-6 ">
                                         <div class="col-12 mx-auto">
-                                            <div>
-                                             <label for="" style="margin-top:15px;color: #d2ae6d"> <h4><b>All Transaction List</b><h4></label>
+                                            <div >
+                                                 <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                        <label for="" style="margin-top:15px;color: #d2ae6d"> <h4><b>All Transaction List</b><h4></label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: end;" >
+                                                       <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment">
+                                                           <i class="fa fa-money"></i> Add Payment
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                             <table id="" class="table table-striped ">
                                                 <tr style="">
                                                     <th>Payment Date</th>
                                                     <th>Transection Id</th>
                                                     <th>Amount</th>
+                                                    <th>Payment Mode</th>
                                                     <th>Status</th>
-                                                    
+                                                    <th>Action</th>
                                                 </tr>
-                                                <tr>
-                                                    <td>20-12-2022</td>
-                                                    <td>15425541158525</td>
-                                                    <td>5222</td>
-                                                    <td>Completed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>20-12-2022</td>
-                                                    <td>15425541158525</td>
-                                                    <td>5222</td>
-                                                    <td>Completed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>20-12-2022</td>
-                                                    <td>15425541158525</td>
-                                                    <td>5222</td>
-                                                    <td>Completed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>20-12-2022</td>
-                                                    <td>15425541158525</td>
-                                                    <td>5222</td>
-                                                    <td>Completed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>20-12-2022</td>
-                                                    <td>15425541158525</td>
-                                                    <td>5222</td>
-                                                    <td>Completed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>20-12-2022</td>
-                                                    <td>15425541158525</td>
-                                                    <td>5222</td>
-                                                    <td>Completed</td>
-                                                </tr>
+                                               
+                                                <?php  foreach ($getEnquirypaymentInfo as $paymentkey => $paymentvalue) { 
+                                                    if($paymentvalue->payment_status=='1'){
+                                                        $status='Completed';
+                                                    }
+
+                                                    if($paymentvalue->razorpay_payment_id){
+                                                        $transaction_id = $paymentvalue->razorpay_payment_id;
+                                                        $payment_date = $paymentvalue->datetime;
+                                                    }else{
+                                                        $transaction_id = 'Manaul-Transaction';
+                                                        $payment_date = $paymentvalue->payment_date;
+                                                    }
+
+
+                                                    ?>
+                                                    <tr>
+                                                        <td><?=$payment_date?></td>
+                                                        <td><?=$transaction_id?></td>
+                                                        <td><?='₹ '.$paymentvalue->totalAmount?></td>
+                                                        <td><?=$paymentvalue->payment_mode?></td>
+                                                        <td><?=$status?></td>
+                                                        <td>
+                                                            <a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/view_doc.png";?>" alt='View Transaction' title='View Transaction'></a>
+                                                            <a style='cursor: pointer;' class='delete_enquiry_tarnsaction' data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/delete.png"; ?>" alt='Delete Transaction' title='Delete Transaction'></a> 
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </table>
-
                                         </div>
                                         </div>
-
-
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                         <?php echo form_close(); ?>
@@ -238,3 +242,126 @@
         </div>
     </div>
     <!-- END PAGE CONTENT-->
+
+
+       <!-- Add New Course Modal -->
+       <div class="modal fade" id="add_payment" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="add_paymentLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#d2ae6d">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php
+            $attributes = array("name"=>"add_paynent_form","id"=>"add_paynent_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            echo form_open("", $attributes);
+         ?>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="enquiry_number">Enquiry Number<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="text" id="enquiry_number"
+                                            name="enquiry_number" value="<?php echo $followDataenquiry[0]->enq_number;?>"
+                                            class="form-control col-md-12 col-xs-12" readonly>
+
+                                            <input autocomplete="off" autocomplete="off" type="hidden" id="enquiry_id"
+                                            name="enquiry_id" value="<?php echo $followDataenquiry[0]->enq_id;?>"
+                                            class="form-control col-md-12 col-xs-12" readonly>
+
+                                        <p class="error enquiry_number_error"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;"  for="payment_mode">Payment Mode<span class="required">*</span>
+                                    </label>
+                                        <select class="form-control" id="payment_mode" name="payment_mode">
+                                                <option value="">Select Course Type</option>
+                                                <option value="NEFT">NEFT</option>
+                                                <option value="IMPS">IMPS</option>
+                                                <option value="RTGS">RTGS</option>
+                                                <option value="Payment Geteway">Payment Geteway</option>
+                                                <option value="Swipe">Swipe</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="Cash">Cash</option>
+                                        </select>
+                                        <p class="error payment_mode_error"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="manual_payment_amount">Amount<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="number" id="manual_payment_amount"
+                                            name="manual_payment_amount"   placeholder="Enter Amount"
+                                            class="form-control col-md-12 col-xs-12">
+                                        <p class="error manual_payment_amount_error"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="payment_date">Payment Date<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div>
+                                        <input type="text" class="form-control datepicker" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
+
+                                        <p class="error payment_date_error"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="cheuqe_number">Cheque Number
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="text" id="cheuqe_number"
+                                            name="cheuqe_number" placeholder="Cheque Number"
+                                            class="form-control col-md-12 col-xs-12">
+                                        <p class="error cheuqe_number_error"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="bank_name">Drawn on Bank
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="text" id="bank_name"
+                                            name="bank_name"  placeholder="Enter Bank Name"
+                                            class="form-control col-md-12 col-xs-12">
+                                        <p class="error bank_name_error"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="prepared_by">Prepared By
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="text" id="prepared_by"
+                                            name="prepared_by"   placeholder="Prepared By"
+                                            class="form-control col-md-12 col-xs-12"> 
+                                        <p class="error prepared_by_error"></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="add_manual_payment" class="btn btn-primary add_manual_payment">Add Payment</button>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+        </div>
+    </div>

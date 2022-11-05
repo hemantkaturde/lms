@@ -3093,8 +3093,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			return false;
 	});
 
-
-
 	$(document).on('blur', '#discounted_amount', function(){
 		if($("#discounted_amount").val()){
 			var total_amount =  parseFloat($("#total_amount").val());
@@ -3105,7 +3103,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		}
 	});
 
-	
 	$(document).on('click','.send_payment_link',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -3151,6 +3148,130 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 				});
 	});
+
+	$(document).on('click','#add_manual_payment',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var enquiry_id = $("#enquiry_id").val();
+			var formData = new FormData($("#add_paynent_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addmanualpayment",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Enquiry Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'payment_details/'?>"+enquiry_id;
+						//});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+
+	$(document).on('click','.delete_enquiry_tarnsaction',function(e){
+			var elemF = $(this);
+
+			var enquiry_id = $("#enquiry_id").val();
+	
+			e.preventDefault();
+
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteEnquiryTransaction",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											//swal("Deleted!", "", "success");
+											//location.reload();
+										//}
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													// swal({
+													// 	title: "Deleted!",
+													// 	text: "",
+													// 	icon: "success",
+													// 	button: "Ok",
+													// 	},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'payment_details/'?>"+enquiry_id;
+													//});	
+											}else if(obj.status=='linked'){
+													// swal({
+													// 		title: "Admission Alreday In use!",
+													// 		text: "",
+													// 		icon: "success",
+													// 		button: "Ok",
+													// 		},function(){ 
+																$("#popup_modal_sm").hide();
+																window.location.href = "<?php echo base_url().'payment_details/'?>"+enquiry_id;
+													//});	
+											}else{
+
+												// swal({
+												// 		title: "Not Deleted!",
+												// 		text: "",
+												// 		icon: "success",
+												// 		button: "Ok",
+												// 		},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'payment_details/'?>"+enquiry_id;
+													//});	
+											}	
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", " ", "error");
+				// 	}
+				// });
+	});
+
 
   </script>
 

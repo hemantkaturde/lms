@@ -789,6 +789,8 @@
             $this->global['pageTitle'] = 'Enquiry Payment Details';
             $data['enquiry_id'] = $id;
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
+            $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
             $this->loadViews("payment/payment_details", $this->global, $data , NULL);
 
        }
@@ -844,7 +846,62 @@
         }
     }
 
-       public function sendBrochureLink(){
+
+   public function addmanualpayment(){
+
+    $post_submit = $this->input->post();
+
+    if($post_submit){
+
+        $add_manaulpayment_response = array();
+
+        $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
+        $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required');
+        $this->form_validation->set_rules('manual_payment_amount', 'Manual Payment Amount', 'trim|required');
+        $this->form_validation->set_rules('payment_date', 'Payment Date', 'trim|required');
+        $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
+        $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
+        $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
+       
+        if($this->form_validation->run() == FALSE){
+            $add_manaulpayment_response['status'] = 'failure';
+            $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+        }else{
+
+                    $data = array(
+                        'enquiry_id'=> $this->input->post('enquiry_id'),
+                        'enquiry_number'=>  $this->input->post('enquiry_number'),
+                        'totalAmount'=>  $this->input->post('manual_payment_amount'),
+                        'payment_status'=> '1',
+                        'payment_mode'=> $this->input->post('payment_mode'),
+                        'cheuqe_number'=> $this->input->post('cheuqe_number'),
+                        'bank_name'=> $this->input->post('bank_name'),
+                        'prepared_by'=> $this->input->post('prepared_by'),
+                        'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
+                    
+                    );
+                    
+                  
+                   $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
+
+                   if($insert_manualpayment_details){
+                        $add_manaulpayment_response['status'] = 'success';
+                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                    }else{
+                        $add_manaulpayment_response['status'] = 'failure';
+                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                    }
+
+                    echo json_encode($add_manaulpayment_response);
+
+        }
+            
+    }
+
+   }
+   
+
+    public function sendBrochureLink(){
 
         $post_submit = $this->input->post();
 
@@ -897,7 +954,30 @@
                 echo(json_encode(array('status'=>FALSE)));
 
             }
-       }
+    }
+
+
+        public function deleteEnquirypaymentTransaction(){
+
+
+                $post_submit = $this->input->post();
+
+                $enquiryInfo = array('payment_status'=>0);
+                $result = $this->database->data_update_onlyupdate('tbl_payment_transaction',$enquiryInfo,'id',$this->input->post('id'));
+
+                if ($result > 0) {
+                    echo(json_encode(array('status'=>TRUE)));
+
+                    $process = 'Enquiry Payment Delete';
+                    $processFunction = 'Enquiry/deleteEnquirypaymentTransaction';
+                    $this->logrecord($process,$processFunction);
+
+                    }
+                else { echo(json_encode(array('status'=>FALSE))); }
+
+
+
+        }
 
     }
 
