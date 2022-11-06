@@ -131,13 +131,13 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."payment_details/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Payment Details' title='Payment Details'></a> | ";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."followup/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/follow_up.png' alt='Follow Up' title='Follow Up'></a> | ";
  
-                 if($value['payment_status']!=1){
+                //  if($value['payment_status']!=1){
                     //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Follow Up' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/follow_up.png  alt='Follow Up' title='Follow Up'></a> &nbsp";
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Whats_up_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> | ";
                     //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> | "; 
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_brochure_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Brochure Link' title='Send Brochure Link'></a> | "; 
 
-                 }
+                // }
                      $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editenquiry/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
                    
                      if($value['payment_status']!=1){
