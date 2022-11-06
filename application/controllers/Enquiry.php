@@ -952,7 +952,7 @@
                     <p>Kindly contact your councilors for more Details.</p></div>
                     
                     <div>
-                        <p>Download Below Brochure </p>
+                        <p><b>Download Below Brochure<b></p>
                         <p>'.$file_path.'</p>
                     </div>
                     '; 
