@@ -136,12 +136,20 @@
                                                 </div>
                                             </div>
 
+                                            <?php 
+                                                if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){
+                                                    $totalpaidAmount =  $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;
+                                                }else{
+                                                    $totalpaidAmount = 0;  
+                                                }  
+                                            ?>
+
                                             <div class="col-3 mx-auto">
                                                 <div class="card card-body card-buttons payment_box"
                                                     style="text-align: center;">
                                                     <div>
                                                         <h4 style="color: #d2ae6d;">
-                                                            <b><?='₹ '.$gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;?></b></h4>
+                                                            <b><?='₹ '.$totalpaidAmount;?></b></h4>
                                                         Total Received
                                                     </div>
                                                 </div>
@@ -152,7 +160,7 @@
                                                     style="text-align: center;">
                                                     <div>
                                                         <h4 style="color: #d2ae6d;">
-                                                            <b><?='₹ '.$followDataenquiry[0]->final_amount - $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;?></b></h4>
+                                                            <b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></h4>
                                                         Pending Payment
                                                     </div>
                                                 </div>
@@ -162,7 +170,7 @@
                                                 <div class="card card-body card-buttons payment_box"
                                                     style="text-align: center;">
                                                     <?php 
-                                                    $pending_amount = $followDataenquiry[0]->final_amount - $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;
+                                                    $pending_amount = $followDataenquiry[0]->final_amount -  $totalpaidAmount;
                                                     if($pending_amount > 0){ ?>
                                                         <div>
                                                             <h4 style="color: #d2ae6d;"><a style='cursor: pointer;' class='send_payment_link' data-id=<?php echo $followDataenquiry[0]->enq_id;?>><i class="fa fa-paper-plane-o"   aria-hidden="true"></i></a></h4>Payment Link
@@ -184,9 +192,17 @@
                                                         <label for="" style="margin-top:15px;color: #d2ae6d"> <h4><b>All Transaction List</b><h4></label>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: end;" >
-                                                       <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment">
+                                                    <?php $pending_amount = $followDataenquiry[0]->final_amount -  $totalpaidAmount;
+                                                      if($pending_amount > 0){ ?>
+                                                       <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" >
                                                            <i class="fa fa-money"></i> Add Payment
                                                         </button>
+                                                    <?php }else{ ?>
+                                                        <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" disabled>
+                                                           <i class="fa fa-money"></i> Add Payment
+                                                        </button>
+
+                                                    <?php } ?> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,7 +239,7 @@
                                                         <td><?=$paymentvalue->payment_mode?></td>
                                                         <td><?=$status?></td>
                                                         <td>
-                                                            <a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/view_doc.png";?>" alt='View Transaction' title='View Transaction'></a>
+                                                            <a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-toggle="modal" data-target="#view_enquiry_tarnsaction"   data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/view_doc.png";?>" alt='View Transaction' title='View Transaction'></a>
                                                             <a style='cursor: pointer;' class='delete_enquiry_tarnsaction' data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/delete.png"; ?>" alt='Delete Transaction' title='Delete Transaction'></a> 
                                                         </td>
                                                     </tr>
@@ -362,6 +378,89 @@
                     <button type="submit" id="add_manual_payment" class="btn btn-primary add_manual_payment">Add Payment</button>
                 </div>
                 <?php echo form_close(); ?>
+            </div>
+        </div>
+    </div>
+
+
+         <!-- Add New Course Modal -->
+    <div class="modal fade" id="view_enquiry_tarnsaction" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="view_enquiry_tarnsactionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#d2ae6d">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">View Payment Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="enquiry_number">Enquiry Number
+                                    </label>
+                                           <input autocomplete="off" autocomplete="off" type="text" id="enquiry_number_detail"
+                                            name="enquiry_number_detail" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;"  for="payment_mode_detail">Payment Mode
+                                    </label>
+                                    <input autocomplete="off" autocomplete="off" type="text" id="payment_mode_detail"
+                                            name="payment_mode_detail" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="manual_payment_amount_details">Amount
+                                    </label>
+                                    <input autocomplete="off" autocomplete="off" type="text" id="manual_payment_amount_details"
+                                            name="manual_payment_amount_details" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="payment_date_details">Payment Date
+                                    </label>
+                                    <input autocomplete="off" autocomplete="off" type="text" id="payment_date_details"
+                                            name="payment_date_details" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="cheuqe_number_detials">Cheque Number
+                                    </label>
+                                    <input autocomplete="off" autocomplete="off" type="text" id="cheuqe_number_detials"
+                                            name="cheuqe_number_detials" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="bank_name_details">Drawn on Bank
+                                    </label>
+                                    <input autocomplete="off" autocomplete="off" type="text" id="bank_name_details"
+                                            name="bank_name_details" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="prepared_by_details">Prepared By
+                                    </label>
+                                    <input autocomplete="off" autocomplete="off" type="text" id="prepared_by_details"
+                                            name="prepared_by_details" 
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

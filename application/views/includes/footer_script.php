@@ -3193,7 +3193,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			return false;
 	});
 
-
 	$(document).on('click','.delete_enquiry_tarnsaction',function(e){
 			var elemF = $(this);
 
@@ -3271,6 +3270,30 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				// 	}
 				// });
 	});
+
+	$(document).on('click','.view_enquiry_tarnsaction',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var transaction_id = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>enquiry/get_enquiry_tarnsaction_details/"+transaction_id,  
+                method:"POST",  
+                data:{transaction_id:transaction_id},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                
+                     $('#view_enquiry_tarnsaction').modal('show');
+                     $('#enquiry_number_detail').val(data[0].enquiry_number);  
+					 $('#payment_mode_detail').val(data[0].payment_mode);  
+					 $('#manual_payment_amount_details').val(data[0].totalAmount);
+					 $('#payment_date_details').val(data[0].payment_date);
+					 $('#cheuqe_number_detials').val(data[0].cheuqe_number);  
+					 $('#bank_name_details').val(data[0].bank_name);  
+					 $('#prepared_by_details').val(data[0].prepared_by); 
+                }  
+           })
+    });
 
 
   </script>

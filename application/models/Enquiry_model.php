@@ -53,8 +53,6 @@ class Enquiry_model extends CI_Model
             return $query->result();
         }
 
-
-
     public function getEnquiryCount($params){
         $this->db->select('*');
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
@@ -428,7 +426,17 @@ class Enquiry_model extends CI_Model
 
     }
 
-
+    
+    public function get_enquiry_tarnsaction_details($transaction_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_payment_transaction');
+       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('id', $transaction_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+     
 
 }
 

@@ -957,7 +957,7 @@
     }
 
 
-        public function deleteEnquirypaymentTransaction(){
+    public function deleteEnquirypaymentTransaction(){
 
 
                 $post_submit = $this->input->post();
@@ -977,8 +977,20 @@
 
 
 
-        }
-
     }
+
+
+
+    public function get_enquiry_tarnsaction_details($transaction_id=NUll){
+
+        $transaction_id = $this->input->post('transaction_id');
+        $data = $this->enquiry_model->get_enquiry_tarnsaction_details($transaction_id);
+        echo json_encode($data);
+        
+    }
+
+}
+
+ 
 
 ?>
