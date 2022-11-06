@@ -909,6 +909,7 @@
                 $enq_id =$post_submit['id'];
                 $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
+                 $doctor_non_doctor = $get_equiry_data->doctor_non_doctor;
                  $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
                 
                  $total_fees = 0;
@@ -935,11 +936,26 @@
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
 
+                     
+                     if($doctor_non_doctor=='doctor'){
+                        $file_path ='<a href="https://iictn.in/markating_material/Doctors_Brochure.pdf">Doctors Brochure </a>';
+                     }else{
+                        $file_path =' <a href="https://iictn.in/markating_material/Non_Doctors_Brochure.pdf">Non Doctors_Brochure </a>';
+                       
+                     }
+
+
                     $htmlContent = '<div>
                     <p><b>Dear, </b> '.$enq_fullname.'</p>
                     <p>Thank You for the inquiry.</p>
                     <p>Please find attached is the brochure and details of our courses and institute.</p>
-                    <p>Kindly contact your councilors for more Details.</p></div>'; 
+                    <p>Kindly contact your councilors for more Details.</p></div>
+                    
+                    <div>
+                        <p>Download Below Brochure </p>
+                        <p>'.$file_path.'</p>
+                    </div>
+                    '; 
                     
                     $retval = mail($to,$subject,$htmlContent,$header);
             
