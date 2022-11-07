@@ -1,5 +1,5 @@
-
 <html>
+
 <head>
     <title>PHP Razorpay Payment Gateway Integration Example</title>
 </head>
@@ -47,7 +47,7 @@
     <div class="container">
         <br><br><br>
         <div class="row justify-content-center align-items-center">
-              <?php
+            <?php
               include_once('../db/config.php');
               $id = $_GET['enq'];
               $sql = "SELECT * FROM tbl_enquiry where enq_number='".$id."' and isDeleted =0" ;
@@ -85,52 +85,83 @@
 
                     }else{
 
-                        $total_payabale = $row['final_amount'];
+                         $total_payabale = $row['final_amount'];
                     }
             
               ?>
 
+            <?php  if($total_payabale > 0){ ?>
             <div class="col-md-6 justify-content-center align-items-center">
-                <figure class="card card-product justify-content-center align-items-center" style="border: 1px solid #212529; background: #fff">
+                <figure class="card card-product justify-content-center align-items-center"
+                    style="border: 1px solid #212529; background: #fff">
                     <div class="img-wrap"><img src="https://iictn.in/assets/img/logos/iictn_lms.png">
                     </div>
                     <figcaption class="info-wrap ">
-                                    <h4 class="title">Contact Infromation</h4>
-                                    <div class="rating-wrap">
-                                        <div class="label-rating"><b>Enquiry Number : </b><?php echo $row['enq_number']; ?> </div><br>
-                                        <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
-                                        <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
-                                        <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div>
-                                        
-                                    </div> <!-- rating-wrap.// -->
+                        <h4 class="title">Contact Infromation</h4>
+                        <div class="rating-wrap">
+                            <div class="label-rating"><b>Enquiry Number : </b><?php echo $row['enq_number']; ?> </div>
+                            <br>
+                            <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
+                            <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
+                            <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div>
+
+                        </div> <!-- rating-wrap.// -->
                     </figcaption><br>
-                   
-                                    <h4 class="title">Total Course Fees</h4>
-                                    <div class="rating-wrap">
-                                       <div class="label-rating"><H4><b><?php echo '₹ '.$total_payabale ; ?> </b></H4></div><br>
-                                        <!-- <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
+
+                    <h4 class="title">Total Course Fees</h4>
+                    <div class="rating-wrap">
+                        <div class="label-rating">
+                            <H4><b><?php echo '₹ '.$total_payabale ; ?> </b></H4>
+                        </div><br>
+                        <!-- <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
                                         <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
                                         <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div> -->
-                                        
-                                    </div> <!-- rating-wrap.// -->
-                
 
-                    <div class="bottom-wrap col-md-6 justify-content-center align-items-center" style="margin-bottom:15px">
-                       
+                    </div> <!-- rating-wrap.// -->
+
+
+                    <div class="bottom-wrap col-md-6 justify-content-center align-items-center"
+                        style="margin-bottom:15px">
+
                         <div class="price-wrap h5">
-                           <input type="number" id="final_student_amount" name="final_student_amount" class="form-control col-md-12 col-xs-12" >
-                           <span id="error"> <span>
+                            <input type="number" id="final_student_amount" name="final_student_amount"
+                                class="form-control col-md-12 col-xs-12">
+                            <span id="error"> <span>
                         </div>
-                        <div style="text-align: center;"> 
-                         <!-- <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
+                        <div style="text-align: center;">
+                            <!-- <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
                             data-amount="<?php echo $total_payabale ; ?>" data-id="1">Pay Now</a> -->
-                            <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
-                            data-amount="" data-id="1">Pay Now</a>
-                        </div>     
+                            <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now" data-amount=""
+                                data-id="1">Pay Now</a>
+                        </div>
                         <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>
             </div> <!-- col // -->
+            <?php }else{ ?>
+                    <!DOCTYPE html>
+                    <html>
+
+                    <head>
+                        <title>Admission Alreday Done</title>
+                        <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+                    </head>
+
+                    <body class="">
+                        <article class="bg-secondary mb-3" style="background-color:#fff !important">
+                            <div class="card-body text-center">
+                                <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
+
+                                <h2 class="text-black"><b>!! Admission Alreday Done !!</b><br></h2>
+                            </div>
+                            
+                        </article>
+                    </body>
+
+                    </html>
+          <?php  } ?>
+
         </div> <!-- row.// -->
     </div>
     <!--container.//-->
@@ -141,49 +172,50 @@
 
         var final_amt = $("#final_student_amount").val();
 
-        if(final_amt){
+        if (final_amt) {
 
-            
-        // var totalAmount = $(this).attr("data-amount");
-        var totalAmount =final_amt;
-        
-        var product_id = $(this).attr("data-id");
-        var options = {
-            "key": "<?php echo RAZORPAYKEY;?>",
-            //"amount": (<?php echo $total_payabale; ?> * 100), // 2000 paise = INR 20
-            "amount": (totalAmount * 100), // 2000 paise = INR 20
-            "name": "IICTN",
-            "description": "Payment",
-            "image": "https://iictn.in/assets/img/logos/iictn_lms.png",
-            "handler": function(response) {
-                $.ajax({
-                    url: '<?php echo SERVER;?>payment/payment-process.php',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
-                        razorpay_payment_id: response.razorpay_payment_id,
-                        totalAmount: totalAmount,
-                        product_id: product_id,
-                        enq_id: <?php echo $row['enq_id']; ?>,
-                        enq_number: <?php echo $row['enq_number']; ?>
-                    },
-                    success: function(msg) {
-                        window.location.href = '<?php echo SERVER;?>payment/success.php?enq=<?=$row['enq_id'];?>';
-                    }
-                });
-            },
 
-            "theme": {
-                "color": "#528FF0"
-            }
-        };
-       
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
-        e.preventDefault();
+            // var totalAmount = $(this).attr("data-amount");
+            var totalAmount = final_amt;
 
-        }else{
-          alert('Custom Payment is Required');
+            var product_id = $(this).attr("data-id");
+            var options = {
+                "key": "<?php echo RAZORPAYKEY;?>",
+                //"amount": (<?php echo $total_payabale; ?> * 100), // 2000 paise = INR 20
+                "amount": (totalAmount * 100), // 2000 paise = INR 20
+                "name": "IICTN",
+                "description": "Payment",
+                "image": "https://iictn.in/assets/img/logos/iictn_lms.png",
+                "handler": function(response) {
+                    $.ajax({
+                        url: '<?php echo SERVER;?>payment/payment-process.php',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            totalAmount: totalAmount,
+                            product_id: product_id,
+                            enq_id: <?php echo $row['enq_id']; ?>,
+                            enq_number: <?php echo $row['enq_number']; ?>
+                        },
+                        success: function(msg) {
+                            window.location.href =
+                                '<?php echo SERVER;?>payment/success.php?enq=<?=$row['enq_id'];?>';
+                        }
+                    });
+                },
+
+                "theme": {
+                    "color": "#528FF0"
+                }
+            };
+
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+
+        } else {
+            alert('Custom Payment is Required');
         }
     });
     </script>

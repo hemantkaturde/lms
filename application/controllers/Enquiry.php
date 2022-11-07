@@ -991,7 +991,6 @@
             }
     }
 
-
     public function deleteEnquirypaymentTransaction(){
 
 
@@ -1013,8 +1012,6 @@
 
 
     }
-
-
 
     public function get_enquiry_tarnsaction_details($transaction_id=NUll){
 
