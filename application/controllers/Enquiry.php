@@ -381,12 +381,12 @@
                     $all_course_name = trim($course_name, ', '); 
 
                     
-                    $get_equiry_data =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
+                    $get_equiry_datapayment =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
 
 
-                    if($get_equiry_data[0]->totalpaidAmount){
+                    if($get_equiry_datapayment[0]->totalpaidAmount){
                    
-                        $total_paybal =$total_fees -$get_equiry_data[0]->totalpaidAmount;
+                        $total_paybal =$total_fees -$get_equiry_datapayment[0]->totalpaidAmount;
 
                     }else{
                         $total_paybal  =$total_fees;
