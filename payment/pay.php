@@ -67,7 +67,27 @@
                     $total_fees += $row_course['course_total_fees'];
                     $course_name .= $i++.'-'.$row_course['course_name'].' ₹ '.$row_course['course_total_fees']. ',   ';    
                 }
-                  $all_course_name = trim($course_name, ', ');
+                    $all_course_name = trim($course_name, ', ');
+                    $enq_id = $row['enq_id'];
+
+                    // print_r($enq_id );
+                    // exit;
+
+                  
+             
+                    $get_course_fees_transaction = "SELECT sum(totalAmount) as total_transaction_amount FROM `tbl_payment_transaction` where enquiry_id ='".$enq_id."' and payment_status=1" ;
+                    $course_result_transaction = $conn->query($get_course_fees_transaction);
+                    $row_course_transaction = $course_result_transaction->fetch_assoc(); 
+
+                    if($row_course_transaction['total_transaction_amount']){
+
+                        $total_payabale = $row['final_amount']-$row_course_transaction['total_transaction_amount'];
+
+                    }else{
+
+                        $total_payabale = $row['final_amount'];
+                    }
+            
               ?>
 
             <div class="col-md-6 justify-content-center align-items-center">
@@ -87,7 +107,7 @@
                    
                                     <h4 class="title">Total Course Fees</h4>
                                     <div class="rating-wrap">
-                                       <div class="label-rating"><H4><b><?php echo '₹ '.$total_fees; ?> </b></H4></div><br>
+                                       <div class="label-rating"><H4><b><?php echo '₹ '.$total_payabale ; ?> </b></H4></div><br>
                                         <!-- <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
                                         <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
                                         <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div> -->
@@ -103,7 +123,7 @@
                         </div>
                         <div style="text-align: center;"> 
                          <!-- <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
-                            data-amount="<?php echo $total_fees; ?>" data-id="1">Pay Now</a> -->
+                            data-amount="<?php echo $total_payabale ; ?>" data-id="1">Pay Now</a> -->
                             <a href="javascript:void(0)" class="btn btn-sm btn-primary buy_now"
                             data-amount="" data-id="1">Pay Now</a>
                         </div>     
@@ -130,7 +150,7 @@
         var product_id = $(this).attr("data-id");
         var options = {
             "key": "<?php echo RAZORPAYKEY;?>",
-            //"amount": (<?php echo $total_fees; ?> * 100), // 2000 paise = INR 20
+            //"amount": (<?php echo $total_payabale; ?> * 100), // 2000 paise = INR 20
             "amount": (totalAmount * 100), // 2000 paise = INR 20
             "name": "IICTN",
             "description": "Payment",
