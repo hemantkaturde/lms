@@ -381,15 +381,17 @@
                     $all_course_name = trim($course_name, ', '); 
 
                     
-                    $get_equiry_datapayment =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
+                    $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
+
+                    $get_equiry_datapayment =  $get_equiry_data->final_amount;
 
 
-                    if($get_equiry_datapayment[0]->totalpaidAmount){
+                    if($get_equiry_datapayment_transaction[0]->totalpaidAmount){
                    
-                        $total_paybal =$total_fees -$get_equiry_datapayment[0]->totalpaidAmount;
+                        $total_paybal =$get_equiry_datapayment - $get_equiry_datapayment_transaction[0]->totalpaidAmount;
 
                     }else{
-                        $total_paybal  =$total_fees;
+                        $total_paybal  =$get_equiry_datapayment;
 
                     }
 
