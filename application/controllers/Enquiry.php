@@ -360,11 +360,10 @@
            
 
             $post_submit = $this->input->post();
-            $post_submit = 38;
         
                 if($post_submit){
-                    // $enq_id =$post_submit['id'];
-                    $enq_id =38;
+                     $enq_id =$post_submit['id'];
+                    //$enq_id =38;
                     $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
                      $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
