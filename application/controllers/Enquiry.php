@@ -383,10 +383,12 @@
                     
                     $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
 
+                
+
                     $get_equiry_datapayment =  $get_equiry_data->final_amount;
 
 
-                    if($get_equiry_datapayment_transaction[0]->totalpaidAmount){
+                    if($get_equiry_datapayment_transaction){
                    
                         $total_paybal =$get_equiry_datapayment - $get_equiry_datapayment_transaction[0]->totalpaidAmount;
 

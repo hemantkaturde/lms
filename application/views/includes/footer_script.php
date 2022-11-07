@@ -3122,7 +3122,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						$(".loader_ajax").show();
 
 						$(".sweet-alert").css({"z-index":"-99"});
-
 								$.ajax({
 									url : "<?php echo base_url();?>sendPaymentLink",
 									type: "POST",

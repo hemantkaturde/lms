@@ -192,16 +192,30 @@
                                                         <label for="" style="margin-top:15px;color: #d2ae6d"> <h4><b>All Transaction List</b><h4></label>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: end;" >
+                                                       
+                                                    <?php if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){ ?>
+
+                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_payment_link" >
+                                                           <i class="fa fa-money"></i> Send Admission Link
+                                                        </button>
+
+                                                     <?php }else{ ?>
+                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_payment_link" disabled>
+                                                           <i class="fa fa-money"></i> Send Admission Link
+                                                        </button>
+
+                                                     <?php } ?>
+
+
                                                     <?php $pending_amount = $followDataenquiry[0]->final_amount -  $totalpaidAmount;
                                                       if($pending_amount > 0){ ?>
-                                                       <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" >
+                                                        <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" >
                                                            <i class="fa fa-money"></i> Add Payment
                                                         </button>
                                                     <?php }else{ ?>
                                                         <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" disabled>
                                                            <i class="fa fa-money"></i> Add Payment
                                                         </button>
-
                                                     <?php } ?> 
                                                     </div>
                                                 </div>
