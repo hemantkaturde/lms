@@ -1,5 +1,7 @@
 
 <?php
+
+
 $enq_id =$_GET['enq'];
 include_once('../db/config.php');
 $id = $_GET['enq'];
@@ -14,7 +16,8 @@ if ($conn->query($sql) === TRUE) {
   //$email       = "hemantkaturde123@gmail.com";
   $to          = $row['enq_email'];
   $from        = "hemantkaturde123@gmail.com";
-  $subject     = "IICTN - Admission Payment Recipt".date();
+ 
+  $subject     = "IICTN - Admission Payment Recipt".date('Y-m-d H:i:s');
 
   $message = '<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>file_1664624919892</title><meta name="author" content="Microsoft Office User"/><style type="text/css"> * {margin:0; padding:0; text-indent:0; }
