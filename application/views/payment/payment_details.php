@@ -195,12 +195,12 @@
                                                        
                                                     <?php if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){ ?>
 
-                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_payment_link" >
+                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_manual_admission_link" >
                                                            <i class="fa fa-money"></i> Send Admission Link
                                                         </button>
 
                                                      <?php }else{ ?>
-                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_payment_link" disabled>
+                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_manual_admission_link" disabled>
                                                            <i class="fa fa-money"></i> Send Admission Link
                                                         </button>
 
