@@ -357,10 +357,14 @@
 
         public function sendPaymentLink(){
 
+           
+
             $post_submit = $this->input->post();
+            $post_submit = 38;
         
                 if($post_submit){
-                    $enq_id =$post_submit['id'];
+                    // $enq_id =$post_submit['id'];
+                    $enq_id =38;
                     $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
                      $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
@@ -377,6 +381,20 @@
                         }
                     $all_course_name = trim($course_name, ', '); 
 
+                    
+                    $get_equiry_data =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
+
+
+                    if($get_equiry_data[0]->totalpaidAmount){
+                   
+                        $total_paybal =$total_fees -$get_equiry_data[0]->totalpaidAmount;
+
+                    }else{
+                        $total_paybal  =$total_fees;
+
+                    }
+
+                
                     $to = $get_equiry_data->enq_email;
                     $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
                     $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
@@ -416,7 +434,7 @@
                                         <td align="center" style="padding: 20px; border-top: 1px solid #f0f0f0; background: #fafafa;,; ">
                                         <div>Total Course Fee:</div>
                                         <h2 style="margin: 10px 0; color: #333; font-weight: 500; font-size: 48px;">
-                                        ₹  '.$total_fees.'
+                                        ₹  '.$total_paybal.'
                                         </h2>
                                         <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;"></div>
                                         </td>
