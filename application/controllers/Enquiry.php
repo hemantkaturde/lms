@@ -1023,6 +1023,55 @@
         
     }
 
+    public function sendManualAdmissionlink(){
+
+        $post_submit = $this->input->post();
+        
+        if($post_submit){
+                    $enq_id =$post_submit['id'];
+                    //$enq_id =38;
+                    $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
+
+                    $to = $get_equiry_data->enq_email;
+                    $from = 'enquiry@iictn.in'; 
+                    $fromName = 'IICTN'; 
+                    $enq_fullname = $get_equiry_data->enq_fullname;
+                    $subject = 'IICTN - Admission Link '.date('Y-m-d H:i:s');
+                    
+                    $header = "From: Admission Link <enquiry@iictn.in> \r\n";
+                    //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                    $header .= "MIME-Version: 1.0\r\n";
+                    $header .= "Content-type: text/html\r\n";
+
+
+                    $htmlContent = '<div>
+                    <p><b>Dear, </b> '.$enq_fullname.'</p>
+                    <p>Please Follow Below Payment Link.</p></div>
+                    
+                    <div>
+                        <p><b>Admission Link<b></p>
+                        <p>https://iictn.in/registration/new-registration-student.php?enq='.$enq_id.'</p>
+                    </div>
+                    '; 
+                    
+                    $retval = mail($to,$subject,$htmlContent,$header);
+            
+                    if($retval){
+                        $process = 'Enquiry Link Sent';
+                        $processFunction = 'Enquiry/sendEnquiryLink';
+                        $this->logrecord($process,$processFunction);
+                        echo(json_encode(array('status'=>'success')));
+                    }
+        }else{
+            echo(json_encode(array('status'=>FALSE)));
+
+        }
+
+    }
+
+
+
+
 }
 
  

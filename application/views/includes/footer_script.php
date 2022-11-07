@@ -838,6 +838,9 @@
 					}
 				});
 	});
+     
+
+	
 
 </script> 
 <?php } ?>
@@ -3293,6 +3296,52 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
                 }  
            })
     });
+
+
+	$(document).on('click','.send_manual_admission_link',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "You want to send Manual Link to User !",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, send it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+						$(".loader_ajax").show();
+
+						$(".sweet-alert").css({"z-index":"-99"});
+								$.ajax({
+									url : "<?php echo base_url();?>sendManualAdmissionlink",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										//if(data.status=='success'){
+											$(".sweet-alert").css({"z-index":""});
+
+                                            $(".loader_ajax").hide();
+											swal("Send!", "Link Sent Successfully.", "success");
+											//location.reload();
+										//}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					               swal("Cancelled", "Link cancelled ", "error");
+					}
+				});
+	});
 
 
   </script>

@@ -160,6 +160,8 @@ $route['updatefollowupdata'] = "enquiry/updatefollowupdata";
 $route['addmanualpayment'] = "enquiry/addmanualpayment";
 $route['deleteEnquiryTransaction'] = "enquiry/deleteEnquirypaymentTransaction";
 $route['get_enquiry_tarnsaction_details/(:any)'] = "enquiry/get_enquiry_tarnsaction_details/$1";
+$route['sendManualAdmissionlink'] = "enquiry/sendManualAdmissionlink";
+
 
 //$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 /*********** ADMISSION CONTROLLER ROUTES *******************/
