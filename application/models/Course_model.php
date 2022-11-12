@@ -479,11 +479,12 @@ class Course_model extends CI_Model
     }
 
 
-    public function checkquniqecoursetopicname($topicname){
+    public function checkquniqecoursetopicname($topicname,$course_id_1_post){
         $this->db->select('topic_name');
         $this->db->from(TBL_COURSE_TOPICS);
         $this->db->where('isDeleted', 0);
         $this->db->where('topic_name', $topicname);
+        $this->db->where('course_id', $course_id_1_post);
         $query = $this->db->get();
         return $query->result();
     }

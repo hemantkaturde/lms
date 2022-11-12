@@ -548,7 +548,7 @@
                 }else{
 
                       /*check If course name is unique*/
-                        $check_uniqe =  $this->course_model->checkquniqecoursetopicname(trim($this->input->post('topic_name')));
+                        $check_uniqe =  $this->course_model->checkquniqecoursetopicname(trim($this->input->post('topic_name')), $this->input->post('course_id_post'));
                         if( $check_uniqe ){
                             $topic_attachemnt_response['status'] = 'failure';
                             $topic_attachemnt_response['error'] = array('topic_name'=>'Topic Already Exits','remark'=>'');
@@ -740,6 +740,8 @@
            $topic_id =   $_POST['topic_id'];
            $doc_type =   $_POST['doc_type'];
 
+           if($doc_type!='documents'){
+
            $upload = 'err'; 
 
                 //   $filesize = round($_FILES['file']['size'] / 1024 , 2); // kilobytes with two digits
@@ -818,6 +820,86 @@
                 // }else{
                 //     echo 'empty';
                 // } 
+           }else{
+
+            $upload = 'err'; 
+
+            $filesize = round($_FILES['file']['size'] / 1024 , 2); // kilobytes with two digits
+    
+            //   if($filesize  > 3000000){
+            //     echo $upload= 'big_file';
+            //   }else{
+    
+            if(!empty($_FILES['file']['size'])){ 
+              if($_FILES['file']['size'] > 0){ 
+                // File upload configuration 
+                $targetDir = "uploads/topic_documents/".$doc_type.'/'; 
+                if($doc_type=='documents'){
+                    $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                }
+    
+                if($doc_type=='videos'){
+                    $allowTypes = array('mp4', 'webm', 'ogv'); 
+                }
+    
+                if($doc_type=='books'){
+                    $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                }
+               
+                
+                $fileName_original = basename($_FILES['file']['name']); 
+    
+                $fileName_original_for_download = $_FILES['file']['name']; 
+    
+                //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+    
+                $fileName =$doc_type.'-'.$_FILES['file']['name']; 
+               // $fileName =basename($_FILES['file']['name']); 
+                $targetFilePath = $targetDir.$fileName; 
+                
+                // Check whether file type is valid 
+                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+                if(in_array($fileType, $allowTypes)){ 
+            //         // Upload file to the server 
+                 if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
+    
+                            $data = array(
+                                'course_id'=> $course_id,
+                                'topic_id' => $topic_id,
+                                'doc_type' => $_POST['document_name'],
+                                'module_name' => $doc_type,
+                                'file_name' => str_replace(' ', '_',$fileName_original_for_download),
+                                'file_name_original' => str_replace(' ', '_',$fileName_original),
+                                'file_url' =>  base_url().str_replace(' ', '_', $targetFilePath),
+                                //'file_name' =>  $_POST['video_text'],
+                                'file_name_original' =>  $_POST['document_name'],
+                                //'file_url' =>  $_POST['video_url'],
+                                'createdBy' => $this->session->userdata('userId')
+                            );
+    
+                            $insertDocumentData = $this->course_model->insertDocumentData($data); 
+                            if($insertDocumentData){
+    
+                                $upload = 'ok'; 
+                            }else{
+    
+                                $upload = 'err'; 
+                            }
+                             echo $upload; 
+    
+                        // $upload = 'ok'; 
+                    }
+                 } 
+                }else{
+    
+                    echo 'type_missmatch';
+                } 
+    
+               
+            }else{
+                echo 'empty';
+            } 
+           }
             
         }
 

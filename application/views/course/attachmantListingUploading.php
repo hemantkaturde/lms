@@ -62,82 +62,160 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="uploadmain-div container">
-                    <!-- <form id="imageupload" action="<?php echo base_url('course/uploadSubmit');?>"
-                        enctype='multipart/form-data' method="post"> -->
-                    <form id="uploadForm" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <div id="progressbr-container">
-                                        <div id="progress-bar-status-show"> </div>
+
+
+                <?php if($_GET['type']=='documents'){ ?>
+
+                    <div class="uploadmain-div container">
+                        <!-- <form id="imageupload" action="<?php echo base_url('course/uploadSubmit');?>"
+                            enctype='multipart/form-data' method="post"> -->
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="progressbr-container">
+                                            <div id="progress-bar-status-show"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="image">Document Name</label>
+                                        <input name="document_name" id="document_name" type="text" class="form-control" required/>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="image">Video URL</label>
+                                        <input name="video_url" id="video_url" type="text" class="form-control" required/>
+                                        <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
+                                        <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
+                                        <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
+                                    </div>
+                                </div> -->
+                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="image">Upload <?=ucfirst($type);?></label>
+                                        <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
+                                        <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
+                                        <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
+                                        <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
                                     </div>
                                 </div>
                             </div>
 
-
-                              
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <label for="image">Video Title</label>
-                                    <input name="video_text" id="video_text" type="text" class="form-control" required/>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <input type="submit" value="Upload <?=ucfirst($type);?>" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="toshow" style="visibility:hidden;"></div>
+                                    </div>
                                 </div>
                             </div>
-
-                              
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <label for="image">Video URL</label>
-                                    <input name="video_url" id="video_url" type="text" class="form-control" required/>
-                                    <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
-                                    <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
-                                    <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="imageDiv" style="display:none;color:red;"><strong>Your Uploaded <?=ucfirst($type);?>
+                                                :-</strong> </div>
+                                        <div id="uploadStatus"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="loader" style="display:none;">
+                                        <div class="progress">
+                                            <div class="progress-bar"></div>
+                                        </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <!-- <div class="col-sm-9">
-                                <div class="form-group">
-                                    <label for="image">Upload <?=ucfirst($type);?></label>
-                                    <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
-                                    <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
-                                    <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
-                                    <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
+                        </form>
+                    </div>
+                <?php }else{ ?>
+                    <div class="uploadmain-div container">
+                        <!-- <form id="imageupload" action="<?php echo base_url('course/uploadSubmit');?>"
+                            enctype='multipart/form-data' method="post"> -->
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="progressbr-container">
+                                            <div id="progress-bar-status-show"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="image">Video Title</label>
+                                        <input name="video_text" id="video_text" type="text" class="form-control" required/>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="image">Video URL</label>
+                                        <input name="video_url" id="video_url" type="text" class="form-control" required/>
+                                        <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
+                                        <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
+                                        <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="image">Upload <?=ucfirst($type);?></label>
+                                        <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
+                                        <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
+                                        <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
+                                        <input name="topic_id"  id="topic_id" type="hidden"  value="<?php echo $topic_id; ?>" />
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <input type="submit" value="Upload <?=ucfirst($type);?>" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="toshow" style="visibility:hidden;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="imageDiv" style="display:none;color:red;"><strong>Your Uploaded <?=ucfirst($type);?>
+                                                :-</strong> </div>
+                                        <div id="uploadStatus"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div id="loader" style="display:none;">
+                                        <div class="progress">
+                                            <div class="progress-bar"></div>
+                                        </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div> -->
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <input type="submit" value="Upload <?=ucfirst($type);?>" class="btn btn-primary" />
-                                </div>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <div id="toshow" style="visibility:hidden;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="row">
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <div id="imageDiv" style="display:none;color:red;"><strong>Your Uploaded <?=ucfirst($type);?>
-                                            :-</strong> </div>
-                                    <div id="uploadStatus"></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <div id="loader" style="display:none;">
-                                    <div class="progress">
-                                        <div class="progress-bar"></div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>
