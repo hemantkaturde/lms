@@ -81,7 +81,7 @@
 
                                 <div class="col-sm-9">
                                     <div class="form-group">
-                                        <label for="image">Document Name</label>
+                                        <label for="image">Document Name</label><span class="required">*</span>
                                         <input name="document_name" id="document_name" type="text" class="form-control" required/>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                 
                                 <div class="col-sm-9">
                                     <div class="form-group">
-                                        <label for="image">Upload <?=ucfirst($type);?></label>
+                                        <label for="image">Upload <?=ucfirst($type);?></label><span class="required">*</span>
                                         <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
                                         <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
                                         <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
@@ -156,7 +156,7 @@
                                 
                                 <div class="col-sm-9">
                                     <div class="form-group">
-                                        <label for="image">Video Title</label>
+                                        <label for="image">Video Title </label><span class="required">*</span>
                                         <input name="video_text" id="video_text" type="text" class="form-control" required/>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                                 
                                 <div class="col-sm-9">
                                     <div class="form-group">
-                                        <label for="image">Video URL</label>
+                                        <label for="image">Video URL</label><span class="required">*</span>
                                         <input name="video_url" id="video_url" type="text" class="form-control" required/>
                                         <input name="course_id" id="course_id" type="hidden" value="<?php echo $course_id; ?>" />
                                         <input name="doc_type" id="doc_type" type="hidden" value="<?php echo $type; ?>" />
