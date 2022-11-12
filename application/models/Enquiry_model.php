@@ -481,7 +481,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['paid_before'] = '';
                  $data[$counter]['total_amount'] = '';
                  $data[$counter]['amount_balance'] = '';
-                 $data[$counter]['payment_mode'] = '';
+                 $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
                 $counter++; 
