@@ -479,7 +479,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['totalAmount'] = $value['totalAmount'];
                  $data[$counter]['paid_before'] = '';
-                 $data[$counter]['total_amount'] = '';
+                 $data[$counter]['total_amount'] = $value['totalAmount'];
                  $data[$counter]['amount_balance'] = '';
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['action'] = '';
