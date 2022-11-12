@@ -92,7 +92,7 @@
                                             class="form-control col-md-12 col-xs-12">
                                     </div>
                                     <div class="form-group">
-                                        <label style="text-align: left;" for="total_benifit">Total Benifit
+                                        <label style="text-align: left;" for="total_benifit">Total Benefit
                                         </label>
                                         <input autocomplete="off" autocomplete="off" maxlength="100" type="number"
                                             id="total_benifit" name="total_benifit"
