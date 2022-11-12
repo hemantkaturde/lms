@@ -467,13 +467,12 @@ class Enquiry_model extends CI_Model
         $fetch_result = $query->result_array();
         $data = array();
         $counter = 0;
-        $i =1;
         if(count($fetch_result) > 0)
         {
             foreach ($fetch_result as $key => $value)
             {
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
-                 $data[$counter]['receipt_no'] = $i++;
+                 $data[$counter]['receipt_no'] = $value['id'];
                  $data[$counter]['enquiry_no'] = $value['enquiry_number'];
                  $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($value['payment_date']));
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
