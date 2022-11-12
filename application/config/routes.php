@@ -190,5 +190,12 @@ $route['payment_details/(:any)'] = 'enquiry/payment_details/$1';
 $route['update_discount'] = 'enquiry/update_discount';
 
 
+// Tax Invoices
+$route['taxinvoices'] = 'enquiry/taxinvoices';
+$route['fetchTaxinvoices'] = 'enquiry/fetchTaxinvoices';
+
+
+
+
 
 

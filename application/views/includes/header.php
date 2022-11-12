@@ -314,6 +314,15 @@ $jsonstringtoArray = json_decode($access, true);
                     </li>
                     <?php } ?>
 
+
+                    <!-- <?php if (in_array("admissionmodule", $jsonstringtoArray)){?> -->
+                    <li class="<?php if($pageUrl =='taxinvoices'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url().'taxinvoices'; ?>"><i class="sidebar-item-icon fa fa-inr" ></i>
+                            <span class="nav-label">Tax Invoices</span>
+                        </a>
+                    </li>
+                    <!-- <?php } ?> -->
+
                     <!-- <li class="">
                         <a href="<?php echo base_url()."timetablemaster"; ?>"><i class="sidebar-item-icon fa fa-calendar" ></i>
                             <span class="nav-label">Time Table</span>

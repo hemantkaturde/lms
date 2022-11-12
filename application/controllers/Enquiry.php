@@ -1070,6 +1070,43 @@
     }
 
 
+    public function taxinvoices(){
+        $process = 'Tax Invoices';
+        $processFunction = 'Enquiry/taxinvoices';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Tax Invoices';
+        $data['page_title'] ='Tax Invoices';
+        $this->loadViews("tax_invoices/tax_invoices_details", $this->global, $data , NULL);
+    }
+
+
+    public function fetchTaxinvoices(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->enquiry_model->getTaxinvoicesCount($params);
+        $queryRecords = $this->enquiry_model->getTaxinvoices($params); 
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+
+        echo json_encode($json_data);
+
+
+    }
+
 
 
 }

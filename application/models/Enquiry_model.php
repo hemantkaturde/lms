@@ -360,14 +360,6 @@ class Enquiry_model extends CI_Model
 
     }
 
-    public function update_originanl_amount($enq_id,$total_fees){
-
-     print_r($enq_id);
-     exit;
-
-    }
-
- 
     public function update_enquiry_discount($data,$enquiry_id){
 
         $this->db->where('enq_id', $enquiry_id);
@@ -436,6 +428,72 @@ class Enquiry_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+
+
+    public function getTaxinvoicesCount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_ENQUIRY_FOLLOW_UP.".date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
+        $query = $this->db->get(TBL_PAYMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getTaxinvoices($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_ENQUIRY_FOLLOW_UP.".date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
+      
+      
+        $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_PAYMENT);
+        
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        $i =1;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['receipt_no'] = $i++;
+                 $data[$counter]['enquiry_no'] = $value['enquiry_number'];
+                 $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($value['payment_date']));
+                 $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                 $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+                 $data[$counter]['totalAmount'] = $value['totalAmount'];
+                 $data[$counter]['paid_before'] = '';
+                 $data[$counter]['total_amount'] = '';
+                 $data[$counter]['amount_balance'] = '';
+                 $data[$counter]['payment_mode'] = '';
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
+                $counter++; 
+            }
+        }
+        return $data;
+
+
+    }
+
+
      
 
 }

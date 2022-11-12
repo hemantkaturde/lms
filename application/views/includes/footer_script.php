@@ -3297,7 +3297,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
            })
     });
 
-
 	$(document).on('click','.send_manual_admission_link',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -3342,10 +3341,47 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 				});
 	});
-
-
   </script>
 
+<?php } ?>
+
+
+<?php if($pageTitle=='Tax Invoices'){ ?>
+    <script type="text/javascript">
+		var course_id =$('#course_id_1_post').val();
+        $(document).ready(function() {	
+					var dt = $('#tax_invoices').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							// { "width": "10%", "targets": 1 },
+							// { "width": "20%", "targets": 3 },
+							// { "width": "20%", "targets": 4 },
+							// { "width": "10%", "targets": 5 },
+							// { "width": "10%", "targets": 6 },
+							// { "width": "10%", "targets": 7 },
+							// { "width": "10%", "targets": 8 },
+							// { "width": "10%", "targets": 9 },
+
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Tax Invoices Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchTaxinvoices/",
+							type: "post",
+						},
+					});
+		});
+
+	</script>
 <?php } ?>
 
 
