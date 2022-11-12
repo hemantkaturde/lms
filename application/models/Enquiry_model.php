@@ -430,6 +430,17 @@ class Enquiry_model extends CI_Model
     }
 
 
+    public function get_before_paid_payment($enq_id){
+        $this->db->select('sum(totalAmount) as beforepaid');
+        $this->db->from('tbl_payment_transaction');
+       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('enquiry_id', $enq_id);
+        $this->db->group_by('enquiry_id', $enq_id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
 
     public function getTaxinvoicesCount($params){
         $this->db->select('*');
@@ -471,6 +482,21 @@ class Enquiry_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+
+                
+                $get_before_paid_payment = $this->get_before_paid_payment($value['enq_id']);
+
+
+                if($get_before_paid_payment){
+                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid -  $value['totalAmount'];
+
+                }else{
+                    $previous_paymemt =0 ;
+                    
+                }
+
+                $bal_amount =  $value['final_amount'] - $get_before_paid_payment[0]->beforepaid;
+
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['receipt_no'] = $value['id'];
                  $data[$counter]['enquiry_no'] = $value['enquiry_number'];
@@ -478,9 +504,9 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['totalAmount'] = $value['totalAmount'];
-                 $data[$counter]['paid_before'] = '';
+                 $data[$counter]['paid_before'] = $previous_paymemt;
                  $data[$counter]['total_amount'] = $value['totalAmount'];
-                 $data[$counter]['amount_balance'] = '';
+                 $data[$counter]['amount_balance'] = $bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
