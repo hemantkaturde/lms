@@ -452,6 +452,8 @@ class Enquiry_model extends CI_Model
         //     $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
         // }
         //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
+        $this->db->where(TBL_PAYMENT.'.payment_status', 1);
+        $this->db->order_by(TBL_PAYMENT.'.payment_status', 1);
         $query = $this->db->get(TBL_PAYMENT);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -469,9 +471,10 @@ class Enquiry_model extends CI_Model
         //     $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
         // }
         //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
-      
+        $this->db->where(TBL_PAYMENT.'.payment_status', 1);
       
         $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
+      
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_PAYMENT);
         
@@ -509,7 +512,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['amount_balance'] = $bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
                 $counter++; 
             }
         }
