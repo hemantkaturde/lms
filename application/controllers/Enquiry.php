@@ -967,10 +967,10 @@
 
 
                     $htmlContent = '<div>
-                    <p><b>Dear, </b> '.$enq_fullname.'</p>
+                    <p><b>Dear, </b> '.$enq_fullname.', </p>
                     <p>Thank You for the inquiry.</p>
                     <p>Please find attached is the brochure and details of our courses and institute.</p>
-                    <p>Kindly contact your councilors for more Details.</p></div>
+                    <p>Kindly contact your councilors for more details.</p></div>
                     
                     <div>
                         <p><b>Download Below Brochure<b></p>
