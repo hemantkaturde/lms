@@ -33,6 +33,14 @@ $pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
 
         // Set the default font to use
         $pdf->SetFont('Helvetica');
+
+
+        // First box - the user's Name
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(30, 46); // set the position of the box
+        $pdf->Cell(100, 1, $result_arry['enq_fullname'], 0, 0, 'L'); // add the text, align to Center of cell
+
+
             
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
@@ -56,30 +64,40 @@ $pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
         $pdf->Cell(160, 43, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
-     
 
+
+         // Secand box - the user's Name
+         $pdf->SetFontSize('8'); // set font size
+         $pdf->SetXY(55, 52); // set the position of the box
+         $pdf->Cell(160, 54, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
+     
+         
+         // Secand box - the user's Name
+         $pdf->SetFontSize('8'); // set font size
+         $pdf->SetXY(55, 52); // set the position of the box
+         $pdf->Cell(160, 66, $result_arry['payment_mode'], 0, 0, 'L'); // add the text, align to Center of cell
 
         // adding a Cell using:
         // $pdf->Cell( $width, $height, $text, $border, $fill, $align);
 
         // add the reason for certificate
         // note the reduction in font and different box position
-        $pdf->SetFontSize('20');
-        $pdf->SetXY(80, 105);
-        $pdf->Cell(150, 10, 'creating an awesome tutorial', 0, 0, 'C');
+        // $pdf->SetFontSize('20');
+        // $pdf->SetXY(80, 105);
+        // $pdf->Cell(150, 10, 'creating an awesome tutorial', 0, 0, 'C');
 
-        // the day
-        $pdf->SetFontSize('20');
-        $pdf->SetXY(118,122);
-        $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
+        // // the day
+        // $pdf->SetFontSize('20');
+        // $pdf->SetXY(118,122);
+        // $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
 
-        // the month
-        $pdf->SetXY(160,122);
-        $pdf->Cell(30, 10, date('M'), 0, 0, 'C');
+        // // the month
+        // $pdf->SetXY(160,122);
+        // $pdf->Cell(30, 10, date('M'), 0, 0, 'C');
 
-        // the year, aligned to Left
-        $pdf->SetXY(200,122);
-        $pdf->Cell(20, 10, date('y'), 0, 0, 'L');
+        // // the year, aligned to Left
+        // $pdf->SetXY(200,122);
+        // $pdf->Cell(20, 10, date('y'), 0, 0, 'L');
 
      }
 
