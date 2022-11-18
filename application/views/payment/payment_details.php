@@ -337,6 +337,18 @@
                                         <p class="error manual_payment_amount_error"></p>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="description">Description
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="text" id="description"
+                                            name="description"  placeholder="Enter Description" maxlength="50"
+                                            class="form-control col-md-12 col-xs-12">
+                                        <p class="error description_error"></p>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label style="text-align: left;" for="payment_date">Payment Date<span
                                             class="required">*</span>
@@ -426,6 +438,18 @@
                                     <input autocomplete="off" autocomplete="off" type="text" id="payment_mode_detail"
                                             name="payment_mode_detail" 
                                             class="form-control col-md-12 col-xs-12" readonly>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="description">Description
+                                    </label>
+                                    <div>
+                                        <input autocomplete="off" autocomplete="off" type="text" id="description1"
+                                            name="description1"  placeholder="Enter Description" maxlength="50"
+                                            class="form-control col-md-12 col-xs-12" readonly>
+                                        <p class="error description_error"></p>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">

@@ -3292,6 +3292,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					 $('#payment_date_details').val(data[0].payment_date);
 					 $('#cheuqe_number_detials').val(data[0].cheuqe_number);  
 					 $('#bank_name_details').val(data[0].bank_name);  
+					 $('#description1').val(data[0].description);  
 					 $('#prepared_by_details').val(data[0].prepared_by); 
                 }  
            })

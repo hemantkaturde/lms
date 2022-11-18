@@ -887,7 +887,8 @@
         $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
         $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
         $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
-       
+        $this->form_validation->set_rules('description', 'Description', 'trim');
+
         if($this->form_validation->run() == FALSE){
             $add_manaulpayment_response['status'] = 'failure';
             $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
@@ -902,6 +903,7 @@
                         'cheuqe_number'=> $this->input->post('cheuqe_number'),
                         'bank_name'=> $this->input->post('bank_name'),
                         'prepared_by'=> $this->input->post('prepared_by'),
+                        'description'=> $this->input->post('description'),
                         'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
                     
                     );

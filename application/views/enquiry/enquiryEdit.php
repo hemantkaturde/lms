@@ -31,7 +31,6 @@ if(!empty($editDataenquiry))
         $enq_course_id  =  $rf->enq_course_id;
         $remark  =  $rf->enq_remark;
         $doctor_non_doctor	  =  $rf->doctor_non_doctor;
-
         $enq_city	  =  $rf->enq_city;
         // $role = $rf->role;
         // $role_type = $rf->role_type;
