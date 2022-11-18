@@ -5,12 +5,16 @@ include "vendor/autoload.php";
 include "../db/config.php";
 
 $enq_id = $_GET['enq_id'];
-$result = $conn->query("SELECT * FROM tbl_payment_transaction  join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id where tbl_payment_transaction.enquiry_id=$enq_id");
+$result = $conn->query("SELECT * FROM tbl_payment_transaction  
+                        join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id 
+                        where tbl_payment_transaction.enquiry_id=$enq_id");
 $result_arry = $result->fetch_assoc();
 
+// get courses here
 
-    // print_r($result_arry);
-    // exit;
+// print_r($result_arry['enq_course_id']);
+// exit;
+
 
 
 // Create new Landscape PDF
@@ -38,7 +42,7 @@ $pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(30, 46); // set the position of the box
-        $pdf->Cell(100, 1, $result_arry['enq_fullname'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(100, 1, $result_arry['datetime'], 0, 0, 'L'); // add the text, align to Center of cell
 
 
             
