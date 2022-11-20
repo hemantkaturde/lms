@@ -219,6 +219,8 @@
         public function updateenquiry($id= null){
             $post_submit = $this->input->post();
 
+            $enq_id = $this->input->post('enq_id');
+
             if(!empty($post_submit)){
                 $createenquiry_response = array();
                
@@ -301,6 +303,7 @@
                                     'enq_course_id' => $courses,
                                     'doctor_non_doctor'=>$this->input->post('doctor_non_doctor'),
                                 );
+
                                 
                                 // if($id == null)
                                 // {
@@ -316,7 +319,7 @@
 
                                 if($check_uniqe){
                                 
-                                  $saveEnquirydata = $this->enquiry_model->saveEnquirydata($id,$data);
+                                  $saveEnquirydata = $this->enquiry_model->saveEnquirydata($enq_id,$data);
                                   if($saveEnquirydata){
                                       $createenquiry_response['status'] = 'success';
                                       $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')));

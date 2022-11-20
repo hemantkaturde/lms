@@ -13,6 +13,9 @@ $alternet_email  = '';
 $enq_course_id  = '';
 $remark  = '';
 
+
+
+
 if(!empty($editDataenquiry))
 {
     foreach ($editDataenquiry as $rf)
