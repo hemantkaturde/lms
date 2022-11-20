@@ -1,51 +1,74 @@
 <?php
 
-// include composer packages
-include "vendor/autoload.php";
-include "../db/config.php";
+   // include composer packages
+   include "vendor/autoload.php";
+   include "../db/config.php";
 
-$enq_id = $_GET['enq_id'];
-$result = $conn->query("SELECT * FROM tbl_payment_transaction  
-                        join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id 
-                        where tbl_payment_transaction.enquiry_id=$enq_id");
-$result_arry = $result->fetch_assoc();
+   $enq_id = $_GET['enq_id'];
+   $result = $conn->query("SELECT * FROM tbl_payment_transaction  
+                           join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id 
+                           where tbl_payment_transaction.enquiry_id=$enq_id");
 
-// get courses here
+   $result_arry = $result->fetch_assoc();
+   $enquiry_course_ids = $result_arry['enq_course_id'];
 
-// print_r($result_arry['enq_course_id']);
-// exit;
+   $course_ids    =   explode(',', $enquiry_course_ids);
+   $total_fees = 0;
+   $course_name = '';
+   $i = 1;
+   foreach($course_ids as $id)
+      {
 
+         $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
+         $get_course_fees = $result->fetch_assoc();
+         if($get_course_fees){
+                           
+            $total_fees += $get_course_fees['course_total_fees'];
+            $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ')  ';  
+            $i++;   
 
+         }else{
 
-// Create new Landscape PDF
-// $pdf = new FPDI('l');
-$pdf = new \setasign\Fpdi\Fpdi();
+            $total_fees = '';
+            $course_name = '';  
+            $i++;  
+         }
+                        
+       }
+      $all_course_name = trim($course_name, ', '); 
 
-// Reference the PDF you want to use (use relative path)
-$pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
+      // Create new Landscape PDF
+      // $pdf = new FPDI('l');
+      $pdf = new \setasign\Fpdi\Fpdi();
 
-    for ($pageNo = 1; $pageNo <= $pagecount; $pageNo++) {
-    // Import the first page from the PDF and add to dynamic PDF
-    //$tpl = $pdf->importPage(1);
-    $tpl = $pdf->importPage($pageNo);
-    $pdf->AddPage();
+      // Reference the PDF you want to use (use relative path)
+      $pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
 
-    $pdf->useTemplate($tpl);
-    // Use the imported page as the template
+      for ($pageNo = 1; $pageNo <= $pagecount; $pageNo++) {
+      // Import the first page from the PDF and add to dynamic PDF
+      //$tpl = $pdf->importPage(1);
+      $tpl = $pdf->importPage($pageNo);
+      $pdf->AddPage();
+
+      $pdf->useTemplate($tpl);
+      // Use the imported page as the template
    
-     if($pageNo==1){
+      if($pageNo==1){
 
         // Set the default font to use
         $pdf->SetFont('Helvetica');
-
 
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(30, 46); // set the position of the box
         $pdf->Cell(100, 1, $result_arry['datetime'], 0, 0, 'L'); // add the text, align to Center of cell
 
+         // First box - the user's Name
+         $pdf->SetFontSize('8'); // set font size
+         $pdf->SetXY(173, 46); // set the position of the box
+         $pdf->Cell(160, 1, $result_arry['id'], 0, 0, 'L'); // add the text, align to Center of cell
 
-            
+
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
@@ -55,7 +78,7 @@ $pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
-        $pdf->Cell(160, 21, $result_arry['enq_fullname'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(160, 21, $result_arry['description'], 0, 0, 'L'); // add the text, align to Center of cell
   
 
          // Secand box - the user's Name
@@ -71,37 +94,73 @@ $pagecount = $pdf->setSourceFile( 'tax_invoice.pdf' );
 
 
          // Secand box - the user's Name
-         $pdf->SetFontSize('8'); // set font size
-         $pdf->SetXY(55, 52); // set the position of the box
-         $pdf->Cell(160, 54, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->Cell(160, 54, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
      
          
          // Secand box - the user's Name
-         $pdf->SetFontSize('8'); // set font size
-         $pdf->SetXY(55, 52); // set the position of the box
-         $pdf->Cell(160, 66, $result_arry['payment_mode'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->Cell(160, 66, $result_arry['payment_mode'], 0, 0, 'L'); // add the text, align to Center of cell
 
-        // adding a Cell using:
-        // $pdf->Cell( $width, $height, $text, $border, $fill, $align);
+         // Secand box - the user's Name
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->Cell(10, 78, $all_course_name, 0, 0, 'L'); // add the text, align to Center of cell
 
-        // add the reason for certificate
-        // note the reduction in font and different box position
-        // $pdf->SetFontSize('20');
-        // $pdf->SetXY(80, 105);
-        // $pdf->Cell(150, 10, 'creating an awesome tutorial', 0, 0, 'C');
+        $excluding_GST = $result_arry['final_amount'] * (18) / 100;
+        $cgst_amount = $excluding_GST/2;
+        $sgst_amount = $excluding_GST/2;
 
-        // // the day
-        // $pdf->SetFontSize('20');
-        // $pdf->SetXY(118,122);
-        // $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
+      
+        
 
-        // // the month
-        // $pdf->SetXY(160,122);
-        // $pdf->Cell(30, 10, date('M'), 0, 0, 'C');
 
-        // // the year, aligned to Left
-        // $pdf->SetXY(200,122);
-        // $pdf->Cell(20, 10, date('y'), 0, 0, 'L');
+        //$SGST_amount =   $result_arry['final_amount'] * 9 / 100+9;
+
+
+        $paid_amount =  0;
+
+          // Secand box - the user's Name
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 118, $paid_amount, 0, 0, 'L'); // add the text, align to Center of cell
+   
+         // Secand box - the user's Name
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 130, $cgst_amount, 0, 0, 'L'); // add the text, align to Center of cell
+
+         // Secand box - the user's Name
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 140, $sgst_amount, 0, 0, 'L'); // add the text, align to Center of cell
+
+         // Secand box - the user's Name
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 151, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+
+
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 162, 0, 0, 0, 'L'); // add the text, align to Center of cell
+
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 162, 0, 0, 0, 'L'); // add the text, align to Center of cell
+
+
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 173, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+
+
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 184, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+
 
      }
 
