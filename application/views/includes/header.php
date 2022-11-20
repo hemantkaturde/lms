@@ -307,7 +307,7 @@ $jsonstringtoArray = json_decode($access, true);
                     <?php } ?>
 
                     <?php if (in_array("admissionmodule", $jsonstringtoArray)){?>
-                    <li class="<?php if($pageUrl =='admissionListing' || $pageUrl =='viewadmissiondetails'){ echo 'active';} ?>">
+                    <li class="<?php if($pageUrl =='admissionListing' || $pageUrl =='viewadmissiondetails' || $pageUrl=="editadmission"){ echo 'active';} ?>">
                         <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap" ></i>
                             <span class="nav-label">Admission</span>
                         </a>

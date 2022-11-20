@@ -12,6 +12,7 @@
             parent::__construct();
             $this->load->model('login_model');
             $this->load->model('admission_model');
+            $this->load->model('enquiry_model');
             $this->load->model('database');
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
@@ -250,8 +251,8 @@
             $process = 'Admission Edit';
             $processFunction = 'Enquiry/enquiryEdit';
             $this->logrecord($process,$processFunction);
-            // $data['course_List'] = $this->comman_model->getCourseList();
-            // $data['editDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            //$data['course_List'] = $this->comman_model->getCourseList();
+            $data['editDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
             // $data['state_List'] = $this->comman_model->selectAllStates($data['editDataenquiry'][0]->enq_country,$data['editDataenquiry'][0]->enq_state);
             // $data['city_List'] = $this->comman_model->selectAllCities($data['editDataenquiry'][0]->enq_state,$data['editDataenquiry'][0]->enq_city);
             $this->global['pageTitle'] = 'Admission Management';
