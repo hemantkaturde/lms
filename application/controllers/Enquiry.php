@@ -897,32 +897,47 @@
             $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
         }else{
 
-                    $data = array(
-                        'enquiry_id'=> $this->input->post('enquiry_id'),
-                        'enquiry_number'=>  $this->input->post('enquiry_number'),
-                        'totalAmount'=>  $this->input->post('manual_payment_amount'),
-                        'payment_status'=> '1',
-                        'payment_mode'=> $this->input->post('payment_mode'),
-                        'cheuqe_number'=> $this->input->post('cheuqe_number'),
-                        'bank_name'=> $this->input->post('bank_name'),
-                        'prepared_by'=> $this->input->post('prepared_by'),
-                        'description'=> $this->input->post('description'),
-                        'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
-                    
-                    );
-                    
-                  
-                   $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
 
-                   if($insert_manualpayment_details){
-                        $add_manaulpayment_response['status'] = 'success';
-                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-                    }else{
+
+                    $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
+
+
+                    if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
                         $add_manaulpayment_response['status'] = 'failure';
-                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-                    }
+                        $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Gratter Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
+             
 
-                    echo json_encode($add_manaulpayment_response);
+                    }else{
+
+                            $data = array(
+                                'enquiry_id'=> $this->input->post('enquiry_id'),
+                                'enquiry_number'=>  $this->input->post('enquiry_number'),
+                                'totalAmount'=>  $this->input->post('manual_payment_amount'),
+                                'payment_status'=> '1',
+                                'payment_mode'=> $this->input->post('payment_mode'),
+                                'cheuqe_number'=> $this->input->post('cheuqe_number'),
+                                'bank_name'=> $this->input->post('bank_name'),
+                                'prepared_by'=> $this->input->post('prepared_by'),
+                                'description'=> $this->input->post('description'),
+                                'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
+                            
+                            );
+                            
+                        
+                        $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
+
+                        if($insert_manualpayment_details){
+                                $add_manaulpayment_response['status'] = 'success';
+                                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                            }else{
+                                $add_manaulpayment_response['status'] = 'failure';
+                                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                            }
+
+
+                    }
+                    
+                 echo json_encode($add_manaulpayment_response);
 
         }
             
@@ -1008,7 +1023,7 @@
                 $post_submit = $this->input->post();
 
                 $enquiryInfo = array('payment_status'=>0);
-                $result = $this->database->data_update_onlyupdate('tbl_payment_transaction',$enquiryInfo,'id',$this->input->post('id'));
+                $result = $this->database->data_update('tbl_payment_transaction',$enquiryInfo,'id',$this->input->post('id'));
 
                 if ($result > 0) {
                     echo(json_encode(array('status'=>TRUE)));

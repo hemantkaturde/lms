@@ -429,7 +429,6 @@ class Enquiry_model extends CI_Model
         return $query->result();
     }
 
-
     public function get_before_paid_payment($enq_id){
         $this->db->select('sum(totalAmount) as beforepaid');
         $this->db->from('tbl_payment_transaction');
@@ -440,7 +439,6 @@ class Enquiry_model extends CI_Model
         return $query->result();
 
     }
-
 
     public function getTaxinvoicesCount($params){
         $this->db->select('*');
@@ -521,6 +519,14 @@ class Enquiry_model extends CI_Model
 
     }
 
+    public function check_payment_maount_lessthan_actaul($enquiry_id){
+        $this->db->select('final_amount');
+        $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
+        $query = $this->db->get(TBL_ENQUIRY);
+        return $query->result_array();
+    
+
+    }
 
      
 
