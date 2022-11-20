@@ -488,8 +488,9 @@ class Enquiry_model extends CI_Model
                 $get_before_paid_payment = $this->get_before_paid_payment($value['enq_id']);
 
 
+
                 if($get_before_paid_payment){
-                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid -  $value['totalAmount'];
+                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
 
                 }else{
                     $previous_paymemt =0 ;
@@ -506,7 +507,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['totalAmount'] = $value['totalAmount'];
                  $data[$counter]['paid_before'] = $previous_paymemt;
-                 $data[$counter]['total_amount'] = $value['totalAmount'];
+                 $data[$counter]['total_amount'] = $value['final_amount'];
                  $data[$counter]['amount_balance'] = $bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['action'] = '';

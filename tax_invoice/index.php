@@ -5,8 +5,10 @@
    include "../db/config.php";
 
    $enq_id = $_GET['enq_id'];
-   $result = $conn->query("SELECT * FROM tbl_payment_transaction  
-                           join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id 
+   $result = $conn->query("SELECT *,tbl_users.name as counsellor_name  FROM tbl_payment_transaction  
+                           join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id
+                           left join tbl_admission on tbl_admission.enq_id = tbl_enquiry.enq_id 
+                           left join tbl_users on tbl_admission.counsellor_name = tbl_users.userId 
                            where tbl_payment_transaction.enquiry_id=$enq_id");
 
    $result_arry = $result->fetch_assoc();
@@ -64,16 +66,14 @@
         $pdf->Cell(100, 1, $result_arry['datetime'], 0, 0, 'L'); // add the text, align to Center of cell
 
          // First box - the user's Name
-         $pdf->SetFontSize('8'); // set font size
-         $pdf->SetXY(173, 46); // set the position of the box
-         $pdf->Cell(160, 1, $result_arry['id'], 0, 0, 'L'); // add the text, align to Center of cell
-
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(173, 46); // set the position of the box
+        $pdf->Cell(160, 1, $result_arry['id'], 0, 0, 'L'); // add the text, align to Center of cell
 
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
         $pdf->Cell(160, 10, $result_arry['enq_fullname'], 0, 0, 'L'); // add the text, align to Center of cell
-
 
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
@@ -96,7 +96,7 @@
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
-        $pdf->Cell(160, 54, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(160, 54, $result_arry['counsellor_name'], 0, 0, 'L'); // add the text, align to Center of cell
      
          
          // Secand box - the user's Name
@@ -112,15 +112,7 @@
         $excluding_GST = $result_arry['final_amount'] * (18) / 100;
         $cgst_amount = $excluding_GST/2;
         $sgst_amount = $excluding_GST/2;
-
-      
-        
-
-
-        //$SGST_amount =   $result_arry['final_amount'] * 9 / 100+9;
-
-
-        $paid_amount =  0;
+        $paid_amount = $result_arry['final_amount']-$excluding_GST;
 
           // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
@@ -142,24 +134,29 @@
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 151, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
 
+        /*check paid before amount here*/
+
+        $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id");
+        $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
+        $abv = $result_arry_result_previous_amount['totalAmount'];
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 162, 0, 0, 0, 'L'); // add the text, align to Center of cell
-
-        $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 162, 0, 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 162, $abv, 0, 0, 'L'); // add the text, align to Center of cell
 
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 173, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 173, $result_arry['final_amount']-$abv, 0, 0, 'L'); // add the text, align to Center of cell
 
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 184, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+        
+        $pdf->SetFontSize('8'); // set font size
+        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->Cell(10, 196, $result_arry['prepared_by'], 0, 0, 'L'); // add the text, align to Center of cell
 
 
      }
