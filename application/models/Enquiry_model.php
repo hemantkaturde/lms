@@ -69,8 +69,9 @@ class Enquiry_model extends CI_Model
     }
 
     public function getEnquirydata($params){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits');
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_number','left');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
@@ -81,6 +82,8 @@ class Enquiry_model extends CI_Model
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_ENQUIRY);
         $fetch_result = $query->result_array();
+
+
         $data = array();
         $counter = 0;
         if(count($fetch_result) > 0)
@@ -95,13 +98,21 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['enq_email'] = $value['enq_email'];
 
-                 if($value['payment_status']=='0'){
-                    $data[$counter]['status'] = 'In Follow up';
-                 }else if($value['payment_status']=='1'){
+                //  if($value['payment_status']=='0'){
+                //     $data[$counter]['status'] = 'In Follow up';
+                //  }else if($value['payment_status']=='1'){
+                //     $data[$counter]['status'] = 'Admitted';
+                //  }else{
+                //     $data[$counter]['status'] = 'In Follow up';
+                //  }
+
+                if($value['admissionexits']){
                     $data[$counter]['status'] = 'Admitted';
-                 }else{
+                }else{
                     $data[$counter]['status'] = 'In Follow up';
-                 }
+                }
+
+
                  $course_ids    =   explode(',', $value['enq_course_id']);
                  $total_fees = 0;
                  $course_name = '';
@@ -130,19 +141,14 @@ class Enquiry_model extends CI_Model
                   
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."payment_details/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Payment Details' title='Payment Details'></a> | ";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."followup/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/follow_up.png' alt='Follow Up' title='Follow Up'></a> | ";
- 
-                //  if($value['payment_status']!=1){
-                    //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Follow Up' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/follow_up.png  alt='Follow Up' title='Follow Up'></a> &nbsp";
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Whats_up_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> | ";
-                    //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_payment_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Payment Link' title='Send Payment Link'></a> | "; 
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_brochure_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Brochure Link' title='Send Brochure Link'></a> | "; 
-
-                // }
-                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editenquiry/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
-                   
-                     if($value['payment_status']!=1){
-                       $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Enquiry'></a> "; 
-                     }  
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Whats_up_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> | ";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_brochure_link' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Brochure Link' title='Send Brochure Link'></a> | "; 
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editenquiry/".$value['enq_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
+                 
+                 if($value['admissionexits']){
+                 }else{
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enq_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Enquiry'></a> "; 
+                 }
                  
                 $counter++; 
             }

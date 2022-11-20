@@ -227,16 +227,23 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
-                    
-                    $retval = mail($to,$Subject,$Body,$header);
-                     
-                    if($retval){
-                        echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+
+
+                    if($_SERVER['HTTP_HOST']=='localhost'){
+                         echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
                     }else{
 
-                        echo ("<script> window.alert('No Record Store')");
-                    }
+                        $retval = mail($to,$Subject,$Body,$header);
+                     
+                        if($retval){
+                            echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+                        }else{
+    
+                            echo ("<script> window.alert('No Record Store')");
+                        }
 
+                    }
+                    
                 }else{
                     echo "Error: " . $sql . "<br>" . $conn->error;
 
