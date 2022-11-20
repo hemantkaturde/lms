@@ -323,15 +323,18 @@ $jsonstringtoArray = json_decode($access, true);
                     </li>
                     <!-- <?php } ?> -->
 
-                    <!-- <li class="">
-                        <a href="<?php echo base_url()."timetablemaster"; ?>"><i class="sidebar-item-icon fa fa-calendar" ></i>
-                            <span class="nav-label">Time Table</span>
-                        </a>
-                    </li> -->
+                
 
-                    <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
-                        <a href="<?php echo base_url()."examinationlisting"; ?>"><i class="sidebar-item-icon fa fa-file-text" ></i>
-                            <span class="nav-label">Examination</span>
+                    <li class="">
+                        <a href=""><i class="sidebar-item-icon fa fa-file-text" ></i>
+                            <span class="nav-label">Certificates</span>
+                        </a>
+                    </li>
+
+
+                    <li class="<?php if($pageUrl =='taxinvoices'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url().'taxinvoices'; ?>"><i class="sidebar-item-icon fa fa-inr" ></i>
+                            <span class="nav-label">Tax Invoices</span>
                         </a>
                     </li>
 
