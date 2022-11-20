@@ -90,22 +90,22 @@ $jsonstringtoArray = json_decode($access, true);
                                             </h5>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="brazil" value="brazil" readonly>
+                                            <label class="radio"> <input type="radio" name="brazil" value="brazil" disabled>
                                                 <span> <?= $value->option_1;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Germany" value="Germany" readonly>
+                                            <label class="radio"> <input type="radio" name="Germany" value="Germany" disabled>
                                             <span> <?= $value->option_2;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Indonesia" value="Indonesia" readonly> 
+                                            <label class="radio"> <input type="radio" name="Indonesia" value="Indonesia" disabled> 
                                             <span> <?= $value->option_3;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Russia" value="Russia" readonly>
+                                            <label class="radio"> <input type="radio" name="Russia" value="Russia" disabled>
                                             <span> <?= $value->option_4;?></span>
                                             </label>
                                         </div>
