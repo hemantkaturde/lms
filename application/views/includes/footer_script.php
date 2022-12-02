@@ -2433,7 +2433,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					],
 					responsive: true,
 					"oLanguage": {
-						"sEmptyTable": "<i>No Staff Found.</i>",
+						"sEmptyTable": "<i>No Documents Found.</i>",
 					}, 
 					"bSort" : false,
 					"bFilter":true,
@@ -2536,7 +2536,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				],
 				responsive: true,
 				"oLanguage": {
-					"sEmptyTable": "<i>No Staff Found.</i>",
+					"sEmptyTable": "<i>No Timetable Found.</i>",
 				}, 
 				"bSort" : false,
 				"bFilter":true,
