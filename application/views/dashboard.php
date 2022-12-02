@@ -1,33 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/event.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/colorbox.css" />
 
-
-<script>
-
-	const shareButton = document.queryselector(a);
-	
-function sharePage(){
-	const title= window.document.title;
-	const url = window.document.location.href;
-
-	if(navigator.share){
-		navigator.share({
-			title : `${title}`,
-			url : `${url}`
-		}).then(() => {
-			console.log("thanx for sharing");
-		})
-		.catch(console.error);
-
-	}else{
-
-		//overly.classlist.add
-
-	}
-
-}
-	</script>
-
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
@@ -46,8 +19,6 @@ function sharePage(){
             <div class="col-lg-3 col-md-6">
                 <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body banner-box">
-                    <button onclick="sharePage()">Share me</button>
-
                         <h2 class="m-b-5 font-strong"><?php echo $enquries; ?></h2>
                         <div class="m-b-5">ENQUIRIES</div><i class="fa fa-phone-square widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> -->
