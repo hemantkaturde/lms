@@ -140,10 +140,7 @@ class Enquiry_model extends CI_Model
 
                  // $data[$counter]['total_fees'] = '₹ '.$total_fees ;
 
-                 
-
                  $data[$counter]['action'] = '';
-                  
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."payment_details/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Payment Details' title='Payment Details'></a> | ";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."followup/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/follow_up.png' alt='Follow Up' title='Follow Up'></a> | ";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Whats_up_link' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> | ";
@@ -441,13 +438,44 @@ class Enquiry_model extends CI_Model
     }
 
     public function get_before_paid_payment($enq_id){
-        $this->db->select('sum(totalAmount) as beforepaid');
+        //$this->db->select('sum(totalAmount) as beforepaid');
+        $this->db->select('id');
         $this->db->from('tbl_payment_transaction');
-       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('enquiry_id', $enq_id);
-        $this->db->group_by('enquiry_id', $enq_id);
+        $this->db->order_by('id','DESC');
+        $this->db->limit(1);
+        //$this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
-        return $query->result();
+        //return $query->result();
+        $result = $query->result();
+
+        
+        if($result[0]->id){
+      
+            $this->db->select('sum(totalAmount) as beforepaid');
+            $this->db->from('tbl_payment_transaction');
+            // $this->db->where('tbl_enquiry.isDeleted', 0);
+            $this->db->where('enquiry_id', $enq_id);
+          
+            $this->db->where('id !=', $result[0]->id);
+            $this->db->order_by('id','DESC');
+            // $this->db->limit(1);
+            //$this->db->group_by('enquiry_id', $enq_id);
+            $query = $this->db->get();
+            //return $query->result();
+            $result1 = $query->result();
+
+           return $result1;
+
+        }else{
+            return NULL;
+
+        }
+    
+      
+        // print_r($query->result());
+        // exit;
 
     }
 
