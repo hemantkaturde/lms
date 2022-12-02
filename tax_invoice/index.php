@@ -5,11 +5,12 @@
    include "../db/config.php";
 
    $enq_id = $_GET['enq_id'];
+   $paymentid = $_GET['paymentid'];
    $result = $conn->query("SELECT *,tbl_users.name as counsellor_name  FROM tbl_payment_transaction  
                            join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id
                            left join tbl_admission on tbl_admission.enq_id = tbl_enquiry.enq_id 
                            left join tbl_users on tbl_admission.counsellor_name = tbl_users.userId 
-                           where tbl_payment_transaction.enquiry_id=$enq_id");
+                           where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid");
 
    $result_arry = $result->fetch_assoc();
    $enquiry_course_ids = $result_arry['enq_course_id'];
@@ -109,10 +110,10 @@
         $pdf->SetXY(55, 52); // set the position of the box
         $pdf->Cell(10, 78, $all_course_name, 0, 0, 'L'); // add the text, align to Center of cell
 
-        $excluding_GST = $result_arry['final_amount'] * (18) / 100;
+        $excluding_GST = $result_arry['totalAmount'] * (18) / 100;
         $cgst_amount = $excluding_GST/2;
         $sgst_amount = $excluding_GST/2;
-        $paid_amount = $result_arry['final_amount']-$excluding_GST;
+        $paid_amount = $result_arry['totalAmount']-$excluding_GST;
 
           // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
@@ -132,22 +133,36 @@
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 151, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 151, $result_arry['totalAmount'], 0, 0, 'L'); // add the text, align to Center of cell
 
         /*check paid before amount here*/
 
-        $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id");
+        $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id!=$paymentid and tbl_payment_transaction.id < $paymentid ");
         $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
-        $abv = $result_arry_result_previous_amount['totalAmount'];
+       
+
+        if($result_arry_result_previous_amount['totalAmount']){
+         $abv = $result_arry_result_previous_amount['totalAmount'];
+        }else{
+         $abv = 0;
+        }
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 162, $abv, 0, 0, 'L'); // add the text, align to Center of cell
 
+        $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid");
+        $current_value_amount = $current_value->fetch_assoc();
+
+        
+
+        $currentbal = $result_arry['final_amount']-($current_value_amount['totalAmountcureent']+$abv);
+     
+
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 173, $result_arry['final_amount']-$abv, 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 173,$currentbal , 0, 0, 'L'); // add the text, align to Center of cell
 
 
         $pdf->SetFontSize('8'); // set font size
