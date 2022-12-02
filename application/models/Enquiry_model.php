@@ -437,35 +437,17 @@ class Enquiry_model extends CI_Model
         return $query->result();
     }
 
-    public function get_before_paid_payment($enq_id){
-
-        //$this->db->select('sum(totalAmount) as beforepaid');
-        $this->db->select('id');
-        $this->db->from('tbl_payment_transaction');
-        // $this->db->where('tbl_enquiry.isDeleted', 0);
-        $this->db->where('enquiry_id', $enq_id);
-        //$this->db->where('id', 39);
-        //$this->db->group_by('enquiry_id', $enq_id);
-        $query1 = $this->db->get();
-        // return $query->result();
-
-        $result1 = $query1->result();
-
-    
+    public function get_before_paid_payment($paymentid,$enq_id){
 
         $this->db->select('sum(totalAmount) as beforepaid');
         $this->db->from('tbl_payment_transaction');
         // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('id !=', $paymentid);
+        $this->db->where('id <', $paymentid);
         $this->db->where('enquiry_id', $enq_id);
-        $this->db->where('id < ',$result1[0]->id );
         $this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
-        // return $query->result();
-
-        $result = $query->result();
-
-        return $result;
-
+        return $query->result();
 
     }
 
@@ -489,7 +471,7 @@ class Enquiry_model extends CI_Model
 
     public function getTaxinvoices($params){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
 
         // if($params['search']['value'] != "") 
@@ -514,36 +496,18 @@ class Enquiry_model extends CI_Model
             {
 
                 
-                $get_before_paid_payment = $this->get_before_paid_payment($value['enq_id']);
+                $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
 
                 if($get_before_paid_payment){
-
-                    if($get_before_paid_payment[0]->beforepaid){
-
-                        $previous_paymemt = $get_before_paid_payment[0]->beforepaid ;
-                    }else{
-
-                        $previous_paymemt = 0;
-                    }
+                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
 
                 }else{
                     $previous_paymemt =0 ;
                     
                 }
 
-                if($get_before_paid_payment){
-                    if($get_before_paid_payment[0]->beforepaid){
-                        $bal_amount =  $value['final_amount'] - $get_before_paid_payment[0]->beforepaid;
-                    }else{
-
-                        $bal_amount =  0;
-                    }
-                }else{
-
-                    $bal_amount =  0;
-                }
-
-               
+                $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
+            
 
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['receipt_no'] = $value['id'];
@@ -551,10 +515,10 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($value['payment_date']));
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
-                 $data[$counter]['totalAmount'] = $value['totalAmount'];
-                 $data[$counter]['paid_before'] = $previous_paymemt;
-                 $data[$counter]['total_amount'] = $value['final_amount'];
-                 $data[$counter]['amount_balance'] = $bal_amount;
+                 $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
+                 $data[$counter]['paid_before'] = '₹ '.$previous_paymemt;
+                 $data[$counter]['total_amount'] = '₹ '.$value['final_amount'];
+                 $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
