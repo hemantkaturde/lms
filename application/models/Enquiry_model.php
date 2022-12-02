@@ -438,44 +438,34 @@ class Enquiry_model extends CI_Model
     }
 
     public function get_before_paid_payment($enq_id){
+
         //$this->db->select('sum(totalAmount) as beforepaid');
         $this->db->select('id');
         $this->db->from('tbl_payment_transaction');
         // $this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('enquiry_id', $enq_id);
-        $this->db->order_by('id','DESC');
-        $this->db->limit(1);
+        //$this->db->where('id', 39);
         //$this->db->group_by('enquiry_id', $enq_id);
+        $query1 = $this->db->get();
+        // return $query->result();
+
+        $result1 = $query1->result();
+
+    
+
+        $this->db->select('sum(totalAmount) as beforepaid');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('enquiry_id', $enq_id);
+        $this->db->where('id < ',$result1[0]->id );
+        $this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
-        //return $query->result();
+        // return $query->result();
+
         $result = $query->result();
 
-        
-        if($result[0]->id){
-      
-            $this->db->select('sum(totalAmount) as beforepaid');
-            $this->db->from('tbl_payment_transaction');
-            // $this->db->where('tbl_enquiry.isDeleted', 0);
-            $this->db->where('enquiry_id', $enq_id);
-          
-            $this->db->where('id !=', $result[0]->id);
-            $this->db->order_by('id','DESC');
-            // $this->db->limit(1);
-            $this->db->group_by('enquiry_id', $enq_id);
-            $query1 = $this->db->get();
-            //return $query->result();
-            $result1 = $query1->result();
+        return $result;
 
-           return $result1;
-
-        }else{
-            return NULL;
-
-        }
-    
-      
-        // print_r($query->result());
-        // exit;
 
     }
 
@@ -526,17 +516,34 @@ class Enquiry_model extends CI_Model
                 
                 $get_before_paid_payment = $this->get_before_paid_payment($value['enq_id']);
 
-
-
                 if($get_before_paid_payment){
-                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+
+                    if($get_before_paid_payment[0]->beforepaid){
+
+                        $previous_paymemt = $get_before_paid_payment[0]->beforepaid ;
+                    }else{
+
+                        $previous_paymemt = 0;
+                    }
 
                 }else{
                     $previous_paymemt =0 ;
                     
                 }
 
-                $bal_amount =  $value['final_amount'] - $get_before_paid_payment[0]->beforepaid;
+                if($get_before_paid_payment){
+                    if($get_before_paid_payment[0]->beforepaid){
+                        $bal_amount =  $value['final_amount'] - $get_before_paid_payment[0]->beforepaid;
+                    }else{
+
+                        $bal_amount =  0;
+                    }
+                }else{
+
+                    $bal_amount =  0;
+                }
+
+               
 
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['receipt_no'] = $value['id'];
