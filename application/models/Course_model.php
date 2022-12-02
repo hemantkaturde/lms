@@ -830,9 +830,11 @@ public function getBookscount($topic_id,$course_id){
              $data[$counter]['date'] = date('d-m-Y', strtotime($value['date']));
              $data[$counter]['timings'] = $value['timings'];
              $data[$counter]['topic'] =  $value['topic'];
-             
              $data[$counter]['action'] = '';
-            //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Document' title='Delete Topic Document'></a>"; 
+
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/meeting.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>";
+
+            //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/meeting.png alt='Add Links' title='Add Links'></a>"; 
             
             $counter++; 
         }
@@ -852,6 +854,22 @@ public function getBookscount($topic_id,$course_id){
       $query = $this->db->get();
       
       return $query->result();
+  }
+
+
+  public function getTopicinfo($course_id,$timetable_id,$time_table_transection_id){
+
+
+    $this->db->select('*');
+    $this->db->from(TBL_TIMETABLE_TRANSECTIONS);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
+    //$this->db->where('tbl_enquiry.payment_status', 1);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $time_table_transection_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $timetable_id);
+    $query = $this->db->get();
+    return $query->result();
+
   }
 
 }

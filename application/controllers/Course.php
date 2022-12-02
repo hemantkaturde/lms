@@ -1274,6 +1274,28 @@
 
         }
 
+      
+        public function addtopiclinksforonlineattendant(){
+
+            $time_table_transection_id = $this->input->get('id');
+            $time_table_id = $this->input->get('time_table_id');
+            $course_id = $this->input->get('course_id'); 
+           
+            $data['time_table_transection_id'] = $time_table_transection_id;
+            $data['time_table_id'] = $time_table_id;
+            $data['course_id'] = $course_id;
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
+            $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
+            $data['getTopicinfo'] = $this->course_model->getTopicinfo($data['course_id'],$data['time_table_id'],$data['time_table_transection_id']);
+
+         
+            $this->global['pageTitle'] = 'Add Timetable Topic Link';
+            $this->loadViews("course/addtimetabletopiclink",$this->global,$data,NULL);
+
+        }
+
+
+
     }
 
 ?>

@@ -2530,8 +2530,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
 					{ "width": "10%", "targets": 0 },
-					{ "width": "10%", "targets": 1 },
-					{ "width": "30%", "targets": 2 },
+					{ "width": "15%", "targets": 1 },
+					{ "width": "50%", "targets": 2 },
+					{ "width": "10%", "targets": 3 },
 					// { "width": "30%", "targets": 5 }
 				],
 				responsive: true,
@@ -2539,7 +2540,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					"sEmptyTable": "<i>No Timetable Found.</i>",
 				}, 
 				"bSort" : false,
-				"bFilter":true,
+				"bFilter":true, 
 				"bLengthChange": true,
 				"iDisplayLength": 10,   
 				"bProcessing": true,

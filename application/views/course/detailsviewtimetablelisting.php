@@ -28,7 +28,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Date</th>
                                 <th>Timings</th>
                                 <th>Topics</th>
-                                <!-- <th>Action</th> -->
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
