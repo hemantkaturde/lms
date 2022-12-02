@@ -461,10 +461,10 @@ class Enquiry_model extends CI_Model
             $this->db->where('id !=', $result[0]->id);
             $this->db->order_by('id','DESC');
             // $this->db->limit(1);
-            //$this->db->group_by('enquiry_id', $enq_id);
-            $query = $this->db->get();
+            $this->db->group_by('enquiry_id', $enq_id);
+            $query1 = $this->db->get();
             //return $query->result();
-            $result1 = $query->result();
+            $result1 = $query1->result();
 
            return $result1;
 
