@@ -109,8 +109,9 @@
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
         $pdf->Cell(10, 78, $all_course_name, 0, 0, 'L'); // add the text, align to Center of cell
-
-        $excluding_GST = $result_arry['totalAmount'] * (18) / 100;
+                         
+               
+        $excluding_GST = $result_arry['totalAmount'] * (100) / 100 + 18;
         $cgst_amount = $excluding_GST/2;
         $sgst_amount = $excluding_GST/2;
         $paid_amount = $result_arry['totalAmount']-$excluding_GST;
