@@ -36,7 +36,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td style="width:20%"><b>Alternet Mobile Number</b></td>
+                                                <td style="width:20%"><b>Alternate Mobile Number</b></td>
                                                 <td><?=$view_admission_details[0]->alt_mobile;?></td>
                                             </tr>
                                             <tr>
@@ -83,10 +83,10 @@
                                                 <td style="width:20%"><b>Counsellor Name</b></td>
                                                 <td><?=$view_admission_details[0]->counsellor;?></td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td style="width:20%"><b>Counsellor contact Number</b></td>
                                                 <td><?=$view_admission_details[0]->counsellor_mobile;?></td>
-                                            </tr>
+                                            </tr> -->
                                     </tbody>
                                 </table>
 

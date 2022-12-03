@@ -123,8 +123,8 @@ class Admission_model extends CI_Model
             $this->db->select(TBL_ADMISSION.'.*,'.TBL_COUNTRY.'.name as countryname,'.TBL_STATES.'.name as statename,'.TBL_CITIES.'.name as cityname,'.TBL_USER.'.name as counsellor,'.TBL_USER.'.mobile as counsellor_mobile');
             $this->db->from(TBL_ADMISSION);
             $this->db->join(TBL_COUNTRY, TBL_ADMISSION.'.country = '.TBL_COUNTRY.'.id');
-            $this->db->join(TBL_STATES, TBL_COUNTRY.'.id = '.TBL_STATES.'.country_id');
-            $this->db->join(TBL_CITIES, TBL_STATES.'.id = '.TBL_CITIES.'.state_id');
+            $this->db->join(TBL_STATES, TBL_ADMISSION.'.state = '.TBL_STATES.'.id');
+            $this->db->join(TBL_CITIES, TBL_ADMISSION.'.city = '.TBL_CITIES.'.id');
             $this->db->join(TBL_USER, TBL_ADMISSION.'.counsellor_name = '.TBL_USER.'.userId');
             $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
             $this->db->where(TBL_ADMISSION.'.id', $id);
