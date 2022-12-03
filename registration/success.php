@@ -26,8 +26,8 @@ $row = $result->fetch_assoc();
             <h2 class="text-black"><b>!! Thank You for Joining IICTN !!</b><br></h2>
             <br>
             <p>Dear <b><?=$row['name'];?></b>,</p>
-            <p>You are successfully Admitted In IICTN LMS</p>
-            <p>Please Contact To Administration</p>
+            <p>You are successfully Admitted In IICTN</p>
+            <p>Please Contact to Administration</p>
             <!-- <p>Payment Receipt</p> -->
             <!-- <p><b>Payment Receipt : </b></p>
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php/?enq='.$enq_id; ?>">Download Payment Receipt </a></p>
