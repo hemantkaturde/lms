@@ -253,8 +253,8 @@ if(!empty($editDataenquiry))
                                                 <select class="form-control" id="doctor_non_doctor"
                                                     name="doctor_non_doctor">
                                                     <option value="">Select Doctor / Non- Doctor</option>
-                                                    <option value="doctor" <?php if($doctor_non_doctor=='doctor'){ echo 'selected';} ?>>Doctor</option>
-                                                    <option value="non-doctor" <?php if($doctor_non_doctor=='non-doctor'){ echo 'selected';} ?>>Non-Doctor</option>
+                                                    <option value="Doctor" <?php if($doctor_non_doctor=='doctor'){ echo 'selected';} ?>>Doctor</option>
+                                                    <option value="Non-Doctor" <?php if($doctor_non_doctor=='non-doctor'){ echo 'selected';} ?>>Non-Doctor</option>
                                                 </select>
                                                 <p class="error doctor_non_doctor_error"></p>
                                             </div>
