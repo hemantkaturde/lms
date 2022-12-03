@@ -164,7 +164,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
-        <button type="submit" id="upadate_follow_up" class="btn btn-primary upadate_follow_up">Upadte</button>
+        <button type="submit" id="upadate_follow_up" class="btn btn-primary upadate_follow_up">Update</button>
       </div>
       <?php echo form_close(); ?>
     </div>
