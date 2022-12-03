@@ -83,11 +83,19 @@ $jsonstringtoArray = json_decode($access, true);
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-9">
+                                        <!-- <div class="col-sm-9">
                                             <div class="form-group">
                                                 <label for="title">Title</label><span  class="required">*</span>
                                                 <input name="title" id="title" type="text" class="form-control" placeholder="Enter Title" required  />
                                                 <p class="error title_error"></p>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="timings">Timings</label><span  class="required">*</span>
+                                                <input name="timings" id="timings" type="text" class="form-control"  value="<?=$getTopicinfo[0]->timings?>" placeholder="Enter Timings" required readonly />
+                                                <p class="error timings_error"></p>
                                             </div>
                                         </div>
 

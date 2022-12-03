@@ -3438,6 +3438,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				{
 
 					var fetchResponse = $.parseJSON(data);
+
+
 					if(fetchResponse.status == "failure")
 				    {
 				    	$.each(fetchResponse.error, function (i, v)
@@ -3447,17 +3449,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						// swal({
-						// 	title: "Topic Successfully Added!",
-						// 	//text: "",
-						// 	icon: "success",
-						// 	button: "Ok",
-						// 	},function(){ 
-						// 		$("#modal-md").hide();
-						// 		window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
-						// });		
+
 						$("#modal-md").hide();
-						window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;				
+						window.location.href = "<?php echo base_url()?>/addtopiclinksforonlineattendant?id="+time_table_transection_id+"&time_table_id="+time_table_id+"&course_id="+course_id_form;				
 				    }
 					
 				},
@@ -3469,6 +3463,79 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			return false;
 	    });
 
+
+		$(document).on('click','.delete_topic_meeting_document',function(e){
+
+			var course_id_form = $('#course_id_form').val();
+			var time_table_id = $('#time_table_id').val();
+			var time_table_transection_id = $('#time_table_transection_id').val();
+
+
+			var elemF = $(this);
+			e.preventDefault();
+
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>delete_topic_meeting_link",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											//swal("Deleted!", "", "success");
+											//location.reload();
+										//}
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													// swal({
+													// 	title: "Deleted!",
+													// 	text: "",
+													// 	icon: "success",
+													// 	button: "Ok",
+													// 	},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url()?>/addtopiclinksforonlineattendant?id="+time_table_transection_id+"&time_table_id="+time_table_id+"&course_id="+course_id_form;				
+													//});	
+											}else{
+
+												// swal({
+												// 		title: "Not Deleted!",
+												// 		text: "",
+												// 		icon: "success",
+												// 		button: "Ok",
+												// 		},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url()?>/addtopiclinksforonlineattendant?id="+time_table_transection_id+"&time_table_id="+time_table_id+"&course_id="+course_id_form;				
+												//});	
+											}	
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+								})
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", " ", "error");
+				// 	}
+				// });
+			});
+
+		
 
 
 	</script>

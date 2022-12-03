@@ -489,6 +489,16 @@ class Course_model extends CI_Model
         return $query->result();
     }
 
+    public function checkquniqecoursetopicname_nameupdate($course_id_1_post){
+        $this->db->select('topic_name');
+        $this->db->from(TBL_COURSE_TOPICS);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('topic_name', $course_id_1_post);
+        //$this->db->where('course_id', $course_id_1_post);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function checkquniqecoursetopicnameupdate($topic_id,$course_id_1_post,$topic_name_1){
         $this->db->select('*');
         $this->db->from(TBL_COURSE_TOPICS);
@@ -672,7 +682,7 @@ public function getBookscount($topic_id,$course_id){
     if($params['search']['value'] != "") 
     {
         $this->db->where("(".TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_COURSE_TOPICS_DOCUMENT.".module_name LIKE '%".$params['search']['value']."%')");
+        $this->db->or_where(TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%')");
     }
     $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.isDeleted', 0);
     $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.course_id', $course_id);
@@ -693,7 +703,7 @@ public function getBookscount($topic_id,$course_id){
     if($params['search']['value'] != "") 
     {
         $this->db->where("(".TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_COURSE_TOPICS_DOCUMENT.".module_name LIKE '%".$params['search']['value']."%')");
+        $this->db->or_where(TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%')");
     }
     $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.isDeleted', 0);
     $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.course_id', $course_id);
@@ -703,6 +713,8 @@ public function getBookscount($topic_id,$course_id){
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_COURSE_TOPICS_DOCUMENT);
     $fetch_result = $query->result_array();
+
+
     $data = array();
     $counter = 0;
     if(count($fetch_result) > 0)
@@ -862,7 +874,7 @@ public function getBookscount($topic_id,$course_id){
     $this->db->from(TBL_TIMETABLE_TRANSECTIONS);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
     //$this->db->where('tbl_enquiry.payment_status', 1);
-    //$this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $time_table_transection_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $time_table_transection_id);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $timetable_id);
     $query = $this->db->get();
@@ -912,10 +924,10 @@ public function getBookscount($topic_id,$course_id){
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['topic_name'] = $value['topic_name'];
-                $data[$counter]['title'] =  $value['title'];
-                $data[$counter]['link_url'] = $value['link_url'];
+                $data[$counter]['timings'] =  $value['timings'];
+                $data[$counter]['link_url'] = '<a href="'.$value['link_url'].'" target="_blank">'.$value['link_url'].'</a>'; ;
                 $data[$counter]['action'] = '';
-               // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/meeting.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>";            
+                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_meeting_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Meeting Link' title='Delete Topic Meeting Link'></a>"; 
                 $counter++; 
             }
         }

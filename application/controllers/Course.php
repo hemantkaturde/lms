@@ -603,7 +603,6 @@
                 }else{
 
                         $check_uniqe =  $this->course_model->checkquniqecoursetopicnameupdate($topic_id,$course_id_1_post,trim($this->input->post('topic_name_1')));
-
                         if($check_uniqe){
 
                             $updateCoursetypedata_1 = $this->course_model->updateCourseTopicsdata($topic_id,$course_id_1_post,$data);
@@ -616,7 +615,7 @@
                                 $update_response['error'] = array('topic_name_1'=>'','remark_1'=>'');
                             }
                         }else{
-                            $check_uniqe_topic_name_1 =  $this->course_model->checkquniqecoursetopicname(trim($this->input->post('topic_name_1')));
+                            $check_uniqe_topic_name_1 =  $this->course_model->checkquniqecoursetopicname_nameupdate(trim($this->input->post('topic_name_1')));
 
                             if($check_uniqe_topic_name_1){
 
@@ -1280,21 +1279,12 @@
             $time_table_transection_id = $this->input->get('id');
             $time_table_id = $this->input->get('time_table_id');
             $course_id = $this->input->get('course_id'); 
-           
             $data['time_table_transection_id'] = $time_table_transection_id;
             $data['time_table_id'] = $time_table_id;
             $data['course_id'] = $course_id;
             $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
-
-
-          
             $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
-
-          
-
             $data['getTopicinfo'] = $this->course_model->getTopicinfo($data['course_id'],$data['time_table_id'],$data['time_table_transection_id']);
-
-           
             $this->global['pageTitle'] = 'Add Timetable Topic Link';
             $this->loadViews("course/addtimetabletopiclink",$this->global,$data,NULL);
 
@@ -1335,29 +1325,28 @@
         public function savecoursetopicMeetingLinks(){
 
            $post_submit =  $this->input->post();
-
-          
            if(!empty($post_submit)){
 
                     $savecoursetopicMeeting_response = array();
 
                     $data = array(
                         'topic_name' => $this->input->post('topic_name'),
-                        'title' => $this->input->post('title'),
+                        //'title' => $this->input->post('title'),
                         'link_url' => $this->input->post('new_meeting_link'),
+                        'timings' => $this->input->post('timings'),
                         'course_id' => $this->input->post('course_id_form_post'),
                         'time_table_id' => $this->input->post('time_table_id_post'),
                         'time_table_transection_id' => $this->input->post('time_table_transection_id_post'),
                     );
 
-
-                    $this->form_validation->set_rules('title', 'Title', 'trim|required');
+                    $this->form_validation->set_rules('timings', 'Timings', 'trim|required');
+                    //$this->form_validation->set_rules('title', 'Title', 'trim|required');
                     $this->form_validation->set_rules('new_meeting_link', 'Link URL', 'trim|required');
 
                     if($this->form_validation->run() == FALSE){
 
                         $savecoursetopicMeeting_response['status'] = 'failure';
-                        $savecoursetopicMeeting_response['error'] = array('title'=>strip_tags(form_error('title')),'new_meeting_link'=>strip_tags(form_error('new_meeting_link')));
+                        $savecoursetopicMeeting_response['error'] = array('timings'=>strip_tags(form_error('timings')),'new_meeting_link'=>strip_tags(form_error('new_meeting_link')));
 
                     }else{
                         /*check If course name is unique*/
@@ -1370,7 +1359,7 @@
                             $saveCoursetypedata = $this->course_model->saveTimetablemeetinglinkdata('',$data);
                             if($saveCoursetypedata){
                                 $savecoursetopicMeeting_response['status'] = 'success';
-                                $savecoursetopicMeeting_response['error'] = array('title'=>'','new_meeting_link'=>'');
+                                $savecoursetopicMeeting_response['error'] = array('timings'=>'','new_meeting_link'=>'');
                             }
                        // }
                     }
@@ -1378,6 +1367,33 @@
              }
              echo json_encode($savecoursetopicMeeting_response);
         }
+ 
+
+        public function delete_topic_meeting_link(){
+
+            $time_table_link_id = $this->input->post('id');
+
+            $post_submit = $this->input->post('id');
+            if(!empty($post_submit)){
+                $deletecourse_response =array();
+              
+                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->course_model->data_update('tbl_topic_meeting_link',$courseInfo,'id',$this->input->post('id'));
+                    if($result){
+                        $deletecourse_response['status'] = 'success';
+                        $process = 'Document Topic Link Delete';
+                        $processFunction = 'nkCourse/delete_topic_meeting_link';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $deletecourse_response['status'] = 'filure';
+                    }
+                echo json_encode($deletecourse_response);
+            }
+        }
+
+
+
     }
 
 ?>

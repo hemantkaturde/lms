@@ -123,6 +123,8 @@ $route['fetchTopicTimetableListing?(:any)'] = "course/fetchTopicTimetableListing
 $route['addtopiclinksforonlineattendant?(:any)'] = "course/addtopiclinksforonlineattendant/$1";
 $route['fetchtopicmeetinglink?(:any)'] = "course/fetchtopicmeetinglink/$1";
 
+$route['delete_topic_meeting_link'] = "course/delete_topic_meeting_link";
+
 $route['savecoursetopicMeetingLinks'] = "course/savecoursetopicMeetingLinks";
 
 
