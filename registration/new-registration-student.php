@@ -112,11 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
         $username = strtok($name, " ");
         $year = date("Y"); 
-        $password = base64_encode(uniqid());
+        $password = base64_encode($name.'@'.$year);
 
-        // $main_pass = $name.'@'.$year;
-
-        $main_pass =  $password;
+        $main_pass = $name.'@'.$year;
 
         $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,enq_id,roleId,createdBy,isDeleted) 
                               VALUES ('$email','$username',' $password','$name','$mobile','student','$enq_id','3','1','0')"; 
