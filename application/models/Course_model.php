@@ -806,8 +806,8 @@ public function getBookscount($topic_id,$course_id){
     $this->db->select('*');
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".file_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_TIMETABLE_TRANSECTIONS.".module_name LIKE '%".$params['search']['value']."%')");
+        $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TIMETABLE_TRANSECTIONS.".topic LIKE '%".$params['search']['value']."%')");
     }
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
@@ -823,8 +823,8 @@ public function getBookscount($topic_id,$course_id){
     $this->db->select('*');
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".file_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_TIMETABLE_TRANSECTIONS.".module_name LIKE '%".$params['search']['value']."%')");
+        $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TIMETABLE_TRANSECTIONS.".topic LIKE '%".$params['search']['value']."%')");
     }
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
