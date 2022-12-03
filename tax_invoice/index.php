@@ -111,25 +111,27 @@
         $pdf->Cell(10, 78, $all_course_name, 0, 0, 'L'); // add the text, align to Center of cell
                          
                
-        $excluding_GST = $result_arry['totalAmount'] * (100) / 100 + 18;
-        $cgst_amount = $excluding_GST/2;
-        $sgst_amount = $excluding_GST/2;
+        $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
+      
+        $cgst_amount = $excluding_GST * 9 /100;
+        $sgst_amount = $excluding_GST * 9 /100;
+
         $paid_amount = $result_arry['totalAmount']-$excluding_GST;
 
           // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 118, $paid_amount, 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 118, round($excluding_GST,2), 0, 0, 'L'); // add the text, align to Center of cell
    
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 130, $cgst_amount, 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 130, round($cgst_amount,2), 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 140, $sgst_amount, 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 140, round($sgst_amount,2), 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
