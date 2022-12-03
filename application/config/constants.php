@@ -105,6 +105,7 @@ define('TBL_TIMETABLE_TRANSECTIONS','tbl_timetable_transection');
 define('TBL_EXAMINATION','tbl_examination');
 define('TBL_QUESTION_PAPER','tbl_course_question_paper');
 define('TBL_ENQUIRY_FOLLOW_UP', 'tbl_enquiry_follow_up');
+define('TBL_TOPIC_MEETING_LINK', 'tbl_topic_meeting_link');
 
 
 define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com

@@ -8,25 +8,30 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <!-- <div class="ibox-tools"> -->
-                <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
-                <!-- </div> -->
                 <div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseType">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewMeeting">
                         <i class="fa fa-plus"></i> Add Meeting Link
                     </button>
 
                     <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
+                                class="fa fa-arrow-left"></i> Back</a>
                     </button>
+
                 </div>
 
-                Date : <?=$getTopicinfo[0]->date?> 
-                <div class="ibox-title">Course Name : <?=$getCourseinfo[0]->course_name;?> | Topic Name : <?=$getTopicinfo[0]->topic;?>    | Topic Meeting Link Management</div>
+                <input name="course_id_form" id="course_id_form" type="hidden" value="<?php echo $course_id; ?>" />
+                <input name="time_table_id" id="time_table_id" type="hidden" value="<?php echo $time_table_id; ?>" />
+                <input name="time_table_transection_id" id="time_table_transection_id" type="hidden"
+                    value="<?php echo $time_table_transection_id; ?>" />
+
+                Date : <?=$getTopicinfo[0]->date?>
+                <div class="ibox-title">Course Name : <?=$getCourseinfo[0]->course_name;?> | Topic Name :
+                    <?=$getTopicinfo[0]->topic;?> | Topic Meeting Link Management</div>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
-                    <table id="view_coursetypelist" class="table table-bordered">
+                    <table id="fetchmeetinglink" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Topic Name</th>
@@ -46,92 +51,65 @@ $jsonstringtoArray = json_decode($access, true);
 
 
     <!-- Add New Course Modal -->
-    <div class="modal fade" id="addCourseType" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-        aria-labelledby="addCourseTypeLabel" aria-hidden="true">
+    <div class="modal fade" id="addNewMeeting" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="addNewMeetingLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#d2ae6d">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Course Type</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Meeting Link</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <?php
-            $attributes = array("name"=>"course_type_form","id"=>"course_type_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            $attributes = array("name"=>"new_meeting_link","id"=>"new_meeting_link","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
             echo form_open("", $attributes);
          ?>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row col-md-12 col-sm-12 col-xs-12">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="course_type_name">Course Type<span
-                                            class="required">*</span>
-                                    </label>
-                                    <div>
-                                        <input autocomplete="off" autocomplete="off" type="text" id="course_type_name"
-                                            name="course_type_name" placeholder="Enter Course Type"
-                                            class="form-control col-md-12 col-xs-12">
-                                        <p class="error course_type_name_error"></p>
+                                    <input name="course_id_form_post" id="course_id_form_post" type="hidden" value="<?php echo $course_id; ?>" />
+                                    <input name="time_table_id_post" id="time_table_id_post" type="hidden" value="<?php echo $time_table_id; ?>" />
+                                    <input name="time_table_transection_id_post" id="time_table_transection_id_post" type="hidden" value="<?php echo $time_table_transection_id; ?>" />
+
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="topic_name">Topic Name </label><span  class="required">*</span>
+                                                <input name="topic_name" id="topic_name" type="text"  value="<?=$getCourseinfo[0]->course_name?>" class="form-control" readonly/>
+                                                <p class="error topic_name_error"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="title">Title</label><span  class="required">*</span>
+                                                <input name="title" id="title" type="text" class="form-control" placeholder="Enter Title" required  />
+                                                <p class="error title_error"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="new_meeting_link">Add New Meeting Link</label><span  class="required">*</span>
+                                                <input name="new_meeting_link" id="new_meeting_link" type="text"  placeholder="Enter Meeting Link" class="form-control" required />
+                                                <p class="error new_meeting_link_error"></p>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="save_course_type" class="btn btn-primary save_course_type">Save</button>
-                </div>
-                <?php echo form_close(); ?>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Edit New Course Modal -->
-    <div class="modal fade" id="editCourseType" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-        aria-labelledby="editCourseTypeLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color:#d2ae6d">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Course Type</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <?php
-            $attributes = array("name"=>"edit_course_type_form","id"=>"edit_course_type_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
-            echo form_open("", $attributes);
-         ?>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row col-md-12 col-sm-12 col-xs-12">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label style="text-align: left;" for="course_type_name">Course Type<span
-                                            class="required">*</span>
-                                    </label>
-                                    <div>
-                                        <input autocomplete="off" autocomplete="off" type="text" id="course_type_name_1"
-                                            name="course_type_name_1" placeholder="Enter Course Type"
-                                            class="form-control col-md-12 col-xs-12">
-                                        <p class="error course_type_name_1_error"></p>
-                                        <input autocomplete="off" autocomplete="off" type="hidden" id="coursetype_id"
-                                            name="coursetype_id" placeholder="Enter Course Type"
-                                            class="form-control col-md-12 col-xs-12">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="add_new_meeting_link" class="btn btn-primary add_new_meeting_link">Save</button>
                     </div>
+                    <?php echo form_close(); ?>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="update_course_type"
-                        class="btn btn-primary update_course_type">Save</button>
-                </div>
-                <?php echo form_close(); ?>
             </div>
         </div>
     </div>

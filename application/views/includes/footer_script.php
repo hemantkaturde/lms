@@ -2332,7 +2332,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						// 	button: "Ok",
 						// 	},function(){ 
 								$("#popup_modal_md").hide();
-								window.location.href = "<?php echo base_url().'timetableListing/'?>"+course_id_form;
+								window.location.href = "<?php echo base_url().'addtopiclinksforonlineattendant/'?>"+course_id_form;
 						//});						
 				    }
 					
@@ -2811,9 +2811,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			});
 			return false;
 	});
-
-	
-
 	</script>
 <?php } ?>
 
@@ -3385,6 +3382,98 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	</script>
 <?php } ?>
+
+<?php if($pageTitle=='Add Timetable Topic Link'){ ?>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+		var course_id_form = $('#course_id_form').val();
+		var time_table_id = $('#time_table_id').val();
+		var id = $('#time_table_transection_id').val();
+
+			var dt = $('#fetchmeetinglink').DataTable({
+				"columnDefs": [ 
+					{ className: "details-control", "targets": [ 0 ] },
+					{ "width": "10%", "targets": 0 },
+					{ "width": "15%", "targets": 1 },
+					{ "width": "50%", "targets": 2 },
+					{ "width": "10%", "targets": 3 },
+					// { "width": "30%", "targets": 5 }
+				],
+				responsive: true,
+				"oLanguage": {
+					"sEmptyTable": "<i>No Meeting Links Found.</i>",
+				}, 
+				"bSort" : false,
+				"bFilter":true, 
+				"bLengthChange": true,
+				"iDisplayLength": 10,   
+				"bProcessing": true,
+				"serverSide": true,
+				"ajax":{
+					url :"<?php echo base_url();?>fetchtopicmeetinglink?id="+id+"&time_table_id="+time_table_id+"&course_id="+course_id_form+"",
+					type: "post",
+				},
+			});
+		});
+
+
+		$(document).on('click','#add_new_meeting_link',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#new_meeting_link")[0]);
+
+			var course_id_form = $('#course_id_form').val();
+			var time_table_id = $('#time_table_id').val();
+			var time_table_transection_id = $('#time_table_transection_id').val();
+
+
+			$.ajax({
+				url : "<?php echo base_url();?>savecoursetopicMeetingLinks",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Topic Successfully Added!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#modal-md").hide();
+						// 		window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
+						// });		
+						$("#modal-md").hide();
+						window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;				
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+
+	</script>
+<?php } ?>
+
 
 
 

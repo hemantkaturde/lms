@@ -1285,17 +1285,99 @@
             $data['time_table_id'] = $time_table_id;
             $data['course_id'] = $course_id;
             $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
+
+
+          
             $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
+
+          
+
             $data['getTopicinfo'] = $this->course_model->getTopicinfo($data['course_id'],$data['time_table_id'],$data['time_table_transection_id']);
 
-         
+           
             $this->global['pageTitle'] = 'Add Timetable Topic Link';
             $this->loadViews("course/addtimetabletopiclink",$this->global,$data,NULL);
 
         }
 
+        public function fetchtopicmeetinglink(){
+
+            $time_table_id = $this->input->get('time_table_id');
+            $course_id = $this->input->get('course_id');
+            $time_table_transection_id = $this->input->get('id');
+
+            $params = $_REQUEST;
+            $totalRecords = $this->course_model->gettopicmeetinglinkCount($params,$time_table_id,$course_id,$time_table_transection_id); 
+            $queryRecords = $this->course_model->gettopicmeetinglinkData($params,$time_table_id,$course_id,$time_table_transection_id); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+
+        }
 
 
+        public function savecoursetopicMeetingLinks(){
+
+           $post_submit =  $this->input->post();
+
+          
+           if(!empty($post_submit)){
+
+                    $savecoursetopicMeeting_response = array();
+
+                    $data = array(
+                        'topic_name' => $this->input->post('topic_name'),
+                        'title' => $this->input->post('title'),
+                        'link_url' => $this->input->post('new_meeting_link'),
+                        'course_id' => $this->input->post('course_id_form_post'),
+                        'time_table_id' => $this->input->post('time_table_id_post'),
+                        'time_table_transection_id' => $this->input->post('time_table_transection_id_post'),
+                    );
+
+
+                    $this->form_validation->set_rules('title', 'Title', 'trim|required');
+                    $this->form_validation->set_rules('new_meeting_link', 'Link URL', 'trim|required');
+
+                    if($this->form_validation->run() == FALSE){
+
+                        $savecoursetopicMeeting_response['status'] = 'failure';
+                        $savecoursetopicMeeting_response['error'] = array('title'=>strip_tags(form_error('title')),'new_meeting_link'=>strip_tags(form_error('new_meeting_link')));
+
+                    }else{
+                        /*check If course name is unique*/
+                        // $check_uniqe =  $this->course_model->checkquniqecoursetype(trim($this->input->post('course_type_name')));
+
+                        // if($check_uniqe){
+                        //     $savecoursetopic_response['status'] = 'failure';
+                        //     $savecoursetopic_response['error'] = array('course_type_name'=>'Course Type Already Exist');
+                        // }else{
+                            $saveCoursetypedata = $this->course_model->saveTimetablemeetinglinkdata('',$data);
+                            if($saveCoursetypedata){
+                                $savecoursetopicMeeting_response['status'] = 'success';
+                                $savecoursetopicMeeting_response['error'] = array('title'=>'','new_meeting_link'=>'');
+                            }
+                       // }
+                    }
+                    
+             }
+             echo json_encode($savecoursetopicMeeting_response);
+        }
     }
 
 ?>

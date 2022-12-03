@@ -858,19 +858,82 @@ public function getBookscount($topic_id,$course_id){
 
 
   public function getTopicinfo($course_id,$timetable_id,$time_table_transection_id){
-
-
     $this->db->select('*');
     $this->db->from(TBL_TIMETABLE_TRANSECTIONS);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
     //$this->db->where('tbl_enquiry.payment_status', 1);
-    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $time_table_transection_id);
+    //$this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $time_table_transection_id);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
     $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $timetable_id);
     $query = $this->db->get();
     return $query->result();
+  }
+
+
+  public function gettopicmeetinglinkCount($params,$time_table_id,$course_id,$time_table_transection_id){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TOPIC_MEETING_LINK.".title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TOPIC_MEETING_LINK.".topic_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.isDeleted', 0);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.status', 1);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.course_id', $course_id);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_id', $time_table_id);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_transection_id', $time_table_transection_id);
+        $query = $this->db->get(TBL_TOPIC_MEETING_LINK);
+        $rowcount = $query->num_rows();
+        return $rowcount;
 
   }
+
+  public function gettopicmeetinglinkData($params,$time_table_id,$course_id,$time_table_transection_id){
+   
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TOPIC_MEETING_LINK.".title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TOPIC_MEETING_LINK.".topic_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.isDeleted', 0);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.status', 1);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.course_id', $course_id);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_id', $time_table_id);
+        $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_transection_id', $time_table_transection_id);
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_TOPIC_MEETING_LINK);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['topic_name'] = $value['topic_name'];
+                $data[$counter]['title'] =  $value['title'];
+                $data[$counter]['link_url'] = $value['link_url'];
+                $data[$counter]['action'] = '';
+               // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/meeting.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>";            
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+  }
+
+  public function saveTimetablemeetinglinkdata($id,$data){
+
+    if($this->db->insert(TBL_TOPIC_MEETING_LINK, $data)) {
+        return $this->db->insert_id();;
+    } else {
+        return FALSE;
+    }
+
+  }
+
 
 }
 

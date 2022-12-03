@@ -121,6 +121,10 @@ $route['viewtimetablelisting?(:any)'] = "course/viewtimetablelisting/$1";
 $route['fetchTopicTimetableListing?(:any)'] = "course/fetchTopicTimetableListing/$1";
 
 $route['addtopiclinksforonlineattendant?(:any)'] = "course/addtopiclinksforonlineattendant/$1";
+$route['fetchtopicmeetinglink?(:any)'] = "course/fetchtopicmeetinglink/$1";
+
+$route['savecoursetopicMeetingLinks'] = "course/savecoursetopicMeetingLinks";
+
 
 /************ EXAMINATION MASTER ***********************/
 $route['examinationlisting'] = "examination/examinationlisting";
