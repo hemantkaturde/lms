@@ -798,7 +798,7 @@
 
 				swal({
 					title: "Are you sure?",
-					text: "You want to Brochure link to User !",
+					text: "Brochure link !",
 					type: "warning",
 					showCancelButton: true,
 					closeOnClickOutside: false,
@@ -3109,7 +3109,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			e.preventDefault();
 				swal({
 					title: "Are you sure?",
-					text: "You want to send Payment Link to User !",
+					text: "Payment Link !",
 					type: "warning",
 					showCancelButton: true,
 					closeOnClickOutside: false,
@@ -3301,7 +3301,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			e.preventDefault();
 				swal({
 					title: "Are you sure?",
-					text: "You want to send Manual Link to User !",
+					text: "Admission Link !",
 					type: "warning",
 					showCancelButton: true,
 					closeOnClickOutside: false,

@@ -1070,7 +1070,7 @@
 
                     $htmlContent = '<div>
                     <p><b>Dear, </b> '.$enq_fullname.'</p>
-                    <p>Please Follow Below Payment Link.</p></div>
+                    <p>Please Follow Below Admission Link.</p></div>
                     
                     <div>
                         <p><b>Admission Link<b></p>
