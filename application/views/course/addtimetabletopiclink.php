@@ -39,7 +39,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <thead>
                             <tr>
                                 <th>Topic Name</th>
-                                <th>Title</th>
+                                <th>Timings</th>
                                 <th>Link</th>
                                 <th>Action</th>
                             </tr>
