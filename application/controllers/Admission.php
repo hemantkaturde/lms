@@ -12,6 +12,7 @@
             parent::__construct();
             $this->load->model('login_model');
             $this->load->model('admission_model');
+            $this->load->model('comman_model');
             $this->load->model('enquiry_model');
             $this->load->model('database');
             // $this->load->library('dbOperations');
@@ -247,16 +248,30 @@
 
         public function editadmission($id){
 
-            
             $process = 'Admission Edit';
-            $processFunction = 'Enquiry/enquiryEdit';
+            $processFunction = 'Enquiry/editadmission';
             $this->logrecord($process,$processFunction);
-            //$data['course_List'] = $this->comman_model->getCourseList();
-            $data['editDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
-            // $data['state_List'] = $this->comman_model->selectAllStates($data['editDataenquiry'][0]->enq_country,$data['editDataenquiry'][0]->enq_state);
-            // $data['city_List'] = $this->comman_model->selectAllCities($data['editDataenquiry'][0]->enq_state,$data['editDataenquiry'][0]->enq_city);
+            $data['counsellor_list_data'] = $this->admission_model->counsellor_list();
+            $data['editDataAdmission'] = $this->admission_model->editDataadmission($id);
+            //$data['country_List'] = $this->comman_model->getCourseList();
+
+            $data['state_List'] = $this->comman_model->selectAllStates(101,NULL);
+            $data['city_List'] = $this->comman_model->selectAllCitiesForedit(NULL,NULL);
             $this->global['pageTitle'] = 'Admission Management';
-            $this->loadViews("enquiry/enquiryEdit", $this->global, $data , NULL);
+            $this->loadViews("admission/editadmission", $this->global, $data , NULL);
+        }
+
+
+        public function updateadmission(){
+            $process = 'Update Admission';
+            $processFunction = 'Admission/updateadmission';
+            $this->logrecord($process,$processFunction);
+
+
+            print_r( $post_submit = $this->input->post());
+            exit;
+
+
 
 
         }

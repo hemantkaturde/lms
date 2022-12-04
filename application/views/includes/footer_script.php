@@ -1724,7 +1724,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
    </script>
 <?php } ?>
 
-<?php if($pageTitle=='Admission Listing'){?>
+<?php if($pageTitle=='Admission Listing' || $pageTitle=='Admission Edit'){?>
 <script type="text/javascript">
 	$(document).ready(function() {
 					var dt = $('#admissionList').DataTable({
@@ -1828,6 +1828,58 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 				});
 	});
+
+	var loadFile = function(event) {
+			var image = document.getElementById('output');
+			image.src = URL.createObjectURL(event.target.files[0]);
+	};
+
+	$(document).on('click','#update_admission',function(e){
+
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				var formData = new FormData($("#update_admission_form")[0]);
+				//var admission_id = $("#admission_id").val();
+				$.ajax({
+					url : "<?php echo base_url();?>updateadmission",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							// swal({
+							// 	title: "User Updated!",
+							// 	text: "",
+							// 	icon: "success",
+							// 	button: "Ok",
+							// 	},function(){ 
+									$("#popup_modal_md").hide();
+									window.location.href = "<?php echo base_url().'admissionListing'?>";
+							//});						
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+			
+					}
+				});
+				return false;
+	});
+
+
 </script>
 <?php } ?>
 

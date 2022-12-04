@@ -39,6 +39,24 @@ class Comman_model extends CI_Model
         }
 
 
+        public function selectAllCitiesForedit($state_id,$city_id = '')
+        {
+            $this->db->select('*');
+           // $this->db->where('state_id', $state_id);
+            $this->db->order_by('name','ASC');
+            $query_result = $this->db->get(TBL_CITIES)->result_array();
+            if($city_id != '') {
+                foreach($query_result as $key => $value) {
+                    if($value['id'] == $city_id) {
+                        $query_result[$key]['selected'] = 'selected';
+                    } else {
+                        $query_result[$key]['selected'] = '';
+                    }
+                }
+            }
+            return $query_result;
+        }
+
         public function getCourseList()
         {
             $this->db->select('*');

@@ -178,6 +178,10 @@ $route['deleteAdmission'] = "admission/deleteAdmission";
 $route['viewadmissiondetails/(:any)'] = "admission/viewadmissiondetails/$1";
 $route['editadmission/(:any)'] = "admission/editadmission/$1";
 
+$route['updateadmission'] = "admission/updateadmission";
+
+
+
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
 $route['emailtemplateListing'] = "emailSetting/emailtemplateListing";

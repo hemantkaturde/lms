@@ -139,6 +139,33 @@ class Admission_model extends CI_Model
 
         }
 
+        public function editDataadmission($id){
+            $this->db->select(TBL_ADMISSION.'.*,'.TBL_COUNTRY.'.name as countryname,'.TBL_STATES.'.name as statename,'.TBL_CITIES.'.name as cityname,'.TBL_USER.'.name as counsellor,'.TBL_USER.'.mobile as counsellor_mobile');
+            $this->db->from(TBL_ADMISSION);
+            $this->db->join(TBL_COUNTRY, TBL_ADMISSION.'.country = '.TBL_COUNTRY.'.id');
+            $this->db->join(TBL_STATES, TBL_ADMISSION.'.state = '.TBL_STATES.'.id');
+            $this->db->join(TBL_CITIES, TBL_ADMISSION.'.city = '.TBL_CITIES.'.id');
+            $this->db->join(TBL_USER, TBL_ADMISSION.'.counsellor_name = '.TBL_USER.'.userId');
+            $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
+            $this->db->where(TBL_ADMISSION.'.id', $id);
+            $query = $this->db->get();
+            return $query->result();
+        }
+
+        public function counsellor_list(){
+            $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role, BaseTbl.user_flag');
+            $this->db->from('tbl_users as BaseTbl');
+            $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->where('Role.role', 'Counsellor');
+            // $this->db->limit($page, $segment);
+            $query = $this->db->get();
+            $result = $query->result_array();        
+            return $result;
+
+
+        }
+
 
 }
 

@@ -314,6 +314,14 @@ $jsonstringtoArray = json_decode($access, true);
                     </li>
                     <?php } ?>
 
+                   
+                    <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
+                        <a href="<?php echo base_url().'examinationlisting'; ?>"><i class="sidebar-item-icon fa fa fa-pencil" ></i>
+                            <span class="nav-label">Examination</span>
+                        </a>
+                    </li>
+                   
+
                     <li class="">
                         <a href=""><i class="sidebar-item-icon fa fa-file-text" ></i>
                             <span class="nav-label">Certificates</span>
