@@ -53,7 +53,10 @@ class Admission_model extends CI_Model
             if($params['search']['value'] != "") 
             {
                 $this->db->where("(".TBL_ADMISSION.".name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_ADMISSION.".name LIKE '%".$params['search']['value']."%')");
+                $this->db->or_where(TBL_ADMISSION.".mobile LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ADMISSION.".address LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ADMISSION.".createdBy LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ADMISSION.".email LIKE '%".$params['search']['value']."%')");
             }
             $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
             $query = $this->db->get(TBL_ADMISSION);
@@ -70,7 +73,10 @@ class Admission_model extends CI_Model
             if($params['search']['value'] != "") 
             {
                 $this->db->where("(".TBL_ADMISSION.".name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_ADMISSION.".name LIKE '%".$params['search']['value']."%')");
+                $this->db->or_where(TBL_ADMISSION.".mobile LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ADMISSION.".createdBy LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ADMISSION.".address LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ADMISSION.".email LIKE '%".$params['search']['value']."%')");
             }
             $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
             $this->db->order_by(TBL_ADMISSION.'.enq_id', 'DESC');
