@@ -508,11 +508,17 @@ class Enquiry_model extends CI_Model
 
                 $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
             
-
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['receipt_no'] = $value['id'];
                  $data[$counter]['enquiry_no'] = $value['enquiry_number'];
-                 $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($value['payment_date']));
+
+                 if($value['razorpay_payment_id']){
+                    $payment_date = $value['datetime'];
+                 }else{
+                    $payment_date = $value['payment_date'];
+                 }
+
+                 $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($payment_date));
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
