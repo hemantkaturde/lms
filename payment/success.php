@@ -1,13 +1,16 @@
 
 <?php
-
-
 $enq_id =$_GET['enq'];
 include_once('../db/config.php');
 $id = $_GET['enq'];
 $sql = "SELECT enq_id,enq_fullname,enq_email FROM tbl_enquiry where enq_id='".$id."' and isDeleted =0" ;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+
+
+$get_last_payment = "SELECT * FROM tbl_payment_transaction where enquiry_id='".$enq_id ."' and payment_mode='Online-Razorpay' order by id desc"  ;
+$result_last_payment = $conn->query($get_last_payment);
+$row_last_payment = $result_last_payment->fetch_assoc();
 
 $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
 if ($conn->query($sql) === TRUE) {
@@ -113,7 +116,8 @@ if ($conn->query($sql) === TRUE) {
             <!-- <p>Payment Receipt</p> -->
             <p><b>Payment Receipt : </b></p>
             <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php?enq='.$enq_id; ?>">Download Payment Receipt </a></p> -->
-            <p><a class="" target="_blank"  href="../invoices/PAYMENT_RECEIPT_1.pdf">Download Payment Receipt </a></p>
+
+            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/tax_invoice/index.php?enq_id='.$enq_id.'&paymentid='.$row_last_payment['id']; ?>">Download Payment Receipt </a></p>
 
             <p><b>Addmission Form : </b></p>
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p>
