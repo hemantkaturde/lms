@@ -37,7 +37,6 @@ class Admin extends BaseController
     public function index($year = null, $month = null, $day = null)
     {
         $this->global['pageTitle'] = 'ADMIN : Home page';
-       
         $year  = (empty($year) || !is_numeric($year))?  date('Y') :  $year;
 		$month = (is_numeric($month) &&  $month > 0 && $month < 13)? $month : date('m');
 		$day   = (is_numeric($day) &&  $day > 0 && $day < 31)?  $day : date('d');
@@ -67,7 +66,11 @@ class Admin extends BaseController
          $data1[] = ['date' => $row['date'], 'count' =>$row['count']];
         }
         $data['chart_data'] = json_encode($data1);
-        $this->loadViews("dashboard", $this->global, $data , NULL);
+        if($this->session->userdata('roleText') !='Student'){
+           $this->loadViews("dashboard", $this->global, $data , NULL);
+        }else{
+            $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
+        }
     }
 
      /**

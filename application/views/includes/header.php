@@ -4,6 +4,7 @@
 $pageUrl =$this->uri->segment(1);
 $access = $this->session->userdata('access');
 $roleText = $this->session->userdata('roleText');
+
 $jsonstringtoArray = json_decode($access, true);
 ?>
 <head>
@@ -262,7 +263,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
                 </div>
 
-                <?php if($role_text!="student"){ ?>
+                <?php if($role_text!="Student"){ ?>
                     <ul class="side-menu metismenu" >
                         <!-- <li class="heading" >DASHBOARD</li> -->
 
@@ -398,7 +399,46 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?> -->
 
                     </ul>
-                <?php } ?>
+                <?php }else{ ?>
+                    <ul class="side-menu metismenu" >
+
+                   
+                        <li  class="<?php if($pageUrl =='dashboard'){ echo 'active';} ?>">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-th-large"></i>
+                                <span class="nav-label" >Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-file"></i>
+                                <span class="nav-label" >Courses</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-graduation-cap"></i>
+                                <span class="nav-label" >Examination</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-file-text"></i>
+                                <span class="nav-label" >Certificates</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-inr"></i>
+                                <span class="nav-label" >Billing Info</span>
+                            </a>
+                        </li>                   
+                    </ul>
+               <?php } ?>
             </div>
         </nav>
         <!-- END SIDEBAR-->
