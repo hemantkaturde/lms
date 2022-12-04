@@ -8,7 +8,7 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
 
-$get_last_payment = "SELECT * FROM tbl_payment_transaction where enquiry_id='".$enq_id ."' and payment_mode='Online-Razorpay' order by id desc"  ;
+$get_last_payment = "SELECT * FROM tbl_payment_transaction where enquiry_id='".$enq_id."' and payment_mode='Online-Razorpay' order by id desc limit 1"  ;
 $result_last_payment = $conn->query($get_last_payment);
 $row_last_payment = $result_last_payment->fetch_assoc();
 
