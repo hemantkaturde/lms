@@ -159,6 +159,37 @@ if(!empty($roleInfo))
 
 
                                             <tr>
+                                                <td style="color:#a83131"><b>Examination</b></td>
+                                                <td><input type="checkbox" id="examinationmodule" name="checkbox[]" value="examinationmodule" <?php if(in_array("examinationmodule", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="examinationpage" name="checkbox[]" value="examinationpage" <?php if(in_array("examinationpage", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="examinationadd" name="checkbox[]" value="examinationadd" <?php if(in_array("examinationadd", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="examinationedit" name="checkbox[]" value="examinationedit" <?php if(in_array("examinationedit", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="examinationdelete" name="checkbox[]" value="examinationdelete" <?php if(in_array("examinationdelete", json_decode($access))){ echo 'checked'; } ?>></td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Certificate</b></td>
+                                                <td><input type="checkbox" id="certificatemodule" name="checkbox[]" value="certificatemodule" <?php if(in_array("certificatemodule", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="certificatepage" name="checkbox[]" value="certificatepage" <?php if(in_array("certificatepage", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="certificateadd" name="checkbox[]" value="certificateadd" <?php if(in_array("certificateadd", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="certificateedit" name="checkbox[]" value="certificateedit" <?php if(in_array("certificateedit", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="certificatedelete" name="checkbox[]" value="certificatedelete" <?php if(in_array("certificatedelete", json_decode($access))){ echo 'checked'; } ?>></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Tax Invoice</b></td>
+                                                <td><input type="checkbox" id="taxinvoicemodule" name="checkbox[]" value="taxinvoicemodule" <?php if(in_array("taxinvoicemodule", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+
+                                            <tr>
                                                 <td style="color:#a83131"><b>Staff / Counseller</b></td>
                                                 <td><input type="checkbox" id="staffcounsellermodule" name="checkbox[]" value="staffcounsellermodule" <?php if(in_array("staffcounsellermodule", json_decode($access))){ echo 'checked'; } ?>></td>
                                                 <td><input type="checkbox" id="staffcounsellerpage" name="checkbox[]" value="staffcounsellerpage" <?php if(in_array("staffcounsellerpage", json_decode($access))){ echo 'checked'; } ?>></td>
@@ -203,7 +234,7 @@ if(!empty($roleInfo))
                                                 <td><input type="checkbox" id="roledelete" name="checkbox[]" value="roledelete" <?php if(in_array("roledelete", json_decode($access))){ echo 'checked'; } ?>></td>
                                             </tr>
 
-                                            <tr>
+                                            <!-- <tr>
                                                 <td style="color:#a83131"><b>Settings</b></td>
                                                 <td><input type="checkbox" id="settingsmodule" name="checkbox[]" value="settingsmodule" <?php if(in_array("settingsmodule", json_decode($access))){ echo 'checked'; } ?>></td>
                                                 <td></td>
@@ -219,7 +250,7 @@ if(!empty($roleInfo))
                                                 <td><input type="checkbox" id="emilsmtpadd" name="checkbox[]" value="emilsmtpadd" <?php if(in_array("emilsmtpadd", json_decode($access))){ echo 'checked'; } ?>></td>
                                                 <td><input type="checkbox" id="emilsmtpedit" name="checkbox[]" value="emilsmtpedit" <?php if(in_array("emilsmtpedit", json_decode($access))){ echo 'checked'; } ?>></td>
                                                 <td><input type="checkbox" id="emilsmtpdelete" name="checkbox[]" value="emilsmtpdelete" <?php if(in_array("emilsmtpdelete", json_decode($access))){ echo 'checked'; } ?>></td>
-                                            </tr>
+                                            </tr> -->
 
                                         </tbody>
                                 </tbody>

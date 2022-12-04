@@ -132,6 +132,37 @@
                                             </tr>
 
 
+                                            
+                                            <tr>
+                                                <td style="color:#a83131"><b>Examination</b></td>
+                                                <td><input type="checkbox" id="examinationmodule" name="checkbox[]" value="examinationmodule"></td>
+                                                <td><input type="checkbox" id="examinationpage" name="checkbox[]" value="examinationpage"></td>
+                                                <td><input type="checkbox" id="examinationadd" name="checkbox[]" value="examinationadd"></td>
+                                                <td><input type="checkbox" id="examinationedit" name="checkbox[]" value="examinationedit"></td>
+                                                <td><input type="checkbox" id="examinationdelete" name="checkbox[]" value="examinationdelete"></td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Certificate</b></td>
+                                                <td><input type="checkbox" id="certificatemodule" name="checkbox[]" value="certificatemodule"></td>
+                                                <td><input type="checkbox" id="certificatepage" name="checkbox[]" value="certificatepage"></td>
+                                                <td><input type="checkbox" id="certificateadd" name="checkbox[]" value="certificateadd"></td>
+                                                <td><input type="checkbox" id="certificateedit" name="checkbox[]" value="certificateedit"></td>
+                                                <td><input type="checkbox" id="certificatedelete" name="checkbox[]" value="certificatedelete"></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td style="color:#a83131"><b>Tax Invoice</b></td>
+                                                <td><input type="checkbox" id="taxinvoicemodule" name="checkbox[]" value="taxinvoicemodule"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
                                             <tr>
                                                 <td style="color:#a83131"><b>Staff / Counseller</b></td>
                                                 <td><input type="checkbox" id="staffcounsellermodule" name="checkbox[]" value="staffcounsellermodule"></td>
@@ -177,7 +208,7 @@
                                                 <td><input type="checkbox" id="roledelete" name="checkbox[]" value="roledelete"></td>
                                             </tr>
 
-                                            <tr>
+                                            <!-- <tr>
                                                 <td style="color:#a83131"><b>Settings</b></td>
                                                 <td><input type="checkbox" id="settingsmodule" name="checkbox[]" value="settingsmodule"></td>
                                                 <td></td>
@@ -193,7 +224,7 @@
                                                 <td><input type="checkbox" id="emilsmtpadd" name="checkbox[]" value="emilsmtpadd"></td>
                                                 <td><input type="checkbox" id="emilsmtpedit" name="checkbox[]" value="emilsmtpedit"></td>
                                                 <td><input type="checkbox" id="emilsmtpdelete" name="checkbox[]" value="emilsmtpdelete"></td>
-                                            </tr>
+                                            </tr> -->
 
                                         </tbody>
                                     </table>
