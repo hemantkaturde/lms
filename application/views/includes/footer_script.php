@@ -3611,6 +3611,40 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
+<?php if($pageTitle=='Student Listing'){ ?>
+	<script type="text/javascript">
+                $(document).ready(function() {
+					var dt = $('#studentList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "20%", "targets": 0 },
+							{ "width": "12%", "targets": 1 },
+							{ "width": "20%", "targets": 2 },
+							{ "width": "20%", "targets": 3 },
+							{ "width": "20%", "targets": 4 }
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Students Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchstudentlist",
+							type: "post",
+						},
+					});
+	            });
+
+    </script>
+
+<?php } ?>
+
 
 
 

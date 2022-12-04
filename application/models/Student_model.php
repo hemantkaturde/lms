@@ -59,6 +59,67 @@ class Student_model extends CI_Model
             
             return $query->result();
         }
+
+
+
+        
+    public function  getStudentCount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'student');
+        $query = $this->db->get(TBL_USER);
+        $rowcount = $query->num_rows();
+        
+        return $rowcount;
+
+    }
+
+    public function getStudentData($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'student');
+        $this->db->order_by(TBL_USER.'.userId', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['name']    = $value['name'];
+                 $data[$counter]['mobile']  = $value['mobile'];
+                 $data[$counter]['email']   = $value['email'];
+                 $data[$counter]['user_flag']   = $value['user_flag'];
+
+                 $data[$counter]['action']  = '';
+                 $data[$counter]['action'] .= "";
+                 $data[$counter]['action'] .= ""; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
 }
 
 ?>
