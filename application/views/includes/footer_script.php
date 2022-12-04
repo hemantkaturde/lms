@@ -14,6 +14,15 @@
 			});
 		});
 
+		$(function() {
+			$(".datepickerpayment").datepicker({ 
+				minDate: 0,
+				todayHighlight: true,
+				format: 'dd-mm-yyyy' ,
+				startDate: new Date()
+			});
+		});
+
 		$(document).on('click','#close',function(e){  
 			history.go(0);
 			location.reload();

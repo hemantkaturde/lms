@@ -936,10 +936,10 @@
 
 
                     }
-                    
-                 echo json_encode($add_manaulpayment_response);
-
+            
         }
+
+        echo json_encode($add_manaulpayment_response);
             
     }
 

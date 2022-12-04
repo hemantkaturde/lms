@@ -236,16 +236,14 @@
                                                         $status='Completed';
                                                     }
 
-                                                    if($paymentvalue->razorpay_payment_id){
+                                                    if($paymentvalue->razorpay_payment_id!=NULL){
                                                         $transaction_id = $paymentvalue->razorpay_payment_id;
                                                         $payment_date = $paymentvalue->datetime;
                                                     }else{
                                                         $transaction_id = 'Manaul-Transaction';
                                                         $payment_date = $paymentvalue->payment_date;
                                                     }
-
-
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td><?=$payment_date?></td>
                                                         <td><?=$transaction_id?></td>
@@ -354,7 +352,7 @@
                                             class="required">*</span>
                                     </label>
                                     <div>
-                                        <input type="text" class="form-control datepicker" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
+                                        <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
 
                                         <p class="error payment_date_error"></p>
                                     </div>
