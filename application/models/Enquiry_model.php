@@ -106,7 +106,7 @@ class Enquiry_model extends CI_Model
                 //     $data[$counter]['status'] = 'In Follow up';
                 //  }
 
-                if($value['admissionexits']){
+                if(!empty($value['admissionexits'])){
                     $data[$counter]['status'] = 'Admitted';
                 }else{
                     $data[$counter]['status'] = 'In Follow up';
