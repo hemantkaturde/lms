@@ -3295,8 +3295,16 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
                      $('#view_enquiry_tarnsaction').modal('show');
                      $('#enquiry_number_detail').val(data[0].enquiry_number);  
 					 $('#payment_mode_detail').val(data[0].payment_mode);  
+
+					 if(data[0].razorpay_payment_id){
+						var payment_date= data[0].datetime;
+					 }else{
+						var payment_date=data[0].payment_date;
+					 }
+
+
 					 $('#manual_payment_amount_details').val(data[0].totalAmount);
-					 $('#payment_date_details').val(data[0].payment_date);
+					 $('#payment_date_details').val(payment_date);
 					 $('#cheuqe_number_detials').val(data[0].cheuqe_number);  
 					 $('#bank_name_details').val(data[0].bank_name);  
 					 $('#description1').val(data[0].description);  
