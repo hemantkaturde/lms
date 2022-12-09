@@ -982,7 +982,7 @@
                     $header .= "Content-type: text/html\r\n";
 
                      
-                     if($doctor_non_doctor=='doctor'){
+                     if($doctor_non_doctor=='Doctor'){
                         $file_path ='<a href="https://iictn.in/markating_material/Doctors_Brochure.pdf">Doctors Brochure </a>';
                      }else{
                         $file_path =' <a href="https://iictn.in/markating_material/Non_Doctors_Brochure.pdf">Non Doctors_Brochure </a>';
