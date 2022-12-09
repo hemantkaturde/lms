@@ -100,7 +100,6 @@ $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
 
 $route['addcourseListing/(:num)'] = "course/addcourseListing/$1";
-
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
 $route['addchapters/(:any)'] = "course/addchapters/$1";
 $route['fetchCourseAttchemant/(:any)'] = "course/fetchCourseAttchemant/$1";
@@ -119,12 +118,9 @@ $route['deletetopictimetable'] = "course/deletetopictimetable";
 $route['timetablemaster'] = "course/timetablemaster";
 $route['viewtimetablelisting?(:any)'] = "course/viewtimetablelisting/$1";
 $route['fetchTopicTimetableListing?(:any)'] = "course/fetchTopicTimetableListing/$1";
-
 $route['addtopiclinksforonlineattendant?(:any)'] = "course/addtopiclinksforonlineattendant/$1";
 $route['fetchtopicmeetinglink?(:any)'] = "course/fetchtopicmeetinglink/$1";
-
 $route['delete_topic_meeting_link'] = "course/delete_topic_meeting_link";
-
 $route['savecoursetopicMeetingLinks'] = "course/savecoursetopicMeetingLinks";
 
 
@@ -141,7 +137,6 @@ $route['uploadquestionpaper'] = "examination/uploadquestionpaper";
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
 $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
-
 $route['fetchstudentlist'] = "student/fetchstudentlist";
 
 /*********** ENQUIRY CONTROLLER ROUTES *******************/
@@ -165,7 +160,6 @@ $route['createFollowup'] = "enquiry/createFollowup";
 $route['fetchEnquiryFollowup/(:any)'] = "enquiry/fetchEnquiryFollowup/$1";
 $route['delete_enquiry_followup'] = "enquiry/delete_enquiry_followup";
 $route['updatefollowupdata'] = "enquiry/updatefollowupdata";
-
 $route['addmanualpayment'] = "enquiry/addmanualpayment";
 $route['deleteEnquiryTransaction'] = "enquiry/deleteEnquirypaymentTransaction";
 $route['get_enquiry_tarnsaction_details/(:any)'] = "enquiry/get_enquiry_tarnsaction_details/$1";
@@ -179,10 +173,7 @@ $route['fetchadmissions'] = "admission/fetchadmissions";
 $route['deleteAdmission'] = "admission/deleteAdmission";
 $route['viewadmissiondetails/(:any)'] = "admission/viewadmissiondetails/$1";
 $route['editadmission/(:any)'] = "admission/editadmission/$1";
-
 $route['updateadmission'] = "admission/updateadmission";
-
-
 
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
@@ -197,11 +188,9 @@ $route['createemailsmtp'] = 'emailSetting/createemailsmtp';
 $route['deletesmtp'] = 'emailSetting/deletesmtp';
 $route['updateSMTP/(:any)'] = 'emailSetting/updateSMTP/$1';
 
-
 // Payment 
 $route['payment_details/(:any)'] = 'enquiry/payment_details/$1';
 $route['update_discount'] = 'enquiry/update_discount';
-
 
 // Tax Invoices
 $route['taxinvoices'] = 'enquiry/taxinvoices';
