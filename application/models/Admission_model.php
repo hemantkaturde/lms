@@ -106,7 +106,7 @@ class Admission_model extends CI_Model
                             if($get_course_fees){
                                 
                                 $total_fees += $get_course_fees[0]->course_total_fees;
-                                $course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> <br> ';  
+                                $course_name .= $i.') '.$get_course_fees[0]->course_name.'<br> ';  
                                 $i++;   
                         
                             }else{

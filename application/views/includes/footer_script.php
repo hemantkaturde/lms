@@ -2671,15 +2671,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Examination Created!",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_md").hide();
 								window.location.href = "<?php echo base_url().'examinationlisting'?>";
-						});						
+						// });						
 				    }
 					
 				},
@@ -2738,15 +2738,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Examination Updated!",
-							text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Examination Updated!",
+						// 	text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_sm").hide();
 								window.location.href = "<?php echo base_url().'examinationlisting'?>";
-						});						
+						// });						
 				    }
 					
 				},
@@ -2762,19 +2762,19 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			var elemF = $(this);
 			e.preventDefault();
 
-				swal({
-					title: "Are you sure?",
-					text: "",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, delete it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
 								$.ajax({
 									url : "<?php echo base_url();?>delete_examination",
 									type: "POST",
@@ -2788,26 +2788,26 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 										const obj = JSON.parse(data);
 											if(obj.status=='success'){
 															
-													swal({
-														title: "Deleted!",
-														text: "",
-														icon: "success",
-														button: "Ok",
-														},function(){ 
+													// swal({
+													// 	title: "Deleted!",
+													// 	text: "",
+													// 	icon: "success",
+													// 	button: "Ok",
+													// 	},function(){ 
 															$("#popup_modal_sm").hide();
 															window.location.href = "<?php echo base_url().'examinationlisting'?>";
-													});	
+													// });	
 											}else{
 
-												swal({
-														title: "Not Deleted!",
-														text: "",
-														icon: "success",
-														button: "Ok",
-														},function(){ 
+												// swal({
+												// 		title: "Not Deleted!",
+												// 		text: "",
+												// 		icon: "success",
+												// 		button: "Ok",
+												// 		},function(){ 
 															$("#popup_modal_sm").hide();
 															window.location.href = "<?php echo base_url().'examinationlisting'?>";
-													});	
+													// });	
 											}	
 
 									},
@@ -2816,11 +2816,11 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 										//$(".loader_ajax").hide();
 									}
 							    })
-							}
-							else {
-					swal("Cancelled", " ", "error");
-					}
-				});
+					// 		}
+					// 		else {
+					// swal("Cancelled", " ", "error");
+					// }
+				// });
 	    });
 
 
@@ -2854,15 +2854,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Question Paper Successfully Uplaoded !",
-							//text: "",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
+						// swal({
+						// 	title: "Question Paper Successfully Uplaoded !",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
 								$("#popup_modal_md").hide();
 								window.location.href = "<?php echo base_url().'viewquestionpaper/'?>"+examination_id;
-						});						
+						// });						
 				    }
 					
 				},

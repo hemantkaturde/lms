@@ -58,6 +58,8 @@ class Admin extends BaseController
         $data['students'] = $this->student_model->studentListingCount();
         $data['admissions'] = $this->admission_model->admissionListingCount();
 
+        $data['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
+
         $query =  $this->db->query('SELECT `createdDtm` AS `date`, COUNT(`id`) as count FROM `tbl_admission`  GROUP BY DATE(`createdDtm`) ORDER BY `id` ASC'); 
         $records = $query->result_array();
 

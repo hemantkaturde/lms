@@ -218,18 +218,20 @@
                             </div>
                         </div> -->
                         <ul class="list-group list-group-divider list-group-full">
-                            <li class="list-group-item">Attendance List - 50
+                            <!-- <li class="list-group-item">Attendance List - 50
                                 <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span>
+                            </li> -->
+                            <li class="list-group-item">Admissions List - <?php echo $admissions; ?>
+                                <a class="dashbord-short-link totaladmissions"
+                                    href="<?php echo base_url().'enquirylisting'?>"><span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span></a>
                             </li>
-                            <li class="list-group-item">Admissions List - 50
+                            <li class="list-group-item">Total Invoice - <?=$total_invoices?>
+                                <a class="dashbord-short-link totalusers"
+                                    href="<?php echo base_url().'taxinvoices'?>"> <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span></a>
+                            </li>
+                            <!-- <li class="list-group-item">Payment Pending - 50
                                 <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span>
-                            </li>
-                            <li class="list-group-item">Invoice - 50
-                                <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span>
-                            </li>
-                            <li class="list-group-item">Payment Pending - 50
-                                <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span>
-                            </li>
+                            </li> -->
                             <!-- <li class="list-group-item">Opera
                                 <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span>
                             </li>

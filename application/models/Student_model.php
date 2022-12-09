@@ -111,10 +111,14 @@ class Student_model extends CI_Model
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['email']   = $value['email'];
                  $data[$counter]['user_flag']   = $value['user_flag'];
-
                  $data[$counter]['action']  = '';
                  $data[$counter]['action'] .= "";
-                 $data[$counter]['action'] .= ""; 
+               
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_type' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_type' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>"; 
+
+
+
                 $counter++; 
             }
         }
