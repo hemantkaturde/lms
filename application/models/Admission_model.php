@@ -89,10 +89,10 @@ class Admission_model extends CI_Model
             {
                 foreach ($fetch_result as $key => $value)
                 {
-    
-
 
                     $getCourseList = $this->getSelectedCourse($value['enq_id']);
+
+                    if($getCourseList){
 
                     if($getCourseList[0]->enq_course_id){
 
@@ -124,6 +124,9 @@ class Admission_model extends CI_Model
                         $all_course_name = ''; 
 
                     }
+                }else{
+                    $all_course_name = ''; 
+                }
 
         
                    
