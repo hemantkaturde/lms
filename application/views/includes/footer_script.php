@@ -36,6 +36,7 @@
 
 		$(document).on('change','#country',function(e){  
 			e.preventDefault();
+			
 			//$(".loader_ajax").show();
 			var country_id = $('#country').val();
 			$.ajax({
@@ -1844,6 +1845,70 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			var image = document.getElementById('output_adhar_copy');
 			image.src = URL.createObjectURL(event.target.files[0]);
 	};
+
+
+
+	$(document).on('change','#countryEditAdmission',function(e){  
+		e.preventDefault();
+		//$(".loader_ajax").show();
+		var country_id = $('#countryEditAdmission').val();
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>getstates",
+			type: "POST",
+			data : {'country' : country_id},
+			success: function(data, textStatus, jqXHR)
+			{
+				$(".loader_ajax").hide();
+				if(data == "failure")
+				{
+					$('#stateEditadmission').html('<option value="">Select State</option>');
+				}
+				else
+				{
+					$('#stateEditadmission').html(data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
+				$('#stateEditadmission').html('<option value="">Select State</option>');
+				//$(".loader_ajax").hide();
+			}
+		});
+		return false;
+	});
+
+
+	$(document).on('change','#stateEditadmission',function(e){
+		e.preventDefault();
+		// $(".loader_ajax").show();
+		var state_id = $('#stateEditadmission').val();
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>getcities",
+			type: "POST",
+			data : {'state_id' : state_id},
+			success: function(data, textStatus, jqXHR)
+			{
+				$(".loader_ajax").hide();
+				if(data == "failure") {
+					$('#cityEditadmission').html('<option value="">Select City</option>');
+				
+				} else {
+					$('#cityEditadmission').html(data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
+				$('#cityEditadmission').html('<option value="">Select City</option>');
+				//$(".loader_ajax").hide();
+			}
+		});
+		return false;
+	});
+
+
+
+
+
 
 	$(document).on('click','#update_admission',function(e){
 		

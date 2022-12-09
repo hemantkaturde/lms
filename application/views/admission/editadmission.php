@@ -127,7 +127,7 @@ if(!empty($editDataAdmission))
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="country">Country </label>
                                                 <div>
-                                                    <select class="form-control country" name="country" id="country">
+                                                    <select class="form-control country" name="country" id="countryEditAdmission">
                                                     <option st-id="" value="0">Select Country</option>
                                                         <option st-id="" value="101" <?php echo 'selected'; ?>>India</option>
                                                     </select>
@@ -139,7 +139,7 @@ if(!empty($editDataAdmission))
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="state">State </label>
                                                 <div>
-                                                    <select class="form-control state" name="state" id="state">
+                                                    <select class="form-control state" name="state" id="stateEditadmission">
                                                     <option st-id="" value="0">Select State</option>
                                                     <?php foreach ($state_List as $key => $value) { ?>       
                                                         <option st-id="" value="<?php echo $value['id'] ?>" <?php if($state_id==$value['id']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
@@ -152,7 +152,7 @@ if(!empty($editDataAdmission))
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="city"> City</label>
                                                 <div>
-                                                    <select class="form-control city" name="city" id="city">
+                                                    <select class="form-control city" name="city" id="cityEditadmission">
                                                     <option st-id="" value="0">Select City</option>
                                                     <?php foreach ($city_List as $key => $value) { ?>       
                                                         <option st-id="" value="<?php echo $value['id'] ?>" <?php if($city_id==$value['id']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
