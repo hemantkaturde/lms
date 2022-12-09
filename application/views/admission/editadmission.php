@@ -34,6 +34,7 @@ if(!empty($editDataAdmission))
         $state_id =$rf->state;
         $city_id =$rf->city;
         $source = $rf->source_about;
+        $pin = $rf->pin;
         $source_ans = $rf->source_ans;
         $image_1 =$rf->document_1; 
         $image_2 =$rf->document_2;
@@ -53,7 +54,7 @@ if(!empty($editDataAdmission))
             <div class="ibox-body">
                     <?php $attributes = array("name"=>"update_admission_form","id"=>"update_admission_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
                         echo form_open("", $attributes);?>
-
+                            <form role="form" id="update_admission_form">
                               <div class="row">
                                     <div class="row col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -70,7 +71,7 @@ if(!empty($editDataAdmission))
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="mobile_number">Mobile Number<span class="required">*</span></label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" type="text" id="mobile_number" name="mobile_number" placeholder="Enter Mobile Number" value="<?php echo $mobile;?>" class="form-control col-md-12 col-xs-12">
+                                                    <input autocomplete="off" autocomplete="off" type="text"   maxlength="10" id="mobile_number" name="mobile_number" placeholder="Enter Mobile Number" value="<?php echo $mobile;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error mobile_number_error"></p>
                                                 </div>
                                             </div>   
@@ -78,7 +79,7 @@ if(!empty($editDataAdmission))
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="alternate_mobile_number">Alternate Mobile Number</label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" type="text" id="alternate_mobile_number" name="alternate_mobile_number" placeholder="Enter Alternate Mobile Number" value="<?php echo $alt_mobile;?>" class="form-control col-md-12 col-xs-12">
+                                                    <input autocomplete="off" autocomplete="off" type="text"  maxlength="10" id="alternate_mobile_number" name="alternate_mobile_number" placeholder="Enter Alternate Mobile Number" value="<?php echo $alt_mobile;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error alternate_mobile_number_error"></p>
                                                 </div>
                                             </div>  
@@ -160,6 +161,14 @@ if(!empty($editDataAdmission))
                                                     <p class="error city_error"></p>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label style="text-align: left;" for="pin_number">PIN</label>
+                                                <div>
+                                                    <input autocomplete="off" autocomplete="off"  maxlength="6" type="text" id="pin_number" name="pin_number" placeholder="Enter PIN Number" value="<?php echo $pin;?>" class="form-control col-md-12 col-xs-12">
+                                                    <p class="error pin_number_error"></p>
+                                                </div>
+                                            </div>  
                                         </div>
                                     </div>
 
@@ -195,36 +204,42 @@ if(!empty($editDataAdmission))
                                     <div class="row col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="form-group">
+                                                <p class="error student_photo_error"></p>
                                                 <label style="text-align: left;" for="student_photo">Student Photo<span class="required">*</span></label>
                                                <img src='<?php echo base_url(); ?>uploads/admission/<?=$image_1 ?>'>
 
-                                               <input type="file" id="profile_photo" name="profile_photo" class="form-control"
-                                                    accept="image/*" onchange="loadFile(event)">
+                                               <input type="file" id="student_photo" name="student_photo" class="form-control"
+                                                    accept="image/*" onchange="loadFile_student_photo(event)">
+                                                <input type="hidden" id="student_photo_existing" name="student_photo_existing" value="<?=$image_1?>" class="form-control">
                                                 <small class="text-default">( Upload photo as Show on Admin Panel)</small>
-                                                <p><img id="output" width="200" /></p>
+                                                <p><img id="output_student_photo" width="200" /></p>
                                             </div>
                                         </div>
 
 
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="form-group">
+                                            <p class="error edu_certificate_error"></p>
                                                 <label style="text-align: left;" for="edu_certificate">Education Certificate <span class="required">*</span></label>
                                                <img src='<?php echo base_url(); ?>uploads/admission/<?=$image_2 ?>'>
-                                               <input type="file" id="profile_photo" name="profile_photo" class="form-control"
-                                                    accept="image/*" onchange="loadFile(event)">
+                                               <input type="file" id="edu_certificate" name="edu_certificate" class="form-control"
+                                                    accept="image/*" onchange="loadFile_education_certificate(event)">
+                                                <input type="hidden" id="edu_certificate_existing" name="edu_certificate_existing" value="<?=$image_2?>" class="form-control">
                                                 <small class="text-default">( Upload photo as Show on Admin Panel)</small>
-                                                <p><img id="output" width="200" /></p>
+                                                <p><img id="output_education_certificate" width="200" /></p>
                                             </div>
                                         </div>
                                        
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="form-group">
+                                            <p class="error adhar_copy_error"></p>
                                                 <label style="text-align: left;" for="adhar_copy">Aadhar Copy<span class="required">*</span></label>
                                                <img src='<?php echo base_url(); ?>uploads/admission/<?=$image_3 ?>'>
-                                               <input type="file" id="profile_photo" name="profile_photo" class="form-control"
-                                                    accept="image/*" onchange="loadFile(event)">
+                                               <input type="file" id="adhar_copy" name="adhar_copy" class="form-control"
+                                                    accept="image/*" onchange="loadFile_adhar_copy(event)">
+                                                <input type="hidden" id="adhar_copy_existing" name="adhar_copy_existing" value="<?=$image_3?>" class="form-control">
                                                 <small class="text-default">( Upload photo as Show on Admin Panel)</small>
-                                                <p><img id="output" width="200" /></p>
+                                                <p><img id="output_adhar_copy" width="200" /></p>
                                             </div>
                                         </div>
                                     </div>
@@ -237,6 +252,7 @@ if(!empty($editDataAdmission))
                                             </div>
                                     </div>
                               </div>
+                              <form>
                     <?php echo form_close(); ?>
             </div>
         </div>    

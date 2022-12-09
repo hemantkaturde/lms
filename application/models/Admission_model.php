@@ -219,6 +219,51 @@ class Admission_model extends CI_Model
 
         }
 
+        
+    public function check_unique_admission($full_name,$admission_id,$enq_id){
+        $this->db->select('count(*) as count ');
+        $this->db->where(TBL_ADMISSION.'.name', trim($full_name));
+        $this->db->where(TBL_ADMISSION.'.id', trim($admission_id));
+        $this->db->where(TBL_ADMISSION.'.enq_id', trim($enq_id));
+        $query = $this->db->get(TBL_ADMISSION);
+        return $query->result_array();
+    }
+
+    public function check_admission_uinqe_name($full_name){
+        $this->db->select('count(*) as count ');
+        $this->db->where(TBL_ADMISSION.'.name', trim($full_name));
+        $query = $this->db->get(TBL_ADMISSION);
+        return $query->result_array();
+    }
+
+
+    public function saveAdmissiondata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_ADMISSION, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ADMISSION, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function UpdateInjquirydata($enquiry_id,$data){
+        $this->db->where('enq_number', $enquiry_id);
+        if($this->db->update(TBL_ENQUIRY, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+     
+
 
 }
 

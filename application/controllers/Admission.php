@@ -15,6 +15,8 @@
             $this->load->model('comman_model');
             $this->load->model('enquiry_model');
             $this->load->model('database');
+            $this->load->library('form_validation');
+
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
             $this->datas();
@@ -254,26 +256,155 @@
             $data['counsellor_list_data'] = $this->admission_model->counsellor_list();
             $data['editDataAdmission'] = $this->admission_model->editDataadmission($id);
             //$data['country_List'] = $this->comman_model->getCourseList();
-
             $data['state_List'] = $this->comman_model->selectAllStates(101,NULL);
             $data['city_List'] = $this->comman_model->selectAllCitiesForedit(NULL,NULL);
-            $this->global['pageTitle'] = 'Admission Management';
+            $this->global['pageTitle'] = 'Update Admission';
             $this->loadViews("admission/editadmission", $this->global, $data , NULL);
         }
 
 
         public function updateadmission(){
-            $process = 'Update Admission';
-            $processFunction = 'Admission/updateadmission';
-            $this->logrecord($process,$processFunction);
+            $post_submit = $this->input->post();
+            if($post_submit){
+                $update_admission_response = array();
+                $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
+                $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'trim|required');
+                $this->form_validation->set_rules('email_address', 'Email Address', 'trim|required');
+                $this->form_validation->set_rules('date_of_birth', 'Date Of Birth', 'trim|required');
+                $this->form_validation->set_rules('counsellor_name', 'Counsellor Name', 'trim|required');
+                $this->form_validation->set_rules('permanent_address', 'Permanent Address', 'trim|required');
+                $this->form_validation->set_rules('how_did_you_know', 'How Did You Know', 'trim|required');
+                $this->form_validation->set_rules('how_about_us', 'How About Us', 'trim|required');
+
+                $this->form_validation->set_rules('student_photo_existing', 'Student Photo', 'trim|required');
+                $this->form_validation->set_rules('edu_certificate_existing', 'Edu Certificate', 'trim|required');
+                $this->form_validation->set_rules('adhar_copy_existing', 'Adhar copy', 'trim|required');
 
 
-            print_r( $post_submit = $this->input->post());
-            exit;
+                if($this->form_validation->run() == FALSE){
+                    $update_admission_response['status'] = 'failure';
+                    $update_admission_response['error'] = array('full_name'=>strip_tags(form_error('full_name')),'mobile_number'=>strip_tags(form_error('mobile_number')),'email_address'=>strip_tags(form_error('email_address')),'date_of_birth'=>strip_tags(form_error('date_of_birth')),'counsellor_name'=>strip_tags(form_error('counsellor_name')),'permanent_address'=>strip_tags(form_error('permanent_address')),'how_did_you_know'=>strip_tags(form_error('how_did_you_know')),'how_about_us'=>strip_tags(form_error('how_about_us')),'student_photo'=>strip_tags(form_error('student_photo')),'edu_certificate'=>strip_tags(form_error('edu_certificate')),'adhar_copy'=>strip_tags(form_error('adhar_copy')));
+                }else{
+                    $check_uniqe  = $this->admission_model->check_unique_admission($this->input->post('full_name'),$this->input->post('admission_id'),$this->input->post('enq_id'));
+                    if($check_uniqe > 0){
+
+                        if(!empty($_FILES['student_photo']['name'])){
+                            $file = rand(1000,100000)."-".$_FILES['student_photo']['name'];
+                            $filename = str_replace(' ','_',$file);
+                            $config['upload_path'] = 'uploads/admission'; 
+                            $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                            $config['max_size'] = '1000'; // max_size in kb 
+                            $config['file_name'] = $filename; 
+                            // Load upload library 
+                            $this->load->library('upload',$config); 
+                    
+                            // File upload
+                            if($this->upload->do_upload('student_photo')){ 
+                                $existing_student_photo = $filename; 
+                            }else{
+                                $existing_student_photo =trim($this->input->post('student_photo_existing'));
+                            }
+                        }else{
+
+                            $existing_student_photo= trim($this->input->post('student_photo_existing'));
+                        }
 
 
+                        if(!empty($_FILES['edu_certificate']['name'])){
+                            $file = rand(1000,100000)."-".$_FILES['edu_certificate']['name'];
+                            $filename = str_replace(' ','_',$file);
+                            $config['upload_path'] = 'uploads/admission'; 
+                            $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                            $config['max_size'] = '1000'; // max_size in kb 
+                            $config['file_name'] = $filename; 
+                            // Load upload library 
+                            $this->load->library('upload',$config); 
+                    
+                            // File upload
+                            if($this->upload->do_upload('edu_certificate')){ 
+                                $existing_certificate_existing = $filename; 
+                            }else{
+                                $existing_certificate_existing =trim($this->input->post('edu_certificate_existing'));
+                            }
+                        }else{
+
+                            $existing_certificate_existing= trim($this->input->post('edu_certificate_existing'));
+                        }
 
 
+                        if(!empty($_FILES['adhar_copy']['name'])){
+                            $file = rand(1000,100000)."-".$_FILES['adhar_copy']['name'];
+                            $filename = str_replace(' ','_',$file);
+                            $config['upload_path'] = 'uploads/admission'; 
+                            $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                            $config['max_size'] = '1000'; // max_size in kb 
+                            $config['file_name'] = $filename; 
+                            // Load upload library 
+                            $this->load->library('upload',$config); 
+                    
+                            // File upload
+                            if($this->upload->do_upload('adhar_copy')){ 
+                                $existing_adhar_copy = $filename; 
+                            }else{
+                                $existing_adhar_copy =trim($this->input->post('adhar_copy_existing'));
+                            }
+                        }else{
+
+                            $existing_adhar_copy= trim($this->input->post('adhar_copy_existing'));
+                        }
+                       
+
+                        $data = array(
+                            'name' => $this->input->post('full_name'),
+                            'mobile'=>$this->input->post('mobile_number'),
+                            'alt_mobile'=>$this->input->post('alternate_mobile_number'),
+                            'email'=>$this->input->post('email_address'),
+                            'dateofbirth'=>$this->input->post('date_of_birth'),
+                            'counsellor_name'=>$this->input->post('counsellor_name'),
+                            'address'=>$this->input->post('permanent_address'),
+                            'city'=>$this->input->post('city'),
+                            'state'=>$this->input->post('state'),
+                            'country'=>$this->input->post('country'),
+                            'pin'=>$this->input->post('pin_number'),
+                            'source_about'=>$this->input->post('how_did_you_know'),
+                            'source_ans'=>$this->input->post('how_about_us'),
+                            'document_1'=> $existing_student_photo,
+                            'document_2'=> $existing_certificate_existing,
+                            'document_3' =>$existing_adhar_copy
+                        );
+
+
+                        $updateAdmissionData = $this->admission_model->saveAdmissiondata($this->input->post('admission_id'),$data);
+                        if($updateAdmissionData){
+
+                            $UpdateInjquirydata = array(
+                                'enq_fullname' => $this->input->post('full_name'),
+                                'enq_mobile' => $this->input->post('enq_mobile'),
+                            );
+
+                           $updateSimilarDatainEnquiry =  $this->admission_model->UpdateInjquirydata($this->input->post('enq_id'),$UpdateInjquirydata);
+                            
+                           if($updateSimilarDatainEnquiry){
+                               $update_admission_response['status'] = 'success';
+                               $update_admission_response['error'] = array('full_name'=>'','mobile_number'=>'','email_address'=>'','date_of_birth'=>'','counsellor_name'=>'','permanent_address'=>'','how_did_you_know'=>'','how_about_us'=>'','adhar_copy'=>'','edu_certificate'=>'','student_photo'=>'');
+                           }
+                        }
+
+                    }else{
+
+                        $check_admission_uinqe_name = $this->admission_model->check_admission_uinqe_name($this->input->post('full_name'));
+                    }
+                 
+
+                    $process = 'Update Admission';
+                    $processFunction = 'Admission/updateadmission';
+                    $this->logrecord($process,$processFunction);
+
+                }
+
+                echo json_encode($update_admission_response);
+
+            }
         }
 
 

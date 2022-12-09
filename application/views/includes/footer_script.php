@@ -1724,7 +1724,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
    </script>
 <?php } ?>
 
-<?php if($pageTitle=='Admission Listing' || $pageTitle=='Admission Edit'){?>
+<?php if($pageTitle=='Admission Listing' || $pageTitle=='Admission Edit' ||  $pageTitle=='Update Admission'){?>
 <script type="text/javascript">
 	$(document).ready(function() {
 					var dt = $('#admissionList').DataTable({
@@ -1830,13 +1830,23 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				});
 	});
 
-	var loadFile = function(event) {
-			var image = document.getElementById('output');
+	var loadFile_student_photo = function(event) {
+			var image = document.getElementById('output_student_photo');
+			image.src = URL.createObjectURL(event.target.files[0]);
+	};
+
+	var loadFile_education_certificate = function(event) {
+			var image = document.getElementById('output_education_certificate');
+			image.src = URL.createObjectURL(event.target.files[0]);
+	};
+
+	var loadFile_adhar_copy = function(event) {
+			var image = document.getElementById('output_adhar_copy');
 			image.src = URL.createObjectURL(event.target.files[0]);
 	};
 
 	$(document).on('click','#update_admission',function(e){
-
+		
 				e.preventDefault();
 				//$(".loader_ajax").show();
 				var formData = new FormData($("#update_admission_form")[0]);

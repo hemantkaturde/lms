@@ -541,11 +541,7 @@ class Enquiry_model extends CI_Model
         $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
         $query = $this->db->get(TBL_ENQUIRY);
         return $query->result_array();
-    
-
     }
-
-     
 
 }
 
