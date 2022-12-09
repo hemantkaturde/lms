@@ -19,11 +19,12 @@
                     <table width="100%" class="table table-bordered" id="admissionList">
                         <thead>
                             <tr>
+                                <th>Enquiry Id</th>
                                 <th>Mobile No.</th>
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Address</th>
+                                <th>Courses</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

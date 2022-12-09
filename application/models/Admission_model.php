@@ -90,12 +90,51 @@ class Admission_model extends CI_Model
                 foreach ($fetch_result as $key => $value)
                 {
     
-                    //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+
+
+                    $getCourseList = $this->getSelectedCourse($value['enq_id']);
+
+                    if($getCourseList[0]->enq_course_id){
+
+                        $course_ids    =   explode(',', $getCourseList[0]->enq_course_id);
+                        $total_fees = 0;
+                        $course_name = '';
+                        $i = 1;
+                        foreach($course_ids as $id)
+                        {
+                            $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                            if($get_course_fees){
+                                
+                                $total_fees += $get_course_fees[0]->course_total_fees;
+                                $course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> <br> ';  
+                                $i++;   
+                        
+                            }else{
+                        
+                                $total_fees = '';
+                                $course_name = '';  
+                                $i++;  
+                            }
+                            
+                        }
+                        $all_course_name = trim($course_name, ', '); 
+
+                    }else{
+
+                        $all_course_name = ''; 
+
+                    }
+
+        
+                   
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                     $data[$counter]['enq_id'] = $value['enq_id'];
                      $data[$counter]['mobile'] = $value['mobile'];
                      $data[$counter]['createdDtm'] = $value['createdDtm'];
                      $data[$counter]['name'] = $value['name'];
                      $data[$counter]['email'] = $value['email'];
-                     $data[$counter]['address'] = $value['address'];
+                    // $data[$counter]['address'] = $value['address'];
+                     $data[$counter]['address'] = $all_course_name;
                      $data[$counter]['action'] = '';
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".ADMIN_PATH."editadmission/".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Admission' title='Edit Admission'></a>&nbsp;";
                     // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_admission_details' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
@@ -163,6 +202,17 @@ class Admission_model extends CI_Model
             $result = $query->result_array();        
             return $result;
 
+
+        }
+
+        public function getSelectedCourse($enq_id){
+
+            $this->db->select('enq_course_id');
+            $this->db->from(TBL_ENQUIRY);
+            $this->db->where('enq_number', $enq_id);
+            $this->db->where('isDeleted', 0);
+            $query = $this->db->get();
+            return $query->result();
 
         }
 
