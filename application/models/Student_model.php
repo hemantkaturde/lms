@@ -124,6 +124,109 @@ class Student_model extends CI_Model
         }
         return $data;
     }
+
+
+    public function getTaxinvoicesCount($params,$enq_id){
+        $this->db->select('*');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_ENQUIRY_FOLLOW_UP.".date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
+        $this->db->where(TBL_PAYMENT.'.payment_status', 1);
+        $this->db->where(TBL_ENQUIRY.'.enq_number', $enq_id);
+        $this->db->order_by(TBL_PAYMENT.'.payment_status', 1);
+        $query = $this->db->get(TBL_PAYMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getTaxinvoices($params,$enq_id){
+
+        $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_ENQUIRY_FOLLOW_UP.".date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_ENQUIRY_FOLLOW_UP.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
+        $this->db->where(TBL_PAYMENT.'.payment_status', 1);
+        $this->db->where(TBL_ENQUIRY.'.enq_number', $enq_id);
+        $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
+      
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_PAYMENT);
+        
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                
+                $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
+
+                if($get_before_paid_payment){
+                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+
+                }else{
+                    $previous_paymemt =0 ;
+                    
+                }
+
+                $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
+            
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['receipt_no'] = $value['id'];
+                 $data[$counter]['enquiry_no'] = $value['enquiry_number'];
+
+                 if($value['razorpay_payment_id']){
+                    $payment_date = $value['datetime'];
+                 }else{
+                    $payment_date = $value['payment_date'];
+                 }
+
+                 $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($payment_date));
+                 $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                 $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+                 $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
+                 $data[$counter]['paid_before'] = '₹ '.$previous_paymemt;
+                 $data[$counter]['total_amount'] = '₹ '.$value['final_amount'];
+                 $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
+                 $data[$counter]['payment_mode'] = $value['payment_mode'];
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
+                $counter++; 
+            }
+        }
+        return $data;
+
+
+    }
+
+    public function get_before_paid_payment($paymentid,$enq_id){
+
+        $this->db->select('sum(totalAmount) as beforepaid');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('id !=', $paymentid);
+        $this->db->where('id <', $paymentid);
+        $this->db->where('enquiry_id', $enq_id);
+        $this->db->group_by('enquiry_id', $enq_id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+
 }
 
 ?>

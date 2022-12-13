@@ -197,6 +197,11 @@ $route['taxinvoices'] = 'enquiry/taxinvoices';
 $route['fetchTaxinvoices'] = 'enquiry/fetchTaxinvoices';
 
 
+// Student Loging Billing Info
+$route['billinginfo'] = 'student/billinginfo';
+$route['fetchBillinginfo'] = 'student/fetchBillinginfo';
+
+
 
 
 

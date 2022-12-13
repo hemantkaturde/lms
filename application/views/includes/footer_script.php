@@ -1905,11 +1905,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		return false;
 	});
 
-
-
-
-
-
 	$(document).on('click','#update_admission',function(e){
 		
 				e.preventDefault();
@@ -3719,6 +3714,44 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
     </script>
 
+<?php } ?>
+
+
+<?php if($pageTitle=='Billing Info'){ ?>
+    <script type="text/javascript">
+        $(document).ready(function() {	
+					var dt = $('#billing_info').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							// { "width": "10%", "targets": 1 },
+							// { "width": "20%", "targets": 3 },
+							// { "width": "20%", "targets": 4 },
+							// { "width": "10%", "targets": 5 },
+							// { "width": "10%", "targets": 6 },
+							// { "width": "10%", "targets": 7 },
+							// { "width": "10%", "targets": 8 },
+							// { "width": "10%", "targets": 9 },
+
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Tax Invoices Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchBillinginfo/",
+							type: "post",
+						},
+					});
+		});
+
+	</script>
 <?php } ?>
 
 

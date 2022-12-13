@@ -32,8 +32,6 @@
 
 
         public function fetchstudentlist(){
- 
-        
             $params = $_REQUEST;
             $totalRecords = $this->student_model->getStudentCount($params); 
             $queryRecords = $this->student_model->getStudentData($params); 
@@ -57,6 +55,43 @@
             echo json_encode($json_data);
 
         }
+
+        public function billinginfo(){
+
+            $this->global['pageTitle'] = 'Billing Info';
+            $this->loadViews("student/billing_info", $this->global, NULL, NULL);
+        }
+
+        
+        public function fetchBillinginfo(){
+
+            $enq_id =  $this->session->userdata('enq_id');
+
+            $params = $_REQUEST;
+            $totalRecords = $this->student_model->getTaxinvoicesCount($params,$enq_id);
+            $queryRecords = $this->student_model->getTaxinvoices($params,$enq_id); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+
+            echo json_encode($json_data);
+
+
+        }
+
 
     }
 

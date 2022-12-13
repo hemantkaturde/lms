@@ -108,6 +108,7 @@ class Login extends BaseController
                                             'access' => $res->access,
                                             'profile_pic' => $res->profile_pic,
                                             'username' => $res->username,
+                                            'enq_id' => $res->enq_id,
                                             'isLoggedIn' => TRUE
                                     );
 

@@ -431,8 +431,8 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="">
-                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                        <li  class="<?php if($pageUrl =='billinginfo'){ echo 'active';} ?>">
+                            <a  href="<?php echo base_url()."billinginfo"; ?>"><i
                                     class="sidebar-item-icon fa fa-inr"></i>
                                 <span class="nav-label" >Billing Info</span>
                             </a>
