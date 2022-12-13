@@ -129,6 +129,7 @@ class Student_model extends CI_Model
     public function getTaxinvoicesCount($params,$enq_id){
         $this->db->select('*');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
 
         // if($params['search']['value'] != "") 
         // {
@@ -149,6 +150,7 @@ class Student_model extends CI_Model
 
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
 
         // if($params['search']['value'] != "") 
         // {

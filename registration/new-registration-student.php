@@ -121,8 +121,14 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                  
             
                 if ($conn->query($sql_create_user) === TRUE) {
+                    $last_id = $conn->insert_id;
 
+                     /*Insert Table Enquiry Realtion In LMS*/
 
+                    $insert_last_enquiry = "INSERT INTO tbl_users_enquires (user_id,enq_id) 
+                                          VALUES ('$last_id','$enq_id')";
+                                          
+                    if($conn->query($insert_last_enquiry)=== TRUE){
 
                     $to = $email;
                     $Subject = 'IICTN -  Login Link '.date('Y-m-d H:i:s');
@@ -248,6 +254,10 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                     echo "Error: " . $sql . "<br>" . $conn->error;
 
                 }
+
+            }else{
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
 
              
 
