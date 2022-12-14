@@ -189,7 +189,7 @@ class Enquiry_model extends CI_Model
         $this->db->select('enq_id,enq_fullname');
         $this->db->from(TBL_ENQUIRY);
         $this->db->where('isDeleted', 0);
-        $this->db->where('enq_id !=', $enq_id);
+        $this->db->where('enq_id =', $enq_id);
         $this->db->where('enq_fullname', $enq_fullname);
         $query = $this->db->get();
         return $query->result();

@@ -66,7 +66,7 @@
         }
 
        public function editenquiry($id){
-        
+
             $process = 'Enquiry Edit';
             $processFunction = 'Enquiry/enquiryEdit';
             $this->logrecord($process,$processFunction);
@@ -216,9 +216,8 @@
 
         }
 
-        public function updateenquiry($id= null){
+        public function updateenquiry($id){
             $post_submit = $this->input->post();
-
             $enq_id = $this->input->post('enq_id');
 
             if(!empty($post_submit)){
@@ -314,7 +313,7 @@
                                 //     $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($id, trim($this->input->post('full_name')));
                                 // }
 
-                                $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($id, trim($this->input->post('full_name')));
+                                $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($enq_id, trim($this->input->post('full_name')));
                                 //$check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
 
                                 if($check_uniqe){
