@@ -37,7 +37,7 @@
                                         <ol class="widget-49-meeting-points">
                                             <li class="widget-49-meeting-item"><span>All Types of Doc.</span>
                                             </li>
-                                            <li class="widget-49-meeting-item"><span>Word,Pdf,Notepad,xml</span>
+                                            <li class="widget-49-meeting-item"><span>Word,Pdf,xls</span>
                                             </li>
                                             <!-- <li class="widget-49-meeting-item"><span>Session timeout increase to 30
                                                     minutes</span></li> -->
@@ -69,7 +69,7 @@
                                         <ol class="widget-49-meeting-points">
                                             <li class="widget-49-meeting-item"><span>All Types of Videos</span>
                                             </li>
-                                            <li class="widget-49-meeting-item"><span>MP4</span></li>
+                                            <li class="widget-49-meeting-item"><span>Video Links</span></li>
                                             <!-- <li class="widget-49-meeting-item"><span>Client request to send
                                                     invoice</span></li> -->
                                         </ol>
