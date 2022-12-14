@@ -72,7 +72,7 @@ if(!empty($student_infromation))
                                                 <label style="text-align: left;" for="password">Password<span class="required">*</span>
                                                 </label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" type="text" id="password" placeholder="Enter Password" name="password" value="<?php echo $password ;?>" class="form-control col-md-12 col-xs-12">
+                                                    <input autocomplete="off" autocomplete="off" type="text" id="password" placeholder="Enter Password" name="password" value="<?php echo base64_decode($password) ;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error password_error"></p>
                                                 </div>
                                             </div>
@@ -83,7 +83,7 @@ if(!empty($student_infromation))
                                                 <input type="file" id="profile_photo1" name="profile_photo1" class="form-control"
                                                     ccept="image/*" onchange="loadFile(event)">
                                                 <small class="text-default">( Upload photo as Show on Admin Panel)</small>
-                                                <input type="text" id="existing_img" name="existing_img" value="<?=$profile_pic?>" >
+                                                <input type="hidden" id="existing_img" name="existing_img" value="<?=$profile_pic?>" >
                                                 <p><img id="output" name="exsting_img" width="80" height="80" /></p>
                                             </div>
 
@@ -114,7 +114,7 @@ if(!empty($student_infromation))
                                                 <label style="text-align: left;" for="confirm_password">Confirm Password<span class="required">*</span>
                                                 </label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" value="<?php echo $c_password ;?>"  type="text" id="confirm_password" placeholder="Enter Confirm Password" name="confirm_password" class="form-control col-md-12 col-xs-12">
+                                                    <input autocomplete="off" autocomplete="off" value="<?php echo base64_decode($c_password) ;?>"  type="text" id="confirm_password" placeholder="Enter Confirm Password" name="confirm_password" class="form-control col-md-12 col-xs-12">
                                                     <p class="error confirm_password_error"></p>
                                                 </div>
                                             </div>
