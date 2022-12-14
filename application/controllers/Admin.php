@@ -481,7 +481,18 @@ class Admin extends BaseController
 
     public function profilesetting(){
         $this->global['pageTitle'] = 'Profile';
-        $this->loadViews("profile", $this->global, NULL, NULL);
+        $userId = $this->session->userdata('userId');
+        $data['profile_details'] = $this->user_model->getUserInfo($userId);
+        $this->loadViews("profile", $this->global, $data, NULL);
+    }
+
+    public function updateprofile(){
+
+        $post_submit = $this->input->post();
+
+        print_r($post_submit);
+        exit;
+
     }
 	
 

@@ -201,8 +201,9 @@ $route['fetchTaxinvoices'] = 'enquiry/fetchTaxinvoices';
 $route['billinginfo'] = 'student/billinginfo';
 $route['fetchBillinginfo'] = 'student/fetchBillinginfo';
 
-
+// Student Loging Billing Info
 $route['profilesetting'] = 'admin/profilesetting';
+$route['updateprofile'] = 'admin/updateprofile';
 
 
 

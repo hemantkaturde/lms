@@ -3756,4 +3756,57 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 
+<?php if($pageTitle=='Profile'){ ?>
+	<script type="text/javascript">
+
+    $(document).on('click','#update_profile',function(e){
+		e.preventDefault();
+		$(".loader_ajax").show();
+
+		var formData = new FormData($("#profileupdate_form")[0]);
+		$.ajax({
+			url : "<?php echo base_url();?>updateprofile",
+			type: "POST",
+			data : formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data, textStatus, jqXHR)
+			{
+				$(".loader_ajax").hide();
+				var fetchResponse = $.parseJSON(data);	
+				if(fetchResponse.status == "failure")
+			    {
+			    	$.each(fetchResponse.error, function (i, v)
+	                {
+	                    $('.'+i+'_error').html(v);
+	                });
+			    }
+			    else
+			    {		
+							const confirmAction = () => {
+								const response = confirm("Are you sure you want to do that?");
+
+								if (response) {
+									window.location.href = "<?php echo base_url().'profilesetting';?>";
+								} else {
+									alert("Cancel was pressed");
+								}
+							}
+			    }
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+		    {
+		   		$(".loader_ajax").hide();
+		    }
+		});
+		return false;
+	});
+     
+	</script>
+<?php } ?>
+
+
+
+
 
