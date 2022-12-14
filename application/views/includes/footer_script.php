@@ -23,6 +23,16 @@
 			});
 		});
 
+
+		$(function() {
+			$(".datepickerdateofbirth").datepicker({ 
+				//minDate: 0,
+				//todayHighlight: true,
+				format: 'yyyy-mm-dd' ,
+				//startDate: new Date()
+			});
+		});
+
 		$(document).on('click','#close',function(e){  
 			history.go(0);
 			location.reload();

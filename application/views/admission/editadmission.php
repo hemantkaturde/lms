@@ -95,7 +95,7 @@ if(!empty($editDataAdmission))
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="date_of_birth">Date Of Birth<span class="required">*</span></label>
                                                 <div>
-                                                    <input autocomplete="off" autocomplete="off" type="text" id="date_of_birth" name="date_of_birth" placeholder="Date Of Birth" value="<?php echo $dateofbirth;?>" class="form-control col-md-12 col-xs-12 datepicker">
+                                                    <input autocomplete="off" autocomplete="off" type="text" id="date_of_birth" name="date_of_birth" placeholder="Date Of Birth" value="<?php echo $dateofbirth;?>" class="form-control col-md-12 col-xs-12 datepickerdateofbirth">
                                                     <p class="error date_of_birth_error"></p>
                                                 </div>
                                             </div> 
