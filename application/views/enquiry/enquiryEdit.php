@@ -32,10 +32,6 @@ if(!empty($editDataenquiry))
         $remark  =  $rf->enq_remark;
         $doctor_non_doctor	  =  $rf->doctor_non_doctor;
         $enq_city	  =  $rf->enq_city;
-        // $role = $rf->role;
-        // $role_type = $rf->role_type;
-        // $discription = $rf->discription;
-        // $access = $rf->access; 
     }
 }
 
@@ -77,7 +73,6 @@ if(!empty($editDataenquiry))
                                                     <p class="error full_name_error"></p>
                                                     <input type="hidden" id="enq_id" name="enq_id"
                                                         value="<?php echo $enquiryId;?>">
-                                                    <p class="error full_name_error"></p>
                                                 </div>
                                             </div>
 
@@ -93,15 +88,6 @@ if(!empty($editDataenquiry))
                                                     <p class="error mobile_no_error"></p>
                                                 </div>
                                             </div>
-
-                                            <!-- <div class="form-group">
-                                                <label style="text-align: left;" for="alternate_mobile">Alternate Mobile
-                                                </label>
-                                                <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="100" type="text" id="alternate_mobile1" placeholder="Enter Alternate Mobile" name="alternate_mobile" value="<?php echo $enq_mobile1;?>" class="form-control col-md-12 col-xs-12">
-                                                    <p class="error alternate_mobile_error"></p>
-                                                </div>
-                                            </div> -->
 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="qualification">Qualification<span
@@ -184,19 +170,6 @@ if(!empty($editDataenquiry))
                                                 <p class="error enq_date_error"></p>
                                             </div>
 
-                                            <!-- <div class="form-group">
-                                                <label style="text-align: left;" for="purpose">Purpose
-                                                </label>
-                                                <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="500"
-                                                        type="text" id="purpose1" 
-                                                        value="<?php echo $enq_purpose; ?>"
-                                                        placeholder="Enter Purpose"
-                                                        name="purpose" class="form-control col-md-12 col-xs-12">
-                                                    <p class="error purpose_error"></p>
-                                                </div>
-                                            </div> -->
-
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
@@ -211,18 +184,6 @@ if(!empty($editDataenquiry))
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="form-group">
-                                                <label style="text-align: left;" for="alternamte_email">Alternamte Email
-                                                </label>
-                                                <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="100"
-                                                        type="text" id="alternamte_email1" name="alternamte_email"
-                                                        placeholder="Enter Alternamte Email"
-                                                        value= "<?php echo $alternet_email;?>"
-                                                        class="form-control col-md-12 col-xs-12">
-                                                    <p class="error alternamte_email_error"></p>
-                                                </div>
-                                            </div> -->
 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="country">Course<span
@@ -256,32 +217,6 @@ if(!empty($editDataenquiry))
                                                 <p class="error doctor_non_doctor_error"></p>
                                             </div>
 
-
-                                            <!-- <div class="form-group">
-                                                <label style="text-align: left;" for="country">Country
-                                                </label>
-                                                <div>
-                                                    <select class="form-control country" id="countryEnquiry" name="country">
-                                                        <option value="0">Select Country</option>
-                                                        <option value="101" selected>India</option>
-                                                    </select>
-                                                    <p class="error enquiry_type_error"></p>
-                                                </div>
-                                            </div> -->
-
-                                            <!-- <div class="form-group">
-                                                <label style="text-align: left;" for="state">State </label>
-                                                <div>
-                                                    <select class="form-control state" name="state" id="stateEnquiry">
-                                                    <option st-id="" value="0">Select State</option>
-                                                    <?php foreach ($state_List as $key => $value) { ?>       
-                                                        <option st-id="" value="<?php echo $value['id'] ?>" <?php echo $value['selected'];?> ><?php echo $value['name'] ?></option>
-                                                    <?php } ?>
-                                                    </select>
-                                                    <p class="error state_error"></p>
-                                                </div>
-                                            </div> -->
-
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="city">City </label>
                                                 <div>
@@ -295,21 +230,6 @@ if(!empty($editDataenquiry))
                                                 </div>
                                             </div>
 
-
-                                            <!-- 
-                                            <div class="form-group">
-                                                <label style="text-align: left;" for="remarks">Remarks
-                                                </label>
-                                                <div>
-                                                    <input autocomplete="off" autocomplete="off" maxlength="5000"
-                                                        type="text" id="remarks1" name="remarks"
-                                                        value= "<?php  echo $remark;?>"
-                                                        placeholder="Enter Remarks"
-                                                        class="form-control col-md-12 col-xs-12">
-                                                    <p class="error remarks_error"></p>
-                                                    <input type="hidden" name="enq_id" id="enq_id">
-                                                </div>
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -322,8 +242,6 @@ if(!empty($editDataenquiry))
                                 <input type="button" id="update_enquiry" class="btn btn-primary" value="UPDATE" />
                                 <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
                                     class="btn btn-default" value="BACK" />
-                                <!-- <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
-                                    class="btn btn-default" value="CANCEL" /> -->
                             </div>
                         </div>
                     </div>
