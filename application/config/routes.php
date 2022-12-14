@@ -202,6 +202,10 @@ $route['billinginfo'] = 'student/billinginfo';
 $route['fetchBillinginfo'] = 'student/fetchBillinginfo';
 
 
+$route['profilesetting'] = 'admin/profilesetting';
+
+
+
 
 
 

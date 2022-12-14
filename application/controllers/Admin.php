@@ -477,6 +477,12 @@ class Admin extends BaseController
 			}
 		}
 	}
+
+
+    public function profilesetting(){
+        $this->global['pageTitle'] = 'Profile';
+        $this->loadViews("profile", $this->global, NULL, NULL);
+    }
 	
 
 }
