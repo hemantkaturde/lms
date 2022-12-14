@@ -227,7 +227,6 @@
                                             class="form-control col-md-12 col-xs-12">
                                         <p class="error password1_error"></p>
                                     </div>
-
                                 </div>
 
                                 <div class="form-group">

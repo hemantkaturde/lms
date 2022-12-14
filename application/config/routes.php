@@ -138,6 +138,10 @@ $route['uploadquestionpaper'] = "examination/uploadquestionpaper";
 $route['studentListing'] = "student/studentListing";
 $route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
 $route['fetchstudentlist'] = "student/fetchstudentlist";
+$route['editstudent/(:num)'] = "student/editstudent/$1";
+
+
+
 
 /*********** ENQUIRY CONTROLLER ROUTES *******************/
 $route['enquirylisting'] = "enquiry/enquirylisting";

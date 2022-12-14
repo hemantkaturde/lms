@@ -92,6 +92,16 @@
 
         }
 
+        public function editstudent($id){
+
+            $process = 'Student Edit';
+            $processFunction = 'student/editstudent';
+            $this->logrecord($process,$processFunction);
+            $data['student_infromation'] = $this->student_model->getAllstudentdata($id);
+            $this->global['pageTitle'] = 'Student Edit';
+            $this->loadViews("student/studentedit", $this->global, $data , NULL);
+
+        }
 
     }
 

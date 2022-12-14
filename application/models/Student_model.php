@@ -113,11 +113,8 @@ class Student_model extends CI_Model
                  $data[$counter]['user_flag']   = $value['user_flag'];
                  $data[$counter]['action']  = '';
                  $data[$counter]['action'] .= "";
-               
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_type' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstudent/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course_type' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course Type' title='Delete Course Type'></a>"; 
-
-
 
                 $counter++; 
             }
@@ -224,6 +221,15 @@ class Student_model extends CI_Model
         $this->db->where('enquiry_id', $enq_id);
         $this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
+        return $query->result();
+
+    }
+
+    public function getAllstudentdata($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_USER.'.userId', $id);
+        $query = $this->db->get(TBL_USER);
         return $query->result();
 
     }
