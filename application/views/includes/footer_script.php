@@ -3764,6 +3764,20 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		$(".loader_ajax").show();
 
 		var formData = new FormData($("#profileupdate_form")[0]);
+
+			// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
 		$.ajax({
 			url : "<?php echo base_url();?>updateprofile",
 			type: "POST",
@@ -3783,16 +3797,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	                });
 			    }
 			    else
-			    {		
-							const confirmAction = () => {
-								const response = confirm("Are you sure you want to do that?");
-
-								if (response) {
-									window.location.href = "<?php echo base_url().'profilesetting';?>";
-								} else {
-									alert("Cancel was pressed");
-								}
-							}
+			    {	
+					window.location.href = "<?php echo base_url().'profilesetting';?>";
+							
 			    }
 			},
 			error: function (jqXHR, textStatus, errorThrown)
