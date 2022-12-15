@@ -244,7 +244,40 @@
 
         }
 
-        
+
+        public function studentcourses(){
+
+            $this->global['pageTitle'] = 'Student Courses List';
+            $this->loadViews("student/studentcoureslisting", $this->global, NULL, NULL);
+        }
+
+        public function fetchstudentcourse()
+        {
+
+            $params = $_REQUEST;
+            $userId =  $this->session->userdata('userId');
+            $totalRecords = $this->student_model->getstudentCourseCount($params,$userId); 
+            $queryRecords = $this->student_model->getstudentCoursedata($params,$userId); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+        }
+
 
     }
 

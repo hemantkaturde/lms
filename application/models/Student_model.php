@@ -355,6 +355,98 @@ class Student_model extends CI_Model
 
     }
 
+
+    
+    public function  getstudentCourseCount($params,$userId){
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $query = $this->db->get(TBL_COURSE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getstudentCoursedata($params,$userId){
+        $access = $this->session->userdata('access');
+        $jsonstringtoArray = json_decode($access, true);
+        $pageUrl =$this->uri->segment(1);
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_COURSE);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                    // $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['course_name'] = $value['course_name'];
+                    $data[$counter]['course_type'] = $value['ct_name'];
+                    $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
+
+                    if($value['course_books']==1){
+                        $course_books = 'Books Available';
+                    }else{
+                        $course_books = '';
+                    }
+
+                   
+                    if($value['course_mode_online']==1){
+
+                        $course_mode_online ='Online';
+                    }else{
+
+                        $course_mode_online ='';
+                    }
+
+
+                    if($value['course_mode_offline']==1){
+
+                        $course_mode_offline = 'Offline';
+                    }else{
+
+                        $course_mode_offline = '';
+                    }
+
+
+                    $data[$counter]['course_mode'] = $course_mode_online.' '.$course_mode_offline;
+                    $data[$counter]['course_books'] = $course_books;
+
+                    $data[$counter]['action'] = '';
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchapters/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."timetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+
+                 
+
+                 $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
  
 
 }

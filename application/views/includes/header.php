@@ -432,8 +432,8 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="">
-                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                        <li  class="<?php if($pageUrl =='studentcourses'){ echo 'active';} ?>">
+                            <a  href="<?php echo base_url()."studentcourses"; ?>"><i
                                     class="sidebar-item-icon fa fa-file"></i>
                                 <span class="nav-label" >Courses</span>
                             </a>

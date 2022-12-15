@@ -216,6 +216,10 @@ $route['updateprofile'] = 'admin/updateprofile';
 $route['studentadmissions'] = 'student/studentadmissions';
 $route['fetchstudentadmissions'] = 'student/fetchstudentadmissions';
 $route['studentpaymentdetails/(:any)'] = 'student/studentpaymentdetails/$1';
+$route['studentcourses'] = 'student/studentcourses';
+$route['fetchstudentcourse'] = "student/fetchstudentcourse";
+
+
 
 
 

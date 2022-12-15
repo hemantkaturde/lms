@@ -3691,7 +3691,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-
 <?php if($pageTitle=='Student Listing' || $pageTitle=='Student Edit'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
@@ -3850,7 +3849,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php } ?>
 
-
 <?php if($pageTitle=='Billing Info'){ ?>
     <script type="text/javascript">
         $(document).ready(function() {	
@@ -3887,8 +3885,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	</script>
 <?php } ?>
-
-
 
 <?php if($pageTitle=='Profile'){ ?>
 	<script type="text/javascript">
@@ -3966,8 +3962,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-
-
 <?php if($pageTitle=='Student Admission and Enquiry Listing'){ ?>
 <script type="text/javascript">
         $(document).ready(function() {
@@ -4001,8 +3995,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	    });
 </script>
 <?php } ?>
-
-
 
 <?php if($pageTitle=='Student Enquiry Payment Details'){ ?>
 	<script type="text/javascript">
@@ -4043,4 +4035,55 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php } ?>
 
+
+<?php if($pageTitle=='Student Courses List'){ ?>
+<script type="text/javascript">
+       $(document).ready(function() {
+            var dt = $('#view_students_courselist').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "15%", "targets": 0 },
+	                 { "width": "8%", "targets": 1 },
+	                 { "width": "8%", "targets": 2 },
+	                 { "width": "8%", "targets": 3 },
+					 { "width": "8%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Course Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>/fetchstudentcourse",
+                    type: "post",
+	            },
+
+	            // "columns": [
+	                // { "data": "course_name" },
+	                // { "data": "ttype" },
+	                // { "data": "user_full_name" },
+	                // { "data": "user_mobile_no" }
+	                // { "data": "driver_full_name" },
+	                // { "data": "driver_mobile_no" },
+	                // { "data": "source_address" },                
+	                // { "data": "dest_address" }, 
+				    // { "data": "journey_status" },
+					// { "data": "trip_flag" },  
+					// { "data": "gross_bill" },              
+	                // { "data": "dial4242_commision_charge" },
+					// { "data": "amount_paid" },
+	                // { "data": "action" },               
+	            // ],
+
+	        });
+		});
+
+</script>
+<?php } ?>
 
