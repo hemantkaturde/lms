@@ -62,7 +62,7 @@
                      $all_course_name = trim($course_name, ', '); 
                             
                      echo '<p>'.$all_course_name .'</p>'; 
-                     echo '<p>'.'<b><H4 style="color: #d2ae6d;">Toal Fees</b> :'.' ₹ '.$total_fees .'</H4></p>'; 
+                     echo '<p>'.'<b><H4 style="color: #d2ae6d;">Total Fees</b> :'.' ₹ '.$total_fees .'</H4></p>'; 
                      ?></td>
                         </tr>
                     </table>
@@ -89,7 +89,7 @@
                                         <input autocomplete="off" autocomplete="off" maxlength="100" type="number"
                                             id="discounted_amount" name="discounted_amount"
                                             value="<?php echo $followDataenquiry[0]->discount_amount; ?>"
-                                            class="form-control col-md-12 col-xs-12">
+                                            class="form-control col-md-12 col-xs-12" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label style="text-align: left;" for="total_benifit">Total Benefit
