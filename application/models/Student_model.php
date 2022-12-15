@@ -158,11 +158,6 @@ class Student_model extends CI_Model
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_PAYMENT);
 
-        print_r($this->db->last_query());
-
-        exit;
-
-
         
         $fetch_result = $query->result_array();
         
