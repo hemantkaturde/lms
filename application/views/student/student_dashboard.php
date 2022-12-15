@@ -23,8 +23,8 @@
                ?>
                 <tr>
                     <td><?=$value['course_name'] ?></td>
-                    <td><?=$value['topic_name'] ?></td>
-                    <td><?=$value['createdDtm'] ?></td>
+                    <td><?=$value['title'] ?></td>
+                    <td><?=$value['date'] ?></td>
                     <td><?=$value['timings'] ?></td>
                     <td><?=$value['link_url'] ?></td>
                 </tr>
