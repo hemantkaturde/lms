@@ -6,7 +6,7 @@
     <div class="page-content fade-in-up">
 
         <div class="col-lg-8 col-md-8">
-        <h5><b> Upcoming Topic Links</b></h5>
+        <h5><b> Class Details</b></h5>
             <table class="table">
             <thead>
                 <tr>
@@ -18,24 +18,18 @@
                 </tr>
             </thead>
             <tbody>
+
+             <?php $i=1; foreach ($upcoming_class_links as $key => $value) {
+                # code...
+               ?>
                 <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                    <th scope="row"><?=$i++ ?></th>
+                    <td><?=$value['topic_name'] ?></td>
+                    <td><?=$value['timings'] ?></td>
+                    <td><?=$value['link_url'] ?></td>
+                    <td><?=$value['link_url'] ?></td>
                 </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                </tr>
+             <?php }  ?>   
             </tbody>
             </table>
         </div>

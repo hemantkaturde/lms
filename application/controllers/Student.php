@@ -474,8 +474,6 @@
             $this->loadViews("student/viewstudenttopiclinks",$this->global,$data,NULL);
 
         }
-
-
         
         public function fetchstudenttopicmeetinglink(){
 

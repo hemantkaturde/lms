@@ -262,9 +262,64 @@ class Admission_model extends CI_Model
             return FALSE;
         }
     }
+
+
+
+    public function upcoming_class_links($userId){
+        $access = $this->session->userdata('access');
+        $jsonstringtoArray = json_decode($access, true);
+        $pageUrl =$this->uri->segment(1);
+        $this->db->select('enq_course_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
+        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+        $data = array();
+        $counter = 0;
+         foreach ($fetch_result_enquiry_courses as $key => $value) {
+
+         $course_ids    =   explode(',', $value['enq_course_id']);
+
+         foreach ($course_ids as $key => $value) {
+           
+           
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_COURSE.'.courseId = '.TBL_TOPIC_MEETING_LINK.'.course_id');
+
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $this->db->where(TBL_COURSE.'.courseId', $value);
+
+        $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+        $query = $this->db->get(TBL_COURSE);
+        $fetch_result = $query->result_array();
+       
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                    // $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['course_name'] = $value['course_name'];
+                    $data[$counter]['topic_name'] = $value['topic_name'];
+                    $data[$counter]['timings'] = $value['timings'];
+                    $data[$counter]['link_url'] = $value['link_url'];
+
+                    $data[$counter]['action'] = '';
+                 $counter++; 
+            }
+        }
+
+         }
+
+         return $data;
+       }
+ 
+
+
+    }
      
-
-
 }
 
 ?>

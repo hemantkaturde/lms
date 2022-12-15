@@ -71,6 +71,9 @@ class Admin extends BaseController
         if($this->session->userdata('roleText') !='Student'){
            $this->loadViews("dashboard", $this->global, $data , NULL);
         }else{
+
+            $userId = $this->session->userdata('userId');
+            $data['upcoming_class_links'] = $this->admission_model->upcoming_class_links($userId);
             $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
         }
     }
