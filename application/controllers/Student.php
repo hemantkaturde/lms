@@ -376,6 +376,44 @@
         }
 
 
+        public function studenttimetableListing($id){
+            $process = 'Studnet Time Table Listing';
+            $processFunction = 'Course/addtimetableListing';
+            $data['course_id'] = $id;
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Studnet Time Table Listing';
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
+            $this->loadViews("student/studenttimetablelisting", $this->global, $data , NULL);
+        }
+
+
+        public function fetchstudentTimetable($courseid){
+
+            $params = $_REQUEST;
+            $totalRecords = $this->student_model->studentgettimetableCount($params,$courseid); 
+            $queryRecords = $this->student_model->studentgettimetabledata($params,$courseid); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+        }
+
+
     }
 
 ?>

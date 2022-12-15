@@ -436,7 +436,7 @@ class Student_model extends CI_Model
                     $data[$counter]['action'] = '';
 
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."timetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
 
                  $counter++; 
             }
@@ -563,6 +563,63 @@ class Student_model extends CI_Model
       }
     
 
+
+      public function studentgettimetableCount($params,$courseid){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TIMETABLE.".from_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TIMETABLE.".to_date LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
+        $this->db->where(TBL_TIMETABLE.'.course_id', $courseid);
+
+        $query = $this->db->get(TBL_TIMETABLE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+  }
+
+
+  public function studentgettimetabledata($params,$courseid){
+
+    $access = $this->session->userdata('access');
+    $jsonstringtoArray = json_decode($access, true);
+    
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_TIMETABLE.".from_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TIMETABLE.".to_date LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_TIMETABLE.'.course_id', $courseid);
+    $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
+    $this->db->order_by(TBL_TIMETABLE.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_TIMETABLE);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['from_date'] = date('d-m-Y', strtotime($value['from_date']));
+             $data[$counter]['to_date'] = date('d-m-Y', strtotime($value['to_date']));
+             $data[$counter]['month_name'] = '<b>'.$value['month_name'].'</b>';
+             $data[$counter]['action'] = '';
+
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewtimetablelisting?time_table_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='Viw TimeTable' title='Viw TimeTable'></a> ";
+            //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_timetable' time-table-id='".$value['id']."' course_id='".$value['course_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Time Table' title='Delete Time Table'></a>"; 
+            
+            $counter++; 
+        }
+    }
+
+    return $data;
+
+  }
  
 
 }

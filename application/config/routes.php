@@ -223,6 +223,12 @@ $route['fetchstudnetCourseAttchemant/(:any)'] = "student/fetchstudnetCourseAttch
 $route['studenttopicdocumentslisting?(:any)'] = "student/studenttopicdocumentslisting/$1";
 $route['studentviewalltopicdocuments?(:any)'] = "student/studentviewalltopicdocuments/$1";
 $route['studentfetchTopicDocument?(:any)'] = "student/studentfetchTopicDocument/$1";
+$route['studentfetchTopicDocument?(:any)'] = "student/studentfetchTopicDocument/$1";
+
+
+$route['studenttimetableListing/(:any)'] = "student/studenttimetableListing/$1";
+
+$route['fetchstudentTimetable/(:any)'] = "student/fetchstudentTimetable/$1";
 
 
 

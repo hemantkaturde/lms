@@ -4159,3 +4159,38 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
    </script>
 <?php }  ?>
+
+
+<?php if($pageTitle=='Studnet Time Table Listing'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+			    var course_id_form = $('#course_id_form').val();
+				var dt = $('#view_student_time_table_list').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "5%", "targets": 3 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No TimeTable List  Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchstudentTimetable/"+course_id_form,
+						type: "post",
+					},
+				});
+		});
+
+	
+	
+	</script>
+<?php } ?>
