@@ -173,7 +173,7 @@
                                                     $pending_amount = $followDataenquiry[0]->final_amount -  $totalpaidAmount;
                                                     if($pending_amount > 0){ ?>
                                                         <div>
-                                                            <h4 style="color: #d2ae6d;"><a style='cursor: pointer;' class='send_payment_link' data-id=<?php echo $followDataenquiry[0]->enq_id;?>><i class="fa fa-paper-plane-o"   aria-hidden="true"></i></a></h4>Payment Link
+                                                        <h4 style="color: #d2ae6d;"><i class="fa fa-wpforms"   aria-hidden="true"></i></a></h4>Payment Pending
                                                         </div>
                                                     <?php }else{ ?>
                                                         <div>

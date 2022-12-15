@@ -425,10 +425,10 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="<?php if($pageUrl =='studentadmissions'){ echo 'active';} ?>">
+                        <li  class="<?php if($pageUrl =='studentadmissions' || $pageUrl =='studentpaymentdetails'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."studentadmissions"; ?>"><i
                                     class="sidebar-item-icon fa fa-address-book"></i>
-                                <span class="nav-label" >Admission / Enquiers</span>
+                                <span class="nav-label" >Inquiry/Payment Details</span>
                             </a>
                         </li>
 
