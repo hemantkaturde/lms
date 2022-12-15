@@ -112,13 +112,13 @@
                                             class="form-control col-md-12 col-xs-12" readonly>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <button type="submit" id="update_discount"
                                             class="btn btn-primary update_discount">Update Discount</button>
                                             <button type="button" class="btn btn-primary">
                                                 <a href="<?php echo base_url().'/enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                                             </button>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -191,33 +191,6 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                                         <label for="" style="margin-top:15px;color: #d2ae6d"> <h4><b>All Transaction List</b><h4></label>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: end;" >
-                                                       
-                                                    <?php if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){ ?>
-
-                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_manual_admission_link" >
-                                                           <i class="fa fa-money"></i> Send Admission Link
-                                                        </button>
-
-                                                     <?php }else{ ?>
-                                                        <button type="button"  style="margin-top:10px" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_manual_admission_link" disabled>
-                                                           <i class="fa fa-money"></i> Send Admission Link
-                                                        </button>
-
-                                                     <?php } ?>
-
-
-                                                    <?php $pending_amount = $followDataenquiry[0]->final_amount -  $totalpaidAmount;
-                                                      if($pending_amount > 0){ ?>
-                                                        <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" >
-                                                           <i class="fa fa-money"></i> Add Payment
-                                                        </button>
-                                                    <?php }else{ ?>
-                                                        <button type="button"  style="margin-top:10px"  class="btn btn-primary" data-toggle="modal" data-target="#add_payment" disabled>
-                                                           <i class="fa fa-money"></i> Add Payment
-                                                        </button>
-                                                    <?php } ?> 
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -252,7 +225,6 @@
                                                         <td><?=$status?></td>
                                                         <td>
                                                             <a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-toggle="modal" data-target="#view_enquiry_tarnsaction"   data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/view_doc.png";?>" alt='View Transaction' title='View Transaction'></a>
-                                                            <a style='cursor: pointer;' class='delete_enquiry_tarnsaction' data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/delete.png"; ?>" alt='Delete Transaction' title='Delete Transaction'></a> 
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
