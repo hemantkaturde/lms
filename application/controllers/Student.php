@@ -67,10 +67,10 @@
         
         public function fetchBillinginfo(){
 
-            $enq_id =  $this->session->userdata('enq_id');
+            $userId =  $this->session->userdata('userId');
             $params = $_REQUEST;
-            $totalRecords = $this->student_model->getTaxinvoicesCount($params,$enq_id);
-            $queryRecords = $this->student_model->getTaxinvoices($params,$enq_id); 
+            $totalRecords = $this->student_model->getTaxinvoicesCount($params,$userId);
+            $queryRecords = $this->student_model->getTaxinvoices($params,$userId); 
             $data = array();
             foreach ($queryRecords as $key => $value)
             {

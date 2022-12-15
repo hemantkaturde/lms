@@ -123,9 +123,9 @@ class Student_model extends CI_Model
     }
 
 
-    public function getTaxinvoicesCount($params,$enq_id){
+    public function getTaxinvoicesCount($params,$userId){
         $this->db->select('*');
-        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_id');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
 
         // if($params['search']['value'] != "") 
@@ -135,8 +135,8 @@ class Student_model extends CI_Model
         // }
         //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
-        $this->db->where(TBL_USERS_ENQUIRES.'.enq_id', $enq_id);
-        $this->db->where(TBL_PAYMENT.'.enquiry_number', $enq_id);
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+        //$this->db->where(TBL_PAYMENT.'.enquiry_number', $enq_id);
         $this->db->order_by(TBL_PAYMENT.'.payment_status', 1);
         $query = $this->db->get(TBL_PAYMENT);
         $rowcount = $query->num_rows();
@@ -144,20 +144,19 @@ class Student_model extends CI_Model
 
     }
 
-    public function getTaxinvoices($params,$enq_id){
+    public function getTaxinvoices($params,$userId){
 
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
-        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_id');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
 
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
-        $this->db->where(TBL_USERS_ENQUIRES.'.enq_id', $enq_id);
-        $this->db->where(TBL_PAYMENT.'.enquiry_number', $enq_id);
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+        // $this->db->where(TBL_PAYMENT.'.enquiry_number', $enq_id);
         $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
       
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_PAYMENT);
-     
         
         $fetch_result = $query->result_array();
         $data = array();
