@@ -68,10 +68,6 @@
         public function fetchBillinginfo(){
 
             $enq_id =  $this->session->userdata('enq_id');
-
-            print_r( $enq_id);
-            exit;
-
             $params = $_REQUEST;
             $totalRecords = $this->student_model->getTaxinvoicesCount($params,$enq_id);
             $queryRecords = $this->student_model->getTaxinvoices($params,$enq_id); 
