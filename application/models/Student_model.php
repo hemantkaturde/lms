@@ -126,7 +126,7 @@ class Student_model extends CI_Model
     public function getTaxinvoicesCount($params,$userId){
         $this->db->select('*');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
 
         // if($params['search']['value'] != "") 
         // {
@@ -148,7 +148,7 @@ class Student_model extends CI_Model
 
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
 
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
@@ -157,8 +157,15 @@ class Student_model extends CI_Model
       
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_PAYMENT);
+
+        print_r($this->db->last_query());
+
+        exit;
+
+
         
         $fetch_result = $query->result_array();
+        
         $data = array();
         $counter = 0;
         if(count($fetch_result) > 0)
