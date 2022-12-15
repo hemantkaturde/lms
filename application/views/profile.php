@@ -9,13 +9,11 @@
               <div class="panel-body table-responsive">
               <div class="container">
                 <div class="row flex-lg-nowrap">
-            
                 <div class="col">
                     <div class="row">
                     <div class="col mb-3">
-
                          <?php $attributes = array("name"=>"profileupdate_form","id"=>"profileupdate_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
-		                	echo form_open("adminusers/profile_update", $attributes);
+		                	echo form_open("admin/updateprofile", $attributes);
 		                 ?> 
                         <div class="card">
                         <div class="card-body">
@@ -25,10 +23,16 @@
                                 <div class="mx-auto" style="width: 140px;">
                                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
                                     <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
+                                   
+                                   
+                                    <!-- <p><img id="output" name="exsting_img_pic" src="" width="80" height="80" /></p> -->
+
+                                    <input type="hidden" id="existing_img" name="existing_img" value="<?php $this->session->userdata('profile_pic');?>" >
+
                                     <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
-                                            <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" width="140px"  height="140px"/>
+                                            <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px"  height="140px"/>
                                     <?php }else{ ?>
-                                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="140px" height="140px" />
+                                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" id="output" width="140px" height="140px" />
                                     <?php } ?>
                                     </span>
                                     </div>
@@ -38,12 +42,10 @@
                                 <div class="text-center text-sm-left mb-2 mb-sm-0">
                                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><?=$profile_details[0]->name;?></h4>
                                     <p class="mb-0"><?=$profile_details[0]->email;?></p>
-                                    <div class="text-muted"><small>IICTN-Student</small></div>
+                                    <div class="text-muted"><small>IICTN-<?=$role_text?></small></div>
                                     <div class="mt-2">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fa fa-fw fa-camera"></i>
-                                        <span>Change Photo</span>
-                                    </button>
+                                        <input type="file" id="profile_photo" name="profile_photo" class="form-control" ccept="image/*" onchange="loadFile(event)" style="display:none;" >  </input>
+                                        <button class="btn btn-primary"  onclick="thisFileUpload();" type="button"><i class="fa fa-fw fa-camera"></i><span>Change Photo</span></button>
                                     </div>
                                 </div>
                                 <div class="text-center text-sm-right">
@@ -64,31 +66,34 @@
                                         <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                            <label>Full Name</label>
-                                            <input class="form-control" type="text" id="full_name" name="full_name" placeholder="Full Name" value="<?=$profile_details[0]->name;?>">
-                                            <input class="form-control" type="hidden" id="userid" name="userid" value="<?=$this->session->userdata('userId');?>">
-
+                                                <label>Full Name</label>
+                                                <input class="form-control" type="text" id="full_name" name="full_name" placeholder="Full Name" value="<?=$profile_details[0]->name;?>">
+                                                <input class="form-control" type="hidden" id="userid" name="userid" value="<?=$this->session->userdata('userId');?>">
+                                                <p class="error full_name_error"></p>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                            <label>Username</label>
-                                            <input class="form-control" type="text" id="username" name="username" placeholder="Enter username" value="<?=$profile_details[0]->username;?>">
+                                                <label>Username</label>
+                                                <input class="form-control" type="text" id="username" name="username" placeholder="Enter username" value="<?=$profile_details[0]->username;?>">
+                                                <p class="error username_error"></p>
                                             </div>
                                         </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                <label>Email</label>
-                                                <input class="form-control" type="text" placeholder="Enter Email Id" id="email" name="email"  value="<?=$profile_details[0]->email;?>">
+                                                    <label>Email</label>
+                                                    <input class="form-control" type="text" placeholder="Enter Email Id" id="email" name="email"  value="<?=$profile_details[0]->email;?>">
+                                                    <p class="error email_error"></p>
                                                 </div>
                                             </div>
 
                                             <div class="col">
                                                 <div class="form-group">
-                                                <label>Mobile Number</label>
-                                                <input class="form-control" type="text" placeholder="Enter Mobile Number" id="mobile" name="mobile"  value="<?=$profile_details[0]->mobile;?>">
+                                                    <label>Mobile Number</label>
+                                                    <input class="form-control" type="text" placeholder="Enter Mobile Number" id="mobile" name="mobile"  value="<?=$profile_details[0]->mobile;?>">
+                                                    <p class="error mobile_error"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,6 +108,7 @@
                                             <label>Current Password</label>
                                                 <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="password" name="password" class="form-control col-md-7 col-xs-12" value="<?php echo trim($profile_details[0]->password); ?>">
                                                 <input type="button" id="showhide" value="Show Password" onclick="if(password.type == 'text'){ password.type = 'password'; showhide.value='Show Password'; }else{ password.type = 'text'; showhide.value='Hide Password'; } return false;"/>
+                                                <p class="error password_error"></p>
                                             </div>
                                         </div>
                                         </div>
@@ -111,6 +117,7 @@
                                             <div class="form-group">
                                             <label>New Password</label>
                                             <input class="form-control" type="password" placeholder="New Password" id="new_password"  name="new_password">
+                                            <p class="error new_password_error"></p>
                                             </div>
                                         </div>
                                         </div>
@@ -119,6 +126,7 @@
                                             <div class="form-group">
                                             <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
                                             <input class="form-control" type="password" placeholder="Confirm Password" id="confirm_password" name="confirm_password"></div>
+                                            <p class="error confirm_password_error"></p>
                                         </div>
                                         </div>
                                     </div>

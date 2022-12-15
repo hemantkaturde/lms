@@ -3899,19 +3899,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 		var formData = new FormData($("#profileupdate_form")[0]);
 
-			// swal({
-				// 	title: "Are you sure?",
-				// 	text: "",
-				// 	type: "warning",
-				// 	showCancelButton: true,
-				// 	closeOnClickOutside: false,
-				// 	confirmButtonClass: "btn-sm btn-danger",
-				// 	confirmButtonText: "Yes, delete it!",
-				// 	cancelButtonText: "No, cancel plz!",
-				// 	closeOnConfirm: false,
-				// 	closeOnCancel: false
-				// }, function(isConfirm) {
-				// 	if (isConfirm) {
 		$.ajax({
 			url : "<?php echo base_url();?>updateprofile",
 			type: "POST",
@@ -3943,7 +3930,16 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		});
 		return false;
 	});
-     
+
+	var loadFile = function(event) {
+			var image = document.getElementById('output');
+			image.src = URL.createObjectURL(event.target.files[0]);
+	};
+
+	function thisFileUpload() {
+            document.getElementById("profile_photo").click();
+    };
+
 	</script>
 <?php } ?>
 
