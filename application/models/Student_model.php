@@ -487,7 +487,7 @@ class Student_model extends CI_Model
                  $data[$counter]['topic_name'] = $value['topic_name'];
                 //  $data[$counter]['remark'] = $value['remark'];
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='View Attachment' title='View Attachment'></a> | ";
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='View Attachment' title='View Attachment'></a> ";
                 $counter++; 
             }
         }

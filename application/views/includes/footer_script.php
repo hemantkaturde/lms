@@ -4098,7 +4098,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
 							{ "width": "85%", "targets": 0 },
-							{ "width": "20%", "targets": 1 },
+							{ "width": "5%", "targets": 1 },
 							// { "width": "5%", "targets": 2 }
 
 						],
@@ -4113,7 +4113,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchCourseAttchemant/"+course_id,
+							url :"<?php echo base_url();?>fetchstudnetCourseAttchemant/"+course_id,
 							type: "post",
 						},
 					});
