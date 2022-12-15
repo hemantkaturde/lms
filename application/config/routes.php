@@ -136,7 +136,7 @@ $route['uploadquestionpaper'] = "examination/uploadquestionpaper";
 
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
-$route['deleteStudent/(:any)'] = "student/deleteStudent/$1";
+$route['deletestudent'] = "student/deleteStudent";
 $route['fetchstudentlist'] = "student/fetchstudentlist";
 $route['editstudent/(:num)'] = "student/editstudent/$1";
 
