@@ -3899,36 +3899,59 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 		var formData = new FormData($("#profileupdate_form")[0]);
 
-		$.ajax({
-			url : "<?php echo base_url();?>updateprofile",
-			type: "POST",
-			data : formData,
-			cache: false,
-			contentType: false,
-			processData: false,
-			success: function(data, textStatus, jqXHR)
-			{
-				$(".loader_ajax").hide();
-				var fetchResponse = $.parseJSON(data);	
-				if(fetchResponse.status == "failure")
-			    {
-			    	$.each(fetchResponse.error, function (i, v)
-	                {
-	                    $('.'+i+'_error').html(v);
-	                });
-			    }
-			    else
-			    {	
-					window.location.href = "<?php echo base_url().'profilesetting';?>";
-							
-			    }
-			},
-			error: function (jqXHR, textStatus, errorThrown)
-		    {
-		   		$(".loader_ajax").hide();
-		    }
-		});
-		return false;
+			swal({
+					title: "Are you sure?",
+					text: "",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+
+					$.ajax({
+						url : "<?php echo base_url();?>updateprofile",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							var fetchResponse = $.parseJSON(data);	
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else
+							{	
+								window.location.href = "<?php echo base_url().'profilesetting';?>";
+										
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+
+
+					}
+					else {
+						swal("Cancelled", " ", "error");
+						$(".loader_ajax").hide();
+						window.location.href = "<?php echo base_url().'profilesetting';?>";
+					}
+				});
 	});
 
 	var loadFile = function(event) {

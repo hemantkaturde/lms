@@ -23,11 +23,13 @@
                                 <div class="mx-auto" style="width: 140px;">
                                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
                                     <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
-                                   
-                                   
+                                
                                     <!-- <p><img id="output" name="exsting_img_pic" src="" width="80" height="80" /></p> -->
 
-                                    <input type="hidden" id="existing_img" name="existing_img" value="<?php $this->session->userdata('profile_pic');?>" >
+                                    <input type="hidden" id="existing_img" name="existing_img" value="<?php echo $profile_details[0]->profile_pic;?>" >
+
+                                    <!-- <input type="hidden" id="profile_id" name="profile_id" value="<?php echo $profile_details[0]->profile_pic;?>" > -->
+
 
                                     <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
                                             <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px"  height="140px"/>
@@ -106,7 +108,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                             <label>Current Password</label>
-                                                <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="password" name="password" class="form-control col-md-7 col-xs-12" value="<?php echo trim($profile_details[0]->password); ?>">
+                                                <input autocomplete="off" autocomplete="off" maxlength="20" type="password" id="password" name="password" class="form-control col-md-7 col-xs-12" value="<?php echo trim(base64_decode($profile_details[0]->password)); ?>">
                                                 <input type="button" id="showhide" value="Show Password" onclick="if(password.type == 'text'){ password.type = 'password'; showhide.value='Show Password'; }else{ password.type = 'text'; showhide.value='Hide Password'; } return false;"/>
                                                 <p class="error password_error"></p>
                                             </div>

@@ -163,6 +163,8 @@
 
                     $saveStudantdata = $this->student_model->saveStudentdata($student_id,$data);
                     if($saveStudantdata){
+
+                        
                         $editstudent_response['status'] = 'success';
                         $editstudent_response['error'] = array('full_name'=>'', 'mobile_number'=>'', 'email'=>'', 'username'=>'','password'=>'','confirm_password'=>'');
                     }
