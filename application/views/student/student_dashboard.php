@@ -53,245 +53,254 @@
         </div> -->
 
         
+        <div class="row">
+                        <div class="col-xl-7 mb-3 mb-xl-0">
+
+                            <div class="card h-100">
+                                <div class="card-header d-flex align-items-center border-0">
+                                    <div class="me-auto">
+                                        <h3 class="h4 m-0">Upcomping Online Courses Links</h3>
+                                    </div>
+                                    <div class="toolbar-end">
+                                        <button type="button" class="btn btn-icon btn-sm btn-hover btn-light" aria-label="Refresh Network Chart">
+                                            <i class="demo-pli-repeat-2 fs-5"></i>
+                                        </button>
+                                        <div class="dropdown">
+                                            <button class="btn btn-icon btn-sm btn-hover btn-light" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Network dropdown">
+                                                <i class="demo-pli-dot-horizontal fs-4"></i>
+                                                <span class="visually-hidden"></span>
+                                            </button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Network - Area Chart -->
+                                <div class="card-body py-0" style="height: 250px; max-height: 275px">
+                                    <table class="table">
+                                        <thead>
+                                            <tr style="background:#f39c12 !important">
+                                            <th scope="col">Subject</th>
+                                            <th scope="col">Topic</th>
+                                            <th scope="col">DateTime</th>
+                                            <th scope="col">Link</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END : Network - Area Chart -->
+
+                                <div class="card-body mt-8">
+                                    <div class="me-auto">
+                                        <h3 class="h4 mb-30">Upcomping Online Examination</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                           
+                                        <table class="table">
+                                        <thead>
+                                            <tr style="background:#f39c12 !important">
+                                            <th scope="col">Subject</th>
+                                            <th scope="col">Topic</th>
+                                            <th scope="col">DateTime</th>
+                                            <th scope="col">Link</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <!-- Tile - HDD Usage -->
+                                    <div class="card bg-success text-white overflow-hidden mb-3">
+                                        <div class="p-3 pb-2">
+                                            <h5 class="mb-3"><i class="demo-psi-data-storage text-reset text-opacity-75 fs-3 me-2"></i> Total Courses</h5>
+                                            <ul class="list-group list-group-borderless">
+                                                <li class="list-group-item p-0 text-reset d-flex justify-content-between align-items-start">
+                                                    <div class="me-auto"><a href=""></a></div>
+                                                    <span class="fw-bold">4</span>
+                                                </li>
+                                                <!-- <li class="list-group-item p-0 text-reset d-flex justify-content-between align-items-start">
+                                                    <div class="me-auto">Used space</div>
+                                                    <span class="fw-bold">1,45Gb</span>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+
+                                        <!-- Area Chart -->
+                                        <div class="py-0" style="height: 70px; margin: 0 -5px -5px;">
+                                            <canvas id="_dm-hddChart" width="328" height="87" style="display: block; box-sizing: border-box; height: 69.6px; width: 262.4px;"></canvas>
+                                        </div>
+                                        <!-- END : Area Chart -->
+
+                                    </div>
+                                    <!-- END : Tile - HDD Usage -->
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <!-- Tile - Earnings -->
+                                    <div class="card bg-info text-white overflow-hidden mb-3">
+                                        <div class="p-3 pb-2">
+                                            <h5 class="mb-3"><i class="demo-psi-coin text-reset text-opacity-75 fs-2 me-2"></i> Examination</h5>
+                                            <ul class="list-group list-group-borderless">
+                                                <li class="list-group-item p-0 text-reset d-flex justify-content-between align-items-start">
+                                                    <div class="me-auto">Today</div>
+                                                    <span class="fw-bold">$764</span>
+                                                </li>
+                                                <!-- <li class="list-group-item p-0 text-reset d-flex justify-content-between align-items-start">
+                                                    <div class="me-auto">Last 7 Day</div>
+                                                    <span class="fw-bold">$1,332</span>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+
+                                        <!-- Line Chart -->
+                                        <div class="py-0" style="height: 70px; margin: 0 -5px -5px;">
+                                            <canvas id="_dm-earningChart" width="328" height="87" style="display: block; box-sizing: border-box; height: 69.6px; width: 262.4px;"></canvas>
+                                        </div>
+                                        <!-- END : Line Chart -->
+
+                                    </div>
+                                    <!-- END : Tile - Earnings -->
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <!-- Tile - Sales -->
+                                    <div class="card bg-purple text-white overflow-hidden mb-3">
+                                        <div class="p-3 pb-2">
+                                            <h5 class="mb-3"><i class="demo-psi-basket-coins text-reset text-opacity-75 fs-2 me-2"></i> Certificates</h5>
+                                            <ul class="list-group list-group-borderless">
+                                                <li class="list-group-item p-0 text-reset d-flex justify-content-between align-items-start">
+                                                    <div class="me-auto">Today</div>
+                                                    <span class="fw-bold">$764</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Bar Chart -->
+                                        <div class="py-0" style="height: 70px">
+                                            <canvas id="_dm-salesChart" width="315" height="87" style="display: block; box-sizing: border-box; height: 69.6px; width: 252px;"></canvas>
+                                        </div>
+                                        <!-- END : Bar Chart -->
+
+                                    </div>
+                                    <!-- END : Tile - Sales -->
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <!-- Tile - Task Progress -->
+                                    <div class="card bg-warning text-white overflow-hidden mb-3">
+                                        <div class="p-3 pb-2">
+                                            <h5 class="mb-3"><i class="demo-psi-basket-coins text-reset text-opacity-75 fs-2 me-2"></i> Total Active Classes</h5>
+                                            <ul class="list-group list-group-borderless">
+                                                <li class="list-group-item p-0 text-reset d-flex justify-content-between align-items-start">
+                                                    <div class="me-auto">Completed</div>
+                                                    <span class="fw-bold">34</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Horizontal Bar Chart -->
+                                        <div class="py-0 pb-2" style="height: 70px">
+                                            <canvas id="_dm-taskChart" width="315" height="77" style="display: block; box-sizing: border-box; height: 61.6px; width: 252px;"></canvas>
+                                        </div>
+                                        <!-- END : Horizontal Bar Chart -->
+
+                                    </div>
+                                    <!-- END : Tile - Task Progress -->
+
+                                </div>
+                            </div>
+
+                            <!-- Simple state widget -->
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 p-3">
+                                            <div class="h3 display-3">95</div>
+                                            <span class="h6">New Friends</span>
+                                        </div>
+                                        <div class="flex-grow-1 text-center ms-3">
+                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                            <button class="btn btn-sm btn-danger">View Details</button>
+
+                                            <!-- Social media statistics -->
+                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
+                                                <div class="text-center">
+                                                    <h4 class="mb-1">1,345</h4>
+                                                    <small class="text-muted">Following</small>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h4 class="mb-1">23k</h4>
+                                                    <small class="text-muted">Followers</small>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h4 class="mb-1">278</h4>
+                                                    <small class="text-muted">Posts</small>
+                                                </div>
+                                            </div>
+                                            <!-- END : Social media statistics -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END : Simple state widget -->
+
+                        </div>
+                    </div>
      
     </div>
     <!-- END PAGE CONTENT-->
-<style>
-
-/* body{margin-top:20px;}
-.event-schedule-area .section-title .title-text {
-    margin-bottom: 50px;
-} */
-
-.event-schedule-area .tab-area .nav-tabs {
-    border-bottom: inherit;
-}
-
-.event-schedule-area .tab-area .nav {
-    border-bottom: inherit;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 80px;
-}
-
-.event-schedule-area .tab-area .nav-item {
-    margin-bottom: 75px;
-}
-.event-schedule-area .tab-area .nav-item .nav-link {
-    text-align: center;
-    font-size: 22px;
-    color: #333;
-    font-weight: 600;
-    border-radius: inherit;
-    border: inherit;
-    padding: 0px;
-    text-transform: capitalize !important;
-}
-.event-schedule-area .tab-area .nav-item .nav-link.active {
-    color: #4125dd;
-    background-color: transparent;
-}
-
-.event-schedule-area .tab-area .tab-content .table {
-    margin-bottom: 0;
-    width: 80%;
-}
-.event-schedule-area .tab-area .tab-content .table thead td,
-.event-schedule-area .tab-area .tab-content .table thead th {
-    border-bottom-width: 1px;
-    font-size: 20px;
-    font-weight: 600;
-    color: #252525;
-}
-.event-schedule-area .tab-area .tab-content .table td,
-.event-schedule-area .tab-area .tab-content .table th {
-    border: 1px solid #b7b7b7;
-    padding-left: 30px;
-}
-.event-schedule-area .tab-area .tab-content .table tbody th .heading,
-.event-schedule-area .tab-area .tab-content .table tbody td .heading {
-    font-size: 16px;
-    text-transform: capitalize;
-    margin-bottom: 16px;
-    font-weight: 500;
-    color: #252525;
-    margin-bottom: 6px;
-}
-.event-schedule-area .tab-area .tab-content .table tbody th span,
-.event-schedule-area .tab-area .tab-content .table tbody td span {
-    color: #4125dd;
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    display: block;
-}
-.event-schedule-area .tab-area .tab-content .table tbody th span.date,
-.event-schedule-area .tab-area .tab-content .table tbody td span.date {
-    color: #656565;
-    font-size: 14px;
-    font-weight: 500;
-    margin-top: 15px;
-}
-.event-schedule-area .tab-area .tab-content .table tbody th p {
-    font-size: 14px;
-    margin: 0;
-    font-weight: normal;
-}
-
-.event-schedule-area-two .section-title .title-text h2 {
-    margin: 0px 0 15px;
-}
-
-.event-schedule-area-two ul.custom-tab {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    border-bottom: 1px solid #dee2e6;
-    margin-bottom: 30px;
-}
-.event-schedule-area-two ul.custom-tab li {
-    margin-right: 70px;
-    position: relative;
-}
-.event-schedule-area-two ul.custom-tab li a {
-    color: #252525;
-    font-size: 25px;
-    line-height: 25px;
-    font-weight: 600;
-    text-transform: capitalize;
-    padding: 35px 0;
-    position: relative;
-}
-.event-schedule-area-two ul.custom-tab li a:hover:before {
-    width: 100%;
-}
-.event-schedule-area-two ul.custom-tab li a:before {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    content: "";
-    background: #4125dd;
-    width: 0;
-    height: 2px;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-}
-.event-schedule-area-two ul.custom-tab li a.active {
-    color: #4125dd;
-}
-
-.event-schedule-area-two .primary-btn {
-    margin-top: 40px;
-}
-
-.event-schedule-area-two .tab-content .table {
-    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0;
-}
-.event-schedule-area-two .tab-content .table thead {
-    background-color: #007bff;
-    color: black;
-    font-size: 15px;
-}
-.event-schedule-area-two .tab-content .table thead tr th {
-    padding: 10px;
-    border: 0;
-}
-.event-schedule-area-two .tab-content .table tbody {
-    background: #fff;
-}
-.event-schedule-area-two .tab-content .table tbody tr.inner-box {
-    border-bottom: 1px solid #dee2e6;
-}
-.event-schedule-area-two .tab-content .table tbody tr th {
-    border: 0;
-    padding: 30px 20px;
-    vertical-align: middle;
-}
-.event-schedule-area-two .tab-content .table tbody tr th .event-date {
-    color: #252525;
-    text-align: center;
-}
-.event-schedule-area-two .tab-content .table tbody tr th .event-date span {
-    font-size: 50px;
-    line-height: 50px;
-    font-weight: normal;
-}
-.event-schedule-area-two .tab-content .table tbody tr td {
-    padding: 30px 20px;
-    vertical-align: middle;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .r-no span {
-    color: #252525;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap h3 a {
-    font-size: 20px;
-    line-height: 20px;
-    color: #cf057c;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap h3 a:hover {
-    color: #4125dd;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .categories {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    margin: 10px 0;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .categories a {
-    color: #252525;
-    font-size: 16px;
-    margin-left: 10px;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .categories a:before {
-    content: "\f07b";
-    font-family: fontawesome;
-    padding-right: 5px;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .time span {
-    color: #252525;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    margin: 10px 0;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers a {
-    color: #4125dd;
-    font-size: 16px;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers a:hover {
-    color: #4125dd;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers a:before {
-    content: "\f007";
-    font-family: fontawesome;
-    padding-right: 5px;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .primary-btn {
-    margin-top: 0;
-    text-align: center;
-}
-.event-schedule-area-two .tab-content .table tbody tr td .event-img img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-}
-</style>
