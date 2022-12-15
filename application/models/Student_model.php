@@ -235,6 +235,25 @@ class Student_model extends CI_Model
     }
 
 
+    public function saveStudentdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('userId', $id);
+            if($this->db->update(TBL_USER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_USER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
 }
 
 ?>

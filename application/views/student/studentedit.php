@@ -1,6 +1,6 @@
 <?php
 
-$student_id = '';
+$studentid = '';
 $name = '';
 $email = '';
 $mobile = '';
@@ -53,7 +53,7 @@ if(!empty($student_infromation))
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" type="text" id="full_name" name="full_name" placeholder="Enter Full name Name" value="<?php echo $name;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error full_name_error"></p>
-                                                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id;?>">
+                                                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $studentid;?>">
                                                 </div>
                                             </div>
 
@@ -79,12 +79,16 @@ if(!empty($student_infromation))
 
                                                                                         
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="profile_photo1">Profile Pic</label>
-                                                <input type="file" id="profile_photo1" name="profile_photo1" class="form-control"
+                                                <label style="text-align: left;" for="profile_photo">Profile Pic</label>
+                                                <input type="file" id="profile_photo" name="profile_photo" class="form-control"
                                                     ccept="image/*" onchange="loadFile(event)">
                                                 <small class="text-default">( Upload photo as Show on Admin Panel)</small>
                                                 <input type="hidden" id="existing_img" name="existing_img" value="<?=$profile_pic?>" >
-                                                <p><img id="output" name="exsting_img" width="80" height="80" /></p>
+                                                <?php if($profile_pic){ ?>
+                                                  <p><img id="output" name="exsting_img_pic" src="<?php echo IMGPATH.'/'.$profile_pic?>" width="80" height="80" /></p>
+                                                <?php }else{ ?>
+                                                  <p><img id="output" name="exsting_img_pic" src="" width="80" height="80" /></p>
+                                                <?php } ?>
                                             </div>
 
 
@@ -127,11 +131,9 @@ if(!empty($student_infromation))
                         <div class="col-md-12">
                             <div class="form-group">
                                 <!-- ENTER BUTTON HERE -->
-                                <input type="button" id="update_enquiry" class="btn btn-primary" value="UPDATE" />
-                                <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
+                                <input type="button" id="update_student" class="btn btn-primary" value="UPDATE" />
+                                <input type="button" onclick="location.href='<?php echo base_url().'studentListing'?>'"
                                     class="btn btn-default" value="BACK" />
-                                <!-- <input type="button" onclick="location.href='<?php echo base_url().'enquirylisting'?>'"
-                                    class="btn btn-default" value="CANCEL" /> -->
                             </div>
                         </div>
                     </div>

@@ -3692,7 +3692,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-<?php if($pageTitle=='Student Listing'){ ?>
+<?php if($pageTitle=='Student Listing' || $pageTitle=='Student Edit'){ ?>
 	<script type="text/javascript">
                 $(document).ready(function() {
 					var dt = $('#studentList').DataTable({
@@ -3702,7 +3702,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							{ "width": "12%", "targets": 1 },
 							{ "width": "20%", "targets": 2 },
 							{ "width": "20%", "targets": 3 },
-							{ "width": "20%", "targets": 4 }
+							{ "width": "10%", "targets": 4 }
 							
 						],
 						responsive: true,
@@ -3721,6 +3721,52 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						},
 					});
 	            });
+
+		$(document).on('click','#update_student',function(e){
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				var formData = new FormData($("#update_staudent_form")[0]);
+				var student_id =  $('#student_id').val();
+			
+				$.ajax({
+					url : "<?php echo base_url();?>update_student",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							// swal({
+							// 	title: "Examination Created!",
+							// 	//text: "",
+							// 	icon: "success",
+							// 	button: "Ok",
+							// 	},function(){ 
+									$("#popup_modal_md").hide();
+									window.location.href = "<?php echo base_url().'studentListing/'?>";
+							//});						
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						//$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
 
     </script>
 

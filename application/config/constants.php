@@ -106,7 +106,6 @@ define('TBL_EXAMINATION','tbl_examination');
 define('TBL_QUESTION_PAPER','tbl_course_question_paper');
 define('TBL_ENQUIRY_FOLLOW_UP', 'tbl_enquiry_follow_up');
 define('TBL_TOPIC_MEETING_LINK', 'tbl_topic_meeting_link');
-
 define('TBL_USERS_ENQUIRES', 'tbl_users_enquires');
 
 
