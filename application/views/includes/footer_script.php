@@ -4121,3 +4121,41 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 </script>
 <?php }  ?>
+
+
+<?php if($pageTitle=='Studnet Topic Attachment Upload Listing'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+
+			var course_id_form = $('#course_id_form').val();
+			var topic_id_form = $('#topic_id_form').val();
+			var doc_type_form = $('#doc_type_form').val();
+
+				var dt = $('#view_topic_document_document').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },
+						//{ "width": "3%", "targets": 2 },
+						//  { "width": "30%", "targets": 3 },
+						// { "width": "30%", "targets": 5 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Documents Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>studentfetchTopicDocument?type="+doc_type_form+"&topic_id="+topic_id_form+"&course_id="+course_id_form+"",
+						type: "post",
+					},
+				});
+		});
+
+   </script>
+<?php }  ?>

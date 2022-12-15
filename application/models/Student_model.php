@@ -496,6 +496,73 @@ class Student_model extends CI_Model
     }
 
 
+
+    public function studentgetFetchtopicdocumentCount($params,$topic_id,$course_id,$type){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.course_id', $course_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.topic_id', $topic_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.module_name', $type);
+        $query = $this->db->get(TBL_COURSE_TOPICS_DOCUMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    
+      }
+    
+      public function studentgetFetchtopicdocumentData($params,$topic_id,$course_id,$type){
+    
+        $access = $this->session->userdata('access');
+        $jsonstringtoArray = json_decode($access, true);
+        
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TOPICS_DOCUMENT.".file_name LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.course_id', $course_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.topic_id', $topic_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.module_name', $type);
+        $this->db->order_by(TBL_COURSE_TOPICS_DOCUMENT.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_COURSE_TOPICS_DOCUMENT);
+        $fetch_result = $query->result_array();
+    
+    
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 //$data[$counter]['file_name_original'] = $value['file_name_original'];
+                 $data[$counter]['doc_type'] = $value['doc_type'];
+                 $data[$counter]['file_url'] = "<a  href=".trim($value['file_url'])." target=_blank>".$value['file_url']."</a>";
+    
+                //  $data[$counter]['video'] ='<iframe width="100" height="100" src="'.trim($value['file_url']).'">
+                //     </iframe>';
+                 
+                 $data[$counter]['action'] = '';
+                 //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course_topic' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course Type' title='Edit Course Type'></a> |";
+                 //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='add_topic_attachment' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/attachment.png alt='Add Attachment' title='Add Attachment'></a> |";
+                 //  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Attachment' title='Add Attachment'></a> |";
+                 //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Document' title='Delete Topic Document'></a>"; 
+                
+                $counter++; 
+            }
+        }
+    
+        return $data;
+    
+      }
+    
+
  
 
 }

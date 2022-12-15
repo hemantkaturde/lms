@@ -34,7 +34,7 @@
                                 <th>File Name</th>
                                 <th>Link</th>
                                 <!-- <th>Downlaod</th> -->
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
