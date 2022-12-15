@@ -325,6 +325,22 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
                         <?php } ?>
+                        
+                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
+                        <li class="">
+                            <a href="#"><i class="sidebar-item-icon fa fa-calendar-check-o" ></i>
+                                <span class="nav-label">Attendance</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
+                        <li class="">
+                            <a href="#"><i class="sidebar-item-icon fa fa-check-square-o" ></i>
+                                <span class="nav-label">Results</span>
+                            </a>
+                        </li>
+                        <?php } ?>
 
                         <?php if (in_array("certificatemodule", $jsonstringtoArray)){?>
                         <li class="">
