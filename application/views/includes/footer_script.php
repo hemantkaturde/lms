@@ -4091,7 +4091,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='View Student Course Infromation'){ ?>
 <script type="text/javascript">
-$(document).ready(function() {	
+		var course_id =$('#course_id_1_post').val();
+
+               $(document).ready(function() {	
 					var dt = $('#view_studentcoursetopicsattAchmentList').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
@@ -4117,5 +4119,5 @@ $(document).ready(function() {
 					});
 		});
 
-
+</script>
 <?php }  ?>
