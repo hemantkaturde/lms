@@ -305,7 +305,7 @@ class Admission_model extends CI_Model
             {
                     // $data[$counter]['courseId'] = $value['courseId'];
                     $data[$counter]['course_name'] = $value['course_name'];
-                    $data[$counter]['title'] = $value['title'];
+                    $data[$counter]['title'] = $value['topic'];
                     $data[$counter]['timings'] = $value['timings'];
                     $data[$counter]['link_url'] = $value['link_url'];
                     $data[$counter]['createdDtm'] = $value['createdDtm'];
