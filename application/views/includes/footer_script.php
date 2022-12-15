@@ -3694,7 +3694,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Student Listing' || $pageTitle=='Student Edit'){ ?>
 	<script type="text/javascript">
-                $(document).ready(function() {
+            $(document).ready(function() {
 					var dt = $('#studentList').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
@@ -3720,53 +3720,131 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							type: "post",
 						},
 					});
-	            });
+	        });
 
-		$(document).on('click','#update_student',function(e){
-				e.preventDefault();
-				//$(".loader_ajax").show();
-				var formData = new FormData($("#update_staudent_form")[0]);
-				var student_id =  $('#student_id').val();
-			
-				$.ajax({
-					url : "<?php echo base_url();?>update_student",
-					type: "POST",
-					data : formData,
-					cache: false,
-					contentType: false,
-					processData: false,
-					success: function(data, textStatus, jqXHR)
-					{
-
-						var fetchResponse = $.parseJSON(data);
-						if(fetchResponse.status == "failure")
+			$(document).on('click','#update_student',function(e){
+					e.preventDefault();
+					//$(".loader_ajax").show();
+					var formData = new FormData($("#update_staudent_form")[0]);
+					var student_id =  $('#student_id').val();
+				
+					$.ajax({
+						url : "<?php echo base_url();?>update_student",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
 						{
-							$.each(fetchResponse.error, function (i, v)
+
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
 							{
-								$('.'+i+'_error').html(v);
-							});
-						}
-						else if(fetchResponse.status == 'success')
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								// swal({
+								// 	title: "Examination Created!",
+								// 	//text: "",
+								// 	icon: "success",
+								// 	button: "Ok",
+								// 	},function(){ 
+										$("#popup_modal_md").hide();
+										window.location.href = "<?php echo base_url().'studentListing/'?>";
+								//});						
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
 						{
-							// swal({
-							// 	title: "Examination Created!",
-							// 	//text: "",
-							// 	icon: "success",
-							// 	button: "Ok",
-							// 	},function(){ 
-									$("#popup_modal_md").hide();
-									window.location.href = "<?php echo base_url().'studentListing/'?>";
-							//});						
+							//$(".loader_ajax").hide();
 						}
-						
-					},
-					error: function (jqXHR, textStatus, errorThrown)
-					{
-						//$(".loader_ajax").hide();
-					}
-				});
-				return false;
-		});
+					});
+					return false;
+			});
+
+
+			$(document).on('click','.delete_student',function(e){
+			var elemF = $(this);
+
+			e.preventDefault();
+
+				// swal({
+				// 	title: "Are you sure?",
+				// 	text: "",
+				// 	type: "warning",
+				// 	showCancelButton: true,
+				// 	closeOnClickOutside: false,
+				// 	confirmButtonClass: "btn-sm btn-danger",
+				// 	confirmButtonText: "Yes, delete it!",
+				// 	cancelButtonText: "No, cancel plz!",
+				// 	closeOnConfirm: false,
+				// 	closeOnCancel: false
+				// }, function(isConfirm) {
+				// 	if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletestudent",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// if(data.status=='success'){
+											//swal("Deleted!", "", "success");
+											//location.reload();
+										//}
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){
+															
+													// swal({
+													// 	title: "Deleted!",
+													// 	text: "",
+													// 	icon: "success",
+													// 	button: "Ok",
+													// 	},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'studentListing/'?>";
+													//});	
+											}else if(obj.status=='linked'){
+													// swal({
+													// 		title: "Admission Alreday In use!",
+													// 		text: "",
+													// 		icon: "success",
+													// 		button: "Ok",
+													// 		},function(){ 
+																$("#popup_modal_sm").hide();
+																window.location.href = "<?php echo base_url().'studentListing/'?>";
+													//});	
+											}else{
+
+												// swal({
+												// 		title: "Not Deleted!",
+												// 		text: "",
+												// 		icon: "success",
+												// 		button: "Ok",
+												// 		},function(){ 
+															$("#popup_modal_sm").hide();
+															window.location.href = "<?php echo base_url().'studentListing/'?>";
+													//});	
+											}	
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+				// 			}
+				// 			else {
+				// 	swal("Cancelled", " ", "error");
+				// 	}
+				// });
+	});
+
 
     </script>
 

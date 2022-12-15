@@ -174,6 +174,24 @@
 
         }
 
+        public function deleteStudent(){
+
+            $post_submit = $this->input->post();
+            $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+            $result = $this->database->data_update('tbl_users',$enquiryInfo,'userId',$this->input->post('id'));
+
+            if ($result > 0) {
+                 echo(json_encode(array('status'=>TRUE)));
+
+                 $process = 'Delete Students';
+                 $processFunction = 'Student/deleteStudent';
+                 $this->logrecord($process,$processFunction);
+
+                }
+            else { echo(json_encode(array('status'=>FALSE))); }
+
+        }
+
     }
 
 ?>
