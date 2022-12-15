@@ -12,7 +12,8 @@
             parent::__construct();
             $this->load->model('login_model');
             $this->load->model('student_model');
-            $this->load->model('enquiry_model');
+            $this->load->model('student_model');
+            $this->load->model('course_model');
             $this->load->model('database');
             $this->load->library('form_validation');
 
@@ -229,7 +230,6 @@
 
         public function studentpaymentdetails($id){
 
-
             $process = 'Student Enquiry Payment Details';
             $processFunction = 'Student/studentpaymentdetails';
             $this->logrecord($process,$processFunction);
@@ -239,9 +239,6 @@
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
             $this->loadViews("student/student_payment_details", $this->global, $data , NULL);
-
-        
-
         }
 
 
@@ -276,6 +273,15 @@
                 );
     
             echo json_encode($json_data);
+        }
+
+        public function viewstudentscoursetopis($id){
+            $process = 'View Student Course Infromation';
+            $processFunction = 'student/viewstudentscoursetopis';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'View Student Course Infromation';
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
+            $this->loadViews("student/studentcourseattchmentlist", $this->global, $data , NULL);
         }
 
 

@@ -4087,3 +4087,35 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 </script>
 <?php } ?>
 
+
+
+<?php if($pageTitle=='View Student Course Infromation'){ ?>
+<script type="text/javascript">
+$(document).ready(function() {	
+					var dt = $('#view_studentcoursetopicsattAchmentList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "85%", "targets": 0 },
+							{ "width": "20%", "targets": 1 },
+							// { "width": "5%", "targets": 2 }
+
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Topics / Chapters Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchCourseAttchemant/"+course_id,
+							type: "post",
+						},
+					});
+		});
+
+
+<?php }  ?>
