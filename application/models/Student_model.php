@@ -250,6 +250,111 @@ class Student_model extends CI_Model
     }
 
 
+    public function getEnquiryCount($params,$userId){
+        $this->db->select('*');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+        $query = $this->db->get(TBL_ENQUIRY);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getEnquirydata($params,$userId){
+        $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+        $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_ENQUIRY);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['enq_number'] = $value['enq_number'];
+                 $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+                 $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                 $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+                 $data[$counter]['enq_email'] = $value['enq_email'];
+
+                if(!empty($value['admissionexits'])){
+                    $data[$counter]['status'] = 'Admitted';
+                }else{
+                    $data[$counter]['status'] = 'In Follow up';
+                }
+
+
+                 $course_ids    =   explode(',', $value['enq_course_id']);
+
+                 $total_fees = 0;
+                 $course_name = '';
+                 $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                        $get_course_fees =  $this->student_model->getCourseInfo($id);
+                        if($get_course_fees){
+                            
+                            $total_fees += $get_course_fees[0]->course_total_fees;
+                            $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
+                            $i++;  
+
+                        }else{
+
+                            $total_fees = '';
+                            $course_name = '';  
+                            $i++;  
+                        }
+                      
+                    }
+                 $all_course_name = trim($course_name, ', '); 
+
+                 // $data[$counter]['total_fees'] = '₹ '.$total_fees ;
+
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentpaymentdetails/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Student Payment Details' title='Student Payment Details'></a>  ";
+                                 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+    public function getCourseInfo($id){
+        $this->db->select('courseId,course_total_fees,course_name');
+        $this->db->from('tbl_course');
+        $this->db->where('tbl_course.isDeleted', 0);
+        //$this->db->where('tbl_enquiry.payment_status', 1);
+        $this->db->where('tbl_course.courseId', $id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+ 
+
 }
 
 ?>

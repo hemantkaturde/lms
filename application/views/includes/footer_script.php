@@ -3968,5 +3968,79 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 
+<?php if($pageTitle=='Student Admission and Enquiry Listing'){ ?>
+<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_enquirylist_student').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "8%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+	                 { "width": "15%", "targets": 2 },
+	                 { "width": "8%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					//  { "width": "10%", "targets": 6 },
+					 { "width": "5%", "targets": 6 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Admission/Enquiry Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchstudentadmissions",
+                    type: "post",
+	            },
+	        });
+	    });
+</script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Student Enquiry Payment Details'){ ?>
+	<script type="text/javascript">
+	$(document).on('click','.view_enquiry_tarnsaction',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var transaction_id = elemF.attr('data-id');
+			$.ajax({  
+                url:"<?php echo base_url(); ?>enquiry/get_enquiry_tarnsaction_details/"+transaction_id,  
+                method:"POST",  
+                data:{transaction_id:transaction_id},
+                dataType:"json",  
+                success:function(data)  
+                {  
+                
+                     $('#view_enquiry_tarnsaction').modal('show');
+                     $('#enquiry_number_detail').val(data[0].enquiry_number);  
+					 $('#payment_mode_detail').val(data[0].payment_mode);  
+
+					 if(data[0].razorpay_payment_id){
+						var payment_date= data[0].datetime;
+					 }else{
+						var payment_date=data[0].payment_date;
+					 }
+
+
+					 $('#manual_payment_amount_details').val(data[0].totalAmount);
+					 $('#payment_date_details').val(payment_date);
+					 $('#cheuqe_number_detials').val(data[0].cheuqe_number);  
+					 $('#bank_name_details').val(data[0].bank_name);  
+					 $('#description1').val(data[0].description);  
+					 $('#prepared_by_details').val(data[0].prepared_by); 
+                }  
+           })
+    });
+
+  </script>
+
+<?php } ?>
 
 

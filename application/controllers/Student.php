@@ -12,6 +12,7 @@
             parent::__construct();
             $this->load->model('login_model');
             $this->load->model('student_model');
+            $this->load->model('enquiry_model');
             $this->load->model('database');
             $this->load->library('form_validation');
 
@@ -192,6 +193,58 @@
             else { echo(json_encode(array('status'=>FALSE))); }
 
         }
+
+
+        public function studentadmissions(){
+            $this->global['pageTitle'] = 'Student Admission and Enquiry Listing';
+            $this->loadViews("student/student_admienq_listing", $this->global, NULL, NULL);
+        }
+
+     
+        public function fetchstudentadmissions(){
+            $params = $_REQUEST;
+            $userId =  $this->session->userdata('userId');
+            $totalRecords = $this->student_model->getEnquiryCount($params,$userId); 
+            $queryRecords = $this->student_model->getEnquirydata($params,$userId); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+        }
+    
+
+        public function studentpaymentdetails($id){
+
+
+            $process = 'Student Enquiry Payment Details';
+            $processFunction = 'Student/studentpaymentdetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Student Enquiry Payment Details';
+            $data['enquiry_id'] = $id;
+            $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+            $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
+            $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
+            $this->loadViews("student/student_payment_details", $this->global, $data , NULL);
+
+        
+
+        }
+
+        
 
     }
 

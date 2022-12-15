@@ -212,6 +212,16 @@ $route['profilesetting'] = 'admin/profilesetting';
 $route['updateprofile'] = 'admin/updateprofile';
 
 
+// Students Enquires and Srudent Listings here 
+$route['studentadmissions'] = 'student/studentadmissions';
+$route['fetchstudentadmissions'] = 'student/fetchstudentadmissions';
+$route['studentpaymentdetails/(:any)'] = 'student/studentpaymentdetails/$1';
+
+
+
+
+
+
 
 
 
