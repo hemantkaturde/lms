@@ -445,6 +445,57 @@ class Student_model extends CI_Model
         return $data;
     }
 
+
+    public function  getstudentCourseattchmentCount($params,$courseid){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE_TOPICS.".topic_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TOPICS.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
+        $query = $this->db->get(TBL_COURSE_TOPICS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function getstudentCourseattchmentdata($params,$courseid){
+        $access = $this->session->userdata('access');
+        $jsonstringtoArray = json_decode($access, true);
+        
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE_TOPICS.".topic_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE_TOPICS.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
+        $this->db->order_by(TBL_COURSE_TOPICS.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_COURSE_TOPICS);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['topic_name'] = $value['topic_name'];
+                //  $data[$counter]['remark'] = $value['remark'];
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."topicattachmentListing?topic_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='View Attachment' title='View Attachment'></a> | ";
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
  
 
 }

@@ -219,7 +219,7 @@ $route['studentpaymentdetails/(:any)'] = 'student/studentpaymentdetails/$1';
 $route['studentcourses'] = 'student/studentcourses';
 $route['fetchstudentcourse'] = "student/fetchstudentcourse";
 $route['viewstudentscoursetopis/(:any)'] = "student/viewstudentscoursetopis/$1";
-
+$route['fetchstudnetCourseAttchemant/(:any)'] = "student/fetchstudnetCourseAttchemant/$1";
 
 
 

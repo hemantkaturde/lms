@@ -285,6 +285,32 @@
         }
 
 
+        public function fetchstudnetCourseAttchemant($courseid){
+            $params = $_REQUEST;
+            $totalRecords = $this->student_model->getstudentCourseattchmentCount($params,$courseid); 
+            $queryRecords = $this->student_model->getstudentCourseattchmentdata($params,$courseid); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+        }
+
+
     }
 
 ?>
