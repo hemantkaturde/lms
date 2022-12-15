@@ -229,7 +229,6 @@ $route['fetchstudentTimetable/(:any)'] = "student/fetchstudentTimetable/$1";
 $route['studentviewtimetablelisting?(:any)'] = "student/studentviewtimetablelisting/$1";
 $route['fetchStudentTopicTimetableListing?(:any)'] = "student/fetchStudentTopicTimetableListing/$1";
 $route['addstudenttopiclinksforonlineattendant?(:any)'] = "student/addstudenttopiclinksforonlineattendant/$1";
-
 $route['fetchstudenttopicmeetinglink?(:any)'] = "student/fetchstudenttopicmeetinglink/$1";
 
 

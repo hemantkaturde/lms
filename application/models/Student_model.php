@@ -380,6 +380,24 @@ class Student_model extends CI_Model
         $jsonstringtoArray = json_decode($access, true);
         $pageUrl =$this->uri->segment(1);
 
+
+        $this->db->select('enq_course_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
+        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+        $data = array();
+        $counter = 0;
+       foreach ($fetch_result_enquiry_courses as $key => $value) {
+        
+    
+
+         $course_ids    =   explode(',', $value['enq_course_id']);
+
+         foreach ($course_ids as $key => $value) {
+           
+           
         $this->db->select('*');
         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
         if($params['search']['value'] != "") 
@@ -389,13 +407,14 @@ class Student_model extends CI_Model
             $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $this->db->where(TBL_COURSE.'.courseId', $value);
+
         $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_COURSE);
         $fetch_result = $query->result_array();
-        $data = array();
-        $counter = 0;
+       
         if(count($fetch_result) > 0)
         {
             foreach ($fetch_result as $key => $value)
@@ -442,7 +461,18 @@ class Student_model extends CI_Model
             }
         }
 
-        return $data;
+       
+
+
+
+
+         }
+
+         return $data;
+       }
+ 
+
+
     }
 
 
