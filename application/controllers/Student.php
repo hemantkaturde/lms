@@ -310,6 +310,38 @@
             echo json_encode($json_data);
         }
 
+        public function studenttopicdocumentslisting(){
+
+            $topic_id = $this->input->get('topic_id');
+            $course_id = $this->input->get('course_id');
+            $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
+
+            $data['documents'] =  $this->course_model->getDocumentcount($topic_id,$course_id);
+            $data['videos'] =  $this->course_model->getVideoscount($topic_id,$course_id);
+            $data['books'] =  $this->course_model->getBookscount($topic_id,$course_id);
+
+            $process = 'Student Topic Attachment Listing';
+            $processFunction = 'Student/studenttopicdocumentslisting';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Student Topic Attachment Listing';
+            $this->loadViews("student/studenttopicdocumentattchlisting", $this->global,$data , NULL);
+        }
+
+
+        public function studentviewalltopicdocuments(){
+            $topic_id = $this->input->get('topic_id');
+            $course_id = $this->input->get('course_id');
+            $data['course_topic_info'] =  $this->course_model->get_signle_course_topicattchment($topic_id,$course_id);
+            $data['type'] =  $this->input->get('type');
+            $data['topic_id'] =  $topic_id;
+            $data['course_id'] =  $course_id;
+            $process = 'Studnet Topic Attachment Upload Listing';
+            $processFunction = 'Course/topicattachmentListing';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Studnet Topic Attachment Upload Listing';
+            $this->loadViews("student/viewalltopicdoc", $this->global,$data , NULL);
+        }
+
 
     }
 
