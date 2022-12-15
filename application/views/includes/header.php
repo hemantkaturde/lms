@@ -418,11 +418,17 @@ $jsonstringtoArray = json_decode($access, true);
                 <?php }else{ ?>
                     <ul class="side-menu metismenu" >
 
-                   
                         <li  class="<?php if($pageUrl =='dashboard'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."dashboard"; ?>"><i
                                     class="sidebar-item-icon fa fa-th-large"></i>
                                 <span class="nav-label" >Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-address-book"></i>
+                                <span class="nav-label" >Admission / Enquiers</span>
                             </a>
                         </li>
 
@@ -435,8 +441,22 @@ $jsonstringtoArray = json_decode($access, true);
 
                         <li  class="">
                             <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-calendar-check-o"></i>
+                                <span class="nav-label" >Attendance</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
                                     class="sidebar-item-icon fa fa-graduation-cap"></i>
                                 <span class="nav-label" >Examination</span>
+                            </a>
+                        </li>
+
+                        <li  class="">
+                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                                    class="sidebar-item-icon fa fa-check-square-o"></i>
+                                <span class="nav-label" >Results</span>
                             </a>
                         </li>
 
@@ -450,7 +470,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <li  class="<?php if($pageUrl =='billinginfo'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."billinginfo"; ?>"><i
                                     class="sidebar-item-icon fa fa-inr"></i>
-                                <span class="nav-label" >Billing Info</span>
+                                <span class="nav-label">Tax Invoices</span>
                             </a>
                         </li>                   
                     </ul>

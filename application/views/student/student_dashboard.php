@@ -4,13 +4,13 @@
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php  ?></h2>
                         <div class="m-b-5">SELECTED COURSES</div><i class="fa fa-book widget-stat-icon"></i>
-                        <!-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> -->
+                         <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalcourses"
                                     href="<?php echo base_url().'courselisting'?>">Courses</a></small></div>
                     </div>
@@ -21,7 +21,7 @@
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php ; ?></h2>
                         <div class="m-b-5">ACTIVE COURSES</div><i class="fa fa-phone-square widget-stat-icon"></i>
-                        <!-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> -->
+                         <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> 
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalenquiries"
                                     href="<?php echo base_url().'enquirylisting'?>">ACTIVE COURSES</a></small></div>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php ; ?></h2>
                         <div class="m-b-5">CERTIFICATES</div><i class="fa fa-money widget-stat-icon"></i>
-                        <!-- <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div> -->
+                         <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div>
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totaladmissions"
                                     href="<?php echo base_url().'enquirylisting'?>">Total Admissions</a></small></div>
 
@@ -44,183 +44,18 @@
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php ; ?></h2>
                         <div class="m-b-5">USERS</div><i class="fa fa-users widget-stat-icon"></i>
-                        <!-- <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div> -->
+                        <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div>
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalusers"
                                     href="<?php echo base_url().'enquirylisting'?>">Total Users</a></small></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        
      
     </div>
     <!-- END PAGE CONTENT-->
-
-
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
-
-<div class="event-schedule-area-two bg-color pad100">
-    <div class="container1">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="section-title text-left">
-                    <div class="title-text">
-                        <h2>Event Schedule</h2>
-                    </div>
-                    <!-- <p>
-                        In ludus latine mea, eos paulo quaestio an. Meis possit ea sit. Vidisse molestie<br />
-                        cum te, sea lorem instructior at.
-                    </p> -->
-                </div>
-            </div>
-            <!-- /.col end-->
-        </div>
-        <!-- row end-->
-        <div class="row">
-            <div class="col-lg-8">
-
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade active show" id="home" role="tabpanel">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" scope="col">Date</th>
-                                        <!-- <th scope="col">Speakers</th> -->
-                                        <th scope="col">Session</th>
-                                        <th scope="col">Venue</th>
-                                        <th class="text-center" scope="col">Venue</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="inner-box">
-                                        <th scope="row">
-                                            <div class="event-date">
-                                                <span>16</span>
-                                                <p>Novembar</p>
-                                            </div>
-                                        </th>
-                                        <!-- <td>
-                                            <div class="event-img">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
-                                            </div>
-                                        </td> -->
-                                        <td>
-                                            <div class="event-wrap">
-                                                <h3><a href="#">English</a></h3>
-                                                <div class="meta">
-                                                    <div class="organizers">
-                                                        <a href="#">Topic Name :</a>
-                                                    </div>
-                                                    <div class="" style="margin-bottom:10px">
-                                                        <span>TEST</span>
-                                                    </div>
-                                                    <div class="time">
-                                                        <span>05:35 AM - 08:00 AM 2h 25'</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="r-no">
-                                                <span>Marathi</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="primary-btn">
-                                                <a class="btn btn-primary" href="#">JOIN</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="inner-box">
-                                        <th scope="row">
-                                            <div class="event-date">
-                                                <span>20</span>
-                                                <p>Novembar</p>
-                                            </div>
-                                        </th>
-                                        <!-- <td>
-                                            <div class="event-img">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
-                                            </div>
-                                        </td> -->
-                                        <td>
-                                            <div class="event-wrap">
-                                                <h3><a href="#">Hindi</a></h3>
-                                                <div class="meta">
-                                                    <div class="organizers">
-                                                        <a href="#">Aslan Lingker</a>
-                                                    </div>
-                                                    <div class="" style="margin-bottom:10px">
-                                                        <span>TEST</span>
-                                                    </div>
-                                                    <div class="time">
-                                                        <span>05:35 AM - 08:00 AM 2h 25'</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="r-no">
-                                                <span>Room D3</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="primary-btn">
-                                                <a class="btn btn-primary" href="#">JOIN</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="inner-box border-bottom-0">
-                                        <th scope="row">
-                                            <div class="event-date">
-                                                <span>18</span>
-                                                <p>Novembar</p>
-                                            </div>
-                                        </th>
-                                        <!-- <td>
-                                            <div class="event-img">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" />
-                                            </div>
-                                        </td> -->
-                                        <td>
-                                            <div class="event-wrap">
-                                                <h3><a href="#">Marathi</a></h3>
-                                                <div class="meta">
-                                                    <div class="organizers">
-                                                        <a href="#">Aslan Lingker</a>
-                                                    </div>
-                                                    <div class="" style="margin-bottom:10px">
-                                                        <span>TEST</span>
-                                                    </div>
-                                                    <div class="time">
-                                                        <span>05:35 AM - 08:00 AM 2h 25'</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="r-no">
-                                                <span>Room A3</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="primary-btn">
-                                                <a class="btn btn-primary" href="#">JOIN</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /col end-->
-        </div>
-        <!-- /row end-->
-    </div>
-</div>
-
 <style>
 
 /* body{margin-top:20px;}
