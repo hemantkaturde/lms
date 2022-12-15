@@ -4194,3 +4194,79 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	
 	</script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Detail Student View Timetable Listing'){ ?>
+        
+		<script type="text/javascript">
+			$(document).ready(function() {
+			var course_id_form = $('#course_id_form').val();
+			var time_table_id = $('#time_table_id').val();
+	
+				var dt = $('#view_student_time_table_topics_listing').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "15%", "targets": 1 },
+						{ "width": "50%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						// { "width": "30%", "targets": 5 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Timetable Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true, 
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchStudentTopicTimetableListing?time_table_id="+time_table_id+"&course_id="+course_id_form+"",
+						type: "post",
+					},
+				});
+			});
+		</script>
+	
+	<?php } ?>
+
+
+
+	<?php if($pageTitle=='View Student Timetable Topic Link'){ ?>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+		var course_id_form = $('#course_id_form').val();
+		var time_table_id = $('#time_table_id').val();
+		var id = $('#time_table_transection_id').val();
+
+			var dt = $('#fetchstudentmeetinglink').DataTable({
+				"columnDefs": [ 
+					{ className: "details-control", "targets": [ 0 ] },
+					{ "width": "10%", "targets": 0 },
+					{ "width": "15%", "targets": 1 },
+					{ "width": "50%", "targets": 2 },
+					{ "width": "10%", "targets": 3 },
+					// { "width": "30%", "targets": 5 }
+				],
+				responsive: true,
+				"oLanguage": {
+					"sEmptyTable": "<i>No Meeting Links Found.</i>",
+				}, 
+				"bSort" : false,
+				"bFilter":true, 
+				"bLengthChange": true,
+				"iDisplayLength": 10,   
+				"bProcessing": true,
+				"serverSide": true,
+				"ajax":{
+					url :"<?php echo base_url();?>fetchstudenttopicmeetinglink?id="+id+"&time_table_id="+time_table_id+"&course_id="+course_id_form+"",
+					type: "post",
+				},
+			});
+		});
+
+	</script>
+<?php } ?>

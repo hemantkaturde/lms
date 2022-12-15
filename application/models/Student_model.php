@@ -610,7 +610,7 @@ class Student_model extends CI_Model
              $data[$counter]['month_name'] = '<b>'.$value['month_name'].'</b>';
              $data[$counter]['action'] = '';
 
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewtimetablelisting?time_table_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='Viw TimeTable' title='Viw TimeTable'></a> ";
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentviewtimetablelisting?time_table_id=".$value['id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='Viw TimeTable' title='Viw TimeTable'></a> ";
             //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_timetable' time-table-id='".$value['id']."' course_id='".$value['course_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Time Table' title='Delete Time Table'></a>"; 
             
             $counter++; 
@@ -620,7 +620,118 @@ class Student_model extends CI_Model
     return $data;
 
   }
+
+
+  
+  public function gettstudnetimetabletopiclistingCount($params,$time_table_id,$course_id){
+
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TIMETABLE_TRANSECTIONS.".topic LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $time_table_id);
+    $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+  }
+
+  public function gettstudentimetabletopiclistingdata($params,$time_table_id,$course_id){
+
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TIMETABLE_TRANSECTIONS.".topic LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $time_table_id);
+    $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['date'] = date('d-m-Y', strtotime($value['date']));
+             $data[$counter]['timings'] = $value['timings'];
+             $data[$counter]['topic'] =  $value['topic'];
+             $data[$counter]['action'] = '';
+
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addstudenttopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>";
+
+            //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/meeting.png alt='Add Links' title='Add Links'></a>"; 
+            
+            $counter++; 
+        }
+    }
+
+    return $data;
+  }
  
+
+
+  public function getstudenttopicmeetinglinkCount($params,$time_table_id,$course_id,$time_table_transection_id){
+
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_TOPIC_MEETING_LINK.".title LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TOPIC_MEETING_LINK.".topic_name LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.isDeleted', 0);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.status', 1);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.course_id', $course_id);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_id', $time_table_id);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_transection_id', $time_table_transection_id);
+    $query = $this->db->get(TBL_TOPIC_MEETING_LINK);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
+public function getstudenttopicmeetinglinkData($params,$time_table_id,$course_id,$time_table_transection_id){
+
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_TOPIC_MEETING_LINK.".title LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_TOPIC_MEETING_LINK.".topic_name LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.isDeleted', 0);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.status', 1);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.course_id', $course_id);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_id', $time_table_id);
+    $this->db->where(TBL_TOPIC_MEETING_LINK.'.time_table_transection_id', $time_table_transection_id);
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_TOPIC_MEETING_LINK);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+            $data[$counter]['topic_name'] = $value['topic_name'];
+            $data[$counter]['timings'] =  $value['timings'];
+            $data[$counter]['link_url'] = '<a href="'.$value['link_url'].'" target="_blank">'.$value['link_url'].'</a>'; ;
+            $data[$counter]['action'] = '';
+            //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_meeting_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Meeting Link' title='Delete Topic Meeting Link'></a>"; 
+            $counter++; 
+        }
+    }
+
+    return $data;
+
+}
 
 }
 

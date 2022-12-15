@@ -414,6 +414,101 @@
         }
 
 
+
+        public function studentviewtimetablelisting(){
+
+            $time_table_id = $this->input->get('time_table_id');
+            $course_id = $this->input->get('course_id');
+            $data['time_table_id'] = $time_table_id;
+            $data['course_id'] = $course_id;
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
+            $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
+            $this->global['pageTitle'] = 'Detail Student View Timetable Listing';
+            $this->loadViews("student/studenttimelist",$this->global,$data,NULL);
+        }
+
+
+        public function fetchStudentTopicTimetableListing(){
+
+            $time_table_id = $this->input->get('time_table_id');
+            $course_id = $this->input->get('course_id');
+
+            $params = $_REQUEST;
+            $totalRecords = $this->student_model->gettstudnetimetabletopiclistingCount($params,$time_table_id,$course_id); 
+            $queryRecords = $this->student_model->gettstudentimetabletopiclistingdata($params,$time_table_id,$course_id); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+
+        }
+
+
+        public function addstudenttopiclinksforonlineattendant(){
+
+            $time_table_transection_id = $this->input->get('id');
+            $time_table_id = $this->input->get('time_table_id');
+            $course_id = $this->input->get('course_id'); 
+            $data['time_table_transection_id'] = $time_table_transection_id;
+            $data['time_table_id'] = $time_table_id;
+            $data['course_id'] = $course_id;
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
+            $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
+            $data['getTopicinfo'] = $this->course_model->getTopicinfo($data['course_id'],$data['time_table_id'],$data['time_table_transection_id']);
+            $this->global['pageTitle'] = 'View Student Timetable Topic Link';
+            $this->loadViews("student/viewstudenttopiclinks",$this->global,$data,NULL);
+
+        }
+
+
+        
+        public function fetchstudenttopicmeetinglink(){
+
+            $time_table_id = $this->input->get('time_table_id');
+            $course_id = $this->input->get('course_id');
+            $time_table_transection_id = $this->input->get('id');
+
+            $params = $_REQUEST;
+            $totalRecords = $this->student_model->getstudenttopicmeetinglinkCount($params,$time_table_id,$course_id,$time_table_transection_id); 
+            $queryRecords = $this->student_model->getstudenttopicmeetinglinkData($params,$time_table_id,$course_id,$time_table_transection_id); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+
+        }
+
+
     }
 
 ?>

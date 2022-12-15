@@ -224,11 +224,15 @@ $route['studenttopicdocumentslisting?(:any)'] = "student/studenttopicdocumentsli
 $route['studentviewalltopicdocuments?(:any)'] = "student/studentviewalltopicdocuments/$1";
 $route['studentfetchTopicDocument?(:any)'] = "student/studentfetchTopicDocument/$1";
 $route['studentfetchTopicDocument?(:any)'] = "student/studentfetchTopicDocument/$1";
-
-
 $route['studenttimetableListing/(:any)'] = "student/studenttimetableListing/$1";
-
 $route['fetchstudentTimetable/(:any)'] = "student/fetchstudentTimetable/$1";
+$route['studentviewtimetablelisting?(:any)'] = "student/studentviewtimetablelisting/$1";
+$route['fetchStudentTopicTimetableListing?(:any)'] = "student/fetchStudentTopicTimetableListing/$1";
+$route['addstudenttopiclinksforonlineattendant?(:any)'] = "student/addstudenttopiclinksforonlineattendant/$1";
+
+$route['fetchstudenttopicmeetinglink?(:any)'] = "student/fetchstudenttopicmeetinglink/$1";
+
+
 
 
 
