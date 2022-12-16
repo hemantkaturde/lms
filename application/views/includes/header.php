@@ -326,13 +326,13 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
                         
-                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
-                        <li class="">
-                            <a href="#"><i class="sidebar-item-icon fa fa-calendar-check-o" ></i>
+                       
+                        <li class="<?php if($pageUrl =='attendance'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url().'attendance'; ?>"><i class="sidebar-item-icon fa fa-calendar-check-o" ></i>
                                 <span class="nav-label">Attendance</span>
                             </a>
                         </li>
-                        <?php } ?>
+                      
 
                         <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
                         <li class="">
@@ -439,8 +439,8 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="">
-                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
+                        <li  class="<?php if($pageUrl =='studentattendance'){ echo 'active';} ?>">
+                            <a  href="<?php echo base_url()."studentattendance"; ?>"><i
                                     class="sidebar-item-icon fa fa-calendar-check-o"></i>
                                 <span class="nav-label" >Attendance</span>
                             </a>

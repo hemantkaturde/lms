@@ -212,6 +212,13 @@ $route['profilesetting'] = 'admin/profilesetting';
 $route['updateprofile'] = 'admin/updateprofile';
 
 
+
+//attendance
+$route['attendance'] = 'admin/attendance';
+$route['fetchstudentattendance'] = 'admin/fetchstudentattendance';
+
+
+
 // Students Enquires and Srudent Listings here 
 $route['studentadmissions'] = 'student/studentadmissions';
 $route['fetchstudentadmissions'] = 'student/fetchstudentadmissions';
@@ -230,6 +237,14 @@ $route['studentviewtimetablelisting?(:any)'] = "student/studentviewtimetablelist
 $route['fetchStudentTopicTimetableListing?(:any)'] = "student/fetchStudentTopicTimetableListing/$1";
 $route['addstudenttopiclinksforonlineattendant?(:any)'] = "student/addstudenttopiclinksforonlineattendant/$1";
 $route['fetchstudenttopicmeetinglink?(:any)'] = "student/fetchstudenttopicmeetinglink/$1";
+$route['attendClasses'] = "student/attendClasses";
+$route['studentattendance'] = "student/studentattendance";
+$route['fetchstudentattendancestudentpanel'] = "student/fetchstudentattendancestudentpanel";
+
+
+
+
+
 
 
 

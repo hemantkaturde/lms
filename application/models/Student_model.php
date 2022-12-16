@@ -763,6 +763,101 @@ public function getstudenttopicmeetinglinkData($params,$time_table_id,$course_id
 
 }
 
+
+public function saveAttendancedata($data){
+
+    if($this->db->insert(TBL_ATTENDANCE, $data)) {
+        return $this->db->insert_id();
+    } else {
+        return FALSE;
+    }
+    
+}
+
+
+public function checkifAttendanceaxist($data){
+        $this->db->select('*');
+        $this->db->from(TBL_ATTENDANCE);
+        $this->db->where('user_id', $data['user_id']);
+        $this->db->where('topic_id', $data['topic_id']);
+        $this->db->where('course_id', $data['course_id']);
+        $this->db->where('meeting_id', $data['meeting_id']);
+       // $this->db->where('id', $data['meeting_link']);
+        $query = $this->db->get();
+        $rowcount = $query->num_rows();
+        return $rowcount;
+}
+
+
+
+public function getstudentAttendanceCount($params,$userId){
+
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+    $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+    $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_USER.'.userId', $userId);
+    $query = $this->db->get(TBL_ATTENDANCE);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+ 
+
+public function getstudentAttendancedata($params,$userId){
+
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+    $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+    $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+    }
+    //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.userId', $userId);
+    $this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_ATTENDANCE);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+            //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+             $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
+             $data[$counter]['name'] = $value['name'];
+             $data[$counter]['course_name'] = $value['course_name'];
+             //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+             $data[$counter]['topic'] = $value['topic'];
+             $data[$counter]['timings'] = $value['timings'];
+
+             if($value['attendance_status']==1){
+                  $attendance_flag= 'Attended';
+             }
+
+             $data[$counter]['attendance_flag'] =$attendance_flag;
+
+            $counter++; 
+        }
+    }
+    return $data;
+}
+
+
 }
 
 ?>

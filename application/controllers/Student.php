@@ -506,7 +506,79 @@
 
         }
 
+        public function attendClasses(){
 
+            $post_submit = $this->input->post();
+
+            if($post_submit){
+
+                $attendance_response = array();
+
+                $data = array(
+                    'user_id'  => $this->input->post('user_id'),
+                    'topic_id' => $this->input->post('topic_id'),
+                    'course_id' => $this->input->post('course_id'),
+                    'meeting_id' => $this->input->post('meeting_id'),
+                    'meeting_link' => $this->input->post('meeting_link'),
+                    'attendance_status' => 1,
+                );
+
+                /*check if data is alreday exits */
+
+                $checkifAttendanceaxist = $this->student_model->checkifAttendanceaxist($data);
+                if($checkifAttendanceaxist > 0){
+                }else{
+                    $saveAttendancedata = $this->student_model->saveAttendancedata($data);
+
+                    if($saveAttendancedata ){
+                        $attendance_response['status'] = 'success';
+                    }else{
+                        $attendance_response['status'] = 'failure';
+                    }
+                    echo json_encode($attendance_response);
+
+                }
+            
+            }
+
+        }
+
+
+        public function studentattendance(){
+            $this->global['pageTitle'] = 'view Student Attendance';
+            $this->loadViews("student/view_student_Attendance", $this->global, NULL, NULL);
+        
+        }
+
+        public function fetchstudentattendancestudentpanel(){
+
+            $params = $_REQUEST;
+            $userId =  $this->session->userdata('userId');
+            $totalRecords = $this->student_model->getstudentAttendanceCount($params,$userId);
+            $queryRecords = $this->student_model->getstudentAttendancedata($params,$userId); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+        
+            echo json_encode($json_data);
+        
+        
+        }
+        
+    
     }
 
 ?>

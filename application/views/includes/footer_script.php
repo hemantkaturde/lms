@@ -4270,3 +4270,70 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	</script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Attendance'){ ?>
+<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_attendance').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	                 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Attendance Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchstudentattendance",
+                    type: "post",
+	            },
+	        });
+	    });
+</script>
+<?php } ?>
+
+
+<?php if($pageTitle=='view Student Attendance'){ ?>
+<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_student_attendance').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	                 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Attendance Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchstudentattendancestudentpanel",
+                    type: "post",
+	            },
+	        });
+	    });
+</script>
+<?php } ?>
