@@ -68,7 +68,7 @@ $(document).ready(function(){
 							else if(fetchResponse.status == 'success')
 							{
 								 swal({
-									title: "Attendance Suucessfully Done",
+									title: "Attendance Successfully Done",
 								    text: "",
 								 	icon: "success",
 								 	button: "Ok",

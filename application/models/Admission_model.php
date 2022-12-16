@@ -270,7 +270,7 @@ class Admission_model extends CI_Model
         $jsonstringtoArray = json_decode($access, true);
         $pageUrl =$this->uri->segment(1);
        
-
+        $current_date = date('Y-m-d');
        
         $this->db->select('enq_course_id');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
@@ -292,6 +292,7 @@ class Admission_model extends CI_Model
         $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_COURSE.'.courseId = '.TBL_TOPIC_MEETING_LINK.'.course_id');
         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
         $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
         // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
         $this->db->where(TBL_COURSE.'.courseId', $value);
 

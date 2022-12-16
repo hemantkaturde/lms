@@ -62,7 +62,7 @@
                      $all_course_name = trim($course_name, ', '); 
                             
                      echo '<p>'.$all_course_name .'</p>'; 
-                     echo '<p>'.'<b><H4 style="color: #d2ae6d;">Toal Fees</b> :'.' ₹ '.$total_fees .'</H4></p>'; 
+                     echo '<p>'.'<b><H4 style="color: #d2ae6d;">Total Fees</b> :'.' ₹ '.$total_fees .'</H4></p>'; 
                      ?></td>
                         </tr>
                     </table>

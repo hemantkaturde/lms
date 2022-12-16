@@ -527,6 +527,9 @@
 
                 $checkifAttendanceaxist = $this->student_model->checkifAttendanceaxist($data);
                 if($checkifAttendanceaxist > 0){
+
+                    $attendance_response['status'] = 'success';
+                    echo json_encode($attendance_response);
                 }else{
                     $saveAttendancedata = $this->student_model->saveAttendancedata($data);
 
