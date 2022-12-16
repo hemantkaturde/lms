@@ -240,6 +240,10 @@ $route['fetchstudenttopicmeetinglink?(:any)'] = "student/fetchstudenttopicmeetin
 $route['attendClasses'] = "student/attendClasses";
 $route['studentattendance'] = "student/studentattendance";
 $route['fetchstudentattendancestudentpanel'] = "student/fetchstudentattendancestudentpanel";
+$route['studentexamination'] = "student/studentexamination";
+
+
+
 
 
 

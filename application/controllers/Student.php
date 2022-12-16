@@ -578,6 +578,11 @@
         
         }
         
+
+        public function studentexamination(){
+            $this->global['pageTitle'] = 'Student Examination';
+            $this->loadViews("student/view_student_examination", $this->global, NULL, NULL);
+        }
     
     }
 
