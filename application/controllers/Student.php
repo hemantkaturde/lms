@@ -14,6 +14,7 @@
             $this->load->model('student_model');
             $this->load->model('student_model');
             $this->load->model('course_model');
+            $this->load->model('enquiry_model');
             $this->load->model('database');
             $this->load->library('form_validation');
 
