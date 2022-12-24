@@ -22,7 +22,12 @@
                                     <tbody>
                                             <tr>
                                                 <td style="width:20%"><b>Full Name</b></td>
-                                                <td><?=$view_admission_details[0]->name;?></td>
+                                                <td><?=$view_admission_details[0]->name;?>  <?=$view_admission_details[0]->lastname;?></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="width:20%"><b>Gender</b></td>
+                                                <td><?=$view_admission_details[0]->gender;?></td>
                                             </tr>
                                            
                                             <tr>

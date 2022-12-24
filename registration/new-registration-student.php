@@ -34,6 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     /*All post params here*/
     $enq_id = $_REQUEST["enq_id"];
     $name   = $_REQUEST["name"];
+    $lastname   = $_REQUEST["lastname"];
+    $gender   = $_REQUEST["gender"];
     $mobile = $_REQUEST["mobile"];
     $alt_mobile = $_REQUEST["alt_mobile"];
     $email = $_REQUEST["email"];
@@ -105,8 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     $source_ans=  $_REQUEST["source_ans"];
     $accept_terms =$_REQUEST["accept_terms"];
 
-    $sql = "INSERT INTO tbl_admission (enq_id,`name`, mobile, alt_mobile,email,dateofbirth,counsellor_name,`address`,city,`state`,country,pin,source_about,source_ans,accept_terms,registration_type,document_1,document_2,document_3,isDeleted) 
-                               VALUES ('$enq_id','$name','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
+    $sql = "INSERT INTO tbl_admission (enq_id,`name`,lastname,gender,mobile, alt_mobile,email,dateofbirth,counsellor_name,`address`,city,`state`,country,pin,source_about,source_ans,accept_terms,registration_type,document_1,document_2,document_3,isDeleted) 
+                               VALUES ('$enq_id','$name','$lastname','$gender','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
 
     if ($conn->query($sql) === TRUE) {
 
@@ -116,8 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
         $main_pass = 'iictn'.'@'.$year;
 
-        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,mobile,user_flag,enq_id,roleId,createdBy,isDeleted) 
-                              VALUES ('$email','$username',' $password','$name','$mobile','student','$enq_id','3','1','0')"; 
+        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,lastname,gender,mobile,user_flag,enq_id,roleId,createdBy,isDeleted) 
+                              VALUES ('$email','$username',' $password','$name','$lastname','$gender','$mobile','student','$enq_id','3','1','0')"; 
                  
             
                 if ($conn->query($sql_create_user) === TRUE) {
@@ -454,17 +456,33 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                         <label class="col-sm-12 form-control-label text-info">PERSONAL DETAILS </label>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Full Name*" Required>
+                                                placeholder="First Name*" Required>
                                             <span class="text-default">( As Required In Certificates )</span>
                                         </div>
 
-                                        <!--- <div class="col-sm-2">
+
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                                placeholder="Last Name*" Required>
+                                            <span class="text-default">( As Required In Certificates )</span>
+                                        </div>
+
+
+                                        <div class="col-sm-2">
+                                          <select id="gender" name="gender" class="form-control" Required>
+                                            <option value="">Gender</option>
+                                              <option value="Male" >Male</option>
+                                              <option value="Female">Female</option>
+                                          </select>
+                                        </div> 
+
+                                        <!-- <div class="col-sm-2">
                                           <select id="marital_status" name="marital_status" class="form-control">
                                             <option value="">Marital Status</option>
                                               <option>Married</option>
                                               <option>Single</option>
                                           </select>
-                                        </div>-->
+                                        </div> -->
 
                                         <div class="col-lg-2">
                                             <input type="number" id="mobile" name="mobile" value="" class="form-control"

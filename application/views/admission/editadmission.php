@@ -1,6 +1,8 @@
 <?php
 $admission_id = '';
 $fullname = '';
+$lastname = '';
+$gender = '';
 $enq_id= '';
 $mobile = '';
 $alt_mobile = '';
@@ -24,6 +26,8 @@ if(!empty($editDataAdmission))
         $admission_id = $rf->id;
         $enq_id = $rf->enq_id;
         $fullname = $rf->name;
+        $lastname = $rf->lastname;
+        $gender = $rf->gender;
         $mobile = $rf->mobile;
         $alt_mobile = $rf->alt_mobile;
         $email =$rf->email;
@@ -59,14 +63,34 @@ if(!empty($editDataAdmission))
                                     <div class="row col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="full_name">Full Name<span class="required">*</span></label>
+                                                <label style="text-align: left;" for="full_name">First Name<span class="required">*</span></label>
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" type="text" id="full_name1" name="full_name" placeholder="Enter Full name Name" value="<?php echo $fullname;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error full_name_error"></p>
                                                     <input type="hidden" id="admission_id" name="admission_id"  value="<?php echo $admission_id;?>">
                                                     <input type="hidden" id="enq_id" name="enq_id"  value="<?php echo $enq_id;?>">
                                                 </div>
-                                            </div>   
+                                            </div> 
+                                            
+                                            <div class="form-group">
+                                                <label style="text-align: left;" for="full_name">Last Name<span class="required">*</span></label>
+                                                <div>
+                                                    <input autocomplete="off" autocomplete="off" type="text" id="lastname" name="lastname" placeholder="Enter Last Name" value="<?php echo $lastname;?>" class="form-control col-md-12 col-xs-12">
+                                                    <p class="error lastname_error"></p>
+                                                </div>
+                                            </div>  
+
+                                            <div class="form-group">
+                                                <label style="text-align: left;" for="full_name">Gender<span class="required">*</span></label>
+                                                <div>
+                                                    <select id="gender" name="gender" class="form-control" Required>
+                                                        <option value="">Select Gender</option>
+                                                        <option value="Male" <?php if($gender=='Male'){ echo 'selected';} ?>>Male</option>
+                                                        <option value="Female" <?php if($gender=='Female'){ echo 'selected';} ?>>Female</option>
+                                                    </select>
+                                                    <p class="error gender_error"></p>
+                                                </div>
+                                            </div> 
 
                                             <div class="form-group">
                                                 <label style="text-align: left;" for="mobile_number">Mobile Number<span class="required">*</span></label>
@@ -99,19 +123,6 @@ if(!empty($editDataAdmission))
                                                     <p class="error date_of_birth_error"></p>
                                                 </div>
                                             </div> 
-
-                                            <div class="form-group">
-                                                <label style="text-align: left;" for="counsellor_name">Counsellor Name <span class="required">*</span></label>
-                                                <div>
-                                                    <select class="form-control counsellor_name" name="counsellor_name" id="counsellor_name">
-                                                    <option st-id="" value="0">Select Counsellor Name</option>
-                                                    <?php foreach ($counsellor_list_data as $key => $value) { ?>       
-                                                        <option st-id="" value="<?php echo $value['userId'] ?>" <?php if($counsellor_name==$value['userId']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
-                                                    <?php } ?>
-                                                    </select>
-                                                    <p class="error counsellor_name_error"></p>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -169,6 +180,21 @@ if(!empty($editDataAdmission))
                                                     <p class="error pin_number_error"></p>
                                                 </div>
                                             </div>  
+
+
+                                            <div class="form-group">
+                                                <label style="text-align: left;" for="counsellor_name">Counsellor Name <span class="required">*</span></label>
+                                                <div>
+                                                    <select class="form-control counsellor_name" name="counsellor_name" id="counsellor_name">
+                                                    <option st-id="" value="0">Select Counsellor Name</option>
+                                                    <?php foreach ($counsellor_list_data as $key => $value) { ?>       
+                                                        <option st-id="" value="<?php echo $value['userId'] ?>" <?php if($counsellor_name==$value['userId']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
+                                                    <?php } ?>
+                                                    </select>
+                                                    <p class="error counsellor_name_error"></p>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 

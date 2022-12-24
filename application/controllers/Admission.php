@@ -268,6 +268,8 @@
             if($post_submit){
                 $update_admission_response = array();
                 $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
+                $this->form_validation->set_rules('lastname', 'Lastname', 'trim|required');
+                $this->form_validation->set_rules('gender', 'Gender', 'trim|required');
                 $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'trim|required');
                 $this->form_validation->set_rules('email_address', 'Email Address', 'trim|required');
                 $this->form_validation->set_rules('date_of_birth', 'Date Of Birth', 'trim|required');
@@ -283,7 +285,7 @@
 
                 if($this->form_validation->run() == FALSE){
                     $update_admission_response['status'] = 'failure';
-                    $update_admission_response['error'] = array('full_name'=>strip_tags(form_error('full_name')),'mobile_number'=>strip_tags(form_error('mobile_number')),'email_address'=>strip_tags(form_error('email_address')),'date_of_birth'=>strip_tags(form_error('date_of_birth')),'counsellor_name'=>strip_tags(form_error('counsellor_name')),'permanent_address'=>strip_tags(form_error('permanent_address')),'how_did_you_know'=>strip_tags(form_error('how_did_you_know')),'how_about_us'=>strip_tags(form_error('how_about_us')),'student_photo'=>strip_tags(form_error('student_photo')),'edu_certificate'=>strip_tags(form_error('edu_certificate')),'adhar_copy'=>strip_tags(form_error('adhar_copy')));
+                    $update_admission_response['error'] = array('full_name'=>strip_tags(form_error('full_name')),'mobile_number'=>strip_tags(form_error('mobile_number')),'email_address'=>strip_tags(form_error('email_address')),'date_of_birth'=>strip_tags(form_error('date_of_birth')),'counsellor_name'=>strip_tags(form_error('counsellor_name')),'permanent_address'=>strip_tags(form_error('permanent_address')),'how_did_you_know'=>strip_tags(form_error('how_did_you_know')),'how_about_us'=>strip_tags(form_error('how_about_us')),'student_photo'=>strip_tags(form_error('student_photo')),'edu_certificate'=>strip_tags(form_error('edu_certificate')),'adhar_copy'=>strip_tags(form_error('adhar_copy')),'gender'=>strip_tags(form_error('gender')),'lastname'=>strip_tags(form_error('lastname')));
                 }else{
                     $check_uniqe  = $this->admission_model->check_unique_admission($this->input->post('full_name'),$this->input->post('admission_id'),$this->input->post('enq_id'));
                     if($check_uniqe > 0){
@@ -356,6 +358,8 @@
 
                         $data = array(
                             'name' => $this->input->post('full_name'),
+                            'lastname' => $this->input->post('lastname'),
+                            'gender' => $this->input->post('gender'),
                             'mobile'=>$this->input->post('mobile_number'),
                             'alt_mobile'=>$this->input->post('alternate_mobile_number'),
                             'email'=>$this->input->post('email_address'),
@@ -386,7 +390,7 @@
                             
                            if($updateSimilarDatainEnquiry){
                                $update_admission_response['status'] = 'success';
-                               $update_admission_response['error'] = array('full_name'=>'','mobile_number'=>'','email_address'=>'','date_of_birth'=>'','counsellor_name'=>'','permanent_address'=>'','how_did_you_know'=>'','how_about_us'=>'','adhar_copy'=>'','edu_certificate'=>'','student_photo'=>'');
+                               $update_admission_response['error'] = array('full_name'=>'','mobile_number'=>'','email_address'=>'','date_of_birth'=>'','counsellor_name'=>'','permanent_address'=>'','how_did_you_know'=>'','how_about_us'=>'','adhar_copy'=>'','edu_certificate'=>'','student_photo'=>'','lastname'=>'','gender'=>'');
                            }
                         }
 
