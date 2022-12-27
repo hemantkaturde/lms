@@ -12,6 +12,7 @@ $enq_email  = '';
 $alternet_email  = '';
 $enq_course_id  = '';
 $remark  = '';
+$counsellor_id ='';
 
 if(!empty($editDataenquiry))
 {
@@ -32,6 +33,8 @@ if(!empty($editDataenquiry))
         $remark  =  $rf->enq_remark;
         $doctor_non_doctor	  =  $rf->doctor_non_doctor;
         $enq_city	  =  $rf->enq_city;
+        $counsellor_id =  $rf->counsellor_id;
+
     }
 }
 
@@ -229,6 +232,20 @@ if(!empty($editDataenquiry))
                                                     <p class="error city_error"></p>
                                                 </div>
                                             </div>
+
+
+                                            <div class="form-group">
+                                            <label style="text-align: left;"  for="counsellor">Counsellor Name <span class="required">*</span></label>
+                                            <div >
+                                                <select class="form-control" name="counsellor" id="counsellor">
+                                                    <option st-id="" value="">Select Counsellor</option>
+                                                    <?php foreach ($counseller_Name as $key => $value) {?>
+                                                    <option value="<?php echo $value['userId']; ?>" <?php if($counsellor_id==$value['userId']){ echo 'selected';} ?> ><?php echo $value['name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <p class="error counsellor_error"></p>       
+                                            </div>
+                                        </div>
 
                                         </div>
                                     </div>

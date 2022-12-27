@@ -79,6 +79,30 @@ class Comman_model extends CI_Model
         }
 
 
+        public function getCounsellerList()
+        {
+            // $this->db->select('*');
+            // $this->db->join('tbl_roles as Type', 'tbl_users.userId = tbl_roles.roleId');
+            // $this->db->where('tbl_users.isDeleted', 0);
+            // $this->db->where('tbl_roles.role','Counsellor');
+            // $this->db->order_by('tbl_users.name','ASC');
+            // $query_result = $this->db->get('tbl_users')->result_array();
+            // return $query_result;
+
+            $this->db->select('BaseTbl.userId,BaseTbl.name');
+            $this->db->from('tbl_users as BaseTbl');
+            $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId');
+            $this->db->where('BaseTbl.isDeleted', 0);
+            $this->db->where('Role.role', 'Counsellor');
+            $this->db->order_by('BaseTbl.name','ASC');
+            // $this->db->limit($page, $segment);
+            $query = $this->db->get();
+            
+            $result = $query->result_array();        
+            return $result;
+        }
+
+
 
 }
 

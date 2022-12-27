@@ -234,6 +234,20 @@
                      </div>
                    </div>
 
+
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="counsellor">Counsellor Name <span class="required">*</span></label>
+                     <div >
+                        <select class="form-control" name="counsellor" id="counsellor">
+                            <option st-id="" value="">Select Counsellor</option>
+                            <?php foreach ($counseller_Name as $key => $value) {?>
+                               <option value="<?php echo $value['userId']; ?>"><?php echo $value['name']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <p class="error counsellor_error"></p>       
+                     </div>
+                   </div>
+
                    <!-- <div class="form-group">
                      <label style="text-align: left;" for="remarks">Remarks
                      </label>
