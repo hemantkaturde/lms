@@ -276,6 +276,79 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
 
+                        <?php if (in_array("enquirymodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup' || $pageUrl=='payment_details'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."enquirylisting"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
+                                <span class="nav-label">Inquiry / Leads</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+                        <?php if (in_array("taxinvoicemodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='taxinvoices'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url().'taxinvoices'; ?>"><i class="sidebar-item-icon fa fa-inr" ></i>
+                                <span class="nav-label">Tax Invoices</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+                        
+                        <?php if (in_array("admissionmodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='admissionListing' || $pageUrl =='viewadmissiondetails' || $pageUrl=="editadmission"){ echo 'active';} ?>">
+                            <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap" ></i>
+                                <span class="nav-label">Admission</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+
+                        <li class="<?php if($pageUrl =='attendance'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url().'attendance'; ?>"><i class="sidebar-item-icon fa fa-calendar-check-o" ></i>
+                                <span class="nav-label">Attendance</span>
+                            </a>
+                        </li>
+
+                        
+                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url().'examinationlisting'; ?>"><i class="sidebar-item-icon fa fa fa-pencil" ></i>
+                                <span class="nav-label">Examination</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+
+                        
+                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
+                        <li class="">
+                            <a href="#"><i class="sidebar-item-icon fa fa-check-square-o" ></i>
+                                <span class="nav-label">Results</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+
+                        <?php if (in_array("certificatemodule", $jsonstringtoArray)){?>
+                        <li class="">
+                            <a href=""><i class="sidebar-item-icon fa fa-file-text" ></i>
+                                <span class="nav-label">Certificates</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+                        
+                        
+                        <?php if (in_array("studentmodule", $jsonstringtoArray)){?>
+                        <li>
+                            <li class="<?php if($pageUrl =='studentListing' || $pageUrl =='editstudent'){ echo 'active';} ?>">
+                                <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
+                                    <span class="nav-label">Students</span>
+                                </a>
+                            </li>
+                        </li>
+                        <?php } ?>
+                        
+                       
+
                         <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
                         <li class="treeview <?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>" style="height: auto; " >
                             <a href="#">
@@ -302,72 +375,7 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
 
-                        <?php if (in_array("enquirymodule", $jsonstringtoArray)){?>
-                        <li class="<?php if($pageUrl =='enquirylisting' || $pageUrl =='editenquiry' || $pageUrl =='followup' || $pageUrl=='payment_details'){ echo 'active';} ?>">
-                            <a href="<?php echo base_url()."enquirylisting"; ?>"><i class="sidebar-item-icon fa fa-address-book" ></i>
-                                <span class="nav-label">Inquiry / Leads</span>
-                            </a>
-                        </li>
-                        <?php } ?>
-
-                        <?php if (in_array("admissionmodule", $jsonstringtoArray)){?>
-                        <li class="<?php if($pageUrl =='admissionListing' || $pageUrl =='viewadmissiondetails' || $pageUrl=="editadmission"){ echo 'active';} ?>">
-                            <a href="<?php echo base_url().'admissionListing'; ?>"><i class="sidebar-item-icon fa fa-graduation-cap" ></i>
-                                <span class="nav-label">Admission</span>
-                            </a>
-                        </li>
-                        <?php } ?>
-
-                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
-                        <li class="<?php if($pageUrl =='examinationlisting' || $pageUrl =='viewquestionpaper'){ echo 'active';} ?>">
-                            <a href="<?php echo base_url().'examinationlisting'; ?>"><i class="sidebar-item-icon fa fa fa-pencil" ></i>
-                                <span class="nav-label">Examination</span>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        
-                       
-                        <li class="<?php if($pageUrl =='attendance'){ echo 'active';} ?>">
-                            <a href="<?php echo base_url().'attendance'; ?>"><i class="sidebar-item-icon fa fa-calendar-check-o" ></i>
-                                <span class="nav-label">Attendance</span>
-                            </a>
-                        </li>
-                      
-
-                        <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
-                        <li class="">
-                            <a href="#"><i class="sidebar-item-icon fa fa-check-square-o" ></i>
-                                <span class="nav-label">Results</span>
-                            </a>
-                        </li>
-                        <?php } ?>
-
-                        <?php if (in_array("certificatemodule", $jsonstringtoArray)){?>
-                        <li class="">
-                            <a href=""><i class="sidebar-item-icon fa fa-file-text" ></i>
-                                <span class="nav-label">Certificates</span>
-                            </a>
-                        </li>
-                        <?php } ?>
-
-                        <?php if (in_array("taxinvoicemodule", $jsonstringtoArray)){?>
-                        <li class="<?php if($pageUrl =='taxinvoices'){ echo 'active';} ?>">
-                            <a href="<?php echo base_url().'taxinvoices'; ?>"><i class="sidebar-item-icon fa fa-inr" ></i>
-                                <span class="nav-label">Tax Invoices</span>
-                            </a>
-                        </li>
-                        <?php } ?>
-
-                        <?php if (in_array("studentmodule", $jsonstringtoArray)){?>
-                        <li>
-                            <li class="<?php if($pageUrl =='studentListing' || $pageUrl =='editstudent'){ echo 'active';} ?>">
-                                <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
-                                    <span class="nav-label">Students</span>
-                                </a>
-                            </li>
-                        </li>
-                        <?php } ?>
-                        
+                    
                         <!-- <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                             <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
