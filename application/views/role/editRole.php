@@ -36,13 +36,13 @@ if(!empty($roleInfo))
                             <div class="col-md-4">
                                 <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Edit Role</h3>
+                            <h3 class="box-title">Edit Page Access</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
                             <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="role">Role</label>
+                                        <label for="role">Page Access</label>
                                         <input type="text" class="form-control" id="role" name="role" value="<?php echo $role; ?>"
                                             maxlength="255">
                                         <input type="hidden" name="roleId" id="roleId" value="<?php echo $roleId ?>">
@@ -51,7 +51,7 @@ if(!empty($roleInfo))
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="discription">Role Type</label><br/>
+                                        <label for="discription">Page Access Type</label><br/>
                                                 <div class="form-check form-check-inline mr-5 ml-5">
                                                     <input class="form-check-input" type="radio" name="roletype" id="roletypesystem" value="system" <?php if($role_type=='system'){ echo 'checked';}?>>
                                                     System
@@ -65,7 +65,7 @@ if(!empty($roleInfo))
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="discription">Role Description</label>
+                                        <label for="discription">Page Access Description</label>
                                         <textarea type="text" class="form-control" id="discription" value="<?php echo $discription; ?>" name="discription"><?php echo $discription; ?></textarea>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@ if(!empty($roleInfo))
                             <div class="col-md-8">
                                  <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Assign Roles</h3>
+                            <h3 class="box-title">Assign Page Access</h3>
                         </div>
                         <div class="box-body">
                              <table class="table table-bordered" >
@@ -122,7 +122,7 @@ if(!empty($roleInfo))
                                             </tr>
 
                                             <tr>
-                                                <td>&nbsp&nbsp&nbsp&nbsp Course Type</td>
+                                                <td>&nbsp&nbsp&nbsp&nbsp Certificate Type</td>
                                                 <td><input type="checkbox" id="coursetypemodule" name="checkbox[]" value="coursetypemodule" <?php if(in_array("coursetypemodule", json_decode($access))){ echo 'checked'; } ?>></td>
                                                 <td><input type="checkbox" id="coursetypepage" name="checkbox[]" value="coursetypepage" <?php if(in_array("coursetypepage", json_decode($access))){ echo 'checked'; } ?>></td>
                                                 <td><input type="checkbox" id="coursetypeadd" name="checkbox[]" value="coursetypeadd" <?php if(in_array("coursetypeadd", json_decode($access))){ echo 'checked'; } ?>></td>

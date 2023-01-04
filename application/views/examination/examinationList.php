@@ -70,7 +70,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <label style="text-align: left;" for="course_name">Select Course Course<span
                                 class="required">*</span></label>
                         <select class="form-control" id="course_name" name="course_name">
-                            <option value="">Select Course Type</option>
+                            <option value="">Select Certificate Type</option>
                             <?php foreach ($course_name as $key => $value) { ?>
                             <option value="<?php echo $value->courseId; ?>"><?php echo ucwords($value->course_name); ?>
                             </option>
@@ -106,7 +106,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 class="required">*</span></label>
                         <div>
                             <select class="form-control" id="examination_status" name="examination_status">
-                                <option value="">Select Course Type</option>
+                                <option value="">Select Certificate Type</option>
                                 <option value="1">Active</option>
                                 <option value="0">In-Active</option>
                             </select>
@@ -147,7 +147,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <label style="text-align: left;" for="course_name">Select Course Course<span
                                 class="required">*</span></label>
                         <select class="form-control" id="course_name1" name="course_name">
-                            <option value="">Select Course Type</option>
+                            <option value="">Select Certificate Type</option>
                             <?php foreach ($course_name as $key => $value) { ?>
                             <option value="<?php echo $value->courseId; ?>"><?php echo ucwords($value->course_name); ?>
                             </option>
@@ -184,7 +184,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 class="required">*</span></label>
                         <div>
                             <select class="form-control" id="examination_status1" name="examination_status">
-                                <option value="">Select Course Type</option>
+                                <option value="">Select Certificate Type</option>
                                 <option value="1">Active</option>
                                 <option value="0">In-Active</option>
                             </select>

@@ -4,7 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Add Role</div>
+                <div class="ibox-title">Add Page Access</div>
             </div>
             <div class="ibox-body">
                 <form class="form-horizontal" id="role_form">
@@ -19,13 +19,13 @@
                         <div class="col-md-4">
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Add Role</h3>
+                                    <h3 class="box-title">Add Page Access</h3>
                                 </div>
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="role">Role</label>
+                                                <label for="role">Page Access</label>
                                                 <input type="text" class="form-control" id="role" name="role" placeholder="Eg. Manager" maxlength="255" required>
                                                 <p class="error role_error"></p>
 
@@ -34,7 +34,7 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="discription">Role Type</label><br />
+                                                <label for="discription">Page Access Type</label><br />
                                                 <div class="form-check form-check-inline mr-5 ml-5">
                                                     <input class="form-check-input" type="radio" name="roletype" id="roletypesystem" value="system" checked> System / Staff
                                                 </div>
@@ -47,7 +47,7 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="discription">Role Description</label>
+                                                <label for="discription">Page Access Description</label>
                                                 <textarea type="text" class="form-control" id="discription" name="discription" placeholder="Enter Role Description"></textarea>
                                                 <p class="error discription_error"></p>
                                             </div>
@@ -59,7 +59,7 @@
                         <div class="col-md-8">
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Assign Roles</h3>
+                                    <h3 class="box-title">Assign Page Access</h3>
                                 </div>
 
                                 <p class="error checkbox_error"></p>
@@ -96,7 +96,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td>&nbsp&nbsp&nbsp&nbsp Course Type</td>
+                                                <td>&nbsp&nbsp&nbsp&nbsp Certificate Type</td>
                                                 <td><input type="checkbox" id="coursetypemodule" name="checkbox[]" value="coursetypemodule"></td>
                                                 <td><input type="checkbox" id="coursetypepage" name="checkbox[]" value="coursetypepage"></td>
                                                 <td><input type="checkbox" id="coursetypeadd" name="checkbox[]" value="coursetypeadd"></td>

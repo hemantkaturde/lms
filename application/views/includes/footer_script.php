@@ -865,7 +865,7 @@
 </script> 
 <?php } ?>
 
-<?php if($pageTitle=='Course Type'){?>
+<?php if($pageTitle=='Certificate Type'){?>
  <script type="text/javascript">
 	    $(document).ready(function() {
 				var dt = $('#view_coursetypelist').DataTable({
@@ -917,7 +917,7 @@
 					else if(fetchResponse.status == 'success')
 				    {
 						// swal({
-						// 	title: "Course Type Created!",
+						// 	title: "Certificate Type Created!",
 						// 	//text: "",
 						// 	icon: "success",
 						// 	button: "Ok",
@@ -1024,7 +1024,7 @@
 										success: function(data, textStatus, jqXHR)
 										{
 											// if(data.status=='success'){
-												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// swal("Deleted!", "Certificate Type has been deleted.", "success");
 												// location.reload();
 											//}
 											const obj = JSON.parse(data);
@@ -1683,7 +1683,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 										success: function(data, textStatus, jqXHR)
 										{
 											// if(data.status=='success'){
-												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// swal("Deleted!", "Certificate Type has been deleted.", "success");
 												// location.reload();
 											//}
 											const obj = JSON.parse(data);
@@ -2141,7 +2141,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 										success: function(data, textStatus, jqXHR)
 										{
 											// if(data.status=='success'){
-												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// swal("Deleted!", "Certificate Type has been deleted.", "success");
 												// location.reload();
 											//}
 											const obj = JSON.parse(data);
@@ -2360,7 +2360,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									{
 										const obj = JSON.parse(data);
 										if(obj.status=='success'){
-											//swal("Deleted!", "Course Type has been deleted.", "success");
+											//swal("Deleted!", "Certificate Type has been deleted.", "success");
 											//location.reload();
 											window.location.href = "<?php echo base_url().'addchapters/'?>"+course_id;
 
@@ -2513,7 +2513,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 										success: function(data, textStatus, jqXHR)
 										{
 											// if(data.status=='success'){
-												// swal("Deleted!", "Course Type has been deleted.", "success");
+												// swal("Deleted!", "Certificate Type has been deleted.", "success");
 												// location.reload();
 											//}
 											const obj = JSON.parse(data);
@@ -2619,7 +2619,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 								success: function(data, textStatus, jqXHR)
 								{
 									// if(data.status=='success'){
-										// swal("Deleted!", "Course Type has been deleted.", "success");
+										// swal("Deleted!", "Certificate Type has been deleted.", "success");
 										// location.reload();
 									//}
 									const obj = JSON.parse(data);
@@ -2653,7 +2653,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							})
 			// 			}
 			// 			else {
-			// 	swal("Cancelled", "Course Type deletion cancelled ", "error");
+			// 	swal("Cancelled", "Certificate Type deletion cancelled ", "error");
 			// 	}
 			// });
 		});

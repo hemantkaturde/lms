@@ -13,7 +13,7 @@ $jsonstringtoArray = json_decode($access, true);
                 <!-- </div> -->
                 <div>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseType">
-                        <i class="fa fa-plus"></i> Add Course Type
+                        <i class="fa fa-plus"></i> Add Certificate Type
                     </button>
 
                     <button type="button" class="btn btn-primary">
@@ -21,14 +21,14 @@ $jsonstringtoArray = json_decode($access, true);
                     </button>
                 </div>
 
-                <div class="ibox-title">Course Type Management</div>
+                <div class="ibox-title">Certificate Type Management</div>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
                     <table id="view_coursetypelist" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Course Type Name</th>
+                                <th>Certificate Type Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,7 +48,7 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#d2ae6d">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Course Type</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Certificate Type</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -62,12 +62,12 @@ $jsonstringtoArray = json_decode($access, true);
                         <div class="row col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="course_type_name">Course Type<span
+                                    <label style="text-align: left;" for="course_type_name">Certificate Type<span
                                             class="required">*</span>
                                     </label>
                                     <div>
                                         <input autocomplete="off" autocomplete="off" type="text" id="course_type_name"
-                                            name="course_type_name" placeholder="Enter Course Type"
+                                            name="course_type_name" placeholder="Enter Certificate Type"
                                             class="form-control col-md-12 col-xs-12">
                                         <p class="error course_type_name_error"></p>
                                     </div>
@@ -92,7 +92,7 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#d2ae6d">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Course Type</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Certificate Type</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,16 +106,16 @@ $jsonstringtoArray = json_decode($access, true);
                         <div class="row col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="course_type_name">Course Type<span
+                                    <label style="text-align: left;" for="course_type_name">Certificate Type<span
                                             class="required">*</span>
                                     </label>
                                     <div>
                                         <input autocomplete="off" autocomplete="off" type="text" id="course_type_name_1"
-                                            name="course_type_name_1" placeholder="Enter Course Type"
+                                            name="course_type_name_1" placeholder="Enter Certificate Type"
                                             class="form-control col-md-12 col-xs-12">
                                         <p class="error course_type_name_1_error"></p>
                                         <input autocomplete="off" autocomplete="off" type="hidden" id="coursetype_id"
-                                            name="coursetype_id" placeholder="Enter Course Type"
+                                            name="coursetype_id" placeholder="Enter Certificate Type"
                                             class="form-control col-md-12 col-xs-12">
                                     </div>
                                 </div>

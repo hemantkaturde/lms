@@ -147,7 +147,7 @@
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
-                $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('course_type', 'Certificate Type', 'trim|required');
                 //$this->form_validation->set_rules('description', 'Description', 'trim');
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
@@ -267,7 +267,7 @@
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
-                $this->form_validation->set_rules('course_type', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('course_type', 'Certificate Type', 'trim|required');
                 //$this->form_validation->set_rules('description', 'Description', 'trim');
                 $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
                 $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
@@ -348,10 +348,10 @@
 
         public function courseTypeListing()
         {
-            $process = 'Course Type Listing';
+            $process = 'Certificate Type Listing';
             $processFunction = 'Course/courseTypeListing';
             $this->logrecord($process,$processFunction);
-            $this->global['pageTitle'] = 'Course Type';
+            $this->global['pageTitle'] = 'Certificate Type';
             $this->loadViews("course/courseType", $this->global, NULL , NULL);
         }
 
@@ -389,7 +389,7 @@
                 $data = array(
                     'ct_name' => $this->input->post('course_type_name'),
                 );
-                $this->form_validation->set_rules('course_type_name', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('course_type_name', 'Certificate Type', 'trim|required');
 
                 if($this->form_validation->run() == FALSE){
 
@@ -402,7 +402,7 @@
 
                        if($check_uniqe){
                            $createcoursetype_response['status'] = 'failure';
-                           $createcoursetype_response['error'] = array('course_type_name'=>'Course Type Already Exist');
+                           $createcoursetype_response['error'] = array('course_type_name'=>'Certificate Type Already Exist');
                        }else{
                            $saveCoursetypedata = $this->course_model->saveCoursetypedata('',$data);
                            if($saveCoursetypedata){
@@ -461,7 +461,7 @@
                     'ct_name' => $this->input->post('course_type_name_1')
                 );
 
-                $this->form_validation->set_rules('course_type_name_1', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('course_type_name_1', 'Certificate Type', 'trim|required');
 
                 if($this->form_validation->run() == FALSE){
                     $update_response['status'] = 'failure';
@@ -480,7 +480,7 @@
                     
                     if($check_uniqe){
                         $update_response['status'] = 'failure';
-                        $update_response['error'] = array('course_type_name_1'=>'Course Type Already Exist');
+                        $update_response['error'] = array('course_type_name_1'=>'Certificate Type Already Exist');
                     }else{
                         $saveCoursetypedata = $this->course_model->saveCoursetypedata($coursetypeid,$data);
                         if($saveCoursetypedata){
@@ -539,7 +539,7 @@
                     'remark' => $this->input->post('remark'),
                 );
 
-                $this->form_validation->set_rules('topic_name', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('topic_name', 'Certificate Type', 'trim|required');
                 $this->form_validation->set_rules('remark', 'Remark', 'trim');
 
                 if($this->form_validation->run() == FALSE){
@@ -594,7 +594,7 @@
                     'remark' => $this->input->post('remark_1'),
                 );
 
-                $this->form_validation->set_rules('topic_name_1', 'Course Type', 'trim|required');
+                $this->form_validation->set_rules('topic_name_1', 'Certificate Type', 'trim|required');
                 $this->form_validation->set_rules('remark_1', 'Remark', 'trim');
 
                 if($this->form_validation->run() == FALSE){
@@ -1354,7 +1354,7 @@
 
                         // if($check_uniqe){
                         //     $savecoursetopic_response['status'] = 'failure';
-                        //     $savecoursetopic_response['error'] = array('course_type_name'=>'Course Type Already Exist');
+                        //     $savecoursetopic_response['error'] = array('course_type_name'=>'Certificate Type Already Exist');
                         // }else{
                             $saveCoursetypedata = $this->course_model->saveTimetablemeetinglinkdata('',$data);
                             if($saveCoursetypedata){

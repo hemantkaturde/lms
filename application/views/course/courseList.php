@@ -30,7 +30,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <thead>
                             <tr>
                                 <th>Course Name</th>
-                                <th>Course Type</th>
+                                <th>Certificate Type</th>
                                 <th>Course Fees</th>
                                 <th>Course Mode</th>
                                 <th>Course Books</th>
@@ -83,10 +83,10 @@ $jsonstringtoArray = json_decode($access, true);
                   </div> -->
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="course_type">Course Type<span class="required">*</span>
+                     <label style="text-align: left;"  for="course_type">Certificate Type<span class="required">*</span>
                      </label>
                          <select class="form-control" id="course_type" name="course_type">
-                           <option value="">Select Course Type</option>
+                           <option value="">Select Certificate Type</option>
                            <?php foreach ($course_type as $key => $value) { ?>
                            <option value="<?php echo $value->ct_id; ?>"><?php echo ucwords($value->ct_name); ?></option>
                            <?php } ?>
@@ -245,10 +245,10 @@ $jsonstringtoArray = json_decode($access, true);
                   -->
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="course_type">Course Type<span class="required">*</span>
+                     <label style="text-align: left;"  for="course_type">Certificate Type<span class="required">*</span>
                      </label>
                          <select class="form-control" id="course_type1" name="course_type">
-                           <option value="">Select Course Type</option>
+                           <option value="">Select Certificate Type</option>
                            <?php foreach ($course_type as $key => $value) { ?>
                            <option value="<?php echo $value->ct_id; ?>"><?php echo ucwords($value->ct_name); ?></option>
                            <?php } ?>

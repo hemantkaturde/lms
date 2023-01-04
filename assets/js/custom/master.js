@@ -201,12 +201,12 @@ jQuery(document).ready(function(){
 			 },
 			 success: function(data) {
 				  $("#"+id).remove();
-				  swal("Deleted!", "Course Type has been deleted.", "success");
+				  swal("Deleted!", "Certificate Type has been deleted.", "success");
 			 }
 		  });
 		}
 		else {
-			swal("Cancelled", "Course Type deletion cancelled ", "error");
+			swal("Cancelled", "Certificate Type deletion cancelled ", "error");
 		  }
 	  });
 	});
@@ -729,9 +729,9 @@ function courses(id)
 	        data += '</div>';
 
 			data += '<div class="form-group col-md-12 mb-3">';
-	            data += '<label>Course Type</label>';
-				data += '<select class="form-control select2_demo_1 required" id="course_type_id" name="course_type_id" placeholder="Select Course Type" required="" multiple>';
-	            	data += '<option value="">Choose Course Type</option>';
+	            data += '<label>Certificate Type</label>';
+				data += '<select class="form-control select2_demo_1 required" id="course_type_id" name="course_type_id" placeholder="Select Certificate Type" required="" multiple>';
+	            	data += '<option value="">Choose Certificate Type</option>';
 	            	$.each(resp['courseTypeInfo'], (index, value) => {
             			data += '<option value="'+value['ct_id']+'">'+value['ct_name'] +'</option>';                        
         			});
@@ -1017,7 +1017,7 @@ function add_link(linkId, id)
 	}
 }
 
-// ====== Course Type
+// ====== Certificate Type
 function course_type(id)
 {
     	//console.log(resp);
@@ -1027,7 +1027,7 @@ function course_type(id)
 	    data += '<div class="row m-2">';
 	    	data += '<div class="form-group col-md-12 mb-3">';
 	    		data += '<label>Course Name <span style="color:red">*</span></label>';
-	    		data += '<input type="text" class="form-control" id="ct_name" name="ct_name" maxlength="128" placeholder="Enter Course Type Here" required>';
+	    		data += '<input type="text" class="form-control" id="ct_name" name="ct_name" maxlength="128" placeholder="Enter Certificate Type Here" required>';
 	   		data += '</div>';
 	        data += '<div class="col-md-12">';
 			if (id == 0) {
@@ -1043,7 +1043,7 @@ function course_type(id)
 
 	    $(".modal-body-sm").html(data);
 	    if(id == 0){
-            $(".modal-title-sm").html("ADD COURSE TYPE");
+            $(".modal-title-sm").html("ADD Certificate Type");
         }
         else
         {
@@ -1059,7 +1059,7 @@ function course_type(id)
                 console.log(errmsg);
             });
 
-            $(".modal-title-sm").html("UPDATE COURSE TYPE");
+            $(".modal-title-sm").html("UPDATE Certificate Type");
         }
 	    $("#popup_modal_sm").modal('show');
 }
@@ -1069,7 +1069,7 @@ function add_course_type(id)
 	var check = 1;
 	if($("#ct_name").val()=="")
 	{
-		var msg = 'Please Enter Course Type Name';
+		var msg = 'Please Enter Certificate Type Name';
 		check = 0;		
 	}else
 	{
@@ -1100,7 +1100,7 @@ function add_course_type(id)
 					if(id == 0)
 					{
 						swal({
-							title: "Course Type Created!",
+							title: "Certificate Type Created!",
 							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",
@@ -1113,7 +1113,7 @@ function add_course_type(id)
 					else
 					{
 						swal({
-							title: "Course Type updated!",
+							title: "Certificate Type updated!",
 							text: "Success message sent!!",
 							icon: "success",
 							button: "Ok",

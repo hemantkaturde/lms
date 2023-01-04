@@ -312,7 +312,7 @@
                                     <label style="text-align: left;"  for="payment_mode">Payment Mode<span class="required">*</span>
                                     </label>
                                         <select class="form-control" id="payment_mode" name="payment_mode">
-                                                <option value="">Select Course Type</option>
+                                                <option value="">Select Certificate Type</option>
                                                 <option value="NEFT">NEFT</option>
                                                 <option value="IMPS">IMPS</option>
                                                 <option value="RTGS">RTGS</option>

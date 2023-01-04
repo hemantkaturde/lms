@@ -9,7 +9,7 @@
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmailSMTP">
-                    <i class="fa fa-plus"></i> Add Course Type
+                    <i class="fa fa-plus"></i> Add Certificate Type
                 </button>
             </div>
             <div class="ibox-body">

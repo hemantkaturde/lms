@@ -4,7 +4,7 @@
         <div class="ibox">
             <div class="ibox-head">
                 <div>
-                   <a class="btn btn-primary text-white" href="<?php echo base_url(); ?>addRole"><i class="fa fa-plus"></i> Add Role</a>
+                   <a class="btn btn-primary text-white" href="<?php echo base_url(); ?>addRole"><i class="fa fa-plus"></i> Add Page Access</a>
 
                    <button type="button" class="btn btn-primary">
                         <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
@@ -12,7 +12,7 @@
 
                 </div>
 
-                <div class="ibox-title">Role Management</div>
+                <div class="ibox-title">Page Access Management</div>
                 <!-- <div class="ibox-tools"> -->
                 <!-- <a class="ibox-collapse"><i class="fa fa-minus"></i></a> -->
                 <!-- </div> -->
@@ -25,7 +25,7 @@
                     <table id="view_roleList" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Role</th>
+                                <th>Page Access</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>

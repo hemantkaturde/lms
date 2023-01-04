@@ -26,7 +26,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Username</th>
-                                <th>Phone number</th>
+                                <th>Mobile No</th>
                                 <th>Role</th>
                                 <th>Action</th>
                             </tr>
@@ -118,7 +118,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="mobile">Telephone No<span
+                                    <label style="text-align: left;" for="mobile">Mobile No<span
                                             class="required">*</span>
                                     </label>
                                     <div>
@@ -242,7 +242,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="mobile1">Telephone No<span
+                                    <label style="text-align: left;" for="mobile1">Mobile No<span
                                             class="required">*</span>
                                     </label>
                                     <div>

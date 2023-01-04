@@ -348,8 +348,16 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
                         
                        
+                        <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' || $pageUrl =='addcourseListing' ||  $pageUrl =='topicattachmentListing' || $pageUrl=="viewalltopicdocuments" || $pageUrl=="timetableListing" || $pageUrl=="viewtimetablelisting" || $pageUrl=="addtopiclinksforonlineattendant"){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."courselisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
+                                <span class="nav-label">Courses</span>
+                            </a>
+                        </li>
+                        <?php } ?>
 
-                        <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
+
+                        <!-- <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
                         <li class="treeview <?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>" style="height: auto; " >
                             <a href="#">
                                 <i class="sidebar-item-icon fa fa-th-list" ></i> <span class="group-master">Masters</span>
@@ -359,21 +367,23 @@ $jsonstringtoArray = json_decode($access, true);
                             <ul class="treeview-menu">
                                 <li class="<?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>">
                                     <a href="<?php echo base_url()."coursetypelisting"; ?>"><i class="sidebar-item-icon fa fa-file" ></i>
-                                        <span class="nav-label" >Course Type</span>
+                                        <span class="nav-label" >Certificate Type</span>
                                     </a>
                                 </li>
                             </ul>
                             <?php } ?>
                         </li>
-                        <?php } ?>
+                        <?php } ?> -->
 
-                        <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
-                        <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' || $pageUrl =='addcourseListing' ||  $pageUrl =='topicattachmentListing' || $pageUrl=="viewalltopicdocuments" || $pageUrl=="timetableListing" || $pageUrl=="viewtimetablelisting" || $pageUrl=="addtopiclinksforonlineattendant"){ echo 'active';} ?>">
-                            <a href="<?php echo base_url()."courselisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
-                                <span class="nav-label">Courses</span>
+
+                        <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."coursetypelisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
+                                <span class="nav-label">Certificate Type</span>
                             </a>
                         </li>
                         <?php } ?>
+
 
                     
                         <!-- <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
@@ -401,7 +411,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
                             <?php } ?>
                             <?php if (in_array("rolepage", $jsonstringtoArray)){?>
-                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Role </span></a></li>
+                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Page Access </span></a></li>
                             <?php } ?>
                             </ul>
                         </li>
