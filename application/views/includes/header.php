@@ -341,7 +341,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <li>
                             <li class="<?php if($pageUrl =='studentListing' || $pageUrl =='editstudent'){ echo 'active';} ?>">
                                 <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
-                                    <span class="nav-label">Students</span>
+                                    <span class="nav-label">Student Portal</span>
                                 </a>
                             </li>
                         </li>
@@ -393,7 +393,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php if (in_array("usersmodule", $jsonstringtoArray)){?>
                         <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
                             <a href="#">
-                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >User</span>
+                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >Staff User</span>
                                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                             </a>
                             <ul class="treeview-menu">

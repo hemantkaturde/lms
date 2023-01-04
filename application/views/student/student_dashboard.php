@@ -6,15 +6,15 @@
     <div class="page-content fade-in-up">
 
         <div class="col-lg-10 col-md-10">
-        <h5><b> Class Details</b></h5>
+        <h5><b> Course Class Schedule</b></h5>
             <table class="table">
             <thead>
                 <tr>
                 <th scope="col">Course Name</th>
                 <th scope="col">Topic Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Timings</th>
-                <th scope="col">Link</th>
+                <th scope="col">Class Date</th>
+                <th scope="col">Class Timings</th>
+                <th scope="col"> Class link</th>
                 <th scope="col">Action</th>
                 </tr>
             </thead>

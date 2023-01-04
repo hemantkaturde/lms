@@ -18,11 +18,11 @@
                 <table id="view_attendance" class="table table-bordered">
                     <thead>
                                 <tr>
-                                    <th>Class Date</th>
                                     <th>Student Name</th>
                                     <th>Course Name</th>
                                     <th>Topic Name</th>
-                                    <th>Class Timing</th>
+                                    <th>Attended Date</th>
+                                    <th>Attended Time</th>
                                     <th>Attendance Status</th>
                                 </tr>
                     </thead>
