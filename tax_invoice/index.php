@@ -6,10 +6,11 @@
 
    $enq_id = $_GET['enq_id'];
    $paymentid = $_GET['paymentid'];
-   $result = $conn->query("SELECT *,tbl_users.name as counsellor_name  FROM tbl_payment_transaction  
+   $result = $conn->query("SELECT *,tbl_users.name as counsellor_name,ab.name as conser_name  FROM tbl_payment_transaction  
                            join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id
+                           left join tbl_users ab on tbl_enquiry.counsellor_id = ab.userId 
                            left join tbl_admission on tbl_admission.enq_id = tbl_enquiry.enq_id 
-                           left join tbl_users on tbl_admission.counsellor_name = tbl_users.userId 
+                           left join tbl_users on tbl_admission.counsellor_name = tbl_users.userId
                            where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid");
 
    $result_arry = $result->fetch_assoc();
@@ -93,11 +94,16 @@
         $pdf->SetXY(55, 52); // set the position of the box
         $pdf->Cell(160, 43, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
 
+        if($result_arry['conser_name']){
+          $couns_name= $result_arry['conser_name'];
+        }else{
+          $couns_name= $result_arry['counsellor_name'];
+        }
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
-        $pdf->Cell(160, 54, $result_arry['counsellor_name'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(160, 54, $couns_name, 0, 0, 'L'); // add the text, align to Center of cell
      
          
          // Secand box - the user's Name
