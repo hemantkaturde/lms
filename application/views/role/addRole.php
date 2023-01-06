@@ -4,7 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Add Page Access</div>
+                <div class="ibox-title">Add Access</div>
             </div>
             <div class="ibox-body">
                 <form class="form-horizontal" id="role_form">
@@ -19,7 +19,7 @@
                         <div class="col-md-4">
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Add Page Access</h3>
+                                    <h3 class="box-title">Add Access</h3>
                                 </div>
                                 <div class="box-body">
                                     <div class="row">

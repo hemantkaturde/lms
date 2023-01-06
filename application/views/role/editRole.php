@@ -22,7 +22,7 @@ if(!empty($roleInfo))
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Add Role</div>
+                <div class="ibox-title">Changes/Modify Access</div>
             </div>
             <div class="ibox-body">
                    <?php
@@ -36,7 +36,7 @@ if(!empty($roleInfo))
                             <div class="col-md-4">
                                 <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Edit Page Access</h3>
+                            <h3 class="box-title">Changes/Modify Access</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
