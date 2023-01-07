@@ -96,7 +96,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
-                 $data[$counter]['enq_email'] = $value['enq_email'];
+                 //$data[$counter]['enq_email'] = $value['enq_email'];
 
                 //  if($value['payment_status']=='0'){
                 //     $data[$counter]['status'] = 'In Follow up';
@@ -106,15 +106,10 @@ class Enquiry_model extends CI_Model
                 //     $data[$counter]['status'] = 'In Follow up';
                 //  }
 
-                if(!empty($value['admissionexits'])){
-                    $data[$counter]['status'] = 'Admitted';
-                }else{
-                    $data[$counter]['status'] = 'In Follow up';
-                }
+               
 
 
                  $course_ids    =   explode(',', $value['enq_course_id']);
-
              
                  $total_fees = 0;
                  $course_name = '';
@@ -138,7 +133,14 @@ class Enquiry_model extends CI_Model
                     }
                  $all_course_name = trim($course_name, ', '); 
 
-                 // $data[$counter]['total_fees'] = '₹ '.$total_fees ;
+                 $data[$counter]['all_course_name'] = $all_course_name ;
+                 //$data[$counter]['total_fees'] = '₹ '.$total_fees ;
+
+                 if(!empty($value['admissionexits'])){
+                    $data[$counter]['status'] = 'Admitted';
+                }else{
+                    $data[$counter]['status'] = 'In Follow up';
+                }
 
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."payment_details/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Payment Details' title='Payment Details'></a> | ";

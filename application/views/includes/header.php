@@ -346,6 +346,23 @@ $jsonstringtoArray = json_decode($access, true);
                             </li>
                         </li>
                         <?php } ?>
+
+                        <?php if (in_array("usersmodule", $jsonstringtoArray)){?>
+                        <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
+                            <a href="#">
+                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >Staff User</span>
+                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu">
+                            <?php if (in_array("userpage", $jsonstringtoArray)){?>
+                                <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
+                            <?php } ?>
+                            <?php if (in_array("rolepage", $jsonstringtoArray)){?>
+                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Page Access </span></a></li>
+                            <?php } ?>
+                            </ul>
+                        </li>
+                        <?php } ?>
                         
                        
                         <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
@@ -400,23 +417,6 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li> -->
 
-                        <?php if (in_array("usersmodule", $jsonstringtoArray)){?>
-                        <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
-                            <a href="#">
-                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >Staff User</span>
-                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                            </a>
-                            <ul class="treeview-menu">
-                            <?php if (in_array("userpage", $jsonstringtoArray)){?>
-                                <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
-                            <?php } ?>
-                            <?php if (in_array("rolepage", $jsonstringtoArray)){?>
-                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Page Access </span></a></li>
-                            <?php } ?>
-                            </ul>
-                        </li>
-                        <?php } ?>
-    
                         <!-- <?php if (in_array("settingsmodule", $jsonstringtoArray)){?>
                         <li class="treeview <?php if($pageUrl =='emailsmtpListing'){ echo 'active';} ?>" style="height: auto;">
                             <a href="#">
@@ -481,7 +481,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <li  class="">
                             <a  href="<?php echo base_url()."dashboard"; ?>"><i
                                     class="sidebar-item-icon fa fa-file-text"></i>
-                                <span class="nav-label" >Certificates</span>
+                                <span class="nav-label" >Certifications</span>
                             </a>
                         </li>
 
