@@ -221,9 +221,15 @@
                             <!-- <li class="list-group-item">Attendance List - 50
                                 <span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span>
                             </li> -->
+
+                            <li class="list-group-item">Enquiry List - <?php echo $enquries; ?>
+                                <a class="dashbord-short-link totalenquiry"
+                                    href="<?php echo base_url().'enquirylisting'?>"><span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span></a>
+                            </li>
+
                             <li class="list-group-item">Admissions List - <?php echo $admissions; ?>
                                 <a class="dashbord-short-link totaladmissions"
-                                    href="<?php echo base_url().'enquirylisting'?>"><span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span></a>
+                                    href="<?php echo base_url().'admissionListing'?>"><span class="float-right text-success"><i class="fa fa-caret-up"></i> Click Here</span></a>
                             </li>
                             <li class="list-group-item">Total Invoice - <?=$total_invoices?>
                                 <a class="dashbord-short-link totalusers"
