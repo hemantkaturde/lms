@@ -183,8 +183,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                                 </tr>
 
                                 <tr>
-                                    <td><b>User Name (First Name  or Email Id )</b></td>
-                                    <td>'.$username.' or '.$email.'</td>
+                                    <td><b>User Name (First Name  or Email Id or Mobile Number )</b></td>
+                                    <td>'.$username.' or '.$email.' or '.$mobile.'</td>
                                 </tr>
 
                                 <tr>
