@@ -40,7 +40,7 @@
                                     <th>Inquiry Date</th>
                                     <th>Name</th>
                                     <th>Mobile No</th>
-                                    <th>Email</th>
+                                    <th>Courses</th>
                                     <th>Status</th>
                                     <!-- <th>Fees</th> -->
                                     <th>Action</th>
