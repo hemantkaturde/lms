@@ -77,52 +77,57 @@ class Login extends BaseController
 
     public function loginMe()
     {
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'username', 'required|max_length[128]|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
-    
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->load->view('login');
-        }
-        else
-        {
-            $username = $this->security->xss_clean($this->input->post('username'));
-            $password = $this->input->post('password');
-            $result = $this->login_model->loginMe($username, $password);
+        $post_submit = $this->input->post();
+        if($post_submit){
+ 
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('username', 'username', 'required|trim');
+                $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
             
-            if(count($result) > 0)
-            {
-                foreach ($result as $res)
+                if($this->form_validation->run() == FALSE)
                 {
-                    // $lastLogin = $this->login_model->lastLoginInfo($res->userId);
-                    $process = 'Login';
-                    $processFunction = 'Login/loginMe';
-
-                    $sessionArray = array('userId'=>$res->userId,                    
-                                            'role'=>$res->roleId,
-                                            'roleText'=>$res->role,
-                                            'name'=>$res->name,
-                                            // 'lastLogin'=> $lastLogin->createdDtm,
-                                            'status'=> $res->status,
-                                            'access' => $res->access,
-                                            'profile_pic' => $res->profile_pic,
-                                            'username' => $res->username,
-                                            'enq_id' => $res->enq_id,
-                                            'isLoggedIn' => TRUE
-                                    );
-
-                    $this->session->set_userdata($sessionArray);
-                    //unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
-                    $this->logrecord($process,$processFunction);
-                    echo 1;
+                    $this->load->view('login');
                 }
-            }
-            else
-            {
-                echo 0;
-            }
-        }
+                else
+                {
+                    $username = $this->security->xss_clean($this->input->post('username'));
+                    $password = $this->input->post('password');
+                    $result = $this->login_model->loginMe($username, $password);
+
+
+                    if(count($result) > 0)
+                    {
+                        foreach ($result as $res)
+                        {
+                            // $lastLogin = $this->login_model->lastLoginInfo($res->userId);
+                            $process = 'Login';
+                            $processFunction = 'Login/loginMe';
+
+                            $sessionArray = array('userId'=>$res->userId,                    
+                                                    'role'=>$res->roleId,
+                                                    'roleText'=>$res->role,
+                                                    'name'=>$res->name,
+                                                    // 'lastLogin'=> $lastLogin->createdDtm,
+                                                    'status'=> $res->status,
+                                                    'access' => $res->access,
+                                                    'profile_pic' => $res->profile_pic,
+                                                    'username' => $res->username,
+                                                    'enq_id' => $res->enq_id,
+                                                    'isLoggedIn' => TRUE
+                                            );
+
+                            $this->session->set_userdata($sessionArray);
+                            //unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
+                            $this->logrecord($process,$processFunction);
+                            echo 1;
+                        }
+                    }
+                    else
+                    {
+                        echo 0;
+                    }
+                }
+           }
     }
 
     public function logout()

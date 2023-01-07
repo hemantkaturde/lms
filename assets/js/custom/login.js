@@ -31,7 +31,6 @@ function display_alert(type,message)
 }
 
 $('#login-form #login_btn').click(function(e) {
-
     $('#login-form').validate({
         errorClass: "help-block",
         rules: {

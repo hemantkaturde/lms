@@ -23,7 +23,7 @@
         <a href="https://doctor.iictn.org/"  target="_blank"><img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="100"></a>
             <!-- <a class="link" href="#" style="font-size: 24px;">LMS Management</a> -->
         </div>
-        <form id="login-form" action="javascript:;" method="post" novalidate="novalidate">
+        <form id="login-form" action="" method="post" novalidate="novalidate">
         <!-- <form action="<?php echo base_url(); ?>loginMe" method="post"> -->
             <h4 class="login-title">Log in</h4>
             <div class="alert_msg"></div> 
@@ -32,7 +32,7 @@
                 <div class="input-group-icon right">
                     <label for=""> Mobile Number / Username / Email </label>
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="username" name="username" placeholder="Username" autocomplete="off">
+                    <input class="form-control" type="text" name="username" placeholder="Username" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
