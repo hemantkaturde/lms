@@ -273,7 +273,7 @@ class Admission_model extends CI_Model
         $current_date = date('Y-m-d');
        
         $this->db->select('enq_course_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id','left');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
         $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
         $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
