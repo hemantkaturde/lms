@@ -155,7 +155,7 @@
                                                 $i++;
                                             }
                                         }else{
-                                            echo '<div class="message"><h4>No Event</h4><p>There\'s no event in this date</p></div>';
+                                            echo '<div class="message"><h4>No Class</h4><p>There\'s no class in this date</p></div>';
                                         }
                                     ?>
                                 </div>
