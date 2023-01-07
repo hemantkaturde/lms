@@ -30,6 +30,7 @@
                     <td><?=$value['link_url'] ?></td>
                     <td>
                        <button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
+                       <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
                     </td>
                 </tr>
              <?php }  ?>   
@@ -76,6 +77,57 @@ $(document).ready(function(){
 										$("#popup_modal_md").hide();
                                         //window.location.href = meeting_link;
                                         window.open(meeting_link, '_blank');
+
+										//window.location.href = "<?php echo base_url().'dashboard'?>";
+								});						
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+				return false;
+
+    });
+});
+
+$(document).ready(function(){
+    $(".attend_manually").click(function(){
+                    var user_id = $(this).attr("user-id");
+                    var topic_id = $(this).attr("topic-id");
+                    var course_id = $(this).attr("course-id");
+                    var meeting_id = $(this).attr("meeting_id");
+                    var meeting_link = $(this).attr("meeting_link");
+                    
+                    $.ajax({
+						url : "<?php echo base_url();?>attendClasses",
+						type: "POST",
+                        data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link,
+						// data : {'user_id':user_id,'topic_id':topic_id,'course_id':course_id,'meeting_id':meeting_id,'meeting_link':meeting_link},
+						success: function(data, textStatus, jqXHR)
+						{
+
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								 swal({
+									title: "Attendance Successfully Done",
+								    text: "",
+								 	icon: "success",
+								 	button: "Ok",
+								 	},function(){ 
+										$("#popup_modal_md").hide();
+                                        //window.location.href = meeting_link;
+                                        //window.open(meeting_link, '_blank');
 
 										//window.location.href = "<?php echo base_url().'dashboard'?>";
 								});						
