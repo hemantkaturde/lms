@@ -295,17 +295,20 @@
                             $filename = str_replace(' ','_',$file);
                             $config['upload_path'] = 'uploads/admission'; 
                             $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                            $config['max_size'] = '1000'; // max_size in kb 
+                            $config['max_size'] = '10000'; // max_size in kb 
                             $config['file_name'] = $filename; 
                             // Load upload library 
                             $this->load->library('upload',$config); 
-                    
+
                             // File upload
                             if($this->upload->do_upload('student_photo')){ 
                                 $existing_student_photo = $filename; 
                             }else{
                                 $existing_student_photo =trim($this->input->post('student_photo_existing'));
                             }
+
+
+
                         }else{
 
                             $existing_student_photo= trim($this->input->post('student_photo_existing'));
@@ -317,7 +320,7 @@
                             $filename = str_replace(' ','_',$file);
                             $config['upload_path'] = 'uploads/admission'; 
                             $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                            $config['max_size'] = '1000'; // max_size in kb 
+                            $config['max_size'] = '10000'; // max_size in kb 
                             $config['file_name'] = $filename; 
                             // Load upload library 
                             $this->load->library('upload',$config); 
@@ -339,7 +342,7 @@
                             $filename = str_replace(' ','_',$file);
                             $config['upload_path'] = 'uploads/admission'; 
                             $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                            $config['max_size'] = '1000'; // max_size in kb 
+                            $config['max_size'] = '10000'; // max_size in kb 
                             $config['file_name'] = $filename; 
                             // Load upload library 
                             $this->load->library('upload',$config); 
@@ -397,6 +400,10 @@
                     }else{
 
                         $check_admission_uinqe_name = $this->admission_model->check_admission_uinqe_name($this->input->post('full_name'));
+
+
+
+
                     }
                  
 
