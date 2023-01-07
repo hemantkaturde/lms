@@ -29,8 +29,11 @@
                     <td><?=$value['timings'] ?></td>
                     <td><?=$value['link_url'] ?></td>
                     <td>
-                       <button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
-                       <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
+                       <?php if($value['link_url']){?>
+                             <button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
+                       <?php } else{ ?>
+                             <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
+                       <?php }?>
                     </td>
                 </tr>
              <?php }  ?>   
