@@ -21,8 +21,8 @@
                                     <th>Student Name</th>
                                     <th>Course Name</th>
                                     <th>Topic Name</th>
-                                    <th>Attended Date</th>
-                                    <th>Attended Time</th>
+                                    <th>Class Attended Date</th>
+                                    <th>Class Attended Time</th>
                                     <th>Attendance Status</th>
                                 </tr>
                     </thead>
