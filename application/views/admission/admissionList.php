@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Enquiry Id</th>
-                                <th>Mobile No.</th>
+                                <th>Mobile No/Roll No</th>
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Email</th>

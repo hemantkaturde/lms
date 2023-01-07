@@ -36,7 +36,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td style="width:20%"><b>Mobile Number</b></td>
+                                                <td style="width:20%"><b>Mobile Number / Roll No</b></td>
                                                 <td><?=$view_admission_details[0]->mobile;?></td>
                                             </tr>
 

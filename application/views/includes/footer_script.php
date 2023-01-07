@@ -1742,7 +1742,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
 							{ "width": "8%", "targets": 0 },
-							{ "width": "10%", "targets": 1 },
+							{ "width": "14%", "targets": 1 },
 							{ "width": "15%", "targets": 2 },
 							{ "width": "15%", "targets": 3 },
 							{ "width": "20%", "targets": 4 },
