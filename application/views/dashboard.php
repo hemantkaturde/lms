@@ -118,8 +118,8 @@
             <div class="col-lg-4">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">
-                            <h2>Monthly Class Schedule </h2>
+                        <div class="ibox-title" >
+                            <h2 style="font-size: 1.5rem !important;">Monthly Class Schedule </h2>
                         </div>
                     </div>
                     <div class="ibox-body">
@@ -135,7 +135,7 @@
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">
-                            <h2 class="s_date">Today Class Schedule <?php echo "$day $month $year";?></h2>
+                            <h2 class="s_date" style="font-size: 1.5rem !important;">Today Class Schedule <?php echo "$day $month $year";?></h2>
                         </div>
                     </div>
                     <div class="ibox-body">
