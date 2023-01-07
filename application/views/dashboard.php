@@ -12,7 +12,7 @@
                         <div class="m-b-5">COURSES</div><i class="fa fa-book widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> -->
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalcourses"
-                                    href="<?php echo base_url().'courselisting'?>">Total Courses</a></small></div>
+                                    href="<?php echo base_url().'courselisting'?>">Courses Uploaded</a></small></div>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php echo $admissions; ?></h2>
-                        <div class="m-b-5">ADMISSIONS</div><i class="fa fa-money widget-stat-icon"></i>
+                        <div class="m-b-5">TOTAL ADMISSIONS</div><i class="fa fa-money widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div> -->
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totaladmissions"
                                     href="<?php echo base_url().'enquirylisting'?>">Total Admissions</a></small></div>
@@ -46,7 +46,7 @@
                         <div class="m-b-5">USERS</div><i class="fa fa-users widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div> -->
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalusers"
-                                    href="<?php echo base_url().'enquirylisting'?>">Total Users</a></small></div>
+                                    href="<?php echo base_url().'enquirylisting'?>">Staff Users</a></small></div>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">
-                            <h2>Detail Event </h2>
+                            <h2>Monthly Class Schedule </h2>
                         </div>
                     </div>
                     <div class="ibox-body">
@@ -135,7 +135,7 @@
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">
-                            <h2 class="s_date">Detail Event <?php echo "$day $month $year";?></h2>
+                            <h2 class="s_date">Today Class Schedule <?php echo "$day $month $year";?></h2>
                         </div>
                     </div>
                     <div class="ibox-body">
@@ -177,14 +177,14 @@
                             </div>
                             <div class="d-inline-flex">
                                 <div class="px-3" style="border-right: 1px solid rgba(0,0,0,.1);">
-                                    <div class="text-muted">TOTAL INCOME AMOUNT</div>
+                                    <div class="text-muted">Total Revenue</div>
                                     <div>
                                         <span class="h2 m-0">5000</span>
                                         <!-- <span class="text-success ml-2"><i class="fa fa-level-up"></i> +25%</span> -->
                                     </div>
                                 </div>
                                 <div class="px-3">
-                                    <div class="text-muted">TOTAL PENDING AMOUNT</div>
+                                    <div class="text-muted">Fees Pending</div>
                                     <div>
                                         <span class="h2 m-0">2000</span>
                                         <!-- <span class="text-warning ml-2"><i class="fa fa-level-down"></i> -12%</span> -->

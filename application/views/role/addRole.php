@@ -70,9 +70,9 @@
                                             <tr>
                                                 <th scope="col">Module Name</th>
                                                 <th scope="col">Module</th>
-                                                <th scope="col">Page</th>
-                                                <th scope="col">Add</th>
-                                                <th scope="col">Edit</th>
+                                                <th scope="col">Page Access</th>
+                                                <th scope="col">Add Access</th>
+                                                <th scope="col">Changes/Modify Access</th>
                                                 <th scope="col">Delete</th>
                                             </tr>
                                         </thead>

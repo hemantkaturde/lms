@@ -474,7 +474,7 @@ class Admin extends BaseController
 		}else{
 			$data = $this->event->getEvent($this->input->post('year', true), $this->input->post('mon', true), $this->input->post('day', true));
 			if($data == null){
-				echo json_encode(array('status' => false, 'title_msg' => 'No Event', 'msg' => 'There\'s no event in this date'));
+				echo json_encode(array('status' => false, 'title_msg' => 'No Class', 'msg' => 'There\'s no Class in this date'));
 			}else{			
 				echo json_encode(array('status' => true, 'data' => $data));
 			}
