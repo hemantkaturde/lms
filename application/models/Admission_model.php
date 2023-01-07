@@ -273,7 +273,7 @@ class Admission_model extends CI_Model
         $current_date = date('Y-m-d');
        
         $this->db->select('enq_course_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id','left');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
         $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
         $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
@@ -289,7 +289,7 @@ class Admission_model extends CI_Model
            
         $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid');
         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
-        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_COURSE.'.courseId = '.TBL_TOPIC_MEETING_LINK.'.course_id');
+        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_COURSE.'.courseId = '.TBL_TOPIC_MEETING_LINK.'.course_id','left');
         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
         $this->db->where(TBL_COURSE.'.isDeleted', 0);
         $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
