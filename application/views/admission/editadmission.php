@@ -18,6 +18,7 @@ $source_ans ='';
 $image_1 =''; 
 $image_2 ='';
 $image_3 ='';
+$pin='';
 
 if(!empty($editDataAdmission))
 {
