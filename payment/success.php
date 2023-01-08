@@ -45,8 +45,6 @@ if ($conn->query($sql) === TRUE) {
 
   $retval = mail($to,$Subject,$Body,$header);  
 
-  print_r($retval);
-  exit;
   
 }
 ?>
