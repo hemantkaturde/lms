@@ -16,7 +16,7 @@ $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
 if ($conn->query($sql) === TRUE) {
   $to = $row['enq_email'];
  
-  $Subject = 'IICTN - Admission Payment Recipt '.date('Y-m-d H:i:s');
+  $Subject = 'IICTN-Admission Payment Recipt '.date('Y-m-d H:i:s');
   $Body  = '<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>file_1664624919892</title><meta name="author" content="Microsoft Office User"/><style type="text/css"> * {margin:0; padding:0; text-indent:0; }
    .s1 { color: #212121; font-family:"Times New Roman", serif; font-style: normal; font-weight: normal; text-decoration: none; font-size: 12pt; }
@@ -39,7 +39,7 @@ if ($conn->query($sql) === TRUE) {
 
   //$Body = 'This is test Email';
 
-  $header = "From: IICTN - Admission Payment Recipt <enquiry@iictn.in> \r\n";
+  $header = "From: IICTN-Admission Payment Recipt <enquiry@iictn.in> \r\n";
   //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
   $header .= "MIME-Version: 1.0\r\n";
   $header .= "Content-type: text/html\r\n";
