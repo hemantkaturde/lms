@@ -5,9 +5,9 @@
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
 
-        <div class="col-lg-10 col-md-10">
+        <div class="col-lg-12 col-md-12">
         <h5><b> Course Class Schedule</b></h5>
-            <table class="table">
+            <table class="table  table-condensed" style="background-color:#cec4de">
             <thead>
                 <tr>
                 <th scope="col">Course Name</th>
@@ -30,7 +30,7 @@
                     <td><?=$value['link_url'] ?></td>
                     <td>
                        <?php if($value['link_url']){?>
-                             <button id="join_link" style="width: 63%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
+                             <button id="join_link" style="width: 51%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
                        <?php } else{ ?>
                              <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
                        <?php }?>
@@ -39,12 +39,56 @@
              <?php }  ?>   
             </tbody>
             </table>
-        </div>
-    </div>
+    
+
+
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<div class=" d-flex justify-container-left">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="piechart3d" style="width: 700px; height: 400px;"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
     <!-- END PAGE CONTENT-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+
+$(document).ready(function(){
+    
+	google.charts.load('current', {'packages':['corechart']});
+	   google.charts.setOnLoadCallback(drawChart);
+ 
+	   function drawChart() {
+ 
+		 var data = google.visualization.arrayToDataTable([
+		   ['Task', 'Hours per Day'],
+		   ['Study',     11],
+		   ['Playing',      2],
+		   ['Watch TV',  2],
+		   ['Tution', 2],
+		   ['Sleep',  7]
+		 ]);
+ 
+		 var options = {
+		   title: 'Class Details',
+		   is3D:true
+		 };
+ 
+		 var chart = new google.visualization.PieChart(document.getElementById('piechart3d'));
+ 
+		 chart.draw(data, options);
+	   } 
+	 
+	 
+ });
+
 $(document).ready(function(){
     $(".join_link").click(function(){
                     var user_id = $(this).attr("user-id");
