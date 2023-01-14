@@ -11,19 +11,18 @@
 
                 </div>
             
-                <div class="ibox-title">View Attendance</div>
+                <div class="ibox-title">View Examination</div>
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">
-                <table id="view_student_attendance" class="table table-bordered">
+                <table id="view_student_examination" class="table table-bordered">
                     <thead>
                                 <tr>
-                                    <th>Examination Date</th>
                                     <th>Course Name</th>
-                                    <th>Topic Name</th>
-                                    <th>Topic Name</th>
-                                    <th>Class Timing</th>
-                                    <th>Attendance Status</th>
+                                    <th>Examination Title</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                     </thead>
                     <tbody>

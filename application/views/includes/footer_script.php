@@ -4088,7 +4088,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-
 <?php if($pageTitle=='View Student Course Infromation'){ ?>
 <script type="text/javascript">
 		var course_id =$('#course_id_1_post').val();
@@ -4160,7 +4159,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
    </script>
 <?php }  ?>
 
-
 <?php if($pageTitle=='Studnet Time Table Listing'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -4194,7 +4192,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	
 	</script>
 <?php } ?>
-
 
 
 <?php if($pageTitle=='Detail Student View Timetable Listing'){ ?>
@@ -4271,8 +4268,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-
-
 <?php if($pageTitle=='Attendance'){ ?>
 <script type="text/javascript">
         $(document).ready(function() {
@@ -4335,5 +4330,41 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	            },
 	        });
 	    });
+</script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Student Examination'){ ?>
+<script type="text/javascript">
+
+        $(document).ready(function() {
+            var dt = $('#view_student_examination').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "25%", "targets": 0 },
+	                 { "width": "25%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	                 { "width": "4%", "targets": 4 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Examination Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchstudentexamination",
+                    type: "post",
+	            },
+	        });
+	    });
+
+
+
 </script>
 <?php } ?>

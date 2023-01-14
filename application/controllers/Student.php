@@ -285,7 +285,6 @@
             $this->loadViews("student/studentcourseattchmentlist", $this->global, $data , NULL);
         }
 
-
         public function fetchstudnetCourseAttchemant($courseid){
             $params = $_REQUEST;
             $totalRecords = $this->student_model->getstudentCourseattchmentCount($params,$courseid); 
@@ -328,7 +327,6 @@
             $this->loadViews("student/studenttopicdocumentattchlisting", $this->global,$data , NULL);
         }
 
-
         public function studentviewalltopicdocuments(){
             $topic_id = $this->input->get('topic_id');
             $course_id = $this->input->get('course_id');
@@ -342,8 +340,6 @@
             $this->global['pageTitle'] = 'Studnet Topic Attachment Upload Listing';
             $this->loadViews("student/viewalltopicdoc", $this->global,$data , NULL);
         }
-
-
 
         public function studentfetchTopicDocument(){
 
@@ -376,7 +372,6 @@
 
         }
 
-
         public function studenttimetableListing($id){
             $process = 'Studnet Time Table Listing';
             $processFunction = 'Course/addtimetableListing';
@@ -386,7 +381,6 @@
             $data['getCourseinfo'] = $this->course_model->getCourseInfo($id);
             $this->loadViews("student/studenttimetablelisting", $this->global, $data , NULL);
         }
-
 
         public function fetchstudentTimetable($courseid){
 
@@ -414,8 +408,6 @@
             echo json_encode($json_data);
         }
 
-
-
         public function studentviewtimetablelisting(){
 
             $time_table_id = $this->input->get('time_table_id');
@@ -427,7 +419,6 @@
             $this->global['pageTitle'] = 'Detail Student View Timetable Listing';
             $this->loadViews("student/studenttimelist",$this->global,$data,NULL);
         }
-
 
         public function fetchStudentTopicTimetableListing(){
 
@@ -458,7 +449,6 @@
             echo json_encode($json_data);
 
         }
-
 
         public function addstudenttopiclinksforonlineattendant(){
 
@@ -547,7 +537,6 @@
 
         }
 
-
         public function studentattendance(){
             $this->global['pageTitle'] = 'view Student Attendance';
             $this->loadViews("student/view_student_Attendance", $this->global, NULL, NULL);
@@ -578,16 +567,39 @@
                 );
         
             echo json_encode($json_data);
-        
-        
         }
         
-
         public function studentexamination(){
             $this->global['pageTitle'] = 'Student Examination';
             $this->loadViews("student/view_student_examination", $this->global, NULL, NULL);
         }
-    
+
+        public function fetchstudentexamination(){
+
+            $params = $_REQUEST;
+            $userId =  $this->session->userdata('userId');
+            $totalRecords = $this->student_model->getstudentexaminationCount($params,$userId);
+            $queryRecords = $this->student_model->getstudentexaminationdata($params,$userId); 
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+        
+            echo json_encode($json_data);
+        }
+
     }
 
 ?>
