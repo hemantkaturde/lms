@@ -243,6 +243,11 @@ $route['fetchstudentattendancestudentpanel'] = "student/fetchstudentattendancest
 $route['studentexamination'] = "student/studentexamination";
 $route['fetchstudentexamination'] = "student/fetchstudentexamination";
 $route['attendexamination/(:any)'] = "student/attendexamination/$1";
+$route['start_exam/(:any)'] = "student/start_exam/$1";
+$route['submit_examination_db'] = "student/submit_examination_db";
+
+
+
 
 
 

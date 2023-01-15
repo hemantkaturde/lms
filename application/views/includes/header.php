@@ -464,7 +464,7 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="<?php if($pageUrl =='studentexamination'){ echo 'active';} ?>">
+                        <li  class="<?php if($pageUrl =='studentexamination' || $pageUrl =='attendexamination' || $pageUrl =='start_exam'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."studentexamination"; ?>"><i
                                     class="sidebar-item-icon fa fa-graduation-cap"></i>
                                 <span class="nav-label" >Examination</span>

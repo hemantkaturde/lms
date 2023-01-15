@@ -12,7 +12,7 @@
             parent::__construct();
             $this->load->model('login_model');
             $this->load->model('student_model');
-            $this->load->model('student_model');
+            $this->load->model('examination_model');
             $this->load->model('course_model');
             $this->load->model('enquiry_model');
             $this->load->model('database');
@@ -605,6 +605,72 @@
             $data['exam_detail'] = $this->student_model->getExamdetails($exam_id);
             $data['question_paper'] = $this->student_model->getstudentexamquestionlist($exam_id);
             $this->loadViews("student/attend_exam", $this->global, $data, NULL);
+        }
+
+        public function start_exam($exam_id){
+            $this->global['pageTitle'] = 'Examination Started';
+            $data['exam_detail'] = $this->student_model->getExamdetails($exam_id);
+            $data['question_paper'] = $this->student_model->getstudentexamquestionlist($exam_id);
+            $data['student_id'] =  $this->session->userdata('userId');
+
+            $course_id = $data['exam_detail'][0]['course_id'];
+            $examination_id = $data['exam_detail'][0]['id'];
+            
+            $data['questionPaperListMCQ'] = $this->examination_model->getquestionPaperListMCQInfo($course_id,$examination_id);
+            $data['questionPaperListWRITTEN'] = $this->examination_model->getquestionPaperListWRITTENInfo($course_id,$examination_id);
+            $data['questionPaperListMATCHPAIR'] = $this->examination_model->getquestionPaperListMATCHPAIRInfo($course_id,$examination_id);
+            $this->loadViews("student/start_exam", $this->global, $data, NULL);
+        }
+
+
+        public function submit_examination_db(){
+
+           $exam_answer_data = $this->input->post();
+           $savesnswerdata_response =array();
+           if($exam_answer_data){
+
+            $examination_id = $this->input->post('examination_id');
+            $course_id = $this->input->post('course_id');
+            $student_id = $this->input->post('student_id');
+
+            foreach ($exam_answer_data as $key => $value) {
+
+                if($key=='examination_id' || $key=='course_id' ||  $key=='student_id'){
+
+
+                }else{
+
+                    preg_match_all('!\d+\.*\d*!', $key, $matches);
+
+                    $data = array(
+                        'student_id'      => $student_id,
+                        'course_id'       => $course_id,
+                        'exam_id'         => $examination_id,
+                        'question_id'  => $matches[0][0],
+                        'question_answer'    => $value,
+                        'exam_status' => 'solved',
+                    );
+
+
+                    $saveAnswerdata = $this->student_model->saveAnswerdata('',$data);
+
+                    if($saveAnswerdata){
+                        $savesnswerdata_response['status'] = 'success';
+                        $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+                    }
+
+                  
+                    
+                }
+                 
+            }
+
+            echo json_encode($savesnswerdata_response);
+
+
+           }
+
+
         }
 
     }

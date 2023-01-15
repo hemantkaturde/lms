@@ -911,6 +911,7 @@ public function getstudentexaminationdata($params,$userId){
         
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+
         if($params['search']['value'] != "") 
         {
           $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
@@ -929,12 +930,28 @@ public function getstudentexaminationdata($params,$userId){
         {
             foreach ($fetch_result as $key => $value)
             {  
+
+                    /*check Here Exam is completed or not*/
+
+                    $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+
+                    if($check_exam_completed_or_pending){
+                        $exam_status ='<b style="color:green">Exam Completed</b>';
+                    }else{
+                        $exam_status ='<b style="color:red">Pending</b>';
+                    }
+
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['exam_title'] = $value['exam_title'];
                     $data[$counter]['exam_time'] = $value['exam_time'];
-                    $data[$counter]['status'] = '';
+                    $data[$counter]['status'] = $exam_status;
                     $data[$counter]['action'] = '';
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='View Topics' title='View Topics'></a> ";
+                    if($exam_status=='Exam Completed'){
+
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
+
+                    }
                 $counter++; 
             }
         }
@@ -966,6 +983,36 @@ public function getExamdetails($exam_id){
 
 }
 
+
+public function saveAnswerdata($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_STUDENT_ANSWER_SHEET, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_STUDENT_ANSWER_SHEET, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+public function checkexamiscompletedornot($userId,$exam_id,$course_id){
+
+    $this->db->select('*');
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+    $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
 
 
 }
