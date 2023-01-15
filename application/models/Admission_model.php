@@ -395,6 +395,23 @@ class Admission_model extends CI_Model
         }
         return $data;
     }
+
+    public function total_revenue(){
+
+        $this->db->select('sum(totalAmount) as total_revenue');
+        $this->db->where(TBL_PAYMENT.'.payment_status',1);
+        $query = $this->db->get(TBL_PAYMENT);
+        return $query->result_array();
+    }
+
+    public function total_pending(){
+        
+        $this->db->select('sum(final_amount) as total_pending');
+        $this->db->where(TBL_ENQUIRY.'.isDeleted',0);
+        $query = $this->db->get(TBL_ENQUIRY);
+        return $query->result_array();
+    }
+
 }
 
 ?>

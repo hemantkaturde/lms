@@ -600,6 +600,13 @@
             echo json_encode($json_data);
         }
 
+        public function attendexamination($exam_id){
+            $this->global['pageTitle'] = 'Attend Exam';
+            $data['exam_detail'] = $this->student_model->getExamdetails($exam_id);
+            $data['question_paper'] = $this->student_model->getstudentexamquestionlist($exam_id);
+            $this->loadViews("student/attend_exam", $this->global, $data, NULL);
+        }
+
     }
 
 ?>

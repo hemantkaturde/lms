@@ -461,10 +461,7 @@ class Student_model extends CI_Model
             }
         }
 
-       
-
-
-
+    
 
          }
 
@@ -937,7 +934,7 @@ public function getstudentexaminationdata($params,$userId){
                     $data[$counter]['exam_time'] = $value['exam_time'];
                     $data[$counter]['status'] = '';
                     $data[$counter]['action'] = '';
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='View Topics' title='View Topics'></a> ";
                 $counter++; 
             }
         }
@@ -945,8 +942,27 @@ public function getstudentexaminationdata($params,$userId){
     }
         return $data;
     }
+}
 
+public function getstudentexamquestionlist($exam_id){
+    $this->db->select('*');
+    $this->db->join(TBL_QUESTION_PAPER, TBL_QUESTION_PAPER.'.examination_id = '.TBL_EXAMINATION.'.id');
+    $this->db->where(TBL_EXAMINATION.'.id', $exam_id);
+    $this->db->order_by(TBL_EXAMINATION.'.id', 'ASC');
+    $query = $this->db->get(TBL_EXAMINATION);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
 
+public function getExamdetails($exam_id){
+
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+    $this->db->where(TBL_EXAMINATION.'.id', $exam_id);
+    $this->db->order_by(TBL_EXAMINATION.'.id', 'ASC');
+    $query = $this->db->get(TBL_EXAMINATION);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 
 }
 

@@ -57,8 +57,11 @@ class Admin extends BaseController
         $data['enquries'] = $this->enquiry_model->enquiryListingCount();
         $data['students'] = $this->student_model->studentListingCount();
         $data['admissions'] = $this->admission_model->admissionListingCount();
-
         $data['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
+        $data['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+        $data['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
+        $data['total_pending_amt'] = $data['total_pending']- $data['total_revenue'];
+
 
         $query =  $this->db->query('SELECT `createdDtm` AS `date`, COUNT(`id`) as count FROM `tbl_admission`  GROUP BY DATE(`createdDtm`) ORDER BY `id` ASC'); 
         $records = $query->result_array();

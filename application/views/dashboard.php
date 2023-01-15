@@ -179,14 +179,14 @@
                                 <div class="px-3" style="border-right: 1px solid rgba(0,0,0,.1);">
                                     <div class="text-muted">Total Revenue</div>
                                     <div>
-                                        <span class="h2 m-0">5000</span>
+                                        <span class="h2 m-0"><?='₹ '. $total_revenue?></span>
                                         <!-- <span class="text-success ml-2"><i class="fa fa-level-up"></i> +25%</span> -->
                                     </div>
                                 </div>
                                 <div class="px-3">
                                     <div class="text-muted">Fees Pending</div>
                                     <div>
-                                        <span class="h2 m-0">2000</span>
+                                        <span class="h2 m-0"><?='₹ '.$total_pending_amt?></span>
                                         <!-- <span class="text-warning ml-2"><i class="fa fa-level-down"></i> -12%</span> -->
                                     </div>
                                 </div>
