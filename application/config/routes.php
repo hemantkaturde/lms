@@ -245,6 +245,18 @@ $route['fetchstudentexamination'] = "student/fetchstudentexamination";
 $route['attendexamination/(:any)'] = "student/attendexamination/$1";
 $route['start_exam/(:any)'] = "student/start_exam/$1";
 $route['submit_examination_db'] = "student/submit_examination_db";
+$route['showexamstatus/(:any)'] = "student/showexamstatus/$1";
+
+$route['examcheckingList'] = "admin/examcheckingList";
+$route['fetchExamcheckListing'] = "admin/fetchExamcheckListing";
+$route['checkanswersheet?(:any)'] = "admin/checkanswersheet/$1";
+
+$route['fetchallstudentansersheet'] = "admin/fetchallstudentansersheet";
+
+
+
+
+
 
 
 

@@ -937,8 +937,10 @@ public function getstudentexaminationdata($params,$userId){
 
                     if($check_exam_completed_or_pending){
                         $exam_status ='<b style="color:green">Exam Completed</b>';
+                        $exam_status_count =1;
                     }else{
                         $exam_status ='<b style="color:red">Pending</b>';
+                        $exam_status_count =0;
                     }
 
                     $data[$counter]['course_name'] = $value['course_name'];
@@ -946,11 +948,10 @@ public function getstudentexaminationdata($params,$userId){
                     $data[$counter]['exam_time'] = $value['exam_time'];
                     $data[$counter]['status'] = $exam_status;
                     $data[$counter]['action'] = '';
-                    if($exam_status=='Exam Completed'){
-
+                    if($exam_status_count=='1'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
                     }else{
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
-
                     }
                 $counter++; 
             }

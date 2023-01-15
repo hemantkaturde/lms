@@ -317,12 +317,11 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
 
-
                         
                         <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
-                        <li class="">
-                            <a href="#"><i class="sidebar-item-icon fa fa-check-square-o" ></i>
-                                <span class="nav-label">Results</span>
+                        <li class="<?php if($pageUrl =='examcheckingList' || $pageUrl=='checkanswersheet'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url().'examcheckingList'; ?>"><i class="sidebar-item-icon fa fa-check-square-o" ></i>
+                                <span class="nav-label">Check Exam / Results</span>
                             </a>
                         </li>
                         <?php } ?>
@@ -464,19 +463,19 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="<?php if($pageUrl =='studentexamination' || $pageUrl =='attendexamination' || $pageUrl =='start_exam'){ echo 'active';} ?>">
+                        <li  class="<?php if($pageUrl =='studentexamination' || $pageUrl =='attendexamination' || $pageUrl =='start_exam' || $pageUrl =='showexamstatus'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."studentexamination"; ?>"><i
                                     class="sidebar-item-icon fa fa-graduation-cap"></i>
                                 <span class="nav-label" >Examination</span>
                             </a>
                         </li>
 
-                        <li  class="">
+                        <!-- <li  class="">
                             <a  href="<?php echo base_url()."dashboard"; ?>"><i
                                     class="sidebar-item-icon fa fa-check-square-o"></i>
                                 <span class="nav-label" >Results</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li  class="">
                             <a  href="<?php echo base_url()."dashboard"; ?>"><i

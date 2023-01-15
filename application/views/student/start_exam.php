@@ -20,8 +20,9 @@ $jsonstringtoArray = json_decode($access, true);
                     <div class="container mt-1">
                         <div class="d-flex justify-content-center row">
                             <div class="col-md-10 col-lg-10">
-                                <div class="border">
-                                       
+                                <div class="border"></br>
+
+                            
                                 <input type="hidden" id="examination_id" name="examination_id" value="<?=$exam_detail[0]['id'] ?>"></input>
                                 <input type="hidden" id="course_id" name="course_id" value="<?=$exam_detail[0]['course_id'] ?>"></input>
                                 <input type="hidden" id="student_id" name="student_id" value="<?=$student_id; ?>"></input>
@@ -170,6 +171,7 @@ $jsonstringtoArray = json_decode($access, true);
                                             </label>
                                         </div>
                                     </div> -->
+                                    <h2 class="error"><p></p></h2>
                                     <div class="modal-footer">
                                         <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
                                         <button type="submit" id="submit_examination_anser" class="btn btn-primary submit_examination_anser">Submit Examination</button>

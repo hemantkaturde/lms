@@ -666,10 +666,26 @@
             }
 
             echo json_encode($savesnswerdata_response);
-
-
            }
 
+
+        }
+
+
+        public function showexamstatus($exam_id){
+
+            $this->global['pageTitle'] = 'Examination Started';
+            $data['exam_detail'] = $this->student_model->getExamdetails($exam_id);
+            $data['question_paper'] = $this->student_model->getstudentexamquestionlist($exam_id);
+            $data['student_id'] =  $this->session->userdata('userId');
+
+            $course_id = $data['exam_detail'][0]['course_id'];
+            $examination_id = $data['exam_detail'][0]['id'];
+            
+            $data['questionPaperListMCQ'] = $this->examination_model->getquestionPaperListMCQInfo($course_id,$examination_id);
+            $data['questionPaperListWRITTEN'] = $this->examination_model->getquestionPaperListWRITTENInfo($course_id,$examination_id);
+            $data['questionPaperListMATCHPAIR'] = $this->examination_model->getquestionPaperListMATCHPAIRInfo($course_id,$examination_id);
+            $this->loadViews("student/showexamstatus", $this->global, $data, NULL);
 
         }
 

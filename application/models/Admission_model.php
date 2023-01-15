@@ -412,6 +412,66 @@ class Admission_model extends CI_Model
         return $query->result_array();
     }
 
+
+        
+    function getexaminationCount($params)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_examination as BaseTbl');
+        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where('BaseTbl.exam_status', 1);
+        $this->db->order_by('BaseTbl.id', 'desc');
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+
+
+    function getexaminationdata($params)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_examination as BaseTbl');
+        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where('BaseTbl.exam_status', 1);
+        $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get();
+
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['exam_title'] = $value['exam_title'];
+                 $data[$counter]['total_student'] = '10';
+                 $data[$counter]['total_student_attende'] = '10';
+                 $data[$counter]['exam_status'] = 'ss';
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."checkanswersheet?course_id=".$value['courseId']."&&exam_id=".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+                 $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
 }
 
 ?>

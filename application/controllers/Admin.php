@@ -10,7 +10,7 @@ class Admin extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('login_model', 'enquiry_model','user_model','student_model','course_model','database','admission_model','event'));
+        $this->load->model(array('login_model','examination_model','enquiry_model','user_model','student_model','course_model','database','admission_model','event'));
         $this->load->helper(array('form', 'url'));
         $this->load->library('calendar', $this->_setting());
         $this->load->library('form_validation');
@@ -584,6 +584,78 @@ class Admin extends BaseController
     $params = $_REQUEST;
     $totalRecords = $this->admission_model->getAttendanceCount($params);
     $queryRecords = $this->admission_model->getAttendancedata($params); 
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+
+    echo json_encode($json_data);
+ }
+
+
+ public function examcheckingList(){
+    $this->global['pageTitle'] = 'Check Exam';
+    $this->loadViews("student/checkexam", $this->global, NULL, NULL);
+ }
+
+ public function fetchExamcheckListing(){
+            $params = $_REQUEST;
+            $totalRecords = $this->admission_model->getexaminationCount($params); 
+            $queryRecords = $this->admission_model->getexaminationdata($params); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+
+ }
+
+
+ public function checkanswersheet(){
+
+    $course_id = $this->input->get('course_id');
+    $exam_id = $this->input->get('exam_id');
+
+    $this->global['pageTitle'] = 'View Student Result Listing ';
+    $data['examination_info'] = $this->examination_model->getSingleExaminationInfo($exam_id);
+    $course_id = $data['examination_info'][0]->course_id;
+    $examination_id = $data['examination_info'][0]->id;
+    $this->global['pageTitle'] = 'Check Answer Sheet';
+    $this->loadViews("student/CheckstudentAnswerSheet", $this->global, $data, NULL);
+ }
+
+
+ public function fetchallstudentansersheet(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admission_model->studentansersheetCount($params); 
+    $queryRecords = $this->admission_model->studentansersheetData($params); 
+
     $data = array();
     foreach ($queryRecords as $key => $value)
     {
