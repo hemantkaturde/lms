@@ -472,6 +472,63 @@ class Admission_model extends CI_Model
         return $data;
     }
 
+
+    function studentansersheetCount($params,$course_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_examination as BaseTbl');
+        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where('BaseTbl.exam_status', 1);
+        $this->db->order_by('BaseTbl.id', 'desc');
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+
+
+    function studentansersheetData($params,$course_id,$exam_id)
+    {
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+        $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
+                 $data[$counter]['mobile'] = $value['mobile'];
+                 $data[$counter]['exam_status'] = '';
+                 $data[$counter]['total_marks'] = '';
+                 $data[$counter]['grade'] = '';
+                 $data[$counter]['ans_sheet_status'] = '';
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']." style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+                 $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
 }
 
 ?>

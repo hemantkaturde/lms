@@ -4457,13 +4457,12 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
 					{ "width": "20%", "targets": 0 },
-					{ "width": "30%", "targets": 1 },
-					{ "width": "15%", "targets": 2 },
-					{ "width": "20%", "targets": 3 },
+					{ "width": "10%", "targets": 1 },
+					{ "width": "10%", "targets": 2 },
+					{ "width": "10%", "targets": 3 },
 					{ "width": "10%", "targets": 4 },
-					{ "width": "5%", "targets": 5 },
-					{ "width": "5%", "targets": 6 },
-					{ "width": "5%", "targets": 7 }
+					{ "width": "15%", "targets": 5 },
+					{ "width": "5%", "targets": 6 }
 				],
 				responsive: true,
 				"oLanguage": {

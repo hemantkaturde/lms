@@ -640,21 +640,24 @@ class Admin extends BaseController
  public function checkanswersheet(){
 
     $course_id = $this->input->get('course_id');
-    $exam_id = $this->input->get('exam_id');
-
-    $this->global['pageTitle'] = 'View Student Result Listing ';
+    $exam_id = $this->input->get('exam_id');    
+    $this->global['pageTitle'] = 'View Student Result Listing';
     $data['examination_info'] = $this->examination_model->getSingleExaminationInfo($exam_id);
     $course_id = $data['examination_info'][0]->course_id;
     $examination_id = $data['examination_info'][0]->id;
-    $this->global['pageTitle'] = 'Check Answer Sheet';
+   
     $this->loadViews("student/CheckstudentAnswerSheet", $this->global, $data, NULL);
  }
 
 
  public function fetchallstudentansersheet(){
+
+    $course_id = 1;
+    $exam_id =7;
+
     $params = $_REQUEST;
-    $totalRecords = $this->admission_model->studentansersheetCount($params); 
-    $queryRecords = $this->admission_model->studentansersheetData($params); 
+    $totalRecords = $this->admission_model->studentansersheetCount($params,$course_id,$exam_id); 
+    $queryRecords = $this->admission_model->studentansersheetData($params,$course_id,$exam_id); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -677,6 +680,9 @@ class Admin extends BaseController
  }
 
 
+
+
+ 
 
 }
 
