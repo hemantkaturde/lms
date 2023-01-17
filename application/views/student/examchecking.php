@@ -17,7 +17,7 @@ $jsonstringtoArray = json_decode($access, true);
                     <p><b>Seat Number : </b><?=$get_userdetails[0]['mobile'];?></p>
 
                     <?php
-                        $attributes = array("name"=>"submit_marks","id"=>"submit_marks","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+                        $attributes = array("name"=>"submit_marks_form","id"=>"submit_marks_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
                         echo form_open("", $attributes);
                     ?>
                     <div class="container mt-1">

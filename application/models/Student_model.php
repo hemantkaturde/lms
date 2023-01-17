@@ -778,7 +778,8 @@ public function checkifAttendanceaxist($data){
         $this->db->where('user_id', $data['user_id']);
         $this->db->where('topic_id', $data['topic_id']);
         $this->db->where('course_id', $data['course_id']);
-        $this->db->where('meeting_id', $data['meeting_id']);
+        //$this->db->where('meeting_id', $data['meeting_id']);
+    
        // $this->db->where('id', $data['meeting_link']);
         $query = $this->db->get();
         $rowcount = $query->num_rows();
@@ -793,7 +794,7 @@ public function getstudentAttendanceCount($params,$userId){
     $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
     $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
     $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
-    $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+    //$this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
 
     if($params['search']['value'] != "") 
     {
@@ -814,7 +815,7 @@ public function getstudentAttendancedata($params,$userId){
     $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
     $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
     $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
-    $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+    //$this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
 
     if($params['search']['value'] != "") 
     {
@@ -823,7 +824,7 @@ public function getstudentAttendancedata($params,$userId){
     }
     //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
     $this->db->where(TBL_USER.'.userId', $userId);
-    $this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+    //$this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_ATTENDANCE);
     $fetch_result = $query->result_array();

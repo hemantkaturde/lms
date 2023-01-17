@@ -4490,4 +4490,60 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 
+<?php if($pageTitle=='Submit Marks'){ ?>
+<script type="text/javascript">
+          $(document).on('click','#submit_marks',function(e){
+			e.preventDefault();
+			 $(".loader_ajax").show();
+
+			 var examination_id =$('#examination_id').val();
+			 var student_id =$('#student_id').val();
+			 var course_id =$('#course_id').val();
+
+			 var formData = new FormData($("#submit_marks_form")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>submit_examination_answer_db",
+				type: "POST",
+				data : formData,	
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						 swal({
+						 	title: "Examination Submitted Successfully!",
+						 	//text: "",
+						 	icon: "success",
+						 	button: "Ok",
+						 	},function(){ 
+								$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'studentexamination/'?>";
+						});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+      
+</script>
+<?php } ?>
+
+
+
 
