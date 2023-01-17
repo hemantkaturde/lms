@@ -627,7 +627,7 @@ class Admission_model extends CI_Model
                  $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
                  $data[$counter]['action'] = '';
 
-                 if($exam_status){
+                 if($exam_status=='Checked'){
 
                  }else{
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
