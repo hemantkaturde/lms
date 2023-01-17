@@ -253,6 +253,15 @@ $route['fetchallstudentansersheet?(:any)'] = "admin/fetchallstudentansersheet/$1
 $route['addmarkstoexam?(:any)'] = "admin/addmarkstoexam/$1";
 $route['submit_examination_answer_db'] = "admin/submit_examination_answer_db";
 
+$route['crtificateListing'] = "admin/crtificateListing";
+$route['fetchallstudentcertificates'] = "admin/fetchallstudentcertificates";
+
+
+
+
+
+
+
 
 
 

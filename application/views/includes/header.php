@@ -328,8 +328,8 @@ $jsonstringtoArray = json_decode($access, true);
 
 
                         <?php if (in_array("certificatemodule", $jsonstringtoArray)){?>
-                        <li class="">
-                            <a href=""><i class="sidebar-item-icon fa fa-file-text" ></i>
+                        <li class="<?php if($pageUrl =='crtificateListing'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."crtificateListing"; ?>"><i class="sidebar-item-icon fa fa-file-text" ></i>
                                 <span class="nav-label">Certificates</span>
                             </a>
                         </li>

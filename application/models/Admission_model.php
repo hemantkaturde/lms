@@ -626,7 +626,12 @@ class Admission_model extends CI_Model
                  $data[$counter]['Quntitave_value'] = $Quntitave_value;
                  $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+
+                 if($exam_status){
+
+                 }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+                 }
                  $counter++; 
             }
         }
@@ -746,6 +751,164 @@ public function gettotalmarks($courseId,$exam_id,$userId){
 
     return $fetch_result;
 }
+
+
+
+function studentcertificateCount($params)
+{
+ 
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+    $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.question_status', 'checked');
+
+    $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
+    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+    $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+    return $query->num_rows();
+}
+
+
+function studentcertificateData($params)
+{
+
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+    $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.question_status', 'checked');
+
+    $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
+    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+           $chekc_student_exam_status =  $this->getexamstatus($value['courseId'],$value['id'],$value['userId']);
+
+            if($chekc_student_exam_status[0]['exam_status']){
+                $exam_status = 'Completed';
+            }else{
+                $exam_status = 'Pending';
+            }
+
+            $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
+
+            if($total_marks[0]['totalmarks']){
+                $total_marks=  $total_marks[0]['totalmarks'];
+                $ans_sheet_status ='Checked';
+            }else{
+                $total_marks=0;
+                $ans_sheet_status ='Checking Pending';
+            }
+
+            if($total_marks >= 90 ){
+
+                $grade ='A+';
+                $Grade_point='10';
+                $Remark ='Pass';
+                $Quntitave_value='Outstanding';
+
+            }else if($total_marks >= 80 && $total_marks <= 89){
+
+                $grade ='A';
+                $Grade_point='9';
+                $Remark ='Pass';
+                $Quntitave_value='Excellent';
+
+            } else if($total_marks >= 70 && $total_marks <= 79){
+
+                $grade ='B+';
+                $Grade_point='8';
+                $Remark ='Pass';
+                $Quntitave_value='Very Good';
+
+            } else if($total_marks >= 60 && $total_marks <= 69){
+
+                $grade ='B';
+                $Grade_point='7';
+                $Remark ='Pass';
+                $Quntitave_value='Good';
+
+            }
+            else if($total_marks >= 50 && $total_marks <= 59){
+
+                $grade ='C';
+                $Grade_point='6';
+                $Remark ='Pass';
+                $Quntitave_value='Above Average';
+
+            }
+            else if($total_marks >= 40 && $total_marks <= 49){
+
+                $grade ='D';
+                $Grade_point='5';
+                $Remark ='Pass';
+                $Quntitave_value='Average';
+
+            }
+
+            else if($total_marks >= 40 && $total_marks <= 44){
+
+                $grade ='D';
+                $Grade_point='4';
+                $Remark ='Pass';
+                $Quntitave_value='Poor';
+
+            }
+
+            else if($total_marks <= 40){
+
+                $grade ='D';
+                $Grade_point='0';
+                $Remark ='Fail';
+                $Quntitave_value='Fail';
+
+            }
+
+             $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
+             $data[$counter]['mobile'] = $value['mobile'];
+             $data[$counter]['exam_status'] = $exam_status;
+             $data[$counter]['total_marks'] = $total_marks;
+             $data[$counter]['grade'] = $grade;
+             $data[$counter]['grade_point'] = $Grade_point;
+             $data[$counter]['remark'] = $Remark;
+             $data[$counter]['Quntitave_value'] = $Quntitave_value;
+             $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
+             $data[$counter]['action'] = '';
+             $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='certificate/index.php?student_id=".$value['student_id']."' target='_blank'  class='print_certificate' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Certificate' title='Print Certificate'></a> "; 
+
+             //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+             
+             $counter++; 
+        }
+    }
+
+    return $data;
+}
+
 
 
 

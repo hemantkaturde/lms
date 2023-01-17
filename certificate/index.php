@@ -2,11 +2,24 @@
 
 // include composer packages
 include "vendor/autoload.php";
+include "../db/config.php";
 
+ $student_id = $_GET['student_id'];
+
+ $result = $conn->query("SELECT * from  tbl_users  
+                         join tbl_student_answer_sheet on tbl_users.userid = tbl_student_answer_sheet.student_id
+                         join tbl_course on tbl_student_answer_sheet.course_id = tbl_course.courseId
+                         where tbl_users.userid=$student_id and tbl_users.isDeleted=0 and tbl_users.user_flag='student' group by tbl_student_answer_sheet.student_id");
+
+ $result_arry = $result->fetch_assoc();
+ $student_name = $result_arry['name'].' '.$result_arry['lastname'];
+ $course_name = $result_arry['course_name'];
+ 
 // Create new Landscape PDF
 // $pdf = new FPDI('l');
 
-$pdf = new \setasign\Fpdi\Fpdi('l');
+// $pdf = new \setasign\Fpdi\Fpdi('l');
+$pdf = new \setasign\Fpdi\Fpdi();
 
 // Reference the PDF you want to use (use relative path)
 $pagecount = $pdf->setSourceFile( 'certificate.pdf' );
@@ -26,27 +39,27 @@ $pdf->SetFont('Helvetica');
 
 // First box - the user's Name
 $pdf->SetFontSize('30'); // set font size
-$pdf->SetXY(10, 89); // set the position of the box
-$pdf->Cell(0, 10, 'Niraj Shah', 0, 0, 'C'); // add the text, align to Center of cell
+$pdf->SetXY(10, 160); // set the position of the box
+$pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
 
 // add the reason for certificate
 // note the reduction in font and different box position
 $pdf->SetFontSize('20');
-$pdf->SetXY(80, 105);
-$pdf->Cell(150, 10, 'creating an awesome tutorial', 0, 0, 'C');
+$pdf->SetXY(10, 140);
+$pdf->Cell(0, 10,  $course_name, 0, 0, 'C');
 
-// the day
-$pdf->SetFontSize('20');
-$pdf->SetXY(118,122);
-$pdf->Cell(20, 10, date('d'), 0, 0, 'C');
+// // the day
+// $pdf->SetFontSize('20');
+// $pdf->SetXY(118,122);
+// $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
 
-// the month
-$pdf->SetXY(160,122);
-$pdf->Cell(30, 10, date('M'), 0, 0, 'C');
+// // the month
+// $pdf->SetXY(160,122);
+// $pdf->Cell(30, 10, date('M'), 0, 0, 'C');
 
-// the year, aligned to Left
-$pdf->SetXY(200,122);
-$pdf->Cell(20, 10, date('y'), 0, 0, 'L');
+// // the year, aligned to Left
+// $pdf->SetXY(200,122);
+// $pdf->Cell(20, 10, date('y'), 0, 0, 'L');
 
 // render PDF to browser
 $pdf->Output();

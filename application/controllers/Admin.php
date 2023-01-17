@@ -743,12 +743,7 @@ class Admin extends BaseController
                         $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
                     
                     }
-
             }
-
-            
-           
-            
         }
 
            echo json_encode($savesnswerdata_response);
@@ -758,6 +753,41 @@ class Admin extends BaseController
 
  }
 
+
+    public function crtificateListing(){
+
+        $this->global['pageTitle'] = 'Certificate Listing';
+        $this->loadViews("student/crtificateListing", $this->global, NULL, NULL);
+
+    }
+
+
+    public function fetchallstudentcertificates(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admission_model->studentcertificateCount($params); 
+        $queryRecords = $this->admission_model->studentcertificateData($params); 
+    
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+    
+        echo json_encode($json_data);
+     }
+    
  
 
 }
