@@ -458,11 +458,15 @@ class Admission_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+                if($value['exam_status']==1){
+                    $status = "Active";
+                }else{
+                    $status = "Active";
+                }
+
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['exam_title'] = $value['exam_title'];
-                 $data[$counter]['total_student'] = '10';
-                 $data[$counter]['total_student_attende'] = '10';
-                 $data[$counter]['exam_status'] = 'ss';
+                 $data[$counter]['exam_status'] = $status;
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."checkanswersheet?course_id=".$value['courseId']."&&exam_id=".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
                  $counter++; 
@@ -528,7 +532,6 @@ class Admission_model extends CI_Model
 
         return $data;
     }
-
 }
 
 ?>

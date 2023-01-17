@@ -16,8 +16,8 @@ $jsonstringtoArray = json_decode($access, true);
                             <tr>
                                 <th>Course Name</th>
                                 <th>Examination Title</th>
-                                <th>Total Student</th>
-                                <th>Total Student Attended</th>
+                                <!-- <th>Total Student</th>
+                                <th>Total Student Attended</th> -->
                                 <th>Exam Status</th>
                                 <th>Action</th>
                             </tr>
