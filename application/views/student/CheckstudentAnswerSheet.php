@@ -26,6 +26,9 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Exam Status</th>
                                 <th>Total Marks</th>
                                 <th>Grade</th>
+                                <th>Grade Point</th>
+                                <th>Remark</th>
+                                <th>Quntitave value</th>
                                 <th>Answer Sheet Status</th>
                                 <th>Action</th>
                             </tr>

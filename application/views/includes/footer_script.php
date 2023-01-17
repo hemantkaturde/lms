@@ -4460,13 +4460,16 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			var dt = $('#view_Staudent_result_list').DataTable({
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
-					{ "width": "20%", "targets": 0 },
+					{ "width": "10%", "targets": 0 },
 					{ "width": "10%", "targets": 1 },
 					{ "width": "10%", "targets": 2 },
 					{ "width": "10%", "targets": 3 },
 					{ "width": "10%", "targets": 4 },
-					{ "width": "15%", "targets": 5 },
-					{ "width": "5%", "targets": 6 }
+					{ "width": "10%", "targets": 5 },
+					{ "width": "10%", "targets": 6 },
+					{ "width": "10%", "targets": 7},
+					{ "width": "10%", "targets": 8},
+					{ "width": "5%", "targets": 9}
 				],
 				responsive: true,
 				"oLanguage": {

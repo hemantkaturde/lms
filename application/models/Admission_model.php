@@ -537,16 +537,94 @@ class Admission_model extends CI_Model
                $chekc_student_exam_status =  $this->getexamstatus($value['courseId'],$value['id'],$value['userId']);
 
                 if($chekc_student_exam_status[0]['exam_status']){
-                     $exam_status = 'Completed';
+                    $exam_status = 'Completed';
                 }else{
                     $exam_status = 'Pending';
                 }
+
+                $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
+
+                if($total_marks[0]['totalmarks']){
+                    $total_marks=  $total_marks[0]['totalmarks'];
+                    $ans_sheet_status ='Checked';
+                }else{
+                    $total_marks=0;
+                    $ans_sheet_status ='Checking Pending';
+                }
+
+                if($total_marks >= 90 ){
+
+                    $grade ='A+';
+                    $Grade_point='10';
+                    $Remark ='Pass';
+                    $Quntitave_value='Outstanding';
+
+                }else if($total_marks >= 80 && $total_marks <= 89){
+
+                    $grade ='A';
+                    $Grade_point='9';
+                    $Remark ='Pass';
+                    $Quntitave_value='Excellent';
+
+                } else if($total_marks >= 70 && $total_marks <= 79){
+
+                    $grade ='B+';
+                    $Grade_point='8';
+                    $Remark ='Pass';
+                    $Quntitave_value='Very Good';
+
+                } else if($total_marks >= 60 && $total_marks <= 69){
+
+                    $grade ='B';
+                    $Grade_point='7';
+                    $Remark ='Pass';
+                    $Quntitave_value='Good';
+
+                }
+                else if($total_marks >= 50 && $total_marks <= 59){
+
+                    $grade ='C';
+                    $Grade_point='6';
+                    $Remark ='Pass';
+                    $Quntitave_value='Above Average';
+
+                }
+                else if($total_marks >= 40 && $total_marks <= 49){
+
+                    $grade ='D';
+                    $Grade_point='5';
+                    $Remark ='Pass';
+                    $Quntitave_value='Average';
+
+                }
+
+                else if($total_marks >= 40 && $total_marks <= 44){
+
+                    $grade ='D';
+                    $Grade_point='4';
+                    $Remark ='Pass';
+                    $Quntitave_value='Poor';
+
+                }
+
+                else if($total_marks <= 40){
+
+                    $grade ='D';
+                    $Grade_point='0';
+                    $Remark ='Fail';
+                    $Quntitave_value='Fail';
+
+                }
+
                  $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
                  $data[$counter]['mobile'] = $value['mobile'];
                  $data[$counter]['exam_status'] = $exam_status;
-                 $data[$counter]['total_marks'] = '';
-                 $data[$counter]['grade'] = '';
-                 $data[$counter]['ans_sheet_status'] = '';
+                 $data[$counter]['total_marks'] = $total_marks;
+                 $data[$counter]['grade'] = $grade;
+                 $data[$counter]['grade_point'] = $Grade_point;
+                 $data[$counter]['remark'] = $Remark;
+                 $data[$counter]['Quntitave_value'] = $Quntitave_value;
+                 $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
                  $counter++; 
@@ -654,6 +732,21 @@ public function getquestionPaperListMATCHPAIRInfo($course_id,$examination_id,$st
     return $query->result();
 
 } 
+
+
+
+public function gettotalmarks($courseId,$exam_id,$userId){
+    $this->db->select('sum(marks) as totalmarks');
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $courseId);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+    $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+    $fetch_result = $query->result_array();
+
+    return $fetch_result;
+}
+
 
 
 }

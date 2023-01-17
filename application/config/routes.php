@@ -249,8 +249,6 @@ $route['showexamstatus/(:any)'] = "student/showexamstatus/$1";
 $route['examcheckingList'] = "admin/examcheckingList";
 $route['fetchExamcheckListing'] = "admin/fetchExamcheckListing";
 $route['checkanswersheet?(:any)'] = "admin/checkanswersheet/$1";
-
-
 $route['fetchallstudentansersheet?(:any)'] = "admin/fetchallstudentansersheet/$1";
 $route['addmarkstoexam?(:any)'] = "admin/addmarkstoexam/$1";
 $route['submit_examination_answer_db'] = "admin/submit_examination_answer_db";
