@@ -14,6 +14,8 @@ include "../db/config.php";
  $result_arry = $result->fetch_assoc();
  $student_name = $result_arry['name'].' '.$result_arry['lastname'];
  $course_name = $result_arry['course_name'];
+ $profile_pic = $result_arry['profile_pic'];
+
  
 // Create new Landscape PDF
 // $pdf = new FPDI('l');
@@ -48,10 +50,16 @@ $pdf->SetFontSize('20');
 $pdf->SetXY(10, 140);
 $pdf->Cell(0, 10,  $course_name, 0, 0, 'C');
 
-// // the day
-// $pdf->SetFontSize('20');
-// $pdf->SetXY(118,122);
+// the day
+$pdf->SetFontSize('20');
+$pdf->SetXY(165.50,232);
 // $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
+
+$profile_pic_img = "../uploads/profile_pic/".$profile_pic;
+
+
+$pdf->Cell(8, 8, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 23.78), 0, 0, 'L', false );
+
 
 // // the month
 // $pdf->SetXY(160,122);
