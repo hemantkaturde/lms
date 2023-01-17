@@ -4522,13 +4522,13 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					else if(fetchResponse.status == 'success')
 				    {
 						 swal({
-						 	title: "Examination Submitted Successfully!",
+						 	title: "Exam Chcked Succussfully!",
 						 	//text: "",
 						 	icon: "success",
 						 	button: "Ok",
 						 	},function(){ 
 								$("#popup_modal_sm").hide();
-								window.location.href = "<?php echo base_url().'studentexamination/'?>";
+								window.location.href = "<?php echo base_url()?>/checkanswersheet?course_id="+course_id+"&&exam_id="+examination_id;
 						});						
 				    }
 					

@@ -651,7 +651,6 @@
                         'exam_status' => 'solved',
                     );
 
-
                     $saveAnswerdata = $this->student_model->saveAnswerdata('',$data);
 
                     if($saveAnswerdata){

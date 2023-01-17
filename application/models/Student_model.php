@@ -1018,6 +1018,21 @@ public function checkexamiscompletedornot($userId,$exam_id,$course_id){
 
 }
 
+public function updateAnswerdata($student_id,$course_id,$examination_id,$question_id,$data){
+
+
+        //$this->db->where('id', $id);
+        $this->db->where('question_id', $question_id);
+        $this->db->where('course_id', $course_id);
+        $this->db->where('exam_id', $examination_id);
+        $this->db->where('student_id', $student_id);
+        if($this->db->update(TBL_STUDENT_ANSWER_SHEET, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+}
+
 
 }
 

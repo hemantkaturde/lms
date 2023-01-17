@@ -711,6 +711,53 @@ class Admin extends BaseController
  }
 
 
+ public function submit_examination_answer_db(){
+
+    $exam_answer_data = $this->input->post();
+    $savesnswerdata_response =array();
+    if($exam_answer_data){
+
+        $examination_id = $this->input->post('examination_id');
+        $course_id = $this->input->post('course_id');
+        $student_id = $this->input->post('student_id');
+
+        foreach ($exam_answer_data as $key => $value) {
+            if($key=='examination_id' || $key=='course_id' ||  $key=='student_id'){
+
+            }else{
+
+                   preg_match_all('!\d+\.*\d*!', $key, $matches);
+
+                   $question_id =$matches[0][0];
+
+                    $data = array(
+                        'marks'    => $value,
+                        'question_status' => 'checked',
+                    );
+                    
+                    $updateAnswerdata = $this->student_model->updateAnswerdata($student_id,$course_id,$examination_id,$question_id,$data);
+
+                    if($updateAnswerdata){
+                        
+                        $savesnswerdata_response['status'] = 'success';
+                        $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+                    
+                    }
+
+            }
+
+            
+           
+            
+        }
+
+           echo json_encode($savesnswerdata_response);
+
+    }
+
+
+ }
+
  
 
 }
