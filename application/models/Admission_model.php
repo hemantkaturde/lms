@@ -339,7 +339,7 @@ class Admission_model extends CI_Model
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
         $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
-        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+        // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
 
         if($params['search']['value'] != "") 
         {
@@ -360,7 +360,7 @@ class Admission_model extends CI_Model
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
         $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
-        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+        // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
 
         if($params['search']['value'] != "") 
         {
@@ -368,7 +368,8 @@ class Admission_model extends CI_Model
             $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
         }
         //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
-        $this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+        // $this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_ATTENDANCE);
         $fetch_result = $query->result_array();

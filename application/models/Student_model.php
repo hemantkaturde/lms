@@ -825,6 +825,8 @@ public function getstudentAttendancedata($params,$userId){
     //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
     $this->db->where(TBL_USER.'.userId', $userId);
     //$this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+    $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_ATTENDANCE);
     $fetch_result = $query->result_array();
