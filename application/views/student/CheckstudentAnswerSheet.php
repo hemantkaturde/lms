@@ -14,6 +14,9 @@ $jsonstringtoArray = json_decode($access, true);
                     <p><b>Examination Tilte : </b><?=$examination_info[0]->exam_title;?></p>
                 </div>
 
+                <input type="hidden"  id="course_id" name="course_id" value="<?=$course_id?>">
+                <input type="hidden"  id="exam_id" name="exam_id" value="<?=$exam_id?>">
+
                 <div class="panel-body table-responsive ">
                     <table id="view_Staudent_result_list" class="table table-bordered">
                         <thead>

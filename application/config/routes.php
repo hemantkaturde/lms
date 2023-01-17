@@ -251,7 +251,10 @@ $route['examcheckingList'] = "admin/examcheckingList";
 $route['fetchExamcheckListing'] = "admin/fetchExamcheckListing";
 $route['checkanswersheet?(:any)'] = "admin/checkanswersheet/$1";
 
-$route['fetchallstudentansersheet'] = "admin/fetchallstudentansersheet";
+$route['fetchallstudentansersheet?(:any)'] = "admin/fetchallstudentansersheet/$1";
+
+$route['addmarkstoexam?(:any)'] = "admin/addmarkstoexam/$1";
+
 
 
 

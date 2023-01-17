@@ -4453,6 +4453,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='View Student Result Listing'){ ?>
 <script type="text/javascript">
         $(document).ready(function() {
+			
+			var exam_id = $('#exam_id').val();
+			var course_id = $('#course_id').val();
+
 			var dt = $('#view_Staudent_result_list').DataTable({
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
@@ -4475,7 +4479,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				"bProcessing": true,
 				"serverSide": true,
 				"ajax":{
-					url :"<?php echo base_url();?>fetchallstudentansersheet",
+					url :"<?php echo base_url();?>fetchallstudentansersheet?course_id="+course_id+"&&exam_id="+exam_id,
 					type: "post",
 				},
 			});

@@ -641,6 +641,9 @@ class Admin extends BaseController
 
     $course_id = $this->input->get('course_id');
     $exam_id = $this->input->get('exam_id');    
+    $data['exam_id'] = $this->input->get('exam_id');
+    $data['course_id'] = $this->input->get('course_id'); 
+
     $this->global['pageTitle'] = 'View Student Result Listing';
     $data['examination_info'] = $this->examination_model->getSingleExaminationInfo($exam_id);
     $course_id = $data['examination_info'][0]->course_id;
@@ -652,8 +655,8 @@ class Admin extends BaseController
 
  public function fetchallstudentansersheet(){
 
-    $course_id = 1;
-    $exam_id =7;
+    $course_id = $this->input->get('course_id');
+    $exam_id = $this->input->get('exam_id'); 
 
     $params = $_REQUEST;
     $totalRecords = $this->admission_model->studentansersheetCount($params,$course_id,$exam_id); 
@@ -680,6 +683,32 @@ class Admin extends BaseController
  }
 
 
+
+ public function addmarkstoexam(){
+
+    $course_id = $this->input->get('course_id');
+    $exam_id = $this->input->get('exam_id');   
+    $student_id = $this->input->get('student_id');  
+
+    $data['exam_id'] = $this->input->get('exam_id');
+    $data['course_id'] = $this->input->get('course_id');
+    $data['student_id'] = $this->input->get('student_id'); 
+
+    $this->global['pageTitle'] = 'Submit Marks';
+    $data['exam_detail'] = $this->admission_model->getExamdetails($course_id,$exam_id,$student_id);
+    $data['question_paper'] = $this->admission_model->getstudentexamquestionlist($course_id,$exam_id,$student_id);
+    $data['get_userdetails'] = $this->admission_model->getuserdetails($student_id);
+
+    $course_id = $data['exam_detail'][0]['course_id'];
+    $examination_id = $data['exam_detail'][0]['id'];
+    
+    $data['questionPaperListMCQ'] = $this->admission_model->getquestionPaperListMCQInfo($course_id,$examination_id,$student_id);
+    $data['questionPaperListWRITTEN'] = $this->admission_model->getquestionPaperListWRITTENInfo($course_id,$examination_id,$student_id);
+    $data['questionPaperListMATCHPAIR'] = $this->admission_model->getquestionPaperListMATCHPAIRInfo($course_id,$examination_id,$student_id);
+
+    $this->loadViews("student/examchecking", $this->global, $data, NULL);
+   
+ }
 
 
  

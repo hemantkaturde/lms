@@ -477,22 +477,26 @@ class Admission_model extends CI_Model
     }
 
 
-    function studentansersheetCount($params,$course_id)
+    function studentansersheetCount($params,$course_id,$exam_id)
     {
+     
         $this->db->select('*');
-        $this->db->from('tbl_examination as BaseTbl');
-        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+        $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+
         if($params['search']['value'] != "") 
         {
             $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
             $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.exam_status', 1);
-        $this->db->order_by('BaseTbl.id', 'desc');
-        $query = $this->db->get();
-        
+
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
         return $query->num_rows();
     }
 
@@ -504,6 +508,14 @@ class Admission_model extends CI_Model
         $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
         $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
         $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
+        }
+
         $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
         $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
@@ -518,20 +530,128 @@ class Admission_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+               $chekc_student_exam_status =  $this->getexamstatus($value['courseId'],$value['id'],$value['userId']);
+
+                if($chekc_student_exam_status[0]['exam_status']){
+                     $exam_status = 'Completed';
+                }else{
+                    $exam_status = 'Pending';
+                }
                  $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
                  $data[$counter]['mobile'] = $value['mobile'];
-                 $data[$counter]['exam_status'] = '';
+                 $data[$counter]['exam_status'] = $exam_status;
                  $data[$counter]['total_marks'] = '';
                  $data[$counter]['grade'] = '';
                  $data[$counter]['ans_sheet_status'] = '';
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']." style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
                  $counter++; 
             }
         }
 
         return $data;
     }
+    
+
+    public function getexamstatus($courseId,$exam_id,$userId){
+        $this->db->select('*');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $courseId);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+    }
+
+
+    
+public function getExamdetails($course_id,$exam_id,$student_id){
+
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+    $this->db->where(TBL_EXAMINATION.'.id', $exam_id);
+    $this->db->order_by(TBL_EXAMINATION.'.id', 'ASC');
+    $query = $this->db->get(TBL_EXAMINATION);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
+
+
+public function getstudentexamquestionlist($course_id,$exam_id,$student_id){
+    $this->db->select('*');
+    $this->db->join(TBL_QUESTION_PAPER, TBL_QUESTION_PAPER.'.examination_id = '.TBL_EXAMINATION.'.id');
+    $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_QUESTION_PAPER.'.examination_id = '.TBL_STUDENT_ANSWER_SHEET.'.exam_id');
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $student_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+    $this->db->where(TBL_EXAMINATION.'.id', $exam_id);
+    $this->db->order_by(TBL_EXAMINATION.'.id', 'ASC');
+    $query = $this->db->get(TBL_EXAMINATION);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+public function getuserdetails($student_id){
+    $this->db->select('name,lastname,mobile');
+    $this->db->where(TBL_USER.'.userid', $student_id);
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+public function getquestionPaperListMCQInfo($course_id,$examination_id,$student_id){
+        
+    $this->db->select('*');
+    $this->db->from(TBL_QUESTION_PAPER);
+    $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.question_id ='.TBL_QUESTION_PAPER.'.id');
+    // $this->db->where(TBL_QUESTION_PAPER.'.isDeleted', 0);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $examination_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $student_id);
+    $this->db->where(TBL_QUESTION_PAPER.'.question_type', 'MCQ');
+    $query = $this->db->get();
+    return $query->result();
+
+} 
+
+public function getquestionPaperListWRITTENInfo($course_id,$examination_id,$student_id){
+        
+       
+    $this->db->select('*');
+    $this->db->from(TBL_QUESTION_PAPER);
+    $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.question_id ='.TBL_QUESTION_PAPER.'.id');
+    // $this->db->where(TBL_QUESTION_PAPER.'.isDeleted', 0);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $examination_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $student_id);
+    $this->db->where(TBL_QUESTION_PAPER.'.question_type', 'WRITTEN');
+    $query = $this->db->get();
+    return $query->result();
+
+} 
+
+
+public function getquestionPaperListMATCHPAIRInfo($course_id,$examination_id,$student_id){
+        
+    $this->db->select('*');
+    $this->db->from(TBL_QUESTION_PAPER);
+    $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.question_id ='.TBL_QUESTION_PAPER.'.id');
+    // $this->db->where(TBL_QUESTION_PAPER.'.isDeleted', 0);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $examination_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $student_id);
+    $this->db->where(TBL_QUESTION_PAPER.'.question_type', 'MATCH_PAIR');
+    $query = $this->db->get();
+    return $query->result();
+
+} 
+
+
 }
 
 ?>

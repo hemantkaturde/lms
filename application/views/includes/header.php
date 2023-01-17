@@ -319,7 +319,7 @@ $jsonstringtoArray = json_decode($access, true);
 
                         
                         <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>
-                        <li class="<?php if($pageUrl =='examcheckingList' || $pageUrl=='checkanswersheet'){ echo 'active';} ?>">
+                        <li class="<?php if($pageUrl =='examcheckingList' || $pageUrl=='checkanswersheet' || $pageUrl=='addmarkstoexam'){ echo 'active';} ?>">
                             <a href="<?php echo base_url().'examcheckingList'; ?>"><i class="sidebar-item-icon fa fa-check-square-o" ></i>
                                 <span class="nav-label">Check Exam / Results</span>
                             </a>
