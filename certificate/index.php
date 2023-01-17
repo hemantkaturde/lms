@@ -55,10 +55,13 @@ $pdf->SetFontSize('20');
 $pdf->SetXY(165.50,232);
 // $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
 
+if($profile_pic){
+
 $profile_pic_img = "../uploads/profile_pic/".$profile_pic;
 
 
 $pdf->Cell(8, 8, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 23.78), 0, 0, 'L', false );
+}
 
 
 // // the month
