@@ -29,11 +29,16 @@
                     <td><?=$value['classtime'] ?></td>
                     <td><?=$value['link_url'] ?></td>
                     <td>
+
+			
+
+					 <?php if($value['attendance_alreday_exits']!='1'){ ?>
                        <?php if($value['link_url']){?>
                              <button id="join_link" style="width: 51%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
                        <?php } else{ ?>
                              <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
                        <?php }?>
+					 <?php } ?>  
                     </td>
                 </tr>
              <?php }  ?>   
@@ -176,7 +181,7 @@ $(document).ready(function(){
                                         //window.location.href = meeting_link;
                                         //window.open(meeting_link, '_blank');
 
-										//window.location.href = "<?php echo base_url().'dashboard'?>";
+										window.location.href = "<?php echo base_url().'dashboard'?>";
 								});						
 							}
 							

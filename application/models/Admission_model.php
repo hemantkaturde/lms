@@ -307,6 +307,19 @@ class Admission_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+
+                    $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+
+                    if($checkattendance){
+
+                        $attendance_alreday_exits = 1 ;
+
+                    }else{
+                        $attendance_alreday_exits = 0 ;
+                    }
+
+
+                 
                     // $data[$counter]['courseId'] = $value['courseId'];
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['title'] = $value['topic'];
@@ -318,6 +331,7 @@ class Admission_model extends CI_Model
                     $data[$counter]['topicid'] = $value['topicid'];
                     $data[$counter]['userid'] =  $userId;
                     $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
                     $data[$counter]['action'] = '';
                  $counter++; 
             }
@@ -329,6 +343,21 @@ class Admission_model extends CI_Model
        }
  
        return $data;
+
+    }
+
+
+    public function checkifAttendanceisexits($userId,$courseId,$topicid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_ATTENDANCE.'.course_id', $courseId);
+        $this->db->where(TBL_ATTENDANCE.'.topic_id', $topicid);
+        $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
 
     }
 
