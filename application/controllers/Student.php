@@ -688,6 +688,45 @@
 
         }
 
+
+
+        
+    public function studentcrtificateListing(){
+
+        $this->global['pageTitle'] = 'Student Certificate Listing';
+        $this->loadViews("student/crtificateListingStudentportal", $this->global, NULL, NULL);
+
+    }
+
+
+    public function fetchallstudentcertificatesstudentPortal(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->student_model->studentcertificateCount($params); 
+        $queryRecords = $this->student_model->studentcertificateData($params); 
+    
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+    
+        echo json_encode($json_data);
+    }
+
+
+
     }
 
 ?>

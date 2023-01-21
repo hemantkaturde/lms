@@ -252,9 +252,11 @@ $route['checkanswersheet?(:any)'] = "admin/checkanswersheet/$1";
 $route['fetchallstudentansersheet?(:any)'] = "admin/fetchallstudentansersheet/$1";
 $route['addmarkstoexam?(:any)'] = "admin/addmarkstoexam/$1";
 $route['submit_examination_answer_db'] = "admin/submit_examination_answer_db";
-
 $route['crtificateListing'] = "admin/crtificateListing";
 $route['fetchallstudentcertificates'] = "admin/fetchallstudentcertificates";
+$route['studentcrtificateListing'] = "student/studentcrtificateListing";
+$route['fetchallstudentcertificatesstudentPortal'] = "student/fetchallstudentcertificatesstudentPortal";
+
 
 
 
