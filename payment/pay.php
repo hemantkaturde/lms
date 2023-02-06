@@ -124,7 +124,7 @@
                         style="margin-bottom:15px">
 
                         <div class="price-wrap h5">
-                            <input type="number" id="final_student_amount" name="final_student_amount"
+                            <input type="number" id="final_student_amount" placeholder="Enter Amount"  name="final_student_amount"
                                 class="form-control col-md-12 col-xs-12">
                             <span id="error"> <span>
                         </div>

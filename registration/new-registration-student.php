@@ -289,7 +289,7 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
 <html>
 
 <head>
-    <title>Admission Alreday Done</title>
+    <title>Admission Form Already Submitted</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
 </head>
@@ -299,7 +299,7 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
         <div class="card-body text-center">
             <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
 
-            <h2 class="text-black"><b>!! Admission Alreday Done !!</b><br></h2>
+            <h2 class="text-black"><b>!! Admission Form Already Submitted !!</b><br></h2>
         </div>
         
     </article>
