@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                     if($conn->query($insert_last_enquiry)=== TRUE){
 
                     $to = $email;
-                    $Subject = 'IICTN -  Login Link '.date('Y-m-d H:i:s');
+                    $Subject = 'IICTN -  Login Link - Email Id And Password'.date('Y-m-d H:i:s');
                     $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
                     <head>
                         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

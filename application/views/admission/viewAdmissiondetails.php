@@ -2,8 +2,8 @@
     <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Admission form</div>
-                <div class="ibox-title"><button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form</div>
+                <div style="margin-left: 474px;"><div class="ibox-title">Admission form</div></div>
+                <div><div class="ibox-title"><button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form</div></div>
 
                 
             </div>
