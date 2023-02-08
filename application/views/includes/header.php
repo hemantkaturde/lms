@@ -505,3 +505,22 @@ $jsonstringtoArray = json_decode($access, true);
         .loader_ajax_inner {background: transparent url("<?php echo ICONPATH;?>/bg.png") no-repeat scroll center center;height: 44px;left: 50%;margin: -22px 0 0 -22px;position: absolute;top: 50%;width: 44px;}
         .loader_ajax img {margin: 9px 0 0 8px;width: 28px;}
     </style>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $(this).bind("contextmenu", function(e) {
+        e.preventDefault();
+    });
+}); 
+</script>
+<script type="text/JavaScript"> 
+    function killCopy(e){ return false } 
+    function reEnable(){ return true } 
+    document.onselectstart=new Function ("return false"); 
+    if (window.sidebar)
+    { 
+        document.onmousedown=killCopy; 
+        document.onclick=reEnable; 
+    } 
+</script>
