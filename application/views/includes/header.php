@@ -506,7 +506,7 @@ $jsonstringtoArray = json_decode($access, true);
         .loader_ajax img {margin: 9px 0 0 8px;width: 28px;}
     </style>
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
     $(this).bind("contextmenu", function(e) {
@@ -523,4 +523,4 @@ $(function() {
         document.onmousedown=killCopy; 
         document.onclick=reEnable; 
     } 
-</script>
+</script> -->

@@ -4563,7 +4563,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					{ "width": "10%", "targets": 6 },
 					{ "width": "10%", "targets": 7},
 					{ "width": "10%", "targets": 8},
-					{ "width": "5%", "targets": 9}
+					{ "width": "7%", "targets": 9}
 				],
 				responsive: true,
 				"oLanguage": {
@@ -4581,6 +4581,71 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				},
 			});
 	   });
+
+	   
+	   $(document).on('click','.addevbtr',function(e){
+	        var certificate_id = $(this).attr('rg-id');
+			$(".certificate_id").val(certificate_id);
+
+		    $('#modalRegister').modal('show');
+		});
+      
+
+		$(document).on('click','#submitEvbtr',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#update_evbtr_numnber")[0]);
+
+			var certificate_id = $('#certificate_id').val();
+			var evbtrdate = $('#evbtrdate').val();
+			var evbtr = $('#evbtr').val();
+			var remark = $('#remark').val();
+
+			$.ajax({
+				url : "<?php echo base_url();?>updateevbtrnumber",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+
+
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+
+						swal({
+						 	title: "EVBTR Number Succussfully Updated !",
+						 	//text: "",
+						 	icon: "success",
+						 	button: "Ok",
+						 	},function(){ 
+								$("#modal-md").hide();
+								window.location.href = "<?php echo base_url()?>/crtificateListing";		
+							});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+
       
 </script>
 <?php } ?>
@@ -4602,7 +4667,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					{ "width": "10%", "targets": 6 },
 					{ "width": "10%", "targets": 7},
 					{ "width": "10%", "targets": 8},
-					{ "width": "5%", "targets": 9}
+					{ "width": "10%", "targets": 9}
 				],
 				responsive: true,
 				"oLanguage": {
@@ -4620,7 +4685,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				},
 			});
 	   });
-      
 </script>
 <?php } ?>
 

@@ -34,3 +34,70 @@ $jsonstringtoArray = json_decode($access, true);
         </div>
     </div>
     <!-- END PAGE CONTENT-->
+
+<div id="modalRegister" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <?php
+                        $attributes = array("name"=>"update_evbtr_numnber","id"=>"update_evbtr_numnber","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+                        echo form_open("", $attributes);
+                        
+                    ?>
+                <form role="form" id="update_evbtr_numnber">
+
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:black">
+                    Add EVBTR Number
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;</button>
+            </div>
+
+            
+
+            <div class="modal-body">
+
+               
+                <input type="hidden" id="certificate_id" class="certificate_id" name="certificate_id" ></input>
+
+                <div class="form-group">
+                    <label style="text-align: left;" for="evbtrdate">Date<span class="required">*</span>
+                    </label>
+                    <div>
+                        <input autocomplete="off" autocomplete="off" type="text" id="evbtrdate" name="evbtrdate" placeholder="Enter Date" class="datepicker form-control col-md-12 col-xs-12">
+                        <p class="error evbtrdate_error"></p>
+                    </div>
+                </div>  
+
+                <div class="form-group">
+                    <label style="text-align: left;" for="evbtr">Enter EVBTR Number<span class="required">*</span>
+                    </label>
+                    <div>
+                        <input autocomplete="off" autocomplete="off" type="text" id="evbtr" name="evbtr" placeholder="Enter EVBTR Number" class="form-control col-md-12 col-xs-12">
+                        <p class="error evbtr_error"></p>
+                    </div>
+                </div>      
+                
+                <div class="form-group">
+                    <label style="text-align: left;" for="remark">Remark
+                    </label>
+                    <div>
+                        <textarea class="form-control" id="remark"  name="remark" rows="3" placeholder="Enter Remark here..."></textarea>
+                        <p class="error remark_error"></p>
+                    </div>
+                </div>    
+               
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" id="submitEvbtr" name="submitEvbtr" class="btn btn-success" id="submit">
+                <input type="button" id="btnClosePopup" value="Close" class="btn btn-danger" data-dismiss="modal" />
+            </div>
+
+            </form>
+            <?php echo form_close(); ?>
+
+        </div>
+    </div>
+</div>

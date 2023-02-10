@@ -1225,6 +1225,17 @@ public function gettotalmarks($courseId,$exam_id,$userId){
 }
 
 
+public function updateEvbtrNumber($certificate_id,$data){
+
+    $this->db->where('userId', $certificate_id);
+    if($this->db->update(TBL_USER, $data)){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+
 }
 
 ?>

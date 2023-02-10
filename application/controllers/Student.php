@@ -726,6 +726,45 @@
     }
 
 
+    public function updateevbtrnumber(){
+
+        $post_submit =  $this->input->post();
+
+        if(!empty($post_submit)){
+
+                 $save_evbtr_response = array();
+
+                 $certificate_id= $this->input->post('certificate_id');
+
+                 $data = array(
+                     //'certificate_id' => $this->input->post('certificate_id'),
+                     'evbtrdate' => date('Y-m-d', strtotime($this->input->post('evbtrdate'))),
+                     'evbtr' => $this->input->post('evbtr'),
+                     'evbtrremark' => $this->input->post('remark'),
+                 );
+
+                 $this->form_validation->set_rules('evbtrdate', 'Evbtr Date', 'trim|required');
+                 $this->form_validation->set_rules('evbtr', 'EVBTR Number', 'trim|required');
+
+                 if($this->form_validation->run() == FALSE){
+
+                     $save_evbtr_response['status'] = 'failure';
+                     $save_evbtr_response['error'] = array('evbtrdate'=>strip_tags(form_error('evbtrdate')),'evbtr'=>strip_tags(form_error('evbtr')));
+
+                 }else{
+                         $updateEvbtrNumber = $this->student_model->updateEvbtrNumber($certificate_id,$data);
+                         if($updateEvbtrNumber){
+                             $save_evbtr_response['status'] = 'success';
+                             $save_evbtr_response['error'] = array('evbtrdate'=>'','evbtr'=>'');
+                         }
+                 }
+                 
+          }
+          echo json_encode($save_evbtr_response);
+     }
+
+
+
 
     }
 
