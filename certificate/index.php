@@ -78,7 +78,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
 $pdf->SetFontSize('20');
 $pdf->SetXY(15,232);
 
-$content = $base.'/certificate/certificate_overview.html' ;
+$content = $base.'certificate_overview.html' ;
 QRcode::png($content,'QR_CODE.png') ;
 
 $orcode_file = "QR_CODE.png";
