@@ -18,6 +18,7 @@ include "phpqrcode/qrlib.php" ;
  $course_name = $result_arry['course_name'];
  $profile_pic = $result_arry['profile_pic'];
  $mobile = $result_arry['mobile'];
+ $evbtr = $result_arry['evbtr'];
 
  
 // Create new Landscape PDF
@@ -46,6 +47,12 @@ $pdf->SetFont('Helvetica');
 $pdf->SetFontSize('30'); // set font size
 $pdf->SetXY(10, 160); // set the position of the box
 $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
+
+// First box - the user's Name
+$pdf->SetFontSize('10'); // set font size
+$pdf->SetXY(110, 205); // set the position of the box
+$pdf->Cell(0, 1,  $evbtr, 0, 0, 'C'); // add the text, align to Center of cell
+
 
 // add the reason for certificate
 // note the reduction in font and different box position
