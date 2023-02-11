@@ -3,6 +3,8 @@
 // include composer packages
 include "vendor/autoload.php";
 include "../db/config.php";
+include "phpqrcode/qrlib.php" ;
+    
 
  $student_id = $_GET['student_id'];
 
@@ -15,6 +17,7 @@ include "../db/config.php";
  $student_name = $result_arry['name'].' '.$result_arry['lastname'];
  $course_name = $result_arry['course_name'];
  $profile_pic = $result_arry['profile_pic'];
+ $mobile = $result_arry['mobile'];
 
  
 // Create new Landscape PDF
@@ -56,12 +59,44 @@ $pdf->SetXY(165.50,232);
 // $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
 
 if($profile_pic){
-
-$profile_pic_img = "../uploads/profile_pic/".$profile_pic;
-
-
-$pdf->Cell(8, 8, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 23.78), 0, 0, 'L', false );
+    $profile_pic_img = "../uploads/profile_pic/".$profile_pic;
+    $pdf->Cell(8, 8, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 23.78), 0, 0, 'L', false );
 }
+
+
+if($_SERVER['HTTP_HOST']=='localhost'){
+    $base  = "http://".$_SERVER['HTTP_HOST'];
+    $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+
+}else{
+    $base  = "https://".$_SERVER['HTTP_HOST'];
+    $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+
+}
+
+
+$pdf->SetFontSize('20');
+$pdf->SetXY(15,232);
+
+$content = $base.'/certificate/certificate_overview.html' ;
+QRcode::png($content,'QR_CODE.png') ;
+
+$orcode_file = "QR_CODE.png";
+$pdf->Cell(8, 8, $pdf->Image($orcode_file, $pdf->GetX(), $pdf->GetY(), 23.78), 0, 0, 'L', false );
+
+
+$pdf->SetFontSize('10');
+$pdf->SetXY(42,270.2);
+$pdf->Cell(0, 1,  '11-02-2023', 0, 0, 'L');
+
+
+$pdf->SetFontSize('10');
+$pdf->SetXY(42,275.6);
+$pdf->Cell(0, 1,  '11-02-2023', 0, 0, 'L');
+
+$pdf->SetFontSize('10');
+$pdf->SetXY(172,275.6);
+$pdf->Cell(0, 1,  $mobile, 0, 0, 'L');
 
 
 // // the month

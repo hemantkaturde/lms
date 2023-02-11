@@ -4586,8 +4586,11 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	   $(document).on('click','.addevbtr',function(e){
 	        var certificate_id = $(this).attr('rg-id');
 			$(".certificate_id").val(certificate_id);
-
+			$("#evbtr").val($(this).attr('evbtr-no'));
+			$("#evbtrdate").val($(this).attr('evbtr-date'));
+			$("#remark").val($(this).attr('evbtr-remark'));
 		    $('#modalRegister').modal('show');
+
 		});
       
 
@@ -4631,7 +4634,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						 	button: "Ok",
 						 	},function(){ 
 								$("#modal-md").hide();
-								window.location.href = "<?php echo base_url()?>/crtificateListing";		
+								window.location.href = "<?php echo base_url()?>crtificateListing";		
 							});		
 				    }
 					
@@ -4644,9 +4647,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			return false;
 	    });
 
-
-
-      
 </script>
 <?php } ?>
 
