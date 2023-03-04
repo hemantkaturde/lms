@@ -16,7 +16,7 @@ $sql = "UPDATE tbl_enquiry SET payment_status=1 WHERE enq_id=$id";
 if ($conn->query($sql) === TRUE) {
   $to = $row['enq_email'];
  
-  $Subject = 'IICTN - Payment Recipt '.date('Y-m-d H:i:s');
+  $Subject = 'IICTN - Payment Receipt '.date('Y-m-d H:i:s');
 //   $Body  = '<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 //   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>file_1664624919892</title><meta name="author" content="Microsoft Office User"/><style type="text/css"> * {margin:0; padding:0; text-indent:0; }
 //    .s1 { color: #212121; font-family:"Times New Roman", serif; font-style: normal; font-weight: normal; text-decoration: none; font-size: 12pt; }
@@ -78,7 +78,7 @@ if ($conn->query($sql) === TRUE) {
 
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/tax_invoice/index.php?enq_id='.$enq_id.'&paymentid='.$row_last_payment['id']; ?>">Download Payment Receipt </a></p>
 
-            <p><b>Addmission Form : </b></p>
+            <p><b>Admission Form : </b></p>
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p>
 
             <p>Kindly contact your councillors for more Details</p>
