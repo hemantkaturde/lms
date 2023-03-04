@@ -215,7 +215,7 @@
             e.preventDefault();
 
         } else {
-            alert('Enter Fees Amount');
+            alert('Enter Amount');
         }
     });
     </script>
