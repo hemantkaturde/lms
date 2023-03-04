@@ -39,11 +39,11 @@ if ($conn->query($sql) === TRUE) {
 
   //$Body = 'This is test Email';
 
-  $Body   = '<p>Dear '.$row['enq_fullname']. ' Thank you For Choosing IICTN</p>';
+  $Body   = '<p>Dear '.$row['enq_fullname'].',</p>';
   $Body  .= '<p>Thank you For Choosing IICTN</p>';
   $Body  .= '<p>Click On the Below Link to fill Admission Form</p>';
   $Body  .= '<p><B>Admission Link</B>: https://iictn.in/registration/new-registration-student.php?enq='. $row['enq_id'].'</p>';
-  $Body  .= '<p>Click to Downlaod Payment Receipt</p>';
+  $Body  .= '<p>Click to Download Payment Receipt</p>';
   $Body  .= '<p><B>Payment Receipt</B> : https://iictn.in/tax_invoice/index.php?enq_id='.$row['enq_id'].'&paymentid='.$row_last_payment['id'].'</p>';
 
   $header = "From: IICTN-Team <enquiry@iictn.in> \r\n";
