@@ -215,7 +215,7 @@
             e.preventDefault();
 
         } else {
-            alert('Custom Payment is Required');
+            alert('Enter Fees Amount');
         }
     });
     </script>
