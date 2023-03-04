@@ -2,18 +2,16 @@
     <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
-                <!-- <div>
+                <div>
             <button type="button" class="btn btn-primary">
               <a href="<?php echo base_url().'/enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
             </button>
-            </div> -->
+            </div>
                 <div class="ibox-title">Payment Details - Enquiry Number <?=$followDataenquiry[0]->enq_number;?>
                     <small>( <?=$followDataenquiry[0]->enq_fullname?> )</small>
                 </div>
 
-                <button type="button" class="btn btn-primary">
-                                                <a href="<?php echo base_url().'/enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
-                </button>
+            
                 <!-- <div class="ibox-title">Enquiry Follow Up - <?=$followDataenquiry[0]->enq_number;?> <small>( <?=$followDataenquiry[0]->enq_fullname?> )</small></div>    -->
             </div>
             <div class="ibox-body">
