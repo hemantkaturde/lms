@@ -224,7 +224,7 @@
                                             <table id="" class="table table-striped ">
                                                 <tr style="">
                                                     <th>Payment Date</th>
-                                                    <th>Transection Id</th>
+                                                    <th>Transaction Id</th>
                                                     <th>Amount</th>
                                                     <th>Payment Mode</th>
                                                     <th>Status</th>

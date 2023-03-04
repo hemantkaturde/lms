@@ -97,7 +97,7 @@
                     <div class="img-wrap"><img src="https://iictn.in/assets/img/logos/iictn_lms.png">
                     </div>
                     <figcaption class="info-wrap ">
-                        <h4 class="title">Contact Infromation</h4>
+                        <h4 class="title">Contact Information</h4>
                         <div class="rating-wrap">
                             <div class="label-rating"><b>Enquiry Number : </b><?php echo $row['enq_number']; ?> </div>
                             <br>
