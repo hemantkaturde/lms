@@ -46,6 +46,22 @@ if ($conn->query($sql) === TRUE) {
   $Body  .= '<p>Click to Download Payment Receipt</p>';
   $Body  .= '<p><B>Payment Receipt</B> : https://iictn.in/tax_invoice/index.php?enq_id='.$row['enq_id'].'&paymentid='.$row_last_payment['id'].'</p>';
 
+  $Body  .= '<p><B> Following Procedure You Have</B></p>';
+
+  $Body  .= '<p> Step 1 - Admission Form</p>';
+
+  $Body  .= '<p> Step 2 - Login With User Id & Password </p>';
+
+  $Body  .= '<p> Step 3 - Attend Lecture & Practicals</p>';
+
+  $Body  .= '<p> Step 4 - Appear For Exams</p>';
+
+  $Body  .= '<p> Step 5 - Apply For Certification</p>';
+
+  $Body  .= '<p> Step 6 - Received Certificate</p>';
+
+
+
   $header = "From: IICTN-Team <enquiry@iictn.in> \r\n";
   //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
   $header .= "MIME-Version: 1.0\r\n";
