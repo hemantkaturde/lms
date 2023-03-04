@@ -22,8 +22,9 @@
                                     <th>Name</th>
                                     <th>Mobile No</th>
                                     <th>Amount</th>
+                                    <th>Fees Amount Paid</th>
                                     <!-- <th>Paid Before</th> -->
-                                    <th>Fees Paid</th>
+                                    <th>Fees Paid Before</th>
                                     <!-- <th>Total Amount</th> -->
                                     <th>Total Fees</th>
                                     <!-- <th>Amount Balance</th> -->
