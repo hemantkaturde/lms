@@ -66,5 +66,5 @@ $pdf->Cell(0, 10,  $mobile, 0, 0, 'C'); // add the text, align to Center of cell
 
 
 // render PDF to browser
-$pdf->Output('I');
+$pdf->Output('Certifucate_overview.pdf','I');
 
