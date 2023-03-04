@@ -256,7 +256,6 @@ $route['crtificateListing'] = "admin/crtificateListing";
 $route['fetchallstudentcertificates'] = "admin/fetchallstudentcertificates";
 $route['studentcrtificateListing'] = "student/studentcrtificateListing";
 $route['fetchallstudentcertificatesstudentPortal'] = "student/fetchallstudentcertificatesstudentPortal";
-
 $route['updateevbtrnumber'] = "student/updateevbtrnumber";
 
 
