@@ -115,7 +115,7 @@ $pdf->Cell(0, 1,  $mobile, 0, 0, 'L');
 // $pdf->Cell(20, 10, date('y'), 0, 0, 'L');
 
 // render PDF to browser
-$pdf->Output();
+$pdf->Output('I');
 
 
 ?>
