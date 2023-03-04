@@ -22,7 +22,7 @@
             <p>Payment Receipt : </p>
             <p><a class="" target="_blank"  href="<?php echo base_url().'paymentrecipt/'.$enq_id; ?>">Download Payment Receipt </a></p>
 
-            <p>Addmission Form : </p>
+            <p>Admission Form : </p>
             <p><a class="" target="_blank"  href="<?php echo base_url().'new-registration-student/'.$enq_id; ?>">Admission Form Link </a></p>
 
             <p>Kindly contact your councillors for more Details</p>
