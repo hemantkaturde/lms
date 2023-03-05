@@ -178,6 +178,41 @@
 
         }
 
+        public function studentbookissued($id){
+            $this->global['pageTitle'] = 'Student Book Issue';
+            $data['enq_course_list'] = $this->student_model->getCourseDetailsforBooksAddedornot($id);
+            $data['student_id'] = $id;
+            $this->loadViews("student/studentbookissued", $this->global, $data, NULL);
+        }
+
+
+        public function update_book_issued(){
+
+            $post_submit = $this->input->post();
+            $updatebookissued_response = array();
+            if($post_submit){
+
+                $student_id = $this->input->post('student_id');
+                $course_check = $this->input->post('course_check');
+
+                $data = array(
+                    'book_issued'      => json_encode($course_check),
+                );
+                /* Update Course */
+
+                $updatebookissueddata = $this->student_model->updatebookissued($student_id,$data);
+
+                if($updatebookissueddata){
+                    $updatebookissued_response['status'] = 'success';
+                }
+
+                echo json_encode($updatebookissued_response);
+            }
+           
+
+        }
+
+
         public function deleteStudent(){
 
             $post_submit = $this->input->post();

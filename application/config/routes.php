@@ -139,6 +139,8 @@ $route['studentListing'] = "student/studentListing";
 $route['deletestudent'] = "student/deleteStudent";
 $route['fetchstudentlist'] = "student/fetchstudentlist";
 $route['editstudent/(:num)'] = "student/editstudent/$1";
+$route['studentbookissued/(:num)'] = "student/studentbookissued/$1";
+$route['update_book_issued'] = "student/update_book_issued";
 
 
 

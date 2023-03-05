@@ -338,7 +338,7 @@ $jsonstringtoArray = json_decode($access, true);
                         
                         <?php if (in_array("studentmodule", $jsonstringtoArray)){?>
                         <li>
-                            <li class="<?php if($pageUrl =='studentListing' || $pageUrl =='editstudent'){ echo 'active';} ?>">
+                            <li class="<?php if($pageUrl =='studentListing' || $pageUrl =='editstudent' || $pageUrl =='studentbookissued'){ echo 'active';} ?>">
                                 <a href="<?php echo base_url()."studentListing"; ?>" ><i class="sidebar-item-icon fa fa-users"></i>
                                     <span class="nav-label">Student Portal</span>
                                 </a>

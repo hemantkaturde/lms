@@ -3688,7 +3688,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-<?php if($pageTitle=='Student Listing' || $pageTitle=='Student Edit'){ ?>
+<?php if($pageTitle=='Student Listing' || $pageTitle=='Student Edit' || $pageTitle=='Student Book Issue'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
 					var dt = $('#studentList').DataTable({
@@ -3764,10 +3764,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					return false;
 			});
 
-
 			$(document).on('click','.delete_student',function(e){
 			var elemF = $(this);
-
 			e.preventDefault();
 
 				// swal({
@@ -3839,9 +3837,54 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				// 	swal("Cancelled", " ", "error");
 				// 	}
 				// });
-	});
+	        });
 
 
+			$(document).on('click','#update_book_issued',function(e){
+					e.preventDefault();
+					//$(".loader_ajax").show();
+					var formData = new FormData($("#update_book_issued_form")[0]);
+					var student_id =  $('#student_id').val();
+					$.ajax({
+						url : "<?php echo base_url();?>update_book_issued",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Book Issue Successfully Updated",
+									//text: "",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										$("#popup_modal_md").hide();
+										window.location.href = "<?php echo base_url().'studentbookissued/'?>"+student_id;
+								});						
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+			});
+			
     </script>
 
 <?php } ?>

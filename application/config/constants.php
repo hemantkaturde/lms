@@ -110,8 +110,6 @@ define('TBL_USERS_ENQUIRES', 'tbl_users_enquires');
 define('TBL_ATTENDANCE', 'tbl_attendance');
 define('TBL_STUDENT_ANSWER_SHEET', 'tbl_student_answer_sheet');
 
-
-
 define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','test@qelocityindia.com');	// Your system name
