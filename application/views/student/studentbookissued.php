@@ -29,13 +29,18 @@
                             // print_r($student_id);
                             $book_issued_checked =    json_decode($enq_course_list[0]['book_issued']);
                              
-
-                            if (in_array($get_course_fees[0]->courseId, $book_issued_checked))
-                            {
-                                $checked ='checked';
+                            if($book_issued_checked){
+                                if (in_array($get_course_fees[0]->courseId, $book_issued_checked))
+                                {
+                                    $checked ='checked';
+                                }else{
+                                    $checked ='';
+                                }
                             }else{
                                 $checked ='';
                             }
+
+                          
                             // if($book_issued_checked){
 
                             //     if($get_course_fees[0]->courseId==$book_issued_checked[$i]){
