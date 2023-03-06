@@ -81,8 +81,8 @@ $jsonstringtoArray = json_decode($access, true);
                             </div>    
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" id="submitEvbtr" name="submitEvbtr" class="btn btn-success" id="submit">
-                            <input type="button" id="btnClosePopup" value="Close" class="btn btn-danger" data-dismiss="modal" />
+                            <input type="submit" id="submitEvbtr" name="submitEvbtr" class="btn btn-success" id="submit" style="background: #d2ae6d;border: #d2ae6d;color: black;">
+                            <input type="button" id="btnClosePopup" value="Close" class="btn btn-danger" data-dismiss="modal" style=" background: #727b84;border: #727b84; color: black;" />
                         </div>
                     </form>    
             <?php echo form_close(); ?>
