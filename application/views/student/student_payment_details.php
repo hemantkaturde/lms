@@ -191,6 +191,11 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                                         <label for="" style="margin-top:15px;color: #d2ae6d"> <h4><b>All Transaction List</b><h4></label>
                                                     </div>
+                                                    <?php if($pending_amount > 0){ ?>
+                                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: end;">
+                                                        <label for="" style="margin-top:15px;color: #d2ae6d"><b><a href="<?php echo base_url().'/payment/pay.php?enq='.$followDataenquiry[0]->enq_number;?>" target="_blank" style="color: black !important">Pay Pending Payment <i class="fa fa-arrow-right" aria-hidden="true"></i></a></b></label>
+                                                    </div>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
 
