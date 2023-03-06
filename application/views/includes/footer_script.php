@@ -3942,7 +3942,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					showCancelButton: true,
 					closeOnClickOutside: false,
 					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, delete it!",
+					confirmButtonText: "Yes, Update It!",
 					cancelButtonText: "No, cancel plz!",
 					closeOnConfirm: false,
 					closeOnCancel: false
