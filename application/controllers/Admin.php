@@ -754,15 +754,15 @@ class Admin extends BaseController
  }
 
 
-    public function crtificateListing(){
+ public function crtificateListing(){
 
         $this->global['pageTitle'] = 'Certificate Listing';
         $this->loadViews("student/crtificateListing", $this->global, NULL, NULL);
 
-    }
+ }
 
 
-    public function fetchallstudentcertificates(){
+ public function fetchallstudentcertificates(){
 
         $params = $_REQUEST;
         $totalRecords = $this->admission_model->studentcertificateCount($params); 
@@ -786,8 +786,13 @@ class Admin extends BaseController
             );
     
         echo json_encode($json_data);
-    }
+ }
     
+ public function printmarksheet(){
+
+
+    
+ }
  
 
 }

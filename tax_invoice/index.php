@@ -6,7 +6,7 @@
 
    $enq_id = $_GET['enq_id'];
    $paymentid = $_GET['paymentid'];
-   $result = $conn->query("SELECT *,tbl_users.name as counsellor_name,ab.name as conser_name  FROM tbl_payment_transaction  
+   $result = $conn->query("SELECT *,tbl_users.name as counsellor_name,ab.name as conser_name,tbl_payment_transaction.id as invoice_number  FROM tbl_payment_transaction  
                            join tbl_enquiry on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id
                            left join tbl_users ab on tbl_enquiry.counsellor_id = ab.userId 
                            left join tbl_admission on tbl_admission.enq_id = tbl_enquiry.enq_id 
@@ -70,7 +70,7 @@
          // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(173, 46); // set the position of the box
-        $pdf->Cell(160, 1, $result_arry['id'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(160, 1, $result_arry['invoice_number'], 0, 0, 'L'); // add the text, align to Center of cell
 
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size

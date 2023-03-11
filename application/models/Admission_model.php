@@ -573,76 +573,76 @@ class Admission_model extends CI_Model
 
                 $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
 
+
                 if($total_marks[0]['totalmarks']){
                     $total_marks=  $total_marks[0]['totalmarks'];
                     $ans_sheet_status ='Checked';
+               
+                        if($total_marks >= 90 ){
+
+                            $grade ='A+';
+                            $Grade_point='10';
+                            $Remark ='Pass';
+                            $Quntitave_value='Outstanding';
+
+                        }else if($total_marks >= 80 && $total_marks <= 89){
+
+                            $grade ='A';
+                            $Grade_point='9';
+                            $Remark ='Pass';
+                            $Quntitave_value='Excellent';
+
+                        }else if($total_marks >= 70 && $total_marks <= 79){
+
+                            $grade ='B+';
+                            $Grade_point='8';
+                            $Remark ='Pass';
+                            $Quntitave_value='Very Good';
+
+                        }else if($total_marks >= 60 && $total_marks <= 69){
+
+                            $grade ='B';
+                            $Grade_point='7';
+                            $Remark ='Pass';
+                            $Quntitave_value='Good';
+
+                        }else if($total_marks >= 50 && $total_marks <= 59){
+
+                            $grade ='C';
+                            $Grade_point='6';
+                            $Remark ='Pass';
+                            $Quntitave_value='Above Average';
+
+                        }else if($total_marks >= 40 && $total_marks <= 49){
+
+                            $grade ='D';
+                            $Grade_point='5';
+                            $Remark ='Pass';
+                            $Quntitave_value='Average';
+
+                        }else if($total_marks >= 40 && $total_marks <= 44){
+
+                            $grade ='D';
+                            $Grade_point='4';
+                            $Remark ='Pass';
+                            $Quntitave_value='Poor';
+
+                        } else if($total_marks <= 40){
+
+                            $grade ='D';
+                            $Grade_point='0';
+                            $Remark ='Fail';
+                            $Quntitave_value='Fail';
+
+                        }
+
                 }else{
-                    $total_marks=0;
+                    $total_marks='NA';
                     $ans_sheet_status ='Checking Pending';
-                }
-
-                if($total_marks >= 90 ){
-
-                    $grade ='A+';
-                    $Grade_point='10';
-                    $Remark ='Pass';
-                    $Quntitave_value='Outstanding';
-
-                }else if($total_marks >= 80 && $total_marks <= 89){
-
-                    $grade ='A';
-                    $Grade_point='9';
-                    $Remark ='Pass';
-                    $Quntitave_value='Excellent';
-
-                } else if($total_marks >= 70 && $total_marks <= 79){
-
-                    $grade ='B+';
-                    $Grade_point='8';
-                    $Remark ='Pass';
-                    $Quntitave_value='Very Good';
-
-                } else if($total_marks >= 60 && $total_marks <= 69){
-
-                    $grade ='B';
-                    $Grade_point='7';
-                    $Remark ='Pass';
-                    $Quntitave_value='Good';
-
-                }
-                else if($total_marks >= 50 && $total_marks <= 59){
-
-                    $grade ='C';
-                    $Grade_point='6';
-                    $Remark ='Pass';
-                    $Quntitave_value='Above Average';
-
-                }
-                else if($total_marks >= 40 && $total_marks <= 49){
-
-                    $grade ='D';
-                    $Grade_point='5';
-                    $Remark ='Pass';
-                    $Quntitave_value='Average';
-
-                }
-
-                else if($total_marks >= 40 && $total_marks <= 44){
-
-                    $grade ='D';
-                    $Grade_point='4';
-                    $Remark ='Pass';
-                    $Quntitave_value='Poor';
-
-                }
-
-                else if($total_marks <= 40){
-
-                    $grade ='D';
-                    $Grade_point='0';
-                    $Remark ='Fail';
-                    $Quntitave_value='Fail';
-
+                    $grade ='NA';
+                    $Grade_point='NA';
+                    $Remark ='NA';
+                    $Quntitave_value='NA';
                 }
 
                  $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
@@ -655,11 +655,12 @@ class Admission_model extends CI_Model
                  $data[$counter]['Quntitave_value'] = $Quntitave_value;
                  $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
                  $data[$counter]['action'] = '';
-
-                
-
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
-                
+                 
+                 if($ans_sheet_status=='Checked'){
+                 }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+                 }
+                 
                  $counter++; 
             }
         }

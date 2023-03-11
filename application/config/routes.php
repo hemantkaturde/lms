@@ -260,6 +260,10 @@ $route['studentcrtificateListing'] = "student/studentcrtificateListing";
 $route['fetchallstudentcertificatesstudentPortal'] = "student/fetchallstudentcertificatesstudentPortal";
 $route['updateevbtrnumber'] = "student/updateevbtrnumber";
 
+$route['printmarksheet?(:any)'] = "admin/printmarksheet/$1";
+
+
+
 
 
 
