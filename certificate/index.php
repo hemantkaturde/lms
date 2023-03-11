@@ -20,6 +20,8 @@ include "phpqrcode/qrlib.php" ;
  $mobile = $result_arry['mobile'];
  $evbtr = $result_arry['evbtr'];
 
+ $admision_date = $result_arry['createdDtm'];
+
  
 // Create new Landscape PDF
 // $pdf = new FPDI('l');
@@ -99,7 +101,7 @@ $pdf->Cell(0, 1,  '11-02-2023', 0, 0, 'L');
 
 $pdf->SetFontSize('10');
 $pdf->SetXY(42,275.6);
-$pdf->Cell(0, 1,  '11-02-2023', 0, 0, 'L');
+$pdf->Cell(0, 1,  $admision_date, 0, 0, 'L');
 
 $pdf->SetFontSize('10');
 $pdf->SetXY(172,275.6);
