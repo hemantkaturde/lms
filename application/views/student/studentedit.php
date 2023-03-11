@@ -9,6 +9,7 @@ $password = '';
 $c_password = '';
 $profile_pic = '';
 
+
 if(!empty($student_infromation))
 {
     foreach ($student_infromation as $rf)
@@ -20,7 +21,12 @@ if(!empty($student_infromation))
         $username = $rf->username;
         $password = $rf->password;
         $c_password =$rf->password;
-        $profile_pic = $rf->profile_pic;
+      
+        if($profile_pic_user){
+            $profile_pic = $rf->profile_pic;
+        }else{
+            $profile_pic = $rf->document_1;
+        }
     }
 }
 
@@ -85,7 +91,7 @@ if(!empty($student_infromation))
                                                 <small class="text-default">( Upload photo as Show on Admin Panel)</small>
                                                 <input type="hidden" id="existing_img" name="existing_img" value="<?=$profile_pic?>" >
                                                 <?php if($profile_pic){ ?>
-                                                  <p><img id="output" name="exsting_img_pic" src="<?php echo IMGPATH.'/'.$profile_pic?>" width="80" height="80" /></p>
+                                                  <p><img id="output" name="exsting_img_pic" src="<?php echo IMGPATH_ADMISSION.'/'.$profile_pic?>" width="80" height="80" /></p>
                                                 <?php }else{ ?>
                                                   <p><img id="output" name="exsting_img_pic" src="" width="80" height="80" /></p>
                                                 <?php } ?>

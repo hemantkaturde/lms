@@ -1,3 +1,5 @@
+<?php $roleText = $this->session->userdata('roleText');?>
+
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
@@ -31,11 +33,19 @@
                                     <!-- <input type="hidden" id="profile_id" name="profile_id" value="<?php echo $profile_details[0]->profile_pic;?>" > -->
 
 
-                                    <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
+                                    <?php if($role_text!="Student"){
+                                        if(!empty($this->session->userdata('profile_pic'))){ ?>
                                             <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px"  height="140px"/>
                                     <?php }else{ ?>
-                                            <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" id="output" width="140px" height="140px" />
-                                    <?php } ?>
+                                        <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" id="output" width="140px" height="140px" />
+                                    <?php } }else{ 
+                                    if(!empty($this->session->userdata('profile_pic'))){ ?>
+                                        <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px" height="140px"/>
+                                    <?php }else{ ?>
+                                        <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" id="output" width="140px" height="140px" />
+                                    <?php } } ?>
+
+                                
                                     </span>
                                     </div>
                                 </div>
