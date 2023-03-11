@@ -40,29 +40,34 @@ $pdf->useTemplate($tpl);
 // Set the default font to use
 $pdf->SetFont('Helvetica');
 
+
+
 // First box - the user's Name
 $pdf->SetFontSize('12'); // set font size
-$pdf->SetXY(40, 122); // set the position of the box
+$pdf->SetXY(156, 76); // set the position of the box
+$pdf->Cell(0, 10,  date("d-m-Y"), 0, 0, 'C'); // add the text, align to Center of cell
+
+
+
+// First box - the user's Name
+$pdf->SetFontSize('12'); // set font size
+$pdf->SetXY(15, 150); // set the position of the box
 $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
 
 
-// // First box - the user's Name
-// $pdf->SetFontSize('12'); // set font size
-// $pdf->SetXY(40, 128); // set the position of the box
-// $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
-
 
 // First box - the user's Name
 $pdf->SetFontSize('12'); // set font size
-$pdf->SetXY(40, 135); // set the position of the box
+$pdf->SetXY(0, 158); // set the position of the box
 $pdf->Cell(0, 10,  $course_name, 0, 0, 'C'); // add the text, align to Center of cell
 
+$Roll_no = $mobile.'/'.date("Y",strtotime("-1 year")).'-'.date("Y").'/WEB/MUM';
 
 
 // First box - the user's Name
 $pdf->SetFontSize('12'); // set font size
-$pdf->SetXY(40, 142); // set the position of the box
-$pdf->Cell(0, 10,  $mobile, 0, 0, 'C'); // add the text, align to Center of cell
+$pdf->SetXY(43, 167); // set the position of the box
+$pdf->Cell(0, 10,  $Roll_no, 0, 0, 'C'); // add the text, align to Center of cell
 
 
 // render PDF to browser
