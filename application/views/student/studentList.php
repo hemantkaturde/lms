@@ -17,7 +17,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Mobile</th>
-                                <th>Date Of Birth</th>
+                                <th>E mail</th>
                                 <th>Role</th>
                                 <th>Action</th>
                             </tr>

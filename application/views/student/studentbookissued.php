@@ -4,13 +4,15 @@
             <div class="ibox-head">
                 <div>
                     <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
+                        <a href="<?php echo base_url().'studentListing';?>" style="color: black !important"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                     </button>
                 </div>
                 <div class="ibox-title">Student Book Issued</div>
             </div>
             <div class="ibox-body">
+
+                 <h4>Student Course List (Student Name : <?=$getstudentdetails[0]->name; ?>  |  Roll No: <?=$getstudentdetails[0]->mobile; ?>    )</h4>
                 <div class="panel-body table-responsive">
 
                     <?php

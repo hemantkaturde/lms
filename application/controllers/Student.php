@@ -181,6 +181,7 @@
         public function studentbookissued($id){
             $this->global['pageTitle'] = 'Student Book Issue';
             $data['enq_course_list'] = $this->student_model->getCourseDetailsforBooksAddedornot($id);
+            $data['getstudentdetails'] = $this->student_model->getAllstudentdata($id);
             $data['student_id'] = $id;
             $this->loadViews("student/studentbookissued", $this->global, $data, NULL);
         }
