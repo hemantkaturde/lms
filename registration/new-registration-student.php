@@ -118,8 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
         $main_pass = 'iictn'.'@'.$year;
 
-        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,lastname,gender,mobile,user_flag,enq_id,roleId,createdBy,isDeleted) 
-                              VALUES ('$email','$username',' $password','$name','$lastname','$gender','$mobile','student','$enq_id','3','1','0')"; 
+        $sql_create_user = "INSERT INTO tbl_users (email,username,`password`,`name`,lastname,gender,mobile,user_flag,enq_id,roleId,createdBy,isDeleted,profile_pic) 
+                              VALUES ('$email','$username',' $password','$name','$lastname','$gender','$mobile','student','$enq_id','3','1','0',$final_file_student_photo)"; 
                  
             
                 if ($conn->query($sql_create_user) === TRUE) {
