@@ -90,22 +90,22 @@ $jsonstringtoArray = json_decode($access, true);
                                             </h5>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="brazil" value="brazil" disabled>
+                                            <label class="radio"> <input type="radio" name="chkAns" id="chkAns1" data-id="<?=$value->id ?>" value="<?=$value->option_1;?>" >
                                                 <span> <?= $value->option_1;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Germany" value="Germany" disabled>
+                                            <label class="radio"> <input type="radio" name="chkAns" id="chkAns2" data-id="<?=$value->id ?>" value="<?= $value->option_2;?>">
                                             <span> <?= $value->option_2;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Indonesia" value="Indonesia" disabled> 
+                                            <label class="radio"> <input type="radio"  name="chkAns" id="chkAns3" data-id="<?=$value->id ?>" value="<?= $value->option_3;?>"> 
                                             <span> <?= $value->option_3;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="Russia" value="Russia" disabled>
+                                            <label class="radio"> <input type="radio"  name="chkAns" id="chkAns4" data-id="<?=$value->id ?>" value="<?= $value->option_4;?>">
                                             <span> <?= $value->option_4;?></span>
                                             </label>
                                         </div>
@@ -185,3 +185,33 @@ $jsonstringtoArray = json_decode($access, true);
         </div>
     </div>
     <!-- END PAGE CONTENT-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js">
+    </script>
+
+    <script type="text/javascript">
+
+           $("#chkAns1").click(function () {
+              var chek1 = $("#chkAns1").val();
+              var elemF = $(this);
+              $("#options_answers_"+elemF.attr('data-id')).val(chek1);
+            });
+
+            $("#chkAns2").click(function () { 
+              var chek2 = $("#chkAns2").val();
+              var elemF = $(this);
+              $("#options_answers_"+elemF.attr('data-id')).val(chek2);
+            });
+
+            $("#chkAns3").click(function () {
+              var chek3 = $("#chkAns3").val();
+              var elemF = $(this);
+              $("#options_answers_"+elemF.attr('data-id')).val(chek3);
+            });
+
+            $("#chkAns4").click(function () {
+              var chek4 = $("#chkAns4").val();
+              var elemF = $(this);
+              $("#options_answers_"+elemF.attr('data-id')).val(chek4);
+            });
+       
+    </script>
