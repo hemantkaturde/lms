@@ -61,12 +61,12 @@ $pdf->SetFontSize('12'); // set font size
 $pdf->SetXY(0, 158); // set the position of the box
 $pdf->Cell(0, 10,  $course_name, 0, 0, 'C'); // add the text, align to Center of cell
 
-$Roll_no = $mobile.'/'.date("Y",strtotime("-1 year")).'-'.date("Y").'/WEB/MUM';
+$Roll_no = $mobile.'/'.date("y",strtotime("-1 year")).'-'.date("y").'/WEB/MUM';
 
 
 // First box - the user's Name
 $pdf->SetFontSize('12'); // set font size
-$pdf->SetXY(43, 167); // set the position of the box
+$pdf->SetXY(34, 167); // set the position of the box
 $pdf->Cell(0, 10,  $Roll_no, 0, 0, 'C'); // add the text, align to Center of cell
 
 
