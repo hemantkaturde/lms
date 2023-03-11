@@ -16,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Mobile</th>
+                                <th>Mobile / Roll Number</th>
                                 <th>E mail</th>
                                 <th>Role</th>
                                 <th>Action</th>
