@@ -21,7 +21,6 @@ $jsonstringtoArray = json_decode($access, true);
                     <p><b>Examination Tilte : </b><?=$exam_detail[0]['exam_title'];?></p>
                     <p><b>Examination Time : </b><?=$exam_detail[0]['exam_time'].' Min';?></p>
 
-                     
                 </div>
             </div>
         </div>

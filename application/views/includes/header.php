@@ -230,10 +230,10 @@ $jsonstringtoArray = json_decode($access, true);
                             <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
                                    <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" />
                             <?php }else{ 
-                                  if($role_text!="Student"){?>
-                                   <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
+                                  if($role_text=="Student"){?>
+                                    <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" />
                             <?php }else{ ?>
-                                <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" />
+                                <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
                             <?php  }  } ?>
 
                             <span></span><?php echo $role_text; ?><i class="fa fa-angle-down m-l-5"></i></a>
