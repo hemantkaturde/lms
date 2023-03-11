@@ -228,10 +228,13 @@ $jsonstringtoArray = json_decode($access, true);
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                             <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
-                                <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" />
+                                   <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" />
+                            <?php }else{ 
+                                  if($role_text!="Student"){?>
+                                   <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
                             <?php }else{ ?>
-                                <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
-                            <?php } ?>
+                                <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" />
+                            <?php  }  } ?>
 
                             <span></span><?php echo $role_text; ?><i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
@@ -254,9 +257,12 @@ $jsonstringtoArray = json_decode($access, true);
                     <div>
                        <?php if(!empty($this->session->userdata('profile_pic'))){ ?>
                             <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" width="50px"  height="50px"/>
-                       <?php }else{ ?>
+                       <?php }else{ 
+                           if($role_text!="Student"){?>
                             <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" width="50px" height="50px" />
-                       <?php } ?>
+                       <?php }else{ ?>
+                        <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" width="50px"  height="50px"/>
+                       <?php } } ?>
                     </div>
                     <div class="admin-info" >
                         <div class="font-strong"> <?php echo $name; ?></div><small ><?php echo $role_text; ?></small>

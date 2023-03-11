@@ -47,6 +47,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
 define("ADMIN_PATH",$config['base_url']);
 define("ICONPATH",ADMIN_PATH.'/assets/icons');
 define("IMGPATH",ADMIN_PATH.'/uploads/profile_pic');
+define("IMGPATH_ADMISSION",ADMIN_PATH.'/uploads/admission');
 define("TEMPALTE_PATH",ADMIN_PATH.'/templates');
 
 
