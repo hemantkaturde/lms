@@ -46,10 +46,10 @@ $pdf->SetXY(40, 122); // set the position of the box
 $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
 
 
-// First box - the user's Name
-$pdf->SetFontSize('12'); // set font size
-$pdf->SetXY(40, 128); // set the position of the box
-$pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
+// // First box - the user's Name
+// $pdf->SetFontSize('12'); // set font size
+// $pdf->SetXY(40, 128); // set the position of the box
+// $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
 
 
 // First box - the user's Name
