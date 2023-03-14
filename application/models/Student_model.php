@@ -107,11 +107,18 @@ class Student_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+                $course_id = json_decode($value['book_issued']);
+                
+                // $course_name = array();
+                $course_name ="";
+                foreach ($course_id as $key => $bookissued_value) {
+                    $course_name .= $this->getCoursenamebyid($bookissued_value)[0]['course_name'].',';        
+                }
+
                  $data[$counter]['name']    = $value['name'];
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['email']   = $value['email'];
-                 $data[$counter]['user_flag']   = $value['user_flag'];
-                 $data[$counter]['action']  = '';
+                 $data[$counter]['user_flag']   =  rtrim($course_name,','); ;
                  $data[$counter]['action'] .= "";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstudent/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentbookissued/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Edit Enquiry' title='Book Issued or Not'></a> | ";
@@ -384,19 +391,20 @@ class Student_model extends CI_Model
         $pageUrl =$this->uri->segment(1);
 
 
-        $this->db->select('enq_course_id');
+        $this->db->select(TBL_ENQUIRY.'.enq_course_id,'.TBL_USER.'.book_issued');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
         $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
         $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
 
         $data = array();
         $counter = 0;
-       foreach ($fetch_result_enquiry_courses as $key => $value) {
+       foreach ($fetch_result_enquiry_courses as $key => $valueid) {
         
     
 
-         $course_ids    =   explode(',', $value['enq_course_id']);
+         $course_ids    =   explode(',', $valueid['enq_course_id']);
 
          foreach ($course_ids as $key => $value) {
            
@@ -451,9 +459,18 @@ class Student_model extends CI_Model
                         $course_mode_offline = '';
                     }
 
+                    $course_id = json_decode($valueid['book_issued']);
+                
+                    // $course_name = array();
+                    $course_name ="";
+                    foreach ($course_id as $key => $bookissued_value) {
+                        $course_name .= $this->getCoursenamebyid($bookissued_value)[0]['course_name'].',';        
+                    }
 
                     $data[$counter]['course_mode'] = $course_mode_online.' '.$course_mode_offline;
                     $data[$counter]['course_books'] = $course_books;
+
+                    $data[$counter]['course_issued'] =  rtrim($course_name,',');
 
                     $data[$counter]['action'] = '';
 
@@ -1263,6 +1280,17 @@ public function updatebookissued($student_id,$data){
     } else {
         return FALSE;
     }
+
+}
+
+public function getCoursenamebyid($course_id){
+
+    $this->db->select('course_name');
+    $this->db->where(TBL_COURSE.'.courseId', $course_id);
+    $this->db->where(TBL_COURSE.'.isDeleted', 0);
+    $query = $this->db->get(TBL_COURSE);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 
 }
 

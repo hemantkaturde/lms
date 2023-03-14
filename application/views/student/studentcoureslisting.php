@@ -25,6 +25,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Course Fees</th>
                                 <th>Course Mode</th>
                                 <th>Course Books</th>
+                                <th>Book Issued</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
