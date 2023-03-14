@@ -11,6 +11,7 @@ include "phpqrcode/qrlib.php" ;
  $result = $conn->query("SELECT * from  tbl_users  
                          join tbl_student_answer_sheet on tbl_users.userid = tbl_student_answer_sheet.student_id
                          join tbl_course on tbl_student_answer_sheet.course_id = tbl_course.courseId
+                         join tbl_course_type on tbl_course_type.ct_id = tbl_course.courseId
                          where tbl_users.userid=$student_id and tbl_users.isDeleted=0 and tbl_users.user_flag='student' group by tbl_student_answer_sheet.student_id");
 
  $result_arry = $result->fetch_assoc();
@@ -21,6 +22,10 @@ include "phpqrcode/qrlib.php" ;
  $evbtr = $result_arry['evbtr'];
 
  $admision_date = $result_arry['createdDtm'];
+
+ $ct_name = $result_arry['ct_name'];
+
+ 
 
  
 // Create new Landscape PDF
@@ -45,9 +50,11 @@ $pdf->SetFont('Helvetica');
 // adding a Cell using:
 // $pdf->Cell( $width, $height, $text, $border, $fill, $align);
 
+
+
 // First box - the user's Name
-$pdf->SetFontSize('30'); // set font size
-$pdf->SetXY(10, 160); // set the position of the box
+$pdf->SetFontSize('25','B'); // set font size
+$pdf->SetXY(10, 162); // set the position of the box
 $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
 
 // First box - the user's Name
@@ -58,9 +65,10 @@ $pdf->Cell(0, 1,  $evbtr, 0, 0, 'C'); // add the text, align to Center of cell
 
 // add the reason for certificate
 // note the reduction in font and different box position
-$pdf->SetFontSize('20');
-$pdf->SetXY(10, 140);
-$pdf->Cell(0, 10,  $course_name, 0, 0, 'C');
+
+$pdf->SetFontSize('30');
+$pdf->SetXY(10, 125);
+$pdf->MultiCell(190,11,$course_name, '0', 'C', 0);
 
 // the day
 $pdf->SetFontSize('20');
@@ -96,7 +104,7 @@ $pdf->Cell(8, 8, $pdf->Image($orcode_file, $pdf->GetX(), $pdf->GetY(), 23.78), 0
 
 $pdf->SetFontSize('10');
 $pdf->SetXY(42,270.2);
-$pdf->Cell(0, 1,  '11-02-2023', 0, 0, 'L');
+$pdf->Cell(0, 1,  $admision_date, 0, 0, 'L');
 
 
 $pdf->SetFontSize('10');
@@ -104,8 +112,8 @@ $pdf->SetXY(42,275.6);
 $pdf->Cell(0, 1,  $admision_date, 0, 0, 'L');
 
 $pdf->SetFontSize('10');
-$pdf->SetXY(172,275.6);
-$pdf->Cell(0, 1,  $mobile, 0, 0, 'L');
+$pdf->SetXY(145,275.6);
+$pdf->Cell(0, 1,  $mobile.'/'.date("y",strtotime("-1 year")).'-'.date("y").'/WEB/MUM', 0, 0, 'L');
 
 
 // // the month

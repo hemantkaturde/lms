@@ -24,7 +24,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <thead>
                             <tr>
                                 <th>Student Name</th>
-                                <th>Mobile Number</th>
+                                <th>Mobile No</th>
                                 <th>Exam Status</th>
                                 <th>Total Marks</th>
                                 <th>Grade</th>
