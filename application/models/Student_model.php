@@ -919,6 +919,7 @@ public function  getstudentexaminationCount($params,$userId){
 
 public function getstudentexaminationdata($params,$userId){
 
+
     $this->db->select('enq_course_id');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
@@ -931,7 +932,21 @@ public function getstudentexaminationdata($params,$userId){
         
         $course_ids    =   explode(',', $value['enq_course_id']);
         foreach ($course_ids as $key => $value) {
-        
+
+
+        $this->db->select('count(*) as count');
+        $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+        $this->db->where(TBL_ATTENDANCE.'.course_id', $value);
+        $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_time_table_attendance = $query->result_array();
+
+    
+        $this->db->select('count(*) as count');
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $value);
+        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+        $fetch_topic_table_attendance = $query->result_array();
+
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
 
@@ -981,7 +996,14 @@ public function getstudentexaminationdata($params,$userId){
         }
 
     }
-        return $data;
+        if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
+            return $data; 
+        }else{
+           
+            return array(); 
+        }
+
+        
     }
 }
 
