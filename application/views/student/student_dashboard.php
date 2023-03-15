@@ -48,51 +48,72 @@
 
 
 
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<div class=" d-flex justify-container-left">
 		<div class="row">
 			<div class="col-md-12">
 				<div id="piechart3d" style="width: 700px; height: 400px;"></div>
 			</div>
 		</div>
-	</div>
+	</div> -->
+
+<?php
+ 
+$dataPoints = array(
+	array("label"=> "WordPress", "y"=> 60.0),
+	array("label"=> "Joomla", "y"=> 6.5),
+	array("label"=> "Drupal", "y"=> 4.6),
+	array("label"=> "Magento", "y"=> 2.4),
+	array("label"=> "Blogger", "y"=> 1.9),
+	array("label"=> "Shopify", "y"=> 1.8),
+	array("label"=> "Bitrix", "y"=> 1.5),
+	array("label"=> "Squarespace", "y"=> 1.5),
+	array("label"=> "PrestaShop", "y"=> 1.3),
+	array("label"=> "Wix", "y"=> 0.9),
+	array("label"=> "OpenCart", "y"=> 0.8)
+);
+	
+?>
+
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+</body>
+</html>    
 
 
 
 </div>
     <!-- END PAGE CONTENT-->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script>
 
-$(document).ready(function(){
-    
-	google.charts.load('current', {'packages':['corechart']});
-	   google.charts.setOnLoadCallback(drawChart);
+window.onload = function () {
  
-	   function drawChart() {
- 
-		 var data = google.visualization.arrayToDataTable([
-		   ['Task', 'Hours per Day'],
-		   ['Study',     11],
-		   ['Playing',      2],
-		   ['Watch TV',  2],
-		   ['Tution', 2],
-		   ['Sleep',  7]
-		 ]);
- 
-		 var options = {
-		   title: 'Class Details',
-		   is3D:true
-		 };
- 
-		 var chart = new google.visualization.PieChart(document.getElementById('piechart3d'));
- 
-		 chart.draw(data, options);
-	   } 
-	 
-	 
+ var chart = new CanvasJS.Chart("chartContainer", {
+	 animationEnabled: true,
+	 theme: "light2",
+	 title: {
+		 text: "Student Course Progress"
+	 },
+	 axisY: {
+		 suffix: "%",
+		 scaleBreaks: {
+			 autoCalculate: true
+		 }
+	 },
+	 data: [{
+		 type: "column",
+		 yValueFormatString: "#,##0\"%\"",
+		 indexLabel: "{y}",
+		 indexLabelPlacement: "inside",
+		 indexLabelFontColor: "white",
+		 dataPoints: <?php echo json_encode($getStudentscourseattetendancedetails, JSON_NUMERIC_CHECK); ?>
+	 }]
  });
+ chart.render();
+  
+ }
+
 
 $(document).ready(function(){
     $(".join_link").click(function(){

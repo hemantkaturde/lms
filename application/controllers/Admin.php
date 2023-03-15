@@ -77,6 +77,9 @@ class Admin extends BaseController
 
             $userId = $this->session->userdata('userId');
             $data['upcoming_class_links'] = $this->admission_model->upcoming_class_links($userId);
+
+            $data['getStudentscourseattetendancedetails'] = $this->admission_model->getStudentscourseattetendancedetails($userId);
+
             $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
         }
     }

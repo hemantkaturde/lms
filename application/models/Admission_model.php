@@ -946,6 +946,44 @@ function studentcertificateData($params)
 }
 
 
+    public function getStudentscourseattetendancedetails($sutudentid){
+
+        $this->db->select('count(*) as count,course_name,course_id');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+        $this->db->where(TBL_ATTENDANCE.'.user_id', $sutudentid);
+        $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
+        $this->db->group_by(TBL_ATTENDANCE.'.course_id');
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+       
+        $arraydivision=array();
+        
+        foreach ($fetch_result as $key => $value) {
+           
+           $total_links = $this->getlinksforperticularuser($value['course_id'],$sutudentid);
+           $peecentage = $value['count']/$total_links['count'] * 100;
+           $arraydivision['label'] = $value['course_name'];
+           $arraydivision['y'] = $peecentage;
+        }
+
+    
+        return array($arraydivision);
+    }
+
+
+    public function getlinksforperticularuser($courseid,$sutudentid){
+
+        $this->db->select('count(*) as count');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+        $this->db->where(TBL_ATTENDANCE.'.course_id', $courseid);
+        $this->db->where(TBL_ATTENDANCE.'.user_id', $sutudentid);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result[0];
+    }
+
+
 
 }
 
