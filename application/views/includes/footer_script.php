@@ -466,16 +466,37 @@
 				var sgst_tax1edit = 0;
 			}
 
-			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
+			// var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
 
-            var cgst_value = total_fees_befor_tax *  cgst_tax1edit / 100 ;
+            // var cgst_value = total_fees_befor_tax *  cgst_tax1edit / 100 ;
 
 	
-			$("#cgst1").val(cgst_value);
-			var sgst_value = total_fees_befor_tax *  sgst_tax1edit / 100 ;
-			$("#sgst1").val(sgst_value);
+			// $("#cgst1").val(cgst_value);
+			// var sgst_value = total_fees_befor_tax *  sgst_tax1edit / 100 ;
+			// $("#sgst1").val(sgst_value);
+			// var total_fees = total_fees_befor_tax + cgst_value +sgst_value;
+            // $("#total_course_fees1").val(Math.round(total_fees));
+
+
+			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
+          
+
+			var cgst_value =  total_fees_befor_tax / 2;
+
+			var sgst_value =  total_fees_befor_tax / 2;
+
+			
+			// var cgst_value = total_fees_befor_tax *  cgst_tax / 100 ;
+			// $("#cgst").val(cgst_value);
+			// var sgst_value = total_fees_befor_tax *  sgst_tax / 100 ;
+			// $("#sgst").val(sgst_value);
+
+			$("#cgst").val(cgst_value);
+			$("#sgst").val(sgst_value);
+
 			var total_fees = total_fees_befor_tax + cgst_value +sgst_value;
-            $("#total_course_fees1").val(Math.round(total_fees));
+            $("#total_course_fees").val( Math.round(total_fees));
+
 
 		});
 		
