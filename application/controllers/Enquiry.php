@@ -987,7 +987,7 @@
                     {
                         $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
                         $total_fees += $get_course_fees[0]->course_total_fees;
-                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
+                        $course_name .= $get_course_fees[0]->course_name. ',';  
                         $i++;  
                     }
 
@@ -1017,10 +1017,10 @@
                     $htmlContent = '<div>
                     <p><b>Greetings from IICTN !!</b></p>
 
-                    <p><b>Dear </b> '.$enq_fullname.' , </p>
+                    <p><b>Dear </b> '.$enq_fullname.', </p>
                     <p>Thank You for your interest in <b>'.$all_course_name.'.</b></p>
-                    <p>We have attached the brochure and Syllabus for your reference Feel free to contact us back, we will be delighted to assist and guide you.</p>
-                    <p>For more details you can also visit our website <a href="https://iictn.org/" rel="noopener" target="_blank" >www.iictn.org </a></p>
+                    <p>We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.</p>
+                    <p>For more details, you can also visit our website <a href="https://iictn.org/" rel="noopener" target="_blank" >www.iictn.org </a></p>
                        
                     </div>
 
@@ -1031,7 +1031,7 @@
 
                     <div>
                         <p><b>Thanks & Regards<b></p>
-                        <p>Team IICTN</p>
+                        <p><b>Team IICTN/b></p>
                     </div>
                     '; 
                     
