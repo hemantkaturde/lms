@@ -997,7 +997,8 @@
                     $from = 'enquiry@iictn.in'; 
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
-                    $subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
+                    //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
+                    $subject = 'Greetings from IICTN !! '.date('Y-m-d H:i:s');
                     
                     $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
@@ -1014,11 +1015,17 @@
 
 
                     $htmlContent = '<div>
+                    <p><b>Greetings from IICTN !!</b></p>
+
                     <p><b>Dear </b> '.$enq_fullname.' , </p>
-                    <p>Thank You for the inquiry.</p>
-                    <p>Please find attached is the brochure and details of our courses and institute.</p>
-                    <p>Kindly contact your councilors for more details.</p></div>
-                    
+
+                    <p>Thank You for your interest in Course Name
+                       We have attached the brochure and Syllabus for your reference
+                       Feel free to contact us back, we will be delighted to assist and guide you
+                       For more details you can also visit our website <a href="https://www.hubspot.com/" rel="noopener" target="_blank" >www.iictn.org </a></p>
+                       
+                    </div>
+
                     <div>
                         <p><b>Download Below Brochure<b></p>
                         <p>'.$file_path.'</p>
@@ -1029,8 +1036,9 @@
             
                     if($retval){
 
+                    
 
-                        $url = "https://marketing.intractly.com/api/send.php?number=+918097404125&type=text&message=Hello hEmasnr Friend&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                        $url = "https://marketing.intractly.com/api/send.php?number=+91'.$get_equiry_data->enq_mobile.'&type=text&message=Hello hEmasnr Friend&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
 
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $url);
