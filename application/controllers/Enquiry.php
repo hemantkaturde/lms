@@ -1041,7 +1041,7 @@
 
                     
 
-                        $url = "https://marketing.intractly.com/api/send.php?number=917021507157&type=text&message=".$htmlContent."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                        $url = "https://marketing.intractly.com/api/send.php?number=917021507157&type=text&message=We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
 
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $url);
