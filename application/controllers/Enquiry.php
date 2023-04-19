@@ -1018,17 +1018,20 @@
                     <p><b>Greetings from IICTN !!</b></p>
 
                     <p><b>Dear </b> '.$enq_fullname.' , </p>
-
-                    <p>Thank You for your interest in Course Name
-                       We have attached the brochure and Syllabus for your reference
-                       Feel free to contact us back, we will be delighted to assist and guide you
-                       For more details you can also visit our website <a href="https://www.hubspot.com/" rel="noopener" target="_blank" >www.iictn.org </a></p>
+                    <p>Thank You for your interest in <b>'.$all_course_name.'.</b></p>
+                    <p>We have attached the brochure and Syllabus for your reference Feel free to contact us back, we will be delighted to assist and guide you.</p>
+                    <p>For more details you can also visit our website <a href="https://iictn.org/" rel="noopener" target="_blank" >www.iictn.org </a></p>
                        
                     </div>
 
                     <div>
                         <p><b>Download Below Brochure<b></p>
                         <p>'.$file_path.'</p>
+                    </div>
+
+                    <div>
+                        <p><b>Thanks & Regards<b></p>
+                        <p>Team IICTN</p>
                     </div>
                     '; 
                     
@@ -1038,7 +1041,7 @@
 
                     
 
-                        $url = "https://marketing.intractly.com/api/send.php?number=+91'.$get_equiry_data->enq_mobile.'&type=text&message=Hello hEmasnr Friend&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                        $url = "https://marketing.intractly.com/api/send.php?number=917021507157&type=text&message=".$htmlContent."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
 
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $url);
