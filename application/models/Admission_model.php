@@ -934,7 +934,7 @@ function studentcertificateData($params)
 
             //  }else{
 
-                $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='certificate/index.php?student_id=".$value['student_id']."' target='_blank'  class='print_certificate' data-id='".$value['student_id']."'><img width='20' src=".ICONPATH."/marksheet.png alt='Student Marksheet' title='Student Marksheet'></a> "; 
+                $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='marksheet/index.php?student_id=".$value['student_id']."' target='_blank'  class='print_certificate' data-id='".$value['student_id']."'><img width='20' src=".ICONPATH."/marksheet.png alt='Student Marksheet' title='Student Marksheet'></a> "; 
                 $data[$counter]['action'] .= "| <a style='cursor: pointer;'  href='certificate/index.php?student_id=".$value['student_id']."' target='_blank'  class='print_certificate' data-id='".$value['student_id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Certificate' title='Print Certificate'></a> "; 
                 $data[$counter]['action'] .= "| <a style='cursor: pointer;' class='addevbtr' rg-id='".$value['student_id']."'  evbtr-no='".$value['evbtr']."'  evbtr-date='".$value['evbtrdate']."'  evbtr-remark='".$value['evbtrremark']."' ><img width='20' src='".ICONPATH."/ivbtr.png' alt='Update EVBTR' title='Update EVBTR'></a>"; 
             //  }

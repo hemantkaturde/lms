@@ -955,6 +955,22 @@
 
     public function sendBrochureLink(){
 
+        
+        // $url = "https://marketing.intractly.com/api/send.php?number=917021507157&type=text&message=HelloEmasnrFriend&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+        // // This is what solved the issue (Accepting gzip encoding)
+        // // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+        // $response = curl_exec($ch);
+        // curl_close($ch);
+        // echo $response;
+        // exit;
+        
+
         $post_submit = $this->input->post();
 
             if($post_submit){
@@ -1012,6 +1028,24 @@
                     $retval = mail($to,$subject,$htmlContent,$header);
             
                     if($retval){
+
+
+                        $url = "https://marketing.intractly.com/api/send.php?number=+918097404125&type=text&message=Hello hEmasnr Friend&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                        // This is what solved the issue (Accepting gzip encoding)
+                        // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                        $response = curl_exec($ch);
+                        curl_close($ch);
+                        echo $response;
+            
+                          /* Send Whats App */
+
+                    
                         $process = 'Enquiry Link Sent';
                         $processFunction = 'Enquiry/sendEnquiryLink';
                         $this->logrecord($process,$processFunction);

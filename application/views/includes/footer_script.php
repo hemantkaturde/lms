@@ -407,10 +407,21 @@
 				var sgst_tax = 0;
 			}
 			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
-            var cgst_value = total_fees_befor_tax *  cgst_tax / 100 ;
+          
+
+			var cgst_value =  total_fees_befor_tax / 2;
+
+			var sgst_value =  total_fees_befor_tax / 2;
+
+			
+			// var cgst_value = total_fees_befor_tax *  cgst_tax / 100 ;
+			// $("#cgst").val(cgst_value);
+			// var sgst_value = total_fees_befor_tax *  sgst_tax / 100 ;
+			// $("#sgst").val(sgst_value);
+
 			$("#cgst").val(cgst_value);
-			var sgst_value = total_fees_befor_tax *  sgst_tax / 100 ;
 			$("#sgst").val(sgst_value);
+
 			var total_fees = total_fees_befor_tax + cgst_value +sgst_value;
             $("#total_course_fees").val( Math.round(total_fees));
 
@@ -538,10 +549,10 @@
 	                 { "width": "10%", "targets": 1 },
 	                 { "width": "15%", "targets": 2 },
 	                 { "width": "8%", "targets": 3 },
-					 { "width": "15%", "targets": 4 },
+					 { "width": "20%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					//  { "width": "10%", "targets": 6 },
-					 { "width": "18%", "targets": 6 }
+					 { "width": "12%", "targets": 6 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
