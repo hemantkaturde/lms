@@ -995,9 +995,10 @@
                      
                      if($doctor_non_doctor=='Doctor'){
                         $file_path ='<a href="https://iictn.in/markating_material/Doctors_Brochure.pdf">Doctors Brochure </a>';
+                        $wp_url = 'https://iictn.in/markating_material/Doctors_Brochure.pdf';
                      }else{
                         $file_path =' <a href="https://iictn.in/markating_material/Non_Doctors_Brochure.pdf">Non Doctors_Brochure </a>';
-                       
+                        $wp_url = 'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf';
                      }
 
 
@@ -1030,45 +1031,42 @@
                     if($retval){
 
                        /* Send Whats App  Start Here */
-                       
-                        $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
-                        //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                        $mobile = '91'.$get_equiry_data->enq_mobile;
-                        $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
-            
-                        $ch = curl_init();
-                        curl_setopt($ch, CURLOPT_URL, $url);
-                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-                        // This is what solved the issue (Accepting gzip encoding)
-                        // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                        $response = curl_exec($ch);
-                        curl_close($ch);
-                        // echo $response;
+                       $curl = curl_init();
+                       $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                       //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                       $mobile = '91'.$get_equiry_data->enq_mobile;
+                       $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+           
+                       $ch = curl_init();
+                       curl_setopt($ch, CURLOPT_URL, $url);
+                       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                       // This is what solved the issue (Accepting gzip encoding)
+                       // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                       $response = curl_exec($ch);
+                       curl_close($ch);
+                       // echo $response;
 
 
-                        $curl = curl_init();
+                       $curl = curl_init();
+                       $text = 'We have attached the brochure and Syllabus for your reference  Feel free to contact us back, we will be delighted to assist and guide you For more details you can also visit our website www.iictn.org';
+                       //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                       //$mobile = '91'.$get_equiry_data->enq_mobile;
+                    
+                       $media ='We have attached the brochure and Syllabus for your reference Feel free to contact us back, we will be delighted to assist and guide you For more details you can also visit our website www.iictn.org';
+                       $url_media = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=media&message=".urlencode($media)."&media_url=".$wp_url."&filename=Brocyre&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
 
-                        $media ='We have attached the brochure and Syllabus for your reference Feel free to contact us back, we will be delighted to assist and guide you For more details you can also visit our website www.iictn.org';
-
-                       // $media = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                        $mobile = '91'.$get_equiry_data->enq_mobile;
-
-                        curl_setopt_array($curl, array(
-                          CURLOPT_URL => 'https://marketing.intractly.com/api/send.php?number='.$mobile.'&type=media&message='.urlencode($media).'&media_url='.$file_path.'&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51',
-                          CURLOPT_RETURNTRANSFER => true,
-                          CURLOPT_ENCODING => '',
-                          CURLOPT_MAXREDIRS => 10,
-                          CURLOPT_TIMEOUT => 0,
-                          CURLOPT_FOLLOWLOCATION => true,
-                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                          CURLOPT_CUSTOMREQUEST => 'POST',
-                        ));
-                        
-                        $response = curl_exec($curl);
-                        
-                        curl_close($curl);
+                       $ch_media = curl_init();
+                       curl_setopt($ch_media, CURLOPT_URL, $url_media);
+                       curl_setopt($ch_media, CURLOPT_SSL_VERIFYPEER, false);
+                       curl_setopt($ch_media, CURLOPT_RETURNTRANSFER, true);
+                       curl_setopt($ch_media, CURLOPT_FOLLOWLOCATION, true );
+                       // This is what solved the issue (Accepting gzip encoding)
+                       // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                       $response = curl_exec($ch_media);
+                       curl_close($ch_media);
+                       // echo $response
                 
                         /* End here  Send Whats App */
 
