@@ -6,9 +6,19 @@ $jsonstringtoArray = json_decode($access, true);
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
         <div class="ibox">
-            <div class="ibox-head">
-                <div class="ibox-title">Question Paper Management ( <B>Course Name :</B><?=$examination_info[0]->course_name;?> )</div>
+
+        
+                <div class="ibox-head">
+                    <div class="ibox-title">Question Paper Management ( <B>Course Name :</B><?=$examination_info[0]->course_name;?> )
+                </div>
+
+                <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/examcheckingList';?>" style="color: black !important"><i
+                                class="fa fa-arrow-left"></i> Back</a>
+                </button>
             </div>
+
+
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
                     <p><b>Examination Tilte : </b><?=$examination_info[0]->exam_title;?></p>
