@@ -3,7 +3,7 @@
 $enq_id =$_GET['enq'];
 include_once('../db/config.php');
 $id = $_GET['enq'];
-$sql = "SELECT enq_id,enq_fullname,enq_email FROM tbl_enquiry where enq_id='".$id."' and isDeleted =0" ;
+$sql = "SELECT enq_id,enq_fullname,enq_email,enq_mobile FROM tbl_enquiry where enq_id='".$id."' and isDeleted =0" ;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
