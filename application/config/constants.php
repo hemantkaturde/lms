@@ -122,6 +122,10 @@ define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
 
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 
+define('INSTANCE_ID','643785A37C7FC');
+
+define('ACCESS_TOKEN','a78a6b9a06b1a24daa0d1402abd84d51');
+
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){

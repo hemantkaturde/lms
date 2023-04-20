@@ -1035,7 +1035,7 @@
                        $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
                        //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                        $mobile = '91'.$get_equiry_data->enq_mobile;
-                       $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                       $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
            
                        $ch = curl_init();
                        curl_setopt($ch, CURLOPT_URL, $url);
@@ -1055,7 +1055,7 @@
                        //$mobile = '91'.$get_equiry_data->enq_mobile;
                     
                        $media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
-                       $url_media = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=media&message=".urlencode($media)."&media_url=".$wp_url."&filename=Brochure&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                       $url_media = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=media&message=".urlencode($media)."&media_url=".$wp_url."&filename=Brochure&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
 
                        $ch_media = curl_init();
                        curl_setopt($ch_media, CURLOPT_URL, $url_media);
