@@ -65,7 +65,6 @@ if ($conn->query($sql) === TRUE) {
 
     if($retval){
 
-
                 /* Send Whats App  Start Here */
                 $curl = curl_init();
                 $text = 'WELCOME TO IICTN !!,  We have received your Payment. Transaction id :'.$row_last_payment['razorpay_payment_id'];
@@ -100,9 +99,6 @@ if ($conn->query($sql) === TRUE) {
                 $response = curl_exec($ch_media);
                 curl_close($ch_media);
                 // echo $response
-
-
-
 
     }
 
