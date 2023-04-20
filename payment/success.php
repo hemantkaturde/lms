@@ -56,6 +56,9 @@ if ($conn->query($sql) === TRUE) {
 
     $Body  .= '<p>For more details kindly contact your councillor or write us on admin@iictn.org</p>';
 
+    $Body  .= '<div><p><b>Thanks & Regards<b></p></p>';
+    $Body  .= '<div><p><b>Team IICTN<b></p></p>';
+
     $header = "From: IICTN-Team <enquiry@iictn.in> \r\n";
     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
     $header .= "MIME-Version: 1.0\r\n";
