@@ -1050,11 +1050,11 @@
 
 
                        $curl = curl_init();
-                       $text = 'We have attached the brochure and Syllabus for your reference  Feel free to contact us back, we will be delighted to assist and guide you For more details you can also visit our website www.iictn.org';
+                       // $text = 'We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
                        //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                        //$mobile = '91'.$get_equiry_data->enq_mobile;
                     
-                       $media ='We have attached the brochure and Syllabus for your reference Feel free to contact us back, we will be delighted to assist and guide you For more details you can also visit our website www.iictn.org';
+                       $media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
                        $url_media = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=media&message=".urlencode($media)."&media_url=".$wp_url."&filename=Brochure&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
 
                        $ch_media = curl_init();
