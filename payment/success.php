@@ -42,7 +42,7 @@ if ($conn->query($sql) === TRUE) {
 
 //   $Body  .= '<p> Step 6 - Received Certificate</p>';
 
-    $Body   = '<p>WELCOME TO IICTN</p>';
+    $Body   = '<p><b>WELCOME TO IICTN</b></p>';
 
     $Body  .='<p> We have received your Payment.</p>';
     $Body  .='<p> Transaction id: '.$row_last_payment['razorpay_payment_id'].'</p>';
