@@ -28,7 +28,7 @@
          if($get_course_fees){
                            
             $total_fees += $get_course_fees['course_total_fees'];
-            $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ')  ';  
+            $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
             $i++;   
 
          }else{
@@ -37,10 +37,34 @@
             $course_name = '';  
             $i++;  
          }
+
+
+            if($get_course_fees['course_mode_online']==1){
+
+                $course_mode_online ='Online';
+            }else{
+
+                $course_mode_online ='';
+            }
+
+
+            if($get_course_fees['course_mode_offline']==1){
+
+                $course_mode_offline = 'Offline';
+            }else{
+
+                $course_mode_offline = '';
+            }
+
+
+
                         
        }
       $all_course_name = trim($course_name, ', '); 
 
+
+
+       
       // Create new Landscape PDF
       // $pdf = new FPDI('l');
       $pdf = new \setasign\Fpdi\Fpdi();
@@ -114,7 +138,7 @@
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(55, 52); // set the position of the box
-        $pdf->Cell(10, 78, $all_course_name, 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 78, $all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')', 0, 0, 'L'); // add the text, align to Center of cell
                          
                
         $excluding_GST = $result_arry['totalAmount'] * 100 / 118;

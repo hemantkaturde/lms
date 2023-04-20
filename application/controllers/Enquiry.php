@@ -1031,7 +1031,7 @@
 
                     <div>
                         <p><b>Thanks & Regards<b></p>
-                        <p><b>Team IICTN/b></p>
+                        <p><b>Team IICTN</b></p>
                     </div>
                     '; 
                     
@@ -1041,18 +1041,18 @@
 
                     
 
-                        $url = "https://marketing.intractly.com/api/send.php?number=917021507157&type=text&message=We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                        // $url = "https://marketing.intractly.com/api/send.php?number=917021507157&type=text&message=We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
 
-                        $ch = curl_init();
-                        curl_setopt($ch, CURLOPT_URL, $url);
-                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-                        // This is what solved the issue (Accepting gzip encoding)
-                        // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                        $response = curl_exec($ch);
-                        curl_close($ch);
-                        echo $response;
+                        // $ch = curl_init();
+                        // curl_setopt($ch, CURLOPT_URL, $url);
+                        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                        // // This is what solved the issue (Accepting gzip encoding)
+                        // // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                        // $response = curl_exec($ch);
+                        // curl_close($ch);
+                        // echo $response;
             
                           /* Send Whats App */
 
@@ -1174,7 +1174,7 @@
         $json_data = array(
             "draw"            => intval( $params['draw'] ),   
             "recordsTotal"    => intval( $totalRecords ),  
-            "recordsFiltered" => intval($totalRecords),
+            "recordsFiltered" => intval( $totalRecords ),
             "data"            => $data   // total data array
             );
 
