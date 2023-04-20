@@ -56,8 +56,8 @@ if ($conn->query($sql) === TRUE) {
 
     $Body  .= '<p>For more details kindly contact your councillor or write us on admin@iictn.org</p>';
 
-    $Body  .= '<div><p><b>Thanks & Regards<b></p></p>';
-    $Body  .= '<div><p><b>Team IICTN<b></p></p>';
+    $Body  .= '<div><b>Thanks & Regards</b><br>';
+    $Body  .= '<div><b>Team IICTN</b>';
 
     $header = "From: IICTN-Team <enquiry@iictn.in> \r\n";
     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
@@ -88,10 +88,13 @@ if ($conn->query($sql) === TRUE) {
 
 
                 $curl = curl_init();     
-                $wp_url = "https://iictn.in/tax_invoice/index.php?enq_id=".$row['enq_id']."&paymentid=".$row_last_payment['id'];     
+                $wp_url = 'https://iictn.in/tax_invoice/index.php?enq_id='.$row['enq_id'].'&paymentid='.$row_last_payment['id'];  
+                
+                
                 $media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
                 $url_media = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=media&message=".urlencode($media)."&media_url=".$wp_url."&filename=Tax+Invoice&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
                 
+
                 $ch_media = curl_init();
                 curl_setopt($ch_media, CURLOPT_URL, $url_media);
                 curl_setopt($ch_media, CURLOPT_SSL_VERIFYPEER, false);
@@ -101,7 +104,9 @@ if ($conn->query($sql) === TRUE) {
                 // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
                 $response = curl_exec($ch_media);
                 curl_close($ch_media);
-                // echo $response
+                echo $response;
+
+                echo $url_media;
 
     }
 
