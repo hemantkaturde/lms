@@ -386,7 +386,7 @@
 
                             $UpdateInjquirydata = array(
                                 'enq_fullname' => $this->input->post('full_name'),
-                                'enq_mobile' => $this->input->post('enq_mobile'),
+                                'enq_mobile' => $this->input->post('mobile_number'),
                             );
 
                            $updateSimilarDatainEnquiry =  $this->admission_model->UpdateInjquirydata($this->input->post('enq_id'),$UpdateInjquirydata);
