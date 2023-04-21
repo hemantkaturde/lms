@@ -4,14 +4,16 @@
             <div class="ibox-head">
                 <div style="margin-left: 474px;"><div class="ibox-title">ADMISSION FORM</div></div>
                
-                <div><div class="ibox-title">
+                <div>
                     
-                <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button>
-            
-                <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
-                </button>
-            
+                <div class="ibox-title">
+                    
+                    <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button>
+                
+                    <button type="button" class="btn btn-primary">
+                            <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                    </button>
+                
             </div></div>
 
                 

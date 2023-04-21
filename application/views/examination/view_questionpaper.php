@@ -7,7 +7,17 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Question Paper Management ( <B>Course Name :</B><?=$examination_info[0]->course_name;?> )</div>
+                <div class="ibox-title">
+
+                
+                <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                </button>
+                    
+                Question Paper Management ( <B>Course Name :</B><?=$examination_info[0]->course_name;?> )
+            
+                </div>
+
 
                 <!-- <div class="ibox-tools"> -->
                 <!-- <a class="btn btn-primary addcourse"><i class="fa fa-plus"></i> Add Course</a> -->
