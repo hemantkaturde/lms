@@ -11,7 +11,7 @@ $jsonstringtoArray = json_decode($access, true);
 
                 
                 <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="<?php echo base_url().'/examinationlisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                 </button>
                     
                 Question Paper Management ( <B>Course Name :</B><?=$examination_info[0]->course_name;?> )
