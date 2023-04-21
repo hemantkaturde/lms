@@ -345,8 +345,9 @@ class Student_model extends CI_Model
                  // $data[$counter]['total_fees'] = '₹ '.$total_fees ;
 
                  $data[$counter]['action'] = '';
+
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentpaymentdetails/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Student Payment Details' title='Student Payment Details'></a>  ";
-                                 
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewadmissiondetails/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View Admission Details' title='View Admission Details'></a>&nbsp;";       
                 $counter++; 
             }
         }
