@@ -46,7 +46,7 @@
                         <div class="m-b-5">USERS</div><i class="fa fa-users widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div> -->
                         <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalusers"
-                                    href="<?php echo base_url().'courselisting'?>">Staff Users</a></small></div>
+                                    href="<?php echo base_url().'userListing'?>">Staff Users</a></small></div>
                     </div>
                 </div>
             </div>
