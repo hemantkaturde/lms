@@ -30,8 +30,6 @@
                     <td><?=$value['link_url'] ?></td>
                     <td>
 
-			
-
 					 <?php if($value['attendance_alreday_exits']!='1'){ ?>
                        <?php if($value['link_url']){?>
                              <button id="join_link" style="width: 51%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
@@ -85,6 +83,8 @@ $dataPoints = array(
 </div>
     <!-- END PAGE CONTENT-->
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
 <script>
 
 window.onload = function () {
@@ -114,9 +114,9 @@ window.onload = function () {
   
  }
 
-
 $(document).ready(function(){
     $(".join_link").click(function(){
+
                     var user_id = $(this).attr("user-id");
                     var topic_id = $(this).attr("topic-id");
                     var course_id = $(this).attr("course-id");
