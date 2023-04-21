@@ -83,7 +83,7 @@ $dataPoints = array(
 </div>
     <!-- END PAGE CONTENT-->
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 
 <script>
