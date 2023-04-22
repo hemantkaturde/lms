@@ -663,9 +663,6 @@
 
            $exam_answer_data = $this->input->post();
 
-
-          
-
            $savesnswerdata_response =array();
            if($exam_answer_data){
 
