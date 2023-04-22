@@ -704,7 +704,6 @@
                         $to = $email;
                         $from = 'enquiry@iictn.in'; 
                         $fromName = 'IICTN'; 
-                        $enq_fullname = $get_equiry_data->enq_fullname;
                         //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                         $subject = 'IICTN Examination Submitted Successfully !! '.date('Y-m-d H:i:s');
                         
