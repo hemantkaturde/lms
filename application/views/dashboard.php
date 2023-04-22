@@ -131,8 +131,8 @@ if($roleText=="Counsellor"){
                 </div>
             </div>
         </div> -->
-        <div class="row" style="display:<?=$display?>">
-            <div class="col-lg-4">
+        <div class="row" >
+            <div class="col-lg-4" style="display:<?=$display?>">
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title" >
@@ -183,8 +183,8 @@ if($roleText=="Counsellor"){
             </div>
         </div>
 
-        <div class="row" style="display:<?=$display?>">
-            <div class="col-lg-8">
+        <div class="row" >
+            <div class="col-lg-8" style="display:<?=$display?>">
                 <div class="ibox">
                     <div class="ibox-body">
                         <div class="flexbox mb-4">
