@@ -1,3 +1,20 @@
+<?php 
+$pageUrl =$this->uri->segment(1);
+$access = $this->session->userdata('access');
+$roleText = $this->session->userdata('roleText');
+
+
+
+if($roleText=="Counsellor"){
+
+    $display = "none";
+
+}else{
+    $display = "block";
+}
+
+?>
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/event.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/colorbox.css" />
 
@@ -39,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6" style="display:<?=$display?>">
                 <div class="ibox bg-danger color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php echo $users; ?></h2>
@@ -114,7 +131,7 @@
                 </div>
             </div>
         </div> -->
-        <div class="row">
+        <div class="row" style="display:<?=$display?>">
             <div class="col-lg-4">
                 <div class="ibox">
                     <div class="ibox-head">
@@ -166,7 +183,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="display:<?=$display?>">
             <div class="col-lg-8">
                 <div class="ibox">
                     <div class="ibox-body">
