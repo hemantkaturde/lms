@@ -964,6 +964,12 @@ public function getstudentexaminationdata($params,$userId){
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_EXAMINATION);
         $fetch_result = $query->result_array();
+
+
+
+       
+
+
     
         if(count($fetch_result) > 0)
         {
