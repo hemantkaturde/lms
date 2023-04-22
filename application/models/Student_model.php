@@ -1324,6 +1324,20 @@ public function getCoursenamebyid($course_id){
 }
 
 
+public function getStudentrecords($student_id){
+
+    $this->db->select('email,mobile');
+    $this->db->where(TBL_USER.'.userid', $student_id);
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.user_flag', 'student');
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+
+}
+
+
 }
 
 ?>
