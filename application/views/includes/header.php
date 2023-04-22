@@ -321,11 +321,13 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
 
+                        <?php if (in_array("attendancemodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='attendance'){ echo 'active';} ?>">
                             <a href="<?php echo base_url().'attendance'; ?>"><i class="sidebar-item-icon fa fa-calendar-check-o" ></i>
                                 <span class="nav-label">Attendance</span>
                             </a>
                         </li>
+                        <?php } ?>
 
                         
                         <?php if (in_array("examinationmodule", $jsonstringtoArray)){?>

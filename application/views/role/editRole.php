@@ -158,6 +158,17 @@ if(!empty($roleInfo))
                                             </tr>
 
 
+                                                
+                                            <tr>
+                                                <td style="color:#a83131"><b>Attendance</b></td>
+                                                <td><input type="checkbox" id="attendancemodule" name="checkbox[]" value="attendancemodule" <?php if(in_array("attendancemodule", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="attendancepage" name="checkbox[]" value="attendancepage" <?php if(in_array("attendancepage", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="attendanceadd" name="checkbox[]" value="attendanceadd" <?php if(in_array("attendanceadd", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="attendanceedit" name="checkbox[]" value="attendanceedit" <?php if(in_array("attendanceedit", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="attendancedelete" name="checkbox[]" value="attendancedelete" <?php if(in_array("attendancedelete", json_decode($access))){ echo 'checked'; } ?>></td>
+                                            </tr>
+
+
                                             <tr>
                                                 <td style="color:#a83131"><b>Examination</b></td>
                                                 <td><input type="checkbox" id="examinationmodule" name="checkbox[]" value="examinationmodule" <?php if(in_array("examinationmodule", json_decode($access))){ echo 'checked'; } ?>></td>

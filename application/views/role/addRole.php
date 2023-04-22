@@ -130,7 +130,15 @@
                                                 <td><input type="checkbox" id="admissionedit" name="checkbox[]" value="admissionedit"></td>
                                                 <td><input type="checkbox" id="admissiondelete" name="checkbox[]" value="admissiondelete"></td>
                                             </tr>
-
+                                            
+                                            <tr>
+                                                <td style="color:#a83131"><b>Attendance</b></td>
+                                                <td><input type="checkbox" id="attendancemodule" name="checkbox[]" value="attendancemodule"></td>
+                                                <td><input type="checkbox" id="attendancepage" name="checkbox[]" value="attendancepage"></td>
+                                                <td><input type="checkbox" id="attendanceadd" name="checkbox[]" value="attendanceadd"></td>
+                                                <td><input type="checkbox" id="attendanceedit" name="checkbox[]" value="attendanceedit"></td>
+                                                <td><input type="checkbox" id="attendancedelete" name="checkbox[]" value="attendancedelete"></td>
+                                            </tr>
 
                                             
                                             <tr>
