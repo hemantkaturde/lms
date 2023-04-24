@@ -7,6 +7,24 @@ include "phpqrcode/qrlib.php" ;
 
 $student_id = $_GET['student_id'];
 
+
+ /* get Student Details */
+ $result = $conn->query("SELECT * from  tbl_users  
+                         join tbl_student_answer_sheet on tbl_users.userid = tbl_student_answer_sheet.student_id
+                         join tbl_course on tbl_student_answer_sheet.course_id = tbl_course.courseId
+                         join tbl_course_type on tbl_course_type.ct_id = tbl_course.courseId
+                         join tbl_users_enquires on tbl_users_enquires.user_id = tbl_users.userid
+                         join tbl_admission on tbl_admission.enq_id = tbl_users_enquires.enq_id
+                         where tbl_users.userid=$student_id and tbl_users.isDeleted=0 and tbl_users.user_flag='student' group by tbl_student_answer_sheet.student_id");
+
+ $result_arry = $result->fetch_assoc();
+ $student_name = $result_arry['name'].' '.$result_arry['lastname'];
+ $course_name = $result_arry['course_name'];
+ $dateofbirth = $result_arry['dateofbirth'];
+ $mobile = $result_arry['mobile'];
+
+
+
 $pdf = new \setasign\Fpdi\Fpdi();
 
 $pagecount = $pdf->setSourceFile('marksheet.pdf');
@@ -18,19 +36,30 @@ $pdf->useTemplate($tpl);
 
 $pdf->SetFont('Helvetica');
 
+$pdf->SetFontSize('10');
+$pdf->SetXY(52, 135);
+$pdf->Cell(0, 1,  $mobile.'/'.date("y",strtotime("-1 year")).'-'.date("y").'/WEB/MUM', 0, 0, 'L');
 
-$pdf->SetFontSize('25','B'); // set font size
-$pdf->SetXY(10, 162); // set the position of the box
-$pdf->Cell(0, 10,  'daf', 0, 0, 'C'); // add the text, align to Center of cell
+
+$pdf->SetFontSize('10','B'); 
+$pdf->SetXY(52, 139.8);
+$pdf->Cell(0, 5,  $student_name, 0, 0, 'L');
 
 
-$pdf->SetFontSize('10'); // set font size
-$pdf->SetXY(110, 205); // set the position of the box
-$pdf->Cell(0, 1,  'df', 0, 0, 'C'); // add the text, align to Center of cell
+$pdf->SetFontSize('10','B'); 
+$pdf->SetXY(52, 146.8);
+$pdf->Cell(0, 5,  $dateofbirth , 0, 0, 'L');
 
-$pdf->SetFontSize('30');
-$pdf->SetXY(10, 125);
-$pdf->MultiCell(190,11,'sds', '0', 'C', 0);
+
+
+$pdf->SetFontSize('10','B'); 
+$pdf->SetXY(16, 176);
+$pdf->Cell(0, 10,  '1', 0, 0, 'L');
+
+$pdf->SetFontSize('10','B'); 
+$pdf->SetXY(25, 176);
+$pdf->Cell(0, 10,   $course_name, 0, 0, 'L');
+
 
 
 $pdf->SetFontSize('20');
