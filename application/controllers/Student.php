@@ -715,7 +715,6 @@
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
     
-                        
     
                         $htmlContent = '<div>
                                             <p>Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner.</p>
@@ -752,12 +751,12 @@
                             curl_close($ch);
                             // echo $response;
 
-                            $savesnswerdata_response['status'] = 'success';
-                            $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
-               
+                             
                         }
 
-
+                        $savesnswerdata_response['status'] = 'success';
+                        $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+        
                    }
 
                   

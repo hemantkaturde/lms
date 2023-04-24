@@ -244,6 +244,27 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                         $retval = mail($to,$Subject,$Body,$header);
                      
                         if($retval){
+
+                            
+                                /* Send Whats App  Start Here */
+                            $curl = curl_init();
+                            $text = 'Login Link : https://www.iictn.in/ , Username (First Name  or Email Id or Mobile Number ) : '.$username .' Password :'.$main_pass;
+                            //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                            $mobile = '91'.$mobile;
+                            $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+                
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                            // This is what solved the issue (Accepting gzip encoding)
+                            // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                            $response = curl_exec($ch);
+                            curl_close($ch);
+                            // echo $response;
+
+
                             echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
                         }else{
     
