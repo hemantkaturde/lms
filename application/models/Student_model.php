@@ -233,7 +233,7 @@ class Student_model extends CI_Model
 
     public function getAllstudentdata($id){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_USER.'.profile_pic as student_profile_pic');
         $this->db->where(TBL_USER.'.userId', $id);
         $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.user_id = '.TBL_USER.'.userId');
         $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');

@@ -154,6 +154,9 @@
                         $profile_pic = $this->input->post('existing_img');
                     }
         
+
+               
+
                     $data = array(
                         'name'      => $this->input->post('full_name'),
                         'mobile'    => $this->input->post('mobile_number'),
