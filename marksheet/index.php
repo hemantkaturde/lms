@@ -53,7 +53,6 @@ $pdf->SetXY(52, 146.8);
 $pdf->Cell(0, 5,  $dateofbirth , 0, 0, 'L');
 
 
-
 $pdf->SetFontSize('10','B');
 $pdf->SetXY(168, 139.5);
 $new_date = date("Y-m-d",strtotime($examdate));
@@ -77,8 +76,6 @@ $pdf->Cell(0, 10,  '1', 0, 0, 'L');
 $pdf->SetFontSize('10','B'); 
 $pdf->SetXY(25, 176);
 $pdf->Cell(0, 10,  $course_name, 0, 0, 'L');
-
-
 
 
 $pdf->SetFontSize('20');
