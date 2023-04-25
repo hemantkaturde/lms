@@ -30,6 +30,8 @@ $student_id = $_GET['student_id'];
     $examid = $result_arry['examid'];
     $userid = $result_arry['user_id_auto'];
 
+    $total_marks_marksheet = $result_arry['total_marks'];
+
 
 
 
@@ -163,8 +165,14 @@ $pdf->Cell(0, 10,  $course_name, 0, 0, 'L');
 
 
 $pdf->SetFontSize('10','B'); 
+$pdf->SetXY(105, 176);
+$pdf->Cell(0, 10,  $total_marks_marksheet, 0, 0, 'L');
+
+
+$pdf->SetFontSize('10','B'); 
 $pdf->SetXY(130, 176);
 $pdf->Cell(0, 10,  $total_marks, 0, 0, 'L');
+
 
 
 
