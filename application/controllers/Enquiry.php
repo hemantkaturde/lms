@@ -531,8 +531,30 @@
                         $header .= "Content-type: text/html\r\n";
                         
                         $retval = mail($to,$Subject,$Body,$header);
-            
+
                     if($retval){
+
+
+                         /* Send Whats App  Start Here */
+                         $curl = curl_init();
+                         $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                         $text .= 'Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
+                         //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                         $mobile = '91'.$get_equiry_data->enq_mobile;
+                         $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
+
+                         $ch = curl_init();
+                         curl_setopt($ch, CURLOPT_URL, $url);
+                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                         // This is what solved the issue (Accepting gzip encoding)
+                         // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                         $response = curl_exec($ch);
+                         curl_close($ch);
+                         // echo $response;
+                         
+
                         $process = 'Enquiry Link Sent';
                         $processFunction = 'Enquiry/sendEnquiryLink';
                         $this->logrecord($process,$processFunction);
