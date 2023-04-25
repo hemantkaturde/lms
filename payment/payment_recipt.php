@@ -94,15 +94,9 @@ if($data->num_rows > 0){
     $pdf->Cell($width_cell[3],10,'75',1,1,'C',false); // Fourth column of row 1 
     //  First row of data is over 
    
-
     $pdf->SetXY(90,120);
     $pdf->SetFont('Arial','B',10);
     $pdf->Cell(20,10,'    JOINING INSTRUCTIONS, TERMS & CONDITIONS',0,1,'C');
-
-
-
-
-    $pdf->Output();
 
     $pdf->Output();
 

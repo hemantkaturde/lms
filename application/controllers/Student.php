@@ -691,71 +691,71 @@
 
                     $saveAnswerdata = $this->student_model->saveAnswerdata('',$data);
 
-                    if($saveAnswerdata){
+                    // if($saveAnswerdata){
 
-                        $getStudentRecord = $this->student_model->getStudentrecords($student_id);
+                        // $getStudentRecord = $this->student_model->getStudentrecords($student_id);
 
 
-                        $name = $getStudentRecord[0]['name']; 
-                        $lastname = $getStudentRecord[0]['lastname']; 
-                        $mobile = $getStudentRecord[0]['mobile']; 
-                        $email = $getStudentRecord[0]['email']; 
+                        // $name = $getStudentRecord[0]['name']; 
+                        // $lastname = $getStudentRecord[0]['lastname']; 
+                        // $mobile = $getStudentRecord[0]['mobile']; 
+                        // $email = $getStudentRecord[0]['email']; 
 
                     
-                        $to = $email;
-                        $from = 'enquiry@iictn.in'; 
-                        $fromName = 'IICTN'; 
-                        //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
-                        $subject = 'IICTN Examination Submitted Successfully !! '.date('Y-m-d H:i:s');
+                        // $to = $email;
+                        // $from = 'enquiry@iictn.in'; 
+                        // $fromName = 'IICTN'; 
+                        // //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
+                        // $subject = 'IICTN Examination Submitted Successfully !! '.date('Y-m-d H:i:s');
                         
-                        $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
-                        //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
-                        $header .= "MIME-Version: 1.0\r\n";
-                        $header .= "Content-type: text/html\r\n";
+                        // $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
+                        // //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                        // $header .= "MIME-Version: 1.0\r\n";
+                        // $header .= "Content-type: text/html\r\n";
     
     
-                        $htmlContent = '<div>
-                                            <p>Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner.</p>
-                                            <p>For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org</p>
+                        // $htmlContent = '<div>
+                        //                     <p>Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner.</p>
+                        //                     <p>For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org</p>
 
-                                        </div>
+                        //                 </div>
 
-                                        <div>
-                                            <p><b>Thanks & Regards<b></p>
-                                            <p><b>Team IICTN</b></p>
-                                        </div> '; 
+                        //                 <div>
+                        //                     <p><b>Thanks & Regards<b></p>
+                        //                     <p><b>Team IICTN</b></p>
+                        //                 </div> '; 
                        
                         
-                        $retval = mail($to,$subject,$htmlContent,$header);
+                        // $retval = mail($to,$subject,$htmlContent,$header);
 
 
-                        if($retval){
+                        // if($retval){
 
-                            /* Send Whats App  Start Here */
-                            $curl = curl_init();
-                            $text = 'Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner . For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org';
-                            //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                            $mobile = '91'.$mobile;
-                            $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
+                            // /* Send Whats App  Start Here */
+                            // $curl = curl_init();
+                            // $text = 'Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner . For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org';
+                            // //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                            // $mobile = '91'.$mobile;
+                            // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
                 
-                            $ch = curl_init();
-                            curl_setopt($ch, CURLOPT_URL, $url);
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-                            // This is what solved the issue (Accepting gzip encoding)
-                            // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                            $response = curl_exec($ch);
-                            curl_close($ch);
-                            // echo $response;
+                            // $ch = curl_init();
+                            // curl_setopt($ch, CURLOPT_URL, $url);
+                            // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                            // // This is what solved the issue (Accepting gzip encoding)
+                            // // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                            // $response = curl_exec($ch);
+                            // curl_close($ch);
+                            // // echo $response;
 
                              
-                        }
+                        // }
 
                         $savesnswerdata_response['status'] = 'success';
                         $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
         
-                   }
+                //    }
 
                   
                     
