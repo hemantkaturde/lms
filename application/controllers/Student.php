@@ -155,11 +155,7 @@
                     }
 
 
-                    print_r($profile_pic);
-                    exit;
-
-               
-
+            
                     $data = array(
                         'name'      => $this->input->post('full_name'),
                         'mobile'    => $this->input->post('mobile_number'),

@@ -220,7 +220,6 @@ $route['attendance'] = 'admin/attendance';
 $route['fetchstudentattendance'] = 'admin/fetchstudentattendance';
 
 
-
 // Students Enquires and Srudent Listings here 
 $route['studentadmissions'] = 'student/studentadmissions';
 $route['fetchstudentadmissions'] = 'student/fetchstudentadmissions';
