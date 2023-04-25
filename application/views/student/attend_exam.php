@@ -8,6 +8,13 @@ $jsonstringtoArray = json_decode($access, true);
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
+                <div>
+                    <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
+                                class="fa fa-arrow-left"></i> Back</a>
+                    </button>
+                </div>
+
                 <div class="ibox-title">Examination ( <B>Course Name :</B><?=$exam_detail[0]['course_name'];?> )</div>
 
                 <div></div>
@@ -112,7 +119,9 @@ $jsonstringtoArray = json_decode($access, true);
 
 
                     <!-- <p><b>Exam Total Marks : </b><?=$exam_detail[0]['exam_title'];?></p> -->
-                    <div><a href="<?php echo base_url();?>start_exam/<?=$exam_detail[0]['id']?>">Start Exam</a></div>
+                    <button type="button" class="btn btn-primary">
+                      <div><a style="color:black" href="<?php echo base_url();?>start_exam/<?=$exam_detail[0]['id']?>">Start Exam</a></div>
+                    </button>
                 </div>
             </div>
         </div>
