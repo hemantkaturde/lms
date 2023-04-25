@@ -950,6 +950,10 @@ public function getstudentexaminationdata($params,$userId){
 
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+        $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
+
 
         if($params['search']['value'] != "") 
         {
@@ -961,16 +965,12 @@ public function getstudentexaminationdata($params,$userId){
         $this->db->where(TBL_EXAMINATION.'.course_id', $value);
 
         $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_EXAMINATION);
         $fetch_result = $query->result_array();
 
 
-
-       
-
-
-    
         if(count($fetch_result) > 0)
         {
             foreach ($fetch_result as $key => $value)
