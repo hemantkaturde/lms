@@ -35,6 +35,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Course Name</th>
                                 <th>Examination Title</th>
                                 <th>Time</th>
+                                <th>Total Marks</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>

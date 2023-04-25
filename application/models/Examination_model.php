@@ -60,7 +60,7 @@ class Examination_model extends CI_Model
 
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['exam_title'] = $value['exam_title'];
-                 $data[$counter]['exam_time'] = $value['exam_time'];
+                 $data[$counter]['total_marks'] = $value['total_marks'];
                  $data[$counter]['exam_status'] = $exam_status;
                  $data[$counter]['action'] = '';
 
