@@ -132,12 +132,12 @@
 
                     if(!empty($_FILES['profile_photo']['name'])){
 
-                        $file = rand(1000,100000)."-".$this->input->post('name').$_FILES['profile_photo']['name'];
+                        $file = $this->input->post('name').$_FILES['profile_photo']['name'];
                         $filename = str_replace(' ','_',$file);
         
                         $config['upload_path'] = 'uploads/profile_pic'; 
                         $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                        $config['max_size'] = '1000'; // max_size in kb 
+                        $config['max_size'] = '100000'; // max_size in kb 
                         $config['file_name'] = $filename; 
                
                         // Load upload library 
