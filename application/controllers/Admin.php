@@ -134,7 +134,7 @@ class Admin extends BaseController
 
             if(!empty($_FILES['profile_photo']['name'])){
 
-                $file = rand(1000,100000)."-".$this->input->post('name').$_FILES['profile_photo']['name'];
+                $file = 'profile_'.$this->input->post('name').$_FILES['profile_photo']['name'];
                 $filename = str_replace(' ','_',$file);
 
                 $config['upload_path'] = 'uploads/profile_pic'; 
@@ -217,14 +217,17 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if(!empty($post_submit)){
 
+        
             if(!empty($_FILES['profile_photo1']['name'])){
 
-                $file = rand(1000,100000)."-".$this->input->post('name1').$_FILES['profile_photo1']['name'];
+                $file = 'profile_'.$this->input->post('name1').$_FILES['profile_photo1']['name'];
                 $filename = str_replace(' ','_',$file);
 
                 $config['upload_path'] = 'uploads/profile_pic'; 
                 $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                $config['max_size'] = '1000'; // max_size in kb 
+                $config['max_size'] = '1000000'; // max_size in kb 
+
+                
                 $config['file_name'] = $filename; 
        
                 // Load upload library 
@@ -241,6 +244,8 @@ class Admin extends BaseController
                 $profile_pic = trim($this->input->post('existing_img'));
 
             }
+
+          
 
             $createuser_response = array();
             if(empty($this->input->post('password1')))

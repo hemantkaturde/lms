@@ -291,11 +291,11 @@
                     if($check_uniqe > 0){
 
                         if(!empty($_FILES['student_photo']['name'])){
-                            $file = rand(1000,100000)."-".$_FILES['student_photo']['name'];
+                            $file = $_FILES['student_photo']['name'];
                             $filename = str_replace(' ','_',$file);
                             $config['upload_path'] = 'uploads/admission'; 
                             $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                            $config['max_size'] = '10000'; // max_size in kb 
+                            $config['max_size'] = '100000'; // max_size in kb 
                             $config['file_name'] = $filename; 
                             // Load upload library 
                             $this->load->library('upload',$config); 
@@ -316,11 +316,11 @@
 
 
                         if(!empty($_FILES['edu_certificate']['name'])){
-                            $file = rand(1000,100000)."-".$_FILES['edu_certificate']['name'];
+                            $file = $_FILES['edu_certificate']['name'];
                             $filename = str_replace(' ','_',$file);
                             $config['upload_path'] = 'uploads/admission'; 
                             $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                            $config['max_size'] = '10000'; // max_size in kb 
+                            $config['max_size'] = '100000'; // max_size in kb 
                             $config['file_name'] = $filename; 
                             // Load upload library 
                             $this->load->library('upload',$config); 
@@ -338,11 +338,11 @@
 
 
                         if(!empty($_FILES['adhar_copy']['name'])){
-                            $file = rand(1000,100000)."-".$_FILES['adhar_copy']['name'];
+                            $file = $_FILES['adhar_copy']['name'];
                             $filename = str_replace(' ','_',$file);
                             $config['upload_path'] = 'uploads/admission'; 
                             $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                            $config['max_size'] = '10000'; // max_size in kb 
+                            $config['max_size'] = '100000'; // max_size in kb 
                             $config['file_name'] = $filename; 
                             // Load upload library 
                             $this->load->library('upload',$config); 
