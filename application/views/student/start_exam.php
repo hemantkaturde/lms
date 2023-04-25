@@ -173,7 +173,11 @@ $jsonstringtoArray = json_decode($access, true);
                                     </div> -->
                                     <h2 class="error"><p></p></h2>
                                     <div class="modal-footer">
-                                        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+                                    <button type="button" class="btn btn-primary">
+                                            <a href="<?php echo base_url().'attendexamination/'.$exam_detail[0]['id'];?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                                    </button>
+                                        
+                                        <!-- <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>         -->
                                         <button type="submit" id="submit_examination_anser" class="btn btn-primary submit_examination_anser">Submit Examination</button>
                                     </div>
                             </div>
