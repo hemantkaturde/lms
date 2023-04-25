@@ -2738,7 +2738,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					{ "width": "30%", "targets": 1 },
 					{ "width": "10%", "targets": 2 },
 					{ "width": "10%", "targets": 3 },
-					{ "width": "10%", "targets": 4 }
+					{ "width": "10%", "targets": 5 }
+					{ "width": "10%", "targets": 6 }
 				],
 				responsive: true,
 				"oLanguage": {
@@ -2820,6 +2821,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					 $('#examination_time1').val(data[0].exam_time);
 					 $('#examination_status1').val(data[0].exam_status);
                      $('#exam_id1').val(exam_id);
+					 $('#total_marks1').val(data[0].total_marks);
                 }  
            })
     });

@@ -68,18 +68,20 @@
                     'course_id' => $this->input->post('course_name'),
                     'exam_title' => $this->input->post('examination_title'),
                     'exam_time' => $this->input->post('examination_time'),
+                    'total_marks' => $this->input->post('total_marks'),
                     'exam_status' => $this->input->post('examination_status'),
                 );
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('examination_title', 'Examination Title', 'trim|required');
                 $this->form_validation->set_rules('examination_time', 'Examination Time', 'trim|required');
+                $this->form_validation->set_rules('total_marks', 'Total Marks', 'trim|required');
                 $this->form_validation->set_rules('examination_status', 'Examination Status', 'trim|required');
 
                 if($this->form_validation->run() == FALSE){
 
                     $examination_response['status'] = 'failure';
-                    $examination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'examination_title'=>strip_tags(form_error('examination_title')),'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')));
+                    $examination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'examination_title'=>strip_tags(form_error('examination_title')),'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')),'total_marks'=>strip_tags(form_error('total_marks')));
 
                 }else{
 
@@ -92,7 +94,7 @@
                         $saveCoursetypedata = $this->examination_model->saveExaminationedata('',$data);
                         if($saveCoursetypedata){
                             $examination_response['status'] = 'success';
-                            $examination_response['error'] = array('course_type_name'=>'');
+                            $examination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'examination_title'=>strip_tags(form_error('examination_title')),'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')),'total_marks'=>strip_tags(form_error('total_marks')));
                         }
 
                     }
@@ -125,18 +127,20 @@
                 $data = array(
                     'course_id' => $this->input->post('course_name'),
                     'exam_title'=> $this->input->post('examination_title'),
+                    'total_marks' => $this->input->post('total_marks'),
                     'exam_time' => $this->input->post('examination_time'),
                     'exam_status'=> $this->input->post('examination_status'),
                 );
 
                 $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
                 $this->form_validation->set_rules('examination_title', 'Examination Title', 'trim|required');
+                $this->form_validation->set_rules('total_marks', 'Total Marks', 'trim|required');
                 $this->form_validation->set_rules('examination_time', 'Examination Time', 'trim|required');
                 $this->form_validation->set_rules('examination_status', 'Examination Status', 'trim');
              
                 if($this->form_validation->run() == FALSE){
                     $updateexamination_response['status'] = 'failure';
-                    $updateexamination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'examination_title'=>strip_tags(form_error('examination_title')), 'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')));
+                    $updateexamination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'examination_title'=>strip_tags(form_error('examination_title')), 'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')),'total_marks'=>strip_tags(form_error('total_marks')));
 
                 }else{
 

@@ -132,7 +132,7 @@
 
                     if(!empty($_FILES['profile_photo']['name'])){
 
-                        $file = $this->input->post('name').$_FILES['profile_photo']['name'];
+                        $file = rand(1000,100000)."-".$_FILES['profile_photo']['name'];
                         $filename = str_replace(' ','_',$file);
         
                         $config['upload_path'] = 'uploads/admission'; 
@@ -153,7 +153,6 @@
                     }else{
                         $profile_pic = $this->input->post('existing_img');
                     }
-
 
             
                     $data = array(

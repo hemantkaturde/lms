@@ -102,6 +102,17 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
 
                     <div>
+                        <label style="text-align: left;" for="total_marks">Total Marks<span
+                                class="required">*</span></label>
+                        <div>
+                            <input autocomplete="off" autocomplete="off" type="text" id="total_marks"
+                                name="total_marks" placeholder="Total Marks"
+                                class="form-control col-md-12 col-xs-12">
+                            <p class="error total_marks_error"></p>
+                        </div>
+                    </div>
+
+                    <div>
                         <label style="text-align: left;" for="examination_status">Status<span
                                 class="required">*</span></label>
                         <div>
@@ -178,6 +189,18 @@ $jsonstringtoArray = json_decode($access, true);
                             <p class="error examination_time_error"></p>
                         </div>
                     </div>
+
+                    <div>
+                        <label style="text-align: left;" for="total_marks">Total Marks<span
+                                class="required">*</span></label>
+                        <div>
+                            <input autocomplete="off" autocomplete="off" type="text" id="total_marks1"
+                                name="total_marks" placeholder="Total Marks"
+                                class="form-control col-md-12 col-xs-12">
+                            <p class="error total_marks_error"></p>
+                        </div>
+                    </div>
+
 
                     <div>
                         <label style="text-align: left;" for="examination_status">Status<span

@@ -526,7 +526,7 @@ class Admin extends BaseController
 
                 if(!empty($_FILES['profile_photo']['name'])){
 
-                    $file = rand(1000,100000)."-".$this->input->post('full_name').$_FILES['profile_photo']['name'];
+                    $file = rand(1000,100000)."-".$_FILES['profile_photo']['name'];
                     $filename = str_replace(' ','_',$file);
     
                     $config['upload_path'] = 'uploads/profile_pic'; 
@@ -548,6 +548,8 @@ class Admin extends BaseController
                     $profile_pic = trim($this->input->post('existing_img'));
     
                 }
+
+
 
                 if($this->input->post('new_password') && $this->input->post('confirm_password')){
 
