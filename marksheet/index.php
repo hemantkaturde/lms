@@ -175,8 +175,6 @@ $pdf->Cell(0, 10,  $total_marks, 0, 0, 'L');
 
 
 
-
-
 $pdf->SetFontSize('10','B'); 
 $pdf->SetXY(185, 176);
 $pdf->Cell(0, 10,  $grade , 0, 0, 'L');
