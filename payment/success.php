@@ -71,7 +71,7 @@ if ($conn->query($sql) === TRUE) {
                 /* Send Whats App  Start Here */
                 $curl = curl_init();
                 $wp_url = 'https://iictn.in/tax_invoice/index.php?enq_id='.$row['enq_id'].'&paymentid='.$row_last_payment['id'];  
-                $text = 'WELCOME TO IICTN !!,  We have received your Payment. Transaction id :'.$row_last_payment['razorpay_payment_id'] .' Download Tax-Invoice Using Following Link '.$wp_url;
+                $text = 'WELCOME TO IICTN !!,  We have received your Payment. Transaction id :'.$row_last_payment['razorpay_payment_id'] .' Download Tax-Invoice Using Following Link '.$wp_url. 'Admission Link https://iictn.in/registration/new-registration-student.php?enq='.$row['enq_id'];
 
                 $mobile = '91'.$row['enq_mobile'];
                 $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
