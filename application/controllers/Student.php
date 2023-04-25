@@ -135,7 +135,7 @@
                         $file = $this->input->post('name').$_FILES['profile_photo']['name'];
                         $filename = str_replace(' ','_',$file);
         
-                        $config['upload_path'] = 'uploads/profile_pic'; 
+                        $config['upload_path'] = 'uploads/admission'; 
                         $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
                         $config['max_size'] = '100000'; // max_size in kb 
                         $config['file_name'] = $filename; 
@@ -153,7 +153,10 @@
                     }else{
                         $profile_pic = $this->input->post('existing_img');
                     }
-        
+
+
+                    print_r($profile_pic);
+                    exit;
 
                
 

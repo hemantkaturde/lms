@@ -410,11 +410,11 @@ class Admission_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
-                 $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
                  $data[$counter]['name'] = $value['name'];
                  $data[$counter]['course_name'] = $value['course_name'];
-                 //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['topic'] = $value['topic'];
+                 $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
+                 //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['timings'] = $value['timings'];
 
                  if($value['attendance_status']==1){
