@@ -174,6 +174,13 @@ $pdf->SetXY(130, 176);
 $pdf->Cell(0, 10,  $total_marks, 0, 0, 'L');
 
 
+$percentage =  ($total_marks/$total_marks_marksheet)*100;
+
+
+$pdf->SetFontSize('10','B'); 
+$pdf->SetXY(134, 176);
+$pdf->Cell(0, 10,  $percentage, 0, 0, 'L');
+
 
 $pdf->SetFontSize('10','B'); 
 $pdf->SetXY(185, 176);
