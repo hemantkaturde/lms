@@ -4,12 +4,12 @@
             <div class="ibox-head">
                 <!-- <div>
             <button type="button" class="btn btn-primary">
-              <a href="<?php echo base_url().'/enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+              <a href="<?php echo base_url().'enquirylisting';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
             </button>
             </div> -->
 
                  <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/studentadmissions';?>" style="color: black !important"><i
+                        <a href="<?php echo base_url().'studentadmissions';?>" style="color: black !important"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                 </button>
 
@@ -199,7 +199,7 @@
                                                     </div>
                                                     <?php if($pending_amount > 0){ ?>
                                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: end;">
-                                                        <label for="" style="margin-top:15px;color: #d2ae6d"><b><a href="<?php echo base_url().'/payment/pay.php?enq='.$followDataenquiry[0]->enq_number;?>" target="_blank" style="color: black !important">Pay Pending Payment <i class="fa fa-arrow-right" aria-hidden="true"></i></a></b></label>
+                                                        <label for="" style="margin-top:15px;color: #d2ae6d"><b><a href="<?php echo base_url().'payment/pay.php?enq='.$followDataenquiry[0]->enq_number;?>" target="_blank" style="color: black !important">Pay Pending Payment <i class="fa fa-arrow-right" aria-hidden="true"></i></a></b></label>
                                                     </div>
                                                     <?php } ?>
                                                 </div>
