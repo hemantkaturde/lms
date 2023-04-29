@@ -14,7 +14,7 @@
 				<div>
 					<h4 style="color: #d2ae6d;">
 						<b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></h4>
-					Total Payment
+					Total Fees
 				</div>
 
 			</div>
@@ -34,7 +34,7 @@
 					<div>
 						<h4 style="color: #d2ae6d;">
 							<b><?='₹ '.$totalpaidAmount;?></b></h4>
-						Total Received
+						Total Fees Received
 					</div>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 					<div>
 						<h4 style="color: #d2ae6d;">
 							<b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></h4>
-						Pending Payment
+						Pending Fees
 					</div>
 				</div>
 			</div>
