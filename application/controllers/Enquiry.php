@@ -540,7 +540,7 @@
                          /* Send Whats App  Start Here */
                          $curl = curl_init();
                          $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$course_name_without;
-                         $text .= ' Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
+                         $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
                          //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                          $mobile = '91'.$get_equiry_data->enq_mobile;
                          $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
