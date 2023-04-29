@@ -28,9 +28,10 @@
                                     <th>Name</th>
                                     <th>Mobile No</th>
                                     <th>Email</th>
-                                    <th>Counsellor</th>
-                                    <th>Counsellor</th>
                                     <th>Status</th>
+                                    <th>Courses</th>
+                                    <th>Counsellor</th>
+                                   
                                     <!-- <th>Fees</th> -->
                                     <th>Action</th>
                                 </tr>
