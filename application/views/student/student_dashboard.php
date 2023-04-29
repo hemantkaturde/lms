@@ -4,8 +4,57 @@
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
+	
 
-        <div class="col-lg-12 col-md-12">
+	<div class="box-body">
+        <div class="row col-md-12 col-sm-12 col-xs-12">
+
+		<div class="col-3 mx-auto">
+			<div class="card card-body card-buttons" style="text-align: center;">
+				<div>
+					<h4 style="color: #d2ae6d;">
+						<b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></h4>
+					Total Payment
+				</div>
+
+			</div>
+		</div>
+
+			<?php 
+				if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){
+					$totalpaidAmount =  $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;
+				}else{
+					$totalpaidAmount = 0;  
+				}  
+			?>
+
+			<div class="col-3 mx-auto">
+				<div class="card card-body card-buttons payment_box"
+					style="text-align: center;">
+					<div>
+						<h4 style="color: #d2ae6d;">
+							<b><?='₹ '.$totalpaidAmount;?></b></h4>
+						Total Received
+					</div>
+				</div>
+			</div>
+
+			<div class="col-3 mx-auto">
+				<div class="card card-body card-buttons payment_box"
+					style="text-align: center;">
+					<div>
+						<h4 style="color: #d2ae6d;">
+							<b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></h4>
+						Pending Payment
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+        <div class="col-lg-12 col-md-12" style="margin-top:35px">
         <h5><b> Course Class Schedule</b></h5>
             <table class="table  table-condensed" style="background-color:#cec4de">
             <thead>
@@ -32,7 +81,7 @@
 
 					 <?php if($value['attendance_alreday_exits']!='1'){ ?>
                        <?php if($value['link_url']){?>
-                             <button id="join_link" style="width: 51%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
+                             <button id="join_link" style="width: 70%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
                        <?php } else{ ?>
                              <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
                        <?php }?>

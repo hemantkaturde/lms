@@ -984,6 +984,18 @@ function studentcertificateData($params)
     }
 
 
+    public function getstudentEenquiryid($userId){
+
+        $this->db->select('*');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+        $query = $this->db->get(TBL_USERS_ENQUIRES);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
+
+
 
 }
 
