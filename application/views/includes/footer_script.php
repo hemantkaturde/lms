@@ -4604,7 +4604,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					else if(fetchResponse.status == 'success')
 				    {
 						 swal({
-						 	title: "Exam checked Succussfully!",
+						 	title: "Exam checked Successfully!",
 						 	//text: "",
 						 	icon: "success",
 						 	button: "Ok",
@@ -4709,7 +4709,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    {
 
 						swal({
-						 	title: "EVBTR Number Succussfully Updated !",
+						 	title: "EVBTR Number Successfully Updated !",
 						 	//text: "",
 						 	icon: "success",
 						 	button: "Ok",
