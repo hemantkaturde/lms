@@ -383,13 +383,15 @@
                      $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
                     
                      $total_fees = 0;
-                     $course_name = '';
+                     $course_name = ''; 
+                     $course_name_without ='';
                      $i = 1;
                         foreach($course_ids as $id)
                         {
                             $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
                             $total_fees += $get_course_fees[0]->course_total_fees;
                             $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
+                            $course_name_without .= $get_course_fees[0]->course_name. ',';  
                             $i++;  
                         }
                     $all_course_name = trim($course_name, ', '); 
@@ -537,8 +539,8 @@
 
                          /* Send Whats App  Start Here */
                          $curl = curl_init();
-                         $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
-                         $text .= 'Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
+                         $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$course_name_without;
+                         $text .= ' Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
                          //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                          $mobile = '91'.$get_equiry_data->enq_mobile;
                          $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
