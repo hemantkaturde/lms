@@ -64,6 +64,13 @@ class Enquiry_model extends CI_Model
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
+
+
+        if($this->session->userdata('roleText')=='Counsellor'){
+
+            $this->db->where(TBL_ENQUIRY.'.counsellor_id', $this->session->userdata('userId'));
+        }
+
         $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
         $query = $this->db->get(TBL_ENQUIRY);
         $rowcount = $query->num_rows();
@@ -80,6 +87,12 @@ class Enquiry_model extends CI_Model
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
+
+        if($this->session->userdata('roleText')=='Counsellor'){
+
+            $this->db->where(TBL_ENQUIRY.'.counsellor_id', $this->session->userdata('userId'));
+        }
+
         $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
         $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
