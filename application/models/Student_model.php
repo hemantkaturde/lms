@@ -267,9 +267,11 @@ class Student_model extends CI_Model
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
@@ -280,14 +282,17 @@ class Student_model extends CI_Model
     }
 
     public function getEnquirydata($params,$userId){
-        $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_ADMISSION.'.id as admission_id');
+        $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_ADMISSION.'.id as admission_id,'.TBL_USER.'.name as counseller');
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+
         $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
 
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
@@ -341,7 +346,8 @@ class Student_model extends CI_Model
                       
                     }
                  $all_course_name = trim($course_name, ', '); 
-
+                 $data[$counter]['all_course_name'] = $all_course_name ;
+                 $data[$counter]['counsellor_name'] = $value['counseller'];
                  // $data[$counter]['total_fees'] = '₹ '.$total_fees ;
 
                  $data[$counter]['action'] = '';

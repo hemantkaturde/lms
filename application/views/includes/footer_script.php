@@ -4050,8 +4050,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	                 { "width": "8%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					//  { "width": "10%", "targets": 6 },
-					 { "width": "5%", "targets": 6 }
+					 { "width": "10%", "targets": 6 },
+					{ "width": "10%", "targets": 7 },
+					 { "width": "5%", "targets": 8 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
