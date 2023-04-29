@@ -33,7 +33,7 @@
                                     <!-- <input type="hidden" id="profile_id" name="profile_id" value="<?php echo $profile_details[0]->profile_pic;?>" > -->
 
 
-                                    <?php if($role_text!="Student"){
+                                    <!-- <?php if($role_text!="Student"){
                                         if(!empty($this->session->userdata('profile_pic'))){ ?>
                                             <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px"  height="140px"/>
                                     <?php }else{ ?>
@@ -43,8 +43,9 @@
                                         <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px" height="140px"/>
                                     <?php }else{ ?>
                                         <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" id="output" width="140px" height="140px" />
-                                    <?php } } ?>
+                                    <?php } } ?> -->
 
+                                    <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" id="output"  width="140px"  height="140px"/>
                                 
                                     </span>
                                     </div>
@@ -104,7 +105,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Mobile Number</label>
-                                                    <input class="form-control" type="text" placeholder="Enter Mobile Number" id="mobile" name="mobile"  value="<?=$profile_details[0]->mobile;?>">
+                                                    <input class="form-control" type="text" placeholder="Enter Mobile Number" id="mobile" maxlength="10" name="mobile"  value="<?=$profile_details[0]->mobile;?>">
                                                     <p class="error mobile_error"></p>
                                                 </div>
                                             </div>
