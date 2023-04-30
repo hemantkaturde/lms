@@ -90,22 +90,22 @@ $jsonstringtoArray = json_decode($access, true);
                                             </h5>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="chkAns" id="chkAns1" data-id="<?=$value->id ?>" value="<?=$value->option_1;?>" >
+                                            <label class="radio"> <input type="radio" name="<?=$value->id ?>" id="<?=$value->option_1;?>" onclick="toggleCheckbox('chkAns1');"  data-id="<?=$value->id ?>" value="<?=$value->option_1;?>" >
                                                 <span> <?= $value->option_1;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio" name="chkAns" id="chkAns2" data-id="<?=$value->id ?>" value="<?= $value->option_2;?>">
+                                            <label class="radio"> <input type="radio" name="<?=$value->id ?>" id="<?=$value->option_2;?>" onclick="toggleCheckbox('chkAns2');" data-id="<?=$value->id ?>" value="<?= $value->option_2;?>">
                                             <span> <?= $value->option_2;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio"  name="chkAns" id="chkAns3" data-id="<?=$value->id ?>" value="<?= $value->option_3;?>"> 
+                                            <label class="radio"> <input type="radio"  name="<?=$value->id ?>" id="<?=$value->option_3;?>" onclick="toggleCheckbox('chkAns3');" data-id="<?=$value->id ?>" value="<?= $value->option_3;?>"> 
                                             <span> <?= $value->option_3;?></span>
                                             </label>
                                         </div>
                                         <div class="ans ml-2">
-                                            <label class="radio"> <input type="radio"  name="chkAns" id="chkAns4" data-id="<?=$value->id ?>" value="<?= $value->option_4;?>">
+                                            <label class="radio"> <input type="radio"  name="<?=$value->id ?>" id="<?=$value->option_4;?>" onclick="toggleCheckbox('chkAns4');" data-id="<?=$value->id ?>" value="<?= $value->option_4;?>">
                                             <span> <?= $value->option_4;?></span>
                                             </label>
                                         </div>
@@ -116,7 +116,7 @@ $jsonstringtoArray = json_decode($access, true);
                                                 <label for="options_answers">Answer</label>
                                                 </div>
                                                 <div class="options_answers_text">
-                                                    <input id="options_answers_<?=$value->id ?>" name="options_answers_<?=$value->id ?>" style="width: 85%;" require></input>
+                                                    <input type="text" id="options_answers_<?=$value->id ?>" name="options_answers_<?=$value->id ?>" style="width: 85%;" require readonly></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,28 +194,13 @@ $jsonstringtoArray = json_decode($access, true);
 
     <script type="text/javascript">
 
-           $("#chkAns1").click(function () {
-              var chek1 = $("#chkAns1").val();
-              var elemF = $(this);
-              $("#options_answers_"+elemF.attr('data-id')).val(chek1);
-            });
+        $("input[type='radio']").change(function() {
+        // Your code for any radio button change event
+                var elemF = $(this);
+                var val = elemF.attr('id');
+                var data_id = elemF.attr('data-id');
 
-            $("#chkAns2").click(function () { 
-              var chek2 = $("#chkAns2").val();
-              var elemF = $(this);
-              $("#options_answers_"+elemF.attr('data-id')).val(chek2);
-            });
-
-            $("#chkAns3").click(function () {
-              var chek3 = $("#chkAns3").val();
-              var elemF = $(this);
-              $("#options_answers_"+elemF.attr('data-id')).val(chek3);
-            });
-
-            $("#chkAns4").click(function () {
-              var chek4 = $("#chkAns4").val();
-              var elemF = $(this);
-              $("#options_answers_"+elemF.attr('data-id')).val(chek4);
-            });
+                $("#options_answers_"+data_id).val(val);
+        })
        
     </script>
