@@ -142,6 +142,11 @@ $pdf->Cell(0, 5,  $dateofbirth , 0, 0, 'L');
 
 
 $pdf->SetFontSize('10','B');
+$pdf->SetXY(168, 132);
+$pdf->Cell(0, 5,  '100', 0, 0, 'L');
+
+
+$pdf->SetFontSize('10','B');
 $pdf->SetXY(168, 139.5);
 $new_date = date("Y-m-d",strtotime($examdate));
 $pdf->Cell(0, 5,  $new_date, 0, 0, 'L');

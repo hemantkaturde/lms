@@ -748,9 +748,11 @@ class Admin extends BaseController
 
                    $question_id =$matches[0][0];
 
+                    $updateddatetime = date('Y-m-d h:i:s', time());
                     $data = array(
                         'marks'    => $value,
                         'question_status' => 'checked',
+                        'updatedDtm' => $updateddatetime,
                     );
                     
                     $updateAnswerdata = $this->student_model->updateAnswerdata($student_id,$course_id,$examination_id,$question_id,$data);
