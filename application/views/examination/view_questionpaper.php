@@ -120,7 +120,7 @@ $jsonstringtoArray = json_decode($access, true);
                                             </label>
                                         </div>
 
-                                        <div class="ans ml-2">
+                                        <div class="ans ml-2"  style="width: 85%;background: yellow;">
                                             <label class="radio"> Correct Answer : 
                                             <span> <?= $value->correct_ans;?></span>
                                             </label>
