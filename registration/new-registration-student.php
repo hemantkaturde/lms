@@ -464,7 +464,7 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                         <div class="card">
                             <div class="card-header d-flex align-items-center"
                                 style="background: rgb(191,150,48);background: linear-gradient(180deg, rgba(191,150,48,1) 0%, rgba(240,224,130,1) 100%, rgba(227,201,160,1) 100%);; color:#fff;">
-                                <h1 class="h4">Student Registration Form</h1>
+                                <h1 class="h4">Student Admission Form</h1>
                             </div>
 
                             <div class="card-body">
@@ -524,6 +524,7 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                         <div class="col-sm-2">
                                             <input type="date" id="dateofbirth" name="dateofbirth"
                                                 class="form-control hasDatepicker" placeholder="">
+                                                <span class="text-default">( Date Of Birth )</span>
                                         </div>
                                     </div>
 
