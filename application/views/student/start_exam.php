@@ -116,7 +116,7 @@ $jsonstringtoArray = json_decode($access, true);
                                                 <label for="options_answers">Answer</label>
                                                 </div>
                                                 <div class="options_answers_text">
-                                                    <input type="text" id="options_answers_<?=$value->id ?>" name="options_answers_<?=$value->id ?>" style="width: 85%;" require readonly></input>
+                                                    <input type="text" style="width: 85%;background: yellow;" id="options_answers_<?=$value->id ?>" name="options_answers_<?=$value->id ?>" style="width: 85%;" require readonly></input>
                                                 </div>
                                             </div>
                                         </div>
