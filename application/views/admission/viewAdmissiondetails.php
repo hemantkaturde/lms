@@ -1,3 +1,11 @@
+
+<?php 
+$pageUrl =$this->uri->segment(1);
+$access = $this->session->userdata('access');
+$roleText = $this->session->userdata('roleText');
+?>
+
+
 <div class="content-wrapper">
     <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
@@ -7,9 +15,9 @@
                 <div>
                     
                 <div class="ibox-title">
-                    
-                    <!-- <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button> -->
-                
+                 <?php if($role_text!="Student"){ ?>
+                    <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button>
+                <?php } ?>
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
