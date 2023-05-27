@@ -8,7 +8,7 @@
                     
                 <div class="ibox-title">
                     
-                    <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button>
+                    <!-- <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button> -->
                 
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
