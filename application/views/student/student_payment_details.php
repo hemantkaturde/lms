@@ -236,6 +236,8 @@
                                                         <td><?=$status?></td>
                                                         <td>
                                                             <a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-toggle="modal" data-target="#view_enquiry_tarnsaction"   data-id="<?php echo $paymentvalue->id ?>"><img width='20' src="<?php echo ICONPATH."/view_doc.png";?>" alt='View Transaction' title='View Transaction'></a>
+                                                            <a style='cursor: pointer;'  href='<?php echo base_url();?>tax_invoice/index.php?enq_id=<?=$enquiry_id;?>&paymentid=<?php echo $paymentvalue->id ?>' target='_blank'  class='print_tax_invoices' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/print.png" alt='Print Invoice' title='Print Invoice'></a>
+
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
