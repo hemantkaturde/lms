@@ -9,7 +9,7 @@ $student_id = $_GET['student_id'];
 
 
     /* get Student Details */
-    $result = $conn->query("SELECT *,tbl_examination.createdDtm as examdate,tbl_examination.id  as examid,tbl_users.userid as user_id_auto from  tbl_users  
+    $result = $conn->query("SELECT *,tbl_examination.createdDtm as examdate,tbl_examination.id  as examid,tbl_users.userid as user_id_auto,tbl_student_answer_sheet.updatedDtm as result_date from  tbl_users  
                          join tbl_student_answer_sheet on tbl_users.userid = tbl_student_answer_sheet.student_id
                          join tbl_course on tbl_student_answer_sheet.course_id = tbl_course.courseId
                          join tbl_course_type on tbl_course_type.ct_id = tbl_course.courseId
@@ -32,6 +32,7 @@ $student_id = $_GET['student_id'];
 
     $total_marks_marksheet = $result_arry['total_marks'];
 
+    $result_date =  $result_arry['result_date'];
 
 
 
@@ -150,6 +151,12 @@ $pdf->SetFontSize('10','B');
 $pdf->SetXY(168, 139.5);
 $new_date = date("Y-m-d",strtotime($examdate));
 $pdf->Cell(0, 5,  $new_date, 0, 0, 'L');
+
+
+
+$pdf->SetFontSize('10','B');
+$pdf->SetXY(168,145.5);
+$pdf->Cell(0, 5,  $result_date, 0, 0, 'L');
 
 
 
