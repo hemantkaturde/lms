@@ -156,7 +156,9 @@ $pdf->Cell(0, 5,  $new_date, 0, 0, 'L');
 
 $pdf->SetFontSize('10','B');
 $pdf->SetXY(168,145.5);
-$pdf->Cell(0, 5,  $result_date, 0, 0, 'L');
+$result_date_val = date("Y-m-d",strtotime($result_date));
+
+$pdf->Cell(0, 5,  $result_date_val, 0, 0, 'L');
 
 
 
