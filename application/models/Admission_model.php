@@ -373,6 +373,8 @@ class Admission_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
         }
         //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
@@ -394,6 +396,8 @@ class Admission_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
         }
         //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
@@ -411,6 +415,8 @@ class Admission_model extends CI_Model
             {
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['name'] = $value['name'];
+                 $data[$counter]['mobile_number'] = $value['mobile'];
+                 $data[$counter]['email_address'] = $value['email'];
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['topic'] = $value['topic'];
                  $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));

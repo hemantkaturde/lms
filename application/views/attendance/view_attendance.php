@@ -19,6 +19,8 @@
                     <thead>
                                 <tr>
                                     <th>Student Name</th>
+                                    <th>Mobile No</th>
+                                    <th>Email Address</th>
                                     <th>Course Name</th>
                                     <th>Topic Name</th>
                                     <th>Class Attended Date</th>
