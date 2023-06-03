@@ -75,19 +75,16 @@ class Admin extends BaseController
            $this->loadViews("dashboard", $this->global, $data , NULL);
         }else{
 
+            $this->global['pageTitle'] = 'Student Dashbaord';
+
             $userId = $this->session->userdata('userId');
             $data['upcoming_class_links'] = $this->admission_model->upcoming_class_links($userId);
-
+            
             $data['getStudentscourseattetendancedetails'] = $this->admission_model->getStudentscourseattetendancedetails($userId);
-
             $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
-
-
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
-
-
             $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
         }
     }

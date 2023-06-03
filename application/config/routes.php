@@ -241,8 +241,14 @@ $route['fetchstudenttopicmeetinglink?(:any)'] = "student/fetchstudenttopicmeetin
 $route['attendClasses'] = "student/attendClasses";
 $route['studentattendance'] = "student/studentattendance";
 $route['fetchstudentattendancestudentpanel'] = "student/fetchstudentattendancestudentpanel";
-$route['studentexamination'] = "student/studentexamination";
+
+
+$route['studentexaminationlist'] = "student/studentexaminationlist";
+$route['studentexamination/(:any)'] = "student/studentexamination/$1";
 $route['fetchstudentexamination'] = "student/fetchstudentexamination";
+
+
+
 $route['attendexamination/(:any)'] = "student/attendexamination/$1";
 $route['start_exam/(:any)'] = "student/start_exam/$1";
 $route['submit_examination_db'] = "student/submit_examination_db";

@@ -606,17 +606,19 @@
             echo json_encode($json_data);
         }
         
-        public function studentexamination(){
+        public function studentexamination($id){
+
             $this->global['pageTitle'] = 'Student Examination';
-            $this->loadViews("student/view_student_examination", $this->global, NULL, NULL);
+            $data['course_id'] = $id;
+            $this->loadViews("student/view_student_examination", $this->global, $data, NULL);
         }
 
-        public function fetchstudentexamination(){
+        public function fetchstudentexamination($course_id){
 
             $params = $_REQUEST;
             $userId =  $this->session->userdata('userId');
-            $totalRecords = $this->student_model->getstudentexaminationCount($params,$userId);
-            $queryRecords = $this->student_model->getstudentexaminationdata($params,$userId); 
+            $totalRecords = $this->student_model->getstudentexaminationCount($params,$userId,$course_id);
+            $queryRecords = $this->student_model->getstudentexaminationdata($params,$userId,$course_id); 
             $data = array();
             foreach ($queryRecords as $key => $value)
             {
@@ -863,6 +865,13 @@
      }
 
 
+     public function studentexaminationlist(){
+        $userId =  $this->session->userdata('userId');
+        $this->global['pageTitle'] = 'Student Examination List';
+        $data['getstudentexaminationdata'] = $this->student_model->getstudentexaminListationdata($params,$userId); 
+        $this->loadViews("student/studentexaminationlist", $this->global, $data, NULL);
+
+     }
 
 
     }

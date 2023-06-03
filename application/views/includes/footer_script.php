@@ -4412,6 +4412,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <script type="text/javascript">
 
         $(document).ready(function() {
+
+			var course_id = $('#course_id').val();
+			
             var dt = $('#view_student_examination').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -4432,7 +4435,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchstudentexamination",
+                    url :"<?php echo base_url();?>student/fetchstudentexamination/"+course_id,
                     type: "post",
 	            },
 	        });
@@ -4769,6 +4772,26 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			});
 	   });
 </script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Student Dashbaord'){ ?>
+  <script type="text/javascript">
+	$(document).ready(function() {
+
+        swal({
+			title: "Upcoming Examination",
+			text: 's',
+			icon: "success",
+			button: "Ok",
+			},function(){ 
+
+		});	
+
+
+
+	});
+  </script>
 <?php } ?>
 
 

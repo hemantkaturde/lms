@@ -91,12 +91,24 @@
                         $examination_response['error'] = array('course_name'=>'Course Name Already Exist','examination_title'=>'Examination Title Alreday Exist');
                     }else{
 
-                        $saveCoursetypedata = $this->examination_model->saveExaminationedata('',$data);
-                        if($saveCoursetypedata){
-                            $examination_response['status'] = 'success';
-                            $examination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'examination_title'=>strip_tags(form_error('examination_title')),'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')),'total_marks'=>strip_tags(form_error('total_marks')));
-                        }
 
+                        $check_number_of_examination =  $this->examination_model->check_number_of_examination(trim($this->input->post('course_name')));
+
+                        if($check_number_of_examination > 3){
+
+                            $examination_response['status'] = 'failure';
+                            $examination_response['error'] = array('examination_status'=>'Only 3 exams can be active. Please inactive earlier exam to active this exam');
+        
+                        }else{
+
+                            $saveCoursetypedata = $this->examination_model->saveExaminationedata('',$data);
+                            if($saveCoursetypedata){
+                                $examination_response['status'] = 'success';
+                                $examination_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'examination_title'=>strip_tags(form_error('examination_title')),'examination_time'=>strip_tags(form_error('examination_time')),'examination_status'=>strip_tags(form_error('examination_status')),'total_marks'=>strip_tags(form_error('total_marks')));
+                            }
+
+                        }
+                       
                     }
 
                 }

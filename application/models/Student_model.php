@@ -885,7 +885,7 @@ public function getstudentAttendancedata($params,$userId){
 }
 
 
-public function  getstudentexaminationCount($params,$userId){
+public function  getstudentexaminationCount($params,$userId,$course_id){
 
     $this->db->select('enq_course_id');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
@@ -910,6 +910,7 @@ public function  getstudentexaminationCount($params,$userId){
         }
         $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
         $this->db->where(TBL_EXAMINATION.'.course_id', $value);
+        $this->db->where(TBL_COURSE.'.courseId', $course_id);
 
         $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
@@ -924,7 +925,7 @@ public function  getstudentexaminationCount($params,$userId){
 
 }
 
-public function getstudentexaminationdata($params,$userId){
+public function getstudentexaminationdata($params,$userId,$course_id){
 
 
     $this->db->select('enq_course_id');
@@ -969,7 +970,7 @@ public function getstudentexaminationdata($params,$userId){
         }
         $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
         $this->db->where(TBL_EXAMINATION.'.course_id', $value);
-
+        $this->db->where(TBL_COURSE.'.courseId', $course_id);
         $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
        // $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $this->db->limit($params['length'],$params['start']);
@@ -1345,9 +1346,111 @@ public function getStudentrecords($student_id){
     $query = $this->db->get(TBL_USER);
     $fetch_result = $query->result_array();
     return $fetch_result;
-
-
 }
+
+
+
+public function getstudentexaminListationdata($params,$userId){
+
+
+    $this->db->select('enq_course_id');
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
+    $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+    $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+    $data = array();
+    $counter = 0;
+    foreach ($fetch_result_enquiry_courses as $key => $value) {
+        
+        $course_ids    =   explode(',', $value['enq_course_id']);
+        foreach ($course_ids as $key => $value) {
+
+
+        $this->db->select('count(*) as count');
+        $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+        $this->db->where(TBL_ATTENDANCE.'.course_id', $value);
+        $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_time_table_attendance = $query->result_array();
+
+    
+        $this->db->select('count(*) as count');
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $value);
+        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+        $fetch_topic_table_attendance = $query->result_array();
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+        // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+        // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+        // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
+
+
+        if($params['search']['value'] != "") 
+        {
+          $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+          $this->db->or_where(TBL_EXAMINATION.".exam_title LIKE '%".$params['search']['value']."%'");
+          $this->db->or_where(TBL_EXAMINATION.".exam_time LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+        $this->db->where(TBL_EXAMINATION.'.course_id', $value);
+
+        $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
+        $this->db->group_by(TBL_COURSE.'.courseId');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_EXAMINATION);
+        $fetch_result = $query->result_array();
+
+
+        // print_r($fetch_result);
+        // exit;
+
+
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {  
+
+                    /*check Here Exam is completed or not*/
+
+                    $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+
+                    if($check_exam_completed_or_pending){
+                        $exam_status ='<b style="color:green">Exam Completed</b>';
+                        $exam_status_count =1;
+                    }else{
+                        $exam_status ='<b style="color:red">Pending</b>';
+                        $exam_status_count =0;
+                    }
+                    $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['course_name'] = $value['course_name'];
+                    $data[$counter]['exam_title'] = $value['exam_title'];
+                    $data[$counter]['exam_time'] = $value['exam_time'];
+                    $data[$counter]['status'] = $exam_status;
+                    $data[$counter]['action'] = '';
+                    if($exam_status_count=='1'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
+                    }
+                $counter++; 
+            }
+        }
+
+    }
+        if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
+            return $data; 
+        }else{
+           
+            return array(); 
+        }
+
+        
+    }
+}
+
 
 
 }

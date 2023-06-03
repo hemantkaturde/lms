@@ -221,6 +221,20 @@ class Examination_model extends CI_Model
     } 
 
 
+    public function check_number_of_examination($course_name){
+
+        $this->db->select('exam_title');
+        $this->db->from(TBL_EXAMINATION);
+        $this->db->where('isDeleted', 0);
+        // $this->db->where('exam_title', $examination_title);
+        $this->db->where('course_id', $course_name);
+        $this->db->where('exam_status', 1);
+        $query = $this->db->get();
+        return $query->num_rows();
+
+    }
+
+
 }
 
 ?>
