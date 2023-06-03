@@ -40,7 +40,7 @@ class Role_model extends CI_Model
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editRole/".$value['roleId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Role' title='Edit Role'></a>&nbsp;";
                 
-                if($value['roleId']==1 || $value['roleId']==2  || $value['roleId']==3 || $value['roleId']==4 || $value['roleId']==5){
+                if($value['roleId']==1 || $value['roleId']==2  || $value['roleId']==3 || $value['roleId']==4 || $value['roleId']==5 || $value['roleId']==6){
 
                 }else{
                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deleteRole' data-id='".$value['roleId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Role' title='Delete Role'></a>&nbsp"; 
