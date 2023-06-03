@@ -94,8 +94,7 @@
 
                         $check_number_of_examination =  $this->examination_model->check_number_of_examination(trim($this->input->post('course_name')));
 
-                        if($check_number_of_examination > 3){
-
+                        if($check_number_of_examination >= 3){
                             $examination_response['status'] = 'failure';
                             $examination_response['error'] = array('examination_status'=>'Only 3 exams can be active. Please inactive earlier exam to active this exam');
         
