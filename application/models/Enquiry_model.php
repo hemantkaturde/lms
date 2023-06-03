@@ -62,6 +62,7 @@ class Enquiry_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
 
@@ -85,6 +86,7 @@ class Enquiry_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
 
