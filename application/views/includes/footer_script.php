@@ -218,6 +218,8 @@
                      $('#certificate_cost1').val(data[0].course_cert_cost);  
                      $('#kit_cost1').val(data[0].course_kit_cost);  
 
+					 $('#trainer1').val(data[0].trainer_id); 
+
 					 if(data[0].course_books==1){
 						$('.radio_yes1').attr("checked", "checked");
 					 }
@@ -4792,6 +4794,84 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	});
   </script>
+<?php } ?>
+
+
+
+<?php
+ if($pageTitle=='Ask A Query' || $pageTitle=="Add Ask A Query"){ ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+				
+				var dt = $('#view_ask_query').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },
+						{ "width": "1%", "targets": 2 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Query Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchallstudentquerys",
+						type: "post",
+					},
+				});
+		});
+
+		$(document).on('click','#addnewquerydata',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#addnewquery_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewquery",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'askqquery'?>";
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+	</script>
 <?php } ?>
 
 

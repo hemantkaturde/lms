@@ -30,6 +30,8 @@
         {
             $this->global['pageTitle'] = 'Course Management';
             $data['course_type'] = $this->course_model->getAllCourseTypeInfo();
+            $data['get_trainer'] = $this->course_model->getAllTrainerInfo();
+
             $this->loadViews("course/courseList",$this->global,$data,NULL);
         }
 
@@ -130,6 +132,7 @@
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),
                     'course_type_id' => $this->input->post('course_type'),
+                    'trainer_id' => $this->input->post('trainer'),
                     //'course_desc'=> $this->input->post('description'),
                     'course_cert_cost' => $this->input->post('certificate_cost'),
                     'course_kit_cost'=> $this->input->post('kit_cost'),
@@ -970,6 +973,10 @@
 
             if($post_submit){
 
+                /* Get Triner Details */ 
+
+                $getTrainerDetails = $this->course_model->getCourseInfo(trim($this->input->post('course_id_post')));
+
                 $savetimetable_response = array();
                  if($_FILES['timetable']['error'] == 0)
                     {
@@ -987,6 +994,7 @@
             
                             $data = array(
                                 'course_id' => $this->input->post('course_id_post'),
+                                'trainer_id' => trim($getTrainerDetails[0]->trainer_id),
                                 'from_date' => date('Y-m-d', strtotime($this->input->post('form_date'))),
                                 'to_date' => date('Y-m-d', strtotime($this->input->post('to_date'))),
                                 'month_name' => $getMonth.'-'.$getYear
@@ -1087,6 +1095,7 @@
                                                                             //$insertArr['vendor_id'] = $vendor_id;
                                                                             $insertArr['course_id'] =  $this->input->post('course_id_post');
                                                                             $insertArr['time_table_id'] = $saveCoursetimetabledata;
+                                                                            $insertArr['trainer_id'] = trim($getTrainerDetails[0]->trainer_id);
                                                                             $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
                                                                             $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
                                                                             $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));

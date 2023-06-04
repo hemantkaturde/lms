@@ -14,9 +14,12 @@
             $this->load->model('student_model');
             $this->load->model('examination_model');
             $this->load->model('course_model');
+            $this->load->model('comman_model');
             $this->load->model('enquiry_model');
             $this->load->model('database');
             $this->load->library('form_validation');
+
+            
 
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
@@ -871,6 +874,78 @@
         $data['getstudentexaminationdata'] = $this->student_model->getstudentexaminListationdata($params,$userId); 
         $this->loadViews("student/studentexaminationlist", $this->global, $data, NULL);
 
+     }
+
+
+     public function askqquery(){
+
+        $this->global['pageTitle'] = 'Ask A Query';
+        $userId =  $this->session->userdata('userId');
+        $data['course_List'] = $this->student_model->getstudentcourse($params,$userId); 
+        $this->loadViews("student/askqquery", $this->global,$data, NULL);
+     }
+
+
+     public function fetchallstudentquerys(){
+
+        $params = $_REQUEST;
+        $userId =  $this->session->userdata('userId');
+        $totalRecords = $this->student_model->getallstudentquerycount($params,$userId); 
+        $queryRecords = $this->student_model->getallstudentquerydata($params,$userId); 
+    
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+    
+        echo json_encode($json_data);
+
+     }
+
+     public function addnewquery(){
+        $post_submit = $this->input->post();
+  
+        if(!empty($post_submit)){
+            $userId =  $this->session->userdata('userId');
+
+            $addnewquery_response = array();
+            $data = array(
+                'course_id' => $this->input->post('course_name'),
+                'query'=> $this->input->post('query'),
+                'student_id'=>$userId
+            );
+
+            $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+            $this->form_validation->set_rules('query', 'Query', 'trim|required');
+
+
+            if($this->form_validation->run() == FALSE){
+                $addnewquery_response['status'] = 'failure';
+                $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'query'=>strip_tags(form_error('query')));
+            }else{
+
+                $saveCoursedata = $this->student_model->saveQuerydata('',$data);
+                if($saveCoursedata){
+                    $addnewquery_response['status'] = 'success';
+                    $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'query'=>strip_tags(form_error('query')));
+                }
+
+            }
+
+            echo json_encode($addnewquery_response);
+        }
      }
 
 

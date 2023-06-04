@@ -241,14 +241,9 @@ $route['fetchstudenttopicmeetinglink?(:any)'] = "student/fetchstudenttopicmeetin
 $route['attendClasses'] = "student/attendClasses";
 $route['studentattendance'] = "student/studentattendance";
 $route['fetchstudentattendancestudentpanel'] = "student/fetchstudentattendancestudentpanel";
-
-
 $route['studentexaminationlist'] = "student/studentexaminationlist";
 $route['studentexamination/(:any)'] = "student/studentexamination/$1";
 $route['fetchstudentexamination'] = "student/fetchstudentexamination";
-
-
-
 $route['attendexamination/(:any)'] = "student/attendexamination/$1";
 $route['start_exam/(:any)'] = "student/start_exam/$1";
 $route['submit_examination_db'] = "student/submit_examination_db";
@@ -264,8 +259,15 @@ $route['fetchallstudentcertificates'] = "admin/fetchallstudentcertificates";
 $route['studentcrtificateListing'] = "student/studentcrtificateListing";
 $route['fetchallstudentcertificatesstudentPortal'] = "student/fetchallstudentcertificatesstudentPortal";
 $route['updateevbtrnumber'] = "student/updateevbtrnumber";
-
 $route['printmarksheet?(:any)'] = "admin/printmarksheet/$1";
+
+
+
+$route['askqquery'] = "student/askqquery";
+$route['fetchallstudentquerys'] = "student/fetchallstudentquerys";
+$route['addnewquery'] = "student/addnewquery";
+
+
 
 
 

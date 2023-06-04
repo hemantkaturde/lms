@@ -109,6 +109,7 @@ define('TBL_TOPIC_MEETING_LINK', 'tbl_topic_meeting_link');
 define('TBL_USERS_ENQUIRES', 'tbl_users_enquires');
 define('TBL_ATTENDANCE', 'tbl_attendance');
 define('TBL_STUDENT_ANSWER_SHEET', 'tbl_student_answer_sheet');
+define('TBL_ASK_A_QUERY', 'tbl_askquery');
 
 define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com

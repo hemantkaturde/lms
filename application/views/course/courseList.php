@@ -104,6 +104,18 @@ $jsonstringtoArray = json_decode($access, true);
                    </div> -->
 
                   <div class="form-group">
+                     <label style="text-align: left;"  for="trainer">Trainer
+                     </label>
+                         <select class="form-control" id="trainer" name="trainer">
+                           <option value="">Select Trainer</option>
+                           <?php foreach ($get_trainer as $key => $value) { ?>
+                           <option value="<?php echo $value->userId; ?>"><?php echo ucwords($value->name); ?></option>
+                           <?php } ?>
+                        </select>
+                        <p class="error trainer_error"></p>
+                  </div>
+
+                  <div class="form-group">
                      <label style="text-align: left;"  for="books">Books <span class="required">*</span>
                      </label>
                      <div >
@@ -265,6 +277,19 @@ $jsonstringtoArray = json_decode($access, true);
                       
                      </div>
                    </div> -->
+
+                   <div class="form-group">
+                     <label style="text-align: left;"  for="trainer">Trainer
+                     </label>
+                         <select class="form-control" id="trainer1" name="trainer">
+                           <option value="">Select Trainer</option>
+                           <?php foreach ($get_trainer as $key => $value) { ?>
+                           <option value="<?php echo $value->userId; ?>"><?php echo ucwords($value->name); ?></option>
+                           <?php } ?>
+                        </select>
+                        <p class="error trainer_error"></p>
+                  </div>
+
 
                      <input id="course_id" name="course_id" type="hidden">
                   <div class="form-group">

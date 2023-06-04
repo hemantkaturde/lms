@@ -66,7 +66,7 @@ class Course_model extends CI_Model
         {
 
 
-            $this->db->select('BaseTbl.*,BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books');
+            $this->db->select('BaseTbl.*,BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books,BaseTbl.trainer_id');
             $this->db->from('tbl_course as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
             $this->db->where('BaseTbl.courseId', $courseId);
@@ -943,6 +943,19 @@ public function getBookscount($topic_id,$course_id){
     } else {
         return FALSE;
     }
+
+  }
+
+
+  public function getAllTrainerInfo(){
+
+    $this->db->select('*');
+    $this->db->from(TBL_USER);
+    $this->db->join(TBL_ROLES, TBL_USER.'.roleId = '.TBL_ROLES.'.roleId');
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_ROLES.'.role', 'Trainer');
+    $query = $this->db->get();
+    return $query->result();
 
   }
 
