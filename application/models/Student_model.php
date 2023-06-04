@@ -1541,7 +1541,24 @@ public function getstudentcourse($params,$userId){
 
 
 
-public function  getallstudentquerycount($params,$userId){
+public function  getallstudentquerycount($params,$userId,$roleText){
+
+
+
+    if($roleText=='Trainer'){
+        $getTrainercourseis = $this->gettrainercourseIds($userId);
+        $course_id =array();
+        foreach ($getTrainercourseis as $key => $value) {
+            $course_id[]= $value['courseId'];
+             
+        }
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+       }else{
+            $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+       }
+
+      
+
     $this->db->select('*');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
 
@@ -1552,7 +1569,7 @@ public function  getallstudentquerycount($params,$userId){
     }
 
     $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
-    $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+
     $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_ASK_A_QUERY);
@@ -1562,7 +1579,21 @@ public function  getallstudentquerycount($params,$userId){
 }
 
 
-public function getallstudentquerydata($params,$userId){
+public function getallstudentquerydata($params,$userId,$roleText){
+
+
+    if($roleText=='Trainer'){
+        $getTrainercourseis = $this->gettrainercourseIds($userId);
+        $course_id =array();
+        foreach ($getTrainercourseis as $key => $value) {
+            $course_id[]= $value['courseId'];
+             
+        }
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+       }else{
+            $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+       }
+
 
     $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
@@ -1574,7 +1605,7 @@ public function getallstudentquerydata($params,$userId){
     }
 
     $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
-    $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+    // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
     $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_ASK_A_QUERY);
@@ -1588,7 +1619,16 @@ public function getallstudentquerydata($params,$userId){
              $data[$counter]['course_name'] = $value['course_name'];
              $data[$counter]['query'] = $value['query'];
              $data[$counter]['action'] = '';
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."view_query_answer?auery_id=".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/history.png' alt='View Answers' title='View Answers'></a> ";
+
+             if($roleText=='Trainer'){
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."add_query_answer?query_id=".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/process.png' alt='View Answers' title='View Answers'></a> ";
+
+             }else{
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."view_query_answer?query_id=".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/history.png' alt='View Answers' title='View Answers'></a> | ";
+                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_query' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Query' title='Delete Query'></a> "; 
+
+             }
             $counter++; 
         }
     }
@@ -1613,6 +1653,19 @@ public function saveQuerydata($id,$data){
             return FALSE;
         }
     }
+
+}
+
+
+
+public function gettrainercourseIds($userId){
+
+    $this->db->select('courseId');
+    $this->db->where(TBL_COURSE.'.trainer_id', $userId);
+    $this->db->where(TBL_COURSE.'.isDeleted', 0);
+    $query = $this->db->get(TBL_COURSE);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 
 }
 

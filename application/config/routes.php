@@ -266,6 +266,9 @@ $route['printmarksheet?(:any)'] = "admin/printmarksheet/$1";
 $route['askqquery'] = "student/askqquery";
 $route['fetchallstudentquerys'] = "student/fetchallstudentquerys";
 $route['addnewquery'] = "student/addnewquery";
+$route['delete_query'] = "student/delete_query";
+
+
 
 
 

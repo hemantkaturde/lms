@@ -452,6 +452,16 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?> -->
 
+
+                        <?php if($role_text=="Trainer"){ ?>
+                        <li  class="<?php if($pageUrl =='askqquery'){ echo 'active';} ?>">
+                            <a  href="<?php echo base_url()."askqquery"; ?>"><i
+                                    class="sidebar-item-icon fa fa-question-circle"></i>
+                                <span class="nav-label">Ask A Query</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
                     </ul>
                 <?php }else{ ?>
                     <ul class="side-menu metismenu" >
@@ -512,14 +522,13 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>  
                         
-                        
+                     
                         <li  class="<?php if($pageUrl =='askqquery'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."askqquery"; ?>"><i
                                     class="sidebar-item-icon fa fa-question-circle"></i>
                                 <span class="nav-label">Ask A Query</span>
                             </a>
                         </li>
-
                     </ul>
                <?php } ?>
             </div>

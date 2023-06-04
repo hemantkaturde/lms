@@ -1,6 +1,7 @@
 <?php 
 $access = $this->session->userdata('access');
 $jsonstringtoArray = json_decode($access, true);
+$roleText = $this->session->userdata('roleText');
 ?>
 
 <div class="content-wrapper">
@@ -9,9 +10,11 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="ibox">
             <div class="ibox-head">
                 <div>
+                    <?php if($roleText=='Student'){ ?>
                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewquery">
                      <i class="fa fa-plus"></i> Add New Query
                    </button>
+                   <?php }?>
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url();?>dashboard" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>

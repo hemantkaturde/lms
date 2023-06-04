@@ -4808,7 +4808,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "10%", "targets": 0 },
 						{ "width": "30%", "targets": 1 },
-						{ "width": "1%", "targets": 2 },
+						{ "width": "3%", "targets": 2 },
 					],
 					responsive: true,
 					"oLanguage": {
@@ -4870,6 +4870,38 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			});
 			return false;
 	    });
+
+
+		$(document).on('click','.delete_query',function(e){
+
+			var elemF = $(this);
+			e.preventDefault();
+
+								$.ajax({
+									url : "<?php echo base_url();?>delete_query",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										// const obj = JSON.parse(data);
+										// if(obj.status=='true'){
+											//swal("Deleted!", "Certificate Type has been deleted.", "success");
+											//location.reload();
+											window.location.href = "<?php echo base_url().'askqquery'?>";
+
+										// }
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+								})
+				
+			});
+
+		
+
 
 	</script>
 <?php } ?>

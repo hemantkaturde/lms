@@ -890,8 +890,10 @@
 
         $params = $_REQUEST;
         $userId =  $this->session->userdata('userId');
-        $totalRecords = $this->student_model->getallstudentquerycount($params,$userId); 
-        $queryRecords = $this->student_model->getallstudentquerydata($params,$userId); 
+        $roleText = $this->session->userdata('roleText');
+
+        $totalRecords = $this->student_model->getallstudentquerycount($params,$userId,$roleText); 
+        $queryRecords = $this->student_model->getallstudentquerydata($params,$userId,$roleText); 
     
         $data = array();
         foreach ($queryRecords as $key => $value)
@@ -946,6 +948,25 @@
 
             echo json_encode($addnewquery_response);
         }
+     }
+
+
+     public function delete_query(){
+
+        $post_submit = $this->input->post();
+        $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+        $result = $this->database->data_update('tbl_askquery',$enquiryInfo,'id',$this->input->post('id'));
+
+        if ($result > 0) {
+             echo(json_encode(array('status'=>TRUE)));
+
+             $process = 'Delete Query';
+             $processFunction = 'Student/delete_query';
+             $this->logrecord($process,$processFunction);
+
+            }
+        else { echo(json_encode(array('status'=>FALSE))); }
+
      }
 
 

@@ -253,6 +253,7 @@
                     'course_name' => $this->input->post('course_name'),
                     'course_fees'=> $this->input->post('fees'),
                     'course_type_id' => $this->input->post('course_type'),
+                    'trainer_id' => $this->input->post('trainer'),
                     //'course_desc'=> $this->input->post('description'),
                     'course_cert_cost' => $this->input->post('certificate_cost'),
                     'course_kit_cost'=> $this->input->post('kit_cost'),
