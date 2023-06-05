@@ -179,12 +179,9 @@ $jsonstringtoArray = json_decode($access, true);
                         
                         $CI =& get_instance();
                         $CI->load->model('student_model');
-                        
                         $userId = $this->session->userdata('userId');
-                        $result = $CI->student_model->getstudentexaminListationdata($userId);
-                       
-                       
-                        ?>
+                        $result = $CI->student_model->getstudentexaminListationdata($userId);   
+                     ?>
 
                     <li class="dropdown dropdown-notification">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell rel" style="font-size: x-large;"><span class="notify-signal" style="height: 21px !important;width: 20px !important;top: -12px !important;right: -10px !important;"> <p style='font-size: small;margin-left: 7px;color: #fff;margin-top: 3px'><?=count($result); ?></p></span></i></a>
@@ -194,10 +191,6 @@ $jsonstringtoArray = json_decode($access, true);
                                     <span><strong>  New Examination Notification </strong></span>
                                     <a class="pull-right"  href="<?php echo base_url();?>studentexaminationlist">view all</a>
                                 </div>
-
-                                <!-- <div>
-                                   You have attended all your classes, completed the course and are now eligible to appear for the exam. Please go to Examination section and appear for the exam.
-                                </div> -->
                             </li>
                             <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
                                 <div>
@@ -212,41 +205,61 @@ $jsonstringtoArray = json_decode($access, true);
                                                 </div>
                                         </a>
                                      <?php }  ?>
-                                   
-                                    
-
-                                    <!-- <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-default badge-big"><i class="fa fa-shopping-basket"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">You have 12 new orders</div><small class="text-muted">40 mins</small></div>
-                                        </div>
-                                    </a> -->
-                                    <!-- <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-danger badge-big"><i class="fa fa-bolt"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">Server #7 rebooted</div><small class="text-muted">2 hrs</small></div>
-                                        </div>
-                                    </a> -->
-                                    <!-- <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-success badge-big"><i class="fa fa-user"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">New user registered</div><small class="text-muted">2 hrs</small></div>
-                                        </div>
-                                    </a> -->
                                 </div>
                             </li>
                         </ul>
                     </li> 
                     <?php } ?>
+
+
+
+
+                    <?php if($roleText=='Trainer'){ 
+                        
+                        $CI =& get_instance();
+                        $CI->load->model('student_model');
+                        $userId = $this->session->userdata('userId');
+                        $result_trainer = $CI->student_model->getallstudentquerydatfornotification($userId,$roleText);
+
+                      
+                     ?>
+
+                    <li class="dropdown dropdown-notification">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell rel" style="font-size: x-large;"><span class="notify-signal" style="height: 21px !important;width: 20px !important;top: -12px !important;right: -10px !important;"> <p style='font-size: small;margin-left: 7px;color: #fff;margin-top: 3px'><?=count($result_trainer); ?></p></span></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
+                            <li class="dropdown-menu-header">
+                                <div>
+                                    <span><strong> Ask A Query  </strong></span>
+                                    <a class="pull-right"  href="<?php echo base_url();?>askqquery">view all</a>
+                                </div>
+                            </li>
+                            <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
+                                <div>
+                                    <?php  foreach ($result_trainer as $key => $value) { ?>
+                                        <a class="list-group-item"  href="<?php echo base_url().'askqquery';?>">
+                                            <div class="media">
+                                                <div class="media-img">
+                                                    <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="font-13"><?= $value['name']?> </div><small class="text-muted"><?= $value['query']?></small></div>
+                                                </div>
+                                        </a>
+                                     <?php }  ?>
+                                </div>
+                            </li>
+                        </ul>
+                    </li> 
+                    <?php } ?>
+
+
+
+
+
+
+
+
+
                     
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">

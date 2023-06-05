@@ -1637,6 +1637,64 @@ public function gettrainercourseIds($userId){
 }
 
 
+
+public function getallstudentquerydatfornotification($userId,$roleText){
+
+
+    if($roleText=='Trainer'){
+        $getTrainercourseis = $this->gettrainercourseIds($userId);
+        $course_id =array();
+        foreach ($getTrainercourseis as $key => $value) {
+            $course_id[]= $value['courseId'];
+             
+        }
+
+        if( $getTrainercourseis){
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+
+        }else{
+            return array();
+
+        }
+
+            
+       }else{
+            $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+       }
+
+
+    $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+    $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
+
+    $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+    // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+    $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+
+    $query = $this->db->get(TBL_ASK_A_QUERY);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['course_name'] = $value['course_name'];
+             $data[$counter]['courseId'] = $value['courseId'];
+             $data[$counter]['name'] = $value['name'];
+             $data[$counter]['query'] = $value['query'];
+             $data[$counter]['queryid'] = $value['queryid'];
+             
+            $counter++; 
+        }
+    }
+
+    return $data;
+}
+
+
+
+
 }
 
 ?>
