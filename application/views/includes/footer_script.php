@@ -4777,29 +4777,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-<?php if($pageTitle=='Student Dashbaord'){ ?>
-  <script type="text/javascript">
-	$(document).ready(function() {
-
-        swal({
-			title: "Upcoming Examination",
-			text: 's',
-			icon: "success",
-			button: "Ok",
-			},function(){ 
-
-		});	
-
-
-
-	});
-  </script>
-<?php } ?>
-
-
-
-<?php
- if($pageTitle=='Ask A Query' || $pageTitle=="Add Ask A Query"){ ?>
+<?php if($pageTitle=='Ask A Query' || $pageTitle=="Add Ask A Query"){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
 				

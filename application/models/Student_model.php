@@ -1358,7 +1358,7 @@ public function getStudentrecords($student_id){
 
 
 
-public function getstudentexaminListationdata($params,$userId){
+public function getstudentexaminListationdata($userId){
 
 
     $this->db->select('enq_course_id');
@@ -1394,13 +1394,6 @@ public function getstudentexaminListationdata($params,$userId){
         // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
         // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
 
-
-        if($params['search']['value'] != "") 
-        {
-          $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
-          $this->db->or_where(TBL_EXAMINATION.".exam_title LIKE '%".$params['search']['value']."%'");
-          $this->db->or_where(TBL_EXAMINATION.".exam_time LIKE '%".$params['search']['value']."%')");
-        }
         $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
         $this->db->where(TBL_EXAMINATION.'.course_id', $value);
 
@@ -1409,11 +1402,6 @@ public function getstudentexaminListationdata($params,$userId){
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_EXAMINATION);
         $fetch_result = $query->result_array();
-
-
-        // print_r($fetch_result);
-        // exit;
-
 
 
         if(count($fetch_result) > 0)
@@ -1438,11 +1426,7 @@ public function getstudentexaminListationdata($params,$userId){
                     $data[$counter]['exam_time'] = $value['exam_time'];
                     $data[$counter]['status'] = $exam_status;
                     $data[$counter]['action'] = '';
-                    if($exam_status_count=='1'){
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
-                    }else{
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
-                    }
+                   
                 $counter++; 
             }
         }

@@ -871,7 +871,7 @@
      public function studentexaminationlist(){
         $userId =  $this->session->userdata('userId');
         $this->global['pageTitle'] = 'Student Examination List';
-        $data['getstudentexaminationdata'] = $this->student_model->getstudentexaminListationdata($params,$userId); 
+        $data['getstudentexaminationdata'] = $this->student_model->getstudentexaminListationdata($userId); 
         $this->loadViews("student/studentexaminationlist", $this->global, $data, NULL);
 
      }
