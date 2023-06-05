@@ -15,7 +15,7 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
                     <p><b>Examination Tilte : </b><?=$exam_detail[0]['exam_title'];?></p>
-                    <p><b>Examination Time : </b><?=$exam_detail[0]['exam_time'].' Min';?></p>
+                    <p><b>Examination Time : </b><?=$exam_detail[0]['exam_time'].' Mins';?></p>
 
                     <?php
                         $attributes = array("name"=>"submit_examination","id"=>"submit_examination","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
