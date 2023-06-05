@@ -8,7 +8,7 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Question Paper Management ( <B>Course Name :</B><?=$exam_detail[0]['course_name'];?> )</div>
-                <div>Timer : </div>
+                <div style="margin-left: 428px;"><h3>Timer : </h3></div>
                 <h1 id="countdown" class="countdown"></h1>
 
             </div>
