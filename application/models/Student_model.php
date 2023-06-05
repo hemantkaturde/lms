@@ -1448,7 +1448,6 @@ public function getstudentexaminListationdata($userId){
 
 public function getstudentcourse($params,$userId){
 
-
     $this->db->select('enq_course_id');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
@@ -1462,46 +1461,11 @@ public function getstudentcourse($params,$userId){
         $course_ids    =   explode(',', $value['enq_course_id']);
         foreach ($course_ids as $key => $value) {
 
-
-        $this->db->select('count(*) as count');
-        $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
-        $this->db->where(TBL_ATTENDANCE.'.course_id', $value);
-        $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
-        $query = $this->db->get(TBL_ATTENDANCE);
-        $fetch_time_table_attendance = $query->result_array();
-
-    
-        $this->db->select('count(*) as count');
-        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $value);
-        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
-        $fetch_topic_table_attendance = $query->result_array();
-
-        $this->db->select('*');
-        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
-        // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
-        // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
-        // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
-
-
-        if($params['search']['value'] != "") 
-        {
-          $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
-          $this->db->or_where(TBL_EXAMINATION.".exam_title LIKE '%".$params['search']['value']."%'");
-          $this->db->or_where(TBL_EXAMINATION.".exam_time LIKE '%".$params['search']['value']."%')");
-        }
-        $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
-        $this->db->where(TBL_EXAMINATION.'.course_id', $value);
-
-        $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
-        $this->db->group_by(TBL_COURSE.'.courseId');
-        $this->db->limit($params['length'],$params['start']);
-        $query = $this->db->get(TBL_EXAMINATION);
-        $fetch_result = $query->result_array();
-
-
-        // print_r($fetch_result);
-        // exit;
-
+         $this->db->select('*');
+         $this->db->where(TBL_COURSE.'.isDeleted', 0);
+         $this->db->where(TBL_COURSE.'.courseId', $value);
+         $query = $this->db->get(TBL_COURSE);
+         $fetch_result = $query->result_array();
 
 
         if(count($fetch_result) > 0)
