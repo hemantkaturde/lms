@@ -23,7 +23,7 @@ $roleText = $this->session->userdata('roleText');
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
                     <p><b>Course Name : </b><?php echo $getquerydatabyid['0']['course_name']; ?></p> 
-                    <p><b>Student Name : </b><?php echo $getquerydatabyid['0']['course_name']; ?></p> 
+                    <p><b>Student Name : </b><?php echo $getquerydatabyid['0']['name']; ?></p> 
                     <p><b>Query : </b><?php echo $getquerydatabyid['0']['query']; ?></p> 
 
                     <table id="view_query_answer" class="table table-bordered">
