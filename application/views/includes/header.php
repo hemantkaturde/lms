@@ -252,15 +252,6 @@ $jsonstringtoArray = json_decode($access, true);
                     </li> 
                     <?php } ?>
 
-
-
-
-
-
-
-
-
-                    
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                             <?php
@@ -490,7 +481,7 @@ $jsonstringtoArray = json_decode($access, true);
 
 
                         <?php if($role_text=="Trainer"){ ?>
-                        <li  class="<?php if($pageUrl =='askqquery'){ echo 'active';} ?>">
+                        <li  class="<?php if($pageUrl =='askqquery' || $pageUrl=="viewqueryanswer" ){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."askqquery"; ?>"><i
                                     class="sidebar-item-icon fa fa-question-circle"></i>
                                 <span class="nav-label">Ask A Query</span>
@@ -559,7 +550,7 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>  
                         
                      
-                        <li  class="<?php if($pageUrl =='askqquery'){ echo 'active';} ?>">
+                        <li  class="<?php if($pageUrl =='askqquery' || $pageUrl=="viewqueryanswer"){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."askqquery"; ?>"><i
                                     class="sidebar-item-icon fa fa-question-circle"></i>
                                 <span class="nav-label">Ask A Query</span>

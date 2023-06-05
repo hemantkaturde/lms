@@ -267,6 +267,10 @@ $route['askqquery'] = "student/askqquery";
 $route['fetchallstudentquerys'] = "student/fetchallstudentquerys";
 $route['addnewquery'] = "student/addnewquery";
 $route['delete_query'] = "student/delete_query";
+$route['viewqueryanswer/(:any)'] = "student/viewqueryanswer/$1";
+$route['fetchallstudentquerysanswer'] = "student/fetchallstudentquerysanswer";
+
+
 
 
 

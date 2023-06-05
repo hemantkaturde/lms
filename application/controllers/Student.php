@@ -970,6 +970,49 @@
      }
 
 
+        public function viewqueryanswer($query_id){
+
+            $this->global['pageTitle'] = 'Ask A Query Answer';
+            $userId =  $this->session->userdata('userId');
+            $data['userId'] =  $this->session->userdata('userId');
+            $data['query_id'] =  $query_id;
+            $data['getquerydatabyid'] =  $this->student_model->getquerydatabyid($query_id);
+
+            $this->loadViews("student/viewqueryanswer", $this->global,$data, NULL);
+        }
+
+
+        public function fetchallstudentquerysanswer(){
+
+            $params = $_REQUEST;
+            $userId =  $this->session->userdata('userId');
+            $roleText = $this->session->userdata('roleText');
+    
+            $totalRecords = $this->student_model->getallstudentqueryanswercount($params,$userId,$roleText); 
+            $queryRecords = $this->student_model->getallstudentqueryanswerdata($params,$userId,$roleText); 
+        
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+        
+            echo json_encode($json_data);
+
+        }
+
+
     }
 
 ?>

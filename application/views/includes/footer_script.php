@@ -4777,7 +4777,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-<?php if($pageTitle=='Ask A Query' || $pageTitle=="Add Ask A Query"){ ?>
+<?php if($pageTitle=='Ask A Query' || $pageTitle=="Add Ask A Query" ){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
 				
@@ -4884,6 +4884,36 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
+
+<?php if($pageTitle=='Ask A Query Answer'){ ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+				
+				var dt = $('#view_query_answer').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Query Answer Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchallstudentquerysanswer",
+						type: "post",
+					},
+				});
+		});
+
+	</script>
+<?php } ?>
 
 
 

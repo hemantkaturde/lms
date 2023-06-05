@@ -1586,16 +1586,12 @@ public function getallstudentquerydata($params,$userId,$roleText){
              $data[$counter]['course_name'] = $value['course_name'];
              $data[$counter]['query'] = $value['query'];
              $data[$counter]['action'] = '';
-
-             if($roleText=='Trainer'){
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."add_query_answer?query_id=".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/process.png' alt='View Answers' title='View Answers'></a> ";
-
-             }else{
-
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."view_query_answer?query_id=".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/history.png' alt='View Answers' title='View Answers'></a> | ";
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqueryanswer/".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/process.png' alt='View Answers' title='View Answers'></a> ";
+            
+             if($roleText!='Trainer'){
                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_query' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Query' title='Delete Query'></a> "; 
-
              }
+             
             $counter++; 
         }
     }
@@ -1690,6 +1686,40 @@ public function getallstudentquerydatfornotification($userId,$roleText){
     }
 
     return $data;
+}
+
+
+public function getquerydatabyid($query_id){
+
+    $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+    $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ASK_A_QUERY.".query LIKE '%".$params['search']['value']."%')");
+    }
+
+    $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+    $this->db->where(TBL_ASK_A_QUERY.'.id', $query_id);
+    $query = $this->db->get(TBL_ASK_A_QUERY);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+public function getallstudentqueryanswercount($params,$userId,$roleText){
+
+
+
+}
+
+
+public function getallstudentqueryanswerdata($params,$userId,$roleText){
+
+
+
+
 }
 
 
