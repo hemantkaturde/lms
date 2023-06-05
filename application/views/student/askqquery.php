@@ -16,8 +16,6 @@ $roleText = $this->session->userdata('roleText');
                    </button>
                    <?php }?>
 
-          >
-
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url();?>dashboard" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
