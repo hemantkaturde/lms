@@ -13,21 +13,6 @@ if($roleText=="Counsellor"){
     $display = "block";
 }
 
-
-
-
-if($roleText=="Trainer"){
-
-    $displayTrainer = "none";
-
-    $displayTrainerstat ="none";
-
-}else{
-    $displayTrainer = "block";
-}
-
-
-
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/event.css" />
@@ -36,7 +21,7 @@ if($roleText=="Trainer"){
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-        <div class="row" style="display:<?=$displayTrainer?>">
+        <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body banner-box">
@@ -147,7 +132,7 @@ if($roleText=="Trainer"){
             </div>
         </div> -->
         <div class="row" >
-            <div class="col-lg-4" style="display:<?=$display?>" style="display:<?=$displayTrainer?>">
+            <div class="col-lg-4" style="display:<?=$display?>">
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title" >
@@ -199,7 +184,7 @@ if($roleText=="Trainer"){
         </div>
 
         <div class="row" >
-            <div class="col-lg-8" style="display:<?=$display?>" style="display:<?=$displayTrainerstat?>">
+            <div class="col-lg-8" style="display:<?=$display?>">
                 <div class="ibox">
                     <div class="ibox-body">
                         <div class="flexbox mb-4">
