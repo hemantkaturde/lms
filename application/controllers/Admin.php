@@ -71,9 +71,9 @@ class Admin extends BaseController
          $data1[] = ['date' => $row['date'], 'count' =>$row['count']];
         }
         $data['chart_data'] = json_encode($data1);
-        if($this->session->userdata('roleText') !='Student'){
-           $this->loadViews("dashboard", $this->global, $data , NULL);
-        }else{
+        if($this->session->userdata('roleText') =='Trainer'){
+            $this->loadViews("trainer_dashbaord", $this->global, $data , NULL);
+        }else if($this->session->userdata('roleText') =='Student'){
 
             $this->global['pageTitle'] = 'Student Dashbaord';
 
@@ -85,13 +85,13 @@ class Admin extends BaseController
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
-
-            // $data['getstudentexaminationdata'] = $this->student_model->getstudentexaminListationdata($userId); 
-
-         
-
-
             $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
+        }else{
+
+
+            $this->loadViews("dashboard", $this->global, $data , NULL);
+
+           
         }
     }
 
