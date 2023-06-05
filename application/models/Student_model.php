@@ -1448,6 +1448,7 @@ public function getstudentexaminListationdata($userId){
 
 public function getstudentcourse($params,$userId){
 
+
     $this->db->select('enq_course_id');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);

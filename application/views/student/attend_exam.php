@@ -2,22 +2,6 @@
 $access = $this->session->userdata('access');
 $jsonstringtoArray = json_decode($access, true);
 
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-         $url = "https://";   
-    else  
-         $url = "http://";   
-    // Append the host(domain name, ip) to the URL.   
-    $url.= $_SERVER['HTTP_HOST'];   
-    
-    // Append the requested resource location to the URL   
-    $url.= $_SERVER['REQUEST_URI'];    
-      
-    $websiteAddress=$url;
-    if(preg_match("/\/(\d+)$/",$websiteAddress,$recordMatch)){
-       $lastResult=$recordMatch[1];
-    }
-
-
 ?>
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
@@ -26,7 +10,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
             <div class="ibox-head">
                 <div>
                     <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'studentexamination/'.$lastResult;?>" style="color: black !important"><i
+                        <a href="<?php echo base_url().'studentexamination/'.$exam_detail[0]['courseId'];?>" style="color: black !important"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                     </button>
                 </div>
