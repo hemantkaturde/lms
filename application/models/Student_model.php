@@ -1536,7 +1536,16 @@ public function  getallstudentquerycount($params,$userId,$roleText){
             $course_id[]= $value['courseId'];
              
         }
+
+        if( $getTrainercourseis){
             $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+
+        }else{
+            return array();
+
+        }
+
+            
        }else{
             $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
        }
