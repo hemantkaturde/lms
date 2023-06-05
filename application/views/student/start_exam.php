@@ -9,6 +9,8 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="ibox-head">
                 <div class="ibox-title">Question Paper Management ( <B>Course Name :</B><?=$exam_detail[0]['course_name'];?> )</div>
                 <div>Timer : </div>
+                <h1 id="countdown" class="countdown"></h1>
+
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
@@ -203,4 +205,27 @@ $jsonstringtoArray = json_decode($access, true);
                 $("#options_answers_"+data_id).val(val);
         })
        
+    </script>
+
+<script>
+        
+        var timer2 = "120:00";
+        var interval = setInterval(function() {
+
+
+        var timer = timer2.split(':');
+        //by parsing integer, I avoid all extra string processing
+        var minutes = parseInt(timer[0], 10);
+        var seconds = parseInt(timer[1], 10);
+        --seconds;
+        minutes = (seconds < 0) ? --minutes : minutes;
+        if (minutes < 0) clearInterval(interval);
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+        //minutes = (minutes < 10) ?  minutes : minutes;
+        $('.countdown').html(minutes + ':' + seconds);
+        timer2 = minutes + ':' + seconds;
+        }, 1000);
+        // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     </script>
