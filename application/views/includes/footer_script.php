@@ -4892,8 +4892,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				var dt = $('#view_query_answer').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "30%", "targets": 1 },
+						{ "width": "50%", "targets": 0 },
+						{ "width": "5%", "targets": 1 },
 					],
 					responsive: true,
 					"oLanguage": {
