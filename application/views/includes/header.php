@@ -187,7 +187,7 @@ $jsonstringtoArray = json_decode($access, true);
                         ?>
 
                     <li class="dropdown dropdown-notification">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell rel" style="font-size: x-large;"><span class="notify-signal"></span></i></a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell rel" style="font-size: x-large;"><span class="notify-signal" style="height: 16px !important;width: 14px !important;"> <p style='font-size: small;margin-left: 4px;color: #fff;'><?=count($result); ?></p></span></i></a>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
                             <li class="dropdown-menu-header">
                                 <div>
