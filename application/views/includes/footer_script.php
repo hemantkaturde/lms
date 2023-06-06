@@ -4876,7 +4876,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									}
 								})
 				
-			});
+		});
 
 		
 
@@ -4885,15 +4885,21 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-<?php if($pageTitle=='Ask A Query Answer'){ ?>
+<?php if($pageTitle=='Ask A Query Answer' || $pageTitle=='Ask A Query Answer'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
-				
+			var query_id_main = $('#query_id_main').val();
+			
 				var dt = $('#view_query_answer').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "50%", "targets": 0 },
+						{ "width": "95%", "targets": 0 },
+
+						<?php 
+						if($roleText=='Trainer'){
+						?>
 						{ "width": "5%", "targets": 1 },
+						<?php } ?>
 					],
 					responsive: true,
 					"oLanguage": {
@@ -4906,11 +4912,89 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>fetchallstudentquerysanswer",
+						url :"<?php echo base_url();?>fetchallstudentquerysanswer/"+query_id_main,
 						type: "post",
 					},
 				});
 		});
+
+		$(document).on('click','#add_query_answer',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var query_id = $('#query_id').val();
+
+			var formData = new FormData($("#addanswer_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addqueryanswer",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'viewqueryanswer/'?>"+query_id;
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.delete_query_answer',function(e){
+
+			var query_id = $('#query_id').val();
+
+					var elemF = $(this);
+					e.preventDefault();
+
+					$.ajax({
+						url : "<?php echo base_url();?>delete_query_answer",
+						type: "POST",
+						data : 'id='+elemF.attr('data-id'),
+						success: function(data, textStatus, jqXHR)
+						{
+							// const obj = JSON.parse(data);
+							// if(obj.status=='true'){
+								//swal("Deleted!", "Certificate Type has been deleted.", "success");
+								//location.reload();
+								window.location.href = "<?php echo base_url().'viewqueryanswer/'?>"+query_id;
+
+							// }
+
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					})
+	
+        });
+
+
 
 	</script>
 <?php } ?>

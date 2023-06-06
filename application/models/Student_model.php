@@ -1708,20 +1708,80 @@ public function getquerydatabyid($query_id){
 }
 
 
-public function getallstudentqueryanswercount($params,$userId,$roleText){
 
 
 
+public function getallstudentqueryanswercount($params,$userId,$roleText,$query_id){
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_ASK_A_QUERY_ANSWER.".query_answer LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ASK_A_QUERY_ANSWER.".query_answer LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_ASK_A_QUERY_ANSWER.'.query_id', $query_id);
+   // $this->db->where(TBL_ASK_A_QUERY_ANSWER.'.student_id', $userId);
+    $query = $this->db->get(TBL_ASK_A_QUERY_ANSWER);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+}
+
+public function getallstudentqueryanswerdata($params,$userId,$roleText,$query_id){
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_ASK_A_QUERY_ANSWER.".query_answer LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ASK_A_QUERY_ANSWER.".query_answer LIKE '%".$params['search']['value']."%')");
+    }
+
+    $this->db->where(TBL_ASK_A_QUERY_ANSWER.'.query_id', $query_id);
+    //$this->db->where(TBL_ASK_A_QUERY_ANSWER.'.student_id', $userId);
+    $this->db->order_by(TBL_ASK_A_QUERY_ANSWER.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_ASK_A_QUERY_ANSWER);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+
+            //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+             $data[$counter]['query_answer'] = $value['query_answer'];
+             
+
+
+             if($roleText=='Trainer'){
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_query_answer' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Query Answer' title='Delete Query Answer'></a> "; 
+             }
+             $counter++; 
+        }
+    }
+    return $data;
 }
 
 
-public function getallstudentqueryanswerdata($params,$userId,$roleText){
 
-
+public function saveQueryanswerdata($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_ASK_A_QUERY_ANSWER, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_ASK_A_QUERY_ANSWER, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    }
 
 
 }
-
 
 
 

@@ -268,7 +268,10 @@ $route['fetchallstudentquerys'] = "student/fetchallstudentquerys";
 $route['addnewquery'] = "student/addnewquery";
 $route['delete_query'] = "student/delete_query";
 $route['viewqueryanswer/(:any)'] = "student/viewqueryanswer/$1";
-$route['fetchallstudentquerysanswer'] = "student/fetchallstudentquerysanswer";
+$route['fetchallstudentquerysanswer/(:any)'] = "student/fetchallstudentquerysanswer/$1";
+$route['addqueryanswer'] = "student/addqueryanswer";
+$route['delete_query_answer'] = "student/delete_query_answer";
+
 
 
 

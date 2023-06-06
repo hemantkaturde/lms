@@ -982,14 +982,14 @@
         }
 
 
-        public function fetchallstudentquerysanswer(){
+        public function fetchallstudentquerysanswer($query_id){
 
             $params = $_REQUEST;
             $userId =  $this->session->userdata('userId');
             $roleText = $this->session->userdata('roleText');
     
-            $totalRecords = $this->student_model->getallstudentqueryanswercount($params,$userId,$roleText); 
-            $queryRecords = $this->student_model->getallstudentqueryanswerdata($params,$userId,$roleText); 
+            $totalRecords = $this->student_model->getallstudentqueryanswercount($params,$userId,$roleText,$query_id); 
+            $queryRecords = $this->student_model->getallstudentqueryanswerdata($params,$userId,$roleText,$query_id); 
         
             $data = array();
             foreach ($queryRecords as $key => $value)
@@ -1009,6 +1009,61 @@
                 );
         
             echo json_encode($json_data);
+
+        }
+
+
+        public function addqueryanswer(){
+            $post_submit = $this->input->post();
+
+
+            if(!empty($post_submit)){
+
+                $addnewqueryanswer_response = array();
+                $data = array(
+                            'student_id' => $this->input->post('userId'),
+                            'query_id'=> $this->input->post('query_id'),
+                            'query_answer'=>$this->input->post('query_answer'),
+                    );
+
+                $this->form_validation->set_rules('query_answer', 'Query', 'trim|required');
+
+
+                if($this->form_validation->run() == FALSE){
+                            $addnewqueryanswer_response['status'] = 'failure';
+                            $addnewqueryanswer_response['error'] = array('query_answer'=>strip_tags(form_error('query_answer')));
+                }else{
+
+                    $saveCoursedata = $this->student_model->saveQueryanswerdata('',$data);
+                       if($saveCoursedata){
+                                $addnewqueryanswer_response['status'] = 'success';
+                                $addnewqueryanswer_response['error'] = array('query_answer'=>strip_tags(form_error('query_answer')));
+                            }
+
+                    }
+
+                    echo json_encode($addnewqueryanswer_response);
+                }
+
+
+        }
+
+
+        public function delete_query_answer(){
+
+            $post_submit = $this->input->post();
+            $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+            $result = $this->database->data_update('tbl_queryanswers',$enquiryInfo,'id',$this->input->post('id'));
+    
+            if ($result > 0) {
+                 echo(json_encode(array('status'=>TRUE)));
+    
+                 $process = 'Delete Query Answer';
+                 $processFunction = 'Student/delete_query_answer';
+                 $this->logrecord($process,$processFunction);
+    
+                }
+            else { echo(json_encode(array('status'=>FALSE))); }
 
         }
 
