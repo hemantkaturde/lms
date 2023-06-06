@@ -411,6 +411,9 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
                         
+
+
+
                        
                         <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' || $pageUrl =='addcourseListing' ||  $pageUrl =='topicattachmentListing' || $pageUrl=="viewalltopicdocuments" || $pageUrl=="timetableListing" || $pageUrl=="viewtimetablelisting" || $pageUrl=="addtopiclinksforonlineattendant"){ echo 'active';} ?>">
@@ -419,6 +422,10 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
                         <?php } ?>
+
+
+
+
 
 
                         <!-- <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
@@ -447,6 +454,19 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
                         <?php } ?>
+
+
+                       
+                        <li class="treeview <?php if($pageUrl =='Reports'){ echo 'active';} ?>"  style="height: auto; " >
+                            <a href="#">
+                                <i class="sidebar-item-icon fa fa-file-excel-o" ></i> <span class="group-master" >Reports</span>
+                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class=""><a href="#"><i class="sidebar-item-icon fa fa-file-excel-o"></i><span class="nav-label"> Student Report </span></a></li>
+                            </ul>
+                        </li>
+              
 
 
                     

@@ -85,7 +85,9 @@
                        <?php } else{ ?>
                              <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
                        <?php }?>
-					 <?php } ?>  
+					 <?php } ?> 
+					 <button id="#" class="#" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
+
                     </td>
                 </tr>
              <?php }  ?>   
