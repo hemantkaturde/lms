@@ -8,6 +8,10 @@
     background:#f3f3f3;
 } */
 
+
+
+
+
 .card.user-card {
     border-top: none;
     -webkit-box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
@@ -283,61 +287,42 @@
             </table>
     
 
-			<div class="modal fade" id="idcarddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="idcarddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 					<div class="modal-header" style="background:#d2ae6d">
 						<h5 class="modal-title" id="exampleModalLabel" style="color:black;">Print Student Id Card</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span> -->
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body " id="printarea">
 					  <div class="container">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="card user-card">
-									<div class="card-header">
-										<!-- <h5>Profile</h5> -->
-									</div>
 									<div class="card-block">
 										<div class="user-image">
-											<img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">
+											<img src="" id="student_profile_pic" name="student_profile_pic" class="img-radius" alt="User-Profile-Image">
 										</div>
-										<h6 class="f-w-600 m-t-25 m-b-10">Alessa Robert</h6>
-										<p class="text-muted">Active | Male | Born 23.05.1992</p>
-										<hr>
-										<p class="text-muted m-t-15">Activity Level: 87%</p>
-										<ul class="list-unstyled activity-leval">
-											<li class="active"></li>
-											<li class="active"></li>
-											<li class="active"></li>
-											<li></li>
-											<li></li>
-										</ul>
-										<div class="bg-c-blue counter-block m-t-10 p-20">
-											<div class="row">
-												<div class="col-4">
-													<i class="fa fa-comment"></i>
-													<p>1256</p>
-												</div>
-												<div class="col-4">
-													<i class="fa fa-user"></i>
-													<p>8562</p>
-												</div>
-												<div class="col-4">
-													<i class="fa fa-suitcase"></i>
-													<p>189</p>
-												</div>
-											</div>
-										</div>
-										<p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-										<hr>
-										<!-- <div class="row justify-content-center user-social-link">
-											<div class="col-auto"><a href="#!"><i class="fa fa-facebook text-facebook"></i></a></div>
-											<div class="col-auto"><a href="#!"><i class="fa fa-twitter text-twitter"></i></a></div>
-											<div class="col-auto"><a href="#!"><i class="fa fa-dribbble text-dribbble"></i></a></div>
-										</div> -->
+										
+										<h5 class="f-w-600 m-t-25 m-b-10" id="student_name" style="color:black"></h5>
+
+										<h6 class="f-w-600 m-t-25 m-b-10" id="student_mobile_number" style="color:black"></h6>
+										    <hr>
+
+										<p class="text-muted"><b>Course Name : </b> <text id="course_name" name="course_name" style="color:black"></text></p>
+										    <hr>
+
+										<p class="text-muted"><b>Topic Name : </b> <text id="topic_name" name="topic_name" style="color:black"></text></p>
+										    <hr>
+
+										<p class="text-muted"><b>Class Time : </b> <text id="class_time" name="class_time" style="color:black"></text></p>
+										    <hr>
+
+										<p class="text-muted"><b>Class Time : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
+										    <hr>
+									     <p>www.iictn.in</p>
 									</div>
 								</div>
 							</div>
@@ -346,8 +331,8 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary print_card" id="print_card">Print Card</button>
+						<button type="button" class="btn btn-secondary print_id_card_close" >Close</button>
+						<button type="button" class="btn btn-primary print_card_button" id="print_card_button">Print Card</button>
 					</div>
 					</div>
 				</div>
@@ -542,20 +527,30 @@ $(".print_id_card").click(function(){
 							}
 							else if(fetchResponse.status == 'success')
 							{
+
+								var profile_pic = fetchResponse.data.profile_pic;
+								var student_profile_pic = "<?php echo base_url().'uploads/admission/'?>"+profile_pic;
+								var student_name = fetchResponse.data.name +' '+ fetchResponse.data.lastname
+								var topic_name = fetchResponse.data.title;
+								var course_name = fetchResponse.data.course_name;
+								var classtime = fetchResponse.data.classtime;
+
+								var date =  fetchResponse.data.date;
+
+								var mobile =  fetchResponse.data.mobile;
+
+								$('#student_profile_pic').attr("src", student_profile_pic);
+								$("#student_name").append(student_name);
+								$("#student_mobile_number").append(mobile);
+
+								
+
+								$("#topic_name").append(topic_name);
+								$("#course_name").append(course_name);
+								$("#class_time").append(classtime);
+								$("#class_date").append(date);
 								$("#idcarddata").modal("show");
-
-								//  swal({
-								// 	title: "Attendance Successfully Done",
-								//     text: "",
-								//  	icon: "success",
-								//  	button: "Ok",
-								//  	},function(){ 
-								// 		$("#popup_modal_md").hide();
-                                //         //window.location.href = meeting_link;
-                                //         //window.open(meeting_link, '_blank');
-
-								// 		window.location.href = "<?php echo base_url().'dashboard'?>";
-								// });						
+				
 							}
 							
 						},
@@ -567,6 +562,25 @@ $(".print_id_card").click(function(){
 				return false;
 
     
+});
+
+
+$(".print_card_button").click(function(){
+	printData();
+});
+
+
+function printData()
+{
+   var divToPrint=document.getElementById("printarea");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$(".print_id_card_close").click(function(){
+	location.reload();
 });
 
 </script>

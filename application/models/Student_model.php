@@ -1855,6 +1855,103 @@ public function courseLinksListing($courseId)
 }
 
 
+public function getallstudentdataforshowidcard($data){
+
+     $user_id = $data['user_id'];
+    // $this->db->select('*');
+    // $this->db->join(TBL_USERS_ENQUIRES, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
+    // $this->db->join(TBL_ENQUIRY, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
+    // //$this->db->join(TBL_USERS_ENQUIRES, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
+
+    // $this->db->where(TBL_USER.'.isDeleted', 0);
+    // $this->db->where(TBL_USER.'.user_flag', 'student');
+    // $this->db->where(TBL_USER.'.userId', $user_id);
+    // $query = $this->db->get(TBL_USER);
+    // $fetch_result = $query->result_array();
+    // return $fetch_result;
+
+    $this->db->select('enq_course_id,'.TBL_USER.'.*');
+    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
+    $this->db->where(TBL_USER.'.userId',$user_id);
+    $get_enquiry_courses = $this->db->get(TBL_USERS_ENQUIRES);
+    $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+    $data = array();
+    $counter = 0;
+     foreach ($fetch_result_enquiry_courses as $key => $value_enquiry) {
+
+     $course_ids    =   explode(',', $value_enquiry['enq_course_id']);
+
+     foreach ($course_ids as $key => $value) {
+       
+        $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
+
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
+
+        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id','left');
+
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
+        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $this->db->where(TBL_COURSE.'.courseId', $value);
+
+        $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+        $query = $this->db->get(TBL_COURSE);
+        $fetch_result = $query->result_array();
+
+    
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                
+                    $data[$counter]['name'] = $value_enquiry['name'];
+                    $data[$counter]['lastname'] = $value_enquiry['lastname'];
+                    $data[$counter]['profile_pic'] = $value_enquiry['profile_pic'];
+                    $data[$counter]['mobile'] = $value_enquiry['mobile'];
+
+                    $data[$counter]['course_name'] = $value['course_name'];
+                    $data[$counter]['title'] = $value['topic'];
+                    $data[$counter]['classtime'] = $value['classtime'];
+                    $data[$counter]['link_url'] = $value['link_url'];
+                    $data[$counter]['createdDtm'] = $value['createdDtm'];
+                    $data[$counter]['date'] = $value['date'];
+                    $data[$counter]['meeting_id'] = $value['meeting_id'];
+                    $data[$counter]['topicid'] = $value['topicid'];
+                    $data[$counter]['userid'] =  $userId;
+                    $data[$counter]['courseId'] = $value['courseId'];
+                    // $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
+                    $data[$counter]['action'] = '';
+                    $counter++; 
+            }
+        }
+    }
+
+    
+  }
+
+  return $data;
+}
+
+
+
+public function checkifAttendanceisexits($userId,$courseId,$topicid){
+
+    $this->db->select('*');
+    $this->db->where(TBL_ATTENDANCE.'.course_id', $courseId);
+    $this->db->where(TBL_ATTENDANCE.'.topic_id', $topicid);
+    $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+    $this->db->limit(1);
+    $query = $this->db->get(TBL_ATTENDANCE);
+    $fetch_result = $query->result_array();
+
+    return $fetch_result;
+
+}
+
 }
 
 ?>

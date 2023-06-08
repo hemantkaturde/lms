@@ -1123,13 +1123,18 @@
                     'attendance_status' => 1,
                 );
 
+                $getallstudentdata = $this->student_model->getallstudentdataforshowidcard($data)[0];
 
+                if($getallstudentdata){
+
+                     $fetchall_staudent_data['status'] = 'success';
+                     $fetchall_staudent_data['data'] = array('date'=>$getallstudentdata['date'],'classtime'=>$getallstudentdata['classtime'],'course_name'=>$getallstudentdata['course_name'],'title'=>$getallstudentdata['title'],'email'=>$getallstudentdata['email'], 'username'=>$getallstudentdata['username'], 'name'=>$getallstudentdata['name'], 'lastname'=>$getallstudentdata['lastname'],'mobile'=>$getallstudentdata['mobile'],'user_flag'=>$getallstudentdata['user_flag'],'profile_pic'=>$getallstudentdata['profile_pic']);
+                }else{
+
+                    $fetchall_staudent_data['status'] = 'failure';
+                    $fetchall_staudent_data['error'] = array('evbtrdate'=>strip_tags(form_error('evbtrdate')),'evbtr'=>strip_tags(form_error('evbtr')));                    
+                }
                 
-
-
-                $fetchall_staudent_data['status'] = 'success';
-                $fetchall_staudent_data['error'] = array('full_name'=>'', 'mobile_number'=>'', 'email'=>'', 'username'=>'','password'=>'','confirm_password'=>'');
-           
                 echo json_encode($fetchall_staudent_data);
 
             }
