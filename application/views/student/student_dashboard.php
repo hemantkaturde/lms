@@ -242,7 +242,7 @@
 
 
 
-        <div class="col-lg-12 col-md-12" style="margin-top:35px">
+    <div class="col-lg-12 col-md-12" style="margin-top:35px">
         <h5><b> Course Class Schedule</b></h5>
             <table class="table  table-condensed" style="background-color:#cec4de">
             <thead>
@@ -344,9 +344,6 @@
 						</div>
 	                </div>
 
-					
-
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -374,14 +371,14 @@ $dataPoints = array(
 	
 ?>
 
-<body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-</body>
+	<body>
+		<div id="chartContainer" style="height: 370px; width: 100%;">
+		</div>
+	</body>
 </html>    
-
-
-
 </div>
+
+
     <!-- END PAGE CONTENT-->
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -414,7 +411,7 @@ window.onload = function () {
  });
  chart.render();
   
- }
+}
 
 $(document).ready(function(){
     $(".join_link").click(function(){
@@ -521,9 +518,55 @@ $(document).ready(function(){
 
 $(".print_id_card").click(function(){
 
-	$("#idcarddata").modal("show");
-          
-});
+	var user_id = $(this).attr("user-id");
+    var topic_id = $(this).attr("topic-id");
+    var course_id = $(this).attr("course-id");
+    var meeting_id = $(this).attr("meeting_id");
+    var meeting_link = $(this).attr("meeting_link");
 
+
+	               $.ajax({
+						url : "<?php echo base_url();?>fetchallstudentdataforprintidcard",
+						type: "POST",
+                        data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link,
+						success: function(data, textStatus, jqXHR)
+						{
+
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								$("#idcarddata").modal("show");
+
+								//  swal({
+								// 	title: "Attendance Successfully Done",
+								//     text: "",
+								//  	icon: "success",
+								//  	button: "Ok",
+								//  	},function(){ 
+								// 		$("#popup_modal_md").hide();
+                                //         //window.location.href = meeting_link;
+                                //         //window.open(meeting_link, '_blank');
+
+								// 		window.location.href = "<?php echo base_url().'dashboard'?>";
+								// });						
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+				return false;
+
+    
+});
 
 </script>

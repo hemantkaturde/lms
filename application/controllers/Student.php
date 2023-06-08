@@ -1106,6 +1106,37 @@
         }
 
 
+        public function fetchallstudentdataforprintidcard(){
+
+            $post_submit = $this->input->post();
+
+            if($post_submit){
+
+                $attendance_response = array();
+
+                $data = array(
+                    'user_id'  => $this->input->post('user_id'),
+                    'topic_id' => $this->input->post('topic_id'),
+                    'course_id' => $this->input->post('course_id'),
+                    'meeting_id' => $this->input->post('meeting_id'),
+                    'meeting_link' => $this->input->post('meeting_link'),
+                    'attendance_status' => 1,
+                );
+
+
+                
+
+
+                $fetchall_staudent_data['status'] = 'success';
+                $fetchall_staudent_data['error'] = array('full_name'=>'', 'mobile_number'=>'', 'email'=>'', 'username'=>'','password'=>'','confirm_password'=>'');
+           
+                echo json_encode($fetchall_staudent_data);
+
+            }
+
+        }
+
+
     }
 
 ?>
