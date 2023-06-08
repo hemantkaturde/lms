@@ -1068,6 +1068,44 @@
         }
 
 
+
+        public function studentreport(){
+            $this->global['pageTitle'] = 'Student Report';
+            $data['getallstudentlist'] =  $this->student_model->getallstudentlist();
+            $data['getCourseList'] =  $this->comman_model->getCourseList();
+            $this->loadViews("student/studentreport", $this->global, $data, NULL);
+        }
+
+
+        public function fetchallstudentreportlist(){
+
+            $params = $_REQUEST;
+
+            $totalRecords = $this->student_model->getallstudentreportcount($params); 
+            $queryRecords = $this->student_model->getallstudentreportdata($params); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+        
+            echo json_encode($json_data);
+
+        }
+
+
     }
 
 ?>

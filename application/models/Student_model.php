@@ -1749,9 +1749,6 @@ public function getallstudentqueryanswerdata($params,$userId,$roleText,$query_id
 
             //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
              $data[$counter]['query_answer'] = $value['query_answer'];
-             
-
-
              if($roleText=='Trainer'){
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_query_answer' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Query Answer' title='Delete Query Answer'></a> "; 
@@ -1780,9 +1777,82 @@ public function saveQueryanswerdata($id,$data){
         }
     }
 
+}
+
+
+
+public function  getallstudentreportcount($params){
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.user_flag', 'student');
+    $query = $this->db->get(TBL_USER);
+    $rowcount = $query->num_rows();
+    
+    return $rowcount;
 
 }
 
+public function getallstudentreportdata($params){
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.user_flag', 'student');
+    $this->db->order_by(TBL_USER.'.userId', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['name']    = $value['name'];
+             $data[$counter]['mobile']  = $value['mobile'];
+             $data[$counter]['email']   = $value['email'];
+             $data[$counter]['user_flag']   =  $value['email'];
+            $counter++; 
+        }
+    }
+    return $data;
+}
+
+
+public function getallstudentlist(){
+
+    $this->db->select('*');
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.user_flag', 'student');
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
+
+
+public function courseLinksListing($courseId)
+{
+    $this->db->select('*');
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.user_flag', 'student');
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
 
 
 }

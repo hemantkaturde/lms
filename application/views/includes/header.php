@@ -457,13 +457,13 @@ $jsonstringtoArray = json_decode($access, true);
 
 
                        
-                        <li class="treeview <?php if($pageUrl =='Reports'){ echo 'active';} ?>"  style="height: auto; " >
+                        <li class="treeview <?php if($pageUrl =='studentreport'){ echo 'active';} ?>"  style="height: auto; " >
                             <a href="#">
                                 <i class="sidebar-item-icon fa fa-file-excel-o" ></i> <span class="group-master" >Reports</span>
                                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class=""><a href="#"><i class="sidebar-item-icon fa fa-file-excel-o"></i><span class="nav-label"> Student Report </span></a></li>
+                                <li class="<?php if($pageUrl =='studentreport'){ echo 'active';} ?>"><a href="<?php echo base_url()."studentreport"; ?>"><i class="sidebar-item-icon fa fa-file-excel-o"></i><span class="nav-label"> Student Report </span></a></li>
                             </ul>
                         </li>
               

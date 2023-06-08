@@ -5000,6 +5000,39 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
+<?php if($pageTitle=='Student Report'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+		
+				var dt = $('#studentreportList').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Student Data Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchallstudentreportlist",
+						type: "post",
+					},
+				});
+		});
+
+    </script>
+<?php } ?>
+
+
 
 
 

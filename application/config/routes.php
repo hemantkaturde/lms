@@ -273,6 +273,12 @@ $route['addqueryanswer'] = "student/addqueryanswer";
 $route['delete_query_answer'] = "student/delete_query_answer";
 
 
+/*  Report Section Start Here */ 
+$route['studentreport'] = "student/studentreport";
+$route['fetchallstudentreportlist'] = "student/fetchallstudentreportlist";
+
+
+
 
 
 
