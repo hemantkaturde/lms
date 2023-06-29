@@ -13,7 +13,7 @@ $jsonstringtoArray = json_decode($access, true);
                 <!-- </div> -->
                 <div>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseType">
-                        <i class="fa fa-plus"></i> Add Certificate Type
+                        <i class="fa fa-plus"></i> Add Certification
                     </button>
 
                     <button type="button" class="btn btn-primary">
@@ -21,14 +21,14 @@ $jsonstringtoArray = json_decode($access, true);
                     </button>
                 </div>
 
-                <div class="ibox-title">Certificate Type Management</div>
+                <div class="ibox-title">Certifications Management</div>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
                     <table id="view_coursetypelist" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Certificate Type Name</th>
+                                <th>Certifications Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,7 +48,7 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#d2ae6d">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Certificate Type</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add New Certification</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -62,7 +62,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <div class="row col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="course_type_name">Certificate Type<span
+                                    <label style="text-align: left;" for="course_type_name">Certifications<span
                                             class="required">*</span>
                                     </label>
                                     <div>
@@ -92,7 +92,7 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#d2ae6d">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Certificate Type</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Edit Certification</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,7 +106,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <div class="row col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="course_type_name">Certificate Type<span
+                                    <label style="text-align: left;" for="course_type_name">Certifications<span
                                             class="required">*</span>
                                     </label>
                                     <div>

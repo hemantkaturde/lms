@@ -1952,6 +1952,18 @@ public function checkifAttendanceisexits($userId,$courseId,$topicid){
 
 }
 
+
+public function getAllstudentlistexport() {
+    $this->db->select(array('userId', 'name', 'email', 'mobile', 'profile_pic', 'gender'));
+    $this->db->from(TBL_USER);
+    $this->db->limit(10);  
+    $query = $this->db->get();
+    return $query->result_array();
+}
+
+
+
+
 }
 
 ?>

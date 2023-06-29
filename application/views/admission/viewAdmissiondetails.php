@@ -30,7 +30,7 @@ $roleText = $this->session->userdata('roleText');
                 <div class="row">
                    <div class="col-md-12">
                        <div class="box-body" id="box-body">
-                          <img src="https://iictn.org.in/images/iictn-logo-arrow.png" style="margin-left:100px" alt="iictn logo" width="70%;" class="center">
+                          <img src="https://iictn.org/wp-content/uploads/2022/12/45-1-r.jpg" style="margin-left:100px" alt="iictn logo" width="70%;" class="center">
                             <div class="row col-md-12 col-sm-12 col-xs-12">
                                 <table class="table table-bordered">
                                     <thead>

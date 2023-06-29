@@ -2,6 +2,9 @@
 
     require APPPATH . '/libraries/BaseController.php';
 
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
     class Student extends BaseController
     {
     /**
@@ -1140,6 +1143,76 @@
             }
 
         }
+
+
+        public function studentreportexporttoexel() {
+            $fileName = 'employee.xlsx';  
+            $employeeData = $this->student_model->getAllstudentlistexport();
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setCellValue('A1', 'Id');
+            $sheet->setCellValue('B1', 'Name');
+            $sheet->setCellValue('C1', 'Skills');
+            $sheet->setCellValue('D1', 'Address');
+            $sheet->setCellValue('E1', 'Age');
+            $sheet->setCellValue('F1', 'Designation');       
+            $rows = 2;
+            foreach ($employeeData as $val){
+                $sheet->setCellValue('A' . $rows, $val['userId']);
+                $sheet->setCellValue('B' . $rows, $val['name']);
+                $sheet->setCellValue('C' . $rows, $val['name']);
+                $sheet->setCellValue('D' . $rows, $val['name']);
+            $sheet->setCellValue('E' . $rows, $val['name']);
+                $sheet->setCellValue('F' . $rows, $val['name']);
+                $rows++;
+            } 
+
+            // $writer = new Xlsx($spreadsheet);
+            // $writer->save("upload/".$fileName);
+            // header("Content-Type: application/vnd.ms-excel");
+            // redirect(base_url()."/upload/".$fileName);    
+            
+                // header('Content-Type: application/vnd.ms-excel');
+				// header("Content-Disposition: attachment;Filename=$fileName.xls");
+				// header('Cache-Control: max-age=0');
+				// // $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+				//  //$writer->save('php://output');
+				// exit;
+
+                //$writer = new Xlsx($spreadsheet);
+        // $writer->save('world.xlsx');
+        // return $this->response->download('world.xlsx', null)->setFileName('sample.xlsx');
+
+        // if($extension == 'csv'){          
+        //     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
+        //     $fileName1 = $fileName.'.csv';
+        //   } elseif($extension == 'xlsx') {
+        //     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        //     $fileName1 = $fileName.'.xlsx';
+        //   } else {
+        //     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xls($spreadsheet);
+        //     $fileName1 = $fileName.'.xls';
+        //   }
+          $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xls($spreadsheet);
+      
+          $this->output->set_header('Content-Type: application/vnd.ms-excel');
+          $this->output->set_header("Content-type: application/csv");
+          $this->output->set_header('Cache-Control: max-age=0');
+          $writer->save("uploads/".$fileName);
+          /*redirect(HTTP_UPLOAD_PATH.$fileName); */
+          $filepath = file_get_contents("/".$fileName1);
+          force_download($fileName1, $filepath);
+
+        }    
+
+
+        public function studentreportexportpdf(){
+            $this->global['pageTitle'] = 'Student Report';
+            $data['getallstudentlist'] =  $this->student_model->getallstudentlist();
+            $data['getCourseList'] =  $this->comman_model->getCourseList();
+            $this->loadViews("student/studentreport", $this->global, $data, NULL);
+        }
+        
 
 
     }

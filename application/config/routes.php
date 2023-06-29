@@ -274,9 +274,12 @@ $route['delete_query_answer'] = "student/delete_query_answer";
 
 
 /*  Report Section Start Here */ 
-$route['studentreport'] = "student/studentreport";
+// $route['studentreport'] = "student/studentreport";
+
+$route['studentreport'] = "student/studentreportexportpdf";
 $route['fetchallstudentreportlist'] = "student/fetchallstudentreportlist";
 $route['fetchallstudentdataforprintidcard'] = "student/fetchallstudentdataforprintidcard";
+$route['studentreportexporttoexel'] = "student/studentreportexporttoexel";
 
 
 
