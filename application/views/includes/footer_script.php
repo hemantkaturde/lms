@@ -2706,9 +2706,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					{ className: "details-control", "targets": [ 0 ] },
 					{ "width": "10%", "targets": 0 },
 					{ "width": "15%", "targets": 1 },
-					{ "width": "50%", "targets": 2 },
-					{ "width": "10%", "targets": 3 },
-					{ "width": "30%", "targets": 4 }
+					{ "width": "30%", "targets": 2 },
+					{ "width": "15%", "targets": 3 },
+					{ "width": "15%", "targets": 4 },
+					{ "width": "8%", "targets": 5 }
 				],
 				responsive: true,
 				"oLanguage": {
@@ -4998,6 +4999,62 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
+
+<?php  if($pageTitle=='Update Trainer To Topic'){ ?>
+	<script type="text/javascript">
+	   $(document).on('click','#updateBackupTrainerToTopic',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#updateBackupTrainerToTopic_from")[0]);
+
+			var course_id_form = $('#course_id_form').val();
+			var time_table_id = $('#time_table_id').val();
+			var time_table_transection_id =  $('#time_table_transection_id').val();
+
+			$.ajax({
+				url : "<?php echo base_url();?>addbackuptrainerdata",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>" +'id='+time_table_transection_id+'&time_table_id='+time_table_id+'&course_id='+course_id_form;
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+	</script>
+<?php } ?>
+
+
+
 <?php if($pageTitle=='Student Report'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -5071,6 +5128,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
     </script>
 <?php } ?>
+
+
+
 
 
 

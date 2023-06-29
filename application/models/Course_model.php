@@ -804,6 +804,7 @@ public function getBookscount($topic_id,$course_id){
   public function gettimetabletopiclistingCount($params,$time_table_id,$course_id){
 
     $this->db->select('*');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id');
     if($params['search']['value'] != "") 
     {
         $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
@@ -821,6 +822,7 @@ public function getBookscount($topic_id,$course_id){
   public function gettimetabletopiclistingdata($params,$time_table_id,$course_id){
 
     $this->db->select('*');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id');
     if($params['search']['value'] != "") 
     {
         $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
@@ -842,12 +844,16 @@ public function getBookscount($topic_id,$course_id){
              $data[$counter]['date'] = date('d-m-Y', strtotime($value['date']));
              $data[$counter]['timings'] = $value['timings'];
              $data[$counter]['topic'] =  $value['topic'];
-             $data[$counter]['trainer'] =  '';
+             $data[$counter]['trainer'] =  $value['name'];
+
+             $data[$counter]['backup_trainer'] =  '';
              $data[$counter]['action'] = '';
 
              $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
+            
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
 
-            $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Add Links'></a>"; 
+             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
             
             $counter++; 
         }
@@ -960,6 +966,34 @@ public function getBookscount($topic_id,$course_id){
 
   }
 
+
+  public function getTrianeridby($trainer_name){
+    $this->db->select('*');
+    $this->db->from(TBL_USER);
+    $this->db->join(TBL_ROLES, TBL_USER.'.roleId = '.TBL_ROLES.'.roleId');
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.name', $trainer_name);
+    $this->db->where(TBL_ROLES.'.role', 'Trainer');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+
+  public function getbackuptrainerfortopics($trainer_id){
+    $this->db->select('userId,name,mobile');
+    $this->db->from(TBL_USER);
+    $this->db->join(TBL_ROLES, TBL_USER.'.roleId = '.TBL_ROLES.'.roleId');
+    $this->db->where(TBL_USER.'.isDeleted', 0);
+    $this->db->where(TBL_USER.'.userId!=',$trainer_id);
+    $this->db->where(TBL_ROLES.'.role', 'Trainer');
+    $query = $this->db->get();
+    return $query->result();
+
+
+  }
+
+
+  
 
 }
 

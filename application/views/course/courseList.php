@@ -103,7 +103,7 @@ $jsonstringtoArray = json_decode($access, true);
                      </div>
                    </div> -->
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label style="text-align: left;"  for="trainer">Trainer
                      </label>
                          <select class="form-control" id="trainer" name="trainer">
@@ -113,7 +113,7 @@ $jsonstringtoArray = json_decode($access, true);
                            <?php } ?>
                         </select>
                         <p class="error trainer_error"></p>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                      <label style="text-align: left;"  for="books">Books <span class="required">*</span>
@@ -278,7 +278,7 @@ $jsonstringtoArray = json_decode($access, true);
                      </div>
                    </div> -->
 
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                      <label style="text-align: left;"  for="trainer">Trainer
                      </label>
                          <select class="form-control" id="trainer1" name="trainer">
@@ -288,7 +288,7 @@ $jsonstringtoArray = json_decode($access, true);
                            <?php } ?>
                         </select>
                         <p class="error trainer_error"></p>
-                  </div>
+                  </div> -->
 
 
                      <input id="course_id" name="course_id" type="hidden">

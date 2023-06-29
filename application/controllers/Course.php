@@ -965,6 +965,7 @@
 
         public function savenewtimetable(){
 
+        
             ini_set('upload_max_filesize', '100M');
             ini_set('post_max_size', '100M');
             ini_set('max_input_time', 300);
@@ -1042,13 +1043,13 @@
                                                         }else{
 
                                                           
-                                                            $columnsArr = array('A'=>'Date','B'=>'Timings','C'=>'Topic');
+                                                            $columnsArr = array('A'=>'Date','B'=>'Timings','C'=>'Topic','D'=>'Trainer');
 
                                                             $excel_errors='';   
                                                         
                                                             for($i = 2; $i <= count($allDataInSheet); $i++)
                                                             {
-                                                                $mandateFields = array('A', 'B', 'C');
+                                                                $mandateFields = array('A', 'B', 'C', 'D');
 
                                                                 $getBlankFields =  $this->isFieldEmpty($allDataInSheet[$i],$columnsArr, $mandateFields);
 
@@ -1093,17 +1094,27 @@
                                                                     //$timetabledata = array();
                                                                     for($i = 2; $i <= count($allDataInSheet); $i++)
                                                                      {
-                                                                            //$insertArr['vendor_id'] = $vendor_id;
-                                                                            $insertArr['course_id'] =  $this->input->post('course_id_post');
-                                                                            $insertArr['time_table_id'] = $saveCoursetimetabledata;
-                                                                            $insertArr['trainer_id'] = trim($getTrainerDetails[0]->trainer_id);
-                                                                            $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
-                                                                            $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
-                                                                            $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
-                                                                            $insertArr['timings'] =$allDataInSheet[$i]['B'];
-                                                                            $insertArr['topic'] = $allDataInSheet[$i]['C'];
-                                                                            $timetabledata[] = $insertArr;
-                                                                            $passdataToOrderAPi = $this->course_model->insertBlukTimetabledata($insertArr);
+                                                                            $getTrianerid = $this->course_model->getTrianeridby(trim($allDataInSheet[$i]['D']));
+                                                                            if(empty($getTrianerid)){
+
+                                                                                $savetimetable_response['status'] = "failure";
+                                                                                $savetimetable_response['error'] = array('importing'=>'Trianer Not Match Row Number => '.$i);
+    
+                                                                            }else{
+
+                                                                                //$insertArr['vendor_id'] = $vendor_id;
+                                                                                $insertArr['course_id'] =  $this->input->post('course_id_post');
+                                                                                $insertArr['time_table_id'] = $saveCoursetimetabledata;
+                                                                                $insertArr['trainer_id'] = trim($getTrainerDetails[0]->trainer_id);
+                                                                                $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
+                                                                                $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
+                                                                                $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
+                                                                                $insertArr['timings'] =$allDataInSheet[$i]['B'];
+                                                                                $insertArr['topic'] = $allDataInSheet[$i]['C'];
+                                                                                $insertArr['trainer_id'] = trim($getTrianerid[0]->userId);
+                                                                                $timetabledata[] = $insertArr;
+                                                                                $passdataToOrderAPi = $this->course_model->insertBlukTimetabledata($insertArr);
+                                                                        }
                                                                      }
 
                                                                      if($passdataToOrderAPi){
@@ -1399,6 +1410,52 @@
                         $deletecourse_response['status'] = 'filure';
                     }
                 echo json_encode($deletecourse_response);
+            }
+        }
+
+
+        public function addbackuptrainer(){
+        
+                $time_table_transection_id = $this->input->get('id');
+                $time_table_id = $this->input->get('time_table_id');
+                $course_id = $this->input->get('course_id'); 
+                $data['time_table_transection_id'] = $time_table_transection_id;
+                $data['time_table_id'] = $time_table_id;
+                $data['course_id'] = $course_id;
+                $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
+                $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
+                $data['getTopicinfo'] = $this->course_model->getTopicinfo($data['course_id'],$data['time_table_id'],$data['time_table_transection_id']);
+                $data['gettrainerinfo'] = $this->course_model->getbackuptrainerfortopics($data['getTopicinfo'][0]->trainer_id);
+                $this->global['pageTitle'] = 'Update Trainer To Topic';
+                $this->loadViews("course/addbackuptrainer",$this->global,$data,NULL);
+
+            
+        }
+
+
+        public function addbackuptrainerdata(){
+            $post_submit = $this->input->post();
+
+            if($post_submit){
+
+                // $result = $this->course_model->delete_timetable($course_id,$time_table_id);
+
+                // if($result){
+                //     $deletecourse_response['status'] = 'success';
+                //     $process = 'Delet Timetable Delete';
+                //     $processFunction = 'Course/deletetopictimetable';
+                //     $this->logrecord($process,$processFunction);
+                // }else
+                // {
+                //     $deletecourse_response['status'] = 'filure';
+                // }
+           
+
+                $deletecourse_response['status'] = 'filure';
+
+                 echo json_encode($deletecourse_response);
+
+
             }
         }
 

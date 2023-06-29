@@ -2,6 +2,14 @@
 $access = $this->session->userdata('access');
 $jsonstringtoArray = json_decode($access, true);
 ?>
+<style>
+ table, th, td {border:1px solid black;}
+ .center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
@@ -15,7 +23,39 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
                     <p><b>Examination Tilte : </b><?=$exam_detail[0]['exam_title'];?></p>
-                    <p><b>Examination Time : </b><?=$exam_detail[0]['exam_time'].' Mins';?></p>
+                    <!-- <p><b>Examination Time : </b><?=$exam_detail[0]['exam_time'].' Mins';?></p> -->
+
+                    <h4>Exam Date: <?=date("Y-m-d");?>  | Exam Time: <?=$exam_detail[0]['exam_time'].' Mins';?> | Marks : 100 Marks </h4>
+
+                    <table style="width:100%;padding: 10px;">
+                       
+                        <tr>
+                            <td><b>Enrolment No.: </b></td>
+                            <td>xxxxxxxxxxx</td>
+                            <td><b>Applicant Full Name: </b></td>
+                            <td>xxxxxxxxxxx</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Mobile No. :</b></td>
+                            <td>xxxxxxxxxxxx</td>
+                            <td><b>Email Id:</b></td>
+                            <td>xxxxxxxxxxx</td>
+                        </tr>
+                    </table>
+
+                    <div style="margin: auto;width: 40%;padding: 10px;">
+
+
+                      <h4>APPLICANTS UNDERTAKING </h4>
+
+                      </div>
+
+                      <p>The applicant hereby affirms and agrees that all the information provided in this assessment form is true and authentic, as per the requirements of the institute or university. Additionally, the applicant consents to utilize their best knowledge and the studies they have undertaken in relation to the course(s) or subjects during the exam. They commit to answering all questions truthfully and pledge not to engage in cheating, copying, or pasting answers from any online or offline platform.</p>
+                    
+
+                    
+
 
                     <?php
                         $attributes = array("name"=>"submit_examination","id"=>"submit_examination","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
