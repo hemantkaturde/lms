@@ -89,7 +89,7 @@ $roleText = $this->session->userdata('roleText');
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="addnewquerydata" class="btn btn-primary addnewquerydata">Save</button>
+                        <button type="submit" id="addnewquerydata" class="btn btn-primary addnewquerydata">Send</button>
                     </div>
                     <?php echo form_close(); ?>
                 </div>
