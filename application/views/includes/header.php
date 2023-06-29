@@ -450,7 +450,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php if (in_array("mastermodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='coursetypelisting'){ echo 'active';} ?>">
                             <a href="<?php echo base_url()."coursetypelisting"; ?>"><i class="sidebar-item-icon fa fa-book" ></i>
-                                <span class="nav-label">Certifications</span>
+                                <span class="nav-label">Certification Type</span>
                             </a>
                         </li>
                         <?php } ?>
