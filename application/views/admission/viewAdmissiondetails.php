@@ -10,7 +10,7 @@ $roleText = $this->session->userdata('roleText');
     <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
-                <div style="margin-left: 474px;"><div class="ibox-title">ADMISSION FORM</div></div>
+                <div style="margin-left: 474px;"><div class="ibox-title">APPLICANT DETAILS</div></div>
                
                 <div>
                     
