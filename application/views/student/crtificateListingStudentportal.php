@@ -25,7 +25,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Remark</th>
                                 <th>Quntitave value</th>
                                 <th>Answer Sheet Status</th>
-                                <th>Downloads</th>
+                                <th>Marksheet/Certificate Downloads</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
