@@ -16,9 +16,8 @@
                         <div class="col-sm">
                             <label style="text-align: left;" for="student_name"><b>Student Name</b></label>
                             <div>
-                                <select class="form-control" id="student_name" name="role" placeholder="Select Student Name">
+                                <select class="form-control" id="student_name" name="student_name" placeholder="Select Student Name">
                                    <option value="">Select Student Name</option>   
-                                   <option value="">ALL</option>   
                                    <?php foreach ($getallstudentlist as $key => $value) { ?>   
                                         <option st-id="" value="<?php echo $value['userId'] ?>"><?php echo $value['name'].' - '.$value['mobile']  ?></option>
                                     <?php } ?>
@@ -30,7 +29,7 @@
                         <div class="col-sm">
                             <label style="text-align: left;" for="download_report"><b>Downlaod Report</b></label>
                             <div>
-                               <button type="submit" id="export_to_excel" class="btn btn-primary add_new_meeting_link">Export To Pdf</button>
+                               <button type="submit" id="export_to_excel_student_report" class="btn btn-primary export_to_excel_student_report">Export To Pdf</button>
                             </div>
                         </div>
                     </div>

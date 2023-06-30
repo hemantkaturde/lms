@@ -4879,9 +4879,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				
 		});
 
-		
-
-
 	</script>
 <?php } ?>
 
@@ -4998,8 +4995,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-
-
 <?php  if($pageTitle=='Update Trainer To Topic'){ ?>
 	<script type="text/javascript">
 	   $(document).on('click','#updateBackupTrainerToTopic',function(e){
@@ -5053,79 +5048,21 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	</script>
 <?php } ?>
 
-
-
 <?php if($pageTitle=='Student Report'){ ?>
 	<script type="text/javascript">
-        $(document).ready(function() {
-		
-				var dt = $('#studentreportList').DataTable({
-					"columnDefs": [ 
-						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "10%", "targets": 1 },
-						{ "width": "10%", "targets": 2 },
-						{ "width": "10%", "targets": 3 },
-					],
-					responsive: true,
-					"oLanguage": {
-						"sEmptyTable": "<i>No Student Data Found.</i>",
-					}, 
-					"bSort" : false,
-					"bFilter":true,
-					"bLengthChange": true,
-					"iDisplayLength": 10,   
-					"bProcessing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"<?php echo base_url();?>fetchallstudentreportlist",
-						type: "post",
-					},
-				});
-		});
-
-
-		$(document).on('click','#export_to_excel',function(e){
+		$(document).on('click','#export_to_excel_student_report',function(e){
 			e.preventDefault();
-			//$(".loader_ajax").show();
-			//var query_id = $('#query_id').val();
-
-			var formData = new FormData($("#addanswer_form")[0]);
-			$.ajax({
-				url : "<?php echo base_url();?>studentreportexporttoexel",
-				type: "POST",
-				data : formData,
-				cache: false,
-		        contentType: false,
-		        processData: false,
-				success: function(data, textStatus, jqXHR)
-				{
-
-					var fetchResponse = $.parseJSON(data);
-					if(fetchResponse.status == "failure")
-				    {
-				    	$.each(fetchResponse.error, function (i, v)
-		                {
-		                    $('.'+i+'_error').html(v);
-		                });
-				    }
-					else if(fetchResponse.status == 'success')
-				    {
-
-						
-				    }
-					
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-			    {
-			   		//$(".loader_ajax").hide();
-			    }
-			});
-			return false;
+			var student_name = $('#student_name').val();
+			if(student_name){
+				$('.student_name_error').html('');
+				var url = '<?=ADMIN_PATH?>report/student_report.php?studentid='+student_name; 
+			    window.open(url, '_blank');
+			}else{
+				$('.student_name_error').html('');
+				$('.student_name_error').append("<P>Please Select Student </p>");
+                return false;
+			}
 	    });
-
-
-
     </script>
 <?php } ?>
 
