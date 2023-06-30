@@ -68,7 +68,7 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="modal-body">
                 <div class="container">
                     <div class="form-group">
-                        <label style="text-align: left;" for="course_name">Select Course Course<span
+                        <label style="text-align: left;" for="course_name">Select Course<span
                                 class="required">*</span></label>
                         <select class="form-control" id="course_name" name="course_name">
                             <option value="">Select Certificate Type</option>
@@ -156,7 +156,7 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="modal-body">
                 <div class="container">
                     <div class="form-group">
-                        <label style="text-align: left;" for="course_name">Select Course Course<span
+                        <label style="text-align: left;" for="course_name">Select Course<span
                                 class="required">*</span></label>
                         <select class="form-control" id="course_name1" name="course_name">
                             <option value="">Select Certificate Type</option>

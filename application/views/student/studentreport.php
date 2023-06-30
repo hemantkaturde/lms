@@ -1,3 +1,8 @@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <div class="content-wrapper">
     <div class="page-content fade-in-up">
         <div class="ibox">
@@ -16,7 +21,7 @@
                         <div class="col-sm">
                             <label style="text-align: left;" for="student_name"><b>Student Name</b></label>
                             <div>
-                                <select class="form-control" id="student_name" name="student_name" placeholder="Select Student Name">
+                                <select class="form-control myselect" id="student_name" name="student_name" placeholder="Select Student Name">
                                    <option value="">Select Student Name</option>   
                                    <?php foreach ($getallstudentlist as $key => $value) { ?>   
                                         <option st-id="" value="<?php echo $value['userId'] ?>"><?php echo $value['name'].' - '.$value['mobile']  ?></option>
@@ -39,3 +44,7 @@
         </div>
     </div>
     <!-- END PAGE CONTENT-->    
+
+    <script type="text/javascript">
+      $(".myselect").select2();
+</script>

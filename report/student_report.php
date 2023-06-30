@@ -35,6 +35,8 @@ $ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_N
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <style>
@@ -43,11 +45,34 @@ h3{
   color:#d2ae6d;
 }
 
+@media print {
+  #print_btn {
+    visibility: hidden;
+  }
+}
+
 </style>
 
-<body>
+<script>
+function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+</script>
+
+<body id="printableArea">
     <div class="jumbotron text-center" style="background-color: #ffffff; !important;margin-bottom:1rm !important">
     <img src="iictn_banner.jpg" alt="" width="850" height="120">
+       <!-- <input type="button" class="btn btn-success" id="print_btn" onclick="printDiv('printableArea')" /> </input> -->
+       <button type="button" id="print_btn" class="btn btn-info" onclick="printDiv('printableArea')" ><i class="fa fa-print"></i> Print</button>
+
     </div>
 <?php
 /*Basic Information Start Here */
@@ -237,14 +262,13 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 <tr>
                     <td><?=$get_course_fees['course_name']?></td>
                     <td><?=$get_course_fees['course_fees']?></td>
-                    <td><?=$get_course_fees['course_cert_cost']?></td>
-                    <td><?=$get_course_fees['course_kit_cost']?></td>
-                    <td><?=$get_course_fees['course_onetime_adm_fees']?></td>
+                    <td><?='₹ '.$get_course_fees['course_cert_cost']?></td>
+                    <td><?='₹ '.$get_course_fees['course_kit_cost']?></td>
+                    <td><?='₹ '.$get_course_fees['course_onetime_adm_fees']?></td>
                     <td><?=$get_course_fees['course_cgst_tax_value']?></td>
                     <td><?=$get_course_fees['course_sgst_tax_value']?></td>
-                    <td><?=$get_course_fees['course_total_fees']?></td>
+                    <td><?='₹ '.$get_course_fees['course_total_fees']?></td>
                 </tr>
-
 
               <?php } ?>
 
@@ -256,7 +280,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><?=$total_fees?></td>
+                    <td><b><?='₹ '.$total_fees?></b></td>
                 </tr>
                 
                 <?php } ?>
@@ -269,7 +293,76 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
 
 
+<?php
+ /*Enquiry Details Start Here */
+$getStudentEnquirydetails = "SELECT tbl_enquiry.enq_number,tbl_enquiry.enq_fullname,tbl_enquiry.createdDtm,tbl_enquiry.enq_mobile,tbl_enquiry.enq_email,tbl_users_enquires.user_id,tbl_enquiry.enq_course_id,tbl_users.name as counsellor
+                              FROM tbl_enquiry JOIN tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id 
+                              JOIN tbl_users on tbl_users.userId=tbl_enquiry.counsellor_id 
+                              WHERE tbl_users_enquires.user_id=$studentid";
+$resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
+//$rowDataStudentEnquirydetails = $resultStudentEnquirydetails->fetch_array();
+?>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Paid Fees Details</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Total Course Fees	</th>
+                    <th>Total Paid Fees</th>
+                    <th>Total Pending Fees</th>
+                </tr>
+            </thead>
+            <tbody> 
+                <?php 
+                while ($row = $resultStudentEnquirydetails->fetch_array()) { 
+              
+                 $course_ids    =   explode(',', $row['enq_course_id']);
+                 $total_fees = 0;
+                 $course_name = '';
+                 $total_paid_fees =0;
+                 $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                      $getStudentEnquiryCourses = "SELECT * FROM tbl_course where courseId=$id";
+                      $resultStudentEnquiryCourses = $conn->query($getStudentEnquiryCourses);
+                      $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
 
+                      $enq_number =$row['enq_number'];
+                      $getStudentEnquiryPaidfees = "SELECT sum(totalAmount) as totalAmount  FROM tbl_payment_transaction where enquiry_id=1";
+                      $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
+                      $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
+
+                        if($get_course_fees){
+                            
+                            $total_fees += $get_course_fees['course_total_fees'];
+                            $course_name .= $i.'-'.$get_course_fees['course_name']. ' <br>';  
+                            $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
+                            $i++;  
+
+                        }else{
+
+                            $total_fees = '';
+                            $course_name = '';  
+                            $total_paid_fees ='';
+                            $i++;  
+                        }
+
+                        ?>
+
+              <?php } ?>
+                <tr>
+                    <td><?='₹ '.$total_fees?></td>
+                    <td><?='₹ '.$total_paid_fees?></td>
+                    <td><?='₹ '.$total_fees-$total_paid_fees?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
 
 <?php
  /*Enquiry Details Start Here */
@@ -341,6 +434,14 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 </body>

@@ -411,9 +411,6 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
                         
-
-
-
                        
                         <?php if (in_array("coursepagemodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='courselisting' || $pageUrl =='addchapters' || $pageUrl =='addcourseListing' ||  $pageUrl =='topicattachmentListing' || $pageUrl=="viewalltopicdocuments" || $pageUrl=="timetableListing" || $pageUrl=="viewtimetablelisting" || $pageUrl=="addtopiclinksforonlineattendant"){ echo 'active';} ?>">
@@ -456,20 +453,16 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
 
-                       
-                        <li class="treeview <?php if($pageUrl =='studentreport'){ echo 'active';} ?>"  style="height: auto; " >
-                            <a href="#">
-                                <i class="sidebar-item-icon fa fa-file-excel-o" ></i> <span class="group-master" >Reports</span>
-                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+
+                        <?php if (in_array("studentreportmodule", $jsonstringtoArray)){?>
+                        <li class="<?php if($pageUrl =='studentreport'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."studentreport"; ?>"><i class="sidebar-item-icon fa fa-file-excel-o" ></i>
+                                <span class="nav-label">Student Report</span>
                             </a>
-                            <ul class="treeview-menu">
-                                <li class="<?php if($pageUrl =='studentreport'){ echo 'active';} ?>"><a href="<?php echo base_url()."studentreport"; ?>"><i class="sidebar-item-icon fa fa-file-excel-o"></i><span class="nav-label"> Student Report </span></a></li>
-                            </ul>
                         </li>
+                        <?php } ?>
+
               
-
-
-                    
                         <!-- <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                             <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>
@@ -548,12 +541,6 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <!-- <li  class="">
-                            <a  href="<?php echo base_url()."dashboard"; ?>"><i
-                                    class="sidebar-item-icon fa fa-check-square-o"></i>
-                                <span class="nav-label" >Results</span>
-                            </a>
-                        </li> -->
 
                         <li  class="<?php if($pageUrl =='studentcrtificateListing'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."studentcrtificateListing"; ?>"><i

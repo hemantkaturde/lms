@@ -245,6 +245,15 @@ if(!empty($roleInfo))
                                                 <td><input type="checkbox" id="roledelete" name="checkbox[]" value="roledelete" <?php if(in_array("roledelete", json_decode($access))){ echo 'checked'; } ?>></td>
                                             </tr>
 
+                                            <tr>
+                                                <td style="color:#a83131"><b>Student Report</b></td>
+                                                <td><input type="checkbox" id="studentreportmodule" name="checkbox[]" value="studentreportmodule" <?php if(in_array("studentreportmodule", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
                                             <!-- <tr>
                                                 <td style="color:#a83131"><b>Settings</b></td>
                                                 <td><input type="checkbox" id="settingsmodule" name="checkbox[]" value="settingsmodule" <?php if(in_array("settingsmodule", json_decode($access))){ echo 'checked'; } ?>></td>

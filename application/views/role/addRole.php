@@ -216,16 +216,16 @@
                                                 <td><input type="checkbox" id="roledelete" name="checkbox[]" value="roledelete"></td>
                                             </tr>
 
-                                            <!-- <tr>
-                                                <td style="color:#a83131"><b>Settings</b></td>
-                                                <td><input type="checkbox" id="settingsmodule" name="checkbox[]" value="settingsmodule"></td>
+                                             <tr>
+                                                <td style="color:#a83131"><b>Student Report</b></td>
+                                                <td><input type="checkbox" id="studentreportmodule" name="checkbox[]" value="studentreportmodule"></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
 
-                                            <tr>
+                                            <!-- <tr>
                                                 <td>&nbsp&nbsp&nbsp&nbsp EMAIL SMTP</td>
                                                 <td></td>
                                                 <td><input type="checkbox" id="emilsmtppage" name="checkbox[]" value="emilsmtppage"></td>
