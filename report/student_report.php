@@ -334,11 +334,14 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                       $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
                       $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
 
+                      
+                      $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
+
                         if($get_course_fees){
                             
                             $total_fees += $get_course_fees['course_total_fees'];
                             $course_name .= $i.'-'.$get_course_fees['course_name']. ' <br>';  
-                            $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
+                           
                             $i++;  
 
                         }else{
