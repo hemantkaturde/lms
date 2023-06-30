@@ -193,13 +193,14 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Enquiry No.</th>
-                    <th>Enquiry Date</th>
-                    <th>Student Name</th>
-                    <th>Mobile No. </th>
-                    <th>Email Id</th>
-                    <th>Courses</th>
-                    <th>Counsellor</th>
+                    <th>Courses Name</th>
+                    <th>Courses Fees</th>
+                    <th>Certificate Cost</th>
+                    <th>Apron Cost/Courier Charges</th>
+                    <th>One time admission fees</th>
+                    <th>CGST (9 %)</th>
+                    <th>SGST (9 %)</th>
+                    <th>Total Course Fees</th>
                 </tr>
             </thead>
             <tbody> 
@@ -230,20 +231,34 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                             $course_name = '';  
                             $i++;  
                         }
-                      
-                    }
-                 $all_course_name = trim($course_name, ', '); 
-                  
-                ?>
+
+                        ?>
+
                 <tr>
-                    <td><?=$row['enq_number']?></td>
-                    <td><?=$row['createdDtm']?></td>
-                    <td><?=$row['enq_fullname']?></td>
-                    <td><?=$row['enq_mobile']?></td>
-                    <td><?=$row['enq_email']?></td>
-                    <td><?=$all_course_name?></td>
-                    <td><?=$row['counsellor']?></td>
+                    <td><?=$get_course_fees['course_name']?></td>
+                    <td><?=$get_course_fees['course_fees']?></td>
+                    <td><?=$get_course_fees['course_cert_cost']?></td>
+                    <td><?=$get_course_fees['course_kit_cost']?></td>
+                    <td><?=$get_course_fees['course_onetime_adm_fees']?></td>
+                    <td><?=$get_course_fees['course_cgst_tax_value']?></td>
+                    <td><?=$get_course_fees['course_sgst_tax_value']?></td>
+                    <td><?=$get_course_fees['course_total_fees']?></td>
                 </tr>
+
+
+              <?php } ?>
+
+              <tr>
+                    <td><b>Total Course Fees</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><?=$total_fees?></td>
+                </tr>
+                
                 <?php } ?>
             </tbody>
         </table>
