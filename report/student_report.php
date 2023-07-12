@@ -348,7 +348,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
                             $total_fees = '';
                             $course_name = '';  
-                            $total_paid_fees ='';
+                           // $total_paid_fees ='';
                             $i++;  
                         }
 
