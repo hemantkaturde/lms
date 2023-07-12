@@ -4786,8 +4786,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "10%", "targets": 0 },
-						{ "width": "30%", "targets": 1 },
-						{ "width": "3%", "targets": 2 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "30%", "targets": 2 },
+						{ "width": "3%", "targets": 3 },
 					],
 					responsive: true,
 					"oLanguage": {
@@ -5024,9 +5025,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					})
 	
         });
-
-
-
 
 	</script>
 <?php } ?>

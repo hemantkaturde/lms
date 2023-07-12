@@ -29,6 +29,7 @@ $roleText = $this->session->userdata('roleText');
                         <thead>
                             <tr>
                                 <th>Course Name</th>
+                                <th>Topic Name</th>
                                 <th>Query</th>
                                 <th>Action</th>
                             </tr>

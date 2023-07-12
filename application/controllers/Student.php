@@ -925,7 +925,7 @@
             $states = $this->student_model->getcoursetopic($this->input->post('course_id'));
 
             if(count($states) >= 1) {
-                    $content = '<option value="">Select Certificate Topic</option><option value="all">All</option>';
+                    $content = '<option value="">Select Certificate Topic</option>';
                 foreach($states as $state) {
                     $content = $content.'<option value="'.$state["id"].'">'.$state["topic_name"].'</option>';
                 }
@@ -949,27 +949,26 @@
             $addnewquery_response = array();
             $data = array(
                 'course_id' => $this->input->post('course_name'),
+                'certificate_topic'=> $this->input->post('certificate_topic'),
                 'query'=> $this->input->post('query'),
                 'student_id'=>$userId
             );
 
             $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+            $this->form_validation->set_rules('certificate_topic', 'Certificate Topic', 'trim|required');
             $this->form_validation->set_rules('query', 'Query', 'trim|required');
-
 
             if($this->form_validation->run() == FALSE){
                 $addnewquery_response['status'] = 'failure';
-                $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'query'=>strip_tags(form_error('query')));
+                $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'certificate_topic'=>strip_tags(form_error('certificate_topic')),'query'=>strip_tags(form_error('query')));
             }else{
-
+                
                 $saveCoursedata = $this->student_model->saveQuerydata('',$data);
                 if($saveCoursedata){
                     $addnewquery_response['status'] = 'success';
-                    $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'query'=>strip_tags(form_error('query')));
+                    $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'certificate_topic'=>strip_tags(form_error('certificate_topic')) ,'query'=>strip_tags(form_error('query')));
                 }
-
             }
-
             echo json_encode($addnewquery_response);
         }
      }
