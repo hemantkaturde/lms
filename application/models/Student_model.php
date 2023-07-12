@@ -1103,8 +1103,6 @@ public function updateAnswerdata($student_id,$course_id,$examination_id,$questio
 }
 
 
-
-
 function studentcertificateCount($params)
 {
 
@@ -1961,6 +1959,24 @@ public function getAllstudentlistexport() {
     return $query->result_array();
 }
 
+
+public function getcoursetopic($course_id)
+{
+    $this->db->select('*');
+    $this->db->where('course_id', $course_id);
+    $this->db->order_by('topic_name','ASC');
+    $query_result = $this->db->get(TBL_TOPIC_MEETING_LINK)->result_array();
+    if($state_id != '') {
+        foreach($query_result as $key => $value) {
+            if($value['id'] == $state_id) {
+                $query_result[$key]['selected'] = 'selected';
+            } else {
+                $query_result[$key]['selected'] = '';
+            }
+        }
+    }
+    return $query_result;
+}
 
 
 

@@ -4879,6 +4879,39 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				
 		});
 
+		
+		$(document).on('change','#course_name',function(e){  
+			e.preventDefault();
+		
+
+			//$(".loader_ajax").show();
+			var course_id = $('#course_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getcoursetopic",
+				type: "POST",
+				data : {'course_id' : course_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#certificate_topic').html('<option value="">Select Certificate Topic</option>');
+					}
+					else
+					{
+						$('#certificate_topic').html(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#certificate_topic').html('<option value="">Select Certificate Topic</option>');
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
 	</script>
 <?php } ?>
 
@@ -4991,6 +5024,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					})
 	
         });
+
+
+
 
 	</script>
 <?php } ?>

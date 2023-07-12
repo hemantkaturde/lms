@@ -919,6 +919,27 @@
 
      }
 
+
+     public function getcoursetopic() {
+        if($this->input->post('course_id')) {
+            $states = $this->student_model->getcoursetopic($this->input->post('course_id'));
+
+            if(count($states) >= 1) {
+                    $content = '<option value="">Select Certificate Topic</option><option value="all">All</option>';
+                foreach($states as $state) {
+                    $content = $content.'<option value="'.$state["id"].'">'.$state["topic_name"].'</option>';
+                }
+                echo $content;
+            } else {
+                echo 'failure';
+            }
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+
      public function addnewquery(){
         $post_submit = $this->input->post();
   

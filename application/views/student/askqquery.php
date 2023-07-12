@@ -77,6 +77,17 @@ $roleText = $this->session->userdata('roleText');
                                 </div>
 
                                 <div class="form-group">
+                                    <label style="text-align: left;"  for="certificate_topic">Certificate Topic<span class="required">*</span>
+                                    </label>
+                                    <div >
+                                        <select class="form-control" id="certificate_topic" name="certificate_topic">
+                                            <option value="">Select Certificate Topic</option>
+                                        </select>
+                                        <p class="error certificate_topic_error"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label style="text-align: left;"  for="query">Query<span class="required">*</span>
                                     </label>
                                     <div >

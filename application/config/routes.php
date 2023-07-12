@@ -286,6 +286,9 @@ $route['fetchallstudentreportlist'] = "student/fetchallstudentreportlist";
 $route['fetchallstudentdataforprintidcard'] = "student/fetchallstudentdataforprintidcard";
 $route['studentreportexporttoexel'] = "student/studentreportexporttoexel";
 
+$route['getcoursetopic'] = "student/getcoursetopic";
+
+
 
 
 
