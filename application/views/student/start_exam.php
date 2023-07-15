@@ -53,7 +53,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
 
                     <div>
-                        <p><b><?=$getstudent_information[0]['name'];?></b></p>
+                        <p><b>Applicant Name :</b> <?=$getstudent_information[0]['name'];?></p>
                         <input type="button" id="" class="btn btn-primary" value="ACCEPTED" />
                     </div>
 
