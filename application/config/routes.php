@@ -122,12 +122,8 @@ $route['addtopiclinksforonlineattendant?(:any)'] = "course/addtopiclinksforonlin
 $route['fetchtopicmeetinglink?(:any)'] = "course/fetchtopicmeetinglink/$1";
 $route['delete_topic_meeting_link'] = "course/delete_topic_meeting_link";
 $route['savecoursetopicMeetingLinks'] = "course/savecoursetopicMeetingLinks";
-
 $route['addbackuptrainer?(:any)'] = "course/addbackuptrainer/$1";
-
 $route['addbackuptrainerdata'] = "course/addbackuptrainerdata";
-
-
 
 /************ EXAMINATION MASTER ***********************/
 $route['examinationlisting'] = "examination/examinationlisting";

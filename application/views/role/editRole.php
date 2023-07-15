@@ -178,7 +178,14 @@ if(!empty($roleInfo))
                                                 <td><input type="checkbox" id="examinationdelete" name="checkbox[]" value="examinationdelete" <?php if(in_array("examinationdelete", json_decode($access))){ echo 'checked'; } ?>></td>
                                             </tr>
 
-
+                                            <tr>
+                                                <td style="color:#a83131"><b>Exam Result/Checking</b></td>
+                                                <td><input type="checkbox" id="checkexamresultmodule" name="checkbox[]" value="checkexamresultmodule" <?php if(in_array("checkexamresultmodule", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="checkexamresultpage" name="checkbox[]" value="checkexamresultpage" <?php if(in_array("checkexamresultpage", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="checkexamresultadd" name="checkbox[]" value="checkexamresultadd" <?php if(in_array("checkexamresultadd", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="checkexamresultedit" name="checkbox[]" value="checkexamresultedit" <?php if(in_array("checkexamresultedit", json_decode($access))){ echo 'checked'; } ?>></td>
+                                                <td><input type="checkbox" id="checkexamresultdelete" name="checkbox[]" value="checkexamresultdelete" <?php if(in_array("checkexamresultdelete", json_decode($access))){ echo 'checked'; } ?>></td>
+                                            </tr>
 
                                             <tr>
                                                 <td style="color:#a83131"><b>Certificate</b></td>

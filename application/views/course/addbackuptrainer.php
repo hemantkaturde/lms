@@ -29,7 +29,7 @@ $jsonstringtoArray = json_decode($access, true);
                     <input name="time_table_transection_id" id="time_table_transection_id" type="hidden" value="<?php echo $time_table_transection_id; ?>" />
 
                         <div class="form-group">
-                            <label style="text-align: left;" for="backup_trainer"><b>Backup Trainer</b></label>
+                            <label style="text-align: left;" for="backup_trainer"><b>Backup Trainer <span class="required">*</span></b></label>
                                 <div>
                                     <select class="form-control" id="backup_trainer" name="backup_trainer" placeholder="Select Backup Trainer">
                                     <option value="">Select Backup Trainer Name</option>    

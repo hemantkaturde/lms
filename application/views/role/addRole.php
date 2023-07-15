@@ -150,6 +150,16 @@
                                                 <td><input type="checkbox" id="examinationdelete" name="checkbox[]" value="examinationdelete"></td>
                                             </tr>
 
+                                            <tr>
+                                                <td style="color:#a83131"><b>Exam Result/Checking</b></td>
+                                                <td><input type="checkbox" id="checkexamresultmodule" name="checkbox[]" value="checkexamresultmodule"></td>
+                                                <td><input type="checkbox" id="checkexamresultpage" name="checkbox[]" value="checkexamresultpage"></td>
+                                                <td><input type="checkbox" id="checkexamresultadd" name="checkbox[]" value="checkexamresultadd"></td>
+                                                <td><input type="checkbox" id="checkexamresultedit" name="checkbox[]" value="checkexamresultedit"></td>
+                                                <td><input type="checkbox" id="checkexamresultdelete" name="checkbox[]" value="checkexamresultdelete"></td>
+                                            </tr>
+
+
 
 
                                             <tr>

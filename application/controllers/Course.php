@@ -1434,31 +1434,15 @@
 
 
         public function addbackuptrainerdata(){
-            $post_submit = $this->input->post();
-
-            if($post_submit){
-
-                // $result = $this->course_model->delete_timetable($course_id,$time_table_id);
-
-                // if($result){
-                //     $deletecourse_response['status'] = 'success';
-                //     $process = 'Delet Timetable Delete';
-                //     $processFunction = 'Course/deletetopictimetable';
-                //     $this->logrecord($process,$processFunction);
-                // }else
-                // {
-                //     $deletecourse_response['status'] = 'filure';
-                // }
-           
-
-                $deletecourse_response['status'] = 'filure';
-
-                 echo json_encode($deletecourse_response);
 
 
-            }
+
+            print_r('dfd');
+            exit;
+          print_r('hemant');
+          exit;
+
         }
-
 
 
     }
