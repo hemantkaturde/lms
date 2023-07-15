@@ -1098,7 +1098,7 @@
                                                                             if(empty($getTrianerid)){
 
                                                                                 $savetimetable_response['status'] = "failure";
-                                                                                $savetimetable_response['error'] = array('importing'=>'Trianer Not Match Row Number => '.$i);
+                                                                                $savetimetable_response['error'] = array('importing'=>'Kindly Check trainer, topic, date, timing in excel => '.$i);
     
                                                                             }else{
 
