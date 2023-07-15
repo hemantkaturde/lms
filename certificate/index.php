@@ -80,7 +80,7 @@ $pdf->SetXY(165.50,232);
 if($profile_pic){
     $profile_pic_img = "../uploads/admission/".$profile_pic;
 
-    if (file_exists($profile_pic_img)) 
+    if(file_exists($profile_pic_img)) 
     {
         $pdf->Cell(20, 10, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 25.00,33.00), 0, 0, 'L', false );
     }   

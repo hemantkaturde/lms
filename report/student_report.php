@@ -76,16 +76,36 @@ function printDiv(divName) {
     </div>
 <?php
 /*Basic Information Start Here */
-$getStudentdetails = "SELECT userId,`name`,mobile,email FROM tbl_users where userId=$studentid and isDeleted=0 and user_flag='student'" ;
+$getStudentdetails = "SELECT userId,`name`,mobile,email,profile_pic FROM tbl_users where userId=$studentid and isDeleted=0 and user_flag='student'" ;
 $resultStudentDetails = $conn->query($getStudentdetails);
 $rowDataStudent = $resultStudentDetails->fetch_assoc();
+
+
+
+if($_SERVER['HTTP_HOST']=='localhost'){
+  $base  = "http://".$_SERVER['HTTP_HOST'];
+ // $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+
+  $img_url = $base.'/lms_2/uploads/admission/'.$rowDataStudent['profile_pic'];
+}else{
+  $base  = "https://".$_SERVER['HTTP_HOST'];
+ // $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+  $img_url = $base.'/uploads/admission/'.$rowDataStudent['profile_pic'];
+}
+
 ?>
 
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <h3></h3>
-      <img src="defult_user.png" style=" display: block;margin-left: auto;margin-right: auto;" width="200" height="180">
+      <?php
+        if($img_url) 
+        { ?>
+             <img src="<?=$img_url?>" style=" display: block;margin-left: auto;margin-right: auto;" width="200" height="180">
+      <?php  }else{ ?>
+             <img src="defult_user.png" style=" display: block;margin-left: auto;margin-right: auto;" width="200" height="180">
+      <?php } ?>
     </div>
     <div class="col-sm-8">
       <h3>Student information</h3>
