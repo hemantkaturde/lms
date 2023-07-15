@@ -86,9 +86,6 @@ $getStudentadmissionDetails = "SELECT tbl_admission.document_1 FROM tbl_users_en
 $resultStudentadmissionDetails = $conn->query($getStudentadmissionDetails);
 $rowDataStudentadminssiondetails = $resultStudentadmissionDetails->fetch_assoc();
 
-// print_r($rowDataStudentadminssiondetails);
-// exit;
-
 
 if($_SERVER['HTTP_HOST']=='localhost'){
   $base  = "http://".$_SERVER['HTTP_HOST'];

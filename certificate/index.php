@@ -27,7 +27,7 @@ include "phpqrcode/qrlib.php" ;
 
  $ct_name = $result_arry['ct_name'];
 
- 
+ $userid=$result_arry['userId'];
 
  
 // Create new Landscape PDF
@@ -77,8 +77,15 @@ $pdf->SetFontSize('20');
 $pdf->SetXY(165.50,232);
 // $pdf->Cell(20, 10, date('d'), 0, 0, 'C');
 
-if($profile_pic){
-    $profile_pic_img = "../uploads/admission/".$profile_pic;
+$getStudentadmissionDetails = "SELECT tbl_admission.document_1 FROM tbl_users_enquires join tbl_admission on tbl_users_enquires.enq_id= tbl_admission.enq_id where tbl_users_enquires.user_id=$userid" ;
+$resultStudentadmissionDetails = $conn->query($getStudentadmissionDetails);
+$rowDataStudentadminssiondetails = $resultStudentadmissionDetails->fetch_assoc();
+
+
+$profile_pic_admission = $rowDataStudentadminssiondetails['document_1'];
+
+if($profile_pic_admission){
+    $profile_pic_img = "../uploads/admission/".$profile_pic_admission;
 
     if(file_exists($profile_pic_img)) 
     {
