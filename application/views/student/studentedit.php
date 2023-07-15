@@ -21,8 +21,6 @@ if(!empty($student_infromation))
         $username = $rf->username;
         $password = $rf->password;
         $c_password =$rf->password;
-      
-       
         $profile_pic = $rf->student_profile_pic;
         
     }
