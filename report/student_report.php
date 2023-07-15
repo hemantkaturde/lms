@@ -71,7 +71,7 @@ function printDiv(divName) {
     <div class="jumbotron text-center" style="background-color: #ffffff; !important;margin-bottom:1rm !important">
     <img src="iictn_banner.jpg" alt="" width="850" height="120">
        <!-- <input type="button" class="btn btn-success" id="print_btn" onclick="printDiv('printableArea')" /> </input> -->
-       <button type="button" id="print_btn" class="btn btn-info" onclick="printDiv('printableArea')" ><i class="fa fa-print"></i> Print</button>
+       <button type="button" id="print_btn" class="btn btn-info" onclick="printDiv('printableArea')"  style="background: #ca9331 !important;border: 1px #ca9331 !important;"><i class="fa fa-print"></i> Print</button>
 
     </div>
 <?php
