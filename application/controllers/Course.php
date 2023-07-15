@@ -1055,7 +1055,8 @@
 
                                                                 if(!empty($getBlankFields))
                                                                 {
-                                                                    $excel_errors .= "Row ".$i."=> Blank Fields: ".$getBlankFields."\n";
+                                                                    // $excel_errors .= "Row ".$i."=> Blank Fields: ".$getBlankFields."\n";
+                                                                    $excel_errors .= "Blank Fields: ".$getBlankFields."in Excel Row".$i;
                                                                 }
                                                                 else
                                                                 {
