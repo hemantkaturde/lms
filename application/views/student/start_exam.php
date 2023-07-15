@@ -31,7 +31,7 @@ $jsonstringtoArray = json_decode($access, true);
                        
                         <tr>
                             <td><b>Enrolment No.: </b></td>
-                            <td><?=$getstudent_information[0]['mobile'];?></td>
+                            <td><?=$getstudent_information[0]['mobile'].'/'.date("y",strtotime("-1 year")).'-'.date("y").'/WEB/MUM';?></td>
                             <td><b>Applicant Full Name: </b></td>
                             <td><?=$getstudent_information[0]['name'];?></td>
                         </tr>
@@ -53,7 +53,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
 
                     <div>
-                        <p>Applicant Name </p>
+                        <p><b>Applicant Name</b></p>
                         <input type="button" id="" class="btn btn-primary" value="ACCEPTED" />
                     </div>
 
