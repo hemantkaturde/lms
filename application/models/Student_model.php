@@ -1980,6 +1980,14 @@ public function getcoursetopic($course_id)
     return $query_result;
 }
 
+public function getstudentinformation($student_id){
+    $this->db->select('userId,mobile,email,name');
+    $this->db->where(TBL_USER.'.status', 1);
+    $this->db->where(TBL_USER.'.userId', $student_id);
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
 
 
 }

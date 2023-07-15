@@ -657,10 +657,16 @@
             $data['exam_detail'] = $this->student_model->getExamdetails($exam_id);
             $data['question_paper'] = $this->student_model->getstudentexamquestionlist($exam_id);
             $data['student_id'] =  $this->session->userdata('userId');
+            $data['question_paper'] = $this->student_model->getstudentexamquestionlist($exam_id);
 
             $course_id = $data['exam_detail'][0]['course_id'];
             $examination_id = $data['exam_detail'][0]['id'];
-            
+
+            $data['getstudent_information'] = $this->student_model->getstudentinformation(trim($this->session->userdata('userId')));
+
+            print_r($data['getstudent_information']);
+            exit;
+
             $data['questionPaperListMCQ'] = $this->examination_model->getquestionPaperListMCQInfo($course_id,$examination_id);
             $data['questionPaperListWRITTEN'] = $this->examination_model->getquestionPaperListWRITTENInfo($course_id,$examination_id);
             $data['questionPaperListMATCHPAIR'] = $this->examination_model->getquestionPaperListMATCHPAIRInfo($course_id,$examination_id);
