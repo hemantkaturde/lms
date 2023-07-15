@@ -1981,12 +1981,13 @@ public function getcoursetopic($course_id)
 }
 
 public function getstudentinformation($student_id){
-    $this->db->select('userId,mobile,email,name');
-    $this->db->where(TBL_USER.'.status', 1);
-    $this->db->where(TBL_USER.'.userId', $student_id);
-    $query = $this->db->get(TBL_USER);
-    $fetch_result = $query->result_array();
-    return $fetch_result;
+    
+    $this->db->select('userId,email,name,lastname,mobile');
+    $this->db->from(TBL_USER);
+    $this->db->where('userId', $student_id);
+    $query = $this->db->get();
+    $query->result_array();
+    return $query->result_array();
 }
 
 

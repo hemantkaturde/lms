@@ -31,16 +31,16 @@ $jsonstringtoArray = json_decode($access, true);
                        
                         <tr>
                             <td><b>Enrolment No.: </b></td>
-                            <td>xxxxxxxxxxx</td>
+                            <td><?=$getstudent_information[0]['mobile'];?></td>
                             <td><b>Applicant Full Name: </b></td>
-                            <td>xxxxxxxxxxx</td>
+                            <td><?=$getstudent_information[0]['name'];?></td>
                         </tr>
 
                         <tr>
                             <td><b>Mobile No. :</b></td>
-                            <td>xxxxxxxxxxxx</td>
+                            <td><?=$getstudent_information[0]['mobile'];?></td>
                             <td><b>Email Id:</b></td>
-                            <td>xxxxxxxxxxx</td>
+                            <td><?=$getstudent_information[0]['email'];?></td>
                         </tr>
                     </table>
 
