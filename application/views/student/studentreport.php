@@ -19,7 +19,7 @@
                 <div class="container">
                     <div class="row" style="margin-left: -53px; !important">
                         <div class="col-sm">
-                            <label style="text-align: left;" for="student_name"><b>Student Name</b></label>
+                            <label style="text-align: left;" for="student_name"><b>Student Name</b></label><span class="required">*</span>
                             <div>
                                 <select class="form-control myselect" id="student_name" name="student_name" placeholder="Select Student Name">
                                    <option value="">Select Student Name</option>   
@@ -32,7 +32,7 @@
                         </div>
                     
                         <div class="col-sm">
-                            <label style="text-align: left;" for="download_report"><b>Downlaod Report</b></label>
+                            <label style="text-align: left;" for="download_report"><b>Download Report</b></label>
                             <div>
                                <button type="submit" id="export_to_excel_student_report" class="btn btn-primary export_to_excel_student_report">Export To Pdf</button>
                             </div>

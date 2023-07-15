@@ -80,17 +80,25 @@ $getStudentdetails = "SELECT userId,`name`,mobile,email,profile_pic FROM tbl_use
 $resultStudentDetails = $conn->query($getStudentdetails);
 $rowDataStudent = $resultStudentDetails->fetch_assoc();
 
+$userid=$rowDataStudent['userId'];
+
+$getStudentadmissionDetails = "SELECT tbl_admission.document_1 FROM tbl_users_enquires join tbl_admission on tbl_users_enquires.enq_id= tbl_admission.enq_id where tbl_users_enquires.user_id=$userid" ;
+$resultStudentadmissionDetails = $conn->query($getStudentadmissionDetails);
+$rowDataStudentadminssiondetails = $resultStudentadmissionDetails->fetch_assoc();
+
+// print_r($rowDataStudentadminssiondetails);
+// exit;
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){
   $base  = "http://".$_SERVER['HTTP_HOST'];
  // $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
-  $img_url = $base.'/lms_2/uploads/admission/'.$rowDataStudent['profile_pic'];
+  $img_url = $base.'/lms_2/uploads/admission/'.$rowDataStudentadminssiondetails['document_1'];
 }else{
   $base  = "https://".$_SERVER['HTTP_HOST'];
  // $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-  $img_url = $base.'/uploads/admission/'.$rowDataStudent['profile_pic'];
+  $img_url = $base.'/uploads/admission/'.$rowDataStudentadminssiondetails['document_1'];
 }
 
 ?>
