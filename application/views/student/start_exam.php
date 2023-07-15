@@ -45,18 +45,19 @@ $jsonstringtoArray = json_decode($access, true);
                     </table>
 
                     <div style="margin: auto;width: 40%;padding: 10px;">
+                       <h4>APPLICANTS UNDERTAKING </h4>
+                    </div>
 
-
-                      <h4>APPLICANTS UNDERTAKING </h4>
-
-                      </div>
-
+                    <div>
                       <p>The applicant hereby affirms and agrees that all the information provided in this assessment form is true and authentic, as per the requirements of the institute or university. Additionally, the applicant consents to utilize their best knowledge and the studies they have undertaken in relation to the course(s) or subjects during the exam. They commit to answering all questions truthfully and pledge not to engage in cheating, copying, or pasting answers from any online or offline platform.</p>
-                    
+                    </div>
 
-                    
+                    <div>
+                        <p>Applicant Name </p>
+                        <input type="button" id="" class="btn btn-primary" value="ACCEPTED" />
+                    </div>
 
-
+                
                     <?php
                         $attributes = array("name"=>"submit_examination","id"=>"submit_examination","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
                         echo form_open("", $attributes);
