@@ -45,7 +45,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </table>
 
                     <div style="margin: auto;width: 40%;padding: 10px;">
-                       <h4>APPLICANTS UNDERTAKING </h4>
+                       <h4><u>APPLICANTS UNDERTAKING</u></h4>
                     </div>
 
                     <div>
@@ -53,7 +53,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </div>
 
                     <div>
-                        <p><b>Applicant Name</b></p>
+                        <p><b><?=$getstudent_information[0]['name'];?></b></p>
                         <input type="button" id="" class="btn btn-primary" value="ACCEPTED" />
                     </div>
 
