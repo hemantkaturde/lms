@@ -821,8 +821,9 @@ public function getBookscount($topic_id,$course_id){
 
   public function gettimetabletopiclistingdata($params,$time_table_id,$course_id){
 
-    $this->db->select('*');
+    $this->db->select('*,a.name as backup_trainer,'.TBL_USER.'.name as real_trainer');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id');
+    $this->db->join(TBL_USER.' as a', 'a.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.backup_trainer','left');
     if($params['search']['value'] != "") 
     {
         $this->db->where("(".TBL_TIMETABLE_TRANSECTIONS.".timings LIKE '%".$params['search']['value']."%'");
@@ -844,9 +845,9 @@ public function getBookscount($topic_id,$course_id){
              $data[$counter]['date'] = date('d-m-Y', strtotime($value['date']));
              $data[$counter]['timings'] = $value['timings'];
              $data[$counter]['topic'] =  $value['topic'];
-             $data[$counter]['trainer'] =  $value['name'];
+             $data[$counter]['trainer'] =  $value['real_trainer'];
 
-             $data[$counter]['backup_trainer'] =  '';
+             $data[$counter]['backup_trainer'] =  $value['backup_trainer'];
              $data[$counter]['action'] = '';
 
              $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
@@ -992,6 +993,20 @@ public function getBookscount($topic_id,$course_id){
 
   }
 
+
+ public function updateBackuptrianerdata($course_id_form,$time_table_id,$time_table_transection_id,$backup_trainer){
+
+    $data = array('backup_trainer'=>$backup_trainer);
+    $this->db->where('course_id', $course_id_form);
+    $this->db->where('time_table_id', $time_table_id);
+    $this->db->where('id', $time_table_transection_id);
+    if($this->db->update(TBL_TIMETABLE_TRANSECTIONS, $data)){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+
+ }
 
   
 

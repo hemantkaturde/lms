@@ -1415,7 +1415,36 @@
 
 
         public function addbackuptrainer(){
-        
+
+            $post_submit =  $this->input->post();
+            
+            if($post_submit){
+
+                $addbackuptrainer_response = array();
+
+                $course_id_form = $this->input->post('course_id_form');
+                $time_table_id = $this->input->post('time_table_id');
+                $time_table_transection_id = $this->input->post('time_table_transection_id');
+                $backup_trainer = $this->input->post('backup_trainer');
+
+                $this->form_validation->set_rules('backup_trainer', 'Backup Trainer', 'trim|required');
+
+                if($this->form_validation->run() == FALSE){
+
+                    $addbackuptrainer_response['status'] = 'failure';
+                    $addbackuptrainer_response['error'] = array('backup_trainer'=>strip_tags(form_error('backup_trainer')));
+                }else{
+
+                    $updateBackuptrianerdata = $this->course_model->updateBackuptrianerdata($course_id_form,$time_table_id,$time_table_transection_id,$backup_trainer);
+                    if($updateBackuptrianerdata){
+                        $addbackuptrainer_response['status'] = 'success';
+                        $addbackuptrainer_response['error'] = array('backup_trainer'=>'');
+                    }
+                }
+
+                echo json_encode($addbackuptrainer_response);
+
+            }else{
                 $time_table_transection_id = $this->input->get('id');
                 $time_table_id = $this->input->get('time_table_id');
                 $course_id = $this->input->get('course_id'); 
@@ -1428,22 +1457,8 @@
                 $data['gettrainerinfo'] = $this->course_model->getbackuptrainerfortopics($data['getTopicinfo'][0]->trainer_id);
                 $this->global['pageTitle'] = 'Update Trainer To Topic';
                 $this->loadViews("course/addbackuptrainer",$this->global,$data,NULL);
-
-            
+            }
         }
-
-
-        public function addbackuptrainerdata(){
-
-
-
-            print_r('dfd');
-            exit;
-          print_r('hemant');
-          exit;
-
-        }
-
 
     }
 

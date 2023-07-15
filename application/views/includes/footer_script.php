@@ -5041,7 +5041,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			var time_table_transection_id =  $('#time_table_transection_id').val();
 
 			$.ajax({
-				url : "<?php echo base_url();?>addbackuptrainerdata",
+				url : "<?php echo base_url();?>addbackuptrainer",
 				type: "POST",
 				data : formData,
 				cache: false,
@@ -5067,7 +5067,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						// 	button: "Ok",
 						// 	},function(){ 
 								$("#popup_modal_md").hide();
-								window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>" +'id='+time_table_transection_id+'&time_table_id='+time_table_id+'&course_id='+course_id_form;
+								window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>" +'time_table_id='+time_table_id+'&course_id='+course_id_form;
 						// });						
 				    }
 					

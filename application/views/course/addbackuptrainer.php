@@ -14,7 +14,6 @@ $jsonstringtoArray = json_decode($access, true);
                 </div>
                 <div class="ibox-title">     <b>Course Name : </b> <?=$getCourseinfo[0]->course_name;?> 
                 | <b>Topic Name : </b> <?=$getTopicinfo[0]->topic;?> | Add Backup Trainer</div>
-                
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
@@ -23,11 +22,9 @@ $jsonstringtoArray = json_decode($access, true);
                         echo form_open("", $attributes);                       
                     ?>
                     <div class="col-sm-4">
-
                     <input name="course_id_form" id="course_id_form" type="hidden" value="<?php echo $course_id; ?>" />
                     <input name="time_table_id" id="time_table_id" type="hidden" value="<?php echo $time_table_id; ?>" />
                     <input name="time_table_transection_id" id="time_table_transection_id" type="hidden" value="<?php echo $time_table_transection_id; ?>" />
-
                         <div class="form-group">
                             <label style="text-align: left;" for="backup_trainer"><b>Backup Trainer <span class="required">*</span></b></label>
                                 <div>
