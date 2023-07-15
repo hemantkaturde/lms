@@ -143,7 +143,7 @@
         
                         $config['upload_path'] = 'uploads/admission'; 
                         $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                        $config['max_size'] = '100000'; // max_size in kb 
+                        $config['max_size'] = '10000000000'; // max_size in kb 
                         $config['file_name'] = $filename; 
                
                         // Load upload library 

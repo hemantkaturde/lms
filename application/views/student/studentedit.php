@@ -22,11 +22,9 @@ if(!empty($student_infromation))
         $password = $rf->password;
         $c_password =$rf->password;
       
-        if($profile_pic_user){
-            $profile_pic = $rf->student_profile_pic;
-        }else{
-            $profile_pic = $rf->document_1;
-        }
+       
+        $profile_pic = $rf->student_profile_pic;
+        
     }
 }
 
