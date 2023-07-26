@@ -364,6 +364,9 @@ class Admission_model extends CI_Model
    
     public function getAttendanceCount($params){
 
+        $roleText = $this->session->userdata('roleText');
+        $userId = $this->session->userdata('userId');
+
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
         $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
@@ -377,6 +380,10 @@ class Admission_model extends CI_Model
             $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
         }
+
+        if($roleText=='Trainer'){
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+        } 
         //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
         $query = $this->db->get(TBL_ATTENDANCE);
         $rowcount = $query->num_rows();
@@ -386,6 +393,9 @@ class Admission_model extends CI_Model
      
 
     public function getAttendancedata($params){
+
+        $roleText = $this->session->userdata('roleText');
+        $userId = $this->session->userdata('userId');
 
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
@@ -402,6 +412,11 @@ class Admission_model extends CI_Model
         }
         //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
         // $this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+
+        if($roleText=='Trainer'){
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+        } 
+
         $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_ATTENDANCE);

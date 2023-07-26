@@ -161,6 +161,11 @@ class Course_model extends CI_Model
 
 
         public function  getCourseCount($params){
+            $access = $this->session->userdata('access');
+            $userId = $this->session->userdata('userId');
+            $jsonstringtoArray = json_decode($access, true);
+            $pageUrl =$this->uri->segment(1);
+
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
 
@@ -170,6 +175,11 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
             }
+
+            if($roleText=='Trainer'){
+                $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+            } 
+
             $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $query = $this->db->get(TBL_COURSE);
             $rowcount = $query->num_rows();
@@ -179,18 +189,26 @@ class Course_model extends CI_Model
 
         public function getCoursedata($params){
             $access = $this->session->userdata('access');
+            $userId = $this->session->userdata('userId');
             $jsonstringtoArray = json_decode($access, true);
             $pageUrl =$this->uri->segment(1);
 
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId','left');
             if($params['search']['value'] != "") 
             {
                 $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE_TYPE.".ct_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
             }
+
+            if($roleText=='Trainer'){
+                $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+            } 
+
             $this->db->where(TBL_COURSE.'.isDeleted', 0);
+           // $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.course_id');
             $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
             $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_COURSE);
