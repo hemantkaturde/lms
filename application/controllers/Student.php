@@ -714,12 +714,12 @@
 
                     
                         // $to = $email;
-                        // $from = 'enquiry@iictn.in'; 
+                        // $from = 'admin@iictn.in'; 
                         // $fromName = 'IICTN'; 
                         // //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                         // $subject = 'IICTN Examination Submitted Successfully !! '.date('Y-m-d H:i:s');
                         
-                        // $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
+                        // $header = "From: IICTN-Marketing Material <admin@iictn.in> \r\n";
                         // //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                         // $header .= "MIME-Version: 1.0\r\n";
                         // $header .= "Content-type: text/html\r\n";

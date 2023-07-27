@@ -839,7 +839,7 @@ public function getBookscount($topic_id,$course_id){
 
   public function gettimetabletopiclistingdata($params,$time_table_id,$course_id){
 
-    $this->db->select('*,a.name as backup_trainer,'.TBL_USER.'.name as real_trainer');
+    $this->db->select('*,a.name as backup_trainer,'.TBL_USER.'.name as real_trainer,'.TBL_TIMETABLE_TRANSECTIONS.'.id as timetableid');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id');
     $this->db->join(TBL_USER.' as a', 'a.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.backup_trainer','left');
     if($params['search']['value'] != "") 
@@ -868,11 +868,20 @@ public function getBookscount($topic_id,$course_id){
              $data[$counter]['backup_trainer'] =  $value['backup_trainer'];
              $data[$counter]['action'] = '';
 
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
-            
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
+             if($value['iscancle']==1){
 
-             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
+                $data[$counter]['action'] = 'Cancelled';
+
+              //  $data[$counter]['action'] .= "  <a style='cursor: pointer;' class='activate_topic_class' course_id=".$value['course_id']."' time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/activate.png alt='Activate Topic class' title='Activate Topic class'></a>"; 
+
+             }else{
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
+            
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
+   
+                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' course_id=".$value['course_id']."' time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
+             }
+
             
             $counter++; 
         }
@@ -1023,6 +1032,37 @@ public function getBookscount($topic_id,$course_id){
     } else {
         return FALSE;
     }
+
+ }
+
+ public function cancletimetableclass($dataid,$time_table_id,$course_id){
+
+    $data = array('iscancle'=>1);
+    $this->db->where('course_id', $course_id);
+    $this->db->where('time_table_id', $time_table_id);
+    $this->db->where('id', $dataid);
+    if($this->db->update(TBL_TIMETABLE_TRANSECTIONS, $data)){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+
+
+ }
+
+
+ public function activstetimetableclass($dataid,$time_table_id,$course_id){
+
+    $data = array('iscancle'=>0);
+    $this->db->where('course_id', $course_id);
+    $this->db->where('time_table_id', $time_table_id);
+    $this->db->where('id', $dataid);
+    if($this->db->update(TBL_TIMETABLE_TRANSECTIONS, $data)){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+
 
  }
 

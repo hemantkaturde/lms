@@ -59,7 +59,7 @@ if ($conn->query($sql) === TRUE) {
     $Body  .= '<div><b>Thanks & Regards</b><br>';
     $Body  .= '<div><b>Team IICTN</b>';
 
-    $header = "From: IICTN-Team <enquiry@iictn.in> \r\n";
+    $header = "From: IICTN-Team <admin@iictn.in> \r\n";
     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
     $header .= "MIME-Version: 1.0\r\n";
     $header .= "Content-type: text/html\r\n";

@@ -2709,7 +2709,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					{ "width": "30%", "targets": 2 },
 					{ "width": "15%", "targets": 3 },
 					{ "width": "15%", "targets": 4 },
-					{ "width": "8%", "targets": 5 }
+					{ "width": "10%", "targets": 5 }
 				],
 				responsive: true,
 				"oLanguage": {
@@ -2727,6 +2727,143 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				},
 			});
 		});
+
+		$(document).on('click','.cancle_class',function(e){
+			var elemF = $(this);
+				e.preventDefault();
+
+				var data_id =  elemF.attr('data-id');
+				var time_table_id = elemF.attr('time_table_id')
+				var course_id =  elemF.attr('course_id')
+
+					swal({
+						title: "Are you sure to cancel this class?",
+						text: "",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>cancletimetableclass",
+										type: "POST",
+										data : {'data-id' :elemF.attr('data-id'),'time_table_id' :elemF.attr('time_table_id'),'course_id' :elemF.attr('course_id')},
+										success: function(data, textStatus, jqXHR)
+										{
+											// if(data.status=='success'){
+												// swal("Deleted!", "Certificate Type has been deleted.", "success");
+												// location.reload();
+											//}
+											const obj = JSON.parse(data);
+											if(obj.status=='success'){
+												swal({
+													title: "Cancled!",
+													text: "",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>"+'time_table_id='+time_table_id+'&course_id='+course_id;
+												});	
+										    }else{
+											    swal({
+													title: "Not Deleted",
+													text: "",
+													icon: "error",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>"+'time_table_id='+time_table_id+'&course_id='+course_id;
+												});	
+										  }
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Class Deleted Succussfully", "error");
+						}
+					});
+		});
+
+
+		$(document).on('click','.activate_topic_class',function(e){
+			var elemF = $(this);
+				e.preventDefault();
+
+				var data_id =  elemF.attr('data-id');
+				var time_table_id = elemF.attr('time_table_id')
+				var course_id =  elemF.attr('course_id')
+
+					swal({
+						title: "Are you sure to Activate this class?",
+						text: "",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>activstetimetableclass",
+										type: "POST",
+										data : {'data-id' :elemF.attr('data-id'),'time_table_id' :elemF.attr('time_table_id'),'course_id' :elemF.attr('course_id')},
+										success: function(data, textStatus, jqXHR)
+										{
+											// if(data.status=='success'){
+												// swal("Deleted!", "Certificate Type has been deleted.", "success");
+												// location.reload();
+											//}
+											const obj = JSON.parse(data);
+											if(obj.status=='success'){
+												swal({
+													title: "Activate",
+													text: "",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>"+'time_table_id='+time_table_id+'&course_id='+course_id;
+												});	
+										    }else{
+											    swal({
+													title: "Not Deleted",
+													text: "",
+													icon: "error",
+													button: "Ok",
+													},function(){ 
+														$("#popup_modal_sm").hide();
+														window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>"+'time_table_id='+time_table_id+'&course_id='+course_id;
+												});	
+										  }
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Class Deleted Succussfully", "error");
+						}
+					});
+		});
+
+
 	</script>
 
 <?php } ?>

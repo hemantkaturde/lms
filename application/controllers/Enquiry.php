@@ -527,7 +527,7 @@
                         // $message = "<b>This is HTML message.</b>";
                         // $message .= "<h1>This is headline.</h1>";
                         
-                        $header = "From: IICTN-Payment Link <enquiry@iictn.in> \r\n";
+                        $header = "From: IICTN-Payment Link <admin@iictn.in> \r\n";
                         //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
@@ -1005,13 +1005,13 @@
                     $all_course_name = trim($course_name, ', '); 
 
                     $to = $get_equiry_data->enq_email;
-                    $from = 'enquiry@iictn.in'; 
+                    $from = 'admin@iictn.in'; 
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
                     //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                     $subject = 'Greetings from IICTN !! '.date('Y-m-d H:i:s');
                     
-                    $header = "From: IICTN-Marketing Material <enquiry@iictn.in> \r\n";
+                    $header = "From: IICTN-Marketing Material <admin@iictn.in> \r\n";
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
@@ -1139,12 +1139,12 @@
                     $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
                     $to = $get_equiry_data->enq_email;
-                    $from = 'enquiry@iictn.in'; 
+                    $from = 'admin@iictn.in'; 
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
                     $subject = 'IICTN - Admission Link '.date('Y-m-d H:i:s');
                     
-                    $header = "From: Admission Link <enquiry@iictn.in> \r\n";
+                    $header = "From: Admission Link <admin@iictn.in> \r\n";
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";

@@ -285,7 +285,8 @@ $route['studentreportexporttoexel'] = "student/studentreportexporttoexel";
 $route['getcoursetopic'] = "student/getcoursetopic";
 
 
-
+$route['cancletimetableclass'] = "course/cancletimetableclass";
+$route['activstetimetableclass'] = "course/activstetimetableclass";
 
 
 

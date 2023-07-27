@@ -231,7 +231,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                     </body>
             </html>';
 
-                    $header = "From: IICTN-Login Link <enquiry@iictn.in> \r\n";
+                    $header = "From: IICTN-Login Link <admin@iictn.in> \r\n";
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";

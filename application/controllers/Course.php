@@ -1461,6 +1461,56 @@
             }
         }
 
+
+        public function cancletimetableclass(){
+
+            $post_submit = $this->input->post();
+
+            if($post_submit){
+
+                $cancle_class_response =array();
+
+                $result = $this->course_model->cancletimetableclass(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
+                if($result){
+                    $cancle_class_response['status'] = 'success';
+                    $process = 'Cancle Class';
+                    $processFunction = 'Course/cancletimetableclass';
+                    $this->logrecord($process,$processFunction);
+                }else
+                {
+                    $cancle_class_response['status'] = 'filure';
+                }
+                 echo json_encode($cancle_class_response);
+            }
+
+        }
+
+
+        public function activstetimetableclass(){
+
+            $post_submit = $this->input->post();
+
+            if($post_submit){
+
+                $cancle_class_response =array();
+
+                $result = $this->course_model->activstetimetableclass(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
+                if($result){
+                    $cancle_class_response['status'] = 'success';
+                    $process = 'Cancle Class';
+                    $processFunction = 'Course/activstetimetableclass';
+                    $this->logrecord($process,$processFunction);
+                }else
+                {
+                    $cancle_class_response['status'] = 'filure';
+                }
+                 echo json_encode($cancle_class_response);
+            }
+
+        }
+
+        
+
     }
 
 ?>
