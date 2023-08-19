@@ -190,7 +190,7 @@ class Course_model extends CI_Model
 
         public function getCoursedata($params){
             $roleText = $this->session->userdata('roleText');
-        
+            $access = $this->session->userdata('access');
             $userId = $this->session->userdata('userId');
             $jsonstringtoArray = json_decode($access, true);
             $pageUrl =$this->uri->segment(1);
