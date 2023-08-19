@@ -460,7 +460,8 @@ class Admission_model extends CI_Model
 
     public function total_pending(){
         
-        $this->db->select('sum(final_amount) as total_pending');
+        $this->db->select('sum(tbl_enquiry.final_amount) as total_pending');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_number');
         $this->db->where(TBL_ENQUIRY.'.isDeleted',0);
         $query = $this->db->get(TBL_ENQUIRY);
         return $query->result_array();
