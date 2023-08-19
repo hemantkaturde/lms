@@ -82,16 +82,19 @@ $jsonstringtoArray = json_decode($access, true);
         <header class="header">
             <div class="page-brand" style="place-content:center;background-color: #ca9331;">
                 <a class="link" href="#">
-                    <span class="brand">IICTN
-                        <!-- <span class="brand-tip">CAST</span> -->
-                    </span>
-                    <span class="brand-mini">IICTN</span>
-                    <!-- <span class="brand">
+                    
+                    
+                    <span class="brand">
                         <span class="brand-tip">
                             <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="50">
                         </span>
                     </span>
-                    <span class="brand-mini">LMS</span> -->
+
+                    <span class="brand">IICTN
+                        <!-- <span class="brand-tip">CAST</span> -->
+                    </span>
+                    <span class="brand-mini">IICTN</span>
+                    <!-- <span class="brand-mini">LMS</span> -->
                 </a>
             </div>
             <div class="flexbox flex-1" style="background: #d2ae6d;">
