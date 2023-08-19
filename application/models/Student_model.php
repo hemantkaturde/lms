@@ -1966,8 +1966,8 @@ public function getcoursetopic($course_id)
 {
     $this->db->select('*');
     $this->db->where('course_id', $course_id);
-    $this->db->order_by('topic_name','ASC');
-    $query_result = $this->db->get(TBL_TOPIC_MEETING_LINK)->result_array();
+    $this->db->order_by('topic','ASC');
+    $query_result = $this->db->get(TBL_TIMETABLE_TRANSECTIONS)->result_array();
     if($state_id != '') {
         foreach($query_result as $key => $value) {
             if($value['id'] == $state_id) {

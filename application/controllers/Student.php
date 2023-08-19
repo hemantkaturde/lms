@@ -930,7 +930,7 @@
             if(count($states) >= 1) {
                     $content = '<option value="">Select Certificate Topic</option>';
                 foreach($states as $state) {
-                    $content = $content.'<option value="'.$state["id"].'">'.$state["topic_name"].'</option>';
+                    $content = $content.'<option value="'.$state["id"].'">'.$state["topic"].'</option>';
                 }
                 echo $content;
             } else {
