@@ -162,11 +162,14 @@ class Course_model extends CI_Model
 
         public function  getCourseCount($params){
             $roleText = $this->session->userdata('roleText');
+            $access = $this->session->userdata('access');
             $userId = $this->session->userdata('userId');
-        
+            $jsonstringtoArray = json_decode($access, true);
+            $pageUrl =$this->uri->segment(1);
+
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
-            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId','left');
+
             if($params['search']['value'] != "") 
             {
                 $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
@@ -186,10 +189,12 @@ class Course_model extends CI_Model
         }
 
         public function getCoursedata($params){
-          
             $roleText = $this->session->userdata('roleText');
-            $userId = $this->session->userdata('userId');
         
+            $userId = $this->session->userdata('userId');
+            $jsonstringtoArray = json_decode($access, true);
+            $pageUrl =$this->uri->segment(1);
+
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
             $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId','left');
