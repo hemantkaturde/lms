@@ -1,3 +1,4 @@
+<?php $roleText = $this->session->userdata('roleText');?>
 <div class="content-wrapper">
     <!-- <div class="page-heading">
         <h3 class="page-title">Users Listing</h3>
@@ -226,7 +227,6 @@
                      <div >
                         <select class="form-control" name="city" id="cityEnquiry">
                             <!-- <option st-id="" value="">Select City</option> -->
-
                             <?php foreach ($city_List as $key => $value) {?>
                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                             <?php } ?>
@@ -235,16 +235,27 @@
                      </div>
                    </div>
 
-
                    <div class="form-group">
                      <label style="text-align: left;"  for="counsellor">Counsellor Name <span class="required">*</span></label>
                      <div >
+                     <?php if($roleText=='Counsellor'){ ?>
+                        <select class="form-control" name="counsellor" id="counsellor">
+                            <!-- <option st-id="" value="">Select Counsellor</option> -->
+                            <?php foreach ($counseller_Name as $key => $value) {
+                              $counsellor_id = $this->session->userdata('userId');
+                              if($value['userId']==$counsellor_id){ ?>
+                                   <option value="<?php echo $value['userId']; ?>"  selected  ><?php echo $value['name']; ?></option>
+                               <?php } ?>
+                            <?php } ?>
+                        </select>
+                     <?php }else{ ?>
                         <select class="form-control" name="counsellor" id="counsellor">
                             <option st-id="" value="">Select Counsellor</option>
                             <?php foreach ($counseller_Name as $key => $value) {?>
                                <option value="<?php echo $value['userId']; ?>"><?php echo $value['name']; ?></option>
                             <?php } ?>
                         </select>
+                     <?php } ?>
                         <p class="error counsellor_error"></p>       
                      </div>
                    </div>
