@@ -285,8 +285,8 @@ $jsonstringtoArray = json_decode($access, true);
         </header>
         <!-- END HEADER-->
         <!-- START SIDEBAR-->
-        <nav class="page-sidebar" id="sidebar" style="background-color: #d2ae6d;">
-            <div id="sidebar-collapse">
+        <nav class="page-sidebar" id="sidebar" style="background-color: #d2ae6d; position: fixed;">
+            <div id="sidebar-collapse" >
                 <div class="admin-block d-flex">
                     <div>
                        <?php

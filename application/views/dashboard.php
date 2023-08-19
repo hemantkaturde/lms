@@ -413,3 +413,9 @@ if($roleText=="Counsellor"){
               console.log( e );
             }
     </script> 
+
+    <style>
+        .amcharts-chart-div a{
+            display:none !important;
+        } 
+    </style>
