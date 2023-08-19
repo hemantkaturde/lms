@@ -844,7 +844,8 @@ public function getBookscount($topic_id,$course_id){
   }
 
   public function gettimetabletopiclistingdata($params,$time_table_id,$course_id){
-
+    
+    $roleText = $this->session->userdata('roleText');
     $this->db->select('*,a.name as backup_trainer,'.TBL_USER.'.name as real_trainer,'.TBL_TIMETABLE_TRANSECTIONS.'.id as timetableid');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id');
     $this->db->join(TBL_USER.' as a', 'a.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.backup_trainer','left');
@@ -881,13 +882,17 @@ public function getBookscount($topic_id,$course_id){
               //  $data[$counter]['action'] .= "  <a style='cursor: pointer;' class='activate_topic_class' course_id=".$value['course_id']."' time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/activate.png alt='Activate Topic class' title='Activate Topic class'></a>"; 
 
              }else{
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
-            
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
-   
-                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' course_id=".$value['course_id']."' time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
-             }
 
+                if($roleText!='Trainer'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
+            
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
+       
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' course_id=".$value['course_id']."' time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
+       
+                }
+
+            }
             
             $counter++; 
         }
