@@ -1517,6 +1517,7 @@ public function  getallstudentquerycount($params,$userId,$roleText){
 
     $this->db->select('*');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
@@ -1554,7 +1555,6 @@ public function getallstudentquerydata($params,$userId,$roleText){
 
         }
 
-            
        }else{
             $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
        }
@@ -1562,7 +1562,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
 
     $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
