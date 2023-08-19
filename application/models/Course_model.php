@@ -169,7 +169,11 @@ class Course_model extends CI_Model
 
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
-            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId','left');
+           
+            if($roleText=='Trainer'){
+                $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId');
+                $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+            } 
 
             if($params['search']['value'] != "") 
             {
@@ -178,9 +182,6 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
             }
 
-            if($roleText=='Trainer'){
-                $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
-            } 
 
             $this->db->where(TBL_COURSE.'.isDeleted', 0);
             $query = $this->db->get(TBL_COURSE);
@@ -198,7 +199,10 @@ class Course_model extends CI_Model
 
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
-            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId','left');
+            if($roleText=='Trainer'){
+                $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId');
+                $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+            } 
             if($params['search']['value'] != "") 
             {
                 $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
@@ -206,9 +210,6 @@ class Course_model extends CI_Model
                 $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
             }
 
-            if($roleText=='Trainer'){
-                $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
-            } 
 
             $this->db->where(TBL_COURSE.'.isDeleted', 0);
            // $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.course_id');
