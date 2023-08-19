@@ -1517,7 +1517,7 @@ public function  getallstudentquerycount($params,$userId,$roleText){
 
     $this->db->select('*');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
@@ -1562,7 +1562,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
 
     $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_ASK_A_QUERY.'.course_id');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
@@ -1583,7 +1583,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
         foreach ($fetch_result as $key => $value)
         {
              $data[$counter]['course_name'] = $value['course_name'];
-             $data[$counter]['topic_name'] = $value['topic_name'];
+             $data[$counter]['topic_name'] = $value['topic'];
              $data[$counter]['query'] = $value['query'];
              $data[$counter]['action'] = '';
              $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqueryanswer/".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/process.png' alt='View Answers' title='View Answers'></a> ";
