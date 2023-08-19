@@ -1527,7 +1527,7 @@ public function  getallstudentquerycount($params,$userId,$roleText){
 
     $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
 
-    $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.topic');
+    $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_ASK_A_QUERY);
     $rowcount = $query->num_rows();
@@ -1573,7 +1573,6 @@ public function getallstudentquerydata($params,$userId,$roleText){
     $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
     // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
     $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
-    $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.topic');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_ASK_A_QUERY);
     $fetch_result = $query->result_array();
