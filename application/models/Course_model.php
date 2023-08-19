@@ -171,7 +171,7 @@ class Course_model extends CI_Model
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
            
             if($roleText=='Trainer'){
-                $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId');
+                $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
                 $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
             } 
 
@@ -200,7 +200,7 @@ class Course_model extends CI_Model
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
             if($roleText=='Trainer'){
-                $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_COURSE.'.courseId');
+                $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
                 $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
             } 
             if($params['search']['value'] != "") 
