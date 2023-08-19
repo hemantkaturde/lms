@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="row">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="<?php echo base_url().'/dashboard';?>"><button class="btn btn-primary" id="" name="" type="button">Back</button></a>   &nbsp
+                                        <a href="<?php echo base_url().'dashboard';?>"><button class="btn btn-primary" id="" name="" type="button">Back</button></a>   &nbsp
                                         <button class="btn btn-primary" id="update_profile" name="update_profile" type="submit">Update Profile</button>
                                     </div>
                                     </div>
