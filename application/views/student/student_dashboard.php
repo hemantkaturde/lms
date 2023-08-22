@@ -285,58 +285,61 @@
              <?php }  ?>   
             </tbody>
             </table>
-    
 
-			<div class="modal fade" id="idcarddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header" style="background:#d2ae6d">
-						<h5 class="modal-title" id="exampleModalLabel" style="color:black;">Print Student Id Card</h5>
-						<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span> -->
-						</button>
-					</div>
-					<div class="modal-body " id="printarea">
-					  <div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="card user-card">
-									<div class="card-block">
-										<div class="user-image">
-											<img src="" id="student_profile_pic" name="student_profile_pic" class="img-radius" alt="User-Profile-Image">
+			<div id="printThis">
+
+				<div class="modal fade" id="idcarddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+						<div class="modal-header headersection" style="background:#d2ae6d">
+							<h5 class="modal-title" id="exampleModalLabel" style="color:black;">Print Student Id Card</h5>
+							<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span> -->
+							</button>
+						</div>
+						<div class="modal-body" id="printarea" style="margin-left: 60px;margin-right: 60px;">
+						<div class="container">
+							<div class="row" style="border: 3px solid #d2ae6d;">
+								<div class="col-md-12">
+									<div class="card user-card" style="background: #d2ae6d;">
+										<div class="card-block">
+											<div class="user-image">
+												<img src="" id="student_profile_pic" name="student_profile_pic" class="img-radius" alt="User-Profile-Image">
+											</div>
+
+											<h5 class="f-w-600 m-t-25 m-b-10" id="student_name" style="color:black"></h5>
+
+											<h6 class="f-w-600 m-t-25 m-b-10" id="student_mobile_number" style="color:black"></h6>
+											
 										</div>
-										
-										<h5 class="f-w-600 m-t-25 m-b-10" id="student_name" style="color:black"></h5>
-
-										<h6 class="f-w-600 m-t-25 m-b-10" id="student_mobile_number" style="color:black"></h6>
-										    <hr>
-
-										<p class="text-muted"><b>Course Name : </b> <text id="course_name" name="course_name" style="color:black"></text></p>
-										    <hr>
-
-										<p class="text-muted"><b>Topic Name : </b> <text id="topic_name" name="topic_name" style="color:black"></text></p>
-										    <hr>
-
-										<p class="text-muted"><b>Class Time : </b> <text id="class_time" name="class_time" style="color:black"></text></p>
-										    <hr>
-
-										<p class="text-muted"><b>Class Time : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
-										    <hr>
-									     <p>www.iictn.in</p>
 									</div>
+									       
+
+											<p class="text-muted"><b>Course Name : </b> <text id="course_name" name="course_name" style="color:black"></text></p>
+												<hr>
+
+											<p class="text-muted"><b>Topic Name : </b> <text id="topic_name" name="topic_name" style="color:black"></text></p>
+												<hr>
+
+											<p class="text-muted"><b>Class Time : </b> <text id="class_time" name="class_time" style="color:black"></text></p>
+												<hr>
+
+											<p class="text-muted"><b>Class Time : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
+												<hr>
+											<p>www.iictn.in</p>
 								</div>
 							</div>
 						</div>
-	                </div>
 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary print_id_card_close" >Close</button>
-						<button type="button" class="btn btn-primary print_card_button" id="print_card_button">Print Card</button>
-					</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary print_id_card_close" >Close</button>
+							<button type="button" class="btn btn-primary print_card_button" id="print_card_button">Print Card</button>
+						</div>
+						</div>
 					</div>
 				</div>
-			</div>
+			</div>	
 
 <?php
  
@@ -565,22 +568,81 @@ $(".print_id_card").click(function(){
 });
 
 
-$(".print_card_button").click(function(){
-	printData();
-});
 
 
-function printData()
-{
-   var divToPrint=document.getElementById("printarea");
-   newWin= window.open("");
-   newWin.document.write(divToPrint.outerHTML);
-   newWin.print();
-   newWin.close();
+document.getElementById("print_card_button").onclick = function () {
+    printElement(document.getElementById("printarea"));
 }
+
+function printElement(elem) {
+    var domClone = elem.cloneNode(true);
+    
+    var $printSection = document.getElementById("printSection");
+    
+    if (!$printSection) {
+        var $printSection = document.createElement("div");
+        $printSection.id = "printSection";
+        document.body.appendChild($printSection);
+    }
+    
+    $printSection.innerHTML = "";
+    $printSection.appendChild(domClone);
+    window.print();
+}
+
+
+
+// $(".print_card_button").click(function(){
+// 	printData();
+// });
+
+
+// function printData()
+// {
+//    var divToPrint=document.getElementById("idcarddata");
+//    newWin= window.open("");
+//    newWin.document.write(divToPrint.outerHTML);
+//    newWin.print();
+//    newWin.close();
+// }
 
 $(".print_id_card_close").click(function(){
 	location.reload();
 });
 
 </script>
+
+
+<style>
+@media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+	-webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+  .headersection{
+
+	visibility: hidden;
+
+  }
+}
+
+
+
+
+
+</style>
