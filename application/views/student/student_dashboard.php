@@ -634,15 +634,6 @@ $(".print_id_card_close").click(function(){
     left:0;
     top:0;
   }
-  .headersection{
-
-	visibility: hidden;
-
-  }
 }
-
-
-
-
 
 </style>

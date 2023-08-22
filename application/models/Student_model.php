@@ -1856,6 +1856,8 @@ public function courseLinksListing($courseId)
 public function getallstudentdataforshowidcard($data){
 
      $user_id = $data['user_id'];
+     $topic_id = $data['topic_id'];
+     $course_id = $data['course_id'];
     // $this->db->select('*');
     // $this->db->join(TBL_USERS_ENQUIRES, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
     // $this->db->join(TBL_ENQUIRY, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
@@ -1892,7 +1894,8 @@ public function getallstudentdataforshowidcard($data){
         $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id','left');
 
         $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $topic_id);
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
         // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
         $this->db->where(TBL_COURSE.'.courseId', $value);
 
