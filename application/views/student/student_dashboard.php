@@ -297,7 +297,7 @@
 							<span aria-hidden="true">&times;</span> -->
 							</button>
 						</div>
-						<div class="modal-body" id="printarea">
+						<div class="modal-body" id="printarea" style="margin-left: 50px;margin-right: 50px;">
 						<div class="container">
 							<div class="row" style="border: 3px solid #d2ae6d;">
 								<div class="col-md-12">
