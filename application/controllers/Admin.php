@@ -811,12 +811,32 @@ class Admin extends BaseController
         echo json_encode($json_data);
  }
     
- public function printmarksheet(){
-
-
-    
+ public function studentexamrequest(){
+    $this->global['pageTitle'] = 'Student Exam Request';
+    $data['getallstudentlist'] =  $this->student_model->getallstudentlist();
+    $this->loadViews("student/studentexamrequest", $this->global, $data, NULL);
  }
  
+
+ public function getstudentcourselist(){
+    $student_name=$this->input->post('student_name');
+    if($student_name) {
+        $getstudentDetails = $this->student_model->getstudentcourselist($student_name);
+        if(count($getstudentDetails) >= 1) {
+            $content = $content.'<option value="">Select Course Name</option>';
+            foreach($getstudentDetails as $value) {
+                $content = $content.'<option value="'.$value["courseId"].'">'.$value["course_name"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+ }
+
 
 }
 

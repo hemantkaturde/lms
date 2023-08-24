@@ -1991,6 +1991,47 @@ public function getstudentinformation($student_id){
     return $query->result_array();
 }
 
+public function getstudentcourselist($student_name){
+
+    $this->db->select('enq_course_id');
+    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $student_name);
+    $query = $this->db->get(TBL_USERS_ENQUIRES);
+    $fetch_result_enquiry_courses = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+     foreach ($fetch_result_enquiry_courses as $key => $value) {
+
+     $course_ids    =   explode(',', $value['enq_course_id']);
+
+        foreach ($course_ids as $key => $value) {
+
+              $getCourseInfo = $this->getcourseinfobyid($value);
+
+              $data[$counter]['courseId'] = $getCourseInfo[0]->courseId;
+              $data[$counter]['course_name'] = $getCourseInfo[0]->course_name;
+              $counter++; 
+        }
+    }
+
+    return $data;
+   
+
+}
+
+
+public function getcourseinfobyid($course_id){
+        $this->db->select('courseId,course_name');
+        $this->db->from(TBL_COURSE);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('courseId', $course_id);
+        $query = $this->db->get();
+        return $query->result();
+}
+
+
+
 
 }
 

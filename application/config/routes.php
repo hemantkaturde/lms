@@ -288,6 +288,12 @@ $route['getcoursetopic'] = "student/getcoursetopic";
 $route['cancletimetableclass'] = "course/cancletimetableclass";
 $route['activstetimetableclass'] = "course/activstetimetableclass";
 
+$route['studentexamrequest'] = "admin/studentexamrequest";
+$route['getstudentcourselist'] = "admin/getstudentcourselist";
+
+
+
+
 
 
 

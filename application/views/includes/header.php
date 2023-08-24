@@ -465,7 +465,15 @@ $jsonstringtoArray = json_decode($access, true);
                         </li>
                         <?php } ?>
 
-              
+
+                    
+                         <li class="">
+                            <a href="<?php echo base_url()."studentexamrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
+                                <span class="nav-label">Student Exam Request</span>
+                            </a>
+                        </li>
+                        
+
                         <!-- <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
                             <a href="<?php echo base_url(); ?>staffListing"><i class="sidebar-item-icon fa fa-user" ></i>

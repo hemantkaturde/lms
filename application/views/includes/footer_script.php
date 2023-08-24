@@ -5238,6 +5238,41 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
+<?php if($pageTitle=='Student Exam Request'){ ?>
+	<script type="text/javascript">
+
+
+
+	 $(document).on('change','#student_name',function(e){  
+
+
+			e.preventDefault();
+			var student_name = $('#student_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getstudentcourselist",
+				type: "POST",
+				data : {'student_name' : student_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#course_name').html('<option value="">Select Course Name</option>');
+					}
+					else
+					{
+						$('#course_name').html(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#course_name').html();
+				}
+			});
+			return false;
+		 });
+   </script>
+<?php  } ?>
 
 
 
