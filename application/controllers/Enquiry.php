@@ -527,7 +527,7 @@
                         // $message = "<b>This is HTML message.</b>";
                         // $message .= "<h1>This is headline.</h1>";
                         
-                        $header = "From: IICTN-Payment Link <admin@iictn.in> \r\n";
+                        $header = "From: IICTN-Payment Link <info@iictn.in> \r\n";
                         //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
