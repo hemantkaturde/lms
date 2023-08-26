@@ -535,7 +535,7 @@
                         $retval = mail($to,$Subject,$Body,$header);
 
 
-                        print_r('dfef');
+                        print_r($retval);
 
                         print_r('dfd');
 
