@@ -69,24 +69,64 @@ if ($conn->query($sql) === TRUE) {
     if($retval){
 
                 /* Send Whats App  Start Here */
-                $curl = curl_init();
+               // $curl = curl_init();
                 $wp_url = 'https://iictn.in/tax_invoice/index.php?enq_id='.$row['enq_id'].'&paymentid='.$row_last_payment['id'];  
                 $text = 'WELCOME TO IICTN !!,  We have received your Payment. Transaction id :'.$row_last_payment['razorpay_payment_id'] .', Download Tax-Invoice Using Following Link '.$wp_url. ' || Admission Link https://iictn.in/registration/new-registration-student.php?enq='.$row['enq_id'];
 
                 $mobile = '91'.$row['enq_mobile'];
-                $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=643785A37C7FC&access_token=a78a6b9a06b1a24daa0d1402abd84d51";
+               // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64E9907187FFA&access_token=64e7462031534";
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-                // This is what solved the issue (Accepting gzip encoding)
-                // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                $response = curl_exec($ch);
-                curl_close($ch);
+                // $ch = curl_init();
+                // curl_setopt($ch, CURLOPT_URL, $url);
+                // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+                // // This is what solved the issue (Accepting gzip encoding)
+                // // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+                // $response = curl_exec($ch);
+                // curl_close($ch);
                 // echo $response;
 
+                $curl = curl_init();
+
+                 $data = [
+                    "number" => $mobile,
+                    "type" => "text",
+                    "message" => urlencode($text),
+                    "instance_id" => "64E9907187FFA",
+                    "access_token" => "64e7462031534"
+                  ];
+
+
+                $jsonData = json_encode($data);
+                
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                // CURLOPT_POSTFIELDS =>'{
+                // "number": "917021507157",
+                // "type": "text",
+                // "message": "This is text SMS FORM IICTN",
+                // "instance_id": "64E9907187FFA",
+                // "access_token": "64e7462031534"
+                // }',
+                CURLOPT_POSTFIELDS =>$jsonData,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                ),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+                //echo $response;
     }
 
   

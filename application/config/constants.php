@@ -125,9 +125,9 @@ define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
 
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 
-define('INSTANCE_ID','643785A37C7FC');
+define('INSTANCE_ID','64E9907187FFA');
 
-define('ACCESS_TOKEN','a78a6b9a06b1a24daa0d1402abd84d51');
+define('ACCESS_TOKEN','64e7462031534');
 
 
 
