@@ -1587,7 +1587,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
              $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqueryanswer/".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/process.png' alt='View Answers' title='View Answers'></a> ";
             
              if($roleText!='Trainer'){
-                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_query' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Query' title='Delete Query'></a> "; 
+                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_query' data-id='".$value['queryid']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Query' title='Delete Query'></a> "; 
              }
              
             $counter++; 

@@ -980,6 +980,7 @@
      public function delete_query(){
 
         $post_submit = $this->input->post();
+        
         $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
         $result = $this->database->data_update('tbl_askquery',$enquiryInfo,'id',$this->input->post('id'));
 
