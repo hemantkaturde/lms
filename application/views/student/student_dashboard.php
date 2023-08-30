@@ -651,8 +651,8 @@ $(".print_id_card_close").click(function(){
     top:0;
   }
   #printarea{
-	margin-left: 0px !important;
-	margin-right: 0px !important;
+	margin-left: 0% !important;
+	margin-right: -15% !important;
   }
 }
 
