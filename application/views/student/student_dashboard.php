@@ -306,7 +306,7 @@
 							<span aria-hidden="true">&times;</span> -->
 							</button>
 						</div>
-						<div class="modal-body" id="printarea" style="margin-left: 50px;margin-right: 50px;">
+						<div class="modal-body" id="printarea" style="margin-left: 70px;margin-right: 70px;">
 						<div class="container">
 							<div class="row" style="border: 3px solid #d2ae6d;">
 								<div class="col-md-12">
@@ -649,6 +649,10 @@ $(".print_id_card_close").click(function(){
     position:absolute;
     left:0;
     top:0;
+  }
+  #printarea{
+	margin-left: 100px !important;
+	margin-right: 100px !important;
   }
 }
 
