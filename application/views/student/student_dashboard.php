@@ -9,7 +9,16 @@
 } */
 
 
-
+.user-card .card-block .iictn_logo_img {
+	position: relative;
+    /* margin: 0 auto; */
+    /* display: inline-block; */
+    /* padding: 5px; */
+    width: 110px;
+    /* height: 110px; */
+    margin-left: -51px;
+    margin-top: -18px
+}
 
 
 .card.user-card {
@@ -301,8 +310,13 @@
 						<div class="container">
 							<div class="row" style="border: 3px solid #d2ae6d;">
 								<div class="col-md-12">
-									<div class="card user-card" style="background: #d2ae6d;">
+									<div class="card user-card">
 										<div class="card-block">
+										    <div class="iictn_logo_img"	>
+											   <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="50">
+ 											</div>
+
+
 											<div class="user-image">
 												<img src="" id="student_profile_pic" name="student_profile_pic" class="img-radius" alt="User-Profile-Image">
 											</div>
@@ -315,18 +329,20 @@
 									</div>
 									       
 
-											<p class="text-muted"><b>Course Name : </b> <text id="course_name" name="course_name" style="color:black"></text></p>
+											<p class="text-muted"><b style="color:black">Course Name : </b> <text id="course_name" name="course_name" style="color:black"></text></p>
 												<hr>
 
-											<p class="text-muted"><b>Topic Name : </b> <text id="topic_name" name="topic_name" style="color:black"></text></p>
+											<p class="text-muted"><b style="color:black">Topic Name : </b> <text id="topic_name" name="topic_name" style="color:black"></text></p>
 												<hr>
 
-											<p class="text-muted"><b>Class Time : </b> <text id="class_time" name="class_time" style="color:black"></text></p>
+											<p class="text-muted"><b style="color:black">Class Time : </b> <text id="class_time" name="class_time" style="color:black"></text></p>
 												<hr>
 
-											<p class="text-muted"><b>Class Time : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
+											<p class="text-muted"><b style="color:black">Class Time : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
 												<hr>
-											<p>www.iictn.in</p>
+
+											<p class="text-muted"><b style="color:black">Website : </b> <text style="color:black">www.iictn.in</text></p>
+					
 								</div>
 							</div>
 						</div>
