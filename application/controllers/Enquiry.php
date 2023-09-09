@@ -1232,7 +1232,7 @@
                          //  /* Send Whats App  Start Here */
                         //  $curl = curl_init();
                         $text = 'Admission Link';
-                        $text .= 'Please Follow Admission Link https://iictn.in/registration/new-registration-student.php?enq='.$enq_id;
+                        $text .= ' https://iictn.in/registration/new-registration-student.php?enq='.$enq_id;
                         //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                         $mobile = '91'.$get_equiry_data->enq_mobile;
                       
@@ -1274,7 +1274,7 @@
             
                             $response = curl_exec($curl);
                             curl_close($curl);
-                            
+
                         $process = 'Enquiry Link Sent';
                         $processFunction = 'Enquiry/sendEnquiryLink';
                         $this->logrecord($process,$processFunction);
