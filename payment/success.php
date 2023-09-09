@@ -74,7 +74,7 @@ if ($conn->query($sql) === TRUE) {
                 $text = 'WELCOME TO IICTN !!,  We have received your Payment. Transaction id :'.$row_last_payment['razorpay_payment_id'] .', Download Tax-Invoice Using Following Link '.$wp_url. ' || Admission Link https://iictn.in/registration/new-registration-student.php?enq='.$row['enq_id'];
 
                 $mobile = '+91'.$row['enq_mobile'];
-               // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC50BEBCCA1&access_token=64e7462031534";
+               // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC5A51A7429&access_token=64e7462031534";
 
                 // $ch = curl_init();
                 // curl_setopt($ch, CURLOPT_URL, $url);
@@ -93,7 +93,7 @@ if ($conn->query($sql) === TRUE) {
                     "number" => $mobile,
                     "type" => "text",
                     "message" => urlencode($text),
-                    "instance_id" => "64FC50BEBCCA1",
+                    "instance_id" => "64FC5A51A7429",
                     "access_token" => "64e7462031534"
                   ];
 
@@ -113,7 +113,7 @@ if ($conn->query($sql) === TRUE) {
                 // "number": "917021507157",
                 // "type": "text",
                 // "message": "This is text SMS FORM IICTN",
-                // "instance_id": "64FC50BEBCCA1",
+                // "instance_id": "64FC5A51A7429",
                 // "access_token": "64e7462031534"
                 // }',
                 CURLOPT_POSTFIELDS =>$jsonData,
