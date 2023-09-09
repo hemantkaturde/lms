@@ -1082,8 +1082,6 @@
             
                     if($retval){
 
-                       
-
                                 $mobile = '91'.$get_equiry_data->enq_mobile;                      
                                 $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
 
@@ -1092,7 +1090,7 @@
                                     $data = [
                                     "number" => $mobile,
                                     "type" => "text",
-                                    "message" => urlencode($text),
+                                    "message" => $text,
                                     "instance_id" => INSTANCE_ID,
                                     "access_token" => ACCESS_TOKEN
                                     ];
@@ -1133,7 +1131,7 @@
                                 $data = [
                                     "number" => $mobile,
                                     "type" => "media",
-                                    "message" => urlencode($media),
+                                    "message" => $media,
                                     "media_url" => $wp_url,
                                     "instance_id" => INSTANCE_ID,
                                     "access_token" => ACCESS_TOKEN
