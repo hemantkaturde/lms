@@ -371,8 +371,6 @@
 
         public function sendPaymentLink(){
 
-           
-
             $post_submit = $this->input->post();
         
                 if($post_submit){
@@ -395,22 +393,14 @@
                             $i++;  
                         }
                     $all_course_name = trim($course_name, ', '); 
-
-                    
                     $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidEnquirypaymentInfo($enq_id);
-
-                
-
                     $get_equiry_datapayment =  $get_equiry_data->final_amount;
-
-
                     if($get_equiry_datapayment_transaction){
                    
                         $total_paybal =$get_equiry_datapayment - $get_equiry_datapayment_transaction[0]->totalpaidAmount;
 
                     }else{
                         $total_paybal  =$get_equiry_datapayment;
-
                     }
 
                 
@@ -643,7 +633,7 @@
             }else{
                echo 'page not found';
             }
-       }
+        }
 
 
        public function razorpaysuccess(){
@@ -1253,6 +1243,9 @@
 
 
     }
+
+
+
 }
 
  

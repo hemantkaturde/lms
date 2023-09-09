@@ -5240,12 +5240,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Student Exam Request'){ ?>
 	<script type="text/javascript">
-
-
-
 	 $(document).on('change','#student_name',function(e){  
-
-
 			e.preventDefault();
 			var student_name = $('#student_name').val();
 			$.ajax({
@@ -5275,6 +5270,39 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php  } ?>
 
 
+<?php if($pageTitle=='Add Course Syllabus'){ ?>
+	    <script type="text/javascript">
+
+             var course_id = $('#course_id').val();
+
+
+             $(document).ready(function() {
+				var dt = $('#view_course_syllabus').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "30%", "targets": 2 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Course Syllabus Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchallcoursesyllabus/"+course_id,
+						type: "post",
+					},
+				});
+		    });
+
+    </script>
+<?php } ?>
 
 
 

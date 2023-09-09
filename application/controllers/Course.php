@@ -1509,6 +1509,45 @@
 
         }
 
+
+        public function addsyllabus($course_id){
+            $process = 'Add Course Syllabus';
+            $processFunction = 'course/addsyllabus';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Course Syllabus';
+            $data['page_title'] ='Add Course Syllabus';
+            $data['course_id'] = $course_id;
+            $data['getCourseinfo'] = $this->course_model->getCourseInfo($course_id);
+            $this->loadViews("course/add_syllabus", $this->global, $data , NULL);
+        }
+
+
+        public function fetchallcoursesyllabus($course_id){
+            $params = $_REQUEST;
+            $totalRecords = $this->course_model->getCoursesyllabusCount($params,$course_id); 
+            $queryRecords = $this->course_model->getCoursesyllabusData($params,$course_id); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval( $totalRecords ),
+                "data"            => $data   // total data array
+                );
+    
+            echo json_encode($json_data);
+
+        }
+
         
 
     }

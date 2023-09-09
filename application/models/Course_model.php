@@ -274,6 +274,9 @@ class Course_model extends CI_Model
                         if(in_array("coursedit", $jsonstringtoArray)){
                             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='edit_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Course' title='Edit Course'></a> | ";
                         }
+
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addsyllabus/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/file.png' alt='Add Syllabus' title='Add Syllabus'></a> | ";
+
     
                         if(in_array("coursedelete", $jsonstringtoArray)){
                             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_course' data-id='".$value['courseId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Course' title='Delete Course'></a>&nbsp"; 
@@ -1075,6 +1078,46 @@ public function getBookscount($topic_id,$course_id){
     }
 
 
+ }
+
+
+
+ public function getCoursesyllabusCount($params,$course_id){
+    $this->db->select('*');
+    $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
+    $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
+    $this->db->order_by(TBL_COURSE_SYLLABUS.'.id', 'DESC');
+    $query = $this->db->get(TBL_COURSE_SYLLABUS);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+ }
+
+
+ public function getCoursesyllabusData($params,$course_id){
+    
+    $this->db->select('*');
+    $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
+    $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
+    $this->db->order_by(TBL_COURSE_SYLLABUS.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_COURSE_SYLLABUS);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['doc_name'] = '';
+             $data[$counter]['doc_name'] = '';
+             
+             $data[$counter]['action'] = '';
+             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_timetable' time-table-id='".$value['id']."' course_id='".$value['course_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Time Table' title='Delete Time Table'></a>";             
+            $counter++; 
+        }
+    }
+
+    return $data;
  }
 
   
