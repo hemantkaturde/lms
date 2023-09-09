@@ -1082,125 +1082,120 @@
             
                     if($retval){
 
-                        // /* Send Whats App  Start Here */
-                        // $curl = curl_init();
-                        // $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
-                        // //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                        // $mobile = '91'.$get_equiry_data->enq_mobile;
-                        // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
-            
-                        // $ch = curl_init();
-                        // curl_setopt($ch, CURLOPT_URL, $url);
-                        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-                        // // This is what solved the issue (Accepting gzip encoding)
-                        // // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                        // $response = curl_exec($ch);
-                        // curl_close($ch);
-                        // // echo $response;
 
+                        $curl = curl_init();
 
-                        //$curl = curl_init();          
-                        //$media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
-                        // $url_media = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=media&message=".urlencode($media)."&media_url=".$wp_url."&filename=Brochure&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";
-                        
-                        
+                        curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'GET',
+                        CURLOPT_POSTFIELDS =>'{
+                        "number": "+918097404125",
+                        "type": "text",
+                        "message": "test",
+                        "instance_id": "64FC50BEBCCA1",
+                        "access_token": "64e7462031534"
+                        }',
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/json',
+                            'Cookie: stackpost_session=i2dhhtgr3mnebjj9ivqencs2iektd75k'
+                        ),
+                        ));
 
-                        // $ch_media = curl_init();
-                        // curl_setopt($ch_media, CURLOPT_URL, $url_media);
-                        // curl_setopt($ch_media, CURLOPT_SSL_VERIFYPEER, false);
-                        // curl_setopt($ch_media, CURLOPT_RETURNTRANSFER, true);
-                        // curl_setopt($ch_media, CURLOPT_FOLLOWLOCATION, true );
-                        // // This is what solved the issue (Accepting gzip encoding)
-                        // // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                        // $response = curl_exec($ch_media);
-                        // curl_close($ch_media);
-                        // // echo $response
+                        $response = curl_exec($curl);
 
-                                $mobile = '+91'.$get_equiry_data->enq_mobile;                      
-                                $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                        curl_close($curl);
+                        echo $response;
+                       
 
-                                $curl = curl_init();
+                                // $mobile = '+91'.$get_equiry_data->enq_mobile;                      
+                                // $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
 
-                                    $data = [
-                                    "number" => $mobile,
-                                    "type" => "text",
-                                    "message" => urlencode($text),
-                                    "instance_id" => INSTANCE_ID,
-                                    "access_token" => ACCESS_TOKEN
-                                    ];
+                                // $curl = curl_init();
+
+                                //     $data = [
+                                //     "number" => $mobile,
+                                //     "type" => "text",
+                                //     "message" => urlencode($text),
+                                //     "instance_id" => INSTANCE_ID,
+                                //     "access_token" => ACCESS_TOKEN
+                                //     ];
                 
                 
-                                $jsonData = json_encode($data);
+                                // $jsonData = json_encode($data);
                                 
-                                curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://wa.intractly.com/api/send',
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => '',
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 0,
-                                CURLOPT_FOLLOWLOCATION => true,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => 'POST',
-                                // CURLOPT_POSTFIELDS =>'{
-                                // "number": "917021507157",
-                                // "type": "text",
-                                // "message": "This is text SMS FORM IICTN",
-                                // "instance_id": "64FC50BEBCCA1",
-                                // "access_token": "64e7462031534"
-                                // }',
-                                CURLOPT_POSTFIELDS =>$jsonData,
-                                CURLOPT_HTTPHEADER => array(
-                                    'Content-Type: application/json',
-                                    // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                                ),
-                                ));
+                                // curl_setopt_array($curl, array(
+                                // CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                                // CURLOPT_RETURNTRANSFER => true,
+                                // CURLOPT_ENCODING => '',
+                                // CURLOPT_MAXREDIRS => 10,
+                                // CURLOPT_TIMEOUT => 0,
+                                // CURLOPT_FOLLOWLOCATION => true,
+                                // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                // CURLOPT_CUSTOMREQUEST => 'POST',
+                                // // CURLOPT_POSTFIELDS =>'{
+                                // // "number": "917021507157",
+                                // // "type": "text",
+                                // // "message": "This is text SMS FORM IICTN",
+                                // // "instance_id": "64FC50BEBCCA1",
+                                // // "access_token": "64e7462031534"
+                                // // }',
+                                // CURLOPT_POSTFIELDS =>$jsonData,
+                                // CURLOPT_HTTPHEADER => array(
+                                //     'Content-Type: application/json',
+                                //     // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                                // ),
+                                // ));
                 
-                                $response = curl_exec($curl);
-                                curl_close($curl);
+                                // $response = curl_exec($curl);
+                                // curl_close($curl);
 
 
                                /* Media Link Whatsaap*/
                                /*=========================================================================*/ 
-                                $media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
-                                $data = [
-                                    "number" => $mobile,
-                                    "type" => "media",
-                                    "message" => urlencode($media),
-                                    "media_url" => $wp_url,
-                                    "instance_id" => INSTANCE_ID,
-                                    "access_token" => ACCESS_TOKEN
-                                ];
+                                // $media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
+                                // $data = [
+                                //     "number" => $mobile,
+                                //     "type" => "media",
+                                //     "message" => urlencode($media),
+                                //     "media_url" => $wp_url,
+                                //     "instance_id" => INSTANCE_ID,
+                                //     "access_token" => ACCESS_TOKEN
+                                // ];
                 
                 
-                                $jsonData = json_encode($data);
+                                // $jsonData = json_encode($data);
                                 
-                                curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://wa.intractly.com/api/send',
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => '',
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 0,
-                                CURLOPT_FOLLOWLOCATION => true,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => 'POST',
-                                // CURLOPT_POSTFIELDS =>'{
-                                // "number": "917021507157",
-                                // "type": "text",
-                                // "message": "This is text SMS FORM IICTN",
-                                // "instance_id": "64FC50BEBCCA1",
-                                // "access_token": "64e7462031534"
-                                // }',
-                                CURLOPT_POSTFIELDS =>$jsonData,
-                                CURLOPT_HTTPHEADER => array(
-                                    'Content-Type: application/json',
-                                    // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                                ),
-                                ));
+                                // curl_setopt_array($curl, array(
+                                // CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                                // CURLOPT_RETURNTRANSFER => true,
+                                // CURLOPT_ENCODING => '',
+                                // CURLOPT_MAXREDIRS => 10,
+                                // CURLOPT_TIMEOUT => 0,
+                                // CURLOPT_FOLLOWLOCATION => true,
+                                // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                // CURLOPT_CUSTOMREQUEST => 'POST',
+                                // // CURLOPT_POSTFIELDS =>'{
+                                // // "number": "917021507157",
+                                // // "type": "text",
+                                // // "message": "This is text SMS FORM IICTN",
+                                // // "instance_id": "64FC50BEBCCA1",
+                                // // "access_token": "64e7462031534"
+                                // // }',
+                                // CURLOPT_POSTFIELDS =>$jsonData,
+                                // CURLOPT_HTTPHEADER => array(
+                                //     'Content-Type: application/json',
+                                //     // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                                // ),
+                                // ));
                 
-                                $response = curl_exec($curl);
-                                curl_close($curl);
+                                // $response = curl_exec($curl);
+                                // curl_close($curl);
 
 
                 
