@@ -1228,6 +1228,53 @@
                     $retval = mail($to,$subject,$htmlContent,$header);
             
                     if($retval){
+
+                         //  /* Send Whats App  Start Here */
+                        //  $curl = curl_init();
+                        $text = 'Admission Link';
+                        $text .= 'Please Follow Admission Link https://iictn.in/registration/new-registration-student.php?enq='.$enq_id;
+                        //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                        $mobile = '91'.$get_equiry_data->enq_mobile;
+                      
+                        $curl = curl_init();
+
+                                $data = [
+                                "number" => $mobile,
+                                "type" => "text",
+                                "message" => $text,
+                                "instance_id" => INSTANCE_ID,
+                                "access_token" => ACCESS_TOKEN
+                                ];
+            
+      
+                            $jsonData = json_encode($data);
+                            
+                            curl_setopt_array($curl, array(
+                            CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            // CURLOPT_POSTFIELDS =>'{
+                            // "number": "917021507157",
+                            // "type": "text",
+                            // "message": "This is text SMS FORM IICTN",
+                            // "instance_id": "64FC5A51A7429",
+                            // "access_token": "64e7462031534"
+                            // }',
+                            CURLOPT_POSTFIELDS =>$jsonData,
+                            CURLOPT_HTTPHEADER => array(
+                                'Content-Type: application/json',
+                                // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                            ),
+                            ));
+            
+                            $response = curl_exec($curl);
+                            curl_close($curl);
+                            
                         $process = 'Enquiry Link Sent';
                         $processFunction = 'Enquiry/sendEnquiryLink';
                         $this->logrecord($process,$processFunction);
