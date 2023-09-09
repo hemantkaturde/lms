@@ -891,7 +891,7 @@ public function getBookscount($topic_id,$course_id){
             
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
        
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' course_id=".$value['course_id']."' time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' course_id=".$value['course_id']." time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
        
                 }
 
@@ -1060,9 +1060,24 @@ public function getBookscount($topic_id,$course_id){
     } else {
         return FALSE;
     }
+ }
 
+
+ public function getstudentdataforcanclenotification($dataid,$time_table_id,$course_id){
+
+    $this->db->select(TBL_USER.'.name,'.TBL_USER.'.mobile');
+    $this->db->where(TBL_ENQUIRY.".enq_course_id LIKE '%".$course_id."%'");
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
+    $this->db->where(TBL_USER.'.user_flag', 'student');
+    $query = $this->db->get(TBL_ENQUIRY);
+    $fetch_result = $query->result_array();
+
+    return $fetch_result;
 
  }
+
+
 
 
  public function activstetimetableclass($dataid,$time_table_id,$course_id){

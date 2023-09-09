@@ -1466,16 +1466,73 @@
 
             $post_submit = $this->input->post();
 
+
             if($post_submit){
 
                 $cancle_class_response =array();
-
                 $result = $this->course_model->cancletimetableclass(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
+
                 if($result){
-                    $cancle_class_response['status'] = 'success';
-                    $process = 'Cancle Class';
-                    $processFunction = 'Course/cancletimetableclass';
-                    $this->logrecord($process,$processFunction);
+
+
+                    $getstudentdata = $this->course_model->getstudentdataforcanclenotification(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
+
+                    foreach ($getstudentdata as $key => $value) {
+
+                        //  //  /* Send Whats App  Start Here */
+                        //  $curl = curl_init();
+                        
+                        $text = ' Class Cancel Notification. Following class is cancelled.  Course Name, Course Date, Topic';
+                        //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                        $mobile = '91'.$value['mobile'];
+                      
+                        $curl = curl_init();
+
+                                $data = [
+                                "number" => $mobile,
+                                "type" => "text",
+                                "message" => $text,
+                                "instance_id" => INSTANCE_ID,
+                                "access_token" => ACCESS_TOKEN
+                                ];
+            
+      
+                            $jsonData = json_encode($data);
+                            
+                            curl_setopt_array($curl, array(
+                            CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            // CURLOPT_POSTFIELDS =>'{
+                            // "number": "917021507157",
+                            // "type": "text",
+                            // "message": "This is text SMS FORM IICTN",
+                            // "instance_id": "64FC5A51A7429",
+                            // "access_token": "64e7462031534"
+                            // }',
+                            CURLOPT_POSTFIELDS =>$jsonData,
+                            CURLOPT_HTTPHEADER => array(
+                                'Content-Type: application/json',
+                                // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                            ),
+                            ));
+            
+                            $response = curl_exec($curl);
+                            curl_close($curl);
+                        
+                    }
+
+
+
+                            $cancle_class_response['status'] = 'success';
+                            $process = 'Cancle Class';
+                            $processFunction = 'Course/cancletimetableclass';
+                            $this->logrecord($process,$processFunction);
                 }else
                 {
                     $cancle_class_response['status'] = 'filure';
