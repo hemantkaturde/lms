@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd15f3127daaa36baabfb28503ce22e133ba92307',
+        'reference' => 'b17b3d3475deff5c0bb7f3a5ca861ba24215c913',
         'name' => 'codeigniter/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd15f3127daaa36baabfb28503ce22e133ba92307',
+            'reference' => 'b17b3d3475deff5c0bb7f3a5ca861ba24215c913',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
@@ -173,12 +173,12 @@
             'dev_requirement' => true,
         ),
         'phpmailer/phpmailer' => array(
-            'pretty_version' => 'v6.6.5',
-            'version' => '6.6.5.0',
+            'pretty_version' => 'v6.8.1',
+            'version' => '6.8.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),
-            'reference' => '8b6386d7417526d1ea4da9edb70b8352f7543627',
+            'reference' => 'e88da8d679acc3824ff231fdc553565b802ac016',
             'dev_requirement' => false,
         ),
         'phpoffice/phpspreadsheet' => array(

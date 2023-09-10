@@ -115,13 +115,14 @@ define('TBL_COURSE_SYLLABUS', 'tbl_course_syllabus');
 
 
 
-define('EMAIL_SMTP_HOST','mail.qelocityindia.com');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_HOST','smtpout.secureserver.net');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
-define('EMAIL_USERNAME','test@qelocityindia.com');	// Your system name
-define('EMAIL_PASSWORD','Qelocity@420');	// Your email password
-define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
-define('FROM_EMAIL','test@qelocityindia.com');		// e.g. email@example.com
-define('FROM_EMAIL_NAME','IICTN-Payment');		// e.g. email@example.com
+define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
+define('EMAIL_PASSWORD','iictn@2023');	// Your email password
+define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
+define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
+define('FROM_EMAIL_NAME','IICTN-Payment');
+define('EMAIL_SECURE','tls');			// e.g. email@example.com
 
 
 

@@ -274,42 +274,30 @@ if(!function_exists(('sendmail')))
     {
         $mail = new PHPMailer(true);
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = EMAIL_SMTP_HOST;                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                                   //Enable SMTP authentication
-            $mail->Username   = EMAIL_USERNAME;                     //SMTP username
-            $mail->Password   = EMAIL_PASSWORD;                               //SMTP password
-            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-            $mail->Port       = EMAIL_SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            $mail->setFrom(FROM_EMAIL, FROM_EMAIL_NAME);
-            $mail->addAddress($to, 'TEST');     //Add a recipient
-            //$mail->addAddress('ellen@example.com');               //Name is optional
-            //$mail->addReplyTo('info@example.com', 'Information');
-            //$mail->addCC('cc@example.com');
-            //$mail->addBCC('bcc@example.com');
-
-            //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = $subject;
-            $mail->Body    = $body;
-           // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-            //echo 'Message has been sent';
-            echo 1;
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-  } 
+            try {
+                $mail->SMTPDebug = 2;                                      
+                $mail->isSMTP();                                           
+                $mail->Host       = EMAIL_SMTP_HOST;                   
+                $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+                $mail->Username   = EMAIL_USERNAME;                
+                $mail->Password   = EMAIL_PASSWORD;                       
+                $mail->SMTPSecure = EMAIL_SECURE;                             
+                $mail->Port       = EMAIL_SMTP_PORT; 
+            
+                $mail->setFrom(EMAIL_USERNAME, 'Name');          
+                $mail->addAddress($to);
+                //$mail->addAddress('receiver2@gfg.com', 'Name');
+                
+                $mail->isHTML(true);                                 
+                $mail->Subject = $subject;
+                $mail->Body    = $body;
+                //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                $mail->send();
+                echo "Mail has been sent successfully!";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+   } 
 }
 
 

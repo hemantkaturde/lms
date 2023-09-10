@@ -1215,7 +1215,7 @@
                     $header .= "Content-type: text/html\r\n";
 
 
-                    $htmlContent = '<div>
+                    $body = '<div>
                     <p><b>Dear </b> '.$enq_fullname.',</p>
                     <p>Please Follow Below Admission Link.</p></div>
                     
@@ -1225,7 +1225,15 @@
                     </div>
                     '; 
                     
-                    $retval = mail($to,$subject,$htmlContent,$header);
+                   // $retval = mail($to,$subject,$htmlContent,$header);
+
+
+                    $retval =  sendmail($to,$subject,$body,$attchment1="",$attchment2="");
+
+                    print_r($retval);
+                    exit;
+
+
             
                     if($retval){
 
