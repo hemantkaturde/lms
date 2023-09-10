@@ -304,6 +304,16 @@ class Enquiry_model extends CI_Model
     }
 
 
+    public function getSyllabusData($id){
+        $this->db->select('*');
+        $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
+        $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $id);
+        $query = $this->db->get(TBL_COURSE_SYLLABUS);
+        return $query->result();
+
+    }
+
+
     public function saveEnquiryFollowupdata($id,$data){
 
         if($id != '') {

@@ -1465,8 +1465,6 @@
         public function cancletimetableclass(){
 
             $post_submit = $this->input->post();
-
-
             if($post_submit){
 
                 $cancle_class_response =array();
@@ -1526,8 +1524,6 @@
                             curl_close($curl);
                         
                     }
-
-
 
                             $cancle_class_response['status'] = 'success';
                             $process = 'Cancle Class';
@@ -1605,7 +1601,82 @@
 
         }
 
-        
+
+        public function uploadCoursesayllabus() {	
+            $upload = 'err'; 
+            $filesize = round($_FILES['file']['size'] / 1024 , 2); // kilobytes with two digits
+            if(!empty($_FILES['file']['size'])){ 
+              if($_FILES['file']['size'] > 0){ 
+                // File upload configuration 
+                $targetDir = "uploads/course_syllabus/"; 
+                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                $fileName_original = basename($_FILES['file']['name']); 
+                $fileName_original_for_download = $_FILES['file']['name']; 
+                //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                $fileName =$_FILES['file']['name']; 
+               // $fileName =basename($_FILES['file']['name']); 
+                $targetFilePath = $targetDir.$fileName; 
+                // Check whether file type is valid 
+                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+
+                $checkifdocnamealredayexits =  $this->course_model->checkifdocnamealredayexits(trim($_POST['course_id']),trim($_POST['document_name'])); 
+                if($checkifdocnamealredayexits > 0){
+                    echo 'exits';
+                }else{
+                if(in_array($fileType, $allowTypes)){ 
+                 if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
+                            $data = array(
+                                'course_id'=>  $_POST['course_id'],
+                                'doc_name' =>  $_POST['document_name'],
+                                'doc_url' =>  base_url().str_replace(' ', '_', $targetFilePath),
+                                'doc_type' => $fileType,
+                                'file_name_original' => str_replace(' ', '_',$fileName_original),
+                                'file_name' => str_replace(' ', '_',$fileName_original_for_download),
+                                'createdBy' => $this->session->userdata('userId')
+                            );
+    
+                            $uploadCoursesayllabus = $this->course_model->uploadCoursesayllabus($data); 
+                            if($uploadCoursesayllabus){
+                                $upload = 'ok'; 
+                            }else{
+                                $upload = 'err'; 
+                            }
+                             echo $upload;
+                    }
+                 } 
+                }
+                }else{
+                    echo 'type_missmatch';
+                } 
+
+            }else{
+                echo 'empty';
+            }                             
+        }
+
+
+    public function deletecourseSyllbus(){
+        $post_submit = $this->input->post('syllbus_id');
+        if(!empty($post_submit)){
+            $deletecourse_response =array();
+          
+                $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                $result = $this->course_model->data_update('tbl_course_syllabus',$courseInfo,'id',$this->input->post('syllbus_id'));
+                if($result){
+                    $deletecourse_response['status'] = 'success';
+                    $process = 'Syallbus Topic Link Delete';
+                    $processFunction = 'Course/deletecourseSyllbus';
+                    $this->logrecord($process,$processFunction);
+                }else
+                {
+                    $deletecourse_response['status'] = 'filure';
+                }
+            echo json_encode($deletecourse_response);
+        }
+
+
+    }        
+
 
     }
 

@@ -993,7 +993,6 @@
 
    }
    
-
     public function sendBrochureLink(){
         $post_submit = $this->input->post();
 
@@ -1006,21 +1005,43 @@
                 
                  $total_fees = 0;
                  $course_name = '';
+                 $doc_url_val ='';
                  $i = 1;
                     foreach($course_ids as $id)
                     {
                         $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+
                         $total_fees += $get_course_fees[0]->course_total_fees;
-                        $course_name .= $get_course_fees[0]->course_name. ',';  
+                        $course_name .= $get_course_fees[0]->course_name. ',';
+
+                        /*For Attchment*/
+                        $getSyllabusData = $this->enquiry_model->getSyllabusData($id);
+
+                        foreach($getSyllabusData as $doc_url)
+                        {
+                            $doc_url_val .= $doc_url->doc_url. ',';
+                        }
+
                         $i++;  
                     }
 
                     $all_course_name = trim($course_name, ', '); 
+                    $all_doc_url_val = trim($doc_url_val, ', '); 
+
+                    if($all_doc_url_val){
+                        $syallabus_urls = '<div>
+                            <p><b>Download Below Syllabus<b></p>
+                            <p>'.$all_doc_url_val.'</p>
+                       </div>';
+                    }else{
+                        $syallabus_urls = '';
+                    }
 
                     $to = $get_equiry_data->enq_email;
                     $from = 'admin@iictn.in'; 
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
+                    $email_name ='IICTN-Marketing Material '.date('Y-m-d H:i:s');
                     //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                     $subject = 'Greetings from IICTN !! '.date('Y-m-d H:i:s');
                     
@@ -1029,7 +1050,6 @@
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
 
-                     
                      if($doctor_non_doctor=='Doctor'){
                         $file_path ='<a href="https://iictn.in/markating_material/Doctors_Brochure.pdf">Doctors Brochure </a>';
                         $wp_url = 'https://iictn.in/markating_material/Doctors_Brochure.pdf';
@@ -1038,120 +1058,51 @@
                         $wp_url = 'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf';
                      }
 
-
-                    $htmlContent = '<div>
-                    <p><b>Greetings from IICTN !!</b></p>
-
-                    <p><b>Dear </b> '.$enq_fullname.', </p>
-                    <p>Thank You for your interest in <b>'.$all_course_name.'.</b></p>
-                    <p>We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.</p>
-                    <p>For more details, you can also visit our website <a href="https://iictn.org/" rel="noopener" target="_blank" >www.iictn.org </a></p>
-                       
-                    </div>
-
-                    <div>
-                        <p><b>Download Below Brochure<b></p>
-                        <p>'.$file_path.'</p>
-                    </div>
-
-                    <div>
-                        <p><b>Thanks & Regards<b></p>
-                        <p><b>Team IICTN</b></p>
-                    </div>
-                    '; 
+                    $body = '<div> <p><b>Greetings from IICTN !!</b></p>
+                        <p><b>Dear </b> '.$enq_fullname.', </p>
+                        <p>Thank You for your interest in <b>'.$all_course_name.'.</b></p>
+                        <p>We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.</p>
+                        <p>For more details, you can also visit our website <a href="https://iictn.org/" rel="noopener" target="_blank" >www.iictn.org </a></p>
+                        </div>
+                        <div>
+                             <p><b>Download Below Brochure<b></p>
+                             <p>'.$file_path.'</p>
+                        </div>
+                          '.$syallabus_urls.'
+                        <div>
+                            <p><b>Thanks & Regards<b></p>
+                            <p><b>Team IICTN</b></p>
+                        </div>'; 
                     
-                    $retval = mail($to,$subject,$htmlContent,$header);
-            
+
+                    //$retval = mail($to,$subject,$htmlContent,$header);
+                    $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
+                    //$retval =  1;
                     if($retval){
 
-                                $mobile = '91'.$get_equiry_data->enq_mobile;                      
-                                $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                        /*Welcome Notification on whatsapp*/
+                        $mobile = '91'.$get_equiry_data->enq_mobile;                      
+                        // $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                        // $data = ["number" => $mobile,"type" => "text","message" => $text,"instance_id" => INSTANCE_ID,"access_token" => ACCESS_TOKEN];
+                        // $jsonData = json_encode($data);
+                        // $send_wp_sms_welcomenoti_text =  sendwhatsapp($mobile,$jsonData);
 
-                                $curl = curl_init();
+                        /* Media Link Whatsaap*/
+                        $media = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name.'.';
+                        $media.=' We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
+                        $media.=' Brochure Link :'.$wp_url;
 
-                                    $data = [
-                                    "number" => $mobile,
-                                    "type" => "text",
-                                    "message" => $text,
-                                    "instance_id" => INSTANCE_ID,
-                                    "access_token" => ACCESS_TOKEN
-                                    ];
-                
-                
-                                $jsonData = json_encode($data);
-                                
-                                curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://wa.intractly.com/api/send',
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => '',
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 0,
-                                CURLOPT_FOLLOWLOCATION => true,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => 'POST',
-                                // CURLOPT_POSTFIELDS =>'{
-                                // "number": "917021507157",
-                                // "type": "text",
-                                // "message": "This is text SMS FORM IICTN",
-                                // "instance_id": "64FC5A51A7429",
-                                // "access_token": "64e7462031534"
-                                // }',
-                                CURLOPT_POSTFIELDS =>$jsonData,
-                                CURLOPT_HTTPHEADER => array(
-                                    'Content-Type: application/json',
-                                    // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                                ),
-                                ));
-                
-                                $response = curl_exec($curl);
-                                curl_close($curl);
+                        if($all_doc_url_val){
+                            $media.=' Syllabus Link :'.$all_doc_url_val;
+                        }else{
+                            $media.='';
+                        }
+        
+                        $data_media = [ "number" => $mobile, "type" => "text", "message" => $media, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
+                        $jsonData = json_encode($data_media);
+                        $send_wp_sms_media_text =  sendwhatsapp($mobile,$jsonData);  
 
-
-                               /* Media Link Whatsaap*/
-                               /*=========================================================================*/ 
-                                $media ='We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
-                                $data = [
-                                    "number" => $mobile,
-                                    "type" => "media",
-                                    "message" => $media,
-                                    "media_url" => $wp_url,
-                                    "instance_id" => INSTANCE_ID,
-                                    "access_token" => ACCESS_TOKEN
-                                ];
-                
-                
-                                $jsonData = json_encode($data);
-                                
-                                curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://wa.intractly.com/api/send',
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => '',
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 0,
-                                CURLOPT_FOLLOWLOCATION => true,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => 'POST',
-                                // CURLOPT_POSTFIELDS =>'{
-                                // "number": "917021507157",
-                                // "type": "text",
-                                // "message": "This is text SMS FORM IICTN",
-                                // "instance_id": "64FC5A51A7429",
-                                // "access_token": "64e7462031534"
-                                // }',
-                                CURLOPT_POSTFIELDS =>$jsonData,
-                                CURLOPT_HTTPHEADER => array(
-                                    'Content-Type: application/json',
-                                    // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                                ),
-                                ));
-                
-                                $response = curl_exec($curl);
-                                curl_close($curl);
-
-
-                
-                        /* End here  Send Whats App */
-
+                         /* End here  Send Whats App */
                         $process = 'Enquiry Link Sent';
                         $processFunction = 'Enquiry/sendEnquiryLink';
                         $this->logrecord($process,$processFunction);
@@ -1205,6 +1156,7 @@
 
                     $to = $get_equiry_data->enq_email;
                     $from = 'admin@iictn.in'; 
+                    $email_name ='IICTN - Admission Link '.date('Y-m-d H:i:s');
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
                     $subject = 'IICTN - Admission Link '.date('Y-m-d H:i:s');
@@ -1214,79 +1166,35 @@
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
 
+                    $body = '<div><p><b>Dear </b> '.$enq_fullname.',</p><p>Please Follow Below Admission Link.</p></div><div><p><b>Admission Link<b></p><p>https://iictn.in/registration/new-registration-student.php?enq='.$enq_id.'</p></div>'; 
 
-                    $body = '<div>
-                    <p><b>Dear </b> '.$enq_fullname.',</p>
-                    <p>Please Follow Below Admission Link.</p></div>
-                    
-                    <div>
-                        <p><b>Admission Link<b></p>
-                        <p>https://iictn.in/registration/new-registration-student.php?enq='.$enq_id.'</p>
-                    </div>
-                    '; 
-                    
-                   // $retval = mail($to,$subject,$htmlContent,$header);
+                    //$retval = mail($to,$subject,$htmlContent,$header);
 
+                    $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
+                    //$retval =  1;
 
-                    $retval =  sendmail($to,$subject,$body,$attchment1="",$attchment2="");
-
-                    print_r($retval);
-                    exit;
-
-
-            
                     if($retval){
-
-                         //  /* Send Whats App  Start Here */
+                        /* Send Whats App  Start Here */
                         //  $curl = curl_init();
                         $text = 'Admission Link';
                         $text .= ' https://iictn.in/registration/new-registration-student.php?enq='.$enq_id;
                         //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                         $mobile = '91'.$get_equiry_data->enq_mobile;
-                      
-                        $curl = curl_init();
-
-                                $data = [
-                                "number" => $mobile,
-                                "type" => "text",
-                                "message" => $text,
-                                "instance_id" => INSTANCE_ID,
-                                "access_token" => ACCESS_TOKEN
-                                ];
-            
-      
-                            $jsonData = json_encode($data);
+                       
+                        $data = ["number" => $mobile, "type" => "text", "message" => $text, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
+                        $jsonData = json_encode($data);
                             
-                            curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://wa.intractly.com/api/send',
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_CUSTOMREQUEST => 'POST',
-                            // CURLOPT_POSTFIELDS =>'{
-                            // "number": "917021507157",
-                            // "type": "text",
-                            // "message": "This is text SMS FORM IICTN",
-                            // "instance_id": "64FC5A51A7429",
-                            // "access_token": "64e7462031534"
-                            // }',
-                            CURLOPT_POSTFIELDS =>$jsonData,
-                            CURLOPT_HTTPHEADER => array(
-                                'Content-Type: application/json',
-                                // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                            ),
-                            ));
-            
-                            $response = curl_exec($curl);
-                            curl_close($curl);
+                        $send_wp_sms =  sendwhatsapp($mobile,$jsonData);
 
-                        $process = 'Enquiry Link Sent';
-                        $processFunction = 'Enquiry/sendEnquiryLink';
-                        $this->logrecord($process,$processFunction);
-                        echo(json_encode(array('status'=>'success')));
+                    //    if(json_decode($send_wp_sms)->status="success"){
+                            $process = 'Enquiry Link Sent';
+                            $processFunction = 'Enquiry/sendEnquiryLink';
+                            $this->logrecord($process,$processFunction);
+                            echo(json_encode(array('status'=>'success')));
+                    //    }else{
+                    //         echo(json_encode(array('status'=>'failure','error_sms'=>'wp sms not send')));
+                    //    }
+
                     }
         }else{
             echo(json_encode(array('status'=>FALSE)));

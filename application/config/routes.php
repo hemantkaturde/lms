@@ -99,6 +99,10 @@ $route['updatecourse/(:num)'] = "course/updatecourse/$1";
 $route['courseLinks/(:num)'] = "course/courseLinks/$1";
 $route['addsyllabus/(:any)'] = "course/addsyllabus/$1";
 $route['fetchallcoursesyllabus/(:any)'] = "course/fetchallcoursesyllabus/$1";
+$route['uploadCoursesayllabus'] = "course/uploadCoursesayllabus";
+$route['deletecourseSyllbus'] = "course/deletecourseSyllbus";
+
+
 
 
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";

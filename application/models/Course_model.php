@@ -1062,7 +1062,6 @@ public function getBookscount($topic_id,$course_id){
     }
  }
 
-
  public function getstudentdataforcanclenotification($dataid,$time_table_id,$course_id){
 
     $this->db->select(TBL_USER.'.name,'.TBL_USER.'.mobile');
@@ -1074,10 +1073,7 @@ public function getBookscount($topic_id,$course_id){
     $fetch_result = $query->result_array();
 
     return $fetch_result;
-
  }
-
-
 
 
  public function activstetimetableclass($dataid,$time_table_id,$course_id){
@@ -1095,11 +1091,14 @@ public function getBookscount($topic_id,$course_id){
 
  }
 
-
-
  public function getCoursesyllabusCount($params,$course_id){
     $this->db->select('*');
     $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_COURSE_SYLLABUS.".doc_url LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_COURSE_SYLLABUS.".doc_name LIKE '%".$params['search']['value']."%')");
+    }
     $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
     $this->db->order_by(TBL_COURSE_SYLLABUS.'.id', 'DESC');
     $query = $this->db->get(TBL_COURSE_SYLLABUS);
@@ -1113,6 +1112,13 @@ public function getBookscount($topic_id,$course_id){
     $this->db->select('*');
     $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
     $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_COURSE_SYLLABUS.".doc_url LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_COURSE_SYLLABUS.".doc_name LIKE '%".$params['search']['value']."%')");
+    }
+
     $this->db->order_by(TBL_COURSE_SYLLABUS.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_COURSE_SYLLABUS);
@@ -1123,11 +1129,10 @@ public function getBookscount($topic_id,$course_id){
     {
         foreach ($fetch_result as $key => $value)
         {
-             $data[$counter]['doc_name'] = '';
-             $data[$counter]['doc_name'] = '';
-             
+             $data[$counter]['doc_name'] = $value['doc_name'];
+             $data[$counter]['doc_url'] = '<a href="'.$value['doc_url'].'" target="_blank">'.$value['doc_url'].'</a>';
              $data[$counter]['action'] = '';
-             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_timetable' time-table-id='".$value['id']."' course_id='".$value['course_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Time Table' title='Delete Time Table'></a>";             
+             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deletecourseSyllbus' syllbus_id='".$value['id']."' course_id='".$value['course_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Time Table' title='Delete Time Table'></a>";             
             $counter++; 
         }
     }
@@ -1135,6 +1140,25 @@ public function getBookscount($topic_id,$course_id){
     return $data;
  }
 
+
+ public function uploadCoursesayllabus($data){
+    if($this->db->insert(TBL_COURSE_SYLLABUS, $data)) {
+        return $this->db->insert_id();;
+    } else {
+        return FALSE;
+    }
+  }
+
+  public function checkifdocnamealredayexits($course_id,$doc_name){
+
+    $this->db->select('id,course_id,doc_name,doc_url');
+    $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
+    $this->db->where(TBL_COURSE_SYLLABUS.'.doc_name', $doc_name);
+    $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
+    $query = $this->db->get(TBL_COURSE_SYLLABUS);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+  }
   
 
 }

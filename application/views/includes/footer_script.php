@@ -5272,17 +5272,14 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Add Course Syllabus'){ ?>
 	    <script type="text/javascript">
-
              var course_id = $('#course_id').val();
-
-
              $(document).ready(function() {
 				var dt = $('#view_course_syllabus').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "10%", "targets": 1 },
-						{ "width": "30%", "targets": 2 }
+						{ "width": "15%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },
+						{ "width": "5%", "targets": 2 }
 					],
 					responsive: true,
 					"oLanguage": {
@@ -5299,7 +5296,37 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						type: "post",
 					},
 				});
-		    });
+		     });
+
+
+			 $(document).on('click','.deletecourseSyllbus',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				var syllbus_id = elemF.attr('syllbus_id');
+				var course_id = elemF.attr('course_id')
+					$.ajax({
+						url : "<?php echo base_url();?>deletecourseSyllbus",
+						type: "POST",
+						data : 'syllbus_id='+syllbus_id,
+						success: function(data, textStatus, jqXHR)
+						{
+							// const obj = JSON.parse(data);
+							// if(obj.status=='true'){
+								//swal("Deleted!", "Certificate Type has been deleted.", "success");
+								//location.reload();
+								window.location.href = "<?php echo base_url().'addsyllabus/'?>"+course_id;
+
+							// }
+
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+				 })
+			 })
+
+				
 
     </script>
 <?php } ?>

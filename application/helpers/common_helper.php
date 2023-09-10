@@ -270,8 +270,9 @@ if(!function_exists(('isFieldEmpty')))
 
 if(!function_exists(('sendmail')))
 {
-    function sendmail($to,$subject,$body,$attchment1,$attchment2)
+    function sendmail($to,$subject,$body,$email_name,$attachmentList)
     {
+
         $mail = new PHPMailer(true);
 
             try {
@@ -284,10 +285,10 @@ if(!function_exists(('sendmail')))
                 $mail->SMTPSecure = EMAIL_SECURE;                             
                 $mail->Port       = EMAIL_SMTP_PORT; 
             
-                $mail->setFrom(EMAIL_USERNAME, 'Name');          
+                $mail->setFrom(EMAIL_USERNAME, $email_name);          
                 $mail->addAddress($to);
                 //$mail->addAddress('receiver2@gfg.com', 'Name');
-                
+            
                 $mail->isHTML(true);                                 
                 $mail->Subject = $subject;
                 $mail->Body    = $body;
@@ -306,8 +307,7 @@ if(!function_exists(('multi_attach_mail')))
 {
     function multi_attach_mail($to, $subject, $message, $senderEmail, $senderName, $files = array())
     {
-
-        // Sender info  
+    // Sender info  
     $from = $senderName." <".$senderEmail.">";  
     $headers = "From: $from"; 
  
@@ -354,10 +354,48 @@ if(!function_exists(('multi_attach_mail')))
     }else{ 
         return false; 
     } 
-
-
-    }
-
+  }
 }
+
+
+if(!function_exists(('sendwhatsapp')))
+{
+    function sendwhatsapp($mobile,$jsonData)
+    {
+            try {
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                // CURLOPT_POSTFIELDS =>'{
+                // "number": "917021507157",
+                // "type": "text",
+                // "message": "This is text SMS FORM IICTN",
+                // "instance_id": "64FC5A51A7429",
+                // "access_token": "64e7462031534"
+                // }',
+                CURLOPT_POSTFIELDS =>$jsonData,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                ),
+                ));
+
+                $response = curl_exec($curl);
+                return $response;
+                //curl_close($curl);             
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$e}";
+            }
+   } 
+}
+
+
 
 ?>
