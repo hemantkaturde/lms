@@ -115,7 +115,7 @@ define('TBL_COURSE_SYLLABUS', 'tbl_course_syllabus');
 
 
 
-define('EMAIL_SMTP_HOST','smtpout.secureserver.net');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_HOST','mail.iictn.in');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
 define('EMAIL_PASSWORD','iictn@2023');	// Your email password
