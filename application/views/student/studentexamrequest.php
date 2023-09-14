@@ -1,4 +1,3 @@
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -15,6 +14,11 @@
                 </div>
                 <div class="ibox-title">Student Exam Request</div>
             </div>
+
+            <?php
+                $attributes = array("name"=>"click_to_allow_request_form","id"=>"click_to_allow_request_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+                echo form_open("", $attributes);        
+            ?>
             <div class="ibox-body">
                 <div class="container">
                     <div class="row" style="margin-left: -53px; !important">
@@ -22,7 +26,7 @@
                             <label style="text-align: left;" for="student_name"><b>Student Name</b></label><span class="required">*</span>
                             <div>
                                 <select class="form-control" id="student_name" name="student_name" placeholder="Select Student Name">
-                                   <option value="">Select Student Name</option>   
+                                   <option value="" >Select Student Name</option>   
                                    <?php foreach ($getallstudentlist as $key => $value) { ?>   
                                         <option st-id="" value="<?php echo $value['userId'] ?>"><?php echo $value['name'].' - '.$value['mobile']  ?></option>
                                     <?php } ?>
@@ -42,9 +46,9 @@
                         </div>
                     
                         <div class="col-sm">
-                            <label style="text-align: left;" for="download_report"><b>Click To Allow</b></label>
+                            <label style="text-align: left;" for="download_report"><b> &nbsp</b></label>
                             <div>
-                               <button type="submit" id="export_to_excel_student_report" class="btn btn-primary export_to_excel_student_report">Allow</button>
+                               <button type="submit" id="click_to_allow_request" class="btn btn-primary click_to_allow_request">Click To Allow</button>
                             </div>
                         </div>
                     </div>
@@ -52,12 +56,12 @@
 
                 <div class="ibox-body">
                     <div class="panel-body table-responsive ">
-                        <table id="fetchstudentexamrequestdata" class="table table-bordered">
+                        <table id="view_studentexamrequestdata" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
                                     <th>Course Name</th>
-                                    <th>Permission To Attent Direct Exam</th>
+                                    <th>Permission</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -67,6 +71,9 @@
                     </div>
                </div>
             </div>
+
+            <?php echo form_close(); ?>
+
         </div>
     </div>
     <!-- END PAGE CONTENT-->    

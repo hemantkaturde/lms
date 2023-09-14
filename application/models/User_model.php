@@ -456,7 +456,26 @@ class User_model extends CI_Model
         return $data;
     }
    
-    // ==============================
+    
+    public function saveStudentexampermissiondata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_STUDENT_REQUEST, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_STUDENT_REQUEST, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
 }
 
   

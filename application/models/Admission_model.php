@@ -1007,16 +1007,62 @@ function studentcertificateData($params)
 
 
     public function getstudentEenquiryid($userId){
-
         $this->db->select('*');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
         $query = $this->db->get(TBL_USERS_ENQUIRES);
         $fetch_result = $query->result_array();
-
         return $fetch_result;
-
     }
 
+
+    public function getstudentexamrequestdataCount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_STUDENT_REQUEST.'.course_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_STUDENT_REQUEST.'.student_id');
+        $this->db->where(TBL_STUDENT_REQUEST.'.status', 1);
+        $this->db->where(TBL_USER.'.user_flag', 'student');
+        $query = $this->db->get(TBL_STUDENT_REQUEST);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+
+    public function getstudentexamrequestdataData($params){
+
+        $this->db->select('*');
+        $this->db->from(TBL_STUDENT_REQUEST);
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_STUDENT_REQUEST.'.course_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_STUDENT_REQUEST.'.student_id');
+        $this->db->where(TBL_STUDENT_REQUEST.'.status', 1);
+        $this->db->where(TBL_USER.'.user_flag', 'student');
+        $this->db->order_by(TBL_STUDENT_REQUEST.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get();
+
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['student_name'] = $value['name'];
+                 $data[$counter]['course_name'] = $value['course_name'];
+
+                 if($value['permission']==1){
+                    $data[$counter]['permission'] = '<input type="checkbox" onClick(1) checked id="checkbox1"/><br />';
+                 }else{
+                    $data[$counter]['permission'] = '<input type="checkbox" onclick(0)  id="checkbox1"/><br />';
+                 }
+               
+                 $data[$counter]['action'] = '';
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_student_request' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Student Request' title=''Delete Student Request'></a>&nbsp"; 
+                 $counter++; 
+            }
+        }
+        return $data;
+    }
 
 
 }

@@ -298,6 +298,13 @@ $route['activstetimetableclass'] = "course/activstetimetableclass";
 
 $route['studentexamrequest'] = "admin/studentexamrequest";
 $route['getstudentcourselist'] = "admin/getstudentcourselist";
+$route['allowstudentexamrequest'] = "admin/allowstudentexamrequest";
+$route['fetchstudentexamrequestdata'] = "admin/fetchstudentexamrequestdata";
+$route['deletestudentrequest'] = "admin/deletestudentrequest";
+
+
+
+
 
 
 

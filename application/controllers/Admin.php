@@ -816,6 +816,38 @@ class Admin extends BaseController
     $data['getallstudentlist'] =  $this->student_model->getallstudentlist();
     $this->loadViews("student/studentexamrequest", $this->global, $data, NULL);
  }
+
+
+ public function allowstudentexamrequest(){
+    $post_submit = $this->input->post();
+    if(!empty($post_submit)){
+        $allowstudentexamrequest_response = array();
+
+        $this->form_validation->set_rules('student_name', 'Student Name', 'trim|required');
+        $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+
+        if($this->form_validation->run() == FALSE){
+            $allowstudentexamrequest_response['status'] = 'failure';
+            $allowstudentexamrequest_response['error'] = array('student_name'=>strip_tags(form_error('student_name')), 'course_name'=>strip_tags(form_error('course_name')));
+        }else{
+
+               $data = array(
+                'student_id'      => $this->input->post('student_name'),
+                'course_id'     => $this->input->post('course_name'),
+                'permission'     => 1
+               );
+
+                $saveStudentexampermissiondata = $this->user_model->saveStudentexampermissiondata('',$data);
+                if($saveStudentexampermissiondata){
+                        $allowstudentexamrequest_response['status'] = 'success';
+                        $allowstudentexamrequest_response['error'] = array('student_name'=>'', 'course_name'=>'');
+                }
+
+        }
+        echo json_encode($allowstudentexamrequest_response);
+    }
+
+ }
  
 
  public function getstudentcourselist(){
@@ -834,7 +866,56 @@ class Admin extends BaseController
     } else {
         echo 'failure';
     }
+ }
 
+
+ public function fetchstudentexamrequestdata(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admission_model->getstudentexamrequestdataCount($params); 
+    $queryRecords = $this->admission_model->getstudentexamrequestdataData($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+
+    echo json_encode($json_data);
+
+ }
+
+ public function deletestudentrequest(){
+  
+    $post_submit = $this->input->post('id');
+    if(!empty($post_submit)){
+        $deletecourse_response =array();
+      
+            $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+            $result = $this->course_model->data_update('tbl_student_exam_request',$courseInfo,'id',$this->input->post('id'));
+            if($result){
+                $deletecourse_response['status'] = 'success';
+                $process = 'Delete Student Request';
+                $processFunction = 'Course/deletestudentrequest';
+                $this->logrecord($process,$processFunction);
+            }else
+            {
+                $deletecourse_response['status'] = 'filure';
+            }
+        echo json_encode($deletecourse_response);
+    }
+    
  }
 
 

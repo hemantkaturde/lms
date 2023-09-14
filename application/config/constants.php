@@ -112,6 +112,7 @@ define('TBL_STUDENT_ANSWER_SHEET', 'tbl_student_answer_sheet');
 define('TBL_ASK_A_QUERY', 'tbl_askquery');
 define('TBL_ASK_A_QUERY_ANSWER', 'tbl_queryanswers');
 define('TBL_COURSE_SYLLABUS', 'tbl_course_syllabus');
+define('TBL_STUDENT_REQUEST', 'tbl_student_exam_request');
 
 define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
@@ -123,14 +124,9 @@ define('FROM_EMAIL_NAME','IICTN-Payment');
 define('EMAIL_SECURE','tls');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');	
 
-
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
-
 define('INSTANCE_ID','64FC5A51A7429');
-
 define('ACCESS_TOKEN','64e7462031534');
-
-
 
 if($_SERVER['HTTP_HOST']=='localhost'){
     define('SERVER','http://localhost/lms_2/');

@@ -4308,7 +4308,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <script type="text/javascript">
 		var course_id =$('#course_id_1_post').val();
 
-               $(document).ready(function() {	
+        $(document).ready(function() {	
 					var dt = $('#view_studentcoursetopicsattAchmentList').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
@@ -4331,7 +4331,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							url :"<?php echo base_url();?>fetchstudnetCourseAttchemant/"+course_id,
 							type: "post",
 						},
-					});
+				});
 		});
 
 </script>
@@ -5238,38 +5238,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-<?php if($pageTitle=='Student Exam Request'){ ?>
-	<script type="text/javascript">
-	 $(document).on('change','#student_name',function(e){  
-			e.preventDefault();
-			var student_name = $('#student_name').val();
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getstudentcourselist",
-				type: "POST",
-				data : {'student_name' : student_name},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-					{
-						$('#course_name').html('<option value="">Select Course Name</option>');
-					}
-					else
-					{
-						$('#course_name').html(data);
-					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#course_name').html();
-				}
-			});
-			return false;
-		 });
-   </script>
-<?php  } ?>
-
-
 <?php if($pageTitle=='Add Course Syllabus'){ ?>
 	    <script type="text/javascript">
              var course_id = $('#course_id').val();
@@ -5326,12 +5294,134 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				 })
 			 })
 
-				
-
     </script>
 <?php } ?>
 
 
+<?php if($pageTitle=='Student Exam Request'){ ?>
+	<script type="text/javascript">
+	   
+	    $(document).ready(function() {	
+					var dt = $('#view_studentexamrequestdata').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "30%", "targets": 0 },
+							{ "width": "30%", "targets": 1 },
+							{ "width": "5%", "targets": 2 },
+							{ "width": "5%", "targets": 3 }
+
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Request Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchstudentexamrequestdata",
+							type: "post",
+						},
+			});
+		}); 	 
+	        
+	    $(document).on('change','#student_name',function(e){  
+			e.preventDefault();
+			var student_name = $('#student_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getstudentcourselist",
+				type: "POST",
+				data : {'student_name' : student_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#course_name').html('<option value="">Select Course Name</option>');
+					}
+					else
+					{
+						$('#course_name').html(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#course_name').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#click_to_allow_request',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#click_to_allow_request_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>allowstudentexamrequest",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'studentexamrequest'?>";
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+		$(document).on('click','.delete_student_request',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			$.ajax({
+				url : "<?php echo base_url();?>deletestudentrequest",
+				type: "POST",
+				data : 'id='+elemF.attr('data-id'),
+				success: function(data, textStatus, jqXHR)
+					{
+						window.location.href = "<?php echo base_url().'studentexamrequest'?>";
+					},
+				error: function (jqXHR, textStatus, errorThrown)
+					{
+					    //$(".loader_ajax").hide();
+					}
+		    })
+        });
+
+
+
+   </script>
+<?php  } ?>
 
 
 
