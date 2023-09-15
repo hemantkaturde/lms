@@ -939,9 +939,7 @@ class Admin extends BaseController
             $checkboxCheckUncheckpermission_response['status'] = 'success';
         }else{
             $checkboxCheckUncheckpermission_response['status'] = 'filure';
-
         }
-        
     }
     echo json_encode($checkboxCheckUncheckpermission_response);
 
