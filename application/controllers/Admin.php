@@ -837,12 +837,20 @@ class Admin extends BaseController
                 'permission'     => 1
                );
 
-                $saveStudentexampermissiondata = $this->user_model->saveStudentexampermissiondata('',$data);
-                if($saveStudentexampermissiondata){
-                        $allowstudentexamrequest_response['status'] = 'success';
-                        $allowstudentexamrequest_response['error'] = array('student_name'=>'', 'course_name'=>'');
-                }
+               /*Check If student data is alreayd exits */
+                $checkifalreadyexitsExamRequest = $this->user_model->checkifalreadyexitsExamRequest(trim($this->input->post('course_name')),trim($this->input->post('student_name')));
+                if($checkifalreadyexitsExamRequest) {
 
+                    $allowstudentexamrequest_response['status'] = 'failure';
+                    $allowstudentexamrequest_response['error'] = array('student_name'=>'Request Already Exists');
+                 }else{
+                    $saveStudentexampermissiondata = $this->user_model->saveStudentexampermissiondata('',$data);
+                    if($saveStudentexampermissiondata){
+                            $allowstudentexamrequest_response['status'] = 'success';
+                            $allowstudentexamrequest_response['error'] = array('student_name'=>'', 'course_name'=>'');
+                    }
+
+                 }
         }
         echo json_encode($allowstudentexamrequest_response);
     }
@@ -916,6 +924,27 @@ class Admin extends BaseController
         echo json_encode($deletecourse_response);
     }
     
+ }
+
+
+ public function CheckboxCheckUncheckpermission(){
+
+    $post_submit = $this->input->post();
+
+    if($post_submit){
+        $checkboxCheckUncheckpermission_response =array();
+        $CheckboxCheckUncheckpermission = $this->admission_model->CheckboxCheckUncheckpermission($this->input->post('id'),$this->input->post('permission_value'));
+
+        if($CheckboxCheckUncheckpermission){
+            $checkboxCheckUncheckpermission_response['status'] = 'success';
+        }else{
+            $checkboxCheckUncheckpermission_response['status'] = 'filure';
+
+        }
+        
+    }
+    echo json_encode($checkboxCheckUncheckpermission_response);
+
  }
 
 

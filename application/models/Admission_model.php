@@ -1051,9 +1051,9 @@ function studentcertificateData($params)
                  $data[$counter]['course_name'] = $value['course_name'];
 
                  if($value['permission']==1){
-                    $data[$counter]['permission'] = '<input type="checkbox" onClick(1) checked id="checkbox1"/><br />';
+                    $data[$counter]['permission'] = '<input type="checkbox" onClick="CheckboxCheckUncheck('.$value['id'].')" checked id="permission"/><br />';
                  }else{
-                    $data[$counter]['permission'] = '<input type="checkbox" onclick(0)  id="checkbox1"/><br />';
+                    $data[$counter]['permission'] = '<input type="checkbox" onClick="CheckboxCheckUncheck('.$value['id'].')" id="permission"/><br />';
                  }
                
                  $data[$counter]['action'] = '';
@@ -1062,6 +1062,20 @@ function studentcertificateData($params)
             }
         }
         return $data;
+    }
+
+
+    public function CheckboxCheckUncheckpermission($id,$permission_value){
+        $data =array(
+            'permission'=>$permission_value
+        );
+
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_STUDENT_REQUEST, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
 

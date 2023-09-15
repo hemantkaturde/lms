@@ -476,6 +476,15 @@ class User_model extends CI_Model
 
     }
 
+    public function checkifalreadyexitsExamRequest($course_name,$student_name){
+        $this->db->select('*');
+        $this->db->where(TBL_STUDENT_REQUEST.'.student_id', $student_name);
+        $this->db->where(TBL_STUDENT_REQUEST.'.course_id', $course_name);
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_STUDENT_REQUEST);
+        return $query->row();
+    }
+
 }
 
   

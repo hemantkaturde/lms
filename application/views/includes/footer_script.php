@@ -5418,8 +5418,37 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		    })
         });
 
+		function CheckboxCheckUncheck(id){
+			var permission = document.getElementById("permission");  
+			if(permission.checked==true){
+				var permission_value = 1;
+			}else{
+				var permission_value = 0;
+			}
 
-
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>CheckboxCheckUncheckpermission",
+				type: "POST",
+				data : {'permission_value' : permission_value,'id':id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#course_name').html('<option value="">Select Course Name</option>');
+					}
+					else
+					{
+						//$('#course_name').html(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#course_name').html();
+				}
+			});
+			return false;
+		}
    </script>
 <?php  } ?>
 

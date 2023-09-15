@@ -78,6 +78,6 @@
     </div>
     <!-- END PAGE CONTENT-->    
 
-    <script type="text/javascript">
+<script type="text/javascript">
       $(".myselect").select2();
 </script>
