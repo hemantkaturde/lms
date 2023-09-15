@@ -288,7 +288,13 @@ $jsonstringtoArray = json_decode($access, true);
         </header>
         <!-- END HEADER-->
         <!-- START SIDEBAR-->
-        <nav class="page-sidebar" id="sidebar" style="background-color: #d2ae6d; position: fixed;overflow: auto">
+        <nav class="page-sidebar" id="sidebar" style="background-color: #d2ae6d; position: fixed;
+        
+            height: 200px; /* Set the desired height */
+            overflow-y: scroll; /* Enable vertical scrolling */
+            border: 1px solid #ccc; /* Add a border for visualization */
+
+        ">
             <div id="sidebar-collapse" >
                 <div class="admin-block d-flex">
                     <div>
