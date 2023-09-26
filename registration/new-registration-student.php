@@ -241,28 +241,67 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                          echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
                     }else{
 
-                        $retval = mail($to,$Subject,$Body,$header);
-                     
+                        //$retval = mail($to,$Subject,$Body,$header);
+
+                        $mail->SMTPDebug = 2;                                      
+                        $mail->isSMTP();                                           
+                        $mail->Host       = EMAIL_SMTP_HOST;                   
+                        $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+                        $mail->Username   = EMAIL_USERNAME;                
+                        $mail->Password   = EMAIL_PASSWORD;                       
+                        $mail->SMTPSecure = EMAIL_SECURE;                             
+                        $mail->Port       = EMAIL_SMTP_PORT; 
+                    
+                        $mail->setFrom(EMAIL_USERNAME, $email_name);          
+                        $mail->addAddress($to);
+                        //$mail->addAddress('receiver2@gfg.com', 'Name');
+                    
+                        $mail->isHTML(true);                                 
+                        $mail->Subject = $Subject;
+                        $mail->Body    = $Body;
+                        //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                        $retval= $mail->send();
+
                         if($retval){
 
-                            
-                                /* Send Whats App  Start Here */
+                            /* Send Whats App  Start Here */
                             $curl = curl_init();
                             $text = 'Login Link : https://www.iictn.in/ , Username (First Name  or Email Id or Mobile Number) : '.$username .' Password :'.$main_pass;
                             //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                            $mobile = '91'.$mobile;
-                            $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC5A51A7429&access_token=64e7462031534";
-                
-                            $ch = curl_init();
-                            curl_setopt($ch, CURLOPT_URL, $url);
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-                            // This is what solved the issue (Accepting gzip encoding)
-                            // curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-                            $response = curl_exec($ch);
-                            curl_close($ch);
-                            // echo $response;
+                            $mobile_number = '91'.$mobile;
+                            // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC5A51A7429&access_token=64e7462031534";
+
+                            $data_media = [ "number" => $mobile_number, "type" => "text", "message" => $text, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
+
+                            $jsonData = json_encode($data_media);
+
+
+                            $curl = curl_init();
+                            curl_setopt_array($curl, array(
+                            CURLOPT_URL => 'https://wa.intractly.com/api/send',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            // CURLOPT_POSTFIELDS =>'{
+                            // "number": "917021507157",
+                            // "type": "text",
+                            // "message": "This is text SMS FORM IICTN",
+                            // "instance_id": "64FC5A51A7429",
+                            // "access_token": "64e7462031534"
+                            // }',
+                            CURLOPT_POSTFIELDS =>$jsonData,
+                            CURLOPT_HTTPHEADER => array(
+                                'Content-Type: application/json',
+                                // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
+                            ),
+                            ));
+            
+                            $response = curl_exec($curl);
+                            //return $response;
 
 
                             echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
