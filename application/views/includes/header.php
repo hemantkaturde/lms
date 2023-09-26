@@ -268,7 +268,7 @@ $jsonstringtoArray = json_decode($access, true);
 
                             }else{
                                 if(!empty($this->session->userdata('profile_pic'))){ ?>
-                                    <img  src="<?php echo IMGPATH_ADMISSION.'/'.$this->session->userdata('profile_pic');?>" />
+                                    <img  src="<?php echo IMGPATH.'/'.$this->session->userdata('profile_pic');?>" />
                               <?php  }else{ ?>
                                 <img src="<?php echo base_url(); ?>assets/img/admin-avatar.png" />
                            <?php  } }?>
