@@ -117,7 +117,7 @@ define('TBL_STUDENT_REQUEST', 'tbl_student_exam_request');
 define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true'); 		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
-define('EMAIL_PASSWORD','xsmtpsib-f92d6f9f9839dbda43ff89926bb006d9c7aa0a756e2b82ef9d4d41f05f3fd9c1-WEhn7Xm1Q9TgztRV');	// Your email password
+define('EMAIL_PASSWORD','xsmtpsib-f92d6f9f9839dbda43ff89926bb006d9c7aa0a756e2b82ef9d4d41f05f3fd9c1-UfnIAx7mg64EaqJZ');	// Your email password
 define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
 define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');
