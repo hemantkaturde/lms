@@ -1161,6 +1161,18 @@ public function getBookscount($topic_id,$course_id){
   }
   
 
+  public function getcouese_details_for_whatsapp_sms($data_id,$time_table_id,$course_id){
+
+    $this->db->select(TBL_COURSE.'.course_name,'.TBL_TIMETABLE_TRANSECTIONS.'.topic,'.TBL_TIMETABLE_TRANSECTIONS.'.date as timetabledate');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $time_table_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id', $data_id);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $course_id);
+    $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+    $row_array = $query->row_array();
+    return $row_array;
+  }
+
 }
 
 ?>

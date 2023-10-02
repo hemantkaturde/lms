@@ -1469,18 +1469,18 @@
 
                 $cancle_class_response =array();
                 $result = $this->course_model->cancletimetableclass(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
-
+               //$result=1;
                 if($result){
 
-
                     $getstudentdata = $this->course_model->getstudentdataforcanclenotification(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
+
+                    $getcouese_details_for_whatsapp_sms = $this->course_model->getcouese_details_for_whatsapp_sms(trim($post_submit['data-id']),trim($post_submit['time_table_id']),trim($post_submit['course_id']));
 
                     foreach ($getstudentdata as $key => $value) {
 
                         //  //  /* Send Whats App  Start Here */
                         //  $curl = curl_init();
-                        
-                        $text = ' Class Cancel Notification. Following class is cancelled.  Course Name, Course Date, Topic';
+                        $text = ' Class Cancel Notification. Following class is cancelled.  Course Name : '.$getcouese_details_for_whatsapp_sms['course_name'].', Course Date : '.$getcouese_details_for_whatsapp_sms['timetabledate'].' , Topic : '.$getcouese_details_for_whatsapp_sms['topic'];
                         //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                         $mobile = '91'.$value['mobile'];
                       
