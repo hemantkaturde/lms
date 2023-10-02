@@ -223,7 +223,6 @@ $route['profilesetting'] = 'admin/profilesetting';
 $route['updateprofile'] = 'admin/updateprofile';
 
 
-
 //attendance
 $route['attendance'] = 'admin/attendance';
 $route['fetchstudentattendance'] = 'admin/fetchstudentattendance';
@@ -269,7 +268,6 @@ $route['studentcrtificateListing'] = "student/studentcrtificateListing";
 $route['fetchallstudentcertificatesstudentPortal'] = "student/fetchallstudentcertificatesstudentPortal";
 $route['updateevbtrnumber'] = "student/updateevbtrnumber";
 $route['printmarksheet?(:any)'] = "admin/printmarksheet/$1";
-
 
 
 $route['askqquery'] = "student/askqquery";

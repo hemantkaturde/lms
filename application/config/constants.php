@@ -114,15 +114,37 @@ define('TBL_ASK_A_QUERY_ANSWER', 'tbl_queryanswers');
 define('TBL_COURSE_SYLLABUS', 'tbl_course_syllabus');
 define('TBL_STUDENT_REQUEST', 'tbl_student_exam_request');
 
-define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
+// define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
+// define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
+// define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
+// define('EMAIL_PASSWORD','EFwG7g1h2vmOTMHB');	// Your email password
+// define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
+// define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
+// define('FROM_EMAIL_NAME','IICTN-Payment');
+// define('EMAIL_SECURE','tls');			// e.g. email@example.com
+// define('EMAIL_NAME','IICTN');	
+
+
+// define('EMAIL_SMTP_HOST','smtp.iictn.com');		// your smtp host e.g. smtp.gmail.com
+// define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
+// define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
+// define('EMAIL_PASSWORD','QY9ZT(!N#.Ro');	// Your email password
+// define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
+// define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
+// define('FROM_EMAIL_NAME','IICTN-Payment');
+// define('EMAIL_SECURE','tls');			// e.g. email@example.com
+// define('EMAIL_NAME','IICTN');
+
+
+define('EMAIL_SMTP_HOST','mail.iictn.in');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
-define('EMAIL_PASSWORD','EFwG7g1h2vmOTMHB');	// Your email password
+define('EMAIL_PASSWORD','QY9ZT(!N#.Ro');	// Your email password
 define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
 define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');
 define('EMAIL_SECURE','tls');			// e.g. email@example.com
-define('EMAIL_NAME','IICTN');	
+define('EMAIL_NAME','IICTN');
 
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
 define('INSTANCE_ID','64FC5A51A7429');
