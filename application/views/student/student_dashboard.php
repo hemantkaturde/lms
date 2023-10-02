@@ -470,7 +470,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $(".attend_manually").click(function(){
+                    $(".attend_manually").click(function(){
                     var user_id = $(this).attr("user-id");
                     var topic_id = $(this).attr("topic-id");
                     var course_id = $(this).attr("course-id");
@@ -520,6 +520,7 @@ $(document).ready(function(){
     });
 });
 
+
 $(".print_id_card").click(function(){
 
 	var user_id = $(this).attr("user-id");
@@ -562,14 +563,57 @@ $(".print_id_card").click(function(){
 								$("#student_name").append(student_name);
 								$("#student_mobile_number").append(mobile);
 
-								
-
+							
 								$("#topic_name").append(topic_name);
 								$("#course_name").append(course_name);
 								$("#class_time").append(classtime);
 								$("#class_date").append(date);
-								$("#idcarddata").modal("show");
-				
+
+								var user_id = $(this).attr("user-id");
+								var topic_id = $(this).attr("topic-id");
+								var course_id = $(this).attr("course-id");
+								var meeting_id = $(this).attr("meeting_id");
+								var meeting_link = $(this).attr("meeting_link");
+								
+								$.ajax({
+									url : "<?php echo base_url();?>attendClasses",
+									type: "POST",
+									data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link,
+									// data : {'user_id':user_id,'topic_id':topic_id,'course_id':course_id,'meeting_id':meeting_id,'meeting_link':meeting_link},
+									success: function(data, textStatus, jqXHR)
+									{
+
+										var fetchResponse = $.parseJSON(data);
+										if(fetchResponse.status == "failure")
+										{
+											$.each(fetchResponse.error, function (i, v)
+											{
+												$('.'+i+'_error').html(v);
+											});
+										}
+										else if(fetchResponse.status == 'success')
+										{
+											swal({
+												title: "Attendance Successfully Done",
+												text: "",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													$("#popup_modal_md").hide();
+													//window.location.href = meeting_link;
+													//window.open(meeting_link, '_blank');
+													$("#idcarddata").modal("show");
+													//window.location.href = "<?php echo base_url().'dashboard'?>";
+											});						
+										}
+										
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+								});
+							return false;
 							}
 							
 						},
@@ -582,8 +626,6 @@ $(".print_id_card").click(function(){
 
     
 });
-
-
 
 
 document.getElementById("print_card_button").onclick = function () {
