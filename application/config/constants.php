@@ -153,7 +153,7 @@ define('ACCESS_TOKEN','64e7462031534');
 if($_SERVER['HTTP_HOST']=='localhost'){
     define('SERVER','http://localhost/lms_2/');
 }else{
-    define('SERVER','http://iictn.in/');
+    define('SERVER','https://iictn.in/');
 }
 
 
