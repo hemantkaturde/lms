@@ -276,7 +276,7 @@ if(!function_exists(('sendmail')))
         $mail = new PHPMailer(true);
 
             try {
-                $mail->SMTPDebug = 2;                                      
+                $mail->SMTPDebug = 0;                                      
                 $mail->isSMTP();                                           
                 $mail->Host       = EMAIL_SMTP_HOST;                   
                 $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
@@ -293,8 +293,13 @@ if(!function_exists(('sendmail')))
                 $mail->Subject = $subject;
                 $mail->Body    = $body;
                 //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-                $mail->send();
-                echo "Mail has been sent successfully!";
+                //$mail->send();
+                if($mail->send()){
+                    return true;
+                }else{
+                    return false;
+                }
+                //echo "Mail has been sent successfully!";
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
