@@ -243,7 +243,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
                         //$retval = mail($to,$Subject,$Body,$header);
 
-                        $mail->SMTPDebug = 2;                                      
+                        $mail->SMTPDebug = 0;                                      
                         $mail->isSMTP();                                           
                         $mail->Host       = EMAIL_SMTP_HOST;                   
                         $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
