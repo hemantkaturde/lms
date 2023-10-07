@@ -43,6 +43,9 @@
                                             <h4 class="card-title"><b>Examination</b></h4>
                                             <p class="card-text"> <?=$value['course_name'];?></p>
                                               </hr>
+                                            <!-- <h4 class="card-title"><b>Examination Title</b></h4>
+                                            <p class="card-text"> <?=$value['exam_title'];?></p> -->
+
                                             <h4 class="card-title"><b>Examination Title</b></h4>
                                             <p class="card-text"> <?=$value['exam_title'];?></p>
                                         </div>
