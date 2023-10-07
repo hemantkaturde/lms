@@ -185,12 +185,12 @@ $roleText = $this->session->userdata('roleText');
                         if (i % 2 == 0) {
                             html = html + '<div class="info1"><h4>' + value.time +
                                 '<img src="" class="delete" alt="" title="delete this event" day="' +
-                                day + '" val="' + value.id + '" /></h4><p>' + value.event +
+                                day + '" val="' + value.id + '" /></h4><p>' + value.event + ' [ Trainer => '+value.trainer+']'+ ' [ Backup Trainer => '+value.backup_trainername+']'+
                                 '</p></div>';
                         } else {
                             html = html + '<div class="info2"><h4>' + value.time +
                                 '<img src="" class="delete" alt="" title="delete this event" day="' +
-                                day + '" val="' + value.id + '" /></h4><p>' + value.event +
+                                day + '" val="' + value.id + '" /></h4><p>' + value.event + ' [ Trainer => '+value.trainer+']'+ ' [ Backup Trainer => '+value.backup_trainername+']'+
                                 '</p></div>';
                         }
                         i++;
