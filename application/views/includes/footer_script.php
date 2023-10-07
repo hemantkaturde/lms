@@ -2790,7 +2790,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									})
 								}
 								else {
-						swal("Cancelled", "Class Deleted Succussfully", "error");
+						swal("Cancelled", "", "error");
 						}
 					});
 		});
@@ -2858,7 +2858,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 									})
 								}
 								else {
-						swal("Cancelled", "Class Deleted Succussfully", "error");
+						swal("Cancelled", "", "error");
 						}
 					});
 		});
