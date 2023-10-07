@@ -11,7 +11,7 @@ include "phpqrcode/qrlib.php" ;
  $result = $conn->query("SELECT * from  tbl_users  
                          join tbl_student_answer_sheet on tbl_users.userid = tbl_student_answer_sheet.student_id
                          join tbl_course on tbl_student_answer_sheet.course_id = tbl_course.courseId
-                         join tbl_course_type on tbl_course_type.ct_id = tbl_course.courseId
+                         join tbl_course_type on tbl_course_type.ct_id = tbl_course.course_type_id
                          where tbl_users.userid=$student_id and tbl_users.isDeleted=0 and tbl_users.user_flag='student' group by tbl_student_answer_sheet.student_id");
 
  $result_arry = $result->fetch_assoc();
@@ -82,16 +82,16 @@ $resultStudentadmissionDetails = $conn->query($getStudentadmissionDetails);
 $rowDataStudentadminssiondetails = $resultStudentadmissionDetails->fetch_assoc();
 
 
-// $profile_pic_admission = $rowDataStudentadminssiondetails['document_1'];
+$profile_pic_admission = $rowDataStudentadminssiondetails['document_1'];
 
-// if($profile_pic_admission){
-//     $profile_pic_img = "../uploads/admission/".$profile_pic_admission;
+if($profile_pic_admission){
+    $profile_pic_img = "../uploads/admission/".$profile_pic_admission;
 
-//     if(file_exists($profile_pic_img)) 
-//     {
-//         $pdf->Cell(20, 10, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 25.00,33.00), 0, 0, 'L', false );
-//     }   
-// }
+    if(file_exists($profile_pic_img)) 
+    {
+        $pdf->Cell(20, 10, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 25.00,33.00), 0, 0, 'L', false );
+    }   
+}
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){
