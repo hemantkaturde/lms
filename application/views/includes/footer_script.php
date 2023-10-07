@@ -4621,7 +4621,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						 	button: "Ok",
 						 	},function(){ 
 								$("#popup_modal_sm").hide();
-								window.location.href = "<?php echo base_url().'studentexamination/'?>"+examination_id;
+								window.location.href = "<?php echo base_url().'studentexamination/'?>"+course_id;
 						});						
 				    }
 					
