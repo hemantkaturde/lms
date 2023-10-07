@@ -46,8 +46,8 @@
                                             <!-- <h4 class="card-title"><b>Examination Title</b></h4>
                                             <p class="card-text"> <?=$value['exam_title'];?></p> -->
 
-                                            <h4 class="card-title"><b>Examination Title</b></h4>
-                                            <p class="card-text"> <?=$value['exam_title'];?></p>
+                                            <!-- <h4 class="card-title"><b>Examination Title</b></h4>
+                                            <p class="card-text"> <?=$value['exam_title'];?></p> -->
                                         </div>
                                         <div class="card-footer" style="background: inherit; border-color: inherit;">
                                             <a href="<?php echo base_url().'studentexamination/'.$value['courseId'];?>" class="btn btn-primary">Go to Examination Page</a>
