@@ -385,7 +385,7 @@ class Student_model extends CI_Model
             $this->db->or_where(TBL_COURSE.".course_total_fees LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
         $query = $this->db->get(TBL_COURSE);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -399,7 +399,7 @@ class Student_model extends CI_Model
 
 
         $this->db->select(TBL_ENQUIRY.'.enq_course_id,'.TBL_USER.'.book_issued');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
         $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
