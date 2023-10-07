@@ -109,9 +109,9 @@ $roleText = $this->session->userdata('roleText');
                                             $i = 1;
                                             foreach($events as $e){
                                             if($i % 2 == 0){
-                                                    echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
+                                                    echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'    [ Trainer => '.$e['trainer'].']   [ Backup Trainer => '.$e['backup_trainername'].'] </p></div>';
                                                 }else{
-                                                    echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
+                                                    echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'    [ Trainer => '.$e['trainer'].']   [ Backup Trainer => '.$e['backup_trainername'].'] </p></div>';
                                                 } 
                                                 $i++;
                                             }
