@@ -1,11 +1,11 @@
 <?php
 include_once('../db/config.php'); 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\SMTP;
+// use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
-require '../vendor/autoload.php';
+// //Load Composer's autoloader
+// require '../vendor/autoload.php';
 
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
 $url = "https://";   
@@ -245,26 +245,26 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                          echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
                     }else{
 
-                        //$retval = mail($to,$Subject,$Body,$header);
+                        $retval = mail($to,$Subject,$Body,$header);
 
-                        $mail->SMTPDebug = 0;                                      
-                        $mail->isSMTP();                                           
-                        $mail->Host       = EMAIL_SMTP_HOST;                   
-                        $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
-                        $mail->Username   = EMAIL_USERNAME;                
-                        $mail->Password   = EMAIL_PASSWORD;                       
-                        $mail->SMTPSecure = EMAIL_SECURE;                             
-                        $mail->Port       = EMAIL_SMTP_PORT; 
+                        // $mail->SMTPDebug = 0;                                      
+                        // $mail->isSMTP();                                           
+                        // $mail->Host       = EMAIL_SMTP_HOST;                   
+                        // $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+                        // $mail->Username   = EMAIL_USERNAME;                
+                        // $mail->Password   = EMAIL_PASSWORD;                       
+                        // $mail->SMTPSecure = EMAIL_SECURE;                             
+                        // $mail->Port       = EMAIL_SMTP_PORT; 
                     
-                        $mail->setFrom(EMAIL_USERNAME, $email_name);          
-                        $mail->addAddress($to);
+                        // $mail->setFrom(EMAIL_USERNAME, $email_name);          
+                        // $mail->addAddress($to);
                         //$mail->addAddress('receiver2@gfg.com', 'Name');
                     
-                        $mail->isHTML(true);                                 
-                        $mail->Subject = $Subject;
-                        $mail->Body    = $Body;
-                        //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-                        $retval= $mail->send();
+                        // $mail->isHTML(true);                                 
+                        // $mail->Subject = $Subject;
+                        // $mail->Body    = $Body;
+                        // //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                        // $retval= $mail->send();
 
                         if($retval){
 
