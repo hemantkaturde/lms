@@ -683,7 +683,6 @@ class Student_model extends CI_Model
 
   }
 
-
   
   public function gettstudnetimetabletopiclistingCount($params,$time_table_id,$course_id){
 
@@ -702,7 +701,7 @@ class Student_model extends CI_Model
 
   }
 
-  public function gettstudentimetabletopiclistingdata($params,$time_table_id,$course_id){
+   public function gettstudentimetabletopiclistingdata($params,$time_table_id,$course_id){
 
     $this->db->select('*');
     if($params['search']['value'] != "") 
@@ -744,8 +743,6 @@ class Student_model extends CI_Model
     return $data;
   }
  
-
-
   public function getstudenttopicmeetinglinkCount($params,$time_table_id,$course_id,$time_table_transection_id){
 
     $this->db->select('*');
@@ -1565,7 +1562,6 @@ public function getallstudentquerydata($params,$userId,$roleText){
 
     $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
@@ -1972,8 +1968,8 @@ public function getcoursetopic($course_id)
 {
     $this->db->select('*');
     $this->db->where('course_id', $course_id);
-    $this->db->order_by('topic','ASC');
-    $query_result = $this->db->get(TBL_TIMETABLE_TRANSECTIONS)->result_array();
+    $this->db->order_by('topic_name','ASC');
+    $query_result = $this->db->get(TBL_COURSE_TOPICS)->result_array();
     if($state_id != '') {
         foreach($query_result as $key => $value) {
             if($value['id'] == $state_id) {
