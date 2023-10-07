@@ -4575,7 +4575,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>student/fetchstudentexamination/"+course_id,
+                    url :"<?php echo base_url();?>student/studentexamination/"+course_id,
                     type: "post",
 	            },
 	        });
