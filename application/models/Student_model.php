@@ -728,7 +728,12 @@ class Student_model extends CI_Model
              $data[$counter]['topic'] =  $value['topic'];
              $data[$counter]['action'] = '';
 
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addstudenttopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>";
+
+             if($value['iscancle']!=1){
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addstudenttopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>";
+             }else{
+                $data[$counter]['action'] .='<p>Cancelled</p>';
+             }
 
             //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/meeting.png alt='Add Links' title='Add Links'></a>"; 
             
