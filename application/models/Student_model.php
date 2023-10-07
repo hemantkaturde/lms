@@ -939,7 +939,7 @@ public function getstudentexaminationdata($params,$userId,$course_id){
 
 
     $this->db->select('enq_course_id');
-    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
     $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
     $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
@@ -947,10 +947,10 @@ public function getstudentexaminationdata($params,$userId,$course_id){
     $data = array();
     $counter = 0;
     foreach ($fetch_result_enquiry_courses as $key => $value) {
-        
+
+
         $course_ids    =   explode(',', $value['enq_course_id']);
         foreach ($course_ids as $key => $value) {
-
 
         $this->db->select('count(*) as count');
         $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
@@ -986,11 +986,6 @@ public function getstudentexaminationdata($params,$userId,$course_id){
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_EXAMINATION);
         $fetch_result = $query->result_array();
-
-
-        // print_r($fetch_result);
-        // exit;
-
 
 
         if(count($fetch_result) > 0)
