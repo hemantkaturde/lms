@@ -1496,7 +1496,7 @@ public function  getallstudentquerycount($params,$userId,$roleText){
         $getTrainercourseis = $this->gettrainercourseIds($userId);
         $course_id =array();
         foreach ($getTrainercourseis as $key => $value) {
-            $course_id[]= $value['courseId'];
+            $course_id[]= $value['course_id'];
              
         }
 
@@ -1543,7 +1543,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
         $getTrainercourseis = $this->gettrainercourseIds($userId);
         $course_id =array();
         foreach ($getTrainercourseis as $key => $value) {
-            $course_id[]= $value['courseId'];
+            $course_id[]= $value['course_id'];
              
         }
 
@@ -1623,10 +1623,11 @@ public function saveQuerydata($id,$data){
 
 public function gettrainercourseIds($userId){
 
-    $this->db->select('courseId');
-    $this->db->where(TBL_COURSE.'.trainer_id', $userId);
-    $this->db->where(TBL_COURSE.'.isDeleted', 0);
-    $query = $this->db->get(TBL_COURSE);
+    $this->db->select('course_id');
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+    $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
+    // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isdeleted', 0);
+    $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
     $fetch_result = $query->result_array();
     return $fetch_result;
 
