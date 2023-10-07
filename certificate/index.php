@@ -82,16 +82,16 @@ $resultStudentadmissionDetails = $conn->query($getStudentadmissionDetails);
 $rowDataStudentadminssiondetails = $resultStudentadmissionDetails->fetch_assoc();
 
 
-$profile_pic_admission = $rowDataStudentadminssiondetails['document_1'];
+// $profile_pic_admission = $rowDataStudentadminssiondetails['document_1'];
 
-if($profile_pic_admission){
-    $profile_pic_img = "../uploads/admission/".$profile_pic_admission;
+// if($profile_pic_admission){
+//     $profile_pic_img = "../uploads/admission/".$profile_pic_admission;
 
-    if(file_exists($profile_pic_img)) 
-    {
-        $pdf->Cell(20, 10, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 25.00,33.00), 0, 0, 'L', false );
-    }   
-}
+//     if(file_exists($profile_pic_img)) 
+//     {
+//         $pdf->Cell(20, 10, $pdf->Image($profile_pic_img, $pdf->GetX(), $pdf->GetY(), 25.00,33.00), 0, 0, 'L', false );
+//     }   
+// }
 
 
 if($_SERVER['HTTP_HOST']=='localhost'){
