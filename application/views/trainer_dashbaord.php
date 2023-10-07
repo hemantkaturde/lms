@@ -108,10 +108,17 @@ $roleText = $this->session->userdata('roleText');
                                         if(isset($events)){
                                             $i = 1;
                                             foreach($events as $e){
-                                            if($i % 2 == 0){
-                                                    echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'    [ Trainer => '.$e['trainer'].']   [ Backup Trainer => '.$e['backup_trainername'].'] </p></div>';
+
+                                                if($e['backup_trainername']){
+                                                    $backup_trainername=$e['backup_trainername'];
                                                 }else{
-                                                    echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'    [ Trainer => '.$e['trainer'].']   [ Backup Trainer => '.$e['backup_trainername'].'] </p></div>';
+                                                    $backup_trainername='';
+                                                }
+
+                                            if($i % 2 == 0){
+                                                    echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'    [ Trainer => '.$e['trainer'].']   [ Backup Trainer => '.$backup_trainername.'] </p></div>';
+                                                }else{
+                                                    echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'    [ Trainer => '.$e['trainer'].']   [ Backup Trainer => '.$backup_trainername.'] </p></div>';
                                                 } 
                                                 $i++;
                                             }
@@ -182,15 +189,22 @@ $roleText = $this->session->userdata('roleText');
                 if (data.status) {
                     var i = 1;
                     $.each(data.data, function(index, value) {
+
+                        if(value.backup_trainername==null){
+                           var backup_trainername ='';
+                        }else{
+                            var backup_trainername =value.backup_trainername;
+                        }
+
                         if (i % 2 == 0) {
                             html = html + '<div class="info1"><h4>' + value.time +
                                 '<img src="" class="delete" alt="" title="delete this event" day="' +
-                                day + '" val="' + value.id + '" /></h4><p>' + value.event + ' [ Trainer => '+value.trainer+']'+ ' [ Backup Trainer => '+value.backup_trainername+']'+
+                                day + '" val="' + value.id + '" /></h4><p>' + value.event + ' [ Trainer => '+value.trainer+']'+ ' [ Backup Trainer => '+backup_trainername+']'+
                                 '</p></div>';
                         } else {
                             html = html + '<div class="info2"><h4>' + value.time +
                                 '<img src="" class="delete" alt="" title="delete this event" day="' +
-                                day + '" val="' + value.id + '" /></h4><p>' + value.event + ' [ Trainer => '+value.trainer+']'+ ' [ Backup Trainer => '+value.backup_trainername+']'+
+                                day + '" val="' + value.id + '" /></h4><p>' + value.event + ' [ Trainer => '+value.trainer+']'+ ' [ Backup Trainer => '+backup_trainername+']'+
                                 '</p></div>';
                         }
                         i++;
