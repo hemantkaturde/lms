@@ -1493,20 +1493,20 @@ public function getstudentcourse($params,$userId){
 public function  getallstudentquerycount($params,$userId,$roleText){
 
     if($roleText=='Trainer'){
-        // $getTrainercourseis = $this->gettrainercourseIds($userId);
-        // $course_id =array();
-        // foreach ($getTrainercourseis as $key => $value) {
-        //     $course_id[]= $value['courseId'];
+        $getTrainercourseis = $this->gettrainercourseIds($userId);
+        $course_id =array();
+        foreach ($getTrainercourseis as $key => $value) {
+            $course_id[]= $value['courseId'];
              
-        // }
+        }
 
-        // if( $getTrainercourseis){
-        //     $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+        if( $getTrainercourseis){
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
 
-        // }else{
-        //     return array();
+        }else{
+            return array();
 
-        // }
+        }
 
             
        }else{
@@ -1517,8 +1517,7 @@ public function  getallstudentquerycount($params,$userId,$roleText){
 
     $this->db->select('*');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_COURSE_TOPICS, TBL_COURSE_TOPICS.'.course_id = '.TBL_COURSE.'.courseId');
-
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
@@ -1541,20 +1540,20 @@ public function getallstudentquerydata($params,$userId,$roleText){
 
 
     if($roleText=='Trainer'){
-        // $getTrainercourseis = $this->gettrainercourseIds($userId);
-        // $course_id =array();
-        // foreach ($getTrainercourseis as $key => $value) {
-        //     $course_id[]= $value['courseId'];
+        $getTrainercourseis = $this->gettrainercourseIds($userId);
+        $course_id =array();
+        foreach ($getTrainercourseis as $key => $value) {
+            $course_id[]= $value['courseId'];
              
-        // }
+        }
 
-        // if( $getTrainercourseis){
-        //     $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+        if( $getTrainercourseis){
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
 
-        // }else{
-        //     return array();
+        }else{
+            return array();
 
-        // }
+        }
 
        }else{
             $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
@@ -1563,8 +1562,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
 
     $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
     $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_COURSE_TOPICS, TBL_COURSE_TOPICS.'.course_id = '.TBL_COURSE.'.courseId');
-
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
 
     if($params['search']['value'] != "") 
     {
@@ -1585,7 +1583,7 @@ public function getallstudentquerydata($params,$userId,$roleText){
         foreach ($fetch_result as $key => $value)
         {
              $data[$counter]['course_name'] = $value['course_name'];
-             $data[$counter]['topic_name'] = $value['topic_name'];
+             $data[$counter]['topic_name'] = $value['topic'];
              $data[$counter]['query'] = $value['query'];
              $data[$counter]['action'] = '';
              $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqueryanswer/".$value['queryid']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/process.png' alt='View Answers' title='View Answers'></a> ";
@@ -1971,8 +1969,10 @@ public function getcoursetopic($course_id)
 {
     $this->db->select('*');
     $this->db->where('course_id', $course_id);
-    $this->db->order_by('topic_name','ASC');
-    $query_result = $this->db->get(TBL_COURSE_TOPICS)->result_array();
+    $this->db->where('iscancle', 0);
+    $this->db->where('isdeleted', 0);
+    $this->db->order_by('topic','ASC');
+    $query_result = $this->db->get(TBL_TIMETABLE_TRANSECTIONS)->result_array();
     if($state_id != '') {
         foreach($query_result as $key => $value) {
             if($value['id'] == $state_id) {
