@@ -898,7 +898,7 @@ public function getstudentAttendancedata($params,$userId){
 public function  getstudentexaminationCount($params,$userId,$course_id){
 
     $this->db->select('enq_course_id');
-    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
     $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
     $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
@@ -1020,12 +1020,12 @@ public function getstudentexaminationdata($params,$userId,$course_id){
         }
 
     }
-        if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
+        // if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
             return $data; 
-        }else{
+        // }else{
            
-            return array(); 
-        }
+        //     return array(); 
+        // }
 
         
     }
