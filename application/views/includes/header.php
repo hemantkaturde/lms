@@ -468,7 +468,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
 
-                        <?php if($role_text!="Trainer" || $role_text!="Counsellor"){ ?>
+                        <?php if($role_text!="Trainer"){ ?>
                          <li class="">
                             <a href="<?php echo base_url()."studentexamrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
                                 <span class="nav-label">Student Exam Request</span>
