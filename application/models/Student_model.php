@@ -1647,7 +1647,7 @@ public function getallstudentquerydatfornotification($userId,$roleText){
         }
 
         if( $getTrainercourseis){
-            $this->db->where_in(TBL_COURSE.'.course_id', $course_id);
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
 
         }else{
             return array();
