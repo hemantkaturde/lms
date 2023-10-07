@@ -1233,10 +1233,15 @@
             $result = $this->course_model->delete_timetable($course_id,$time_table_id);
 
             if($result){
-                $deletecourse_response['status'] = 'success';
-                $process = 'Delet Timetable Delete';
-                $processFunction = 'Course/deletetopictimetable';
-                $this->logrecord($process,$processFunction);
+                /*Delete All Courses Topic*/
+                $delete_timetable_topic = $this->course_model->delete_timetable_topic($course_id,$time_table_id);
+
+                if($delete_timetable_topic){
+                    $deletecourse_response['status'] = 'success';
+                    $process = 'Delet Timetable Delete';
+                    $processFunction = 'Course/deletetopictimetable';
+                    $this->logrecord($process,$processFunction);
+                }
             }else
             {
                 $deletecourse_response['status'] = 'filure';

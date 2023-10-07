@@ -815,6 +815,17 @@ public function getBookscount($topic_id,$course_id){
        
   }
 
+
+  public function delete_timetable_topic($course_id,$timetable_id){
+
+    $this->db->where('course_id', $course_id);
+    $this->db->where('time_table_id', $timetable_id);
+    $this->db->delete(TBL_TIMETABLE_TRANSECTIONS);
+    return true;
+   
+}
+
+
   public function getTimetableInfo($course_id,$timetable_id){
 
     $this->db->select('*');
