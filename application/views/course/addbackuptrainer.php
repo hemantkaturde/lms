@@ -13,7 +13,7 @@ $jsonstringtoArray = json_decode($access, true);
                     </button>
                 </div>
                 <div class="ibox-title">     
-                   Date : <?=$getCourseinfo[0]->date?>
+                   Date : <?=$getTimetableInfo[0]->date?>
                   <b>Course Name : </b> <?=$getCourseinfo[0]->course_name;?> 
                 | <b>Topic Name : </b> <?=$getTopicinfo[0]->topic;?> | Add Backup Trainer</div>
             </div>

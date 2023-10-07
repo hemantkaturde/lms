@@ -819,6 +819,8 @@ public function getBookscount($topic_id,$course_id){
 
     $this->db->select('*');
     $this->db->from(TBL_TIMETABLE);
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
+
     $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
     //$this->db->where('tbl_enquiry.payment_status', 1);
     $this->db->where(TBL_TIMETABLE.'.id', $timetable_id);
