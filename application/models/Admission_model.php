@@ -299,7 +299,7 @@ class Admission_model extends CI_Model
         // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
         $this->db->where(TBL_COURSE.'.courseId', $value);
 
-        $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
         $query = $this->db->get(TBL_COURSE);
         $fetch_result = $query->result_array();
        
