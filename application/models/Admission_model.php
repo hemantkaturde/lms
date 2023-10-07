@@ -212,7 +212,7 @@ class Admission_model extends CI_Model
 
             $this->db->select('enq_course_id');
             $this->db->from(TBL_ENQUIRY);
-            $this->db->where('enq_number', $enq_id);
+            $this->db->where('enq_id', $enq_id);
             $this->db->where('isDeleted', 0);
             $query = $this->db->get();
             return $query->result();

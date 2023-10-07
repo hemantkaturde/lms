@@ -405,6 +405,7 @@
 
                 
                     $to = $get_equiry_data->enq_email;
+                    $email_name ='IICTN-Payment Link';
                     $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
                     $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
                                 <head>
@@ -522,8 +523,8 @@
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
                         
-                        $retval = mail($to,$Subject,$Body,$header);
-
+                        // $retval = mail($to,$Subject,$Body,$header);
+                        $retval =  sendmail($to,$Subject,$Body,$email_name,$attachmentList="");
                     if($retval){
 
 

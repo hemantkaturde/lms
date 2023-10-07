@@ -2,6 +2,15 @@
 <?php
 $enq_id =$_GET['enq'];
 include_once('../db/config.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
+
 $id = $_GET['enq'];
 $sql = "SELECT enq_id,enq_fullname,enq_email,enq_mobile FROM tbl_enquiry where enq_id='".$id."' and isDeleted =0" ;
 $result = $conn->query($sql);
@@ -17,6 +26,7 @@ if ($conn->query($sql) === TRUE) {
   $to = $row['enq_email'];
  
   $Subject = 'IICTN - Payment Receipt '.date('Y-m-d H:i:s');
+  $email_name = 'IICTN-Payment Receipt';
 
 
   //$Body = 'This is test Email';
@@ -64,7 +74,28 @@ if ($conn->query($sql) === TRUE) {
     $header .= "MIME-Version: 1.0\r\n";
     $header .= "Content-type: text/html\r\n";
 
-    $retval = mail($to,$Subject,$Body,$header);  
+    $mail = new PHPMailer(true);
+
+    $mail->SMTPDebug = 0;                                      
+    $mail->isSMTP();                                           
+    $mail->Host       = EMAIL_SMTP_HOST;                   
+    $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+    $mail->Username   = EMAIL_USERNAME;                
+    $mail->Password   = EMAIL_PASSWORD;                       
+    $mail->SMTPSecure = EMAIL_SECURE;                             
+    $mail->Port       = EMAIL_SMTP_PORT; 
+
+    $mail->setFrom(EMAIL_USERNAME, $email_name);          
+    $mail->addAddress($to);
+    //$mail->addAddress('receiver2@gfg.com', 'Name');
+
+    $mail->isHTML(true);                                 
+    $mail->Subject = $Subject;
+    $mail->Body    = $Body;
+    //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+    $retval= $mail->send();
+
+    //$retval = mail($to,$Subject,$Body,$header);  
 
     if($retval){
 

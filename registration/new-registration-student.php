@@ -1,11 +1,11 @@
 <?php
 include_once('../db/config.php'); 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
-// use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// //Load Composer's autoloader
-// require '../vendor/autoload.php';
+//Load Composer's autoloader
+require '../vendor/autoload.php';
 
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
 $url = "https://";   
@@ -137,6 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                     if($conn->query($insert_last_enquiry)=== TRUE){
 
                     $to = $email;
+                    $email_name ="IICTN - Login Id and Password";
                     $Subject = 'IICTN - Login Id and Password '.date('Y-m-d H:i:s');
                     $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
                     <head>
@@ -241,30 +242,27 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
                     $header .= "Content-type: text/html\r\n";
 
 
-                    if($_SERVER['HTTP_HOST']=='localhost'){
-                         echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
-                    }else{
 
-                        $retval = mail($to,$Subject,$Body,$header);
-
-                        // $mail->SMTPDebug = 0;                                      
-                        // $mail->isSMTP();                                           
-                        // $mail->Host       = EMAIL_SMTP_HOST;                   
-                        // $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
-                        // $mail->Username   = EMAIL_USERNAME;                
-                        // $mail->Password   = EMAIL_PASSWORD;                       
-                        // $mail->SMTPSecure = EMAIL_SECURE;                             
-                        // $mail->Port       = EMAIL_SMTP_PORT; 
+                        //$retval = mail($to,$Subject,$Body,$header);
+                        $mail = new PHPMailer(true);
+                        $mail->SMTPDebug = 0;                                      
+                        $mail->isSMTP();                                           
+                        $mail->Host       = EMAIL_SMTP_HOST;                   
+                        $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+                        $mail->Username   = EMAIL_USERNAME;                
+                        $mail->Password   = EMAIL_PASSWORD;                       
+                        $mail->SMTPSecure = EMAIL_SECURE;                             
+                        $mail->Port       = EMAIL_SMTP_PORT; 
                     
-                        // $mail->setFrom(EMAIL_USERNAME, $email_name);          
-                        // $mail->addAddress($to);
+                        $mail->setFrom(EMAIL_USERNAME, $email_name);          
+                        $mail->addAddress($to);
                         //$mail->addAddress('receiver2@gfg.com', 'Name');
                     
-                        // $mail->isHTML(true);                                 
-                        // $mail->Subject = $Subject;
-                        // $mail->Body    = $Body;
-                        // //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-                        // $retval= $mail->send();
+                        $mail->isHTML(true);                                 
+                        $mail->Subject = $Subject;
+                        $mail->Body    = $Body;
+                        //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                        $retval= $mail->send();
 
                         if($retval){
 
@@ -313,8 +311,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     
                             echo ("<script> window.alert('No Record Store')");
                         }
-
-                    }
                     
                 }else{
                     echo "Error: " . $sql . "<br>" . $conn->error;
