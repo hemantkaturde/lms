@@ -280,6 +280,8 @@
                     <td><?=$value['link_url'] ?></td>
                     <td>
 
+					<?php  if($value['iscancle']!=1){ ?>
+
 					 <?php if($value['attendance_alreday_exits']!='1'){ ?>
                        <?php if($value['link_url']){?>
                              <button id="join_link" style="width: 70%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
@@ -288,6 +290,9 @@
                        <?php }?>
 					 <?php } ?> 
 					 <button id="print_id_card" class="print_id_card" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
+                     <?php }else{ ?>
+						<p><b>Cancelled</b></p>
+					 <?php } ?>
 
                     </td>
                 </tr>
@@ -647,8 +652,6 @@ function printElement(elem) {
     $printSection.appendChild(domClone);
     window.print();
 }
-
-
 
 // $(".print_card_button").click(function(){
 // 	printData();

@@ -331,6 +331,7 @@ class Admission_model extends CI_Model
                     $data[$counter]['topicid'] = $value['topicid'];
                     $data[$counter]['userid'] =  $userId;
                     $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['iscancle'] = $value['iscancle'];
                     $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
                     $data[$counter]['action'] = '';
                  $counter++; 
