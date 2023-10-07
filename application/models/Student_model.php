@@ -1642,12 +1642,12 @@ public function getallstudentquerydatfornotification($userId,$roleText){
         $getTrainercourseis = $this->gettrainercourseIds($userId);
         $course_id =array();
         foreach ($getTrainercourseis as $key => $value) {
-            $course_id[]= $value['courseId'];
+            $course_id[]= $value['course_id'];
              
         }
 
         if( $getTrainercourseis){
-            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+            $this->db->where_in(TBL_COURSE.'.course_id', $course_id);
 
         }else{
             return array();
