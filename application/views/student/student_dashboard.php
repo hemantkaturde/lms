@@ -283,15 +283,15 @@
 					<?php  if($value['iscancle']!=1){ ?>
 
 					 <?php if($value['attendance_alreday_exits']!='1'){ ?>
-                       <?php if($value['link_url']){?>
-                             <button id="join_link" style="width: 70%;" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
-                       <?php } else{ ?>
-                             <button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
-                       <?php }?>
-					 <?php } ?> 
-					 <button id="print_id_card" class="print_id_card" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
-                     <?php }else{ ?>
-						<p><b>Cancelled</b></p>
+						<?php if($value['link_url']){ ?>
+							<button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
+						<?php }else{?>
+								<button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
+							    <button id="print_id_card" class="print_id_card" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
+                       <?php }}else {?>
+						<b>Attended</b>
+                     <?php } }else{ ?>
+						<b>Cancelled</b>
 					 <?php } ?>
 
                     </td>
@@ -430,11 +430,11 @@ $(document).ready(function(){
                     var course_id = $(this).attr("course-id");
                     var meeting_id = $(this).attr("meeting_id");
                     var meeting_link = $(this).attr("meeting_link");
-                    
+					var join_link = 'YES';
                     $.ajax({
 						url : "<?php echo base_url();?>attendClasses",
 						type: "POST",
-                        data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link,
+                        data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link+'&join_link='+join_link,
 						// data : {'user_id':user_id,'topic_id':topic_id,'course_id':course_id,'meeting_id':meeting_id,'meeting_link':meeting_link},
 						success: function(data, textStatus, jqXHR)
 						{
@@ -474,7 +474,7 @@ $(document).ready(function(){
     });
 });
 
-$(document).ready(function(){
+                $(document).ready(function(){
                     $(".attend_manually").click(function(){
                     var user_id = $(this).attr("user-id");
                     var topic_id = $(this).attr("topic-id");
@@ -528,13 +528,13 @@ $(document).ready(function(){
 
 $(".print_id_card").click(function(){
 
-	var user_id = $(this).attr("user-id");
-    var topic_id = $(this).attr("topic-id");
-    var course_id = $(this).attr("course-id");
-    var meeting_id = $(this).attr("meeting_id");
-    var meeting_link = $(this).attr("meeting_link");
+	                var user_id = $(this).attr("user-id");
+                    var topic_id = $(this).attr("topic-id");
+                    var course_id = $(this).attr("course-id");
+                    var meeting_id = $(this).attr("meeting_id");
+                    var meeting_link = $(this).attr("meeting_link");
 
-
+					var print_card = 'YES';
 	               $.ajax({
 						url : "<?php echo base_url();?>fetchallstudentdataforprintidcard",
 						type: "POST",
@@ -554,7 +554,7 @@ $(".print_id_card").click(function(){
 							{
 
 								var profile_pic = fetchResponse.data.profile_pic;
-								var student_profile_pic = "<?php echo base_url().'uploads/admission/'?>"+profile_pic;
+								var student_profile_pic = "<?php echo base_url().'uploads/profile_pic/'?>"+profile_pic;
 								var student_name = fetchResponse.data.name +' '+ fetchResponse.data.lastname
 								var topic_name = fetchResponse.data.title;
 								var course_name = fetchResponse.data.course_name;
@@ -574,16 +574,11 @@ $(".print_id_card").click(function(){
 								$("#class_time").append(classtime);
 								$("#class_date").append(date);
 
-								var user_id = $(this).attr("user-id");
-								var topic_id = $(this).attr("topic-id");
-								var course_id = $(this).attr("course-id");
-								var meeting_id = $(this).attr("meeting_id");
-								var meeting_link = $(this).attr("meeting_link");
 								
 								$.ajax({
 									url : "<?php echo base_url();?>attendClasses",
 									type: "POST",
-									data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link,
+									data : 'user_id='+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link+'&print_card='+print_card,
 									// data : {'user_id':user_id,'topic_id':topic_id,'course_id':course_id,'meeting_id':meeting_id,'meeting_link':meeting_link},
 									success: function(data, textStatus, jqXHR)
 									{

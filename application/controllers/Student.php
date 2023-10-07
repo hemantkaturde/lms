@@ -548,14 +548,40 @@
 
                 $attendance_response = array();
 
-                $data = array(
-                    'user_id'  => $this->input->post('user_id'),
-                    'topic_id' => $this->input->post('topic_id'),
-                    'course_id' => $this->input->post('course_id'),
-                    'meeting_id' => $this->input->post('meeting_id'),
-                    'meeting_link' => $this->input->post('meeting_link'),
-                    'attendance_status' => 1,
-                );
+                 if(trim($this->input->post('join_link')) =='YES'){
+                    $data = array(
+                        'user_id'  => $this->input->post('user_id'),
+                        'topic_id' => $this->input->post('topic_id'),
+                        'course_id' => $this->input->post('course_id'),
+                        'meeting_id' => $this->input->post('meeting_id'),
+                        'meeting_link' => $this->input->post('meeting_link'),
+                        'attendance_status' => 1,
+                        'join_link' => 1,
+                    );
+                 }
+                 else if(trim($this->input->post('print_card')) =='YES'){
+
+                    $data = array(
+                        'user_id'  => $this->input->post('user_id'),
+                        'topic_id' => $this->input->post('topic_id'),
+                        'course_id' => $this->input->post('course_id'),
+                        'meeting_id' => $this->input->post('meeting_id'),
+                        'meeting_link' => $this->input->post('meeting_link'),
+                        'attendance_status' => 1,
+                        'print_card' => 1,
+                    );
+
+                }else{
+                    $data = array(
+                        'user_id'  => $this->input->post('user_id'),
+                        'topic_id' => $this->input->post('topic_id'),
+                        'course_id' => $this->input->post('course_id'),
+                        'meeting_id' => $this->input->post('meeting_id'),
+                        'meeting_link' => $this->input->post('meeting_link'),
+                        'attendance_status' => 1,
+                    );
+                }
+
 
                 /*check if data is alreday exits */
 
