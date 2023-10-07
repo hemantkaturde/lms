@@ -2762,7 +2762,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 											const obj = JSON.parse(data);
 											if(obj.status=='success'){
 												swal({
-													title: "Cancled!",
+													title: "Cancelled!",
 													text: "",
 													icon: "success",
 													button: "Ok",
