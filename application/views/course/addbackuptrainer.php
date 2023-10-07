@@ -12,7 +12,9 @@ $jsonstringtoArray = json_decode($access, true);
                             <a href="<?php echo base_url().'viewtimetablelisting?time_table_id='.$time_table_id.'&course_id='.$course_id;?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
                 </div>
-                <div class="ibox-title">     <b>Course Name : </b> <?=$getCourseinfo[0]->course_name;?> 
+                <div class="ibox-title">     
+                   Date : <?=$getTopicinfo[0]->date?>
+                  <b>Course Name : </b> <?=$getCourseinfo[0]->course_name;?> 
                 | <b>Topic Name : </b> <?=$getTopicinfo[0]->topic;?> | Add Backup Trainer</div>
             </div>
             <div class="ibox-body">
