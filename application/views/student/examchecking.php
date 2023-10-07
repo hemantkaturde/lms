@@ -205,7 +205,10 @@ $jsonstringtoArray = json_decode($access, true);
                                     </div> -->
                                     <h2 class="error"><p></p></h2>
                                     <div class="modal-footer">
-                                        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+                                    <button type="button" class="btn btn-primary">
+                                        <a href="<?php echo base_url().'examcheckingList';?>" style="color: black !important"><i
+                                                class="fa fa-arrow-left"></i> Back</a>
+                                    </button>    
                                         <button type="submit" id="submit_marks" class="btn btn-primary submit_marks">Submit Marks</button>
                                     </div>
                             </div>
