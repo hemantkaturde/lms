@@ -468,13 +468,13 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
 
-                    
+                        <?php if($role_text!="Trainer" || $role_text!="Counsellor"){ ?>
                          <li class="">
                             <a href="<?php echo base_url()."studentexamrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
                                 <span class="nav-label">Student Exam Request</span>
                             </a>
                         </li>
-                        
+                        <?php } ?>
 
                         <!-- <?php if (in_array("staffcounsellermodule", $jsonstringtoArray)){?>
                         <li class="<?php if($pageUrl =='staffListing'){ echo 'active';} ?>">
