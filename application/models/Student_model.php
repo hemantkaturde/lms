@@ -999,9 +999,12 @@ public function getstudentexaminationdata($params,$userId,$course_id){
 
                     if($check_exam_completed_or_pending){
                         $exam_status ='<b style="color:green">Exam Completed</b>';
+                        $exam_status_for_condition ='Exam Completed';
                         $exam_status_count =1;
                     }else{
                         $exam_status ='<b style="color:red">Pending</b>';
+
+                        $exam_status_for_condition ='Pending';
                         $exam_status_count =0;
                     }
 
@@ -1010,11 +1013,25 @@ public function getstudentexaminationdata($params,$userId,$course_id){
                     $data[$counter]['exam_time'] = $value['exam_time'];
                     $data[$counter]['status'] = $exam_status;
                     $data[$counter]['action'] = '';
-                    if($exam_status_count=='1'){
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
+
+
+
+                    if($check_exam_completed_or_pending){
+                        if($exam_status_count=='1'){
+
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
+
+                        }else{
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
+
+                        }
+
+
                     }else{
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination' disabled='disabled'></a> ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
                     }
+
+            
                 $counter++; 
             }
         }
