@@ -10,7 +10,7 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="ibox-head">
 
                 <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'studentadmissions';?>" style="color: black !important"><i
+                        <a href="<?php echo base_url().'studentexamination/'.$exam_detail[0]['course_id'];?>" style="color: black !important"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                 </button>
 
