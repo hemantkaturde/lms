@@ -1690,6 +1690,56 @@ public function getallstudentquerydatfornotification($userId,$roleText){
 }
 
 
+
+public function trinerNoti($userId,$roleText){
+        $getTrainercourseis = $this->gettrainercourseIds($userId);;
+
+        $course_id =array();
+        foreach ($getTrainercourseis as $key => $value) {
+            $course_id[]= $value['course_id'];
+             
+        }
+        if( $getTrainercourseis){
+            $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+
+        }else{
+            return array();
+
+        }
+
+    $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+    $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+    $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
+    $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+    $this->db->where(TBL_ASK_A_QUERY.'.id NOT IN (SELECT `query_id` FROM '.TBL_ASK_A_QUERY_ANSWER.')', NULL, TRUE);
+
+    // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+    $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+
+    $query = $this->db->get(TBL_ASK_A_QUERY);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['queryid'] = $value['queryid'];
+             $data[$counter]['course_name'] = $value['course_name'];
+             $data[$counter]['topic_name'] = $value['topic'];
+             $data[$counter]['name'] = $value['name'];
+             $data[$counter]['query'] = $value['query'];
+             $data[$counter]['createdDtm'] = $value['createdDtm'];
+            $counter++; 
+        }
+    }
+
+    return $data;
+}
+
+
+
 public function getquerydatabyid($query_id){
 
     $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
@@ -1707,9 +1757,6 @@ public function getquerydatabyid($query_id){
     $fetch_result = $query->result_array();
     return $fetch_result;
 }
-
-
-
 
 
 public function getallstudentqueryanswercount($params,$userId,$roleText,$query_id){

@@ -11,70 +11,6 @@ $roleText = $this->session->userdata('roleText');
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-      
-        <!-- <div class="row">
-            <div class="col-lg-8">
-                <div class="ibox">
-                    <div class="ibox-body">
-                        <div class="flexbox mb-4">
-                            <div>
-                                <h3 class="m-0">Statistics</h3>
-                                <div>Your shop sales analytics</div>
-                            </div>
-                            <div class="d-inline-flex">
-                                <div class="px-3" style="border-right: 1px solid rgba(0,0,0,.1);">
-                                    <div class="text-muted">WEEKLY INCOME</div>
-                                    <div>
-                                        <span class="h2 m-0">$850</span>
-                                        <span class="text-success ml-2"><i class="fa fa-level-up"></i> +25%</span>
-                                    </div>
-                                </div>
-                                <div class="px-3">
-                                    <div class="text-muted">WEEKLY SALES</div>
-                                    <div>
-                                        <span class="h2 m-0">240</span>
-                                        <span class="text-warning ml-2"><i class="fa fa-level-down"></i> -12%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <canvas id="bar_chart" style="height:260px;"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ibox">
-                    <div class="ibox-head">
-                        <div class="ibox-title">Statistics</div>
-                    </div>
-                    <div class="ibox-body">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <canvas id="doughnut_chart" style="height:160px;"></canvas>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="m-b-20 text-success"><i class="fa fa-circle-o m-r-10"></i>Desktop 52%</div>
-                                <div class="m-b-20 text-info"><i class="fa fa-circle-o m-r-10"></i>Tablet 27%</div>
-                                <div class="m-b-20 text-warning"><i class="fa fa-circle-o m-r-10"></i>Mobile 21%</div>
-                            </div>
-                        </div>
-                        <ul class="list-group list-group-divider list-group-full">
-                            <li class="list-group-item">Chrome
-                                <span class="float-right text-success"><i class="fa fa-caret-up"></i> 24%</span>
-                            </li>
-                            <li class="list-group-item">Firefox
-                                <span class="float-right text-success"><i class="fa fa-caret-up"></i> 12%</span>
-                            </li>
-                            <li class="list-group-item">Opera
-                                <span class="float-right text-danger"><i class="fa fa-caret-down"></i> 4%</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="row" >
             <div class="col-lg-4" style="display:<?=$display?>">
                 <div class="ibox">
@@ -131,39 +67,39 @@ $roleText = $this->session->userdata('roleText');
                         </div>
                     </div>
                 </div>
+
+
+    
+                
+
+		  <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Ask a query notification</span></h3>
+				<div style="border: 5px solid #55acee;padding: 12px;min-height: 300px;" class="borderr2">
+						<!-- <marquee width="100%" direction="up"  height="210px"> -->
+							
+                                <?php foreach ($getstudentqueryforttopicwisetriner as $key => $value) { ?>
+                                    <div class="testimonial pt-10 borderb" style="border-bottom: 1px solid rebeccapurple;">
+                                        <a href='<?php echo ADMIN_PATH."viewqueryanswer/".$value['queryid']?>'>
+                                            <div class="thumb pull-left mb-0 mr-0 pr-12">
+                                            <i class="fa fa-question-circle" style="font-size: xxx-large"></i>
+                                            </div>
+                                            <div class="ml-30 fs17fwb">
+                                                <p><b>Course : </b><?=$value['course_name']?></p>
+                                                <p><b>Topic  :</b><?=$value['topic_name']?></p>
+                                                <p><b>Query  :</b><?=$value['query']?> - <small> From: <?=$value['name']?> - <?=$value['createdDtm']?> </small></p>
+                                                <p><b>Student Name  :</b><?=$value['name']?> - <?=$value['createdDtm']?></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php  } ?>
+					     
+					    <!-- </marquee> -->
+				</div>
+		
+	</div>
+</div>
             </div>
         </div>
-
-     
-
-        <!-- 
-        <div class="row">
-            <div id="evencal">
-                <div class="calendar">
-                    <?php echo $notes?>
-                </div>
-                <div class="event_detail">
-                    <h2 class="s_date">Detail Event <?php echo "$day $month $year";?></h2>
-                    <div class="detail_event">
-                        <?php 
-                            if(isset($events)){
-                                $i = 1;
-                                foreach($events as $e){
-                                if($i % 2 == 0){
-                                        echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
-                                    }else{
-                                        echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" />  <img src="'.base_url().'css/images/edit.png" class="edit" alt="" title="edit this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
-                                    } 
-                                    $i++;
-                                }
-                            }else{
-                                echo '<div class="message"><h4>No Event</h4><p>There\'s no event in this date</p></div>';
-                            }
-                        ?>
-                    </div>
-                </div>
-           </div>
-        </div> -->
     </div>
     <!-- END PAGE CONTENT-->
 

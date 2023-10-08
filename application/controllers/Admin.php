@@ -72,6 +72,8 @@ class Admin extends BaseController
         }
         $data['chart_data'] = json_encode($data1);
         if($this->session->userdata('roleText') =='Trainer'){
+            $userId = $this->session->userdata('userId');
+            $data['getstudentqueryforttopicwisetriner'] = $this->student_model->trinerNoti($userId,trim($this->session->userdata('roleText')));
             $this->loadViews("trainer_dashbaord", $this->global, $data , NULL);
         }else if($this->session->userdata('roleText') =='Student'){
 

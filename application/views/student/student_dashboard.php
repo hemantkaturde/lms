@@ -200,6 +200,13 @@
     left: 0;
     z-index: 10;
 }
+
+.borderb {
+    background: linear-gradient(rgba(250,250,250,250),rgba(250,250,250,250));
+    box-shadow: 0 5px 15px #ccc;
+    padding: 10px;
+    margin-bottom: 6px;
+}
 </style>
 
 <div class="content-wrapper">
@@ -254,7 +261,6 @@
 	</div>
 
 
-
     <div class="col-lg-12 col-md-12" style="margin-top:35px">
         <h5><b> Course Class Schedule</b></h5>
             <table class="table  table-condensed" style="background-color:#cec4de">
@@ -301,7 +307,6 @@
             </table>
 
 			<div id="printThis">
-
 				<div class="modal fade" id="idcarddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -320,7 +325,6 @@
 										    <div class="iictn_logo_img"	>
 											   <img src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="" height="50">
  											</div>
-
 
 											<div class="user-image">
 												<img src="" id="student_profile_pic" name="student_profile_pic" class="img-radius" alt="User-Profile-Image">
@@ -364,26 +368,68 @@
 
 <?php
  
-$dataPoints = array(
-	array("label"=> "WordPress", "y"=> 60.0),
-	array("label"=> "Joomla", "y"=> 6.5),
-	array("label"=> "Drupal", "y"=> 4.6),
-	array("label"=> "Magento", "y"=> 2.4),
-	array("label"=> "Blogger", "y"=> 1.9),
-	array("label"=> "Shopify", "y"=> 1.8),
-	array("label"=> "Bitrix", "y"=> 1.5),
-	array("label"=> "Squarespace", "y"=> 1.5),
-	array("label"=> "PrestaShop", "y"=> 1.3),
-	array("label"=> "Wix", "y"=> 0.9),
-	array("label"=> "OpenCart", "y"=> 0.8)
-);
+// $dataPoints = array(
+// 	array("label"=> "WordPress", "y"=> 60.0),
+// 	array("label"=> "Joomla", "y"=> 6.5),
+// 	array("label"=> "Drupal", "y"=> 4.6),
+// 	array("label"=> "Magento", "y"=> 2.4),
+// 	array("label"=> "Blogger", "y"=> 1.9),
+// 	array("label"=> "Shopify", "y"=> 1.8),
+// 	array("label"=> "Bitrix", "y"=> 1.5),
+// 	array("label"=> "Squarespace", "y"=> 1.5),
+// 	array("label"=> "PrestaShop", "y"=> 1.3),
+// 	array("label"=> "Wix", "y"=> 0.9),
+// 	array("label"=> "OpenCart", "y"=> 0.8)
+// );
 	
 ?>
 
-	<body>
+<div class="row col-md-12 col-sm-12 col-xs-12" style="margin-left: -31px;">
+    <div class="col-md-6 col-sm-6 col-xs-12">
 		<div id="chartContainer" style="height: 370px; width: 100%;">
 		</div>
-	</body>
+	</div>
+
+	<div class="col-md-6 col-sm-6 col-xs-12">
+	    <div class="row">
+		  <div class="col-md-6 col-sm-6 col-xs-12">
+              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Ask a query notification</span></h3>
+				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
+						<!-- <marquee width="100%" direction="up"  height="210px"> -->
+							<div class="testimonial pt-10 borderb">
+								<a href="/news-details/nda-iii-timetable---2024">
+									<div class="thumb pull-left mb-0 mr-0 pr-12">
+									   <i class="fa fa-link color2"></i>
+									</div>
+									<div class="ml-30 fs17fwb">
+									   <p>This is Test Notification</p>
+									</div>
+								</a>
+					      </div>
+					    <!-- </marquee> -->
+				</div>
+		  </div>
+
+		  <div class="col-md-6 col-sm-6 col-xs-12">
+			<h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Exam notification</span></h3>
+				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
+						<!-- <marquee width="100%" direction="up"  height="210px"> -->
+							<div class="testimonial pt-10 borderb">
+								<a href="http://localhost/lms_2/studentadmissions">
+									<div class="thumb pull-left mb-0 mr-0 pr-12">
+									   <i class="fa fa-link color2"></i>
+									</div>
+									<div class="ml-30 fs17fwb">
+									  <p>This is Test Notification</p>
+									</div>
+								</a>
+					      </div>
+					    <!-- </marquee> -->
+				</div>
+		  </div>
+		</div>
+	</div>
+</div>
 </html>    
 </div>
 
@@ -400,8 +446,10 @@ window.onload = function () {
  var chart = new CanvasJS.Chart("chartContainer", {
 	 animationEnabled: true,
 	 theme: "light2",
+	 backgroundColor: "#fff685",
 	 title: {
-		 text: "Student Course Progress"
+		 text: "Student Course Progress",
+		 fontWeight: "normal",
 	 },
 	 axisY: {
 		 suffix: "%",
@@ -410,6 +458,7 @@ window.onload = function () {
 		 }
 	 },
 	 data: [{
+		bevelEnabled: true,
 		 type: "column",
 		 yValueFormatString: "#,##0\"%\"",
 		 indexLabel: "{y}",

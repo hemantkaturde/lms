@@ -983,8 +983,15 @@ function studentcertificateData($params)
         
         foreach ($fetch_result as $key => $value) {
            
-           $total_links = $this->getlinksforperticularuser($value['course_id'],$sutudentid);
-           $peecentage = $value['count']/$total_links['count'] * 100;
+           $total_links = $this->upcoming_class_links($sutudentid);
+
+           if($total_links){
+             $total_topics = count($total_links[0]);
+           }else{
+             $total_topics =0;
+           }
+
+           $peecentage = $value['count']/$total_topics * 100;
            $arraydivision['label'] = $value['course_name'];
            $arraydivision['y'] = $peecentage;
         }
