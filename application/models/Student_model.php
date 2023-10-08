@@ -937,7 +937,7 @@ public function  getstudentexaminationCount($params,$userId,$course_id){
 
 public function getstudentexaminationdata($params,$userId,$course_id){
 
-
+    /*check if user Having Direct Access to attend Exam*/
     $this->db->select('enq_course_id');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
@@ -946,31 +946,30 @@ public function getstudentexaminationdata($params,$userId,$course_id){
 
     $data = array();
     $counter = 0;
+   
     foreach ($fetch_result_enquiry_courses as $key => $value) {
-
 
         $course_ids    =   explode(',', $value['enq_course_id']);
         foreach ($course_ids as $key => $value) {
 
-        $this->db->select('count(*) as count');
-        $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
-        $this->db->where(TBL_ATTENDANCE.'.course_id', $value);
-        $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
-        $query = $this->db->get(TBL_ATTENDANCE);
-        $fetch_time_table_attendance = $query->result_array();
+        // $this->db->select('count(*) as attendance');
+        // $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+        // $this->db->where(TBL_ATTENDANCE.'.course_id', $value);
+        // $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
+        // $query = $this->db->get(TBL_ATTENDANCE);
+        // $attendance[] = $query->result_array();
 
-    
-        $this->db->select('count(*) as count');
-        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $value);
-        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
-        $fetch_topic_table_attendance = $query->result_array();
+        // $this->db->select('count(*) as topic');
+        // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $value);
+        // $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+        // $topic[] = $query->result_array();
+
 
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
         // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
         // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
         // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
-
 
         if($params['search']['value'] != "") 
         {
@@ -1024,16 +1023,10 @@ public function getstudentexaminationdata($params,$userId,$course_id){
             }
         }
 
+    }        
     }
-        // if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
-            return $data; 
-        // }else{
-           
-        //     return array(); 
-        // }
 
-        
-    }
+    return $data; 
 }
 
 public function getstudentexamquestionlist($exam_id){

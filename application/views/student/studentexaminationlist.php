@@ -39,9 +39,9 @@
                                             <img class="img-fluid" style=" display: block;margin-left: auto;margin-right: auto;width:50%;" src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="Avatar" />
                                         </div> 
 
-                                        <div class="card-body" style="overflow-y: auto">
+                                        <div class="card-body" style="overflow-y: auto;text-align: center;">
                                             <h4 class="card-title"><b>Examination</b></h4>
-                                            <p class="card-text"> <?=$value['course_name'];?></p>
+                                            <h3> <p class="card-text"> <?=$value['course_name'];?></p></h3>
                                               </hr>
                                             <!-- <h4 class="card-title"><b>Examination Title</b></h4>
                                             <p class="card-text"> <?=$value['exam_title'];?></p> -->
@@ -49,7 +49,7 @@
                                             <!-- <h4 class="card-title"><b>Examination Title</b></h4>
                                             <p class="card-text"> <?=$value['exam_title'];?></p> -->
                                         </div>
-                                        <div class="card-footer" style="background: inherit; border-color: inherit;">
+                                        <div class="card-footer" style="background: inherit; border-color: inherit;text-align: center;">
                                             <a href="<?php echo base_url().'studentexamination/'.$value['courseId'];?>" class="btn btn-primary">Go to Examination Page</a>
                                             <!-- <a href="#" class="btn btn-outline-primary">Other option</a> -->
                                         </div>
