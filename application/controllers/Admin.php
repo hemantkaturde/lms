@@ -78,10 +78,12 @@ class Admin extends BaseController
         }else if($this->session->userdata('roleText') =='Student'){
 
             $this->global['pageTitle'] = 'Student Dashbaord';
-
             $userId = $this->session->userdata('userId');
-            $data['upcoming_class_links'] = $this->admission_model->upcoming_class_links($userId);
+
             
+
+
+            $data['upcoming_class_links'] = $this->admission_model->upcoming_class_links($userId);
             $data['getStudentscourseattetendancedetails'] = $this->admission_model->getStudentscourseattetendancedetails($userId);
             $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);

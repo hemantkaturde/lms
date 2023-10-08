@@ -212,51 +212,42 @@
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-	
-
 	<div class="box-body">
         <div class="row col-md-12 col-sm-12 col-xs-12">
-
-		<div class="col-3 mx-auto">
-			<div class="card card-body card-buttons" style="text-align: center;">
-				<div>
-					<h4 style="color: #d2ae6d;">
-						<b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></h4>
-					Total Fees
-				</div>
-
-			</div>
-		</div>
-
-			<?php 
+		<div class="col-lg-4 mb-4">
+            <!-- Billing card 1-->
+            <div class="card h-100 border-start-lg border-start-primary">
+                <div class="card-body">
+				    <div class="h3"><i class="fa fa-money" aria-hidden="true"></i> Total Fees</div>
+                    <div class="text-muted"><b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></div>
+                </div>
+            </div>
+        </div>
+		    <?php 
 				if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){
 					$totalpaidAmount =  $gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount;
 				}else{
 					$totalpaidAmount = 0;  
 				}  
 			?>
-
-			<div class="col-3 mx-auto">
-				<div class="card card-body card-buttons payment_box"
-					style="text-align: center;">
-					<div>
-						<h4 style="color: #d2ae6d;">
-							<b><?='₹ '.$totalpaidAmount;?></b></h4>
-						Total Fees Received
-					</div>
-				</div>
-			</div>
-
-			<div class="col-3 mx-auto">
-				<div class="card card-body card-buttons payment_box"
-					style="text-align: center;">
-					<div>
-						<h4 style="color: #d2ae6d;">
-							<b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></h4>
-						Pending Fees
-					</div>
-				</div>
-			</div>
+        <div class="col-lg-4 mb-4">
+            <!-- Billing card 2-->
+            <div class="card h-100 border-start-lg border-start-secondary">
+                <div class="card-body">
+			    	<div class="h3"><i class="fa fa-cc" aria-hidden="true"></i>  Total Fees Received</div>
+                    <div class="text-muted"><b><?='₹ '.$totalpaidAmount;?></b></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <!-- Billing card 3-->
+            <div class="card h-100 border-start-lg border-start-success">
+                <div class="card-body">
+				   <div class="h3"><i class="fa fa-inr" aria-hidden="true"></i>  Pending Fees</div>
+                    <div class="text-muted"><b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></div>
+                </div>
+            </div>
+        </div>
 		</div>
 	</div>
 
