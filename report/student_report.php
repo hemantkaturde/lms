@@ -355,7 +355,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                       $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
 
                       $enq_number =$row['enq_number'];
-                      $getStudentEnquiryPaidfees = "SELECT  totalAmount  FROM tbl_payment_transaction where enquiry_id=1";
+                      $getStudentEnquiryPaidfees = "SELECT  totalAmount  FROM tbl_payment_transaction where payment_status!=1 and enquiry_id=1";
                       $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
                       $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
 
