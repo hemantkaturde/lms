@@ -386,18 +386,26 @@
 		  <div class="col-md-6 col-sm-6 col-xs-12">
               <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Ask a query notification</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
-						<!-- <marquee width="100%" direction="up"  height="210px"> -->
-							<div class="testimonial pt-10 borderb">
-								<a href="/news-details/nda-iii-timetable---2024">
+						<marquee width="100%" direction="up"  height="210px">
+
+							<?php foreach ($getaskaqueryRecord as $key => $value) { ?>
+								<div class="testimonial pt-10 borderb">
+								<a href='<?php echo ADMIN_PATH."viewqueryanswer/".$value['queryid']?>'>
 									<div class="thumb pull-left mb-0 mr-0 pr-12">
-									   <i class="fa fa-link color2"></i>
-									</div>
-									<div class="ml-30 fs17fwb">
-									   <p>This is Test Notification</p>
-									</div>
-								</a>
-					      </div>
-					    <!-- </marquee> -->
+									  <i class="fa fa-files-o" style="font-size: xxx-large"></i>
+										</div>
+										<div class="ml-30 fs17fwb">
+										    <div class="ml-30 fs17fwb">
+                                                <p><b>Course : </b><?=$value['course_name']?></p>
+                                                <p><b>Topic  :</b><?=$value['topic_name']?></p>
+                                                <p><b>Query  :</b><?=$value['query']?> - <?=$value['createdDtm']?> </small></p>
+												<p><b>Ans   :</b><?=$value['query_answer']?></small></p>
+                                            </div>
+										</div>
+									</a>
+							</div>
+						  <?php  } ?>
+					    </marquee>
 				</div>
 		  </div>
 

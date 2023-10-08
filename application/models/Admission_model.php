@@ -1162,9 +1162,44 @@ function studentcertificateData($params)
        }
  
        return $data;
-
     }
 
+
+
+    public function getaskaqueryRecord($userId){
+
+        // $userId =  $this->session->userdata('userId');
+        // $roleText = $this->session->userdata('roleText');
+
+        $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+        $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
+        $this->db->join(TBL_ASK_A_QUERY_ANSWER, TBL_ASK_A_QUERY_ANSWER.'.query_id = '.TBL_ASK_A_QUERY.'.id');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+        $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+        $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+        // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+        $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+        $query = $this->db->get(TBL_ASK_A_QUERY);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['query_answer'] = $value['query_answer'];
+                $data[$counter]['queryid'] = $value['queryid'];
+                $data[$counter]['course_name'] = $value['course_name'];
+                $data[$counter]['topic_name'] = $value['topic'];
+                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['query'] = $value['query'];
+                $data[$counter]['action'] = '';            
+                $counter++; 
+            }
+        }
+       return $data;
+    }
 
 
 }
