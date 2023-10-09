@@ -147,7 +147,7 @@ define('EMAIL_SECURE','tls');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');
 
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
-define('INSTANCE_ID','651AAA06D0FAF');
+define('INSTANCE_ID','6523F20610A72');
 define('ACCESS_TOKEN','64e7462031534');
 
 if($_SERVER['HTTP_HOST']=='localhost'){
