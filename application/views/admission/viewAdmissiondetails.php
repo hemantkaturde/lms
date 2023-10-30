@@ -156,43 +156,57 @@ $roleText = $this->session->userdata('roleText');
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th colspan="3">INSTRUCTIONS, TERMS & CONDITIONS</th>
+                                            <th colspan="3">ADMISSION TERMS, CONDITIONS & POLICIES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             <tr>
-                                                <td><b>Please note,</b> The selection of the courses and packages are based on an individual’s understanding and due diligence. Due to different schemes and policies, Course fee and package can differ from other applicants from time to time.</td>
+                                                <td>Applicants are advised to note that the selection of the courses and packages are based on an individual’s understanding, choice, and due diligence. The course fee and package can differ from other applicants.</td>
                                             </tr>
                                             <tr>
-                                                <td>1. Applicants must fill their admission form along with all mandatory documents on the online admission form link attached in this email.</td>
+                                                <td><b>Mandatory details and documents required to be filled out and uploaded on our online / digital admission form before starting the course:</b></td>
                                             </tr>
                                             <tr>
-                                                <td>2. Applicants will not be added in online study groups and cannot start courses, unless they have filled and submitted the admission form within a period of 72hrs. The same copy of the admission form will be emailed to the related student’s email id also.</td>
+                                                <td>
+                                                    <p>a.	Passport size colour photograph</p>
+                                                    <p>b.	For Doctors - Medical Registration / For Non-Doctor - Highest Education Certificate</p> 
+                                                    <p>c.	Aadhar Card / Passport / Driving License</p>
+                                                </td>
                                             </tr>
 
                                             <tr>
-                                                <td>3. We will only accept the course(s) that have been mentioned on your final invoice sent on your email id by IICTN management.</td>
+                                                <td>Applicant promises and agrees that all details filled in and documents uploaded and submitted on our online or digital admission form are true, authentic, and genuine in accordance with institute requirements, and that if any details or documents uploaded are found to be non-authentic, genuine, or fake, it is the applicant's sole responsibility, and management and the institute will not be held responsible for the same at any time in the future.</td>
                                             </tr>  
                                             <tr>
-                                                <td>4. Applicant Must download Telegram, Zoom / Google Meet / WEBEX applications before starting Online class / Lecture.</td>
+                                                <td><b>1.	Administration:</b> If Applicant has any query regarding Courses Fee, Learning, Classes, Practicals, Exams or Certifications, Therefore, we advise that Applicant should send their queries via WhatsApp / Telegram on 9820000030 or email admin@iictn.org or mumbai.iictn@gmail.com Applicant queries will be attended in 10 working days subject to approvals from the management, Applicant cooperation will be appreciated.</td>
                                             </tr>  
                                             <tr>
-                                                <td>5. Class joining link will be sent in group one day to 10min before starting lecture</td>
+                                                <td><b>2.	Fees: </b>If the applicant has paid a registration fee of Rs. 5,000, registration will be valid for 3 months from the date of payment, Kindly note that along with each enrolled course fee, the applicant also paid the applicable and mandatory exam fee of each course of Rs. 2,600 plus a one-time admin fee of Rs. 2,600, which is included in the course fee, and that each online and offline topic session (webinar, lecture) original cost is Rs. 5100/-. The apron fee of Rs. 300 is separate from the course fees. It is optional to purchase from the institute or buy it yourself, but it is mandatory to wear the apron during offline classes and Practicals. </td>
                                             </tr>  
                                             <tr>
-                                                <td>6. Applicants must sit comfortably in a place where network coverage is good.</td>
+                                                <td><b>3.	Fee Instalments:</b>Fees can be paid in two instalments over two-weeks apart only, with 75% as the first instalment and an exam fee extra to begin the course; however, if paying in installments, applicants are only permitted to attend lectures once a week. Kindly note that the book and study materials will be issued after full payment of the course fees. If the applicant is unable to pay the balance fee amount within two months due to whatever reason, he or she will not be entitled to any refund. However, at its sole discretion, the institute may accommodate applicants with the next batch schedule and can advise on converting the course into a short certificate course or other services.</td>
                                             </tr>  
                                             <tr>
-                                                <td>7. Audio & Video of the Applicant side should be in off mode to avoid noise disturbance from the background.</td>
+                                                <td><b>4.	Education Loan: </b>Applicants are advised to do their own due diligence before opting for any education loan service from the any financial institutions and platform provided by the institute or from any other financial institutions. The Institute will not be responsible, answerable, or accountable for any dispute that arises now or in the future.</td>
                                             </tr>  
                                             <tr>
-                                                <td>8. After the lecture the applicant can unmute and ask any query related to the course in the class itself so everyone else also can know all the questions and answers.</td>
+                                                <td>
+                                                   <p><b>5.	Online / Offline Classes: </b>Kindly cooperate with the faculty and attend course lectures as per the institute’s class timings, topics, trainers and lecturers, methods of teaching, online and offline platforms of teaching, and timetable. Topics once taught will not be repeated; if missed, they have to be studied by the applicant themselves from study material in any form, such as printable, digital, book, PPTs, notes, video, audio, online or offline, once shared and provided by the institute. Classes and lectures are weekly or fortnightly for 1.5 hours for each course (subjective to the course opted), for which a timetable is posted or shared in respective Telegram groups at the start of every month. Each course duration will last as per the syllabus, or for 3 months, whichever is earlier, but if, due to any medical issues, marriage, etc., the course completion validity has expired, it can be extended to another 3 months if relevant supporting documents are provided by the applicant via email at admin@iictn.org or mumbai.iictn@gmail.com Applicants can give exams online if their courses have only theory and no practical.</p>
+
+                                                   <p><b>Offline Practical Sessions:</b> Once the relevant theory class is completed, Applicants can appear for offline practical class. The schedule can change at any time subject to the discretion of the management. If government rules and norms changed due to any reason whatsoever, the institute holds no responsibility or liability for the same.</p>
+
+                                                   <p><b> Online Practicals: </b>Once the relevant theory class is completed, Applicants will be removed from the theory group and added to the online practical class group with online or live videos that can be shared and explained once or twice a week only.</p>
+                                                </td>
                                             </tr>  
                                             <tr>
-                                                <td>9. Please do not personally WhatsApp trainers after class as they are back to back Scheduled for other classes.</td>
+                                                <td><b>6.	Machines Use: </b>If Applicant breaks any machine, he / she has to pay Rs. 5,000/- or 30% of the actual cost of the part of the machines on very next day itself. Thus, while Practicals applicants are advised to look after for Equipment / Machines carefully.</td>
                                             </tr>  
                                             <tr>
-                                                <td>10. Study material will be dispatched 1 week or more only after the full course fee is received.</td>
+                                                <td>
+                                                    <p><b>7.	Course Certificates: </b>In order to secure the certificate, applicants should complete the theory and practical portions of both and clear the examination of the course (s) with a 75% passing mark. A certificate will be issued three months after the institute receives the applicant's course completion confirmation email by the applicant email id only. It is mandatory to email a copy of all bills to bills.iictn@gmail.com when applying for certification. Applicants are not allowed to attend theory and practical classes after the exams or issuance of certifications, please be ethical and start making your professional commitment only after you have been awarded the certificate. The institute reserves the right to change, modify, or update the format of the certificate at any given time, subject to the discretion of the management.</p>
+
+                                                    <p><b>Workshop Certificate: </b>A workshop certificate will be awarded on the last day of the workshop to only those applicants who have made their full fee 15 days in advance before the start of the workshop. If the applicant has only made a partial payment and attended the workshop, they must pay their outstanding fees in order to receive their workshop certificate. Applicants who clear their dues after the workshop are only eligible to receive their workshop certificate 15 working days after receiving their pending dues. and courier charges must be borne solely by the applicants.</p>
+                                                </td>
                                             </tr>  
                                             <tr>
                                                 <td>11. Books / Certificates have to be personally collected, If applicant needs it to be couriered, Applicable charges of Rs.200/- have to be borne by applicant within INDIA , For international courier charges actual cost of courier will be applicable and institute will not be held responsible for any damages. In case if any book is damaged, Reissue charges Rs 600/book.</td>
