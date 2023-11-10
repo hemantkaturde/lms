@@ -36,7 +36,7 @@ class Api extends BaseController
 				$status = 'Success';
 				$message = 'Authorization data';
 				$data = $user_data;
-				logInformationcollection($user_data['id'],$this->input->post('username'),$user_data['mobile_no'],'Login Success', 'API to user app', 'Login',json_encode($data));
+				//logInformationcollection($user_data['id'],$this->input->post('username'),$user_data['mobile_no'],'Login Success', 'API to user app', 'Login',json_encode($data));
 			} else if($user_data == 'password mismatch'){
 				$status = 'Failure';
 				$message = 'You have entered an invalid password';
