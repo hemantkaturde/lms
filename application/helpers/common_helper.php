@@ -402,5 +402,129 @@ if(!function_exists(('sendwhatsapp')))
 }
 
 
+if (!function_exists('setContentLength'))
+{
+    //Add content length header to response and echo it
+	function setContentLength($data) 
+	{
+		$returnData = json_encode($data);
+		header('Content-Length: '.strlen($returnData)); 
+		echo $returnData;
+		exit;	
+	}	
+}
+
+
+if (!function_exists(('uniqueAlphaNumericString')))
+{
+	/*
+	Function to generate unique alphanumeric string, also can be used for OTP generation
+	*/
+	function uniqueAlphaNumericString($l = 4) 
+	{
+		return substr(md5(uniqid(rand(1,6))), 0, $l);
+	}
+}
+
+if (!function_exists(('logInformationcollection')))
+{
+	/* 
+	Function to save journey logs
+	*/
+	function logInformationcollection($userid = '', $username = '', $mobile_number = '', $action_type = '', $usertype = '', $information = '', $data = '')
+	{
+		$ci = &get_instance();
+		$datatoadd = array('userid'=>$userid, 'username' => $username, 'mobile_number' => $mobile_number, 'action_type' => $action_type, 'usertype' => $usertype, 'information' => $information, 'data'=>json_encode($data), 'added_date' => DATEANDTIME);
+		savelogInformation($datatoadd);
+		return true;
+	}
+}
+
+if (!function_exists(('savelogInformation')))
+{
+	/* 
+	Function to save journey logs
+	*/
+	function savelogInformation($datatoadd = array())
+	{
+		$ci = &get_instance();
+        $ci->db->insert(TBL_ACTIVITY_APP_LOG, $datatoadd);
+
+	}
+}
+
+
+if (!function_exists('validateServiceRequest'))
+{
+	function validateServiceRequest() //Authenticate user
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+					//echo '<pre>';print_r($_SERVER);echo '</pre>'; exit;
+					if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+						exit;
+					} elseif (isset($_SERVER['HTTP_AUTHTOKEN']) && trim($_SERVER['HTTP_AUTHTOKEN']) != '') {
+						//$keys = authtokenDecrypt($_SERVER['HTTP_AUTHTOKEN']);
+						$keys = explode(':',$_SERVER['HTTP_AUTHTOKEN']);
+						if(isset($keys[0],$keys[1])) {
+							$ci = &get_instance();
+							/************USER*************/
+							$ci->db->select('BaseTbl.userId,BaseTbl.user_flag,BaseTbl.email, BaseTbl.password, BaseTbl.name,BaseTbl.status,BaseTbl.roleId, Roles.role,Roles.access,BaseTbl.profile_pic,BaseTbl.username,BaseTbl.mobile');
+                            $ci->db->from('tbl_users as BaseTbl');
+                            $ci->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+							$ci->db->where('BaseTbl.authtoken', trim($keys[0]));
+							$ci->db->where('BaseTbl.userId', trim($keys[1]));
+							//$ci->db->where(TBL_USER.'.status', 1);
+							$query = $ci->db->get(TBL_USER);
+							$getUsers = $query->result_array();
+							
+							if ($query->num_rows() > 0) {
+								return $getUsers[0];
+							}  else {
+								accessUnAuthorized();
+							}
+						} else {
+							accessUnAuthorized();
+						}
+					} else {
+						accessUnAuthorized();
+					}
+		}else{
+
+			validateMethod();
+		}			
+	}	
+}
+
+
+if (!function_exists('accessUnAuthorized'))
+{
+	function accessUnAuthorized() //Response for unauthorized access
+	{
+		header('HTTP/1.0 401 Unauthorized');
+		$returnData = json_encode(array('status'=> 'Failure','message'=>'Authorization failed'));
+		//header('Content-Length: '.strlen($returnData)); 
+		//echo $returnData;
+		setContentLength(array('status'=> 'Failure','message'=>'Authorization failed'));
+		exit; 	
+		//setContentLength(array('status'=> 'Failure','message'=>'Authorization failed'));
+	}	
+}
+
+
+if (!function_exists('validateMethod'))
+{
+	function validateMethod() //Response for unauthorized access
+	{
+		header("HTTP/1.1 500 Internal Server Error");
+		//header('HTTP/1.0 401 Unauthorized');
+		$returnData = json_encode(array('status'=> 'Failure','message'=>'Check Request-response Method'));
+		//header('Content-Length: '.strlen($returnData)); 
+		//echo $returnData;
+		setContentLength(array('status'=> 'Failure','message'=>'Check Request-response Method'));
+		exit; 	
+		//setContentLength(array('status'=> 'Failure','message'=>'Authorization failed'));
+	}	
+}
+
 
 ?>

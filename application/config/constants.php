@@ -113,6 +113,10 @@ define('TBL_ASK_A_QUERY', 'tbl_askquery');
 define('TBL_ASK_A_QUERY_ANSWER', 'tbl_queryanswers');
 define('TBL_COURSE_SYLLABUS', 'tbl_course_syllabus');
 define('TBL_STUDENT_REQUEST', 'tbl_student_exam_request');
+define('TBL_ACTIVITY_APP_LOG', 'tbl_activity_log_app');
+
+
+define('DATEANDTIME', Date('Y-m-d H:i:s'));
 
 // define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
 // define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
