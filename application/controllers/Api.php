@@ -32,7 +32,7 @@ class Api extends BaseController
             $data = array('username' => $this->input->post('username'),'password' => $this->input->post('password'));
             $user_data = $this->Api_model->getAuthtoken($data);
 
-            if($user_data != 'password mismatch' && $user_data != 'number not available' && $user_data != 'account disable') {
+            if($user_data != 'password mismatch' && $user_data != 'Username not available' && $user_data != 'account disable') {
 				$status = 'Success';
 				$message = 'Authorization data';
 				$data = $user_data;
