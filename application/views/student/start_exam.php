@@ -273,3 +273,11 @@ $jsonstringtoArray = json_decode($access, true);
         // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     </script>
+
+    <script type="text/javascript">
+        // Try using right-click on the preview page. This script disables that functionality.
+        window.addEventListener('contextmenu', function (e) {
+        document.body.innerHTML += ' '
+        e.preventDefault();
+        }, false);
+    </script>
