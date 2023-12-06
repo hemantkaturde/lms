@@ -10,7 +10,7 @@
 				minDate: 0,
 				todayHighlight: true,
 				format: 'dd-mm-yyyy' ,
-				startDate: new Date()
+				//startDate: new Date()
 			});
 		});
 
@@ -19,7 +19,7 @@
 				minDate: 0,
 				todayHighlight: true,
 				format: 'dd-mm-yyyy' ,
-				startDate: new Date()
+				//startDate: new Date()
 			});
 		});
 

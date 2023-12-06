@@ -63,6 +63,7 @@ class Enquiry_model extends CI_Model
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
 
@@ -87,6 +88,7 @@ class Enquiry_model extends CI_Model
         {
             $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
         }
 
@@ -111,7 +113,7 @@ class Enquiry_model extends CI_Model
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['enq_number'] = $value['enq_number'];
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
-                 $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                 $data[$counter]['enq_fullname'] = '<b>'.$value['enq_fullname'].'</b><br/>'.$value['enq_email'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  //$data[$counter]['enq_email'] = $value['enq_email'];
 

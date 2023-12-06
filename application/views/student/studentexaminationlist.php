@@ -5,7 +5,7 @@
             <div class="ibox-head">
                 <div>
                     <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
+                        <a href="<?php echo base_url().'dashboard';?>" style="color: black !important"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                     </button>
                 </div>
