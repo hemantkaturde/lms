@@ -60,9 +60,9 @@ $pdf->SetXY(10, 162); // set the position of the box
 $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center of cell
 
 // First box - the user's Name
-$pdf->SetFontSize('10'); // set font size
-$pdf->SetXY(110, 205); // set the position of the box
-$pdf->Cell(0, 1,  $evbtr, 0, 0, 'C'); // add the text, align to Center of cell
+// $pdf->SetFontSize('10'); // set font size
+// $pdf->SetXY(110, 205); // set the position of the box
+// $pdf->Cell(0, 1,  $evbtr, 0, 0, 'C'); // add the text, align to Center of cell
 
 
 // add the reason for certificate

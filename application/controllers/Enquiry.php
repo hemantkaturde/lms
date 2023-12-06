@@ -1042,11 +1042,13 @@
                     $from = 'admin@iictn.in'; 
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
-                    $email_name ='IICTN-Marketing Material '.date('Y-m-d H:i:s');
+                    $email_name ='IICTN-Mumbai Marketing Material '.date('Y-m-d H:i:s');
+
+                    //$email_name ='IICTN-Marketing Material '.date('Y-m-d H:i:s');
                     //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
                     $subject = 'Greetings from IICTN !! '.date('Y-m-d H:i:s');
                     
-                    $header = "From: IICTN-Marketing Material <admin@iictn.in> \r\n";
+                    $header = "From: IICTN-Mumbai Marketing Material <admin@iictn.in> \r\n";
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
