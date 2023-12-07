@@ -315,11 +315,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="text-align: left;"  for="payment_mode">Invoice<span class="required">*</span>
+                                    <label style="text-align: left;"  for="payment_mode">Payment Mode<span class="required">*</span>
                                     </label>
                                         <select class="form-control" id="payment_mode" name="payment_mode">
-                                                <!-- <option value="">Select Payment Mode</option> -->
-                                                <option value="">Invoice</option>
+                                                <option value="">Select Payment Mode</option>
+                                                <!-- <option value="">Invoice</option> -->
                                                 <option value="NEFT">NEFT</option>
                                                 <option value="IMPS">IMPS</option>
                                                 <option value="RTGS">RTGS</option>
