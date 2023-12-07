@@ -69,7 +69,7 @@ $pdf->Cell(0, 10,  $student_name, 0, 0, 'C'); // add the text, align to Center o
 // note the reduction in font and different box position
 
 $pdf->SetFontSize('30');
-$pdf->SetXY(10, 140);
+$pdf->SetXY(10, 135);
 $pdf->MultiCell(190,11,$course_name, '0', 'C', 0);
 
 // the day
