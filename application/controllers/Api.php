@@ -123,8 +123,13 @@ class Api extends BaseController
 		setContentLength($responseData);
     }
 
+    public function getdashboarddetails(){
+       $userdetails = validateServiceRequest();
+       $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+       $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
 
 
+    }
 
 }
 

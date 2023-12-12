@@ -44,6 +44,6 @@ define('EMAIL_SECURE','tls');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');
 
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
-define('INSTANCE_ID','6523F20610A72');
+define('INSTANCE_ID','65784BDAEE97A');
 define('ACCESS_TOKEN','64e7462031534');
 ?>
