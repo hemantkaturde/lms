@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     $state =$_REQUEST["state"];
     $city = $_REQUEST["city"];
     $pin=  $_REQUEST["pin"];
+    $aadhaarnumber=  $_REQUEST["aadhaarnumber"];
 
     if($_FILES['student_photo']['name']){
         $file = rand(1000,100000)."-".$name.'-'.$_FILES['student_photo']['name'];
@@ -111,8 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     $source_ans=  $_REQUEST["source_ans"];
     $accept_terms =$_REQUEST["accept_terms"];
 
-    $sql = "INSERT INTO tbl_admission (enq_id,`name`,lastname,gender,mobile, alt_mobile,email,dateofbirth,counsellor_name,`address`,city,`state`,country,pin,source_about,source_ans,accept_terms,registration_type,document_1,document_2,document_3,isDeleted) 
-                               VALUES ('$enq_id','$name','$lastname','$gender','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','0')";
+    $sql = "INSERT INTO tbl_admission (enq_id,`name`,lastname,gender,mobile, alt_mobile,email,dateofbirth,counsellor_name,`address`,city,`state`,country,pin,source_about,source_ans,accept_terms,registration_type,document_1,document_2,document_3,aadhaarnumber,isDeleted) 
+                               VALUES ('$enq_id','$name','$lastname','$gender','$mobile','$alt_mobile','$email','$dateofbirth','$counsellerName','$address','$city','$state','$country','$pin','$source_about','$source_ans','$accept_terms','Weblink','$final_file_student_photo','$final_file_marksheet_photo','$final_file_adhar_photo','$aadhaarnumber','0')";
 
     if ($conn->query($sql) === TRUE) {
 
@@ -564,6 +565,12 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                             <input type="date" id="dateofbirth" name="dateofbirth"
                                                 class="form-control hasDatepicker" placeholder="">
                                                 <span class="text-default">( Date Of Birth )</span>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <input type="text" id="aadhaarnumber" name="aadhaarnumber"
+                                                class="form-control" placeholder="Aadhaar Number*" Required>
+                                                <span class="text-default">( Aadhaar Number )</span>
                                         </div>
                                     </div>
 
