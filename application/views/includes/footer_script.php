@@ -1775,12 +1775,13 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
 							{ "width": "8%", "targets": 0 },
-							{ "width": "14%", "targets": 1 },
-							{ "width": "15%", "targets": 2 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
 							{ "width": "15%", "targets": 3 },
-							{ "width": "20%", "targets": 4 },
+							{ "width": "15%", "targets": 4 },
 							{ "width": "20%", "targets": 5 },
-							{ "width": "10%", "targets": 6 },
+							{ "width": "8%", "targets": 6 },
+							{ "width": "15%", "targets": 7 },
 						],
 						responsive: true,
 						"oLanguage": {
@@ -1889,8 +1890,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			image.src = URL.createObjectURL(event.target.files[0]);
 	};
 
-
-
 	$(document).on('change','#countryEditAdmission',function(e){  
 		e.preventDefault();
 		//$(".loader_ajax").show();
@@ -1992,6 +1991,57 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				});
 				return false;
 	});
+
+
+	$(document).on('click','.cancle_admission',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, Procced!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>cancleadmission",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+											if(obj.status=='success'){			
+												swal({
+													title: "Admission Cancel!",
+													text: "",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+													   $("#popup_modal_sm").hide();
+													window.location.href = "<?php echo base_url().'admissionListing'?>";
+												});	
+											}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										//$(".loader_ajax").hide();
+									}
+							    })
+							}
+							else {
+					swal("Cancelled", " ", "error");
+					}
+			});
+	});
+
+
 
 
 </script>

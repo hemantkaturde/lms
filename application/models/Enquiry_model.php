@@ -157,11 +157,15 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['all_course_name'] = $all_course_name ;
                  $data[$counter]['counsellor_name'] = $value['counseller'];
 
-                 if(!empty($value['admissionexits'])){
-                    $data[$counter]['status'] = 'Admitted';
-                }else{
-                    $data[$counter]['status'] = 'In Follow up';
-                }
+                 if($value['cancle_status']=='1'){
+                       $data[$counter]['status'] = 'Cancelled';
+                 }else{
+                    if(!empty($value['admissionexits'])){
+                        $data[$counter]['status'] = 'Admitted';
+                    }else{
+                        $data[$counter]['status'] = 'In Follow up';
+                    }
+                 }
 
                  $data[$counter]['action'] = '';
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."payment_details/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Payment Details' title='Payment Details'></a> | ";
@@ -172,7 +176,10 @@ class Enquiry_model extends CI_Model
                  
                  if($value['admissionexits']){
                  }else{
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Enquiry'></a> "; 
+                    if($value['cancle_status']=='1'){
+                    }else{
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Enquiry'></a> "; 
+                    }
                  }
                  
                 $counter++; 

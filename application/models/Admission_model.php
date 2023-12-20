@@ -138,11 +138,28 @@ class Admission_model extends CI_Model
                      $data[$counter]['email'] = $value['email'];
                     // $data[$counter]['address'] = $value['address'];
                      $data[$counter]['address'] = $all_course_name;
+                    
+                     if($value['cancle_status']==1){
+                       $data[$counter]['cancel'] = 'Cancelled';
+                     }else{
+                        $data[$counter]['cancel'] = '';
+                     }
+
                      $data[$counter]['action'] = '';
                      $data[$counter]['action'] .= "<a style='cursor: pointer;' href='".ADMIN_PATH."editadmission/".$value['id']."'><img width='20' src=".ICONPATH."/edit.png alt='Edit Admission' title='Edit Admission'></a>&nbsp;";
-                    // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_admission_details' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
+                     //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_admission_details' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
                      $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewadmissiondetails/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
-                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Admission' title='Delete Admission'></a>&nbsp"; 
+
+                     if($value['cancle_status']==1){
+                        //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_admission_cancle_reason' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Cancle Admission' title='Print Admission Cancle reason'></a>&nbsp"; 
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='admissioncancleinfo/index.php?admission_id=".$value['id']."' target='_blank'  class='print_certificate' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Admission Cancle reason' title='Print Admission Cancle reason'></a> "; 
+
+                     }else{
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancle Admission' title='Cancle Admission'></a>&nbsp";
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Admission' title='Delete Admission'></a>&nbsp"; 
+ 
+                     }
+
                     $counter++; 
                 }
             }
@@ -1199,6 +1216,37 @@ function studentcertificateData($params)
             }
         }
        return $data;
+    }
+
+
+    public function cancleadmission($id){
+        $data =array(
+            'cancle_status'=>1
+        );
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_ADMISSION, $data)){
+            return TRUE;
+            $sql = "UPDATE tbl_enquiry AS ud JOIN tbl_admission AS u ON ud.enq_id = u.enq_id SET ud.cancle_status=1 WHERE u.id = $id";
+                if($this->db->query($sql)){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+
+        } else {
+            return FALSE;
+        }
+
+        // $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id  = '.TBL_ADMISSION.'.enq_id');
+        // $this->db->where(TBL_ADMISSION.'.id ', $id);
+       
+        // if($this->db->update(TBL_ENQUIRY, $data)){
+        //     return TRUE;
+        // }else{
+        //     return FALSE;
+        // }
+
+        
     }
 
 

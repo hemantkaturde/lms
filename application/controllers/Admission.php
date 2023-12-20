@@ -418,6 +418,26 @@
             }
         }
 
+        public function cancleadmission(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $cancleadmission_response =array();
+                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->admission_model->cancleadmission($this->input->post('id'));
+                    if($result){
+                        $cancleadmission_response['status'] = 'success';
+                        $process = 'Delete Admission';
+                        $processFunction = 'Admission/Delete Admission';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $cancleadmission_response['status'] = 'filure';
+                    }
+            
+                echo json_encode($cancleadmission_response);
+            }
+        }
+
 
     }
 

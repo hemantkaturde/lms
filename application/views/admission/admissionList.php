@@ -25,6 +25,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Courses</th>
+                                <th>Admission Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

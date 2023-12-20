@@ -189,6 +189,9 @@ $route['deleteAdmission'] = "admission/deleteAdmission";
 $route['viewadmissiondetails/(:any)'] = "admission/viewadmissiondetails/$1";
 $route['editadmission/(:any)'] = "admission/editadmission/$1";
 $route['updateadmission'] = "admission/updateadmission";
+$route['cancleadmission'] = "admission/cancleadmission";
+
+
 
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
