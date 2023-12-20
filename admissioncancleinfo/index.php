@@ -7,7 +7,7 @@ include "../db/config.php";
 
  $admission_id = $_GET['admission_id'];
 
- $result = $conn->query("SELECT tbl_admission.name,tbl_admission.lastname,tbl_admission.email,tbl_admission.mobile,sum(tbl_payment_transaction.totalAmount) as totalpaidAmount,tbl_payment_transaction.payment_date,tbl_payment_transaction.payment_mode,tbl_payment_transaction.datetime,tbl_enquiry.createdDtm,tbl_users.name as counsellor from  tbl_admission 
+ $result = $conn->query("SELECT tbl_admission.aadhaarnumber,tbl_admission.name,tbl_admission.lastname,tbl_admission.email,tbl_admission.mobile,sum(tbl_payment_transaction.totalAmount) as totalpaidAmount,tbl_payment_transaction.payment_date,tbl_payment_transaction.payment_mode,tbl_payment_transaction.datetime,tbl_enquiry.createdDtm,tbl_users.name as counsellor from  tbl_admission 
   join tbl_enquiry on tbl_enquiry.enq_id = tbl_admission.enq_id 
   join tbl_payment_transaction on tbl_payment_transaction.enquiry_id =tbl_enquiry.enq_id
   left join tbl_users on tbl_admission.counsellor_name = tbl_users.userId
@@ -15,7 +15,7 @@ include "../db/config.php";
 
  $result_arry = $result->fetch_assoc();
  $student_name = $result_arry['name'].' '.$result_arry['lastname'];
- $adhar_number = '1251254556555125';
+ $adhar_number = $result_arry['aadhaarnumber'];
  $email = $result_arry['email'];
  $mobile = $result_arry['mobile'];
  $totalpaidAmount = $result_arry['totalpaidAmount'];
@@ -24,6 +24,7 @@ include "../db/config.php";
  $payment_mode = $result_arry['payment_mode'];
  $createdDtm = $result_arry['createdDtm'];
  $counsellor = $result_arry['counsellor'];
+
  
  
 // Create new Landscape PDF
