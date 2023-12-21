@@ -67,6 +67,11 @@ $roleText = $this->session->userdata('roleText');
                                                 <td style="width:20%"><b>Email Id</b></td>
                                                 <td><?=$view_admission_details[0]->email;?></td>
                                             </tr>
+
+                                            <tr>
+                                                <td style="width:20%"><b>Adhaar Number</b></td>
+                                                <td><?=$view_admission_details[0]->aadhaarnumber;?></td>
+                                            </tr>
                                     </tbody>
                                 </table>
 
