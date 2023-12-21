@@ -69,7 +69,7 @@ $roleText = $this->session->userdata('roleText');
                                             </tr>
 
                                             <tr>
-                                                <td style="width:20%"><b>Adhaar Number</b></td>
+                                                <td style="width:20%"><b>Aadhaar Number</b></td>
                                                 <td><?=$view_admission_details[0]->aadhaarnumber;?></td>
                                             </tr>
                                     </tbody>
