@@ -142,7 +142,7 @@ class Admission_model extends CI_Model
                      if($value['cancle_status']==1){
                        $data[$counter]['cancel'] = 'Cancelled';
                      }else{
-                        $data[$counter]['cancel'] = '';
+                        $data[$counter]['cancel'] = 'Admitted';
                      }
 
                      $data[$counter]['action'] = '';
