@@ -93,6 +93,18 @@ $pdf->SetXY(85, 102);
 $pdf->Cell(80, 8, $counsellor, 0, 0, 'L');
 
 
+
+$pdf->SetFontSize('8');
+$pdf->SetXY(58, 222);
+$pdf->Cell(80, 8, $student_name, 0, 0, 'L');
+
+
+$pdf->SetFontSize('8');
+$pdf->SetXY(152, 222);
+$pdf->Cell(80, 8, $adhar_number, 0, 0, 'L');
+
+
+
 // render PDF to browser
 $pdf->Output();
 
