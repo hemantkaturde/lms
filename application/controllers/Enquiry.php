@@ -924,75 +924,75 @@
     }
 
 
-   public function addmanualpayment(){
+        public function addmanualpayment(){
 
-    $post_submit = $this->input->post();
+            $post_submit = $this->input->post();
 
-    if($post_submit){
+            if($post_submit){
 
-        $add_manaulpayment_response = array();
+                $add_manaulpayment_response = array();
 
-        $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
-        $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required');
-        $this->form_validation->set_rules('manual_payment_amount', 'Manual Payment Amount', 'trim|required');
-        $this->form_validation->set_rules('payment_date', 'Payment Date', 'trim|required');
-        $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
-        $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
-        $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
-        $this->form_validation->set_rules('description', 'Description', 'trim');
+                $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
+                $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required');
+                $this->form_validation->set_rules('manual_payment_amount', 'Manual Payment Amount', 'trim|required');
+                $this->form_validation->set_rules('payment_date', 'Payment Date', 'trim|required');
+                $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
+                $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
+                $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
+                $this->form_validation->set_rules('description', 'Description', 'trim');
 
-        if($this->form_validation->run() == FALSE){
-            $add_manaulpayment_response['status'] = 'failure';
-            $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-        }else{
-
-
-
-                    $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
+                if($this->form_validation->run() == FALSE){
+                    $add_manaulpayment_response['status'] = 'failure';
+                    $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                }else{
 
 
-                    if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
-                        $add_manaulpayment_response['status'] = 'failure';
-                        $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Gratter Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
-             
 
-                    }else{
+                            $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
 
-                            $data = array(
-                                'enquiry_id'=> $this->input->post('enquiry_id'),
-                                'enquiry_number'=>  $this->input->post('enquiry_number'),
-                                'totalAmount'=>  $this->input->post('manual_payment_amount'),
-                                'payment_status'=> '1',
-                                'payment_mode'=> $this->input->post('payment_mode'),
-                                'cheuqe_number'=> $this->input->post('cheuqe_number'),
-                                'bank_name'=> $this->input->post('bank_name'),
-                                'prepared_by'=> $this->input->post('prepared_by'),
-                                'description'=> $this->input->post('description'),
-                                'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
-                            
-                            );
-                            
-                        
-                        $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
 
-                        if($insert_manualpayment_details){
-                                $add_manaulpayment_response['status'] = 'success';
-                                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-                            }else{
+                            if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
                                 $add_manaulpayment_response['status'] = 'failure';
-                                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                                $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Gratter Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
+                    
+
+                            }else{
+
+                                    $data = array(
+                                        'enquiry_id'=> $this->input->post('enquiry_id'),
+                                        'enquiry_number'=>  $this->input->post('enquiry_number'),
+                                        'totalAmount'=>  $this->input->post('manual_payment_amount'),
+                                        'payment_status'=> '1',
+                                        'payment_mode'=> $this->input->post('payment_mode'),
+                                        'cheuqe_number'=> $this->input->post('cheuqe_number'),
+                                        'bank_name'=> $this->input->post('bank_name'),
+                                        'prepared_by'=> $this->input->post('prepared_by'),
+                                        'description'=> $this->input->post('description'),
+                                        'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
+                                    
+                                    );
+                                    
+                                
+                                $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
+
+                                if($insert_manualpayment_details){
+                                        $add_manaulpayment_response['status'] = 'success';
+                                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                                    }else{
+                                        $add_manaulpayment_response['status'] = 'failure';
+                                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                                    }
+
+
                             }
+                    
+                }
 
+                echo json_encode($add_manaulpayment_response);
+                    
+            }
 
-                    }
-            
         }
-
-        echo json_encode($add_manaulpayment_response);
-            
-    }
-
-   }
    
     public function sendBrochureLink(){
         $post_submit = $this->input->post();
@@ -1206,6 +1206,81 @@
         }
 
     }
+
+
+    public function add_on_courses($id){
+
+        $process = 'Add On courses Details';
+        $processFunction = 'Enquiry/add_on_courses';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add On courses Details';
+        $data['enquiry_id'] = $id;
+        $data['course_List'] = $this->comman_model->getCourseList();
+        $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+        $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
+
+        $data['getAddoncourseList'] = $this->enquiry_model->getAddoncourseList($id);
+
+        $this->loadViews("enquiry/add_on_courses_details", $this->global, $data , NULL);
+    }
+
+
+    public function save_add_on_course(){
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+            $saveaddoncourse_response = array();
+
+            $this->form_validation->set_rules('course', 'Course Name', 'trim|required');
+            $this->form_validation->set_rules('enquiry_id', 'Enquiry Id', 'trim|required');
+            if($this->form_validation->run() == FALSE){
+                $saveaddoncourse_response['status'] = 'failure';
+                $saveaddoncourse_response['error'] = array('course'=>strip_tags(form_error('course')), 'enquiry_id'=>strip_tags(form_error('enquiry_id')));
+            }else{
+
+                $data = array(
+                    'enquiry_id'=>trim($this->input->post('enquiry_id')),
+                    'course_id'=> trim($this->input->post('course')),
+                );
+
+                $save_Add_on_courses = $this->enquiry_model->save_Add_on_courses('',$data);
+                if($save_Add_on_courses){
+                    $saveaddoncourse_response['status'] = 'success';
+                    $saveaddoncourse_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+                }
+            }
+            echo json_encode($saveaddoncourse_response);
+        }
+    }
+
+
+    public function activeinactiveaddoncourses(){
+        $post_submit = $this->input->post();
+
+    
+
+        if($post_submit){
+        
+
+            $activeinactiveaddoncourses_response = array();
+
+            $status = $this->input->post('status');
+            $enquiry_id = $this->input->post('enquiry_id');
+            $data = array(
+                'active'=>trim($this->input->post('status')),
+            );
+
+            $save_Add_on_courses = $this->enquiry_model->save_Add_on_courses('',$data);
+            if($save_Add_on_courses){
+                $activeinactiveaddoncourses_response['status'] = 'success';
+                $activeinactiveaddoncourses_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+            }
+
+            echo json_encode($activeinactiveaddoncourses_response);
+
+        }
+
+    }
+
 
 
     public function taxinvoices(){

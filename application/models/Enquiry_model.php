@@ -174,6 +174,9 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_brochure_link' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Brochure Link' title='Send Brochure Link'></a> | "; 
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editenquiry/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
                  
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."add_on_courses/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/add.png' alt='Add-on courses' title='Add-on courses'></a> | ";
+
+
                  if($value['admissionexits']){
                  }else{
                     if($value['cancle_status']=='1'){
@@ -588,6 +591,33 @@ class Enquiry_model extends CI_Model
         $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
         $query = $this->db->get(TBL_ENQUIRY);
         return $query->result_array();
+    }
+
+    public function save_Add_on_courses($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_ADD_ON_COURSE, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ADD_ON_COURSE, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function getAddoncourseList($id){
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+        $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->result_array();
+
     }
 
 }

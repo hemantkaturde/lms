@@ -571,7 +571,7 @@
 	                 { className: "details-control", "targets": [ 0 ] },
 	                 { "width": "8%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
-	                 { "width": "15%", "targets": 2 },
+	                 { "width": "12%", "targets": 2 },
 	                 { "width": "8%", "targets": 3 },
 					 { "width": "20%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
@@ -896,6 +896,105 @@
      	
 
 </script> 
+<?php } ?>
+
+<?php if($pageTitle=='Add On courses Details'){?>
+ <script type="text/javascript">
+
+       $(document).on('click','#save_add_on_course',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+
+			var id = $("#enquiry_id").val();
+
+			var formData = new FormData($("#add_on_courses_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>save_add_on_course",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Certificate Type Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'add_on_courses/'?>"+id;
+						//});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	   });
+
+
+	   $('#toggleSwitch').change(function () {
+            var status = $(this).prop('checked') ? 1 : 0;
+			var id = $("#enquiry_id").val();
+
+			$.ajax({
+				url : "<?php echo base_url();?>activeinactiveaddoncourses",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Certificate Type Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+						// 		$("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'add_on_courses/'?>"+id;
+						//});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+        });
+
+ </script> 
+
 <?php } ?>
 
 <?php if($pageTitle=='Certificate Type'){?>
