@@ -436,6 +436,15 @@ $jsonstringtoArray = json_decode($access, true);
                                 <span class="nav-label">Ask A Query</span>
                             </a>
                         </li>
+
+                        <li  class="<?php if($pageUrl =='courseRequest'){ echo 'active';} ?>">
+                            <a  href="<?php echo base_url()."courseRequest"; ?>"><i
+                                    class="sidebar-item-icon fa fa-exchange"></i>
+                                <span class="nav-label">Course Request</span>
+                            </a>
+                        </li>
+
+
                     </ul>
                <?php } ?>
             </div>

@@ -306,6 +306,9 @@ $route['allowstudentexamrequest'] = "admin/allowstudentexamrequest";
 $route['fetchstudentexamrequestdata'] = "admin/fetchstudentexamrequestdata";
 $route['deletestudentrequest'] = "admin/deletestudentrequest";
 $route['CheckboxCheckUncheckpermission'] = "admin/CheckboxCheckUncheckpermission";
+$route['courseRequest'] = "admin/courseRequest";
+$route['fetchcourseRequest'] = "admin/fetchcourseRequest";
+
 
 
 

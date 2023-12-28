@@ -5602,6 +5602,38 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php  } ?>
 
 
+<?php if($pageTitle=='Course Request'){ ?>
+<script type="text/javascript">
+        $(document).ready(function() {
+			var dt = $('#view_coursetypelist').DataTable({
+				"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "50%", "targets": 0 },
+						{ "width": "5%", "targets": 1 },
+
+				],
+				responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Course Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>/fetchcourseRequest",
+						type: "post",
+					},
+				});
+	     	});
+</script>
+<?php  } ?>
+
+
+
+
 
 
 

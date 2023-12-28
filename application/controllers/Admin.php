@@ -950,6 +950,48 @@ class Admin extends BaseController
  }
 
 
+ public function courseRequest(){
+
+    $this->global['pageTitle'] = 'Course Request';
+    $this->loadViews("student/courseRequest", $this->global, NULL, NULL);
+
+ }
+
+
+ public function fetchcourseRequest(){
+
+        $userId = $this->session->userdata('userId');
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admission_model->courseRequestDataCount($params,$userId); 
+        $queryRecords = $this->admission_model->courseRequestData($params,$userId); 
+    
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+    
+        echo json_encode($json_data);
+
+    //$data['upcoming_class_links'] = $this->admission_model->upcoming_class_links($userId);
+ }
+
+
+
+
+
 }
 
 ?>
