@@ -30,7 +30,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Class Date</th>	
                                 <th>Class Timings</th>
                                 <th>Attendance Status</th>
-                                <th>Request Status</th>
+                                <th>Approval Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

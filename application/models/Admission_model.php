@@ -1503,19 +1503,13 @@ function studentcertificateData($params)
                     $data[$counter]['classtime'] = $value['classtime'];
                     $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
 
-                    $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
-                  
-                    if($checkAprrovalstatus){
-
-                        if($checkAprrovalstatus['approval_status'] > 0){
-                            $request_status ='Approved';
+                
+                        if($value['admin_approval_status']){
+                            $request_status = $value['admin_approval_status'];
                         }else{
                             $request_status ='In Approval Process ..please wait';
                         }
-                       
-                    }else{
-                        $request_status ='NA';
-                    }
+                   
                    
                     $data[$counter]['request_status'] =  $request_status;
                     $data[$counter]['action'] = '';
