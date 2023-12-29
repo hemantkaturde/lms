@@ -1008,6 +1008,7 @@ class Admin extends BaseController
                 'time_table_id'      => $this->input->post('time_table_id'),
                 'student_id'     => $this->input->post('student_id'),
                 'remark'  => $this->input->post('request_description'),
+                'approval_status'  => 1,
             );
 
             $topic_class_request = $this->admission_model->saveclassrequest('',$data);
@@ -1042,7 +1043,6 @@ class Admin extends BaseController
  }
 
  public function fetchcourseRequestadmin(){
-
 
     $params = $_REQUEST;
     $totalRecords = $this->admission_model->courseRequestDataCountadmin($params); 
