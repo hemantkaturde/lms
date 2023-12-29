@@ -5746,10 +5746,11 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	    });
 
 
-		$(document).on('click','.request_class',function(e){  
+		$(document).on('click','.request_class_admin',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
 			var id = elemF.attr('data-id');
+			
 			$.ajax({
 				url : "<?php echo base_url();?>getcoursetopicrequestdetailsadmin",
 				type: "POST",

@@ -68,8 +68,6 @@ $jsonstringtoArray = json_decode($access, true);
                         <p class="error course_name_error"></p>
                         <input autocomplete="off" autocomplete="off"  type="hidden" id="time_table_id" name="time_table_id" readonly>
                         <input autocomplete="off" autocomplete="off"  type="hidden" id="request_id" name="request_id" readonly>
-
-
                      </div>
                   </div>
                   <div class="form-group">

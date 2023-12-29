@@ -1468,7 +1468,7 @@ function studentcertificateData($params)
         $pageUrl =$this->uri->segment(1);
     
         //$this->db->select('*');
-         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
+         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate,'.TBL_NEW_COURSE_REQUEST.'.id as request_id');
          $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
          $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
          $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
@@ -1513,7 +1513,7 @@ function studentcertificateData($params)
                    
                     $data[$counter]['request_status'] =  $request_status;
                     $data[$counter]['action'] = '';
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='request_class' data-id='".$value['topicid']."'><img width='20' src=".ICONPATH."/request_new.png alt='Request New Class' title='Request New Class'></a>&nbsp"; 
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='request_class_admin' data-id='".$value['request_id']."'><img width='20' src=".ICONPATH."/request_new.png alt='Request New Class' title='Request New Class'></a>&nbsp"; 
 
                  $counter++; 
             }
@@ -1529,12 +1529,12 @@ function studentcertificateData($params)
     }
 
 
-    public function getcoursetopicrequestdetailsadmin($topicid){
+    public function getcoursetopicrequestdetailsadmin($requestid){
         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topictimetbaleid,'.TBL_NEW_COURSE_REQUEST.'.id as request_id,'.TBL_NEW_COURSE_REQUEST.'.remark as request_description');
         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
         $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE.'.id = '.TBL_TIMETABLE_TRANSECTIONS.'.time_table_id');
-        // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id',$topicid);
+        $this->db->where(TBL_NEW_COURSE_REQUEST.'.id',$requestid);
         $get_enquiry_courses = $this->db->get(TBL_NEW_COURSE_REQUEST);
         $fetch_result_enquiry_courses = $get_enquiry_courses->row_array();
 
