@@ -178,6 +178,7 @@ $route['updatefollowupdata'] = "enquiry/updatefollowupdata";
 $route['addmanualpayment'] = "enquiry/addmanualpayment";
 $route['deleteEnquiryTransaction'] = "enquiry/deleteEnquirypaymentTransaction";
 $route['get_enquiry_tarnsaction_details/(:any)'] = "enquiry/get_enquiry_tarnsaction_details/$1";
+
 $route['sendManualAdmissionlink'] = "enquiry/sendManualAdmissionlink";
 $route['add_on_courses/(:any)'] = "enquiry/add_on_courses/$1";
 $route['save_add_on_course'] = "enquiry/save_add_on_course";
@@ -193,6 +194,9 @@ $route['viewadmissiondetails/(:any)'] = "admission/viewadmissiondetails/$1";
 $route['editadmission/(:any)'] = "admission/editadmission/$1";
 $route['updateadmission'] = "admission/updateadmission";
 $route['cancleadmission'] = "admission/cancleadmission";
+$route['delete_add_on_course'] = "admission/delete_add_on_course";
+
+
 
 
 

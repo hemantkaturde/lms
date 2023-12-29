@@ -949,6 +949,30 @@
 	   });
 
 
+	   $(document).on('click','.delete_add_on_course',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+				$.ajax({
+					url : "<?php echo base_url();?>delete_add_on_course",
+					type: "POST",
+					data : 'id='+elemF.attr('data-id'),
+					success: function(data, textStatus, jqXHR)
+						{
+							// if(data.status=='success'){
+							//swal("Deleted!", "Enquiry has been deleted.", "success");
+							location.reload();
+							//}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+				})
+				
+	    });
+
+
+
 	   $('#toggleSwitch').change(function () {
             var status = $(this).prop('checked') ? 1 : 0;
 			var id = $("#enquiry_id").val();

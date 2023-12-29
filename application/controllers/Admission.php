@@ -438,6 +438,27 @@
             }
         }
 
+        public function delete_add_on_course(){
+            $post_submit = $this->input->post();
+            if(!empty($post_submit)){
+                $deleteaddoncourse_response =array();
+        
+                    $courseInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    $result = $this->admission_model->data_update('tbl_add_on_courses',$courseInfo,'id',$this->input->post('id'));
+                    if($result){
+                        $deleteaddoncourse_response['status'] = 'success';
+                        $process = 'Delete Add On Course';
+                        $processFunction = 'Admission/delete_add_on_course';
+                        $this->logrecord($process,$processFunction);
+                    }else
+                    {
+                        $deleteaddoncourse_response['status'] = 'filure';
+                    }
+            }
+                echo json_encode($deleteaddoncourse_response);
+            }
+
+        
 
     }
 

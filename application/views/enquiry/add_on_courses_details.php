@@ -100,7 +100,7 @@
                                 <td><?=$status?></td>
 
                                 <td>
-                                    <a style='cursor: pointer;' class='delete_enquiry' data-id=''><img width='20' src="<?=ICONPATH;?>/delete.png" alt='Delete Equipment' title='Delete Enquiry'></a>
+                                    <a style='cursor: pointer;' class='delete_add_on_course' data-id='<?=$value['id']?>'><img width='20' src="<?=ICONPATH;?>/delete.png" alt='Delete Add On Course' title='Delete Add On Course'></a>
                                     <label class="switch">
                                         <input type="checkbox" id="toggleSwitch">
                                         <span class="slider"></span>

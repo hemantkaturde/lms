@@ -1255,11 +1255,7 @@
 
     public function activeinactiveaddoncourses(){
         $post_submit = $this->input->post();
-
-    
-
         if($post_submit){
-        
 
             $activeinactiveaddoncourses_response = array();
 
