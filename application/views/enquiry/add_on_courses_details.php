@@ -85,7 +85,7 @@
                         </tr>
 
                         <?php  foreach ($getAddoncourseList as $key => $value) {
-                            if($value['active_status']==1){
+                            if($value['active_status']==0){
 
                                 $status = 'Inactive';
                             }else{

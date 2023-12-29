@@ -1293,9 +1293,11 @@
 
 
                     if(trim($this->input->post('course_status'))==0){
-                        $data = array('active_status'=>trim($this->input->post('course_status')));
-                        $updateactiveinactivestatus = $this->enquiry_model->updateactiveinactivestatus(trim($this->input->post('main_id')),$data); 
-                        if($updateactiveinactivestatus){
+                        $data = array('active_status'=>0);
+                        $updateactiveinactivestatus2 = $this->enquiry_model->updateactiveinactivestatus(trim($this->input->post('main_id')),$data);
+                        
+                        
+                        if($updateactiveinactivestatus2){
 
                             $enquiry_id  = trim($this->input->post('enquiry_id'));
                             $course_id  = trim($this->input->post('course_id'));
