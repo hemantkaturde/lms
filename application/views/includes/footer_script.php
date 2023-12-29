@@ -949,7 +949,7 @@
 	   });
 
 
-	   $(document).on('click','.delete_add_on_course',function(e){
+	    $(document).on('click','.delete_add_on_course',function(e){
 			var elemF = $(this);
 			e.preventDefault();
 				$.ajax({
@@ -971,19 +971,20 @@
 				
 	    });
 
-
-
-	   $('#toggleSwitch').change(function () {
+	  
+		$('#toggleSwitch').change(function (e) {
+			var elemF = $(this);
             var status = $(this).prop('checked') ? 1 : 0;
 			var id = $("#enquiry_id").val();
+			var course_id= elemF.attr('course_id');
+
 
 			$.ajax({
 				url : "<?php echo base_url();?>activeinactiveaddoncourses",
-				type: "POST",
-				data : formData,
-				cache: false,
-		        contentType: false,
-		        processData: false,
+				// type: "POST",
+				method:"POST",  
+                data:{status:status,id:id,course_id:course_id},
+                dataType:"json", 
 				success: function(data, textStatus, jqXHR)
 				{
 

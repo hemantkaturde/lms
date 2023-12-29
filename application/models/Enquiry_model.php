@@ -617,6 +617,16 @@ class Enquiry_model extends CI_Model
         $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
         $query = $this->db->get(TBL_ADD_ON_COURSE);
         return $query->result_array();
+    }
+
+    public function updateenquirywithpush($enquiry_id,$data){
+        $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
+        if($this->db->update(TBL_ENQUIRY,$data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+
 
     }
 

@@ -102,7 +102,7 @@
                                 <td>
                                     <a style='cursor: pointer;' class='delete_add_on_course' data-id='<?=$value['id']?>'><img width='20' src="<?=ICONPATH;?>/delete.png" alt='Delete Add On Course' title='Delete Add On Course'></a>
                                     <label class="switch">
-                                        <input type="checkbox" id="toggleSwitch">
+                                        <input type="checkbox" course_id='<?=$value['courseId']?>' id="toggleSwitch">
                                         <span class="slider"></span>
                                     </label>
                                 </td>
