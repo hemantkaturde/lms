@@ -626,7 +626,15 @@ class Enquiry_model extends CI_Model
         } else {
             return FALSE;
         }
+    }
 
+    public function updateactiveinactivestatus($main_id,$data){
+        $this->db->where(TBL_ADD_ON_COURSE.'.id', $main_id);
+        if($this->db->update(TBL_ADD_ON_COURSE,$data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
 
     }
 

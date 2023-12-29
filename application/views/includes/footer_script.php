@@ -971,23 +971,83 @@
 				
 	    });
 
-	  
-		$('#toggleSwitch').change(function (e) {
+		// $('#toggleSwitch').change(function (e) {
+		// 	var elemF = $(this);
+        //     var status = $(this).prop('checked') ? 1 : 0;
+		// 	var id = $("#enquiry_id").val();
+		// 	var course_id= elemF.attr('course_id');
+
+
+
+		// 	$.ajax({
+		// 		url : "<?php echo base_url();?>activeinactiveaddoncourses",
+		// 		// type: "POST",
+		// 		method:"POST",  
+        //         data:{status:status,id:id,course_id:course_id},
+        //         dataType:"json", 
+		// 		success: function(data, textStatus, jqXHR)
+		// 		{
+
+		// 			var fetchResponse = $.parseJSON(data);
+		// 			if(fetchResponse.status == "failure")
+		// 		    {
+		// 		    	$.each(fetchResponse.error, function (i, v)
+		//                 {
+		//                     $('.'+i+'_error').html(v);
+		//                 });
+		// 		    }
+		// 			else if(fetchResponse.status == 'success')
+		// 		    {
+		// 				// swal({
+		// 				// 	title: "Certificate Type Created!",
+		// 				// 	//text: "",
+		// 				// 	icon: "success",
+		// 				// 	button: "Ok",
+		// 				// 	},function(){ 
+		// 				// 		$("#popup_modal_sm").hide();
+		// 						window.location.href = "<?php echo base_url().'add_on_courses/'?>"+id;
+		// 				//});						
+		// 		    }
+					
+		// 		},
+		// 		error: function (jqXHR, textStatus, errorThrown)
+		// 	    {
+		// 	   		//$(".loader_ajax").hide();
+		// 	    }
+		// 	});
+		// 	return false;
+        // });
+
+
+		$(document).on('click','.change_active_inactive_status',function(e){
 			var elemF = $(this);
-            var status = $(this).prop('checked') ? 1 : 0;
-			var id = $("#enquiry_id").val();
+			var enquiry_id = $("#enquiry_id").val();
 			var course_id= elemF.attr('course_id');
+			var id= elemF.attr('data-id');
+			
+
+	        $('#changeactiveinactive').modal('show'); 
+			$("#course_id").val(course_id);
+			$("#main_id").val(id);
+		});
 
 
+		$(document).on('click','.save_changeactiveinactive',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+
+			var enquiry_id = $("#enquiry_id").val();
+
+			var formData = new FormData($("#changeactiveinactive_form")[0]);
 			$.ajax({
 				url : "<?php echo base_url();?>activeinactiveaddoncourses",
-				// type: "POST",
-				method:"POST",  
-                data:{status:status,id:id,course_id:course_id},
-                dataType:"json", 
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
 				success: function(data, textStatus, jqXHR)
 				{
-
 					var fetchResponse = $.parseJSON(data);
 					if(fetchResponse.status == "failure")
 				    {
@@ -1005,7 +1065,7 @@
 						// 	button: "Ok",
 						// 	},function(){ 
 						// 		$("#popup_modal_sm").hide();
-								window.location.href = "<?php echo base_url().'add_on_courses/'?>"+id;
+								window.location.href = "<?php echo base_url().'add_on_courses/'?>"+enquiry_id;
 						//});						
 				    }
 					
@@ -1016,7 +1076,9 @@
 			    }
 			});
 			return false;
-        });
+		});
+
+	
 
  </script> 
 

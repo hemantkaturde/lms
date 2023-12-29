@@ -1240,6 +1240,7 @@
                 $data = array(
                     'enquiry_id'=>trim($this->input->post('enquiry_id')),
                     'course_id'=> trim($this->input->post('course')),
+                    'active_status'=> 0,
                 );
 
                 $save_Add_on_courses = $this->enquiry_model->save_Add_on_courses('',$data);
@@ -1257,45 +1258,75 @@
         $post_submit = $this->input->post();
         if($post_submit){
             $activeinactiveaddoncourses_response = array();
-           
-            $status = $this->input->post('status');
-            $enquiry_id = $this->input->post('id');
-            $course_id = $this->input->post('course_id');
-
-            if($status==1){
-
-              /* Update Enquiry id */
-
-              $get_existing_value = $this->enquiry_model->getEnquiryInfo($enquiry_id);
-
-              if($get_existing_value[0]->enq_course_id){
-
-                $getExistingstring = $get_existing_value[0]->enq_course_id;
-                $array_with_old_file = explode(',', $getExistingstring);
-                array_push($array_with_old_file,$course_id);
-                
-                $list = implode(', ', $array_with_old_file);
-
-                $data = array(
-                    'enq_course_id'=>$list
-                );
-
-
-
-                $updateenquirywithpush = $this->enquiry_model->updateenquirywithpush($enquiry_id,$data); 
-
-                if($updateenquirywithpush){
-                    $activeinactiveaddoncourses_response['status'] = 'success';
-                    $activeinactiveaddoncourses_response['error'] = array('course'=>'', 'enquiry_id'=>'');
-                }
-
-              }
-            
+            $this->form_validation->set_rules('course_status', 'Course Status', 'trim|required');
+            if($this->form_validation->run() == FALSE){
+                $activeinactiveaddoncourses_response['status'] = 'failure';
+                $activeinactiveaddoncourses_response['error'] = array('course_status'=>strip_tags(form_error('course_status')));
             }else{
+                  
+                    if(trim($this->input->post('course_status'))==1){
 
+                        $data = array('active_status'=>trim($this->input->post('course_status')));
+                        $updateactiveinactivestatus = $this->enquiry_model->updateactiveinactivestatus(trim($this->input->post('main_id')),$data); 
+
+                        if($updateactiveinactivestatus){
+                                $enquiry_id  = trim($this->input->post('enquiry_id'));
+                                $course_id  = trim($this->input->post('course_id'));
+                                $get_existing_value = $this->enquiry_model->getEnquiryInfo($enquiry_id);
+
+                                if($get_existing_value[0]->enq_course_id){
+                                    $getExistingstring = $get_existing_value[0]->enq_course_id;
+                                    $array_with_old_file = explode(',', $getExistingstring);
+                                    array_push($array_with_old_file,$course_id);
+                                    $list = implode(', ', $array_with_old_file);
+                                    $data = array('enq_course_id'=>$list);
+
+                                    $updateenquirywithpush = $this->enquiry_model->updateenquirywithpush($enquiry_id,$data); 
+                                    if($updateenquirywithpush){
+                                        $activeinactiveaddoncourses_response['status'] = 'success';
+                                        $activeinactiveaddoncourses_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+                                    }
+
+                                }
+                        }
+                    }
+
+
+                    if(trim($this->input->post('course_status'))==0){
+                        $data = array('active_status'=>trim($this->input->post('course_status')));
+                        $updateactiveinactivestatus = $this->enquiry_model->updateactiveinactivestatus(trim($this->input->post('main_id')),$data); 
+                        if($updateactiveinactivestatus){
+
+                            $enquiry_id  = trim($this->input->post('enquiry_id'));
+                            $course_id  = trim($this->input->post('course_id'));
+                            $get_existing_value = $this->enquiry_model->getEnquiryInfo($enquiry_id);
+
+
+                            if($get_existing_value[0]->enq_course_id){
+                                $getExistingstring = $get_existing_value[0]->enq_course_id;
+                                $array_with_old_file = explode(',', $getExistingstring);
+                                $delete_item = $course_id;
+                                // take a list of months in an array
+                               // $months = array('jan', 'feb', 'march', 'april', 'may');
+                                if (($key = array_search($delete_item, $array_with_old_file)) !== false) {
+                                    unset($array_with_old_file[$key]);
+                                }
+                                $list = implode(', ', $array_with_old_file);
+                                $data = array('enq_course_id'=>$list);
+
+                                $updateenquirywithpush = $this->enquiry_model->updateenquirywithpush($enquiry_id,$data); 
+                                if($updateenquirywithpush){
+                                    $activeinactiveaddoncourses_response['status'] = 'success';
+                                    $activeinactiveaddoncourses_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+                                }
+
+                            }
+
+                        }
+                    }
 
             }
-           
+        
             echo json_encode($activeinactiveaddoncourses_response);
 
         }
