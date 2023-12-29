@@ -1036,6 +1036,38 @@ class Admin extends BaseController
 
  }
 
+ public function viewclassrequest(){
+    $this->global['pageTitle'] = 'View Class Request Admin';
+    $this->loadViews("student/viewclassrequest", $this->global, NULL, NULL);
+ }
+
+ public function fetchcourseRequestadmin(){
+
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admission_model->courseRequestDataCountadmin($params); 
+    $queryRecords = $this->admission_model->courseRequestDataadmin($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+
+    echo json_encode($json_data);
+ }
+
 
 }
 

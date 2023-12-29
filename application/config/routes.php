@@ -310,9 +310,8 @@ $route['courseRequest'] = "admin/courseRequest";
 $route['fetchcourseRequest'] = "admin/fetchcourseRequest";
 $route['getcoursetopicrequestdetails'] = "admin/getcoursetopicrequestdetails";
 $route['addnewcoursetopicrequest'] = "admin/addnewcoursetopicrequest";
-
-
-
+$route['viewclassrequest'] = "admin/viewclassrequest";
+$route['fetchcourseRequestadmin'] = "admin/fetchcourseRequestadmin";
 
 
 

@@ -5705,16 +5705,44 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			return false;
 	    });
 
-
-
-
-
 </script>
 <?php  } ?>
 
 
 
+<?php if($pageTitle=='View Class Request Admin'){ ?>
+	<script type="text/javascript">
 
+       $(document).ready(function() {
+			var dt = $('#view_course_rerquests_admin').DataTable({
+				"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "15%", "targets": 2 },
+						{ "width": "15%", "targets": 3 },
+						{ "width": "15%", "targets": 4 },
+						{ "width": "15%", "targets": 5 },
+						{ "width": "15%", "targets": 6 },
 
+				],
+				responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Course Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchcourseRequestadmin",
+						type: "post",
+					},
+				});
+	    });
+	</script>
+<?php  } ?>
 
 

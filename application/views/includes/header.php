@@ -148,12 +148,12 @@ $jsonstringtoArray = json_decode($access, true);
         </header>
         <!-- END HEADER-->
         <!-- START SIDEBAR-->
-        <nav class="page-sidebar" id="sidebar" style="background-color: #d2ae6d; position: fixed;
-        
-            height: 200px; /* Set the desired height */
-            overflow-y: scroll; /* Enable vertical scrolling */
-            border: 1px solid #ccc; /* Add a border for visualization */
-
+        <nav class="page-sidebar" id="sidebar" style="
+             background-color: #d2ae6d; 
+             /* position: fixed;
+            height: 200px; 
+            overflow-y: scroll; */
+            border: 1px solid #ccc;
         ">
             <div id="sidebar-collapse" >
                 <div class="admin-block d-flex">
@@ -332,6 +332,16 @@ $jsonstringtoArray = json_decode($access, true);
                          <li class="">
                             <a href="<?php echo base_url()."studentexamrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
                                 <span class="nav-label">Student Exam Request</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+
+                        
+                        <?php if($role_text=="Superadmin"){ ?>
+                         <li class="">
+                            <a href="<?php echo base_url()."viewclassrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
+                                <span class="nav-label">View Class Request</span>
                             </a>
                         </li>
                         <?php } ?>
