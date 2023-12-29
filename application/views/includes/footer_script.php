@@ -5713,7 +5713,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='View Class Request Admin'){ ?>
 	<script type="text/javascript">
 
-       $(document).ready(function() {
+        $(document).ready(function() {
 			var dt = $('#view_course_rerquests_admin').DataTable({
 				"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
@@ -5724,6 +5724,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						{ "width": "15%", "targets": 4 },
 						{ "width": "15%", "targets": 5 },
 						{ "width": "15%", "targets": 6 },
+						{ "width": "15%", "targets": 7 },
+						{ "width": "15%", "targets": 8 },
 
 				],
 				responsive: true,
@@ -5742,6 +5744,82 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					},
 				});
 	    });
+
+
+		$(document).on('click','.request_class',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>getcoursetopicrequestdetailsadmin",
+				type: "POST",
+				data : 'id='+id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addCourseRequest').modal('show'); 
+						$('#course_name').val(fetchResponse.course_name); 
+						$('#course_topic').val(fetchResponse.topic);
+						$('#time_table_id').val(fetchResponse.topictimetbaleid);
+						$('#request_id').val(fetchResponse.request_id);
+						$('#request_description').val(fetchResponse.request_description);
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
+
+		$(document).on('click','#save_addCourseRequestapproved_form',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#addCourseRequestapproved_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewcoursetopicrequestapproved",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#addCourseRequest").hide();
+								window.location.href = "<?php echo base_url().'viewclassrequest'?>";
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+
 	</script>
 <?php  } ?>
 

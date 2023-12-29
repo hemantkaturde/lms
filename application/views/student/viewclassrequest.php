@@ -23,6 +23,8 @@ $jsonstringtoArray = json_decode($access, true);
                     <table id="view_course_rerquests_admin" class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>Student Name</th>
+                                <th>Student Nobile Number</th>
                                 <th>Tpoic Name</th>
                                 <th>Course Name</th>
                                 <th>Class Date</th>	
@@ -51,7 +53,7 @@ $jsonstringtoArray = json_decode($access, true);
         </button>
       </div>
         <?php
-            $attributes = array("name"=>"addCourseRequest_form","id"=>"addCourseRequest_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+            $attributes = array("name"=>"addCourseRequestapproved_form","id"=>"addCourseRequestapproved_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
             echo form_open("", $attributes);
          ?>
       <div class="modal-body">
@@ -64,11 +66,9 @@ $jsonstringtoArray = json_decode($access, true);
                      <div >
                         <input autocomplete="off" autocomplete="off"  type="text" id="course_name" name="course_name"  placeholder=" Course Name" class="form-control col-md-12 col-xs-12" readonly>
                         <p class="error course_name_error"></p>
-
                         <input autocomplete="off" autocomplete="off"  type="hidden" id="time_table_id" name="time_table_id" readonly>
+                        <input autocomplete="off" autocomplete="off"  type="hidden" id="request_id" name="request_id" readonly>
 
-                        <?php  $userId = $this->session->userdata('userId'); ?>
-                        <input autocomplete="off" autocomplete="off"  type="hidden" id="student_id" name="student_id" value="<?=$userId;?>" readonly>
 
                      </div>
                   </div>
@@ -85,13 +85,26 @@ $jsonstringtoArray = json_decode($access, true);
                        <textarea id="request_description" name="request_description" rows="4" cols="50" class="form-control col-md-12 col-xs-12"> </textarea>
                         <p class="error request_description_error"></p>
                   </div>
+
+                 
+                  <div class="form-group">
+                    <label style="text-align: left;"  for="request_description">Approval Status<span class="required">*</span>
+                        </label>
+                       <select class="form-control" id="updated_status" name="updated_status">
+                           <option value="">Select Approval Status</option>
+                           <option value="Approved">Approved</option>
+                           <option value="Not Approved">Not Approved</option>
+                        </select>
+                        <p class="error updated_status_error"></p>
+                </div>
+
               </div>
             </div>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>        
-        <button type="submit" id="save_addCourseRequest_form" class="btn btn-primary save_course">Save</button>
+        <button type="submit" id="save_addCourseRequestapproved_form" class="btn btn-primary save_course">Save</button>
       </div>
       <?php echo form_close(); ?>
     </div>

@@ -1364,7 +1364,7 @@ function studentcertificateData($params)
                   
                     if($checkAprrovalstatus){
 
-                        if($checkAprrovalstatus['approval_status'] > 0){
+                        if($checkAprrovalstatus['admin_approval_status'] > 0){
                             $request_status ='Approved';
                         }else{
                             $request_status ='In Approval Process ..please wait';
@@ -1438,59 +1438,27 @@ function studentcertificateData($params)
         $access = $this->session->userdata('access');
         $jsonstringtoArray = json_decode($access, true);
         $pageUrl =$this->uri->segment(1);
-       
-        $current_date = date('Y-m-d');
-       
-        $this->db->select('enq_course_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
-        //$this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
-        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
-        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
-
-        $data = array();
-        $counter = 0;
-         foreach ($fetch_result_enquiry_courses as $key => $value) {
-
-         $course_ids    =   explode(',', $value['enq_course_id']);
-
-         foreach ($course_ids as $key => $value) {
-           
-        $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
-        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
-        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
-
-      
-        $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
-
-        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id','left');
     
+        //$this->db->select('*');
+         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
+         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
+         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
 
-        $this->db->join(TBL_NEW_COURSE_REQUEST, TBL_NEW_COURSE_REQUEST.'.time_table_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
-
-
-        $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $this->db->where(TBL_NEW_COURSE_REQUEST.'.approval_status=',1);
-       // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
-        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
-        $this->db->where(TBL_COURSE.'.courseId', $value);
-        // $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
-        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
-        $fetch_result = $query->result_array();
-       
-        if(count($fetch_result) > 0)
-        {
-            foreach ($fetch_result as $key => $value)
-            {
-                $data[$counter]['courseId'] = $value['courseId'];
-                 $counter++; 
-            }
-        }
-
-         }
-       }
+        // $this->db->join(TBL_NEW_COURSE_REQUEST, TBL_NEW_COURSE_REQUEST.'.time_table_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
+    
+        // $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_NEW_COURSE_REQUEST.'.student_id');
+        // $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->where(TBL_NEW_COURSE_REQUEST.'.request_sent_status=',1);        
+        // $this->db->where(TBL_COURSE.'.courseId', $value);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_NEW_COURSE_REQUEST.'.id', 'DESC');
+        $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
+        $fetch_result = $query->num_rows();
 
     
-      return count($data);
+         return $fetch_result;
     }
 
 
@@ -1498,42 +1466,25 @@ function studentcertificateData($params)
         $access = $this->session->userdata('access');
         $jsonstringtoArray = json_decode($access, true);
         $pageUrl =$this->uri->segment(1);
-       
-        $current_date = date('Y-m-d');
-       
-        $this->db->select('enq_course_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
-        //$this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
-        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
-        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+    
+        //$this->db->select('*');
+         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
+         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
+         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
 
+        // $this->db->join(TBL_NEW_COURSE_REQUEST, TBL_NEW_COURSE_REQUEST.'.time_table_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
+    
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_NEW_COURSE_REQUEST.'.student_id');
+        // $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->where(TBL_NEW_COURSE_REQUEST.'.request_sent_status=',1);        
+        // $this->db->where(TBL_COURSE.'.courseId', $value);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_NEW_COURSE_REQUEST.'.id', 'DESC');
+        $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
+        $fetch_result = $query->result_array();
         $data = array();
         $counter = 0;
-         foreach ($fetch_result_enquiry_courses as $key => $value) {
-
-         $course_ids    =   explode(',', $value['enq_course_id']);
-
-         foreach ($course_ids as $key => $value) {
-           
-        $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
-        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
-        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
-
-      
-        $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
-
-        $this->db->join(TBL_NEW_COURSE_REQUEST, TBL_NEW_COURSE_REQUEST.'.time_table_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
-    
-        // $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
-        $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $this->db->where(TBL_NEW_COURSE_REQUEST.'.approval_status=',1);
-        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
-        $this->db->where(TBL_COURSE.'.courseId', $value);
-        $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
-        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
-        $fetch_result = $query->result_array();
-       
         if(count($fetch_result) > 0)
         {
             foreach ($fetch_result as $key => $value)
@@ -1544,7 +1495,8 @@ function studentcertificateData($params)
                     }else{
                         $attendance_alreday_exits = 'Not Attended' ;
                     }
-                    // $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['name'] = $value['name'];
+                    $data[$counter]['mobile'] = $value['mobile'];
                     $data[$counter]['title'] = $value['topic'];
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['classdate'] = $value['classdate'];
@@ -1571,14 +1523,30 @@ function studentcertificateData($params)
 
                  $counter++; 
             }
-        }
+    //     }
 
-         }
-       }
+    //      }
+
+   
+        }
  
-       return $data;
+        return $data;
 
     }
+
+
+    public function getcoursetopicrequestdetailsadmin($topicid){
+        $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topictimetbaleid,'.TBL_NEW_COURSE_REQUEST.'.id as request_id,'.TBL_NEW_COURSE_REQUEST.'.remark as request_description');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+        $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE.'.id = '.TBL_TIMETABLE_TRANSECTIONS.'.time_table_id');
+        // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.id',$topicid);
+        $get_enquiry_courses = $this->db->get(TBL_NEW_COURSE_REQUEST);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->row_array();
+
+        return $fetch_result_enquiry_courses;
+    }
+
 
 }
 
