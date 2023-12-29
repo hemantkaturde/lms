@@ -308,6 +308,9 @@ $route['deletestudentrequest'] = "admin/deletestudentrequest";
 $route['CheckboxCheckUncheckpermission'] = "admin/CheckboxCheckUncheckpermission";
 $route['courseRequest'] = "admin/courseRequest";
 $route['fetchcourseRequest'] = "admin/fetchcourseRequest";
+$route['getcoursetopicrequestdetails'] = "admin/getcoursetopicrequestdetails";
+$route['addnewcoursetopicrequest'] = "admin/addnewcoursetopicrequest";
+
 
 
 

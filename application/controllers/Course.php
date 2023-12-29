@@ -1108,6 +1108,7 @@
                                                                                 $insertArr['time_table_id'] = $saveCoursetimetabledata;
                                                                                 $insertArr['trainer_id'] = trim($getTrainerDetails[0]->trainer_id);
                                                                                 $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
+                                                                                
                                                                                 $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
                                                                                 $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
                                                                                 $insertArr['timings'] =$allDataInSheet[$i]['B'];

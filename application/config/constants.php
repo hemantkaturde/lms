@@ -115,7 +115,7 @@ define('TBL_COURSE_SYLLABUS', 'tbl_course_syllabus');
 define('TBL_STUDENT_REQUEST', 'tbl_student_exam_request');
 define('TBL_ACTIVITY_APP_LOG', 'tbl_activity_log_app');
 define('TBL_ADD_ON_COURSE', 'tbl_add_on_courses');
-
+define('TBL_NEW_COURSE_REQUEST', 'tb_new_course_request');
 define('DATEANDTIME', Date('Y-m-d H:i:s'));
 
 // define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
