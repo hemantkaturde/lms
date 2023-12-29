@@ -23,7 +23,7 @@ $jsonstringtoArray = json_decode($access, true);
                     <table id="view_course_rerquest" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Tpoic Name</th>
+                                <th>Topic Name</th>
                                 <th>Course Name</th>
                                 <th>Class Date</th>	
                                 <th>Class Timings</th>
