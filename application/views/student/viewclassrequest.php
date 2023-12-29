@@ -24,8 +24,8 @@ $jsonstringtoArray = json_decode($access, true);
                         <thead>
                             <tr>
                                 <th>Student Name</th>
-                                <th>Student Nobile Number</th>
-                                <th>Tpoic Name</th>
+                                <th>Student Mobile Number</th>
+                                <th>Topic Name</th>
                                 <th>Course Name</th>
                                 <th>Class Date</th>	
                                 <th>Class Timings</th>
