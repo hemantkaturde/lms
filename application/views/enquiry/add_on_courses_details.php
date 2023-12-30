@@ -186,7 +186,7 @@
                             </label>
                             <div class="form-group">
                                 <select class="form-control" id="course_status" name="course_status"  placeholder="Select Courses"  required="" style="width: 320px; margin-left: -15px;">
-                                    <option value="">Select Course Name</option>   
+                                    <option value="">Select Course Status</option>   
                                     <option value="1">Active</option>
                                     <option value="0">In-Active</option>
                                 </select>
