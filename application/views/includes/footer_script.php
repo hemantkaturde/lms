@@ -4852,7 +4852,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    {
 						 swal({
 						 	title: "Examination Submitted Successfully!",
-						 	text: "Thank you for submitting your answer sheet, you will be intimated by Email after the assessment will be done by the examiner . For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org",
+						 	text: "Thank you for submitting your answer sheet, you will be intimated by Email after the assessment will be done by the examiner . For More Details browse on www.iictn.in / Contact your Counsellor or write us on admin@iictn.org",
 						 	icon: "success",
 						 	button: "Ok",
 						 	},function(){ 

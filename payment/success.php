@@ -64,7 +64,7 @@ if ($conn->query($sql) === TRUE) {
     $Body  .= '<p>Click to Download Payment Receipt</p>';
     $Body  .= '<p><B>Payment Receipt</B> : https://iictn.in/tax_invoice/index.php?enq_id='.$row['enq_id'].'&paymentid='.$row_last_payment['id'].'</p>';
 
-    $Body  .= '<p>For more details kindly contact your councillor or write us on admin@iictn.org</p>';
+    $Body  .= '<p>For more details kindly contact your Counsellor or write us on admin@iictn.org</p>';
 
     $Body  .= '<div><b>Thanks & Regards</b><br>';
     $Body  .= '<div><b>Team IICTN</b>';
@@ -191,7 +191,7 @@ if ($conn->query($sql) === TRUE) {
             <p><b>Admission Form : </b></p>
             <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p>
 
-            <p>Kindly contact your councillors for more Details</p>
+            <p>Kindly contact your Counsellors for more Details</p>
             <!-- <p><a class="btn btn-warning" target="_blank" href="https://doctor.iictn.org/"> <br> -->
                 <p><b>Thanks & Regards</b></p>
                 <p><h2><a class="" target="_blank" href="https://doctor.iictn.org/"><b style="color:black">IICTN</b></a></h2></p>

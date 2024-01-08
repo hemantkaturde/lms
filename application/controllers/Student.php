@@ -753,7 +753,7 @@
     
                         // $htmlContent = '<div>
                         //                     <p>Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner.</p>
-                        //                     <p>For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org</p>
+                        //                     <p>For More Details browse on www.iictn.in / Contact your Counsellor or write us on admin@iictn.org</p>
 
                         //                 </div>
 
@@ -770,7 +770,7 @@
 
                             // /* Send Whats App  Start Here */
                             // $curl = curl_init();
-                            // $text = 'Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner . For More Details browse on www.iictn.in / Contact your councillor or write us on admin@iictn.org';
+                            // $text = 'Thank you for submitting your answer sheet, you will be intimated by Email / WhatsApp after the assessment will be done by the examiner . For More Details browse on www.iictn.in / Contact your Counsellor or write us on admin@iictn.org';
                             // //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                             // $mobile = '91'.$mobile;
                             // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=".INSTANCE_ID."&access_token=".ACCESS_TOKEN."";

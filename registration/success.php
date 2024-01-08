@@ -35,7 +35,7 @@ $row = $result->fetch_assoc();
             <p><b>Addmission Form : </b></p> -->
             <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p> -->
 
-            <!-- <p>Kindly contact your councillors for more Details</p> -->
+            <!-- <p>Kindly contact your Counsellors for more Details</p> -->
             <!-- <p><a class="btn btn-warning" target="_blank" href="https://doctor.iictn.org/"> <br> -->
                 <!-- <p><b>Thanks & Regards</b></p> -->
                 <!-- <p><h2><a class="" target="_blank" href="https://doctor.iictn.org/"><b style="color:black">IICTN</b></a></h2></p>
