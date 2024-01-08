@@ -7,8 +7,8 @@
                     <button type="button" class="btn btn-primary">
                         <a href="<?php echo base_url().'studentexaminationlist';?>" style="color: black !important"><i
                                 class="fa fa-arrow-left"></i> Back</a>
-                                <P> Please select 1 exam paper out of 3 exam paper and start the exa</p>
                     </button>
+                    <P style="color:red"> *Please select 1 exam paper out of 3 exam paper and start the exam</p>
                 </div>
 
                 <input type="hidden" id="course_id" name="course_id" value="<?=$course_id;?>">
