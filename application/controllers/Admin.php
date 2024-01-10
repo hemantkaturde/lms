@@ -739,44 +739,64 @@ class Admin extends BaseController
  public function submit_examination_answer_db(){
 
     $exam_answer_data = $this->input->post();
-    $savesnswerdata_response =array();
-    if($exam_answer_data){
 
-        $examination_id = $this->input->post('examination_id');
-        $course_id = $this->input->post('course_id');
-        $student_id = $this->input->post('student_id');
+    $given_marks=0;
+    foreach ($exam_answer_data as $key => $value) {
+        if($key=='examination_id' || $key=='course_id' ||  $key=='student_id'){
 
-        foreach ($exam_answer_data as $key => $value) {
-            if($key=='examination_id' || $key=='course_id' ||  $key=='student_id'){
-
-            }else{
-
-                   preg_match_all('!\d+\.*\d*!', $key, $matches);
-
-                   $question_id =$matches[0][0];
-
-                    $updateddatetime = date('Y-m-d h:i:s', time());
-                    $data = array(
-                        'marks'    => $value,
-                        'question_status' => 'checked',
-                        'updatedDtm' => $updateddatetime,
-                    );
-                    
-                    $updateAnswerdata = $this->student_model->updateAnswerdata($student_id,$course_id,$examination_id,$question_id,$data);
-
-                    if($updateAnswerdata){
-                        
-                        $savesnswerdata_response['status'] = 'success';
-                        $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
-                    
-                    }
-            }
+        }else{
+            (int)$given_marks+= (int)$value;
         }
-
-           echo json_encode($savesnswerdata_response);
 
     }
 
+    if($given_marks > 100){
+
+        $savesnswerdata_response['status'] = 'filure';
+        $savesnswerdata_response['error'] = array('error'=>'Total marks cannot be more than 100');
+    
+        echo json_encode($savesnswerdata_response);
+    }else{
+
+        $savesnswerdata_response =array();
+        if($exam_answer_data){
+
+            $examination_id = $this->input->post('examination_id');
+            $course_id = $this->input->post('course_id');
+            $student_id = $this->input->post('student_id');
+
+            foreach ($exam_answer_data as $key => $value) {
+                if($key=='examination_id' || $key=='course_id' ||  $key=='student_id'){
+
+                }else{
+
+                    preg_match_all('!\d+\.*\d*!', $key, $matches);
+
+                    $question_id =$matches[0][0];
+
+                        $updateddatetime = date('Y-m-d h:i:s', time());
+                        $data = array(
+                            'marks'    => $value,
+                            'question_status' => 'checked',
+                            'updatedDtm' => $updateddatetime,
+                        );
+                        
+                        $updateAnswerdata = $this->student_model->updateAnswerdata($student_id,$course_id,$examination_id,$question_id,$data);
+
+                        if($updateAnswerdata){
+                            
+                            $savesnswerdata_response['status'] = 'success';
+                            $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+                        
+                        }
+                }
+            }
+
+            echo json_encode($savesnswerdata_response);
+
+        }
+
+    }
 
  }
 
