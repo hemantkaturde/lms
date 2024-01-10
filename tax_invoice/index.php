@@ -89,34 +89,34 @@
 
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(30, 46); // set the position of the box
+        $pdf->SetXY(20, 54.1); // set the position of the box
         $pdf->Cell(100, 1, $result_arry['datetime'], 0, 0, 'L'); // add the text, align to Center of cell
 
          // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(173, 46); // set the position of the box
+        $pdf->SetXY(174, 54); // set the position of the box
         $pdf->Cell(160, 1, $result_arry['invoice_number'], 0, 0, 'L'); // add the text, align to Center of cell
 
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->SetXY(50, 60); // set the position of the box
         $pdf->Cell(160, 10, $result_arry['enq_fullname'], 0, 0, 'L'); // add the text, align to Center of cell
 
         // Secand box - the user's Name
-        $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
-        $pdf->Cell(160, 21, $result_arry['description'], 0, 0, 'L'); // add the text, align to Center of cell
+        // $pdf->SetFontSize('8'); // set font size
+        // $pdf->SetXY(50, 70); // set the position of the box
+        // $pdf->Cell(160, 21, $result_arry['description'], 0, 0, 'L'); // add the text, align to Center of cell
   
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->SetXY(50, 54); // set the position of the box
         $pdf->Cell(160, 32, $result_arry['enq_email'], 0, 0, 'L'); // add the text, align to Center of cell
 
 
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->SetXY(50, 55); // set the position of the box
         $pdf->Cell(160, 43, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
 
         if($result_arry['conser_name']){
@@ -127,19 +127,19 @@
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->SetXY(50, 56); // set the position of the box
         $pdf->Cell(160, 54, $couns_name, 0, 0, 'L'); // add the text, align to Center of cell
      
          
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
+        $pdf->SetXY(50, 55); // set the position of the box
         $pdf->Cell(160, 66, $result_arry['payment_mode'], 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(55, 52); // set the position of the box
-        $pdf->Cell(10, 78, $all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')', 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->SetXY(50, 56); // set the position of the box
+        $pdf->Cell(160, 78, $all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')', 0, 0, 'L'); // add the text, align to Center of cell
                          
                
         $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
@@ -151,12 +151,12 @@
 
           // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->SetXY(162, 51); // set the position of the box
         $pdf->Cell(10, 118, round($excluding_GST,2), 0, 0, 'L'); // add the text, align to Center of cell
    
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 52); // set the position of the box
+        $pdf->SetXY(162, 51); // set the position of the box
         $pdf->Cell(10, 130, round($cgst_amount,2), 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
