@@ -752,7 +752,7 @@ class Admin extends BaseController
 
     if($given_marks > 100){
         $savesnswerdata_response =array();
-        $savesnswerdata_response['status'] = 'filure';
+        $savesnswerdata_response['status'] = 'failure';
         $savesnswerdata_response['error'] = array('exam'=>'Total marks cannot be more than 100');
     
         echo json_encode($savesnswerdata_response);
