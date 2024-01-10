@@ -1014,9 +1014,9 @@ public function getstudentexaminationdata($params,$userId,$course_id){
                         $exam_status_for_condition ='Exam Completed';
                         $exam_status_count =1;
                     }else{
-                        $exam_status ='<b style="color:red">Pending</b>';
+                        $exam_status ='<b style="color:red"></b>';
 
-                        $exam_status_for_condition ='Pending';
+                        $exam_status_for_condition ='';
                         $exam_status_count =0;
                     }
 
