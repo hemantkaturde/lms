@@ -138,9 +138,10 @@
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(50, 56); // set the position of the box
-        $pdf->Cell(100, 78, $all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')', 0, 0, 'L'); // add the text, align to Center of cell
-                         
+        $pdf->SetXY(50, 91); // set the position of the box
+       // $pdf->Cell(0, 80, $all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')', 0, 0, 'L'); // add the text, align to Center of cell
+       
+        $pdf->Cell(80,9,$all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')',0);            
                
         $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
       
