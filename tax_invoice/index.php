@@ -203,10 +203,16 @@
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 184, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+
+        if($result_arry['prepared_by']){
+          $prepared_by= $result_arry['prepared_by'];
+        }else{
+          $prepared_by = 'Auto Generated';
+        }
         
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 196, $result_arry['prepared_by'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 196, $prepared_by, 0, 0, 'L'); // add the text, align to Center of cell
 
 
 
@@ -254,7 +260,7 @@
        //$words = $result . "Rupees  " . $points . " Paise";
 
        $pdf->SetFontSize('8'); // set font size
-       $pdf->SetXY(43, 57); // set the position of the box
+       $pdf->SetXY(43, 58); // set the position of the box
        $pdf->Cell(10, 196, $words, 0, 0, 'L'); // add the text, align to Center of cell
 
 
