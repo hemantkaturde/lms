@@ -4957,7 +4957,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <script type="text/javascript">
           $(document).on('click','#submit_marks',function(e){
 			e.preventDefault();
-			 $(".loader_ajax").show();
+			 //$(".loader_ajax").show();
 
 			 var examination_id =$('#examination_id').val();
 			 var student_id =$('#student_id').val();
@@ -4976,9 +4976,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				{
 					var fetchResponse = $.parseJSON(data);
 					if(fetchResponse.status == "failure")
-				    {
+				    {	$("#loader_ajax").hide();
 				    	$.each(fetchResponse.error, function (i, v)
-		                {
+		                {  
+						
 		                    $('.'+i+'_error').html(v);
 		                });
 				    }
@@ -4990,7 +4991,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						 	icon: "success",
 						 	button: "Ok",
 						 	},function(){ 
-								$("#popup_modal_sm").hide();
+								$("#loader_ajax").hide();
 								window.location.href = "<?php echo base_url()?>/checkanswersheet?course_id="+course_id+"&&exam_id="+examination_id;
 						});						
 				    }

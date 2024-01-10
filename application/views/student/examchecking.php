@@ -204,7 +204,11 @@ $jsonstringtoArray = json_decode($access, true);
                                         </div>
                                     </div> -->
                                     <h2 class="error"><p></p></h2>
+
+                                  
                                     <div class="modal-footer">
+
+                                    <p class="error exam_error"></p>
                                     <button type="button" class="btn btn-primary">
                                         <a href="<?php echo base_url().'examcheckingList';?>" style="color: black !important"><i
                                                 class="fa fa-arrow-left"></i> Back</a>
