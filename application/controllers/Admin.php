@@ -63,6 +63,7 @@ class Admin extends BaseController
         $data['total_pending_amt'] = $data['total_pending']- $data['total_revenue'];
 
 
+        
         $query =  $this->db->query('SELECT `createdDtm` AS `date`, COUNT(`id`) as count FROM `tbl_admission`  GROUP BY DATE(`createdDtm`) ORDER BY `id` ASC'); 
         $records = $query->result_array();
 
@@ -91,11 +92,7 @@ class Admin extends BaseController
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
             $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
         }else{
-
-
             $this->loadViews("dashboard", $this->global, $data , NULL);
-
-           
         }
     }
 

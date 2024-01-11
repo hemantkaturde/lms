@@ -467,7 +467,13 @@ class Admission_model extends CI_Model
 
     public function total_revenue(){
 
+        if($this->session->userdata('roleText') =='Counsellor'){
+            $userId = $this->session->userdata('userId');
+            $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userId);
+        }
+
         $this->db->select('sum(totalAmount) as total_revenue');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_number');
         $this->db->where(TBL_PAYMENT.'.payment_status',1);
         $query = $this->db->get(TBL_PAYMENT);
         return $query->result_array();
@@ -475,6 +481,11 @@ class Admission_model extends CI_Model
 
     public function total_pending(){
         
+        if($this->session->userdata('roleText') =='Counsellor'){
+            $userId = $this->session->userdata('userId');
+            $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userId);
+        }
+
         $this->db->select('sum(tbl_enquiry.final_amount) as total_pending');
         $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_number');
         $this->db->where(TBL_ENQUIRY.'.isDeleted',0);
