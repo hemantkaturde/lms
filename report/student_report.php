@@ -336,6 +336,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 <tr>
                     <th>Total Course Fees	</th>
                     <th>Discount</th>
+                    <th>Final Amount</th>
                     <th>Total Paid Fees</th>
                     <th>Total Pending Fees</th>
                 </tr>
@@ -350,6 +351,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                  $total_paid_fees =0;
                  $total_discount_amount =0;
                  $final_amount =0;
+                 $amount_after_dicount =0;
                  $i = 1;
                     foreach($course_ids as $id)
                     {
@@ -367,7 +369,9 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                       $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
                       $total_discount_amount +=  $row['discount_amount'];
 
-                      $final_amount += $total_paid_fees - $total_discount_amount;
+                      $amount_after_dicount += $row['final_amount'];
+
+                      $final_amount +=  $amount_after_dicount - $row['final_amount'];
 
                         if($get_course_fees){
                             
@@ -390,6 +394,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 <tr>
                     <td><?='₹ '.$total_fees?></td>
                     <td><?='₹ '.$total_discount_amount?></td>
+                    <td><?='₹ '.$amount_after_dicount?></td>
                     <td><?='₹ '.$total_paid_fees?></td>
                     <td><?='₹ '.$final_amount?></td>
                 </tr>
