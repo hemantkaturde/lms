@@ -63,14 +63,28 @@ class Admin extends BaseController
         $data['total_pending_amt'] = $data['total_pending']- $data['total_revenue'];
 
 
-        
-        $query =  $this->db->query('SELECT `createdDtm` AS `date`, COUNT(`id`) as count FROM `tbl_admission`  GROUP BY DATE(`createdDtm`) ORDER BY `id` ASC'); 
+        if($this->session->userdata('roleText') =='Counsellor'){
+            $userId = $this->session->userdata('userId');
+
+            $where = ' where tbl_enquiry.enq_id="'.$userId.'"';
+
+        }else{
+
+            $where = '';
+        }
+
+    
+
+        $query =  $this->db->query('SELECT tbl_admission.createdDtm AS `date`, COUNT(tbl_admission.id) as count FROM `tbl_admission` join tbl_enquiry ON tbl_enquiry.enq_id=tbl_admission.enq_id '.$where.' GROUP BY DATE(tbl_admission.createdDtm) ORDER BY tbl_admission.id ASC'); 
         $records = $query->result_array();
 
         $data1 = [];
         foreach($records as $row) {
          $data1[] = ['date' => $row['date'], 'count' =>$row['count']];
         }
+
+    
+
         $data['chart_data'] = json_encode($data1);
         if($this->session->userdata('roleText') =='Trainer'){
             $userId = $this->session->userdata('userId');
