@@ -357,7 +357,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
                       $enq_number =$row['enq_number'];
                       $enq_id =$row['enq_id'];
-                      $getStudentEnquiryPaidfees = "SELECT  sum(totalAmount)  as totalAmount , sum(discount_amount) as total_discount_amount FROM tbl_payment_transaction where enquiry_id=$enq_id group by enquiry_id";
+                      $getStudentEnquiryPaidfees = "SELECT  sum(totalAmount)  as totalAmount , sum(discount_amount) as total_discount_amount,sum(final_amount) as total_final_amount FROM tbl_payment_transaction where enquiry_id=$enq_id group by enquiry_id";
                       $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
                       $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
 
@@ -365,7 +365,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                       $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
                       $total_discount_amount +=  $get_course_Paidfees['total_discount_amount'];
 
-                      $final_amount += $get_course_Paidfees['final_amount'];
+                      $final_amount += $get_course_Paidfees['total_final_amount'];
 
                         if($get_course_fees){
                             
