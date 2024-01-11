@@ -367,7 +367,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                       $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
                       $total_discount_amount +=  $row['discount_amount'];
 
-                      $final_amount += $row['final_amount'];
+                      $final_amount += $total_paid_fees - $total_discount_amount;
 
                         if($get_course_fees){
                             
