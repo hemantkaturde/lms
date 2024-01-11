@@ -151,11 +151,11 @@ class Admission_model extends CI_Model
                      $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewadmissiondetails/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View Admission Details' title='View Admission Details'></a>&nbsp;";
 
                      if($value['cancle_status']==1){
-                        //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_admission_cancle_reason' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Cancle Admission' title='Print Admission Cancle reason'></a>&nbsp"; 
+                        //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='print_admission_cancle_reason' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Cancle Admission' title='Print Admission Cancel reason'></a>&nbsp"; 
                         $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='admissioncancleinfo/index.php?admission_id=".$value['id']."' target='_blank'  class='print_certificate' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Admission Cancle reason' title='Print Admission Cancle reason'></a> "; 
 
                      }else{
-                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancle Admission' title='Cancle Admission'></a>&nbsp";
+                        $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancel Admission' title='Cancel Admission'></a>&nbsp";
                         $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Admission' title='Delete Admission'></a>&nbsp"; 
  
                      }
