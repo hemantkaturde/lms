@@ -371,7 +371,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
                       $amount_after_dicount += $row['final_amount'];
 
-                      $final_amount +=  $amount_after_dicount - $row['final_amount'];
+                      $final_amount +=  $amount_after_dicount - $total_paid_fees;
 
                         if($get_course_fees){
                             
