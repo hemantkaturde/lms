@@ -3900,6 +3900,66 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 				});
 	});
+
+	$(document).on('click','#add_discount_tarnsaction',function(e){
+	    e.preventDefault();
+		var elemF = $(this);
+					
+		var add_discount_tarnsaction_id = elemF.attr('data-id');
+		var course_name = elemF.attr('course-name');
+
+        $('#add_discount_tarnsactionmodal').modal('show');
+        $('#add_discount_tarnsaction_id').val(add_discount_tarnsaction_id);  
+		$('#course_name').text(course_name);  
+
+	});
+
+
+	$(document).on('click','#add_addon_discount_payment_submit',function(e){
+			e.preventDefault();
+			 //$(".loader_ajax").show();
+			 
+			var enquiry_id =  $('#enquiry_id').val();
+			var add_discount_tarnsaction_id =  $('#add_discount_tarnsaction_id').val();
+			var discount_amount =  $('#discount_amount').val();
+		
+			$.ajax({
+				url : "<?php echo base_url();?>add_addon_discount_payment",
+				type: "POST",
+				data : {'enquiry_id':enquiry_id,'add_discount_tarnsaction_id':add_discount_tarnsaction_id,'discount_amount':discount_amount},
+				// cache: false,
+		        // contentType: false,
+		        // processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						$("#popup_modal_md").hide();
+						window.location.href = "<?php echo base_url().'payment_details/'?>"+enquiry_id;
+										
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+
+
+
   </script>
 
 <?php } ?>

@@ -69,10 +69,10 @@
                         </tr>
                     </table>
                     <div>
-                        <?php
-                  $attributes = array("name"=>"update_enquiry_form","id"=>"update_enquiry_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
-                  echo form_open("", $attributes);
-                  ?>
+                            <?php
+                                $attributes = array("name"=>"update_enquiry_form","id"=>"update_enquiry_form","class"=>"form-horizontal form-label-left", "enctype"=>"multipart/form-data"); 
+                                echo form_open("", $attributes);
+                            ?>
                         <div class="box-body">
                             <div class="row col-md-12 col-sm-12 col-xs-12">
                                 <div class="col-md-4 col-sm-4 col-xs-12"
@@ -273,13 +273,60 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="ibox-body">
+                <div class="panel-body table-responsive">
+                    <table id="" class="table table-bordered">
+                        <tr style="background: #d2ae6d;">
+                            <th>Add On Course</th>
+                        </tr>
+                    </table>
+
+                    <table id="" class="table table-bordered">
+                        <tr style="background: #d3d5c3;">
+                            <th>Course Name</th>
+                            <th>Course Added DateTime</tthd>
+                            <th>Course Amount</th>
+                            <th>Discount</th>
+                            <th>Final Amount</th>
+                            <th>Total Paid Amount</th>
+                            <th>Total Pending Amount</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php foreach ($getadditionalInfo as $getadditionalInfokey => $getadditionalInfokeyvalue) { ?>
+                            <tr>
+                                <td><?=$getadditionalInfokeyvalue['course_name'] ?></td>
+                                <td><?=$getadditionalInfokeyvalue['addoncoursedatetime'] ?></td>
+                                <td> ₹ <?=$getadditionalInfokeyvalue['course_total_fees'] ?></td>
+                                <td><?=$getadditionalInfokeyvalue['discount'] ?></td>
+                                <?php 
+                                    $total_amount_after_discount = $getadditionalInfokeyvalue['course_total_fees']-$getadditionalInfokeyvalue['discount'];
+                                    $total_paid = 0;
+                                    $total_pending_amount = $total_amount_after_discount - $total_paid;
+                                ?>
+                                <td> ₹ <?=$total_amount_after_discount;?></td>
+
+
+                                <td> ₹ <?=$total_paid ?></td>
+                                <td> ₹ <?=$total_pending_amount?></td>
+                                <td>
+                                    <a style='cursor: pointer;' class='add_discount_tarnsaction' id='add_discount_tarnsaction' data-toggle="modal" data-target="#add_discount_tarnsaction"   course-name="<?php echo $getadditionalInfokeyvalue['course_name'] ?>"  data-id="<?php echo $getadditionalInfokeyvalue['addoncourse_id']?>"><img width='20' src="<?php echo ICONPATH."/discount.png";?>" alt='View Transaction' title='View Transaction'></a>
+                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>tax_invoice/index.php?enq_id=<?=$enquiry_id;?>&paymentid=<?php echo $paymentvalue->id ?>' target='_blank'  class='print_tax_invoices' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/print.png" alt='Print Invoice' title='Print Invoice'></a>
+                                </td>
+                            </tr>
+                        <?php }  ?>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <!-- END PAGE CONTENT-->
 
 
-       <!-- Add New Course Modal -->
-       <div class="modal fade" id="add_payment" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+
+    <!-- Add New Course Modal -->
+    <div class="modal fade" id="add_payment" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
         aria-labelledby="add_paymentLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -415,7 +462,7 @@
     </div>
 
 
-         <!-- Add New Course Modal -->
+    <!-- Add New Course Modal -->
     <div class="modal fade" id="view_enquiry_tarnsaction" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
         aria-labelledby="view_enquiry_tarnsactionLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -508,3 +555,42 @@
             </div>
         </div>
     </div>
+
+
+
+      <!-- Add New Course Modal -->
+    <div class="modal fade" id="add_discount_tarnsactionmodal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="add_discount_tarnsactionmodal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#d2ae6d">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000">Add Discount - <span id="course_name"></span>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                        <!-- <span aria-hidden="true">&times;</span> -->
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="text-align: left;" for="enquiry_number">Discount Amount
+                                    </label>
+                                        <input autocomplete="off" autocomplete="off" type="hidden" id="add_discount_tarnsaction_id" name="add_discount_tarnsaction_id" class="form-control col-md-12 col-xs-12">
+                                        <input autocomplete="off" autocomplete="off" type="number" id="discount_amount" name="discount_amount" class="form-control col-md-12 col-xs-12">
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="add_addon_discount_payment_submit" class="btn btn-primary add_addon_discount_payment_submit">Add Discount</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    

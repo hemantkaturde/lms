@@ -319,6 +319,9 @@ $route['fetchcourseRequestadmin'] = "admin/fetchcourseRequestadmin";
 $route['getcoursetopicrequestdetailsadmin'] = "admin/getcoursetopicrequestdetailsadmin";
 $route['addnewcoursetopicrequestapproved'] = "admin/addnewcoursetopicrequestapproved";
 
+$route['add_addon_discount_payment'] = "enquiry/add_addon_discount_payment";
+
+
 
 
 

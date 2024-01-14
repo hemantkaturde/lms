@@ -635,7 +635,34 @@ class Enquiry_model extends CI_Model
         } else {
             return FALSE;
         }
+    }
 
+
+    public function getadditionalInfo($id){
+        $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+        $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->result_array();
+
+    }
+
+    public function save_addon_discount_payment($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_ADD_ON_COURSE, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ADD_ON_COURSE, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
     }
 
 }

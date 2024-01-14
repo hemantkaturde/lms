@@ -868,6 +868,7 @@
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
+            $data['getadditionalInfo'] = $this->enquiry_model->getadditionalInfo($id);
             $this->loadViews("payment/payment_details", $this->global, $data , NULL);
 
        }
@@ -1374,6 +1375,36 @@
 
     }
 
+
+    public function add_addon_discount_payment(){
+
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+            $add_addon_discount_response = array();
+            $this->form_validation->set_rules('discount_amount', 'Discount Amount', 'trim|required');
+            if($this->form_validation->run() == FALSE){
+                $add_addon_discount_response['status'] = 'failure';
+                $add_addon_discount_response['error'] = array('discount_amount'=>strip_tags(form_error('discount_amount')));
+            }else{
+
+                $add_discount_tarnsaction_id = trim($this->input->post('add_discount_tarnsaction_id'));
+
+                $data = array(
+                    'discount'=> trim($this->input->post('discount_amount')),
+                );
+
+                $save_Add_on_courses_discounr = $this->enquiry_model->save_addon_discount_payment($add_discount_tarnsaction_id ,$data);
+                if($save_Add_on_courses_discounr){
+                    $add_addon_discount_response['status'] = 'success';
+                    $add_addon_discount_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+                }
+
+            }
+
+            echo json_encode($add_addon_discount_response);
+        }
+    }
 
 
 }
