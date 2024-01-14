@@ -312,7 +312,7 @@
                                 <td> ₹ <?=$total_pending_amount?></td>
                                 <td>
                                     <a style='cursor: pointer;' class='add_discount_tarnsaction' id='add_discount_tarnsaction' data-toggle="modal" data-target="#add_discount_tarnsaction"   course-name="<?php echo $getadditionalInfokeyvalue['course_name'] ?>"  data-id="<?php echo $getadditionalInfokeyvalue['addoncourse_id']?>"><img width='20' src="<?php echo ICONPATH."/discount.png";?>" alt='View Transaction' title='View Transaction'></a>
-                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>tax_invoice/index.php?enq_id=<?=$enquiry_id;?>&paymentid=<?php echo $paymentvalue->id ?>' target='_blank'  class='print_tax_invoices' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/print.png" alt='Print Invoice' title='Print Invoice'></a>
+                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>tax_invoice/index.php?enq_id=<?=$enquiry_id;?>&paymentid=<?php echo $paymentvalue->id ?>' target='_blank'  class='print_tax_invoices' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Print Invoice' title='Print Invoice'></a>
                                 </td>
                             </tr>
                         <?php }  ?>
