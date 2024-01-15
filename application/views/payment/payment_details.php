@@ -299,7 +299,7 @@
                                 <td><?=$getadditionalInfokeyvalue['course_name'] ?></td>
                                 <td><?=$getadditionalInfokeyvalue['addoncoursedatetime'] ?></td>
                                 <td> ₹ <?=$getadditionalInfokeyvalue['course_total_fees'] ?></td>
-                                <td><?=$getadditionalInfokeyvalue['discount'] ?></td>
+                                <td> ₹ <?=$getadditionalInfokeyvalue['discount'] ?></td>
                                 <?php 
                                     $total_amount_after_discount = $getadditionalInfokeyvalue['course_total_fees']-$getadditionalInfokeyvalue['discount'];
                                     $total_paid = 0;
@@ -312,7 +312,7 @@
                                 <td> ₹ <?=$total_pending_amount?></td>
                                 <td>
                                     <a style='cursor: pointer;' class='add_discount_tarnsaction' id='add_discount_tarnsaction' data-toggle="modal" data-target="#add_discount_tarnsaction"   course-name="<?php echo $getadditionalInfokeyvalue['course_name'] ?>"  data-id="<?php echo $getadditionalInfokeyvalue['addoncourse_id']?>"><img width='20' src="<?php echo ICONPATH."/discount.png";?>" alt='View Transaction' title='View Transaction'></a>
-                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>tax_invoice/index.php?enq_id=<?=$enquiry_id;?>&paymentid=<?php echo $paymentvalue->id ?>' target='_blank'  class='print_tax_invoices' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Print Invoice' title='Print Invoice'></a>
+                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>viewaddoncoursepaymentdetails/<?=$getadditionalInfokeyvalue['addoncourse_id']?>' class='add_on_course_payment_details' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Add On Course Payment Details' title='Add On Course Payment Details'></a>
                                 </td>
                             </tr>
                         <?php }  ?>
@@ -556,8 +556,6 @@
         </div>
     </div>
 
-
-
       <!-- Add New Course Modal -->
     <div class="modal fade" id="add_discount_tarnsactionmodal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
         aria-labelledby="add_discount_tarnsactionmodal" aria-hidden="true">
@@ -574,10 +572,12 @@
                         <div class="row col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label style="text-align: left;" for="enquiry_number">Discount Amount
+                                    <label style="text-align: left;" for="discount_amount">Discount Amount<span
+                                            class="required">*</span>
                                     </label>
                                         <input autocomplete="off" autocomplete="off" type="hidden" id="add_discount_tarnsaction_id" name="add_discount_tarnsaction_id" class="form-control col-md-12 col-xs-12">
                                         <input autocomplete="off" autocomplete="off" type="number" id="discount_amount" name="discount_amount" class="form-control col-md-12 col-xs-12">
+                                        <p class="error discount_amount_error"></p>
                                 </div>
                             </div>  
                         </div>

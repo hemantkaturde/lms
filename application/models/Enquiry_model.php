@@ -665,6 +665,16 @@ class Enquiry_model extends CI_Model
         }
     }
 
+
+    public function getAddoncourseListforviewaddoncoursedetails($id){
+        $this->db->select('*,'.TBL_ENQUIRY.'.enq_number as enq_number_enq,'.TBL_ADD_ON_COURSE.'.id as add_on_course_id');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_ADD_ON_COURSE.'.enquiry_id');
+        $this->db->where(TBL_ADD_ON_COURSE.'.id', $id);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->row_array();
+    }
+
 }
 
 ?>

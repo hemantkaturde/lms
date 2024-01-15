@@ -1407,6 +1407,22 @@
     }
 
 
+    public function viewaddoncoursepaymentdetails($id){
+
+        $process = 'View Add On Course Payment Details';
+        $processFunction = 'Enquiry/enquiryEdit';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Add On Course Payment Details';
+        $data['getaddoncoursedetails'] = $this->enquiry_model->getAddoncourseListforviewaddoncoursedetails($id);
+
+        // print_r($data['getaddoncoursedetails']);
+        // exit;
+        
+        $this->loadViews("payment/viewaddoncoursepaymentdetails", $this->global, $data , NULL);
+
+    }
+
+
 }
 
  

@@ -3957,9 +3957,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			return false;
 	});
 
-
-
-
   </script>
 
 <?php } ?>
@@ -4545,7 +4542,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     });
 
   </script>
-
 <?php } ?>
 
 <?php if($pageTitle=='Student Courses List'){ ?>
@@ -5971,5 +5967,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 	</script>
 <?php  } ?>
+
+
+<?php if($pageTitle=='View Add On Course Payment Details'){ ?>
+	<script type="text/javascript">
+
+		
+
+
+	</script>
+<?php }  ?>
 
 
