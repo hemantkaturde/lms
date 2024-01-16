@@ -18,10 +18,15 @@ $roleText = $this->session->userdata('roleText');
                  <?php if($role_text!="Student"){ ?>
                     <button type="button" id="print_details" onclick="printDiv()" class="btn btn-primary"><i class="fa fa-print"></i> Print Admission form   </button>
                 <?php } ?>
+                <?php if($role_text!="Student"){ ?>
+                    <button type="button" class="btn btn-primary">
+                            <a href="<?php echo base_url().'/studentadmissions';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                    </button>
+                <?php }else{ ?>
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url().'/admissionListing';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
-                
+                <?php } ?>
             </div></div>
 
                 

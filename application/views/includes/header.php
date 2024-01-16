@@ -450,7 +450,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <li  class="<?php if($pageUrl =='courseRequest'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."courseRequest"; ?>"><i
                                     class="sidebar-item-icon fa fa-exchange"></i>
-                                <span class="nav-label">Course Request</span>
+                                <span class="nav-label">Class Request</span>
                             </a>
                         </li>
 
