@@ -30,6 +30,7 @@
                                     <!-- <th>Amount Balance</th> -->
                                     <th>Balance Fees</th>
                                     <th>Mode</th>
+                                    <th>Invoice Type</th>
                                     <th>Bill Download</th>
                                 </tr>
                     </thead>
