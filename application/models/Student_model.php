@@ -2168,6 +2168,17 @@ public function get_before_paid_payment_add_on_course($paymentid,$enq_id,$add_on
 
 }
 
+public function get_final_amount_of_add_on_course($enq_id,$add_on_course_id){
+
+    $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+    $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $enq_id);
+    $this->db->where(TBL_ADD_ON_COURSE.'.id', $add_on_course_id);
+    $query = $this->db->get(TBL_ADD_ON_COURSE);
+    return $query->row_array();
+
+}
+
 
 }
 
