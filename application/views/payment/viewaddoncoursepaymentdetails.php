@@ -6,9 +6,9 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_payment" >
                         <i class="fa fa-money"></i> Add Payment
                     </button>
-                    <button type="button" data-id="<?php echo $followDataenquiry[0]->enq_id ; ?>" class="btn btn-primary send_manual_admission_link" >
-                        <i class="fa fa-money"></i> Send Admission Link
-                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <a style='cursor: pointer;' class='send_payment_link' data-id=<?php echo $getaddoncoursedetails['enq_id'];?>> Payment Link</a>    
+                    </button>                          
                     <button type="button" class="btn btn-primary">
                         <a href="<?php echo base_url().'/payment_details/'.$getaddoncoursedetails['enq_id'];?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
@@ -76,7 +76,6 @@
                                             <input autocomplete="off" autocomplete="off" type="hidden" id="add_on_course_id"
                                             name="add_on_course_id" value="<?php echo $getaddoncoursedetails['add_on_course_id'];?>"
                                             class="form-control col-md-12 col-xs-12" readonly>
-
 
                                         <p class="error enquiry_number_error"></p>
                                     </div>

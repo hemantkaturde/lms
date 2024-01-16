@@ -947,16 +947,23 @@
                     $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
                 }else{
 
+                            $add_on_course_id_post_value =  trim($this->input->post('add_on_course_id'));
 
+                            if($add_on_course_id_post_value){
+                                $add_on_course_id =  trim($this->input->post('add_on_course_id'));
+                                $paymant_type = 'add_on_course_invoice';
+
+                            }else{
+
+                                $paymant_type = 'regular_invoice';
+                                $add_on_course_id ='';
+                            }
 
                             $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
-
 
                             if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
                                 $add_manaulpayment_response['status'] = 'failure';
                                 $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Gratter Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
-                    
-
                             }else{
 
                                     $data = array(
@@ -969,21 +976,20 @@
                                         'bank_name'=> $this->input->post('bank_name'),
                                         'prepared_by'=> $this->input->post('prepared_by'),
                                         'description'=> $this->input->post('description'),
+                                        'paymant_type' => $paymant_type,
+                                        'add_on_course_id' => trim($add_on_course_id),
                                         'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
-                                    
                                     );
-                                    
-                                
-                                $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
 
-                                if($insert_manualpayment_details){
+                                   $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
+
+                                   if($insert_manualpayment_details){
                                         $add_manaulpayment_response['status'] = 'success';
                                         $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
                                     }else{
                                         $add_manaulpayment_response['status'] = 'failure';
                                         $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
                                     }
-
 
                             }
                     
@@ -1218,10 +1224,7 @@
         $data['enquiry_id'] = $id;
         $data['course_List'] = $this->comman_model->getCourseList();
         $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
-        $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
-
         $data['getAddoncourseList'] = $this->enquiry_model->getAddoncourseList($id);
-
         $this->loadViews("enquiry/add_on_courses_details", $this->global, $data , NULL);
     }
 
@@ -1336,8 +1339,6 @@
 
     }
 
-
-
     public function taxinvoices(){
         $process = 'Tax Invoices';
         $processFunction = 'Enquiry/taxinvoices';
@@ -1413,15 +1414,37 @@
         $processFunction = 'Enquiry/enquiryEdit';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'View Add On Course Payment Details';
-        $data['getaddoncoursedetails'] = $this->enquiry_model->getAddoncourseListforviewaddoncoursedetails($id);
-
-        // print_r($data['getaddoncoursedetails']);
-        // exit;
-        
+        $data['getaddoncoursedetails'] = $this->enquiry_model->getAddoncourseListforviewaddoncoursedetails($id);    
         $this->loadViews("payment/viewaddoncoursepaymentdetails", $this->global, $data , NULL);
 
     }
 
+
+    public function fetchaddoncoursepaymentdetails($id){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->enquiry_model->getaddoncoursepaymentdetailsCount($params,$id); 
+        $queryRecords = $this->enquiry_model->getaddoncoursepaymentdetailsData($params,$id); 
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+
+        echo json_encode($json_data);
+
+    }
 
 }
 
