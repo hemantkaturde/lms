@@ -177,17 +177,74 @@ class Student_model extends CI_Model
             {
 
                 
-                $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
+                // $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
 
-                if($get_before_paid_payment){
-                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+                // if($get_before_paid_payment){
+                //     $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+
+                // }else{
+                //     $previous_paymemt =0 ;
+                    
+                // }
+
+                // $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
+            
+                // //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                //  $data[$counter]['receipt_no'] = $value['id'];
+                //  $data[$counter]['enquiry_no'] = $value['enquiry_number'];
+
+                //  if($value['razorpay_payment_id']){
+                //     $payment_date = $value['datetime'];
+                //  }else{
+                //     $payment_date = $value['payment_date'];
+                //  }
+
+                //  $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($payment_date));
+                //  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                //  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+                //  $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
+                //  $data[$counter]['paid_before'] = '₹ '.$previous_paymemt;
+                //  $data[$counter]['total_amount'] = '₹ '.$value['final_amount'];
+                //  $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
+                //  $data[$counter]['payment_mode'] = $value['payment_mode'];
+                //  $data[$counter]['action'] = '';
+                //  $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
+                // $counter++; 
+
+
+                
+                if($value['paymant_type']=='regular_invoice'){
+                    $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
+
+                    if($get_before_paid_payment){
+                        $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+    
+                    }else{
+                        $previous_paymemt =0 ;
+                        
+                    }
+    
+                    $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
+                    $final_amount =  $value['final_amount'];
 
                 }else{
-                    $previous_paymemt =0 ;
-                    
+
+                    $get_before_paid_payment = $this->get_before_paid_payment_add_on_course($value['paymentid'],$value['enq_id'],trim($value['add_on_course_id']));
+
+                    if($get_before_paid_payment){
+                        $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+    
+                    }else{
+                        $previous_paymemt =0 ;
+                        
+                    }
+
+                    $get_final_amount_of_add_on_course = $this->get_final_amount_of_add_on_course($value['enq_id'],trim($value['add_on_course_id']));
+                    $amount_add_on_course_after_discount =  $get_final_amount_of_add_on_course['course_total_fees'] - $get_final_amount_of_add_on_course['discount'];
+                    $bal_amount =   $amount_add_on_course_after_discount  - ($value['totalAmount']+$previous_paymemt);
+                    $final_amount =   $amount_add_on_course_after_discount ;
                 }
 
-                $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
             
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                  $data[$counter]['receipt_no'] = $value['id'];
@@ -199,17 +256,26 @@ class Student_model extends CI_Model
                     $payment_date = $value['payment_date'];
                  }
 
+                 if($value['paymant_type']=='regular_invoice'){
+                    $paymant_type = 'Invoice';
+                 }else{
+                    $paymant_type = 'Add on';
+                 }
+
                  $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($payment_date));
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
                  $data[$counter]['paid_before'] = '₹ '.$previous_paymemt;
-                 $data[$counter]['total_amount'] = '₹ '.$value['final_amount'];
+                 $data[$counter]['total_amount'] = '₹ '.$final_amount;
                  $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
+                 $data[$counter]['paymant_type'] = $paymant_type;
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Edit Enquiry Follow' title='Edit Enquiry Follow'></a> "; 
+                 $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> "; 
                 $counter++; 
+
+
             }
         }
         return $data;
