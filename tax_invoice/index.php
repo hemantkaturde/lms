@@ -90,7 +90,7 @@
               $course_mode_offline = '';
           }
 
-        $all_course_name = '1) Add On - '.$result_arry_add_on_course['course_name'];
+        $all_course_name = $result_arry_add_on_course['course_name'];
         //$total_amount_payment_transection = $result_arry_add_on_course['course_total_fees']-$result_arry_add_on_course['discount'];
         $total_amount_payment_transection =  $result_arry['totalAmount'];
       }
