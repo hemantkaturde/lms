@@ -490,6 +490,7 @@ class Enquiry_model extends CI_Model
         $this->db->where('id !=', $paymentid);
         $this->db->where('id <', $paymentid);
         $this->db->where('enquiry_id', $enq_id);
+        $this->db->where('paymant_type', 'regular_invoice');
         $this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
         return $query->result();
@@ -505,6 +506,7 @@ class Enquiry_model extends CI_Model
         $this->db->where('id <', $paymentid);
         $this->db->where('enquiry_id', $enq_id);
         $this->db->where('add_on_course_id', $add_on_course_id);
+        $this->db->where('paymant_type', 'add_on_course_invoice');
         $this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
         return $query->result();
