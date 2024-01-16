@@ -26,6 +26,7 @@
                                     <th>Total Amount</th>
                                     <th>Amount Balance</th>
                                     <th>Mode</th>
+                                    <th>Invoice Type</th>
                                     <th>Bill Download</th>
                                 </tr>
                     </thead>
