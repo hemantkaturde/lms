@@ -21,6 +21,7 @@
    $add_on_course_id = $result_arry['add_on_course_id'];
    $enquiry_id = $result_arry['enquiry_id'];
 
+
    if($paymant_type=='regular_invoice'){
 
         $course_ids    =   explode(',', $enquiry_course_ids);
@@ -30,43 +31,54 @@
         foreach($course_ids as $id)
             {
 
-
-                        $get_course_id_from_add_course = $conn->query("SELECT * from tbl_add_on_courses where course_id=$id and enquiry_id=$enquiry_id and id=$add_on_course_id");
-
+          
+                        $get_course_id_from_add_course = $conn->query("SELECT * from tbl_add_on_courses where enquiry_id=$enquiry_id");
                         $get_add_on_course_id = $get_course_id_from_add_course->fetch_assoc();
-
-                        if($get_add_on_course_id['course_id'] !=$id){
-
-
-                          $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
-                          $get_course_fees = $result->fetch_assoc();
-
-                            if($get_course_fees){      
-                                $total_fees += $get_course_fees['course_total_fees'];
-                                $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
-                                $i++;   
-                            }else{
-
-                                $total_fees = '';
-                                $course_name = '';  
-                                $i++;  
-                            }
+ 
+                        // print_r($get_add_on_course_id['course_id']);
 
 
-                            if($get_course_fees['course_mode_online']==1){
-                                $course_mode_online ='Online';
-                            }else{
-                                $course_mode_online ='';
-                            }
+                        // print_r($id);
+                        // exit;
+                       
+                        if($get_add_on_course_id['course_id']==$id){
+                          // echo $id.'.55555555';
+
+                        }else{
+                     
+                              
+                        $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
+             
+                        $get_course_fees = $result->fetch_assoc();
+                        if($get_course_fees){      
+                            $total_fees += $get_course_fees['course_total_fees'];
+                            $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
+                            $i++;   
+                        }else{
+
+                            $total_fees = '';
+                            $course_name = '';  
+                            $i++;  
+                        }
 
 
-                            if($get_course_fees['course_mode_offline']==1){
-                                $course_mode_offline = 'Offline';
-                            }else{
-                                $course_mode_offline = '';
-                            }
+                        if($get_course_fees['course_mode_online']==1){
+                            $course_mode_online ='Online';
+                        }else{
+                            $course_mode_online ='';
+                        }
+
+
+                        if($get_course_fees['course_mode_offline']==1){
+                            $course_mode_offline = 'Offline';
+                        }else{
+                            $course_mode_offline = '';
+                        }
 
                         }
+                        
+                    
+                    
                                     
                   }
                   $all_course_name = trim($course_name, ', '); 
