@@ -30,43 +30,86 @@
         foreach($course_ids as $id)
             {
 
-              $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
-              $get_course_fees = $result->fetch_assoc();
-              if($get_course_fees){
-                                
-                  $total_fees += $get_course_fees['course_total_fees'];
-                  $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
-                  $i++;   
+                  $result = $conn->query("SELECT * FROM tbl_course where courseId=$id and courseId  Not IN (select course_id from tbl_add_on_courses where enquiry_id=$enquiry_id");
+             
+          
+                   if($result){
 
-              }else{
+                    $get_course_fees = $result->fetch_assoc();
+                    if($get_course_fees){
+                                      
+                        $total_fees += $get_course_fees['course_total_fees'];
+                        $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
+                        $i++;   
 
-                  $total_fees = '';
-                  $course_name = '';  
-                  $i++;  
-              }
+                    }else{
 
-
-                  if($get_course_fees['course_mode_online']==1){
-
-                      $course_mode_online ='Online';
-                  }else{
-
-                      $course_mode_online ='';
-                  }
+                        $total_fees = '';
+                        $course_name = '';  
+                        $i++;  
+                    }
 
 
-                  if($get_course_fees['course_mode_offline']==1){
+                        if($get_course_fees['course_mode_online']==1){
 
-                      $course_mode_offline = 'Offline';
-                  }else{
+                            $course_mode_online ='Online';
+                        }else{
 
-                      $course_mode_offline = '';
-                  }
-                              
-            }
-            $all_course_name = trim($course_name, ', '); 
+                            $course_mode_online ='';
+                        }
 
-            $total_amount_payment_transection =  $result_arry['totalAmount'];
+
+                        if($get_course_fees['course_mode_offline']==1){
+
+                            $course_mode_offline = 'Offline';
+                        }else{
+
+                            $course_mode_offline = '';
+                        }
+
+                   }else{
+
+                    $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
+             
+                    $get_course_fees = $result->fetch_assoc();
+                    if($get_course_fees){
+                                      
+                        $total_fees += $get_course_fees['course_total_fees'];
+                        $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
+                        $i++;   
+
+                    }else{
+
+                        $total_fees = '';
+                        $course_name = '';  
+                        $i++;  
+                    }
+
+
+                        if($get_course_fees['course_mode_online']==1){
+
+                            $course_mode_online ='Online';
+                        }else{
+
+                            $course_mode_online ='';
+                        }
+
+
+                        if($get_course_fees['course_mode_offline']==1){
+
+                            $course_mode_offline = 'Offline';
+                        }else{
+
+                            $course_mode_offline = '';
+                        }
+                   }
+          
+                }
+
+                  $all_course_name = trim($course_name, ', '); 
+
+                  $total_amount_payment_transection =  $result_arry['totalAmount'];
+              
 
       }else{
 
