@@ -282,7 +282,6 @@ class Student_model extends CI_Model
 
 
     }
-
     public function get_before_paid_payment($paymentid,$enq_id){
 
         $this->db->select('sum(totalAmount) as beforepaid');
@@ -291,6 +290,7 @@ class Student_model extends CI_Model
         $this->db->where('id !=', $paymentid);
         $this->db->where('id <', $paymentid);
         $this->db->where('enquiry_id', $enq_id);
+        $this->db->where('paymant_type', 'regular_invoice');
         $this->db->group_by('enquiry_id', $enq_id);
         $query = $this->db->get();
         return $query->result();
