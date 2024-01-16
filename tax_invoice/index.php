@@ -31,7 +31,7 @@
             {
 
 
-                        $get_course_id_from_add_course = $conn->query("SELECT * from tbl_add_on_courses where course_id=1 and enquiry_id=$enquiry_id");
+                        $get_course_id_from_add_course = $conn->query("SELECT * from tbl_add_on_courses where course_id=$id and enquiry_id=$enquiry_id and id=$add_on_course_id");
 
                         $get_add_on_course_id = $get_course_id_from_add_course->fetch_assoc();
 
