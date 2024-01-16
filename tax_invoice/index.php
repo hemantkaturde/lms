@@ -91,7 +91,8 @@
           }
 
         $all_course_name = '1) Add On - '.$result_arry_add_on_course['course_name'];
-        $total_amount_payment_transection = $result_arry_add_on_course['course_total_fees']-$result_arry_add_on_course['discount'];
+        //$total_amount_payment_transection = $result_arry_add_on_course['course_total_fees']-$result_arry_add_on_course['discount'];
+        $total_amount_payment_transection =  $result_arry['totalAmount'];
       }
 
        
@@ -285,7 +286,6 @@
 
         $number = $result_arry['totalAmount'];
       
-
         $no = floor($number);
         $point = round($number - $no, 2) * 100;
         $hundred = null;
