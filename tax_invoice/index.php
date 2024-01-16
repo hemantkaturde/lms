@@ -92,6 +92,7 @@
 
         $all_course_name = $result_arry_add_on_course['course_name'];
         //$total_amount_payment_transection = $result_arry_add_on_course['course_total_fees']-$result_arry_add_on_course['discount'];
+        $final_amount = $result_arry_add_on_course['course_total_fees']-$result_arry_add_on_course['discount'];
         $total_amount_payment_transection =  $result_arry['totalAmount'];
       }
 
@@ -249,9 +250,11 @@
          
         }else{
 
+          
+
           $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid and add_on_course_id=$add_on_course_id and paymant_type='add_on_course_invoice'");
           $current_value_amount = $current_value->fetch_assoc();
-          $currentbal =  $total_amount_payment_transection-($current_value_amount['totalAmountcureent']+$abv);
+          $currentbal =  $final_amount-($current_value_amount['totalAmountcureent']+$abv);
         }
      
 
@@ -268,7 +271,7 @@
 
           $pdf->SetFontSize('8'); // set font size
           $pdf->SetXY(162, 52); // set the position of the box
-          $pdf->Cell(10, 184, $total_amount_payment_transection, 0, 0, 'L'); // add the text, align to Center of cell
+          $pdf->Cell(10, 184, $final_amount, 0, 0, 'L'); // add the text, align to Center of cell
 
         }
 
