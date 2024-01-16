@@ -495,6 +495,21 @@ class Enquiry_model extends CI_Model
 
     }
 
+    public function get_before_paid_payment_add_on_course($paymentid,$enq_id,$add_on_course_id){
+
+        $this->db->select('sum(totalAmount) as beforepaid');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('id !=', $paymentid);
+        $this->db->where('id <', $paymentid);
+        $this->db->where('enquiry_id', $enq_id);
+        $this->db->where('add_on_course_id', $add_on_course_id);
+        $this->db->group_by('enquiry_id', $enq_id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
     public function getTaxinvoicesCount($params){
         $this->db->select('*');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
@@ -546,19 +561,38 @@ class Enquiry_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                
-                $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
 
-                if($get_before_paid_payment){
-                    $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+                if($value['paymant_type']=='regular_invoice'){
+                    $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
+
+                    if($get_before_paid_payment){
+                        $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+    
+                    }else{
+                        $previous_paymemt =0 ;
+                        
+                    }
+    
+                    $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
+                    $final_amount =  $value['final_amount'];
 
                 }else{
-                    $previous_paymemt =0 ;
-                    
+
+                    $get_before_paid_payment = $this->get_before_paid_payment_add_on_course($value['paymentid'],$value['enq_id'],trim($value['add_on_course_id']));
+
+                    if($get_before_paid_payment){
+                        $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+    
+                    }else{
+                        $previous_paymemt =0 ;
+                        
+                    }
+
+                    $get_final_amount_of_add_on_course = $this->get_final_amount_of_add_on_course($value['enq_id'],trim($value['add_on_course_id']));
+                    $amount_add_on_course_after_discount =  $get_final_amount_of_add_on_course['course_total_fees'] - $get_final_amount_of_add_on_course['discount'];
+                    $bal_amount =   $amount_add_on_course_after_discount  - ($value['totalAmount']+$previous_paymemt);
+                    $final_amount =   $amount_add_on_course_after_discount ;
                 }
-
-                $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
-
 
             
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
@@ -582,7 +616,7 @@ class Enquiry_model extends CI_Model
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
                  $data[$counter]['paid_before'] = '₹ '.$previous_paymemt;
-                 $data[$counter]['total_amount'] = '₹ '.$value['final_amount'];
+                 $data[$counter]['total_amount'] = '₹ '.$final_amount;
                  $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['paymant_type'] = $paymant_type;
@@ -761,6 +795,18 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
         }
         return $data;
 
+
+    }
+
+
+    public function get_final_amount_of_add_on_course($enq_id,$add_on_course_id){
+
+        $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+        $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $enq_id);
+        $this->db->where(TBL_ADD_ON_COURSE.'.id', $add_on_course_id);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->row_array();
 
     }
 
