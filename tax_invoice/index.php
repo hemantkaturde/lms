@@ -35,15 +35,11 @@
 
                         $get_add_on_course_id = $get_course_id_from_add_course->fetch_assoc();
 
-
-                        
-                        $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
-                        $get_course_fees = $result->fetch_assoc();
-
-                        if($get_add_on_course_id['course_id'] == $get_course_fees['courseId']){
+                        if($get_add_on_course_id['course_id'] !=$id){
 
 
-                        }else{
+                          $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
+                          $get_course_fees = $result->fetch_assoc();
 
                             if($get_course_fees){      
                                 $total_fees += $get_course_fees['course_total_fees'];
