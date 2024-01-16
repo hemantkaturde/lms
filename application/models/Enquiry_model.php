@@ -692,7 +692,7 @@ class Enquiry_model extends CI_Model
     }
 
     public function getadditionalInfo($id){
-        $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount');
+        $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount,'.TBL_ADD_ON_COURSE.'.enquiry_id');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
         $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
         $query = $this->db->get(TBL_ADD_ON_COURSE);
@@ -808,6 +808,21 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
         $this->db->where(TBL_ADD_ON_COURSE.'.id', $add_on_course_id);
         $query = $this->db->get(TBL_ADD_ON_COURSE);
         return $query->row_array();
+
+    }
+
+
+    public function gettotalpaidamountof_add_on_course($addoncourse_id,$enquiry_id){
+        $this->db->select('sum(totalAmount) as totalpaidamount');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('tbl_payment_transaction.enquiry_id', $enquiry_id);
+        $this->db->where('tbl_payment_transaction.paymant_type', 'add_on_course_invoice');
+        $this->db->where('tbl_payment_transaction.add_on_course_id', $addoncourse_id);
+        $this->db->group_by('tbl_payment_transaction.add_on_course_id');
+        $query = $this->db->get();
+        return $query->result();
+
 
     }
 

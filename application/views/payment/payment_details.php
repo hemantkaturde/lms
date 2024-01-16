@@ -302,7 +302,11 @@
                                 <td> ₹ <?=$getadditionalInfokeyvalue['discount'] ?></td>
                                 <?php 
                                     $total_amount_after_discount = $getadditionalInfokeyvalue['course_total_fees']-$getadditionalInfokeyvalue['discount'];
-                                    $total_paid = 0;
+                                    // $total_paid = 0;
+                                    $CI =& get_instance();
+                                    $CI->load->model('enquiry_model');
+                                    $result_of_total_paid = $CI->enquiry_model->gettotalpaidamountof_add_on_course(trim($getadditionalInfokeyvalue['addoncourse_id']),trim($getadditionalInfokeyvalue['enquiry_id']));
+                                    $total_paid = $result_of_total_paid[0]->totalpaidamount;
                                     $total_pending_amount = $total_amount_after_discount - $total_paid;
                                 ?>
                                 <td> ₹ <?=$total_amount_after_discount;?></td>
