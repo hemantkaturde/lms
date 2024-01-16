@@ -17,53 +17,82 @@
    $result_arry = $result->fetch_assoc();
    $enquiry_course_ids = $result_arry['enq_course_id'];
 
-   $course_ids    =   explode(',', $enquiry_course_ids);
-   $total_fees = 0;
-   $course_name = '';
-   $i = 1;
-   foreach($course_ids as $id)
-      {
+   $paymant_type = $result_arry['paymant_type'];
+   $add_on_course_id = $result_arry['add_on_course_id'];
+   $enquiry_id = $result_arry['enquiry_id'];
 
-         $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
-         $get_course_fees = $result->fetch_assoc();
-         if($get_course_fees){
-                           
-            $total_fees += $get_course_fees['course_total_fees'];
-            $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
-            $i++;   
+   if($paymant_type=='regular_invoice'){
 
-         }else{
+        $course_ids    =   explode(',', $enquiry_course_ids);
+        $total_fees = 0;
+        $course_name = '';
+        $i = 1;
+        foreach($course_ids as $id)
+            {
 
-            $total_fees = '';
-            $course_name = '';  
-            $i++;  
-         }
+              $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
+              $get_course_fees = $result->fetch_assoc();
+              if($get_course_fees){
+                                
+                  $total_fees += $get_course_fees['course_total_fees'];
+                  $course_name .= $i.') '.$get_course_fees['course_name'].' ( Rs '.$get_course_fees['course_total_fees']. ' )  ';  
+                  $i++;   
+
+              }else{
+
+                  $total_fees = '';
+                  $course_name = '';  
+                  $i++;  
+              }
 
 
-            if($get_course_fees['course_mode_online']==1){
+                  if($get_course_fees['course_mode_online']==1){
 
-                $course_mode_online ='Online';
-            }else{
+                      $course_mode_online ='Online';
+                  }else{
 
-                $course_mode_online ='';
+                      $course_mode_online ='';
+                  }
+
+
+                  if($get_course_fees['course_mode_offline']==1){
+
+                      $course_mode_offline = 'Offline';
+                  }else{
+
+                      $course_mode_offline = '';
+                  }
+                              
             }
+            $all_course_name = trim($course_name, ', '); 
 
+            $total_amount_payment_transection =  $result_arry['totalAmount'];
 
-            if($get_course_fees['course_mode_offline']==1){
+      }else{
 
-                $course_mode_offline = 'Offline';
-            }else{
+        $result_add_on_course = $conn->query("SELECT * from tbl_add_on_courses  join tbl_course on tbl_add_on_courses.course_id = tbl_course.courseId  where tbl_add_on_courses.id=$add_on_course_id and tbl_add_on_courses.enquiry_id=$enquiry_id");
 
-                $course_mode_offline = '';
-            }
+         $result_arry_add_on_course = $result_add_on_course->fetch_assoc();
+        
+          if($result_arry_add_on_course['course_mode_online']==1){
 
+              $course_mode_online ='Online';
+          }else{
 
+              $course_mode_online ='';
+          }
 
-                        
-       }
-      $all_course_name = trim($course_name, ', '); 
+          if($result_arry_add_on_course['course_mode_offline']==1){
 
+              $course_mode_offline = 'Offline';
+          }else{
 
+              $course_mode_offline = '';
+          }
+
+        $all_course_name = '1) Add On - '.$result_arry_add_on_course['course_name'];
+        $total_amount_payment_transection = $result_arry_add_on_course['course_total_fees']-$result_arry_add_on_course['discount'];
+      }
 
        
       // Create new Landscape PDF
@@ -143,12 +172,20 @@
        
         $pdf->MultiCell(120,5,$all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')',0);            
                
-        $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
+        // $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
+      
+        // $cgst_amount = $excluding_GST * 9 /100;
+        // $sgst_amount = $excluding_GST * 9 /100;
+
+        // $paid_amount = $result_arry['totalAmount']-$excluding_GST;
+
+
+        $excluding_GST = $total_amount_payment_transection * 100 / 118;
       
         $cgst_amount = $excluding_GST * 9 /100;
         $sgst_amount = $excluding_GST * 9 /100;
 
-        $paid_amount = $result_arry['totalAmount']-$excluding_GST;
+        $paid_amount = $total_amount_payment_transection-$excluding_GST;
 
           // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
@@ -168,41 +205,71 @@
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 151, 'Rs.'.$result_arry['totalAmount'], 0, 0, 'L'); // add the text, align to Center of cell
+        // $pdf->Cell(10, 151, 'Rs.'.$result_arry['totalAmount'], 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 151, 'Rs.'.$total_amount_payment_transection, 0, 0, 'L'); // add the text, align to Center of cell
 
         /*check paid before amount here*/
 
-        $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id!=$paymentid and tbl_payment_transaction.id < $paymentid ");
-        $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
-       
 
-        if($result_arry_result_previous_amount['totalAmount']){
-         $abv = $result_arry_result_previous_amount['totalAmount'];
+        if($paymant_type=='regular_invoice'){
+
+            $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id!=$paymentid and tbl_payment_transaction.id < $paymentid  and paymant_type='regular_invoice'");
+            $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
+          
+
+            if($result_arry_result_previous_amount['totalAmount']){
+            $abv = $result_arry_result_previous_amount['totalAmount'];
+            }else{
+            $abv = 0;
+            }
         }else{
-         $abv = 0;
+            $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id!=$paymentid and tbl_payment_transaction.id < $paymentid and add_on_course_id=$add_on_course_id and paymant_type='add_on_course_invoice'");
+            $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
+          
+
+            if($result_arry_result_previous_amount['totalAmount']){
+            $abv = $result_arry_result_previous_amount['totalAmount'];
+            }else{
+            $abv = 0;
+            }
         }
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 162, $abv, 0, 0, 'L'); // add the text, align to Center of cell
 
-        $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid");
-        $current_value_amount = $current_value->fetch_assoc();
 
-        
 
-        $currentbal = $result_arry['final_amount']-($current_value_amount['totalAmountcureent']+$abv);
+        if($paymant_type=='regular_invoice'){
+          $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid and paymant_type='regular_invoice'");
+          $current_value_amount = $current_value->fetch_assoc();
+          $currentbal = $result_arry['final_amount']-($current_value_amount['totalAmountcureent']+$abv);
+          //$currentbal =  $total_amount_payment_transection-($current_value_amount['totalAmountcureent']+$abv);
+         
+        }else{
+
+          $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid and add_on_course_id=$add_on_course_id and paymant_type='add_on_course_invoice'");
+          $current_value_amount = $current_value->fetch_assoc();
+          $currentbal =  $total_amount_payment_transection-($current_value_amount['totalAmountcureent']+$abv);
+        }
      
-
 
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 173,$currentbal , 0, 0, 'L'); // add the text, align to Center of cell
 
+        if($paymant_type=='regular_invoice'){
+          $pdf->SetFontSize('8'); // set font size
+          $pdf->SetXY(162, 52); // set the position of the box
+          $pdf->Cell(10, 184, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
 
-        $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 52); // set the position of the box
-        $pdf->Cell(10, 184, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
+        }else{
+
+          $pdf->SetFontSize('8'); // set font size
+          $pdf->SetXY(162, 52); // set the position of the box
+          $pdf->Cell(10, 184, $total_amount_payment_transection, 0, 0, 'L'); // add the text, align to Center of cell
+
+        }
 
         if($result_arry['prepared_by']){
           $prepared_by= $result_arry['prepared_by'];
@@ -214,9 +281,11 @@
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 196, $prepared_by, 0, 0, 'L'); // add the text, align to Center of cell
 
-
+      
 
         $number = $result_arry['totalAmount'];
+      
+
         $no = floor($number);
         $point = round($number - $no, 2) * 100;
         $hundred = null;
