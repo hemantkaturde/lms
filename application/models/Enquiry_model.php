@@ -444,6 +444,7 @@ class Enquiry_model extends CI_Model
        // $this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('enquiry_id', $id);
         $this->db->where('payment_status', 1);
+        $this->db->where('paymant_type', 'regular_invoice');
         $this->db->group_by('enquiry_id');
         $this->db->order_by('id', 'desc');
         $query = $this->db->get();
