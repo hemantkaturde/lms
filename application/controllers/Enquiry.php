@@ -1484,11 +1484,15 @@
                 $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidamountof_add_on_course($add_on_course_id,$enq_id);
                 
                 $get_equiry_datapayment =  $final_course_amount;
+
+             
                
                 if($get_equiry_datapayment_transaction){
-                    $total_paybal =$get_equiry_datapayment - $get_equiry_datapayment_transaction[0]->totalpaidAmount;
+                    $total_paybal = $get_equiry_datapayment - $get_equiry_datapayment_transaction[0]->totalpaidamount;
+
+
                 }else{
-                    $total_paybal  =$get_equiry_datapayment;
+                    $total_paybal  = $get_equiry_datapayment;
                 }
 
 

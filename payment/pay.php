@@ -50,6 +50,7 @@
             <?php
               include_once('../db/config.php');
               $id = $_GET['enq'];
+              $add_on_course_id = $_GET['add_on_course_id'];
               $sql = "SELECT * FROM tbl_enquiry where enq_number='".$id."' and isDeleted =0" ;
               $result = $conn->query($sql);
               //$row = $result->fetch_assoc();
