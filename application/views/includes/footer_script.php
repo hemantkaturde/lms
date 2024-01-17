@@ -6185,7 +6185,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 								$.ajax({
 									url : "<?php echo base_url();?>sendPaymentLinkaddoncourse",
 									type: "POST",
-									data : 'id='+elemF.attr('data-id')+'add_on_course_id='+elemF.attr('add-on-data-id'),
+									//data : 'id='+elemF.attr('data-id')add_on_course_id='+elemF.attr('add-on-data-id'),
+									data : {'id':elemF.attr('data-id'),'add_on_course_id':elemF.attr('add-on-data-id') },
 									success: function(data, textStatus, jqXHR)
 									{
 										//if(data.status=='success'){

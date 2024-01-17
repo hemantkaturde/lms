@@ -1481,7 +1481,8 @@
                 $all_course_name =$get_final_amount_of_add_on_course['course_name'];
 
 
-                $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidamountof_add_on_course($enq_id,$add_on_course_id);
+                $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidamountof_add_on_course($add_on_course_id,$enq_id);
+                
                 $get_equiry_datapayment =  $final_course_amount;
                
                 if($get_equiry_datapayment_transaction){
@@ -1490,7 +1491,7 @@
                     $total_paybal  =$get_equiry_datapayment;
                 }
 
-            
+
                 $to = $get_equiry_data->enq_email;
                 $email_name ='IICTN-Payment Link';
                 $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
