@@ -1570,7 +1570,7 @@
                                     <div><br></div>
                                     <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
 
-                                    <a href="https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'" class="btn btn-sm btn-primary float-right pay_now"
+                                    <a href="https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id.'" class="btn btn-sm btn-primary float-right pay_now"
                                     data-amount="1000" data-id="1">Pay Now</a>
                                     
                                     </div>
