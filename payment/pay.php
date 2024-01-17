@@ -51,43 +51,87 @@
               include_once('../db/config.php');
               $id = $_GET['enq'];
               $add_on_course_id = $_GET['add_on_course_id'];
+
               $sql = "SELECT * FROM tbl_enquiry where enq_number='".$id."' and isDeleted =0" ;
               $result = $conn->query($sql);
               //$row = $result->fetch_assoc();
               if($result->num_rows > 0){ 
-              $row = $result->fetch_assoc(); 
-              $course_ids    =   explode(',',$row['enq_course_id']);
-              $total_fees = 0;
-              $course_name = '';
-              $i = 1;
-                foreach($course_ids as $id)
-                {
-                    $get_course_fees = "SELECT * FROM tbl_course where courseId='".$id."' and isDeleted =0" ;
-                    $course_result = $conn->query($get_course_fees);
-                    $row_course = $course_result->fetch_assoc(); 
-                    $total_fees += $row_course['course_total_fees'];
-                    $course_name .= $i++.'-'.$row_course['course_name'].' ₹ '.$row_course['course_total_fees']. ',   ';    
-                }
+
+                if($add_on_course_id){
+
+                    $sql_add = "SELECT *,tbl_add_on_courses.discount as add_on_courses_discount FROM tbl_add_on_courses 
+                    join tbl_course ON  tbl_add_on_courses.course_id = tbl_course.courseId 
+                    join tbl_enquiry ON  tbl_add_on_courses.enquiry_id = tbl_enquiry.enq_id 
+                    where  id='".$add_on_course_id."'" ;
+                    $result_add = $conn->query($sql_add);
+                    $row_add = $result_add->fetch_assoc();
+
+                    if($result_add->num_rows > 0){ 
+                    
+
+                         $all_course_name = $row_add['course_name'];
+                         $course_name= $row_add['course_name'];
+                         $enq_number = $row_add['enq_number'];
+                         $enq_fullname= $row_add['enq_fullname'];
+                         $enq_mobile = $row_add['enq_mobile'];
+                         $enq_id = $row_add['enq_id'];
+                         $final_amount = $row_add['course_total_fees'] - $row_add['add_on_courses_discount'];
+            
+                        $get_course_fees_transaction = "SELECT sum(totalAmount) as total_transaction_amount FROM `tbl_payment_transaction` where enquiry_id ='".$enq_id."' and  paymant_type='add_on_course_invoice' and payment_status=1" ;
+                        $course_result_transaction = $conn->query($get_course_fees_transaction);
+                        $row_course_transaction = $course_result_transaction->fetch_assoc(); 
+
+                        if($row_course_transaction['total_transaction_amount']){
+
+                            $total_payabale = $final_amount - $row_course_transaction['total_transaction_amount'];
+
+                        }else{
+
+                            $total_payabale = $final_amount;
+                        }
+                    }
+
+                }else{
+
+                    $row = $result->fetch_assoc(); 
+                    $course_ids    =   explode(',',$row['enq_course_id']);
+                    $total_fees = 0;
+                    $course_name = '';
+                    $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                        $get_course_fees = "SELECT * FROM tbl_course where courseId='".$id."' and isDeleted =0" ;
+                        $course_result = $conn->query($get_course_fees);
+                        $row_course = $course_result->fetch_assoc(); 
+                        $total_fees += $row_course['course_total_fees'];
+                        $course_name .= $i++.'-'.$row_course['course_name'].' ₹ '.$row_course['course_total_fees']. ',   ';    
+                    }
                     $all_course_name = trim($course_name, ', ');
                     $enq_id = $row['enq_id'];
 
-                    // print_r($enq_id );
-                    // exit;
+                    $course_name= $row['course_name'];
+                    $enq_number = $row['enq_number'];
+                    $enq_fullname= $row['enq_fullname'];
+                    $enq_mobile = $row['enq_mobile'];
 
-                  
-             
-                    $get_course_fees_transaction = "SELECT sum(totalAmount) as total_transaction_amount FROM `tbl_payment_transaction` where enquiry_id ='".$enq_id."' and payment_status=1" ;
+    
+                    $get_course_fees_transaction = "SELECT sum(totalAmount) as total_transaction_amount FROM `tbl_payment_transaction` where enquiry_id ='".$enq_id."' and  paymant_type='regular_invoice' and payment_status=1" ;
                     $course_result_transaction = $conn->query($get_course_fees_transaction);
                     $row_course_transaction = $course_result_transaction->fetch_assoc(); 
-
+    
                     if($row_course_transaction['total_transaction_amount']){
-
+    
                         $total_payabale = $row['final_amount']-$row_course_transaction['total_transaction_amount'];
-
+    
                     }else{
-
+    
                          $total_payabale = $row['final_amount'];
-                    }
+                    }  
+
+                }
+
+
+                  
             
               ?>
 
@@ -100,10 +144,10 @@
                     <figcaption class="info-wrap ">
                         <h4 class="title">Contact Information</h4>
                         <div class="rating-wrap">
-                            <div class="label-rating"><b>Enquiry Number : </b><?php echo $row['enq_number']; ?> </div>
+                            <div class="label-rating"><b>Enquiry Number : </b><?php echo $enq_number; ?> </div>
                             <br>
-                            <div class="label-rating"><b>Name : </b><?php echo $row['enq_fullname']; ?> </div><br>
-                            <div class="label-rating"><b>Mobile Number : </b><?php echo $row['enq_mobile']; ?></div><br>
+                            <div class="label-rating"><b>Name : </b><?php echo $enq_fullname; ?> </div><br>
+                            <div class="label-rating"><b>Mobile Number : </b><?php echo $enq_mobile; ?></div><br>
                             <div class="label-rating"><b>Selected Courses : </b><?php echo $course_name; ?></div>
 
                         </div> <!-- rating-wrap.// -->
@@ -178,7 +222,7 @@
 
             // var totalAmount = $(this).attr("data-amount");
             var totalAmount = final_amt;
-
+            var addoncourseid =<?php echo $add_on_course_id; ?>;
             var product_id = $(this).attr("data-id");
             var options = {
                 "key": "<?php echo RAZORPAYKEY;?>",
@@ -196,12 +240,17 @@
                             razorpay_payment_id: response.razorpay_payment_id,
                             totalAmount: totalAmount,
                             product_id: product_id,
-                            enq_id: <?php echo $row['enq_id']; ?>,
-                            enq_number: <?php echo $row['enq_number']; ?>
+                            enq_id: <?php echo $enq_id; ?>,
+                            enq_number: <?php echo $enq_number; ?>,
+                            add_on_course_id: <?php echo $add_on_course_id; ?>
                         },
                         success: function(msg) {
-                            window.location.href =
-                                '<?php echo SERVER;?>payment/success.php?enq=<?=$row['enq_id'];?>';
+                            if(addoncourseid){
+                                window.location.href ='<?php echo SERVER;?>payment/success.php?enq=<?=$enq_id;?>&&add_on_course_id=<?=$add_on_course_id?>';
+                            }else{
+                                window.location.href ='<?php echo SERVER;?>payment/success.php?enq=<?=$enq_id;?>';
+                            }
+                           
                         }
                     });
                 },
