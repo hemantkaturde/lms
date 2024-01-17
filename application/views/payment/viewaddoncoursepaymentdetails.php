@@ -7,7 +7,7 @@
                         <i class="fa fa-money"></i> Add Payment
                     </button>
                     <button type="button" class="btn btn-primary">
-                        <a style='cursor: pointer;' class='send_payment_link' data-id=<?php echo $getaddoncoursedetails['enq_id'];?>> Payment Link</a>    
+                        <a style='cursor: pointer;' class='send_payment_link_add_on_course' data-id=<?php echo $getaddoncoursedetails['enq_id'];?>  add-on-data-id=<?php echo $getaddoncoursedetails['add_on_course_id'];?> > Payment Link</a>    
                     </button>                          
                     <button type="button" class="btn btn-primary">
                         <a href="<?php echo base_url().'/payment_details/'.$getaddoncoursedetails['enq_id'];?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>

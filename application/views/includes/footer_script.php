@@ -6163,7 +6163,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 		
-	$(document).on('click','.send_payment_link',function(e){
+	$(document).on('click','.send_payment_link_add_on_course',function(e){
 			var elemF = $(this);
 			e.preventDefault();
 				swal({
@@ -6183,9 +6183,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 						$(".sweet-alert").css({"z-index":"-99"});
 								$.ajax({
-									url : "<?php echo base_url();?>sendPaymentLink",
+									url : "<?php echo base_url();?>sendPaymentLinkaddoncourse",
 									type: "POST",
-									data : 'id='+elemF.attr('data-id'),
+									data : 'id='+elemF.attr('data-id')+'add_on_course_id='+elemF.attr('add-on-data-id'),
 									success: function(data, textStatus, jqXHR)
 									{
 										//if(data.status=='success'){

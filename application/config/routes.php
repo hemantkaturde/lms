@@ -330,7 +330,7 @@ $route['fetchaddoncoursepaymentdetails/(:any)'] = "enquiry/fetchaddoncoursepayme
 
 
 
-
+$route['sendPaymentLinkaddoncourse'] = "enquiry/sendPaymentLinkaddoncourse";
 
 
 
