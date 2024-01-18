@@ -52,6 +52,13 @@
               $id = $_GET['enq'];
               $add_on_course_id = $_GET['add_on_course_id'];
 
+              if($add_on_course_id){
+                $add_on_course_id_condition =$add_on_course_id;
+              }else{
+
+                $add_on_course_id_condition ='NA';
+              }
+
               $sql = "SELECT * FROM tbl_enquiry where enq_number='".$id."' and isDeleted =0" ;
               $result = $conn->query($sql);
               //$row = $result->fetch_assoc();
@@ -220,9 +227,9 @@
 
             // var totalAmount = $(this).attr("data-amount");
             var totalAmount = final_amt;
-            var addoncourseid =<?php echo $add_on_course_id; ?>;
+            var addoncourseid =<?php echo $add_on_course_id_condition; ?>;
 
-            if(addoncourseid){
+            if(addoncourseid !='NA'){
                 var addoncourseid_var =addoncourseid;
             }else{
                 var addoncourseid_var ="";
