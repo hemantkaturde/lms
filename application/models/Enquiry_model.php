@@ -657,21 +657,26 @@ class Enquiry_model extends CI_Model
         $data_1 =  $query->result_array();
         $total_paid_add_course =  $data_1[0]['beforepaid'];
 
+       
+
     
         $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
         $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $enquiry_id);
         $this->db->where(TBL_ADD_ON_COURSE.'.id', $add_on_course_id);
         $query_2 = $this->db->get(TBL_ADD_ON_COURSE);
-        $total_final_amount = $query_2->row_array();
+        $total_final_amount = $query_2->result_array();
 
+    
 
         $coursefinalamount =  $total_final_amount[0]['course_total_fees'] -  $total_final_amount[0]['discount'];
         $pending_amount =  $coursefinalamount - $total_paid_add_course; 
 
-        $data[0]['final_amount'] =$pending_amount;
+    
 
-        return $data[0]['final_amount'];
+        $data[][0] = array('final_amount'=>$pending_amount);
+
+        return $data[0];
 
 
     }
