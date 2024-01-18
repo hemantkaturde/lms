@@ -56,7 +56,7 @@
                 $add_on_course_id_condition =$add_on_course_id;
               }else{
 
-                $add_on_course_id_condition ='NA';
+                $add_on_course_id_condition =0;
               }
 
               $sql = "SELECT * FROM tbl_enquiry where enq_number='".$id."' and isDeleted =0" ;
@@ -229,7 +229,7 @@
             var totalAmount = final_amt;
             var addoncourseid =<?php echo $add_on_course_id_condition; ?>;
 
-            if(addoncourseid !='NA'){
+            if(addoncourseid > 0){
                 var addoncourseid_var =addoncourseid;
             }else{
                 var addoncourseid_var ="";
