@@ -1,3 +1,8 @@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+
 <?php
 include_once('../db/config.php'); 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -33,7 +38,8 @@ $ark_root  = $scheme.$_SERVER['HTTP_HOST'];
 $ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
 
-if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
+if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
+  <?php
 
     /*All post params here*/
     $enq_id = $_REQUEST["enq_id"];
@@ -51,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
     $city = $_REQUEST["city"];
     $pin=  $_REQUEST["pin"];
     $aadhaarnumber=  $_REQUEST["aadhaarnumber"];
-
+    
     if($_FILES['student_photo']['name']){
         $file = rand(1000,100000)."-".$name.'-'.$_FILES['student_photo']['name'];
         $file_loc = $_FILES['student_photo']['tmp_name'];
@@ -117,6 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
 
     if ($conn->query($sql) === TRUE) {
 
+
+    
         $username = strtok($name, " ");
         $year = date("Y"); 
         $password = base64_encode('iictn'.'@'.$year);
@@ -330,9 +338,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
     
-    $conn->close();
-}
+    $conn->close(); ?>
 
+    <script type="text/javascript">
+       $(".loader_ajax").hide();
+    </script>
+<?php
+}
 ?>
 
 
@@ -470,6 +482,10 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
         margin-right: auto;
         width: 50%;
     }
+
+    .loader_ajax {background-color: #242424;bottom: 0;height: 100%;left: 0;opacity: 0.9;position: fixed;top: 0;width: 100%;z-index: 999;}
+	.loader_ajax_inner {background: transparent url("bg.png") no-repeat scroll center center;height: 44px;left: 50%;margin: -22px 0 0 -22px;position: absolute;top: 50%;width: 44px;}
+	.loader_ajax img {margin: 9px 0 0 8px;width: 28px;}
     </style>
 </head>
 
@@ -1071,88 +1087,102 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-        $('.submit').prop("disabled", true);
-    });
-
-    $(function() {
-        $("#dateofbirth").datepicker({
-            dateFormat: 'yy-mm-dd',
-            maxDate: "-14Y 0D",
-            changeMonth: true,
-            changeYear: true
-        });
-        /*$( "#pass_year" ).datepicker();
-        $('#pass_year').datepicker( {
-        	changeMonth: true,
-        	changeYear: true,
-        	dateFormat: 'MM yy',
-        	onClose: function(dateText, inst) { 
-        		var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-        		var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-        		$(this).datepicker('setDate', new Date(year, month, 1));
-        	}
-        });
-        */
-        for (i = new Date().getFullYear(); i > 1947; i--) {
-            $('#pass_year').append($('<option />').val(i).html(i));
-        }
-    });
-
-
-    $(".accept_terms").click(function() {
-        if ($(this).prop("checked") == true) {
-            $('.submit').prop("disabled", false);
-        } else if ($(this).prop("checked") == false) {
+        $(document).ready(function() {
             $('.submit').prop("disabled", true);
-        } else {
-            $('.submit').prop("disabled", true);
-        }
-    });
+        });
 
-
-    $(document).ready(function() {
-        $('#country').on('change', function() {
-            var country_id = this.value;
-            $.ajax({
-                url: '<?php echo $ark_root;?>states-by-country.php',
-                type: "POST",
-                data: {
-                    country_id: country_id
-                },
-                cache: false,
-                success: function(result) {
-                    $("#state").html(result);
-                    $('#city').html('<option value="">Select State First</option>');
+        $(function() {
+            $("#dateofbirth").datepicker({
+                dateFormat: 'yy-mm-dd',
+                maxDate: "-14Y 0D",
+                changeMonth: true,
+                changeYear: true
+            });
+            /*$( "#pass_year" ).datepicker();
+            $('#pass_year').datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'MM yy',
+                onClose: function(dateText, inst) { 
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
                 }
             });
-
-
+            */
+            for (i = new Date().getFullYear(); i > 1947; i--) {
+                $('#pass_year').append($('<option />').val(i).html(i));
+            }
         });
-        $('#state').on('change', function() {
-            var state_id = this.value;
-            $.ajax({
-                url: '<?php echo $ark_root;?>cities-by-state.php',
-                type: "POST",
-                data: {
-                    state_id: state_id
-                },
-                cache: false,
-                success: function(result) {
-                    $("#city").html(result);
-                }
+
+
+        $(".accept_terms").click(function() {
+            if ($(this).prop("checked") == true) {
+                $('.submit').prop("disabled", false);
+            } else if ($(this).prop("checked") == false) {
+                $('.submit').prop("disabled", true);
+            } else {
+                $('.submit').prop("disabled", true);
+            }
+        });
+
+
+        $(document).ready(function() {
+            $('#country').on('change', function() {
+                var country_id = this.value;
+                $.ajax({
+                    url: '<?php echo $ark_root;?>states-by-country.php',
+                    type: "POST",
+                    data: {
+                        country_id: country_id
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $("#state").html(result);
+                        $('#city').html('<option value="">Select State First</option>');
+                    }
+                });
+
+
+            });
+            $('#state').on('change', function() {
+                var state_id = this.value;
+                $.ajax({
+                    url: '<?php echo $ark_root;?>cities-by-state.php',
+                    type: "POST",
+                    data: {
+                        state_id: state_id
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $("#city").html(result);
+                    }
+                });
             });
         });
-    });
-    </script>
+
+     
+        $(document).ready(function() {
+            $("#registration_form_details").on("submit", function(){
+                $(".loader_ajax").show();
+            });
+        });
+</script>
+     
+
 
     </script>
+
 
     <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
     </div>
 </body>
 
 </html>
+
+    <div class="loader_ajax" style="display:none;">
+	    <div class="loader_ajax_inner"><img src="preloader_ajax.gif"><p>Please wait your form is submitting...</p></div>
+	</div>
 
 <?php
 }
