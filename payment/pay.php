@@ -217,6 +217,8 @@
 
         var final_amt = $("#final_student_amount").val();
 
+        alert('trst');
+
         if (final_amt) {
 
 
