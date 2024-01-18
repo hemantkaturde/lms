@@ -953,13 +953,16 @@
                                 $add_on_course_id =  trim($this->input->post('add_on_course_id'));
                                 $paymant_type = 'add_on_course_invoice';
 
+                                $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul_add_course($this->input->post('enquiry_id'),trim($this->input->post('add_on_course_id')));
+
                             }else{
 
                                 $paymant_type = 'regular_invoice';
                                 $add_on_course_id ='';
+                                $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
                             }
 
-                            $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
+                        
 
                             if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
                                 $add_manaulpayment_response['status'] = 'failure';

@@ -641,11 +641,39 @@ class Enquiry_model extends CI_Model
     }
 
 
-    public function check_payment_maount_lessthan_actaul_add_course($add_on_course_id,$enquiry_id){
-        $this->db->select('final_amount');
-        $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
-        $query = $this->db->get(TBL_ENQUIRY);
-        return $query->result_array();
+    public function check_payment_maount_lessthan_actaul_add_course($enquiry_id,$add_on_course_id){
+        // $this->db->select('final_amount');
+        // $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
+        // $query = $this->db->get(TBL_ENQUIRY);
+        // return $query->result_array();
+
+        $this->db->select('sum(totalAmount) as beforepaid');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('enquiry_id', $enquiry_id);
+        $this->db->where('add_on_course_id', $add_on_course_id);
+        $this->db->where('paymant_type', 'add_on_course_invoice');
+        $query = $this->db->get();
+        $data_1 =  $query->result_array();
+        $total_paid_add_course =  $data_1[0]['beforepaid'];
+
+    
+        $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+        $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $enquiry_id);
+        $this->db->where(TBL_ADD_ON_COURSE.'.id', $add_on_course_id);
+        $query_2 = $this->db->get(TBL_ADD_ON_COURSE);
+        $total_final_amount = $query_2->row_array();
+
+
+        $coursefinalamount =  $total_final_amount[0]['course_total_fees'] -  $total_final_amount[0]['discount'];
+        $pending_amount =  $coursefinalamount - $total_paid_add_course; 
+
+        $data[0]['final_amount'] =$pending_amount;
+
+        return $data[0]['final_amount'];
+
+
     }
 
 
