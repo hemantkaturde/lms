@@ -216,15 +216,18 @@
     $('body').on('click', '.buy_now', function(e) {
 
         var final_amt = $("#final_student_amount").val();
-
-        alert('trst');
-
         if (final_amt) {
-
 
             // var totalAmount = $(this).attr("data-amount");
             var totalAmount = final_amt;
             var addoncourseid =<?php echo $add_on_course_id; ?>;
+
+            if(addoncourseid){
+                var addoncourseid_var =addoncourseid;
+            }else{
+                var addoncourseid_var ="";
+            }
+
             var product_id = $(this).attr("data-id");
             var options = {
                 "key": "<?php echo RAZORPAYKEY;?>",
@@ -244,10 +247,10 @@
                             product_id: product_id,
                             enq_id: <?php echo $enq_id; ?>,
                             enq_number: <?php echo $enq_number; ?>,
-                            add_on_course_id: <?php echo $add_on_course_id; ?>
+                            add_on_course_id: addoncourseid_var,
                         },
                         success: function(msg) {
-                            if(addoncourseid){
+                            if(addoncourseid_var){
                                 window.location.href ='<?php echo SERVER;?>payment/success.php?enq=<?=$enq_id;?>&&add_on_course_id=<?=$add_on_course_id?>';
                             }else{
                                 window.location.href ='<?php echo SERVER;?>payment/success.php?enq=<?=$enq_id;?>';
