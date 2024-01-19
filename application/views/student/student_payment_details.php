@@ -252,9 +252,65 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="ibox-body">
+                <div class="panel-body table-responsive">
+                    <table id="" class="table table-bordered">
+                        <tr style="background: #d2ae6d;">
+                            <th>Add On Course</th>
+                        </tr>
+                    </table>
+
+                    <table id="" class="table table-bordered">
+                        <tr style="background: #d3d5c3;">
+                            <th>Course Name</th>
+                            <th>Course Added DateTime</tthd>
+                            <th>Course Amount</th>
+                            <th>Discount</th>
+                            <th>Final Amount</th>
+                            <th>Total Paid Amount</th>
+                            <th>Total Pending Amount</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php foreach ($getadditionalcourseInfostudent as $getadditionalInfokey => $getadditionalInfokeyvalue) { ?>
+                            <tr>
+                                <td><?=$getadditionalInfokeyvalue['course_name'] ?></td>
+                                <td><?=$getadditionalInfokeyvalue['addoncoursedatetime'] ?></td>
+                                <td> ₹ <?=$getadditionalInfokeyvalue['course_total_fees'] ?></td>
+                                <td> ₹ <?=$getadditionalInfokeyvalue['discount'] ?></td>
+                                <?php 
+                                    $total_amount_after_discount = $getadditionalInfokeyvalue['course_total_fees']-$getadditionalInfokeyvalue['discount'];
+                                    // $total_paid = 0;
+                                    $CI =& get_instance();
+                                    $CI->load->model('enquiry_model');
+                                    $result_of_total_paid = $CI->enquiry_model->gettotalpaidamountof_add_on_course(trim($getadditionalInfokeyvalue['addoncourse_id']),trim($getadditionalInfokeyvalue['enquiry_id']));
+                                    $total_paid = $result_of_total_paid[0]->totalpaidamount;
+                                    $total_pending_amount = $total_amount_after_discount - $total_paid;
+                                ?>
+                                <td> ₹ <?=$total_amount_after_discount;?></td>
+
+
+                                <td> ₹ <?=$total_paid ?></td>
+                                <td> ₹ <?=$total_pending_amount?></td>
+                                <td>
+                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>viewaddoncoursepaymentdetails/<?=$getadditionalInfokeyvalue['addoncourse_id']?>' class='add_on_course_payment_details' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Add On Course Payment Details' title='Add On Course Payment Details'></a>
+                                </td>
+                            </tr>
+                        <?php }  ?>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
     </div>
     <!-- END PAGE CONTENT-->
+
+
+
+
 
 
        <!-- Add New Course Modal -->

@@ -320,18 +320,7 @@ $route['getcoursetopicrequestdetailsadmin'] = "admin/getcoursetopicrequestdetail
 $route['addnewcoursetopicrequestapproved'] = "admin/addnewcoursetopicrequestapproved";
 $route['add_addon_discount_payment'] = "enquiry/add_addon_discount_payment";
 $route['viewaddoncoursepaymentdetails/(:any)'] = "enquiry/viewaddoncoursepaymentdetails/$1";
-
 $route['fetchaddoncoursepaymentdetails/(:any)'] = "enquiry/fetchaddoncoursepaymentdetails/$1";
-
-
-$route['viewaddoncoursepaymentdetails_student/(:any)'] = "enquiry/viewaddoncoursepaymentdetails_student/$1";
-
-
-
-
-
-
-
 $route['sendPaymentLinkaddoncourse'] = "enquiry/sendPaymentLinkaddoncourse";
 
 

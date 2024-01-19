@@ -282,6 +282,11 @@
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
+
+            $data['getadditionalcourseInfostudent'] = $this->enquiry_model->getadditionalInfo( $id);
+
+
+
             $this->loadViews("student/student_payment_details", $this->global, $data , NULL);
         }
 

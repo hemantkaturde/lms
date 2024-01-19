@@ -822,10 +822,19 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
                 //$data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> ";
                 
                 
-                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-toggle='modal' data-target='#view_enquiry_tarnsaction'  data-id='".$value['paymentid']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Transaction' title='View Transaction'></a>";
-                $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='../tax_invoice/index.php?enq_id=".$value['enquiry_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> ";
-                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry_tarnsaction' data-id=".$value['paymentid']."><img width='20' src=".ICONPATH."/delete.png  alt='Delete Transaction' title='Delete Transaction'></a> ";
+                if($this->session->userdata('roleText')=='Student'){
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='../tax_invoice/index.php?enq_id=".$value['enquiry_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> ";
+                }else{
 
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='view_enquiry_tarnsaction' data-toggle='modal' data-target='#view_enquiry_tarnsaction'  data-id='".$value['paymentid']."'><img width='20' src=".ICONPATH."/view_doc.png alt='View Transaction' title='View Transaction'></a>";
+               
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='../tax_invoice/index.php?enq_id=".$value['enquiry_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> ";
+                
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry_tarnsaction' data-id=".$value['paymentid']."><img width='20' src=".ICONPATH."/delete.png  alt='Delete Transaction' title='Delete Transaction'></a> ";
+
+                }
+
+             
                 $counter++; 
             }
         }

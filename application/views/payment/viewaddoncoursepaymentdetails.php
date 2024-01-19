@@ -2,7 +2,9 @@
     <div class="page-content fade-in-up col-md-12">
         <div class="ibox">
             <div class="ibox-head">
+          
                 <div>
+                   <?php if($this->session->userdata('roleText')!='Student'){?>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_payment" >
                         <i class="fa fa-money"></i> Add Payment
                     </button>
@@ -12,7 +14,13 @@
                     <button type="button" class="btn btn-primary">
                         <a href="<?php echo base_url().'payment_details/'.$getaddoncoursedetails['enq_id'];?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
+                    <?php }else{ ?>
+                    <button type="button" class="btn btn-primary">
+                        <a href="<?php echo base_url().'dashboard';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                    </button>
+                    <?php } ?>
                 </div>
+        
                 <div class="ibox-title">Add on Course Payment Details - Enquiry Number <?=$getaddoncoursedetails['enq_number_enq'];?>
                     <small>( <?=$getaddoncoursedetails['course_name']?> )</small>
                 </div>

@@ -253,7 +253,7 @@
 
 
 			<div class="col-lg-12 col-md-12" style="margin-top:35px">
-				<h5><b> Course Class Schedule</b></h5>
+				<h5><b> Add on Course Payment Details</b></h5>
 
                     <table id="" class="table table-bordered">
                         <tr style="background: #d3d5c3;">
@@ -287,7 +287,7 @@
                                 <td> ₹ <?=$total_paid ?></td>
                                 <td> ₹ <?=$total_pending_amount?></td>
                                 <td>
-                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>viewaddoncoursepaymentdetails_student/<?=$getadditionalInfokeyvalue['addoncourse_id']?>' class='add_on_course_payment_details' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Add On Course Payment Details' title='Add On Course Payment Details'></a>
+                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>viewaddoncoursepaymentdetails/<?=$getadditionalInfokeyvalue['addoncourse_id']?>' class='add_on_course_payment_details' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Add On Course Payment Details' title='Add On Course Payment Details'></a>
                                 </td>
                             </tr>
                         <?php }  ?>
