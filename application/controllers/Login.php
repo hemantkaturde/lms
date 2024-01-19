@@ -94,7 +94,6 @@ class Login extends BaseController
                     $password = $this->input->post('password');
                     $result = $this->login_model->loginMe($username, $password);
 
-
                     if(count($result) > 0)
                     {
                         foreach ($result as $res)

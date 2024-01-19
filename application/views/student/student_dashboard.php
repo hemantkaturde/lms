@@ -252,6 +252,51 @@
 	</div>
 
 
+			<div class="col-lg-12 col-md-12" style="margin-top:35px">
+				<h5><b> Course Class Schedule</b></h5>
+
+                    <table id="" class="table table-bordered">
+                        <tr style="background: #d3d5c3;">
+                            <th>Course Name</th>
+                            <th>Course Added DateTime</tthd>
+                            <th>Course Amount</th>
+                            <th>Discount</th>
+                            <th>Final Amount</th>
+                            <th>Total Paid Amount</th>
+                            <th>Total Pending Amount</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php foreach ($getadditionalcourseInfostudent as $getadditionalInfokey => $getadditionalInfokeyvalue) { ?>
+                            <tr>
+                                <td><?=$getadditionalInfokeyvalue['course_name'] ?></td>
+                                <td><?=$getadditionalInfokeyvalue['addoncoursedatetime'] ?></td>
+                                <td> ₹ <?=$getadditionalInfokeyvalue['course_total_fees'] ?></td>
+                                <td> ₹ <?=$getadditionalInfokeyvalue['discount'] ?></td>
+                                <?php 
+                                    $total_amount_after_discount = $getadditionalInfokeyvalue['course_total_fees']-$getadditionalInfokeyvalue['discount'];
+                                    // $total_paid = 0;
+                                    $CI =& get_instance();
+                                    $CI->load->model('enquiry_model');
+                                    $result_of_total_paid = $CI->enquiry_model->gettotalpaidamountof_add_on_course(trim($getadditionalInfokeyvalue['addoncourse_id']),trim($getadditionalInfokeyvalue['enquiry_id']));
+                                    $total_paid = $result_of_total_paid[0]->totalpaidamount;
+                                    $total_pending_amount = $total_amount_after_discount - $total_paid;
+                                ?>
+                                <td> ₹ <?=$total_amount_after_discount;?></td>
+
+
+                                <td> ₹ <?=$total_paid ?></td>
+                                <td> ₹ <?=$total_pending_amount?></td>
+                                <td>
+                                    <a style='cursor: pointer;'  href='<?php echo base_url();?>viewaddoncoursepaymentdetails_student/<?=$getadditionalInfokeyvalue['addoncourse_id']?>' class='add_on_course_payment_details' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Add On Course Payment Details' title='Add On Course Payment Details'></a>
+                                </td>
+                            </tr>
+                        <?php }  ?>
+                    </table>
+                </div>
+
+
+
+
     <div class="col-lg-12 col-md-12" style="margin-top:35px">
         <h5><b> Course Class Schedule</b></h5>
             <table class="table  table-condensed" style="background-color:#cec4de">
@@ -413,7 +458,7 @@
 			<h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Exam notification</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
 						<!-- <marquee width="100%" direction="up"  height="210px"> -->
-							<div class="testimonial pt-10 borderb">
+							<!-- <div class="testimonial pt-10 borderb">
 								<a href="http://localhost/lms_2/studentadmissions">
 									<div class="thumb pull-left mb-0 mr-0 pr-12">
 									   <i class="fa fa-link color2"></i>
@@ -422,7 +467,7 @@
 									  <p>This is Test Notification</p>
 									</div>
 								</a>
-					      </div>
+					      </div> -->
 					    <!-- </marquee> -->
 				</div>
 		  </div>

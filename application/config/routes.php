@@ -324,6 +324,8 @@ $route['viewaddoncoursepaymentdetails/(:any)'] = "enquiry/viewaddoncoursepayment
 $route['fetchaddoncoursepaymentdetails/(:any)'] = "enquiry/fetchaddoncoursepaymentdetails/$1";
 
 
+$route['viewaddoncoursepaymentdetails_student/(:any)'] = "enquiry/viewaddoncoursepaymentdetails_student/$1";
+
 
 
 

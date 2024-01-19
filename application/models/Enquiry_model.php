@@ -441,7 +441,7 @@ class Enquiry_model extends CI_Model
 
         $this->db->select('sum(totalAmount) as totalpaidAmount');
         $this->db->from('tbl_payment_transaction');
-       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('enquiry_id', $id);
         $this->db->where('payment_status', 1);
         $this->db->where('paymant_type', 'regular_invoice');
