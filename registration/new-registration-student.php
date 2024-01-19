@@ -675,18 +675,18 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                                 class="form-control"
                                                 accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
                                             <small class="text-default">( Upload photo as required on certificate
-                                                )</small>
+                                                ) Kindly upload files in png, jpeg, jpg format</small>
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="file" id="marksheet_photo" name="marksheet_photo"
                                                 class="form-control"
                                                 accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
-                                            <small class="text-default">( Upload Highest Education Certificate )</small>
+                                            <small class="text-default">( Upload Highest Education Certificate ) Kindly upload files in png, jpeg, jpg format</small>
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="file" id="adhar_photo" name="adhar_photo" class="form-control"
                                                 accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
-                                            <small class="text-default">( Upload Aadhar Copy)</small>
+                                            <small class="text-default">( Upload Aadhar Copy) Kindly upload files in png, jpeg, jpg format</small>
                                         </div>
                                     </div>
                                     <div class="line"></div>
