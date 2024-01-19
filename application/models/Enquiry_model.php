@@ -209,21 +209,21 @@ class Enquiry_model extends CI_Model
         }
     }
 
-    public function checkuniqeenquiryname($enq_fullname){
+    public function checkuniqeenquiryname($mobile_no){
         $this->db->select('enq_fullname');
         $this->db->from(TBL_ENQUIRY);
         $this->db->where('isDeleted', 0);
-        $this->db->where('enq_fullname', $enq_fullname);
+        $this->db->where('enq_mobile', $mobile_no);
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function checkuniqeenquiryname_update($enq_id,$enq_fullname){
+    public function checkuniqeenquiryname_update($enq_id,$mobile_no){
         $this->db->select('enq_id,enq_fullname');
         $this->db->from(TBL_ENQUIRY);
         $this->db->where('isDeleted', 0);
         $this->db->where('enq_id =', $enq_id);
-        $this->db->where('enq_fullname', $enq_fullname);
+        $this->db->where('enq_mobile', $enq_fullname);
         $query = $this->db->get();
         return $query->result();
     }

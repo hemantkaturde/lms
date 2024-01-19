@@ -196,7 +196,7 @@
                     );
 
                     /*check If course name is unique*/
-                    $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
+                    $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('mobile_no')));
 
                     if($check_uniqe){
                         $createenquiry_response['status'] = 'failure';
@@ -321,7 +321,7 @@
                                 //     $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($id, trim($this->input->post('full_name')));
                                 // }
 
-                                $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($enq_id, trim($this->input->post('full_name')));
+                                $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($enq_id, trim($this->input->post('mobile_no')));
                                 //$check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
 
                                 if($check_uniqe){
