@@ -1,8 +1,4 @@
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-
-
 <?php
 include_once('../db/config.php'); 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -1181,7 +1177,8 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
 </html>
 
     <div class="loader_ajax" style="display:none;">
-	    <div class="loader_ajax_inner"><img src="preloader_ajax.gif"><p>Please wait your form is submitting...</p></div>
+	    <div class="loader_ajax_inner"><img src="preloader_ajax.gif"></div>
+        <p style="margin-left: 34%;margin-top: 25%;font-size: xx-large;">Please wait your form is submitting...</p>
 	</div>
 
 <?php
