@@ -673,19 +673,19 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                         <div class="col-sm-4">
                                             <input type="file" id="student_photo" name="student_photo"
                                                 class="form-control"
-                                                accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
+                                                accept="image/jpeg,image/png">
                                             <small class="text-default">( Upload photo as required on certificate
                                                 ) Kindly upload files in png, jpeg, jpg format</small>
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="file" id="marksheet_photo" name="marksheet_photo"
                                                 class="form-control"
-                                                accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
+                                                accept="image/jpeg,image/png">
                                             <small class="text-default">( Upload Highest Education Certificate ) Kindly upload files in png, jpeg, jpg format</small>
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="file" id="adhar_photo" name="adhar_photo" class="form-control"
-                                                accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
+                                                accept="image/jpeg,image/png">
                                             <small class="text-default">( Upload Aadhar Copy) Kindly upload files in png, jpeg, jpg format</small>
                                         </div>
                                     </div>
