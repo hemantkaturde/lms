@@ -475,6 +475,7 @@ class Admission_model extends CI_Model
         $this->db->select('sum(totalAmount) as total_revenue');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_number');
         $this->db->where(TBL_PAYMENT.'.payment_status',1);
+        $this->db->where(TBL_PAYMENT.'.paymant_type','regular_invoice');
         $query = $this->db->get(TBL_PAYMENT);
         return $query->result_array();
     }
