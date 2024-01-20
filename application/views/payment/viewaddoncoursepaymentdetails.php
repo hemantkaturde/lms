@@ -16,8 +16,12 @@
                     </button>
                     <?php }else{ ?>
                     <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'dashboard';?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="<?php echo base_url().'studentpaymentdetails/'.$getaddoncoursedetails['enq_id'];?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
+
+                   
+                        <label for="" style="margin-top:15px;color: #d2ae6d"><b><a href="<?php echo base_url().'payment/pay.php?enq='.$getaddoncoursedetails['enq_id'],'&&add_on_course_id='.$getaddoncoursedetails['add_on_course_id'];?>" target="_blank" style="color: black !important">Pay Pending Payment <i class="fa fa-arrow-right" aria-hidden="true"></i></a></b></label>
+                 
                     <?php } ?>
                 </div>
         

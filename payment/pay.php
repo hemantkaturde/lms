@@ -50,7 +50,14 @@
             <?php
               include_once('../db/config.php');
               $id = $_GET['enq'];
-              $add_on_course_id = $_GET['add_on_course_id'];
+              
+             
+
+              if(isset($_GET['add_on_course_id'])){
+                $add_on_course_id = $_GET['add_on_course_id'];
+              }else{
+                $add_on_course_id ='';
+              }
 
               if($add_on_course_id){
                 $add_on_course_id_condition =$add_on_course_id;
@@ -100,7 +107,9 @@
 
                 }else{
 
+        
                     $row = $result->fetch_assoc(); 
+
                     $course_ids    =   explode(',',$row['enq_course_id']);
                     $total_fees = 0;
                     $course_name = '';
@@ -113,10 +122,10 @@
                         $total_fees += $row_course['course_total_fees'];
                         $course_name .= $i++.'-'.$row_course['course_name'].' ₹ '.$row_course['course_total_fees']. ',   ';    
                     }
-                    $all_course_name = trim($course_name, ', ');
+                    $course_name = trim($course_name, ', ');
                     $enq_id = $row['enq_id'];
 
-                    $course_name= $row['course_name'];
+                    // $course_name= $row['course_name'];
                     $enq_number = $row['enq_number'];
                     $enq_fullname= $row['enq_fullname'];
                     $enq_mobile = $row['enq_mobile'];
@@ -137,9 +146,6 @@
 
                 }
 
-
-                  
-            
               ?>
 
             <?php  if($total_payabale > 0){ ?>
