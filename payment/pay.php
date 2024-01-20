@@ -201,7 +201,7 @@
                     <html>
 
                     <head>
-                        <title>All Payment Alreday Done</title>
+                        <title>All Payment Already Done</title>
                         <link rel="stylesheet"
                             href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
                     </head>
@@ -211,7 +211,7 @@
                             <div class="card-body text-center">
                                 <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
 
-                                <h2 class="text-black"><b>!! All Payment Alreday Done !!</b><br></h2>
+                                <h2 class="text-black"><b>!! All Payment Already Done !!</b><br></h2>
                             </div>
                             
                         </article>
