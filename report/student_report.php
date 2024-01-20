@@ -406,7 +406,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
 <?php
  /*Enquiry Details Start Here */
-$getStudentEnquirydetails = "SELECT tbl_enquiry.enq_number,tbl_payment_transaction.datetime,tbl_payment_transaction.razorpay_payment_id,tbl_payment_transaction.payment_mode,tbl_payment_transaction.totalAmount,tbl_users_enquires.user_id,tbl_enquiry.enq_course_id,tbl_users.name as counsellor
+$getStudentEnquirydetails = "SELECT tbl_payment_transaction.paymant_type,tbl_enquiry.enq_number,tbl_payment_transaction.datetime,tbl_payment_transaction.razorpay_payment_id,tbl_payment_transaction.payment_mode,tbl_payment_transaction.totalAmount,tbl_users_enquires.user_id,tbl_enquiry.enq_course_id,tbl_users.name as counsellor
                               FROM tbl_enquiry JOIN tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id 
                               JOIN tbl_users on tbl_users.userId=tbl_enquiry.counsellor_id 
                               JOIN tbl_payment_transaction on tbl_payment_transaction.enquiry_id=tbl_users_enquires.enq_id 
@@ -426,6 +426,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                     <th>Transaction Id</th>
                     <th>payment_mode</th>
                     <th>Payment Amount</th>
+                    <th>Course Type</th>
                 </tr>
             </thead>
             <tbody> 
@@ -459,6 +460,12 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                       
                     }
                  $all_course_name = trim($course_name, ', '); 
+
+                 if($row['paymant_type']=='regular_invoice'){
+                  $paymant_type = 'Invoice';
+                 }else{
+                   $paymant_type = 'Add on';
+                 }
                   
                 ?>
                 <tr>
@@ -467,6 +474,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                     <td><?=$row['razorpay_payment_id']?></td>
                     <td><?=$row['payment_mode']?></td>
                     <td><?=$row['totalAmount']?></td>
+                    <td><?=$paymant_type?></td>
                 </tr>
                 <?php } ?>
             </tbody>
