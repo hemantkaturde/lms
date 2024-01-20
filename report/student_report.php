@@ -469,8 +469,9 @@ $resultStudentEnquirydetails_add_on = $conn->query($getStudentEnquirydetails_add
                     $resultStudentEnquiryCourses = $conn->query($getStudentEnquiryCourses);
                     $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
 
-                    if($row_add_on[0]['discount']){
-                      $discount = $row_add_on[0]['discount'];
+
+                    if($row_add_on['discount']){
+                      $discount = $row_add_on['discount'];
                     }else{
                       $discount = 0;
                     }
@@ -482,9 +483,10 @@ $resultStudentEnquirydetails_add_on = $conn->query($getStudentEnquirydetails_add
                     $total_pending_fess_addon_result = $conn->query($total_pending_fess_addon);
                     $add_on_total_paid = $total_pending_fess_addon_result->fetch_array();
 
+                
 
-                    if($add_on_total_paid[0]['totalAmount']){
-                      $total_paid = $add_on_total_paid[0]['totalAmount'];
+                    if($add_on_total_paid['totalAmount']){
+                      $total_paid = $add_on_total_paid['totalAmount'];
                     }else{
                       $total_paid = 0;
                     }
