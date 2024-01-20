@@ -345,7 +345,6 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
             <tbody> 
                 <?php 
                 while ($row = $resultStudentEnquirydetails->fetch_array()) { 
-
                  $enq_number =$row['enq_number'];
                  $enq_id =$row['enq_id'];
   
@@ -358,11 +357,8 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                  $i = 1;
                  $course_ids    =   explode(',', $row['enq_course_id']);
 
-
                     foreach($course_ids as $id)
                     {
-                      
-
                          /*check course id in Add on course */
                    
                          $checkif_courese_id_in_add_on = "SELECT tbl_add_on_courses.course_id
@@ -376,11 +372,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
        
                         $add_on_course_ids = array();
                          while ($row11 = $checkifcourseinaddon->fetch_array()) { 
-       
-       
                                $add_on_course_ids[] = $row11['course_id'];
-       
-    
                          }
 
                         // Check if $valueToCheck exists in $array1
@@ -422,7 +414,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
               <?php }  ?>
                 <tr>
-                    <td><?='₹ '.$course_name?></td>
+                    <td><?=$course_name?></td>
                     <td><?='₹ '.$total_fees?></td>
                     <td><?='₹ '.$total_discount_amount?></td>
                     <td><?='₹ '.$amount_after_dicount?></td>
@@ -436,6 +428,91 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
     </div>
   </div>
 </div>
+
+
+<?php
+ /*Enquiry Details Start Here */
+$getStudentEnquirydetails_add_on = "SELECT tbl_add_on_courses.enquiry_id addon_course_add_on_id_enquiry, tbl_add_on_courses.id  as add_on_course_id,tbl_add_on_courses.discount,tbl_add_on_courses.course_id,tbl_enquiry.final_amount,tbl_enquiry.discount_amount,tbl_enquiry.enq_number,tbl_enquiry.enq_id,tbl_enquiry.enq_fullname,tbl_enquiry.createdDtm,tbl_enquiry.enq_mobile,tbl_enquiry.enq_email,tbl_users_enquires.user_id,tbl_enquiry.enq_course_id,tbl_users.name as counsellor
+                              FROM tbl_enquiry JOIN tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id 
+                              JOIN tbl_users on tbl_users.userId=tbl_enquiry.counsellor_id 
+                              JOIN tbl_add_on_courses on tbl_add_on_courses.enquiry_id=tbl_enquiry.enq_id 
+                              WHERE tbl_users_enquires.user_id=$studentid";
+$resultStudentEnquirydetails_add_on = $conn->query($getStudentEnquirydetails_add_on);
+//$rowDataStudentEnquirydetails = $resultStudentEnquirydetails->fetch_array();
+?>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Total Course Fees	</th>
+                    <th>Discount</th>
+                    <th>Final Amount</th>
+                    <th>Total Paid Fees</th>
+                    <th>Total Pending Fees</th>
+                    <th>Invoice Type</th>
+                </tr>
+            </thead>
+            <tbody> 
+                <?php 
+
+
+
+                while ($row_add_on = $resultStudentEnquirydetails_add_on->fetch_array()) {
+                    $course_id_add_on = $row_add_on['course_id'];
+                    $add_on_course_id = $row_add_on['add_on_course_id'];
+                    $addon_course_add_on_id_enquiry = $row_add_on['addon_course_add_on_id_enquiry'];
+
+                    $getStudentEnquiryCourses = "SELECT * FROM tbl_course where courseId=$course_id_add_on";
+                    $resultStudentEnquiryCourses = $conn->query($getStudentEnquiryCourses);
+                    $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
+
+                    if($row_add_on['discount']){
+                      $discount = $row_add_on['discount'];
+                    }else{
+                      $discount = 0;
+                    }
+
+                    $final_amount =  $get_course_fees['course_total_fees'] - $row_add_on['discount'];
+
+
+                    $total_pending_fess_addon= "SELECT  sum(totalAmount)  as totalAmount  FROM tbl_payment_transaction where paymant_type='add_on_course_invoice' and add_on_course_id =$add_on_course_id and enquiry_id=$addon_course_add_on_id_enquiry";
+                    $total_pending_fess_addon_result = $conn->query($total_pending_fess_addon);
+                    $add_on_total_paid = $total_pending_fess_addon_result->fetch_array();
+
+
+                    if($add_on_total_paid['totalAmount']){
+                      $total_paid = $add_on_total_paid['discount'];
+                    }else{
+                      $total_paid = 0;
+                    }
+
+
+                    $total_pending =  $final_amount -$total_paid;
+                  
+                  
+                  ?>
+             
+                <tr>
+                    <td><?=$get_course_fees['course_name'];?></td>
+                    <td><?='₹ '.$get_course_fees['course_total_fees']?></td>
+                    <td><?='₹ '.$discount?></td>
+                    <td><?='₹ '.$final_amount?></td>
+                    <td><?='₹ '.$total_paid?></td>
+                    <td><?='₹ '.$total_pending?></td>
+                    <td> Add On</td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+
+
 
 <?php
  /*Enquiry Details Start Here */
