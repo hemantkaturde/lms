@@ -175,7 +175,7 @@
                     $data = array(
                         //'enq_number'=> DATE('Y').DATE('m').DATE('d').DATE('H').DATE('i').DATE('s'),
                         'enq_number'=> $enq_number,
-                        'enq_fullname' => $this->input->post('full_name'),
+                        'enq_fullname' => ucwords($this->input->post('full_name')),
                         'enq_mobile'=> $this->input->post('mobile_no'),
                         //'enq_mobile1' => $this->input->post('alternate_mobile'),
                         'enq_email'=> $this->input->post('email'),
@@ -291,7 +291,7 @@
 
                                 /*check If enquiry name is unique*/
                                 $data = array(
-                                    'enq_fullname' => $this->input->post('full_name'),
+                                    'enq_fullname' => ucwords($this->input->post('full_name')),
                                     'enq_mobile'=> $this->input->post('mobile_no'),
                                     //'enq_mobile1' => $this->input->post('alternate_mobile'),
                                     'enq_email'=> $this->input->post('email'),
