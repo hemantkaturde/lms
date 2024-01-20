@@ -264,7 +264,6 @@
                             <th>Final Amount</th>
                             <th>Total Paid Amount</th>
                             <th>Total Pending Amount</th>
-                            <th>Action</th>
                         </tr>
                         <?php foreach ($getadditionalcourseInfostudent as $getadditionalInfokey => $getadditionalInfokeyvalue) { ?>
                             <tr>
@@ -286,9 +285,9 @@
 
                                 <td> ₹ <?=$total_paid ?></td>
                                 <td> ₹ <?=$total_pending_amount?></td>
-                                <td>
+                                <!-- <td>
                                     <a style='cursor: pointer;'  href='<?php echo base_url();?>viewaddoncoursepaymentdetails/<?=$getadditionalInfokeyvalue['addoncourse_id']?>' class='add_on_course_payment_details' data-id=""><img width='20' src="<?php echo ICONPATH; ?>/payment.png" alt='Add On Course Payment Details' title='Add On Course Payment Details'></a>
-                                </td>
+                                </td> -->
                             </tr>
                         <?php }  ?>
                     </table>
