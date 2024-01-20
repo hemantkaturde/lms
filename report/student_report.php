@@ -426,7 +426,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                     <th>Transaction Id</th>
                     <th>payment_mode</th>
                     <th>Payment Amount</th>
-                    <th>Course Type</th>
+                    <th>Invoice Type</th>
                 </tr>
             </thead>
             <tbody> 
