@@ -82,7 +82,7 @@
                      <label style="text-align: left;"  for="full_name">Full Name<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="full_name" name="full_name" style=" text-transform:capitalize;"  placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off" maxlength="50" type="text" id="full_name" name="full_name" placeholder="Enter Full name Name" class="form-control col-md-12 col-xs-12">
                         <p class="error full_name_error"></p>
                      </div>
                   </div>
