@@ -361,11 +361,10 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
                       $enq_number =$row['enq_number'];
                       $enq_id =$row['enq_id'];
-                      $getStudentEnquiryPaidfees = "SELECT  sum(totalAmount)  as totalAmount  FROM tbl_payment_transaction where enquiry_id=$enq_id group by enquiry_id";
+                      $getStudentEnquiryPaidfees = "SELECT  sum(totalAmount)  as totalAmount  FROM tbl_payment_transaction where paymant_type='regular_invoice' and enquiry_id=$enq_id group by enquiry_id";
                       $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
                       $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
 
-                      
                       $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
                       $total_discount_amount +=  $row['discount_amount'];
 
