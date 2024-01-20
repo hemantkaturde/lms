@@ -483,8 +483,8 @@ $resultStudentEnquirydetails_add_on = $conn->query($getStudentEnquirydetails_add
                     $add_on_total_paid = $total_pending_fess_addon_result->fetch_array();
 
 
-                    if($add_on_total_paid['totalAmount']){
-                      $total_paid = $add_on_total_paid['discount'];
+                    if($add_on_total_paid[0]['totalAmount']){
+                      $total_paid = $add_on_total_paid[0]['discount'];
                     }else{
                       $total_paid = 0;
                     }
