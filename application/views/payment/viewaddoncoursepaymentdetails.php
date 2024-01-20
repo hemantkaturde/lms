@@ -20,7 +20,7 @@
                     </button>
 
                    
-                        <label for="" style="margin-top:15px;color: #d2ae6d"><b><a href="<?php echo base_url().'payment/pay.php?enq='.$getaddoncoursedetails['enq_id'],'&&add_on_course_id='.$getaddoncoursedetails['add_on_course_id'];?>" target="_blank" style="color: black !important">Pay Pending Payment <i class="fa fa-arrow-right" aria-hidden="true"></i></a></b></label>
+                        <label for="" style="margin-top:15px;color: #d2ae6d;margin-left: 16px;"><b><a href="<?php echo base_url().'payment/pay.php?enq='.$getaddoncoursedetails['enq_id'],'&&add_on_course_id='.$getaddoncoursedetails['add_on_course_id'];?>" target="_blank" style="color: black !important">Pay Pending Payment <i class="fa fa-arrow-right" aria-hidden="true"></i></a></b></label>
                  
                     <?php } ?>
                 </div>
