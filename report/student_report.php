@@ -258,10 +258,6 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 while ($row = $resultStudentEnquirydetails->fetch_array()) { 
               
                  $course_ids    =   explode(',', $row['enq_course_id']);
-
-                 print_r($course_ids);
-                 exit;
-             
                  $total_fees = 0;
                  $course_name = '';
                  $i = 1;
