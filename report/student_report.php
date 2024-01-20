@@ -333,6 +333,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th>Course Name</th>
                     <th>Total Course Fees	</th>
                     <th>Discount</th>
                     <th>Final Amount</th>
@@ -421,6 +422,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
               <?php }  ?>
                 <tr>
+                    <td><?='₹ '.$course_name?></td>
                     <td><?='₹ '.$total_fees?></td>
                     <td><?='₹ '.$total_discount_amount?></td>
                     <td><?='₹ '.$amount_after_dicount?></td>
