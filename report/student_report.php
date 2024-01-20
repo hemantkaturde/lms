@@ -352,43 +352,64 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                  $final_amount =0;
                  $amount_after_dicount =0;
                  $i = 1;
+
+
+               
+
+
                     foreach($course_ids as $id)
                     {
-                      $getStudentEnquiryCourses = "SELECT * FROM tbl_course where courseId=$id";
-                      $resultStudentEnquiryCourses = $conn->query($getStudentEnquiryCourses);
-                      $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
 
+                      
                       $enq_number =$row['enq_number'];
                       $enq_id =$row['enq_id'];
-                      $getStudentEnquiryPaidfees = "SELECT  sum(totalAmount)  as totalAmount  FROM tbl_payment_transaction where paymant_type='regular_invoice' and enquiry_id=$enq_id group by enquiry_id";
-                      $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
-                      $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
 
-                      $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
-                      $total_discount_amount +=  $row['discount_amount'];
+                      /*check course id in Add on course */
+                      $checkif_courese_id_in_add_on = "SELECT tbl_add_on_courses.course_id
+                                                        FROM tbl_enquiry JOIN tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id 
+                                                        JOIN tbl_users on tbl_users.userId=tbl_enquiry.counsellor_id 
+                                                        JOIN tbl_add_on_courses on tbl_add_on_courses.enquiry_id=tbl_enquiry.enq_id 
+                                                        WHERE tbl_add_on_courses.course_id=$id and tbl_add_on_courses.enquiry_id=$enq_id";
+                      $checkifcourseinaddon = $conn->query($checkif_courese_id_in_add_on);
+                      $addondata  =$checkifcourseinaddon->fetch_assoc();
 
-                      $amount_after_dicount += $row['final_amount'];
+                     if($addondata==$id){
 
-                      $final_amount +=  $amount_after_dicount - $total_paid_fees;
+                     }else{
 
-                        if($get_course_fees){
-                            
-                            $total_fees += $get_course_fees['course_total_fees'];
-                            $course_name .= $i.'-'.$get_course_fees['course_name']. ' <br>';  
-                           
-                            $i++;  
+                          $getStudentEnquiryCourses = "SELECT * FROM tbl_course where courseId=$id";
+                          $resultStudentEnquiryCourses = $conn->query($getStudentEnquiryCourses);
+                          $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
 
-                        }else{
+                          $getStudentEnquiryPaidfees = "SELECT  sum(totalAmount)  as totalAmount  FROM tbl_payment_transaction where paymant_type='regular_invoice' and enquiry_id=$enq_id group by enquiry_id";
+                          $resultStudentEnquiryPaidfees = $conn->query($getStudentEnquiryPaidfees);
+                          $get_course_Paidfees = $resultStudentEnquiryPaidfees->fetch_assoc();
 
-                            $total_fees = '';
-                            $course_name = '';  
-                           // $total_paid_fees ='';
-                            $i++;  
-                        }
+                          $total_paid_fees +=  $get_course_Paidfees['totalAmount'];
+                          $total_discount_amount +=  $row['discount_amount'];
 
-                        ?>
+                          $amount_after_dicount += $row['final_amount'];
 
-              <?php } ?>
+                          $final_amount +=  $amount_after_dicount - $total_paid_fees;
+
+                            if($get_course_fees){
+                                
+                                $total_fees += $get_course_fees['course_total_fees'];
+                                $course_name .= $i.'-'.$get_course_fees['course_name']. ' <br>';  
+                              
+                                $i++;  
+
+                            }else{
+
+                                $total_fees = '';
+                                $course_name = '';  
+                              // $total_paid_fees ='';
+                                $i++;  
+                            }
+
+                     } ?>
+
+              <?php }  ?>
                 <tr>
                     <td><?='₹ '.$total_fees?></td>
                     <td><?='₹ '.$total_discount_amount?></td>
