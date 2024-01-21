@@ -514,11 +514,8 @@ class Admission_model extends CI_Model
         
         if($this->session->userdata('roleText') =='Counsellor'){
             $userId = $this->session->userdata('userId');
-            print_r($userId);
-            exit;
-
-          
-            $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_number');
+    
+            $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_id');
             $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userId);
         }
 
