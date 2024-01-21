@@ -1172,10 +1172,10 @@ class Admin extends BaseController
     $post_submit = $this->input->post();
     if(!empty($post_submit)){
         $whatappconfigupdate_response = array();
-
         
         $this->form_validation->set_rules('instance_id', 'Instance Id', 'trim|required');
         $this->form_validation->set_rules('access_token', 'Access Token', 'trim|required');
+        $this->form_validation->set_rules('whatsapp_config_id', 'Whats_config_id', 'trim|required');
 
         if($this->form_validation->run() == FALSE){
             $whatappconfigupdate_response['status'] = 'failure';
@@ -1185,6 +1185,7 @@ class Admin extends BaseController
 
         $instance_id = $this->input->post('instance_id');
         $access_token = $this->input->post('access_token');
+        $whatsapp_config_id = $this->input->post('whatsapp_config_id');
 
         $data = array(
             'setting_module'   => 'whatsapp_credentials',
@@ -1192,7 +1193,7 @@ class Admin extends BaseController
             'ACCESS_TOKEN'     => $access_token,
         );
 
-        $save_whatsapp_config = $this->admission_model->savewhatsappconfig('',$data);
+        $save_whatsapp_config = $this->admission_model->savewhatsappconfig($whatsapp_config_id,$data);
 
         if($save_whatsapp_config){
              $whatappconfigupdate_response['status'] = 'success';

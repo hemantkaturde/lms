@@ -45,6 +45,9 @@ $jsonstringtoArray = json_decode($access, true);
                             ?>
                          
                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <input autocomplete="off" autocomplete="off" type="hidden" id="whatsapp_config_id" name="whatsapp_config_id" value="<?=$get_whatsappconfig_setting['id']?>" class="form-control col-md-12 col-xs-12">
+
                                 <div class="form-group">
                                     <label style="text-align: left;"  for="instance_id">INSTANCE_ID<span class="required">*</span>
                                     </label>
