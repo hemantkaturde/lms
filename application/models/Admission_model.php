@@ -515,7 +515,9 @@ class Admission_model extends CI_Model
         if($this->session->userdata('roleText') =='Counsellor'){
             $userId = $this->session->userdata('userId');
             $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_number');
-            $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userId);
+            // $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userId);
+            $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+            $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
         }
 
         $this->db->select('sum(tbl_course.course_total_fees) as total_pending');
