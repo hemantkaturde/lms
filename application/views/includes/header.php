@@ -329,7 +329,7 @@ $jsonstringtoArray = json_decode($access, true);
 
 
                         <?php if($role_text=="Superadmin"){ ?>
-                         <li class="">
+                         <li class="<?php if($pageUrl =='studentexamrequest'){ echo 'active';} ?>">
                             <a href="<?php echo base_url()."studentexamrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
                                 <span class="nav-label">Student Exam Request</span>
                             </a>
@@ -339,9 +339,19 @@ $jsonstringtoArray = json_decode($access, true);
 
                         
                         <?php if($role_text=="Superadmin"){ ?>
-                         <li class="">
+                         <li class="<?php if($pageUrl =='viewclassrequest'){ echo 'active';} ?>">
                             <a href="<?php echo base_url()."viewclassrequest"; ?>"><i class="sidebar-item-icon fa fa-file-text-o" ></i>
                                 <span class="nav-label">View Class Request</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+
+                         
+                        <?php if($role_text=="Superadmin"){ ?>
+                         <li class="<?php if($pageUrl =='settings'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."settings"; ?>"><i class="sidebar-item-icon fa fa-cog" ></i>
+                                <span class="nav-label">Settings</span>
                             </a>
                         </li>
                         <?php } ?>

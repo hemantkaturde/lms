@@ -116,7 +116,9 @@ define('TBL_STUDENT_REQUEST', 'tbl_student_exam_request');
 define('TBL_ACTIVITY_APP_LOG', 'tbl_activity_log_app');
 define('TBL_ADD_ON_COURSE', 'tbl_add_on_courses');
 define('TBL_NEW_COURSE_REQUEST', 'tb_new_course_request');
+define('TBL_SETTINGS', 'tbl_settings');
 define('DATEANDTIME', Date('Y-m-d H:i:s'));
+
 
 // define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
 // define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
@@ -151,8 +153,13 @@ define('EMAIL_SECURE','tls');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');
 
 define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+
+
+
 define('INSTANCE_ID','65784BDAEE97A');
 define('ACCESS_TOKEN','64e7462031534');
+
+
 
 if($_SERVER['HTTP_HOST']=='localhost'){
     define('SERVER','http://localhost/lms_2/');

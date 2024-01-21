@@ -1161,6 +1161,54 @@ class Admin extends BaseController
  }
 
 
+ public function settings(){
+    $this->global['pageTitle'] = 'Settings';
+    $data['get_whatsappconfig_setting'] = $this->admission_model->get_whatsappconfig_setting();
+    $this->loadViews("settings", $this->global, $data, NULL);
+ }
+
+ public function whatappconfigupdate(){
+
+    $post_submit = $this->input->post();
+    if(!empty($post_submit)){
+        $whatappconfigupdate_response = array();
+
+        
+        $this->form_validation->set_rules('instance_id', 'Instance Id', 'trim|required');
+        $this->form_validation->set_rules('access_token', 'Access Token', 'trim|required');
+
+        if($this->form_validation->run() == FALSE){
+            $whatappconfigupdate_response['status'] = 'failure';
+            $whatappconfigupdate_response['error'] = array('instance_id'=>strip_tags(form_error('instance_id')), 'access_token'=>strip_tags(form_error('access_token')));    
+        }else{
+
+
+        $instance_id = $this->input->post('instance_id');
+        $access_token = $this->input->post('access_token');
+
+        $data = array(
+            'setting_module'   => 'whatsapp_credentials',
+            'INSTANCE_ID'      => $instance_id,
+            'ACCESS_TOKEN'     => $access_token,
+        );
+
+        $save_whatsapp_config = $this->admission_model->savewhatsappconfig('',$data);
+
+        if($save_whatsapp_config){
+             $whatappconfigupdate_response['status'] = 'success';
+             $whatappconfigupdate_response['error'] = array('instance_id'=>strip_tags(form_error('instance_id')), 'access_token'=>strip_tags(form_error('access_token')));
+        }else{
+             $whatappconfigupdate_response['status'] = 'failure';
+             $whatappconfigupdate_response['error'] = array('instance_id'=>strip_tags(form_error('instance_id')), 'access_token'=>strip_tags(form_error('access_token')));    
+        }
+
+       
+    }
+    echo json_encode($whatappconfigupdate_response);
+    }
+ }
+
+
 }
 
 ?>

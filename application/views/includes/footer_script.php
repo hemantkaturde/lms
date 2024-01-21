@@ -6162,54 +6162,102 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	    });
 
 
-		
-	$(document).on('click','.send_payment_link_add_on_course',function(e){
-			var elemF = $(this);
-			e.preventDefault();
-				swal({
-					title: "Are you sure?",
-					text: "Payment Link !",
-					type: "warning",
-					showCancelButton: true,
-					closeOnClickOutside: false,
-					confirmButtonClass: "btn-sm btn-danger",
-					confirmButtonText: "Yes, send it!",
-					cancelButtonText: "No, cancel plz!",
-					closeOnConfirm: false,
-					closeOnCancel: false
-				}, function(isConfirm) {
-					if (isConfirm) {
-						$(".loader_ajax").show();
+		$(document).on('click','.send_payment_link_add_on_course',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+					swal({
+						title: "Are you sure?",
+						text: "Payment Link !",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, send it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+							$(".loader_ajax").show();
 
-						$(".sweet-alert").css({"z-index":"-99"});
-								$.ajax({
-									url : "<?php echo base_url();?>sendPaymentLinkaddoncourse",
-									type: "POST",
-									//data : 'id='+elemF.attr('data-id')add_on_course_id='+elemF.attr('add-on-data-id'),
-									data : {'id':elemF.attr('data-id'),'add_on_course_id':elemF.attr('add-on-data-id') },
-									success: function(data, textStatus, jqXHR)
-									{
-										//if(data.status=='success'){
-											$(".sweet-alert").css({"z-index":""});
+							$(".sweet-alert").css({"z-index":"-99"});
+									$.ajax({
+										url : "<?php echo base_url();?>sendPaymentLinkaddoncourse",
+										type: "POST",
+										//data : 'id='+elemF.attr('data-id')add_on_course_id='+elemF.attr('add-on-data-id'),
+										data : {'id':elemF.attr('data-id'),'add_on_course_id':elemF.attr('add-on-data-id') },
+										success: function(data, textStatus, jqXHR)
+										{
+											//if(data.status=='success'){
+												$(".sweet-alert").css({"z-index":""});
 
-                                            $(".loader_ajax").hide();
-											swal("Send!", "Link Sent Successfully.", "success");
-											//location.reload();
-										//}
-									},
-									error: function (jqXHR, textStatus, errorThrown)
-									{
-										$(".loader_ajax").hide();
-									}
-							    })
-							}
-							else {
-					               swal("Cancelled", "Link cancelled ", "error");
-					}
-				});
-	});
+												$(".loader_ajax").hide();
+												swal("Send!", "Link Sent Successfully.", "success");
+												//location.reload();
+											//}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+									swal("Cancelled", "Link cancelled ", "error");
+						}
+					});
+		});
 
 	</script>
 <?php }  ?>
 
+
+<?php if($pageTitle=='Settings'){ ?>
+	<script type="text/javascript">
+
+        $(document).on('click','#save_whtapsapp_config',function(e){
+
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#save_whtapsapp_config_tab")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>whatappconfigupdate",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Enquiry Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								// $("#popup_modal_sm").hide();
+								window.location.href = "<?php echo base_url().'settings'?>";
+						//});						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+    </script>
+<?php } ?>
 

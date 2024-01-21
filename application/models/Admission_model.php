@@ -1587,6 +1587,36 @@ function studentcertificateData($params)
     }
 
 
+    public function savewhatsappconfig($id,$data){
+
+            if($id != '') {
+                $this->db->where('id', $id);
+                if($this->db->update(TBL_SETTINGS, $data)){
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            } else {
+                if($this->db->insert(TBL_SETTINGS, $data)) {
+                    return $this->db->insert_id();;
+                } else {
+                    return FALSE;
+                }
+            }
+    }
+
+
+    public function get_whatsappconfig_setting(){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SETTINGS.'.setting_module','whatsapp_credentials');
+        $get_whatsappconfig_setting = $this->db->get(TBL_SETTINGS);
+        $get_whatsappconfig_setting_result = $get_whatsappconfig_setting->row_array();
+        return $get_whatsappconfig_setting_result;
+
+    }
+
+
 }
 
 ?>

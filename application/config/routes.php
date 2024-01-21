@@ -323,6 +323,12 @@ $route['viewaddoncoursepaymentdetails/(:any)'] = "enquiry/viewaddoncoursepayment
 $route['fetchaddoncoursepaymentdetails/(:any)'] = "enquiry/fetchaddoncoursepaymentdetails/$1";
 $route['sendPaymentLinkaddoncourse'] = "enquiry/sendPaymentLinkaddoncourse";
 
+$route['settings'] = "admin/settings";
+$route['whatappconfigupdate'] = "admin/whatappconfigupdate";
+
+
+
+
 
 
 
