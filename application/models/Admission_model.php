@@ -520,7 +520,7 @@ class Admission_model extends CI_Model
         $this->db->select('sum(tbl_course.course_total_fees) as total_pending');
         $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_number');
         $this->db->join(TBL_COURSE, TBL_ADD_ON_COURSE.'.course_id = '.TBL_COURSE.'.courseId');
-        $this->db->where(TBL_ADD_ON_COURSE.'.active_status',1);
+        // $this->db->where(TBL_ADD_ON_COURSE.'.active_status',1);
         $query = $this->db->get(TBL_ADD_ON_COURSE);
         return $query->result_array();
     }
