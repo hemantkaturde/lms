@@ -201,6 +201,15 @@ if($roleText=="Counsellor"){
                                 <div>Daily Admissions Count</div>
                             </div>
                             <div class="d-inline-flex">
+
+                            <div class="px-3" style="border-right: 1px solid rgba(0,0,0,.1);">
+                                    <div class="text-muted">Total Course Fees</div>
+                                    <div>
+                                        <span class="h2 m-0"><?='₹ '. $total_pending?></span>
+                                        <!-- <span class="text-success ml-2"><i class="fa fa-level-up"></i> +25%</span> -->
+                                    </div>
+                                </div>
+
                                 <div class="px-3" style="border-right: 1px solid rgba(0,0,0,.1);">
                                     <div class="text-muted">Total Revenue</div>
                                     <div>
@@ -229,8 +238,23 @@ if($roleText=="Counsellor"){
             <div class="col-lg-4">
                 <div class="ibox">
                     <div class="ibox-head">
+                        <div class="ibox-title">Add On Course Total Revenue</div>
+                    </div>
+
+                    <div class="ibox-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="m-b-20"><i class="fa fa-money m-r-10"></i>Total Course Fees <H3>₹ <?=$total_pending_add_on;?> </H3></div>
+                                <div class="m-b-20"><i class="fa fa-money m-r-10"></i>Total Revenue <H3>₹ <?=$total_revenue_add_on;?> </H3></div>
+                                <div class="m-b-20"><i class="fa fa-money m-r-10"></i>Total Pending Fees <H3>₹ <?=$total_pending_amt_add_on;?> </H3></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox-head">
                         <div class="ibox-title">Statistics</div>
                     </div>
+
                     <div class="ibox-body">
                         <!-- <div class="row align-items-center">
                             <div class="col-md-6">

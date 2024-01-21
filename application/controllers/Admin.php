@@ -58,11 +58,15 @@ class Admin extends BaseController
         $data['students'] = $this->student_model->studentListingCount();
         $data['admissions'] = $this->admission_model->admissionListingCount();
         $data['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
+       
         $data['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
         $data['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
-
         $data['total_pending_amt'] = $data['total_pending'] - $data['total_revenue'];
 
+
+        $data['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+        $data['total_pending_add_on'] = $this->admission_model->total_pending_add_on()[0]['total_pending'];
+        $data['total_pending_amt_add_on'] = $data['total_pending_add_on'] - $data['total_revenue_add_on'];
 
         if($this->session->userdata('roleText') =='Counsellor'){
             $userId = $this->session->userdata('userId');
