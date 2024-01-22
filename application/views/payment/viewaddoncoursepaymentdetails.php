@@ -107,6 +107,7 @@
                                                 <option value="Cheque">Cheque</option>
                                                 <!-- <option value="Cash">Cash</option> -->
                                                 <option value="Fee">Fee</option>
+                                                <option value="Loan">Loan</option>
                                         </select>
                                         <p class="error payment_mode_error"></p>
                                 </div>
