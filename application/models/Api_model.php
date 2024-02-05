@@ -52,6 +52,30 @@ class Api_model extends CI_Model
         }
     }
 
+
+    public function getEnquiryData($data){
+
+        try{
+            //extract($data);
+
+            $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller');
+            // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+            $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+            $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+            $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+            $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
+            $query = $this->db->get(TBL_ENQUIRY);
+            $fetch_result = $query->result_array();
+
+            return  $fetch_result;
+
+        }catch (Exception $e) {
+            return $e->getMessage();
+        }
+
+
+    }
+
 }
 
 ?>
