@@ -167,9 +167,6 @@ class Api_model extends CI_Model
     }
 
 
-
-
-     
      /* Sub Query Add On List*/
     public function getCourseInfo($id){
         $this->db->select('courseId,course_total_fees,course_name');
