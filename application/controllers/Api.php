@@ -14,9 +14,6 @@ class Api extends BaseController
          $this->load->library('form_validation');
     }
 
-    /**
-     * This is Login Function Access by Mobile 
-    */
     public function login(){
         $post_submit = $this->input->post();
         $this->form_validation->set_rules('username', 'User Name', 'trim|required');
@@ -55,6 +52,7 @@ class Api extends BaseController
 		setContentLength($responseData);
     }
 
+    /*user Details*/
     public function getuserdetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -77,6 +75,7 @@ class Api extends BaseController
 		setContentLength($responseData);
     }
 
+    /*Menu List*/
     public function getmenu(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -123,6 +122,7 @@ class Api extends BaseController
 		setContentLength($responseData);
     }
 
+    /*Dashbaord DetailsList*/
     public function getdashboarddetails(){
        $userdetails = validateServiceRequest();
        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -130,7 +130,65 @@ class Api extends BaseController
 
     }
 
+    /*Course List*/
+    public function getcourselist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
 
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $course_data = $this->Api_model->getCourseData($data);
+            if($course_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $course_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+     /*Course List*/
+     public function getcoursetypelist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $courseList_data = $this->Api_model->getCourseTypedata($data);
+            if($courseList_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $courseList_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+    /*Enquiry List*/
     public function getenquirylist(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -143,31 +201,21 @@ class Api extends BaseController
 			$message = 'Validation error';
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
-
-
-
             $equiry_data = $this->Api_model->getEnquiryData($data);
-
-                if($equiry_data){
-
-                    $status = 'Success';
-                    $message = 'Data Found';
-                    $data = $equiry_data;
-                }else{
-
-                    $status = 'Failure';
-                    $message = 'No Data Found';
-                    $data = '';
-                   
-                }
-
-                $responseData = array('status' => $status,'message'=> $message,'data' => $data);
-                setContentLength($responseData);
+            if($equiry_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $equiry_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
         }
 
-     }
-
-
+    }
 
 }
 
