@@ -14,6 +14,7 @@ class Api extends BaseController
          $this->load->library('form_validation');
     }
 
+    /*Login */
     public function login(){
         $post_submit = $this->input->post();
         $this->form_validation->set_rules('username', 'User Name', 'trim|required');
@@ -52,7 +53,7 @@ class Api extends BaseController
 		setContentLength($responseData);
     }
 
-    /*user Details*/
+    /*User Details*/
     public function getuserdetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -216,6 +217,67 @@ class Api extends BaseController
         }
 
     }
+
+    /*Enquiry List*/
+    public function gettaxinvoicelist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $taxinvoice_data = $this->Api_model->getTaxinvoiceData($data);
+            if($taxinvoice_data){
+                $status = 'Success';
+                $message = 'Tax Invoice Data Found';
+                $data = $taxinvoice_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+     /*Admission List*/
+    public function getadmissionlist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $admission_data = $this->Api_model->getAdmissionsdata($data);
+            if($admission_data){
+                $status = 'Success';
+                $message = 'Admission Data Found';
+                $data = $admission_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+
+
 
 }
 
