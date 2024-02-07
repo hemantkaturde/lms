@@ -266,8 +266,8 @@ class Api_model extends CI_Model
         return $data;
     }
 
-
-    public function getAdmissionsdata($params){
+    /*Get Admission List */
+    public function getAdmissionsdata($data){
 
         $this->db->select('*');
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
@@ -345,8 +345,253 @@ class Api_model extends CI_Model
         return $data;
     }
 
+    /*Get Examination List*/
+    public function getExaminationdata($data){
+        $this->db->select('*');
+        $this->db->from('tbl_examination as BaseTbl');
+        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+    
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->order_by('BaseTbl.id', 'DESC');
+        $query = $this->db->get();
+
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 if($value['exam_status']==1){
+                    $exam_status ='Active';
+                 }else{
+                    $exam_status ='In-Active';
+                 }
+
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['exam_title'] = $value['exam_title'];
+                 $data[$counter]['exam_time'] = $value['exam_time'];
+                 $data[$counter]['total_marks'] = $value['total_marks'];
+                 $data[$counter]['exam_status'] = $exam_status;
+                 $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
 
 
+    /*Get Attendance List*/
+    public function getattendancedata($data){
+       
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+        // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');       
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['name'] = $value['name'];
+                 $data[$counter]['mobile_number'] = $value['mobile'];
+                 $data[$counter]['email_address'] = $value['email'];
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['topic'] = $value['topic'];
+                 $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
+                 //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+                 $data[$counter]['timings'] = $value['timings'];
+
+                 if($value['attendance_status']==1){
+                      $attendance_flag= 'Attended';
+                 }
+
+                 $data[$counter]['attendance_flag'] =$attendance_flag;
+
+                $counter++; 
+            }
+        }
+        return $data;
+
+    }
+
+
+    /*Get All Certificate List*/
+    public function getCertificatedata($params)
+    {
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+        $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.question_status', 'checked');
+        $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+            $chekc_student_exam_status =  $this->getexamstatus($value['courseId'],$value['id'],$value['userId']);
+
+                if($chekc_student_exam_status[0]['exam_status']){
+                    $exam_status = 'Completed';
+                }else{
+                    $exam_status = 'Pending';
+                }
+
+                $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
+
+                if($total_marks[0]['totalmarks']){
+                    $total_marks=  $total_marks[0]['totalmarks'];
+                    $ans_sheet_status ='Checked';
+                }else{
+                    $total_marks=0;
+                    $ans_sheet_status ='Checking Pending';
+                }
+
+                if($total_marks >= 90 ){
+
+                    $grade ='A+';
+                    $Grade_point='10';
+                    $Remark ='Pass';
+                    $Quntitave_value='Outstanding';
+
+                }else if($total_marks >= 80 && $total_marks <= 89){
+
+                    $grade ='A';
+                    $Grade_point='9';
+                    $Remark ='Pass';
+                    $Quntitave_value='Excellent';
+
+                } else if($total_marks >= 70 && $total_marks <= 79){
+
+                    $grade ='B+';
+                    $Grade_point='8';
+                    $Remark ='Pass';
+                    $Quntitave_value='Very Good';
+
+                } else if($total_marks >= 60 && $total_marks <= 69){
+
+                    $grade ='B';
+                    $Grade_point='7';
+                    $Remark ='Pass';
+                    $Quntitave_value='Good';
+
+                }
+                else if($total_marks >= 50 && $total_marks <= 59){
+
+                    $grade ='C';
+                    $Grade_point='6';
+                    $Remark ='Pass';
+                    $Quntitave_value='Above Average';
+
+                }
+                else if($total_marks >= 40 && $total_marks <= 49){
+
+                    $grade ='D';
+                    $Grade_point='5';
+                    $Remark ='Pass';
+                    $Quntitave_value='Average';
+
+                }
+
+                else if($total_marks >= 40 && $total_marks <= 44){
+
+                    $grade ='D';
+                    $Grade_point='4';
+                    $Remark ='Pass';
+                    $Quntitave_value='Poor';
+
+                }
+
+                else if($total_marks <= 40){
+
+                    $grade ='D';
+                    $Grade_point='0';
+                    $Remark ='Fail';
+                    $Quntitave_value='Fail';
+
+                }
+
+                $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
+                $data[$counter]['mobile'] = $value['mobile'];
+                $data[$counter]['exam_status'] = $exam_status;
+                $data[$counter]['total_marks'] = $total_marks;
+                $data[$counter]['grade'] = $grade;
+                $data[$counter]['grade_point'] = $Grade_point;
+                $data[$counter]['remark'] = $Remark;
+                $data[$counter]['Quntitave_value'] = $Quntitave_value;
+                $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
+                $data[$counter]['action'] = '';
+
+                if($Quntitave_value=='Fail'){
+
+                    $data[$counter]['action'] .= 'Fail';
+
+                }
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+    /*Get All Student Portal List */
+    public function getStudentportaldata($params)
+    {
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'student');
+        $this->db->order_by(TBL_USER.'.userId', 'DESC');
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $course_id = json_decode($value['book_issued']);
+                
+                // $course_name = array();
+                $course_name ="";
+                foreach ($course_id as $key => $bookissued_value) {
+                    $course_name .= $this->getCoursenamebyid($bookissued_value)[0]['course_name'].',';        
+                }
+
+                $data[$counter]['name']    = $value['name'];
+                $data[$counter]['mobile']  = $value['mobile'];
+                $data[$counter]['email']   = $value['email'];
+                $data[$counter]['book_issued']   =  rtrim($course_name,'\n'); ;
+                $counter++; 
+            }
+        }
+        return $data;
+}
   
 
 
@@ -433,7 +678,30 @@ class Api_model extends CI_Model
     }
 
 
+    public function getexamstatus($courseId,$exam_id,$userId){
+        $this->db->select('*');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $courseId);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+        $fetch_result = $query->result_array();
 
+        return $fetch_result;
+    }
+
+
+    public function gettotalmarks($courseId,$exam_id,$userId){
+        $this->db->select('sum(marks) as totalmarks');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $courseId);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+        $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+        $fetch_result = $query->result_array();
+    
+        return $fetch_result;
+    }
 
 
 }
