@@ -213,7 +213,7 @@
                      $('#fees1').val(data[0].course_fees);  
                      $('#one_time_admission_fees1').val(data[0].course_onetime_adm_fees);  
                      $('#course_type1').val(data[0].course_type_id);  
-                     $('#course_books1').val(data[0].course_books);  
+                     //$('#course_books1').val(data[0].course_books);  
                      $('#description1').val(data[0].course_desc);  
                      $('#certificate_cost1').val(data[0].course_cert_cost);  
                      $('#kit_cost1').val(data[0].course_kit_cost);  
@@ -222,10 +222,12 @@
 
 					 if(data[0].course_books==1){
 						$('.radio_yes1').attr("checked", "checked");
+						//$('.radio_yes1').val(1);
 					 }
 
 					 if(data[0].course_books==0){
 						$('.radio_no1').attr("checked", "checked");	
+						//$('.radio_yes1').val(0);
 					 }
 					 
 					 if(data[0].course_mode_online==1){
