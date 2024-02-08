@@ -68,7 +68,7 @@ $roleText = $this->session->userdata('roleText');
                                     </label>
                                     <div >
                                         <select class="form-control" id="course_name" name="course_name">
-                                            <option value="">Select Certificate Type</option>
+                                            <option value="">Select Course</option>
                                             <?php foreach ($course_List as $key => $value) {?>
                                                <option value="<?php echo $value['courseId']; ?>"><?php echo $value['course_name']; ?></option>
                                             <?php } ?>
@@ -82,7 +82,7 @@ $roleText = $this->session->userdata('roleText');
                                     </label>
                                     <div >
                                         <select class="form-control" id="certificate_topic" name="certificate_topic">
-                                            <option value="">Select Certificate Topic</option>
+                                            <option value="">Select Topic</option>
                                         </select>
                                         <p class="error certificate_topic_error"></p>
                                     </div>
