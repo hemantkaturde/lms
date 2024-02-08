@@ -247,7 +247,8 @@ class Student_model extends CI_Model
 
             
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
-                 $data[$counter]['receipt_no'] = $value['id'];
+                // $data[$counter]['receipt_no'] = $value['id'];
+                 $data[$counter]['receipt_no'] = $value['paymentid'];
                  $data[$counter]['enquiry_no'] = $value['enquiry_number'];
 
                  if($value['razorpay_payment_id']){
