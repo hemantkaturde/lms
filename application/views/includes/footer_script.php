@@ -5328,7 +5328,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					$(".loader_ajax").hide();
 					if(data == "failure")
 					{
-						$('#certificate_topic').html('<option value="">Select Certificate Topic</option>');
+						$('#certificate_topic').html('<option value="">Select Topic</option>');
 					}
 					else
 					{
@@ -5337,7 +5337,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 				{
-					$('#certificate_topic').html('<option value="">Select Certificate Topic</option>');
+					$('#certificate_topic').html('<option value="">Select Topic</option>');
 					//$(".loader_ajax").hide();
 				}
 			});
