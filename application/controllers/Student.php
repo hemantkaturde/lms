@@ -959,7 +959,7 @@
             $states = $this->student_model->getcoursetopic($this->input->post('course_id'));
 
             if(count($states) >= 1) {
-                    $content = '<option value="">Select Certificate Topic</option>';
+                    $content = '<option value="">Select Topic</option>';
                 foreach($states as $state) {
                     $content = $content.'<option value="'.$state["id"].'">'.$state["topic"].'</option>';
                 }
