@@ -1,4 +1,5 @@
 <?php 
+$roleText = $this->session->userdata('roleText');
 $access = $this->session->userdata('access');
 $jsonstringtoArray = json_decode($access, true);
 ?>
@@ -9,9 +10,11 @@ $jsonstringtoArray = json_decode($access, true);
         <div class="ibox">
             <div class="ibox-head">
                 <div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewMeeting">
-                        <i class="fa fa-plus"></i> Add Meeting Link
-                    </button>
+                    <?php if($roleText!='Trainer'){?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewMeeting">
+                            <i class="fa fa-plus"></i> Add Meeting Link
+                        </button>
+                    <?php } ?>
 
                     <button type="button" class="btn btn-primary">
                             <a href="<?php echo base_url().'viewtimetablelisting?time_table_id='.$time_table_id.'&course_id='.$course_id;?>" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
