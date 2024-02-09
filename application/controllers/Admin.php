@@ -68,7 +68,7 @@ class Admin extends BaseController
         $data['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
         $data['total_pending'] = $this->admission_model->total_pending_add_on()[0]['total_pending'];
 
-        $data['total_pending_add_on'] =  $data['total_discount'] - $data['total_pending'];
+        $data['total_pending_add_on'] =  $data['total_pending'] - $data['total_discount'];
 
         $data['total_pending_amt_add_on'] = $data['total_pending_add_on'] - $data['total_revenue_add_on'];
 
