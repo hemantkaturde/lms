@@ -904,6 +904,10 @@ public function getBookscount($topic_id,$course_id){
        
                     $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_class' course_id=".$value['course_id']." time_table_id='".$value['time_table_id']."' data-id='".$value['timetableid']."'><img width='20' src=".ICONPATH."/disable.png alt='Add Links' title='Cancel Topic class'></a>"; 
        
+                }else{
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
+
                 }
 
             }
@@ -963,6 +967,8 @@ public function getBookscount($topic_id,$course_id){
 
   public function gettopicmeetinglinkData($params,$time_table_id,$course_id,$time_table_transection_id){
    
+        $roleText = $this->session->userdata('roleText');
+    
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
@@ -987,7 +993,10 @@ public function getBookscount($topic_id,$course_id){
                 $data[$counter]['timings'] =  $value['timings'];
                 $data[$counter]['link_url'] = '<a href="'.$value['link_url'].'" target="_blank">'.$value['link_url'].'</a>'; ;
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_meeting_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Meeting Link' title='Delete Topic Meeting Link'></a>"; 
+                
+                if($roleText!='Trainer'){
+                   $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_meeting_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Meeting Link' title='Delete Topic Meeting Link'></a>"; 
+                }
                 $counter++; 
             }
         }
