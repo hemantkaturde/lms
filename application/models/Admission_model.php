@@ -528,6 +528,24 @@ class Admission_model extends CI_Model
     }
 
 
+    public function total_discount_add_on(){
+        
+        if($this->session->userdata('roleText') =='Counsellor'){
+            $userId = $this->session->userdata('userId');
+    
+            $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_id');
+            $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userId);
+        }
+
+        $this->db->select('sum(tbl_course.discount	) as total_discount');
+    
+        $this->db->join(TBL_COURSE, TBL_ADD_ON_COURSE.'.course_id = '.TBL_COURSE.'.courseId');
+        // $this->db->where(TBL_ADD_ON_COURSE.'.active_status',1);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->result_array();
+    }
+
+
         
     function getexaminationCount($params)
     {
