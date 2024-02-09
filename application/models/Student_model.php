@@ -520,7 +520,7 @@ class Student_model extends CI_Model
                     // $data[$counter]['courseId'] = $value['courseId'];
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['course_type'] = $value['ct_name'];
-                    $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
+                   // $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
 
                     if($value['course_books']==1){
                         $course_books = 'Books Available';

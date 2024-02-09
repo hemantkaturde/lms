@@ -22,7 +22,7 @@ $jsonstringtoArray = json_decode($access, true);
                             <tr>
                                 <th>Course Name</th>
                                 <th>Certificate Type</th>
-                                <th>Course Fees</th>
+                                <!-- <th>Course Fees</th> -->
                                 <th>Course Mode</th>
                                 <th>Course Books</th>
                                 <th>Book Issued</th>
