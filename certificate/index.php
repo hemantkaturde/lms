@@ -125,7 +125,7 @@ $pdf->SetXY(42,275.6);
 $pdf->Cell(0, 1,  date('Y-m-d H:i:s'), 0, 0, 'L');
 
 $pdf->SetFontSize('10');
-$pdf->SetXY(145,275.6);
+$pdf->SetXY(145,276.5);
 $pdf->Cell(0, 1,  $mobile.'/'.date("y",strtotime("-1 year")).'-'.date("y").'/WEB/MUM', 0, 0, 'L');
 
 

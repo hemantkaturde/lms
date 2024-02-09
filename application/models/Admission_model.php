@@ -850,7 +850,6 @@ public function getquestionPaperListMATCHPAIRInfo($course_id,$examination_id,$st
 } 
 
 
-
 public function gettotalmarks($courseId,$exam_id,$userId){
     $this->db->select('sum(marks) as totalmarks');
     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $courseId);
