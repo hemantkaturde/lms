@@ -3,6 +3,12 @@
 class Api_model extends CI_Model
 {
 
+    public function __construct()
+    {
+         parent::__construct();
+         $this->load->model(array('user_model','enquiry_model','course_model','student_model','admission_model','event'));
+         //$this->load->library('form_validation');
+    }
     /*get Authtoken*/
     public function getAuthtoken($data) {
 		
@@ -591,23 +597,52 @@ class Api_model extends CI_Model
             }
         }
         return $data;
-}
+    }
   
 
+     /*Get All Certificate List*/
+     public function getDashbaorddata($params)
+     {
+
+        $year  = (empty($year) || !is_numeric($year))?  date('Y') :  $year;
+		$month = (is_numeric($month) &&  $month > 0 && $month < 13)? $month : date('m');
+		$day   = (is_numeric($day) &&  $day > 0 && $day < 31)?  $day : date('d');
+		
+		$date      = $this->event->getDateEvent($year, $month);
+		$cur_event = $this->event->getEvent($year, $month, $day);
+	
+        $data_response['calenderclasslist'] = $datacalenderclasslist;
+
+
+        $dataCount['users'] = $this->user_model->userListingCount();
+        $dataCount['courses'] = $this->course_model->courseListingCount();
+        $dataCount['enquries'] = $this->enquiry_model->enquiryListingCount();
+        $dataCount['students'] = $this->student_model->studentListingCount();
+        $dataCount['admissions'] = $this->admission_model->admissionListingCount();
+        $dataCount['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
+        $data_response['dashbaordcount'] = $dataCount;
+
+
+        $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+        $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
+        $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
+        $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+
+
+        $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+        $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
+        $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
+        $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
+        $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
+        $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
 
 
 
+        return $data_response;
 
 
 
-
-
-
-
-
-
-
-
+     }
 
 
     /*=========================================================================================================================*/
@@ -702,8 +737,6 @@ class Api_model extends CI_Model
     
         return $fetch_result;
     }
-
-
 }
 
 ?>
