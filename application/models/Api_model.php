@@ -543,12 +543,17 @@ class Api_model extends CI_Model
                 $data[$counter]['remark'] = $Remark;
                 $data[$counter]['Quntitave_value'] = $Quntitave_value;
                 $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
-                $data[$counter]['action'] = '';
-
+                
                 if($Quntitave_value=='Fail'){
 
                     $data[$counter]['action'] .= 'Fail';
+                }else{
 
+                    $data[$counter]['marksheet_pdf'] = base_url()."marksheet/index.php?student_id=".$value['student_id'];
+                    $data[$counter]['certificate_pdf'] = base_url()."certificate/index.php?student_id=".$value['student_id'];
+
+                    //$data[$counter]['marksheet_pdf'] .= "<a style='cursor: pointer;'  href='marksheet/index.php?student_id=".$value['student_id']."' target='_blank'  class='print_certificate' data-id='".$value['student_id']."'><img width='20' src=".ICONPATH."/marksheet.png alt='Student Marksheet' title='Student Marksheet'></a> "; 
+                    //$data[$counter]['certificate_pdf'] .= "| <a style='cursor: pointer;'  href='certificate/index.php?student_id=".$value['student_id']."' target='_blank'  class='print_certificate' data-id='".$value['student_id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Certificate' title='Print Certificate'></a> "; 
                 }
                 $counter++; 
             }
