@@ -392,7 +392,6 @@ class Api extends BaseController
 
     }
 
-
     /*Dashbaord Details*/
     public function getdashbaorddetails(){
         $userdetails = validateServiceRequest();
@@ -406,11 +405,11 @@ class Api extends BaseController
 			$message = 'Validation error';
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
-            $studentportal_data = $this->Api_model->getDashbaorddata($data);
-            if($studentportal_data){
+            $dashbaord_details_data = $this->Api_model->getDashbaorddata($data);
+            if($dashbaord_details_data){
                 $status = 'Success';
                 $message = 'Dashbaord Portal Data Found';
-                $data = $studentportal_data;
+                $data = $dashbaord_details_data;
             }else{
                 $status = 'Failure';
                 $message = 'No Data Found';
@@ -418,6 +417,36 @@ class Api extends BaseController
             }
             $responseData = array('status' => $status,'message'=> $message,'data' => $data);
         }
+        setContentLength($responseData);
+    }
+
+    /*Staff User List*/
+    public function getstaffuserdetails(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+
+            $staff_details_data = $this->Api_model->getStaffuserdetails($data);
+            if($staff_details_data){
+                $status = 'Success';
+                $message = 'Staff User Detials Found';
+                $data = $staff_details_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+        }
+
         setContentLength($responseData);
     }
 

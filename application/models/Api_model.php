@@ -631,6 +631,38 @@ class Api_model extends CI_Model
      }
 
 
+     /*Get All Staff Details List */
+    public function getStaffuserdetails($params)
+    {
+        $this->db->select('*');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
+        $this->db->where(TBL_USER.'.isDeleted', 0);
+        $this->db->where(TBL_USER.'.user_flag', 'user');
+        $this->db->order_by(TBL_USER.'.userId', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['name']    = $value['name'];
+                 $data[$counter]['email']   = $value['email'];
+                 $data[$counter]['username']  = $value['username'];
+                 $data[$counter]['mobile']  = $value['mobile'];
+                 $data[$counter]['role']    = $value['role'];
+                 $counter++; 
+            }
+        }
+        return $data;
+    }
+  
+
+
+
 
     /*=========================================================================================================================*/
     /* Sub Query Add On List*/
