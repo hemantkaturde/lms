@@ -264,6 +264,7 @@ class Api_model extends CI_Model
                  $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
                  $data[$counter]['payment_mode'] = $value['payment_mode'];
                  $data[$counter]['paymant_type'] = $paymant_type;
+                 $data[$counter]['invoice_url'] = base_url()."tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid'];
                  //$data[$counter]['action'] = '';
                  //$data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> "; 
                 $counter++; 
