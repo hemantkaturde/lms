@@ -451,7 +451,7 @@ class Api extends BaseController
     }
 
 
-     /*Staff User List*/
+     /*Class request Details*/
      public function getclassrequestdetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
