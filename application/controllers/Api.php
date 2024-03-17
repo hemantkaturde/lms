@@ -451,7 +451,38 @@ class Api extends BaseController
     }
 
 
-    
+     /*Staff User List*/
+     public function getclassrequestdetails(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+
+            $view_class_request_details = $this->Api_model->getclassrequestdetails($data);
+            if($view_class_request_details){
+                $status = 'Success';
+                $message = 'Staff User Detials Found';
+                $data = $view_class_request_details;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+        }
+
+        setContentLength($responseData);
+    }
+
+
+
 
 }
 

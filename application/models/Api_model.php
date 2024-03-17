@@ -667,6 +667,67 @@ class Api_model extends CI_Model
     }
   
 
+     /*Get All Staff Details List */
+     public function getclassrequestdetails($params)
+     {
+
+         //$this->db->select('*');
+         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate,'.TBL_NEW_COURSE_REQUEST.'.id as request_id');
+         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
+         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
+
+        // $this->db->join(TBL_NEW_COURSE_REQUEST, TBL_NEW_COURSE_REQUEST.'.time_table_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id');
+    
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_NEW_COURSE_REQUEST.'.student_id');
+        // $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $this->db->where(TBL_NEW_COURSE_REQUEST.'.request_sent_status=',1);        
+        // $this->db->where(TBL_COURSE.'.courseId', $value);
+        $this->db->order_by(TBL_NEW_COURSE_REQUEST.'.id', 'DESC');
+        $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                    $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+                    if($checkattendance){
+                        $attendance_alreday_exits = 'Attended' ;
+                    }else{
+                        $attendance_alreday_exits = 'Not Attended' ;
+                    }
+                    $data[$counter]['name'] = $value['name'];
+                    $data[$counter]['mobile'] = $value['mobile'];
+                    $data[$counter]['title'] = $value['topic'];
+                    $data[$counter]['course_name'] = $value['course_name'];
+                    $data[$counter]['classdate'] = $value['classdate'];
+                    $data[$counter]['classtime'] = $value['classtime'];
+                    $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
+
+                
+                        if($value['admin_approval_status']){
+                            $request_status = $value['admin_approval_status'];
+                        }else{
+                            $request_status ='In Approval Process ..please wait';
+                        }
+                   
+                   
+                    $data[$counter]['request_status'] =  $request_status;
+                    
+                 $counter++; 
+            }
+    //     }
+
+    //      }
+
+   
+        }
+ 
+        return $data;
+
+     }
 
 
 
@@ -772,6 +833,21 @@ class Api_model extends CI_Model
         $fetch_result = $query->result_array();
         return $fetch_result;
     
+    }
+
+
+    public function checkifAttendanceisexits($userId,$courseId,$topicid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_ATTENDANCE.'.course_id', $courseId);
+        $this->db->where(TBL_ATTENDANCE.'.topic_id', $topicid);
+        $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
     }
 }
 
