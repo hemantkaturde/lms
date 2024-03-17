@@ -363,7 +363,7 @@ class Api extends BaseController
 
     }
 
-    /*Certicate List*/
+    /*Student Portal List*/
     public function getstudentportallist(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -393,7 +393,7 @@ class Api extends BaseController
     }
 
 
-    /*Certicate List*/
+    /*Dashbaord Details*/
     public function getdashbaorddetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -417,12 +417,9 @@ class Api extends BaseController
                 $data = '';   
             }
             $responseData = array('status' => $status,'message'=> $message,'data' => $data);
-            setContentLength($responseData);
         }
-
+        setContentLength($responseData);
     }
-
-
 
 }
 

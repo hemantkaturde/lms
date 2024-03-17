@@ -561,14 +561,7 @@ class Api_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId = '.TBL_USER.'.roleId','left');
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_USER.".name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_USER.".username LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%')");
-        }
+      
         $this->db->where(TBL_USER.'.isDeleted', 0);
         $this->db->where(TBL_USER.'.user_flag', 'student');
         $this->db->order_by(TBL_USER.'.userId', 'DESC');
@@ -622,12 +615,10 @@ class Api_model extends CI_Model
         $dataCount['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
         $data_response['dashbaordcount'] = $dataCount;
 
-
         $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
         $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
         $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
         $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
-
 
         $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
         $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
@@ -635,14 +626,10 @@ class Api_model extends CI_Model
         $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
         $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
         $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
-
-
-
         return $data_response;
 
-
-
      }
+
 
 
     /*=========================================================================================================================*/
@@ -736,6 +723,17 @@ class Api_model extends CI_Model
         $fetch_result = $query->result_array();
     
         return $fetch_result;
+    }
+
+    public function getCoursenamebyid($course_id){
+
+        $this->db->select('course_name');
+        $this->db->where(TBL_COURSE.'.courseId', $course_id);
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        $query = $this->db->get(TBL_COURSE);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    
     }
 }
 
