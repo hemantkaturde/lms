@@ -1,3 +1,8 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Brochure</title>
+</head>
 <?php
     include "../db/config.php";
     if (isset($_POST)) {
@@ -19,7 +24,7 @@
                     // echo $pdf_content;
 
                     header("Content-type: application/pdf");
-
+                    header("Content-Disposition: inline; filename=file.pdf");
                     // Open the PDF file
                     readfile($pdf_url);
 
