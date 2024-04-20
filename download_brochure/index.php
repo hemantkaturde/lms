@@ -91,7 +91,8 @@ include "../db/config.php";
             <label for="city">City:</label>
             <input type="text" id="city" name="city" placeholder="Please Enter Mobile Number" required>
 
-            <input type="submit" value="Download Brochure">
+            <input type="submit"  onclick="startDownload()" value="Submit">
+
         </form>
     </div>
 </body>

@@ -11,12 +11,18 @@
                 if ($conn->query($sql) === TRUE) {
                     $pdf_url = 'Non-Doctors-Broucher.pdf';
                     // Fetch the PDF file contents
-                    $pdf_content = file_get_contents($pdf_url);
+                    // $pdf_content = file_get_contents($pdf_url);
                     // Set the appropriate headers for the download
-                    header('Content-Type: application/pdf');
-                    header('Content-Disposition: attachment; filename="Non-Doctors-Broucher.pdf"');
-                    // Output the PDF content
-                    echo $pdf_content;
+                    // header('Content-Type: application/pdf');
+                    // header('Content-Disposition: attachment; filename="Non-Doctors-Broucher.pdf"');
+                    // // Output the PDF content
+                    // echo $pdf_content;
+
+                    header("Content-type: application/pdf");
+
+                    // Open the PDF file
+                    readfile($pdf_url);
+
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
