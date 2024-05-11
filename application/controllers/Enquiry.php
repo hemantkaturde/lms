@@ -217,6 +217,9 @@
                 }
         
                 echo json_encode($createenquiry_response);
+            }else{
+
+                echo 'no formdata -poasted';
             }
 
         }

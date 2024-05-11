@@ -450,9 +450,8 @@ class Api extends BaseController
         setContentLength($responseData);
     }
 
-
-     /*Class request Details*/
-     public function getclassrequestdetails(){
+    /*Class request Details*/
+    public function getclassrequestdetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
@@ -481,6 +480,134 @@ class Api extends BaseController
         setContentLength($responseData);
     }
 
+    /*class for get enquiry sourse*/
+    public function getenquirysourselist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+                $status = 'Success';
+                $message = 'Sourse List Found';
+                $data = array(
+                    "Email" =>"Email",                            
+                    "Friends" =>"Friends",                           
+                    "Google" =>"Google",  
+                    "Facebook" =>"Facebook", 
+                    "Instagram" =>"Instagram", 
+                    "Reference" =>"Reference", 
+                    "Social Media"  =>"Social Media", 
+                    "Direct" =>"Direct",
+                    "Call" =>"Call",
+                    "Chat" =>"Chat",
+                    "Cold calling" =>"Cold calling",
+                    "Ads Campaign" =>"Ads Campaign",
+                    "WhatsApp" =>"WhatsApp",
+                    "Other" =>"Other",
+                );
+
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+        }
+
+        setContentLength($responseData);
+    }
+
+    /*class for get All Course List*/
+    public function getallcourselist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+
+            $view_CourseList = $this->Api_model->getCourseList();
+            if($view_CourseList){
+                $status = 'Success';
+                $message = 'Course List Detials Found';
+                $data = $view_CourseList;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+        }
+
+        setContentLength($responseData);
+
+
+    }
+
+
+    /*class for get All city List*/
+    public function getallcitylist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+
+            $view_cityList = $this->Api_model->getCityList();
+            if($view_cityList){
+                $status = 'Success';
+                $message = 'City List Found';
+                $data = $view_cityList;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+        }
+
+        setContentLength($responseData);
+    }
+
+
+     /*class for get All Counsellor List*/
+    public function counsellerlist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+
+            $getcounsellerlist = $this->Api_model->getcounsellerlist();
+            if($getcounsellerlist){
+                $status = 'Success';
+                $message = 'counseller List Found';
+                $data = $getcounsellerlist;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+        }
+
+        setContentLength($responseData);
+     }
 
 
 
