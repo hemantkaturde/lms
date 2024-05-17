@@ -223,7 +223,7 @@ class Enquiry_model extends CI_Model
         $this->db->from(TBL_ENQUIRY);
         $this->db->where('isDeleted', 0);
         $this->db->where('enq_id =', $enq_id);
-        $this->db->where('enq_mobile', $enq_fullname);
+        $this->db->where('enq_mobile', $mobile_no);
         $query = $this->db->get();
         return $query->result();
     }
