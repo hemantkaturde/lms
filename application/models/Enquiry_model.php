@@ -871,6 +871,16 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
     }
 
 
+   public function getallcourseidbycoursename($course_name){
+        $this->db->select('courseId');
+        $this->db->from(TBL_COURSE);
+        $this->db->where_in('course_name', $course_name);
+        $query = $this->db->get();
+        return $query->result_array();
+   }
+
+
+
 }
 
 ?>

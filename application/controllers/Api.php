@@ -10,7 +10,7 @@ class Api extends BaseController
     public function __construct()
     {
          parent::__construct();
-         $this->load->model(array('Api_model'));
+         $this->load->model(array('Api_model','enquiry_model'));
          $this->load->library('form_validation');
     }
 
@@ -496,20 +496,20 @@ class Api extends BaseController
                 $status = 'Success';
                 $message = 'Sourse List Found';
                 $data = array(
-                    "Email" =>"Email",                            
-                    "Friends" =>"Friends",                           
-                    "Google" =>"Google",  
-                    "Facebook" =>"Facebook", 
-                    "Instagram" =>"Instagram", 
-                    "Reference" =>"Reference", 
-                    "Social Media"  =>"Social Media", 
-                    "Direct" =>"Direct",
-                    "Call" =>"Call",
-                    "Chat" =>"Chat",
-                    "Cold calling" =>"Cold calling",
-                    "Ads Campaign" =>"Ads Campaign",
-                    "WhatsApp" =>"WhatsApp",
-                    "Other" =>"Other",
+                    'Email' =>'Email',                            
+                    'Friends' =>'Friends',                           
+                    'Google' =>'Google',  
+                    'Facebook' =>'Facebook', 
+                    'Instagram' =>'Instagram', 
+                    'Reference' =>'Reference', 
+                    'Social Media'  =>'Social Media', 
+                    'Direct' =>'Direct',
+                    'Call' =>'Call',
+                    'Chat' =>'Chat',
+                    'Cold calling' =>'Cold calling',
+                    'Ads Campaign' =>'Ads Campaign',
+                    'WhatsApp' =>'WhatsApp',
+                    'Other' =>'Other'
                 );
 
             $responseData = array('status' => $status,'message'=> $message,'data' => $data);
@@ -580,7 +580,7 @@ class Api extends BaseController
     }
 
 
-     /*class for get All Counsellor List*/
+    /*class for get All Counsellor List*/
     public function counsellerlist(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -607,7 +607,160 @@ class Api extends BaseController
         }
 
         setContentLength($responseData);
-     }
+    }
+
+
+    /*class for create enquiry*/
+    public function createenquiry(){
+        $post_submit = $this->input->post();
+
+        if(!empty($post_submit)){
+            $createenquiry_response = array();
+        
+            $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
+            $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|numeric|greater_than[0]|exact_length[10]');
+            //$this->form_validation->set_rules('alternate_mobile', 'Alternate Mobile', 'trim');
+            $this->form_validation->set_rules('email', 'Email', 'trim');
+            //$this->form_validation->set_rules('alternamte_email', 'Alternamte Email', 'trim');
+            $this->form_validation->set_rules('qualification', 'Qualification', 'trim|required');
+            //$this->form_validation->set_rules('purpose', 'Purpose', 'trim');
+            $this->form_validation->set_rules('enq_date', 'Enq Date', 'trim|required');
+            //$this->form_validation->set_rules('country', 'Country', 'trim');
+            //$this->form_validation->set_rules('state', 'State', 'trim');
+            $this->form_validation->set_rules('city', 'City', 'trim');
+            $this->form_validation->set_rules('enquiry_type', 'Enquiry Type', 'trim|required');
+            $this->form_validation->set_rules('doctor_non_doctor', 'Doctor Non Doctor', 'trim|required');
+            $this->form_validation->set_rules('counsellor', 'Counsellor', 'trim|required');
+            $this->form_validation->set_rules('inquiry_from', 'Inquiry_from', 'trim|required');
+            //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
+            //$this->form_validation->set_rules('course', 'Course', 'trim|required');
+            
+            $courses_multipal = $this->security->xss_clean($this->input->post('course'));
+            if($courses_multipal){
+               // $courses = implode(',', $courses_multipal);
+
+            //    $this->enquiry_model->getCourseInfo($id);
+
+            //     print_r($courses_multipal);
+            //     exit;
+
+                  $course_name = explode(',', $courses_multipal);
+
+                   $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($course_name);
+
+        
+
+
+                    // $course_ids    =   explode(',', $courses_multipal);
+                    $course_ids    =   $getallcourseidbycoursename ;
+
+                    $total_fees = 0;
+                    $course_name = '';
+                    $i = 1;
+                    $courses='';
+                    foreach($course_ids as $id)
+                    {
+                       $courses .= $id['courseId'] . ','; 
+
+                       $get_course_fees =  $this->enquiry_model->getCourseInfo($id['courseId']);
+                        if($get_course_fees){
+                            
+                            $total_fees += $get_course_fees[0]->course_total_fees;
+                            //$course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> ';  
+                            $i++;   
+                    
+                        }else{
+                    
+                            $total_fees = '';
+                            //$course_name = '';  
+                            $i++;  
+                        }
+                        
+                    }
+
+
+            }else{
+                $courses = '';
+            }
+           
+            if($this->form_validation->run() == FALSE){
+
+                if($this->input->post('course')){
+                    $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
+                }else{
+                    $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
+                }
+             
+            }else{
+
+                if($this->input->post('course')){
+
+                $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry();
+                if($check_enquiry_auto_number){
+                    if($check_enquiry_auto_number[0]->enq_number){
+                        $enq_number =$check_enquiry_auto_number[0]->enq_number +  1;
+                    }else{
+                        $enq_number = 1;
+                    }
+
+                }else{
+                    $enq_number = 1;
+                }
+               
+
+                $data = array(
+                    //'enq_number'=> DATE('Y').DATE('m').DATE('d').DATE('H').DATE('i').DATE('s'),
+                    'enq_number'=> $enq_number,
+                    'enq_fullname' => ucwords($this->input->post('full_name')),
+                    'enq_mobile'=> $this->input->post('mobile_no'),
+                    //'enq_mobile1' => $this->input->post('alternate_mobile'),
+                    'enq_email'=> $this->input->post('email'),
+                    //'enq_email1' => $this->input->post('alternamte_email'),
+                    'enq_qualification' => $this->input->post('qualification'),
+                    //'enq_purpose' => $this->input->post('purpose'),
+                    'enq_date' => date('Y-m-d', strtotime($this->input->post('enq_date'))),
+                    'doctor_non_doctor'=>$this->input->post('doctor_non_doctor'),
+                    //'enq_country'=> $this->input->post('country'),
+                    //'enq_state'=>$this->input->post('state'),
+                    'enq_city'=>$this->input->post('city'),
+                    'total_payment' =>$total_fees,
+                    'final_amount' =>$total_fees,
+                    'enq_source'=>$this->input->post('enquiry_type'),
+                    //'enq_remark' => $this->input->post('remarks'),
+                    'enq_course_id' => $courses,
+                    'counsellor_id' => $this->input->post('counsellor'),
+                );
+
+                /*check If course name is unique*/
+                $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('mobile_no')));
+
+                if($check_uniqe){
+                    $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
+                }else{
+                    $saveEnquirydata = $this->enquiry_model->saveEnquirydata('',$data);
+                    if($saveEnquirydata){
+                        $createenquiry_response['status'] = 'success';
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
+                    }
+                }
+              }else{
+                
+                $createenquiry_response['status'] = 'failure';
+                $createenquiry_response['error'] = array('full_name'=>'', 'mobile_no'=>'', 'alternate_mobile'=>'', 'email'=>'','alternamte_email'=>'','qualification'=>'','purpose'=>'','enq_date'=>'','country'=>'','state'=>'','city'=>'','city'=>'course Required','remarks'=>'','counsellor'=>'','inquiry_from'=>'');
+        
+              }
+            }
+    
+            echo json_encode($createenquiry_response);
+        }else{
+
+            echo 'no formdata -poasted';
+        }
+
+    }
 
 
 
