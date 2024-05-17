@@ -633,7 +633,7 @@ class Api extends BaseController
             $this->form_validation->set_rules('counsellor', 'Counsellor', 'trim|required');
             $this->form_validation->set_rules('inquiry_from', 'Inquiry_from', 'trim|required');
             //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
-            //$this->form_validation->set_rules('course', 'Course', 'trim|required');
+            $this->form_validation->set_rules('course', 'Course', 'trim|required');
             
             $courses_multipal = $this->security->xss_clean($this->input->post('course'));
             if($courses_multipal){
@@ -647,9 +647,6 @@ class Api extends BaseController
                   $course_name = explode(',', $courses_multipal);
 
                    $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($course_name);
-
-        
-
 
                     // $course_ids    =   explode(',', $courses_multipal);
                     $course_ids    =   $getallcourseidbycoursename ;
@@ -685,17 +682,12 @@ class Api extends BaseController
            
             if($this->form_validation->run() == FALSE){
 
-                if($this->input->post('course')){
+                
                     $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['validation_msg'] = 'Record not Submitted';
                     $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
-                }else{
-                    $createenquiry_response['status'] = 'failure';
-                    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
-                }
              
             }else{
-
-                if($this->input->post('course')){
 
                 $check_enquiry_auto_number =  $this->enquiry_model->getautonumberfromEnquiry();
                 if($check_enquiry_auto_number){
@@ -738,20 +730,17 @@ class Api extends BaseController
 
                 if($check_uniqe){
                     $createenquiry_response['status'] = 'failure';
+                    $createenquiry_response['validation_msg'] = 'Mobile Number Already Exists';
                     $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
                 }else{
                     $saveEnquirydata = $this->enquiry_model->saveEnquirydata('',$data);
                     if($saveEnquirydata){
                         $createenquiry_response['status'] = 'success';
-                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'Course Required','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
+                        $createenquiry_response['validation_msg'] = 'Record successfully Submitted';
+                        $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'enquiry_type'=>strip_tags(form_error('enquiry_type')),'course'=>'','remarks'=>strip_tags(form_error('remarks')),'doctor_non_doctor'=>strip_tags(form_error('doctor_non_doctor')),'counsellor'=>strip_tags(form_error('counsellor')),'inquiry_from'=>strip_tags(form_error('inquiry_from')));
                     }
                 }
-              }else{
-                
-                $createenquiry_response['status'] = 'failure';
-                $createenquiry_response['error'] = array('full_name'=>'', 'mobile_no'=>'', 'alternate_mobile'=>'', 'email'=>'','alternamte_email'=>'','qualification'=>'','purpose'=>'','enq_date'=>'','country'=>'','state'=>'','city'=>'','city'=>'course Required','remarks'=>'','counsellor'=>'','inquiry_from'=>'');
-        
-              }
+              
             }
     
             echo json_encode($createenquiry_response);
