@@ -338,12 +338,12 @@ class Api_model extends CI_Model
                  $data[$counter]['name'] = $value['name'];
                  $data[$counter]['email'] = $value['email'];
                 // $data[$counter]['address'] = $value['address'];
-                 $data[$counter]['address'] = $all_course_name;
+                 $data[$counter]['courses'] = $all_course_name;
                 
                  if($value['cancle_status']==1){
-                   $data[$counter]['cancel'] = 'Cancelled';
+                   $data[$counter]['admission_status'] = 'Cancelled';
                  }else{
-                    $data[$counter]['cancel'] = 'Admitted';
+                    $data[$counter]['admission_status'] = 'Admitted';
                  }
 
                 $counter++; 
