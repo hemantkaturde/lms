@@ -1058,9 +1058,10 @@
 
                     //$email_name ='IICTN-Marketing Material '.date('Y-m-d H:i:s');
                     //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
-                    $subject = 'Greetings from IICTN !! '.date('Y-m-d H:i:s');
+                    $subject = ' IICTN Brochures and Syllabus for '.$enq_fullname;
                     
-                    $header = "From: IICTN-Mumbai Marketing Material <admin@iictn.in> \r\n";
+                   // $header = "From: IICTN-Mumbai Marketing Material <admin@iictn.in> \r\n";
+                    $header = "From: IICTN-Admin <admin@iictn.in> \r\n";
                     //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
@@ -1072,6 +1073,8 @@
                         $file_path =' <a href="https://iictn.in/markating_material/Non_Doctors_Brochure.pdf">Non Doctors_Brochure </a>';
                         $wp_url = 'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf';
                      }
+
+                   /// $body = '<div> <p><b>Greetings from IICTN !!</b></p>
 
                     $body = '<div> <p><b>Greetings from IICTN !!</b></p>
                         <p><b>Dear </b> '.$enq_fullname.', </p>
