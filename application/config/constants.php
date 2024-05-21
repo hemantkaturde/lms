@@ -158,7 +158,7 @@ define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','marketing.iictn@gmail.com');	// Your system name
 define('EMAIL_PASSWORD','Iictn@6600%Mumbai');	// Your email password
 define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
-define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
+define('FROM_EMAIL','marketing.iictn@gmail.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');
 define('EMAIL_SECURE','tls');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');
