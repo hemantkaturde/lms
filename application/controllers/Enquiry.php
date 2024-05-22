@@ -1054,7 +1054,7 @@
                     $from = 'admin@iictn.in'; 
                     $fromName = 'IICTN'; 
                     $enq_fullname = $get_equiry_data->enq_fullname;
-                    $email_name ='Admin '.date('Y-m-d H:i:s');
+                    $email_name ='IICTN Admin '.date('Y-m-d H:i:s');
 
                     //$email_name ='IICTN-Marketing Material '.date('Y-m-d H:i:s');
                     //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');

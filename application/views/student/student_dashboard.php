@@ -243,7 +243,7 @@
             <!-- Billing card 3-->
             <div class="card h-100 border-start-lg border-start-success">
                 <div class="card-body">
-				   <div class="h3"><i class="fa fa-inr" aria-hidden="true"></i>  Pending Fees</div>
+				   <div class="h4"><i class="fa fa-inr" aria-hidden="true"></i>  Pending Fees</div>
                     <div class="text-muted"><b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></div>
                 </div>
             </div>
