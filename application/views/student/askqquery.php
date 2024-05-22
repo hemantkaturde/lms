@@ -31,7 +31,7 @@ $roleText = $this->session->userdata('roleText');
                                 <th>Course Name</th>
                                 <th>Topic Name</th>
                                 <th>Query</th>
-                                <th>Action</th>
+                                <th>View Answer</th>
                             </tr>
                         </thead>
                         <tbody>

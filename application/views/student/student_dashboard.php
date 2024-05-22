@@ -218,7 +218,7 @@
             <!-- Billing card 1-->
             <div class="card h-100 border-start-lg border-start-primary">
                 <div class="card-body">
-				    <div class="h4"><i class="fa fa-money" aria-hidden="true"></i> Total Fees</div>
+				    <div class="h4"><i class="fa fa-money" aria-hidden="true"></i> Amount Total</div>
                     <div class="text-muted"><b><?='₹ '.$followDataenquiry[0]->final_amount;?></b></div>
                 </div>
             </div>
@@ -243,7 +243,7 @@
             <!-- Billing card 3-->
             <div class="card h-100 border-start-lg border-start-success">
                 <div class="card-body">
-				   <div class="h4"><i class="fa fa-inr" aria-hidden="true"></i>  Pending Fees</div>
+				   <div class="h4"><i class="fa fa-inr" aria-hidden="true"></i>  Pending Amount By You</div>
                     <div class="text-muted"><b><?='₹ '.$followDataenquiry[0]->final_amount -  $totalpaidAmount;?></b></div>
                 </div>
             </div>

@@ -231,7 +231,7 @@ class Course_model extends CI_Model
                         $data[$counter]['course_fees'] = '₹' .$value['course_total_fees'];
 
                         if($value['course_books']==1){
-                            $course_books = 'Books Available';
+                            $course_books = 'Books Received';
                         }else{
                             $course_books = '';
                         }
