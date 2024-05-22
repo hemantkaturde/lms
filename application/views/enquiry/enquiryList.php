@@ -225,7 +225,7 @@
                    <div class="form-group">
                      <label style="text-align: left;"  for="city">City </label>
                      <div >
-                        <select class="form-control select2_demo_1" name="city" id="cityEnquiry">
+                        <select class="form-control" name="city" id="cityEnquiry">
                             <!-- <option st-id="" value="">Select City</option> -->
                             <?php foreach ($city_List as $key => $value) {?>
                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
