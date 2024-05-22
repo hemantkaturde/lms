@@ -121,7 +121,7 @@ define('DATEANDTIME', Date('Y-m-d H:i:s'));
 
 
 
-define('EMAIL_SMTP_HOST','localhost');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_HOST','smtp.iictn.com');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','false');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
 define('EMAIL_PASSWORD','QY9ZT(!N#.Ro');	// Your email password
