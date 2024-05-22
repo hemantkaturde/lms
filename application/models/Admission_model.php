@@ -474,6 +474,7 @@ class Admission_model extends CI_Model
 
         $this->db->select('sum(totalAmount) as total_revenue');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_number');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_PAYMENT.'.enquiry_number');
         $this->db->where(TBL_PAYMENT.'.payment_status',1);
         $this->db->where(TBL_PAYMENT.'.paymant_type','regular_invoice');
         $query = $this->db->get(TBL_PAYMENT);
@@ -489,6 +490,8 @@ class Admission_model extends CI_Model
 
         $this->db->select('sum(tbl_enquiry.final_amount) as total_pending');
         //$this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_number');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_PAYMENT.'.enquiry_number');
+
         $this->db->where(TBL_ENQUIRY.'.isDeleted',0);
         $query = $this->db->get(TBL_ENQUIRY);
         return $query->result_array();
@@ -504,6 +507,8 @@ class Admission_model extends CI_Model
 
         $this->db->select('sum(totalAmount) as total_revenue');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_number');
+        $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_PAYMENT.'.enquiry_number');
+
         $this->db->where(TBL_PAYMENT.'.payment_status',1);
         $this->db->where(TBL_PAYMENT.'.paymant_type','add_on_course_invoice');
         $query = $this->db->get(TBL_PAYMENT);
