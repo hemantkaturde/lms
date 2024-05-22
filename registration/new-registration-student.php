@@ -19,6 +19,11 @@ $url.= $_SERVER['REQUEST_URI'];
 //$enq_id = substr($url, strrpos($url, '/') + 1);  
 $enq_id  = $_GET['enq'];
 
+$check_counsellor_name = "SELECT * FROM tbl_enquiry where enq_id=".$enq_id;
+$result_check_counsellor = $conn->query($check_counsellor_name);
+$row_counsellor_name = mysqli_fetch_assoc($result_check_counsellor);
+
+
 // print_r($_GET['enq']);
 // exit;
 
@@ -616,11 +621,14 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                                 name="counsellerName">
                                                 <option value="">Select Your Counsellor Name*</option>
                                                 <?php
+
+                                        
+
             
                                             $sql = "SELECT * FROM tbl_users join tbl_roles on tbl_users.roleId=tbl_roles.roleId  where tbl_users.isDeleted='0' and tbl_roles.role='Counsellor'" ;
                                             $result = $conn->query($sql);
                                             while($row = mysqli_fetch_array($result)) { ?>
-                                                <option value="<?php echo $row["userId"];?>"><?php echo $row["name"];?>
+                                                <option value="<?php echo $row["userId"];?>" <?php if($row_counsellor_name['counsellor_id']==$row["userId"]){ echo 'selected';}  ?> ><?php echo $row["name"];?>
                                                 </option>
                                                 <?php
                                             }
