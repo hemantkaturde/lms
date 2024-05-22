@@ -23,49 +23,53 @@ if($roleText=="Counsellor"){
     <div class="page-content fade-in-up">
         <div class="row">
             <div class="col-lg-3 col-md-6">
+            <a class="dashbord-short-link totalcourses" href="<?php echo base_url().'courselisting'?>">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php echo $courses; ?></h2>
                         <div class="m-b-5">COURSES</div><i class="fa fa-book widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> -->
-                        <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalcourses"
-                                    href="<?php echo base_url().'courselisting'?>">Courses Uploaded</a></small></div>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>Courses Uploaded</small></div>
                     </div>
                 </div>
+             </a>
             </div>
             <div class="col-lg-3 col-md-6">
+            <a class="dashbord-short-link totalenquiries" href="<?php echo base_url().'enquirylisting'?>">
                 <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php echo $enquries; ?></h2>
                         <div class="m-b-5">ENQUIRIES</div><i class="fa fa-phone-square widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> -->
-                        <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalenquiries"
-                                    href="<?php echo base_url().'enquirylisting'?>">Total Enquiries</a></small></div>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>Total Enquiries</small></div>
                     </div>
                 </div>
+            </a>    
             </div>
             <div class="col-lg-3 col-md-6">
+              <a class="dashbord-short-link totaladmissions"  href="<?php echo base_url().'admissionListing'?>">
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php echo $admissions; ?></h2>
                         <div class="m-b-5">TOTAL ADMISSIONS</div><i class="fa fa-money widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div> -->
-                        <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totaladmissions"
-                                    href="<?php echo base_url().'admissionListing'?>">Total Admissions</a></small></div>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>Total Admissions</small></div>
 
                     </div>
                 </div>
+              </a>
             </div>
             <div class="col-lg-3 col-md-6" style="display:<?=$display?>">
+            <a class="dashbord-short-link totalusers"  href="<?php echo base_url().'userListing'?>">
                 <div class="ibox bg-danger color-white widget-stat">
                     <div class="ibox-body banner-box">
                         <h2 class="m-b-5 font-strong"><?php echo $users; ?></h2>
                         <div class="m-b-5">USERS</div><i class="fa fa-users widget-stat-icon"></i>
                         <!-- <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div> -->
-                        <div><i class="fa fa-level-up m-r-5"></i><small><a class="dashbord-short-link totalusers"
-                                    href="<?php echo base_url().'userListing'?>">Staff Users</a></small></div>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>Staff Users</small></div>
                     </div>
                 </div>
+            </a>
             </div>
         </div>
         <!-- <div class="row">
