@@ -176,7 +176,9 @@ define('EMAIL_NAME','IICTN');
 // define('EMAIL_NAME','IICTN');
 
 
-define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+//define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+
+define('RAZORPAYKEY','rzp_live_EjGpefgMl9fDxf');
 
 
 
