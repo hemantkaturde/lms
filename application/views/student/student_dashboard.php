@@ -428,7 +428,7 @@
 	<div class="col-md-6 col-sm-6 col-xs-12">
 	    <div class="row">
 		  <div class="col-md-6 col-sm-6 col-xs-12">
-              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Ask a query notification</span></h3>
+              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Reply on your query</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
 						<marquee width="100%" direction="up"  height="210px">
 
