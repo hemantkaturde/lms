@@ -390,7 +390,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <li  class="<?php if($pageUrl =='askqquery' || $pageUrl=="viewqueryanswer" ){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."askqquery"; ?>"><i
                                     class="sidebar-item-icon fa fa-question-circle"></i>
-                                <span class="nav-label">Ask A Query</span>
+                                <span class="nav-label">Ans the query</span>
                             </a>
                         </li>
                         <?php } ?>

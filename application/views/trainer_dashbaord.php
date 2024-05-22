@@ -73,7 +73,7 @@ $roleText = $this->session->userdata('roleText');
                 
 
 		  <div class="col-md-12 col-sm-12 col-xs-12">
-              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Query Of Applicant</span></h3>
+              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Student Query</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 300px;" class="borderr2">
 						<!-- <marquee width="100%" direction="up"  height="210px"> -->
 							

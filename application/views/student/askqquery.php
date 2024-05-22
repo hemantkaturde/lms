@@ -30,8 +30,24 @@ $roleText = $this->session->userdata('roleText');
                             <tr>
                                 <th>Course Name</th>
                                 <th>Topic Name</th>
-                                <th>Query</th>
+
+                                <?php if($roleText=='Student'){ ?>
+                                    <th>Query of applicant</th>
+                                <?php } ?>
+
+
+                                <?php if($roleText=='Trainer'){ ?>
+                                    <th>Query of applicant</th>
+                                <?php } ?>
+
+
+                                <?php if($roleText=='Student'){ ?>
                                 <th>View Answer</th>
+                                <?php } ?>
+
+                                <?php if($roleText=='Trainer'){ ?>
+                                <th>Ans the query</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
