@@ -533,7 +533,7 @@
 
                         //  /* Send Whats App  Start Here */
                         //  $curl = curl_init();
-                          $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$course_name_without;
+                          $text = 'Thank You for your interest in '.$course_name_without;
                           $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
                           //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                           $mobile = '91'.$get_equiry_data->enq_mobile;
@@ -1076,7 +1076,7 @@
 
                    /// $body = '<div> <p><b>Greetings from IICTN !!</b></p>
 
-                    $body = '<div> <p><b>Greetings from IICTN !!</b></p>
+                    $body = '<div>
                         <p><b>Dear </b> '.$enq_fullname.', </p>
                         <p>Thank You for your interest in <b>'.$all_course_name.'.</b></p>
                         <p>We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.</p>
