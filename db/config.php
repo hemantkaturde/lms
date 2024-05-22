@@ -13,7 +13,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
       die("Connection failed: " . $conn->connect_error);
     }
 
-    define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+    define('RAZORPAYKEY','rzp_live_EjGpefgMl9fDxf');
     define('SERVER','http://localhost/lms_2/');
 
 }else{
@@ -30,7 +30,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     }
 
     define('SERVER','https://iictn.in/');
-    define('RAZORPAYKEY','rzp_test_MuaQbngB5NBp7h');
+    define('RAZORPAYKEY','rzp_live_EjGpefgMl9fDxf');
 }
 
 
