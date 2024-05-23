@@ -155,7 +155,7 @@ class Student_model extends CI_Model
     public function getTaxinvoices($params,$userId){
 
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
-        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_id');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
 
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
