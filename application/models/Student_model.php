@@ -2119,7 +2119,7 @@ public function getstudentinformation($student_id){
 public function getstudentcourselist($student_name){
 
     $this->db->select('enq_course_id');
-    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $student_name);
     $query = $this->db->get(TBL_USERS_ENQUIRES);
     $fetch_result_enquiry_courses = $query->result_array();
