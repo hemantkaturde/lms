@@ -21,11 +21,11 @@ $roleText = $this->session->userdata('roleText');
                     </button>
                 </div>
                 <?php if($roleText=='Student'){ ?>
-                  <div class="ibox-title"> Ans the query</div>
+                  <div class="ibox-title"> Ask A query</div>
                 <?php } ?>
 
                 <?php if($roleText=='Trainer'){ ?>
-                    <div class="ibox-title"> Ask A query</div>
+                    <div class="ibox-title">Ans the query</div>
                 <?php } ?>
 
             </div>
