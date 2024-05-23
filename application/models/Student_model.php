@@ -565,7 +565,9 @@ class Student_model extends CI_Model
                     $data[$counter]['course_books'] = $course_books;
                     
 
-                    $data[$counter]['course_issued'] =  rtrim($course_name,',');
+                    //$data[$counter]['course_issued'] =  rtrim($course_name,',');
+
+                    $data[$counter]['course_issued'] =  '';
 
                     $data[$counter]['action'] = '';
 
