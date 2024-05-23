@@ -20,8 +20,14 @@ $roleText = $this->session->userdata('roleText');
                             <a href="<?php echo base_url();?>dashboard" style="color: black !important"><i class="fa fa-arrow-left"></i> Back</a>
                     </button>
                 </div>
+                <?php if($roleText=='Student'){ ?>
+                  <div class="ibox-title"> Ans the query</div>
+                <?php } ?>
 
-                <div class="ibox-title"> Ask A Query</div>
+                <?php if($roleText=='Trainer'){ ?>
+                    <div class="ibox-title"> Ask A query</div>
+                <?php } ?>
+
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive ">
