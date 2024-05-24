@@ -577,6 +577,7 @@ class Admission_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        
         if($params['search']['value'] != "") 
         {
             $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
