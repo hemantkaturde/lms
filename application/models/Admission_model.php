@@ -1071,7 +1071,17 @@ function studentcertificateData($params)
            }else{
             $total_topics =0;
            }
-           $peecentage = $value['count']/$total_topics * 100;
+
+           if($total_topics > 0){
+
+            $peecentage = $value['count']/$total_topics * 100;
+           }else{
+            $peecentage = 0;
+
+           }
+
+
+    
           //$arraydivision['label'] = $value['course_name'];
           //$arraydivision['y'] = $peecentage;
            $arraydivision[] = array('label'=>$value['course_name'],'y'=>$peecentage);
