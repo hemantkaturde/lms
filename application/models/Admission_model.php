@@ -596,7 +596,6 @@ class Admission_model extends CI_Model
         } 
 
 
-
         $this->db->order_by('BaseTbl.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get();
