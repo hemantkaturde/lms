@@ -592,7 +592,7 @@ class Admission_model extends CI_Model
 
         if($roleText=='Trainer'){
             $userId =  $this->session->userdata('userId');
-            $this->db->where('tbl_timetable.trainer_id', $userId);
+            $this->db->where('timetable.trainer_id', $userId);
         } 
 
 
