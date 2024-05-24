@@ -577,6 +577,9 @@ class Admission_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        $this->db->join('tbl_timetable as timetable', 'timetable.course_id = course.courseId');
+        $this->db->join('tbl_users as users', 'users.userId = timetable.trainer_id');
+        
         
         if($params['search']['value'] != "") 
         {
@@ -586,6 +589,14 @@ class Admission_model extends CI_Model
         }
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->where('BaseTbl.exam_status', 1);
+
+        if($roleText=='Trainer'){
+            $userId =  $this->session->userdata('userId');
+            $this->db->where('tbl_timetable.trainer_id', $userId);
+        } 
+
+
+
         $this->db->order_by('BaseTbl.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get();
