@@ -73,7 +73,7 @@ $roleText = $this->session->userdata('roleText');
                 
 
 		  <div class="col-md-12 col-sm-12 col-xs-12">
-              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Student Query</span></h3>
+              <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Student Query, Please Answer</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 300px;" class="borderr2">
 						<!-- <marquee width="100%" direction="up"  height="210px"> -->
 							
@@ -86,8 +86,8 @@ $roleText = $this->session->userdata('roleText');
                                             <div class="ml-30 fs17fwb">
                                                 <p><b>Course : </b><?=$value['course_name']?></p>
                                                 <p><b>Topic  :</b><?=$value['topic_name']?></p>
-                                                <p><b>Query  :</b><?=$value['query']?> - <small> From: <?=$value['name']?> - <?=$value['createdDtm']?> </small></p>
-                                                <p><b>Student Name  :</b><?=$value['name']?> - <?=$value['createdDtm']?></p>
+                                                <p><b>Query  :</b><?=$value['query']?> </p>
+                                                <p><b>Student Name  :</b><?=$value['name']?> - <?=$value['datequery']?></p>
                                             </div>
                                         </a>
                                     </div>
