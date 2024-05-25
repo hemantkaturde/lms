@@ -85,9 +85,9 @@ $roleText = $this->session->userdata('roleText');
                                             </div>
                                             <div class="ml-30 fs17fwb">
                                                 <p><b>Course : </b><?=$value['course_name']?></p>
-                                                <p><b>Topic  :</b><?=$value['topic_name']?></p>
-                                                <p><b>Query  :</b><?=$value['query']?> </p>
-                                                <p><b>Student Name  :</b><?=$value['name']?> - <?=$value['datequery']?></p>
+                                                <p><b>Topic  : </b><?=$value['topic_name']?></p>
+                                                <p><b>Query  : </b><?=$value['query']?> </p>
+                                                <p><b>Student Name  : </b><?=$value['name']?> - <?=$value['datequery']?></p>
                                             </div>
                                         </a>
                                     </div>

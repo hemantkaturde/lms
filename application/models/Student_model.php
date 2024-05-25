@@ -1803,7 +1803,7 @@ public function trinerNoti($userId,$roleText){
              $data[$counter]['topic_name'] = $value['topic'];
              $data[$counter]['name'] = $value['name'];
              $data[$counter]['query'] = $value['query'];
-             $data[$counter]['createdDtm'] = $value['datequery'];
+             $data[$counter]['datequery'] = $value['datequery'];
             $counter++; 
         }
     }
