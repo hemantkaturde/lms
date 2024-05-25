@@ -1276,7 +1276,7 @@ function studentcertificateData($params)
         // $userId =  $this->session->userdata('userId');
         // $roleText = $this->session->userdata('roleText');
 
-        $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+        $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid,'.TBL_ASK_A_QUERY.'.createdDtm');
         $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
         $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
         $this->db->join(TBL_ASK_A_QUERY_ANSWER, TBL_ASK_A_QUERY_ANSWER.'.query_id = '.TBL_ASK_A_QUERY.'.id');
@@ -1299,6 +1299,7 @@ function studentcertificateData($params)
                 $data[$counter]['topic_name'] = $value['topic'];
                 $data[$counter]['name'] = $value['name'];
                 $data[$counter]['query'] = $value['query'];
+                $data[$counter]['createdDtm'] = $value['createdDtm'];
                 $data[$counter]['action'] = '';            
                 $counter++; 
             }

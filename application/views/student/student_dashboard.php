@@ -441,9 +441,9 @@
 										<div class="ml-30 fs17fwb">
 										    <div class="ml-30 fs17fwb">
                                                 <p><b>Course : </b><?=$value['course_name']?></p>
-                                                <p><b>Topic  :</b><?=$value['topic_name']?></p>
-                                                <p><b>Query  :</b><?=$value['query']?> - <?=$value['createdDtm']?> </small></p>
-												<p><b>Ans   :</b><?=$value['query_answer']?></small></p>
+                                                <p><b>Topic  : </b><?=$value['topic_name']?></p>
+                                                <p><b>Query  : </b><?=$value['query']?> - <?=$value['createdDtm']?> </small></p>
+												<p><b>Ans    : </b><?=$value['query_answer']?></small></p>
                                             </div>
 										</div>
 									</a>
