@@ -1994,7 +1994,7 @@ public function getallstudentdataforshowidcard($data){
     // return $fetch_result;
 
     $this->db->select('enq_course_id,'.TBL_USER.'.*');
-    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
     $this->db->where(TBL_USER.'.userId',$user_id);
     $get_enquiry_courses = $this->db->get(TBL_USERS_ENQUIRES);
