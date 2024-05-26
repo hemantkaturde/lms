@@ -1442,7 +1442,7 @@ public function getStudentrecords($student_id){
 
 public function getstudentexaminListationdata($userId){
     $this->db->select('enq_course_id');
-    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
     $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
     $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
