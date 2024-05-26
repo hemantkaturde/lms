@@ -18,7 +18,7 @@
                                 <th>Name</th>
                                 <th>Mobile / Roll Number</th>
                                 <th>E mail</th>
-                                <th>Book Issued</th>
+                                <th>Course Books Issued to Student</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
