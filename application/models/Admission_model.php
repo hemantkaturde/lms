@@ -574,7 +574,7 @@ class Admission_model extends CI_Model
 
     function getexaminationdata($params)
     {
-        $this->db->select('*,tbl_examination.id as exam_id');
+        $this->db->select('*,BaseTbl.id as exam_id');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
         $this->db->join('tbl_timetable_transection', 'tbl_timetable_transection.course_id = course.courseId');
