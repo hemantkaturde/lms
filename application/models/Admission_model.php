@@ -574,7 +574,7 @@ class Admission_model extends CI_Model
 
     function getexaminationdata($params)
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_examination.id as exam_id');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
         $this->db->join('tbl_timetable_transection', 'tbl_timetable_transection.course_id = course.courseId');
@@ -618,7 +618,7 @@ class Admission_model extends CI_Model
                  $data[$counter]['exam_title'] = $value['exam_title'];
                  $data[$counter]['exam_status'] = $status;
                  $data[$counter]['action'] = '';
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."checkanswersheet?course_id=".$value['courseId']."&&exam_id=".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."checkanswersheet?course_id=".$value['courseId']."&&exam_id=".$value['exam_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
                  $counter++; 
             }
         }
