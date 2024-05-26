@@ -155,13 +155,13 @@ define('DATEANDTIME', Date('Y-m-d H:i:s'));
 
 
 define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com
-define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_AUTH','false');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','hemantkaturde123@gmail.com');	// Your system name
 define('EMAIL_PASSWORD','ZFBDr0O6aKIRCmwb');	// Your email password
-define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
+define('EMAIL_SMTP_PORT','25');				    // mail, sendmail, smtp
 define('FROM_EMAIL','hemantkaturde123@gmail.com');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');
-define('EMAIL_SECURE','tls');			// e.g. email@example.com
+define('EMAIL_SECURE','false');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');
 
 
