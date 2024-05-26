@@ -577,7 +577,7 @@ class Admission_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
-        //$this->db->join('tbl_timetable as timetable', 'timetable.course_id = course.courseId');
+        $this->db->join('tbl_timetable', 'tbl_timetable.course_id = course.courseId');
         //$this->db->join('tbl_users as users', 'users.userId = timetable.trainer_id');
         
         
