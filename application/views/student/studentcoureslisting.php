@@ -24,8 +24,8 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Certificate Type</th>
                                 <!-- <th>Course Fees</th> -->
                                 <th>Course Mode</th>
-                                <th>Course Books</th>
-                                <th>Book Issued</th>
+                                <!-- <th>Course Books</th> -->
+                                <th>Book Issued to Student</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
