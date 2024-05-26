@@ -562,7 +562,7 @@ class Student_model extends CI_Model
 
 
                     $data[$counter]['course_mode'] = $course_mode_online.' '.$course_mode_offline;
-                    $data[$counter]['course_books'] = $course_books;
+                    //$data[$counter]['course_books'] = $course_books;
                     
 
                     if($course_name){
