@@ -590,10 +590,10 @@ class Admission_model extends CI_Model
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->where('BaseTbl.exam_status', 1);
 
-        if($roleText=='Trainer'){
-            $userId =  $this->session->userdata('userId');
-            $this->db->where('timetable.trainer_id', $userId);
-        } 
+        // if($roleText=='Trainer'){
+        //     $userId =  $this->session->userdata('userId');
+        //     $this->db->where('timetable.trainer_id', $userId);
+        // } 
 
 
         $this->db->order_by('BaseTbl.id', 'DESC');
