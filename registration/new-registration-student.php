@@ -278,36 +278,25 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
                             $mobile_number = '91'.$mobile;
                             // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC5A51A7429&access_token=64e7462031534";
 
-                            $data_media = [ "number" => $mobile_number, "type" => "text", "message" => $text, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
+                            $data_media = [ "number" => $mobile_number, "msg" => $text, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
 
-                            $jsonData = json_encode($data_media);
-
+                           // $jsonData = json_encode($data_media);
+                            $jsonData = $data_media;
 
                             $curl = curl_init();
-                            curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://wa.intractly.com/api/send',
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_CUSTOMREQUEST => 'POST',
-                            // CURLOPT_POSTFIELDS =>'{
-                            // "number": "917021507157",
-                            // "type": "text",
-                            // "message": "This is text SMS FORM IICTN",
-                            // "instance_id": "64FC5A51A7429",
-                            // "access_token": "64e7462031534"
-                            // }',
-                            CURLOPT_POSTFIELDS =>$jsonData,
-                            CURLOPT_HTTPHEADER => array(
-                                'Content-Type: application/json',
-                                // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                            ),
-                            ));
-            
-                            $response = curl_exec($curl);
+                            $url = "https://app.whatzapi.com/api/send-text.php";
+                  
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+                            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                            //$result = curl_exec($ch);
+
+                            $response = curl_exec($ch);
                             //return $response;
 
 
