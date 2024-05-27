@@ -146,7 +146,7 @@ define('DATEANDTIME', Date('Y-m-d H:i:s'));
 define('EMAIL_SMTP_HOST','mail.iictn.in');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','true');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
-define('EMAIL_PASSWORD','s8^1@e=E#WWn');	// Your email password
+define('EMAIL_PASSWORD','XJOF7{Jk$EcL');	// Your email password
 define('EMAIL_SMTP_PORT','587');				    // mail, sendmail, smtp
 define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');
