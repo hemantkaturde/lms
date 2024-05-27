@@ -1201,9 +1201,10 @@
                         //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                         $mobile = '91'.$get_equiry_data->enq_mobile;
                        
-                        $data = ["number" => $mobile, "type" => "text", "message" => $text, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
-                        $jsonData = json_encode($data);
-                            
+                        $data = ["number" => $mobile, "msg" => $text, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
+                        //$jsonData = json_encode($data);
+                        
+                        $jsonData = $data;
                         $send_wp_sms =  sendwhatsapp($mobile,$jsonData);
 
                     //    if(json_decode($send_wp_sms)->status="success"){
