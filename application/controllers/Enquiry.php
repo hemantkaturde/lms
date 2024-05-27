@@ -1095,8 +1095,8 @@
 
                     //$retval = mail($to,$subject,$htmlContent,$header);
                     $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
-
                     //$retval =  1;
+                    $retval =  1;
                     if($retval){
 
                         /*Welcome Notification on whatsapp*/
@@ -1117,8 +1117,9 @@
                             $media.='';
                         }
         
-                        $data_media = [ "number" => $mobile, "type" => "text", "message" => $media, "instance_id" => INSTANCE_ID, "access_token" => ACCESS_TOKEN];
-                        $jsonData = json_encode($data_media);
+                        $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
+                       // $jsonData = json_encode($data_media);
+                        $jsonData = $data_media;
                         $send_wp_sms_media_text =  sendwhatsapp($mobile,$jsonData);  
 
                          /* End here  Send Whats App */
