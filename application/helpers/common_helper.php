@@ -419,27 +419,27 @@ if(!function_exists(('sendwhatsapp')))
                 // curl_close($curl);  
 
 
-                $number = "918097404125";
-                $msg = "This Test Wp Meg";
-                $ins = "0qYcUO2erwVT7Wp";
-                $api = "3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c";
+                // $number = "918097404125";
+                // $msg = "This Test Wp Meg";
+                // $ins = "0qYcUO2erwVT7Wp";
+                // $api = "3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c";
                 
                 
                 
                     $url = "https://app.whatzapi.com/api/send-text.php";
-                    $data = [
-                        "number" => $number,
-                        "msg" => $msg,
-                        "instance" => $ins,
-                        "apikey" => $api
-                    ];
+                    // $data = [
+                    //     "number" => $number,
+                    //     "msg" => $msg,
+                    //     "instance" => $ins,
+                    //     "apikey" => $api
+                    // ];
                 
                 
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
                     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
