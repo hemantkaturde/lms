@@ -268,9 +268,9 @@ if(!function_exists(('isFieldEmpty')))
 }
 
 
-if(!function_exists(('sendmail111')))
+if(!function_exists(('sendmail')))
 {
-    function sendmail111($to,$subject,$body,$email_name,$attachmentList)
+    function sendmail($to,$subject,$body,$email_name,$attachmentList)
     {
 
             $mail = new PHPMailer(true);
