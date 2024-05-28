@@ -994,7 +994,7 @@ public function getBookscount($topic_id,$course_id){
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['topic_name'] = $value['topic_name'];
-                $data[$counter]['timings'] =  $value['timings'];
+                //$data[$counter]['timings'] =  $value['timings'];
                 $data[$counter]['link_url'] = '<a href="'.$value['link_url'].'" target="_blank">'.$value['link_url'].'</a>'; ;
                 $data[$counter]['action'] = '';
                 
