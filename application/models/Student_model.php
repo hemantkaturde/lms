@@ -1525,14 +1525,14 @@ public function getstudentexaminListationdata($userId){
         }
 
     }
-        if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
-            return $data; 
-        }else{
+        // if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
+        //     return $data; 
+        // }else{
            
-            return array(); 
-        }
+        //     return array(); 
+        // }
 
-           // return $data; 
+            return $data; 
         
     }
 }
