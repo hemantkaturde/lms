@@ -1205,7 +1205,8 @@
                         //$jsonData = json_encode($data);
 
                         $jsonData = $data;
-                        $send_wp_sms =  sendwhatsapp($mobile,$jsonData);
+
+                       $send_wp_sms =  sendwhatsapp($mobile,$jsonData);
 
                     //    if(json_decode($send_wp_sms)->status="success"){
                             $process = 'Enquiry Link Sent';
