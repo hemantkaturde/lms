@@ -277,7 +277,7 @@ if(!function_exists(('sendmail')))
             try {
                 $mail->SMTPDebug = 0;                                      
                 $mail->isSMTP();        
-                $mail->SMTPKeepAlive = true;
+                //$mail->SMTPKeepAlive = true;
                                    
                 $mail->Host       = EMAIL_SMTP_HOST;                   
                 $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
