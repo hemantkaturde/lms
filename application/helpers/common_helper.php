@@ -276,7 +276,9 @@ if(!function_exists(('sendmail')))
             $mail = new PHPMailer(true);
             try {
                 $mail->SMTPDebug = 0;                                      
-                $mail->isSMTP();                                           
+                $mail->isSMTP();        
+                $mail->SMTPKeepAlive = true;
+                                   
                 $mail->Host       = EMAIL_SMTP_HOST;                   
                 $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
                 $mail->Username   = EMAIL_USERNAME;                
@@ -436,13 +438,13 @@ if(!function_exists(('sendwhatsapp')))
                 
                 
                     $ch = curl_init();
-                    //curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-                  //  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                   // curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
                     curl_setopt($ch, CURLOPT_URL, $url);
-                    //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
-                    //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
                     $result = curl_exec($ch);
                     curl_close($ch);
                     echo $result;
