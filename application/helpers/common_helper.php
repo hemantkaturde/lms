@@ -300,7 +300,7 @@ if(!function_exists(('sendmail')))
                 //     return false;
                 // }
 
-                return 1;
+                return true;
                 //echo "Mail has been sent successfully!";
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
