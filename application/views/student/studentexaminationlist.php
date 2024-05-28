@@ -18,7 +18,10 @@
                         <div class="container1">
                             <div class="row">
 
-                            <?php foreach ($getstudentexaminationdata as $key => $value) { ?>
+                            <?php foreach ($getstudentexaminationdata as $key => $value) { 
+                                
+                                if($value['peecentage']==100){
+                                ?>
 
                                 <div class="col-md-6 col-lg-4">
                                     <!-- Copy the content below until next comment -->
@@ -56,7 +59,7 @@
                                     </div>
                                 </div>
 
-                                <?php } ?>
+                                <?php }} ?>
                             </div>
                         </div>
                     </body>
