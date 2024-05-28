@@ -441,8 +441,8 @@ if(!function_exists(('sendwhatsapp')))
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
                     curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
                     $result = curl_exec($ch);
                     curl_close($ch);
                     echo $result;
