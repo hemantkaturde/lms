@@ -52,17 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-
 /*********** COMMAN ROUTES******************/
 $route['getstates'] = "comman/getstates";
 $route['getcities'] = "comman/getcities";
-
 /*********** USER DEFINED ROUTES *******************/
 $route['loginMe'] = 'login/loginMe';
 $route['dashboard'] = 'admin';
 $route['logout'] = 'login/logout';
-
 /*********** ADMIN CONTROLLER ROUTES *******************/
 $route['userListing'] = 'admin/userListing';
 $route['fetchUsers'] = 'admin/fetchUsers';
@@ -71,7 +67,6 @@ $route['updateUser/(:num)'] = 'admin/updateUser/$1';
 $route['deleteUser'] = "admin/deleteUser";
 $route['staffListing'] = 'admin/staffListing';
 $route['fetchStaff'] = 'admin/fetchStaff';
-
 /*********** ROLE CONTROLLER ROUTES *******************/
 $route['roleListing'] = "role/roleListing";
 $route['addRole'] = "role/addRole";
@@ -81,7 +76,6 @@ $route['createRole'] = "role/createRole";
 $route['editRole/(:num)'] = "role/editRole/$1";
 $route['editRolerecord/(:num)'] = "role/editRolerecord/$1";
 $route['deleteRole'] = "role/deleteRole";
-
 /*********** Masters CONTROLLER ROUTES *******************/
 $route['coursetypelisting'] = "course/courseTypeListing";
 $route['fetchcoursetype'] = "course/fetchcoursetype";
@@ -89,7 +83,6 @@ $route['createcoursetype'] = "course/createcoursetype";
 $route['deletecoursetype'] = "course/deletecoursetype";
 $route['get_signle_coursetypeData'] = "course/get_signle_coursetypeData";
 $route['updatcoursetype/(:num)'] = "course/updatcoursetype/$1";
-
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['courselisting'] = "course/courseListing";
 $route['fetchcourse'] = "course/fetchcourse";
@@ -101,12 +94,7 @@ $route['addsyllabus/(:any)'] = "course/addsyllabus/$1";
 $route['fetchallcoursesyllabus/(:any)'] = "course/fetchallcoursesyllabus/$1";
 $route['uploadCoursesayllabus'] = "course/uploadCoursesayllabus";
 $route['deletecourseSyllbus'] = "course/deletecourseSyllbus";
-
-
-
-
 // $route['deleteCourse/(:any)'] = "course/deleteCourse/$1";
-
 $route['addcourseListing/(:num)'] = "course/addcourseListing/$1";
 $route['deleteCourseLink/(:any)'] = "course/deleteCourseLink/$1";
 $route['addchapters/(:any)'] = "course/addchapters/$1";
@@ -133,7 +121,6 @@ $route['delete_topic_meeting_link'] = "course/delete_topic_meeting_link";
 $route['savecoursetopicMeetingLinks'] = "course/savecoursetopicMeetingLinks";
 $route['addbackuptrainer?(:any)'] = "course/addbackuptrainer/$1";
 $route['addbackuptrainerdata'] = "course/addbackuptrainerdata";
-
 /************ EXAMINATION MASTER ***********************/
 $route['examinationlisting'] = "examination/examinationlisting";
 $route['fetchExaminationListing'] = "examination/fetchExaminationListing";
@@ -142,8 +129,6 @@ $route['viewquestionpaper/(:any)'] = "examination/viewquestionpaper/$1";
 $route['updateExamination/(:any)'] = "examination/updateExamination/$1";
 $route['delete_examination'] = "examination/delete_examination";
 $route['uploadquestionpaper'] = "examination/uploadquestionpaper";
-
-
 /*********** COURSE CONTROLLER ROUTES *******************/
 $route['studentListing'] = "student/studentListing";
 $route['deletestudent'] = "student/deleteStudent";
@@ -151,10 +136,6 @@ $route['fetchstudentlist'] = "student/fetchstudentlist";
 $route['editstudent/(:num)'] = "student/editstudent/$1";
 $route['studentbookissued/(:num)'] = "student/studentbookissued/$1";
 $route['update_book_issued'] = "student/update_book_issued";
-
-
-
-
 /*********** ENQUIRY CONTROLLER ROUTES *******************/
 $route['enquirylisting'] = "enquiry/enquirylisting";
 $route['fetchenquiry'] = "enquiry/fetchenquiry";
@@ -179,12 +160,10 @@ $route['updatefollowupdata'] = "enquiry/updatefollowupdata";
 $route['addmanualpayment'] = "enquiry/addmanualpayment";
 $route['deleteEnquiryTransaction'] = "enquiry/deleteEnquirypaymentTransaction";
 $route['get_enquiry_tarnsaction_details/(:any)'] = "enquiry/get_enquiry_tarnsaction_details/$1";
-
 $route['sendManualAdmissionlink'] = "enquiry/sendManualAdmissionlink";
 $route['add_on_courses/(:any)'] = "enquiry/add_on_courses/$1";
 $route['save_add_on_course'] = "enquiry/save_add_on_course";
 $route['activeinactiveaddoncourses'] = "enquiry/activeinactiveaddoncourses";
-
 
 //$route['deleteEnquiry/(:any)'] = "enquiry/deleteEnquiry/$1";
 /*********** ADMISSION CONTROLLER ROUTES *******************/
@@ -196,16 +175,10 @@ $route['editadmission/(:any)'] = "admission/editadmission/$1";
 $route['updateadmission'] = "admission/updateadmission";
 $route['cancleadmission'] = "admission/cancleadmission";
 $route['delete_add_on_course'] = "admission/delete_add_on_course";
-
-
-
-
-
 /*********** Email Setting CONTROLLER ROUTES *******************/
 // Template
 $route['emailtemplateListing'] = "emailSetting/emailtemplateListing";
 $route['deleteTemplate/(:any)'] = "emailSetting/deleteTemplate/$1";
-
 // SMTP
 $route['emailsmtpListing'] = "emailSetting/emailsmtpListing";
 //$route['deleteSmtp/(:any)'] = "emailSetting/deleteSmtp/$1";
@@ -213,32 +186,22 @@ $route['fetchSmtpsetting'] = 'emailSetting/fetchSmtpsetting';
 $route['createemailsmtp'] = 'emailSetting/createemailsmtp';
 $route['deletesmtp'] = 'emailSetting/deletesmtp';
 $route['updateSMTP/(:any)'] = 'emailSetting/updateSMTP/$1';
-
 // Payment 
 $route['payment_details/(:any)'] = 'enquiry/payment_details/$1';
 $route['update_discount'] = 'enquiry/update_discount';
-
 // Tax Invoices
 $route['taxinvoices'] = 'enquiry/taxinvoices';
 $route['fetchTaxinvoices'] = 'enquiry/fetchTaxinvoices';
-
-
 // Student Loging Billing Info
 $route['billinginfo'] = 'student/billinginfo';
 $route['fetchBillinginfo'] = 'student/fetchBillinginfo';
 $route['update_student'] = 'student/update_student';
-
-
 // Student Loging Billing Info
 $route['profilesetting'] = 'admin/profilesetting';
 $route['updateprofile'] = 'admin/updateprofile';
-
-
 //attendance
 $route['attendance'] = 'admin/attendance';
 $route['fetchstudentattendance'] = 'admin/fetchstudentattendance';
-
-
 // Students Enquires and Srudent Listings here 
 $route['studentadmissions'] = 'student/studentadmissions';
 $route['fetchstudentadmissions'] = 'student/fetchstudentadmissions';
@@ -279,8 +242,6 @@ $route['studentcrtificateListing'] = "student/studentcrtificateListing";
 $route['fetchallstudentcertificatesstudentPortal'] = "student/fetchallstudentcertificatesstudentPortal";
 $route['updateevbtrnumber'] = "student/updateevbtrnumber";
 $route['printmarksheet?(:any)'] = "admin/printmarksheet/$1";
-
-
 $route['askqquery'] = "student/askqquery";
 $route['fetchallstudentquerys'] = "student/fetchallstudentquerys";
 $route['addnewquery'] = "student/addnewquery";
@@ -289,22 +250,15 @@ $route['viewqueryanswer/(:any)'] = "student/viewqueryanswer/$1";
 $route['fetchallstudentquerysanswer/(:any)'] = "student/fetchallstudentquerysanswer/$1";
 $route['addqueryanswer'] = "student/addqueryanswer";
 $route['delete_query_answer'] = "student/delete_query_answer";
-
-
 /*  Report Section Start Here */ 
 // $route['studentreport'] = "student/studentreport";
-
 $route['studentreport'] = "student/studentreportexportpdf";
 $route['fetchallstudentreportlist'] = "student/fetchallstudentreportlist";
 $route['fetchallstudentdataforprintidcard'] = "student/fetchallstudentdataforprintidcard";
 $route['studentreportexporttoexel'] = "student/studentreportexporttoexel";
-
 $route['getcoursetopic'] = "student/getcoursetopic";
-
-
 $route['cancletimetableclass'] = "course/cancletimetableclass";
 $route['activstetimetableclass'] = "course/activstetimetableclass";
-
 $route['studentexamrequest'] = "admin/studentexamrequest";
 $route['getstudentcourselist'] = "admin/getstudentcourselist";
 $route['allowstudentexamrequest'] = "admin/allowstudentexamrequest";
@@ -323,9 +277,9 @@ $route['add_addon_discount_payment'] = "enquiry/add_addon_discount_payment";
 $route['viewaddoncoursepaymentdetails/(:any)'] = "enquiry/viewaddoncoursepaymentdetails/$1";
 $route['fetchaddoncoursepaymentdetails/(:any)'] = "enquiry/fetchaddoncoursepaymentdetails/$1";
 $route['sendPaymentLinkaddoncourse'] = "enquiry/sendPaymentLinkaddoncourse";
-
 $route['settings'] = "admin/settings";
 $route['whatappconfigupdate'] = "admin/whatappconfigupdate";
+
 
 
 

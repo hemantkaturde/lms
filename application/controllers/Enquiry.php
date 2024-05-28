@@ -1091,11 +1091,10 @@
                             <p><b>Thanks & Regards<b></p>
                             <p><b>Team IICTN</b></p>
                         </div>'; 
-                    
+        
 
                     //$retval = mail($to,$subject,$htmlContent,$header);
-                    $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
-                    //$retval =  1;
+                    $retval =  sendmail111($to,$subject,$body,$email_name,$attachmentList="");
                     //$retval =  1;
                     if($retval){
 

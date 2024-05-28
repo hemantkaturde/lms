@@ -268,39 +268,41 @@ if(!function_exists(('isFieldEmpty')))
 }
 
 
-if(!function_exists(('sendmail')))
+if(!function_exists(('sendmail111')))
 {
-    function sendmail($to,$subject,$body,$email_name,$attachmentList)
+    function sendmail111($to,$subject,$body,$email_name,$attachmentList)
     {
 
-        //$mail = new PHPMailer(true);
-
+            $mail = new PHPMailer(true);
             try {
-                // $mail->SMTPDebug = 2;                                      
-                // $mail->isSMTP();                                           
-                // $mail->Host       = EMAIL_SMTP_HOST;                   
-                // $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
-                // $mail->Username   = EMAIL_USERNAME;                
-                // $mail->Password   = EMAIL_PASSWORD;                       
-                // $mail->SMTPSecure = EMAIL_SECURE;                             
-                // $mail->Port       = EMAIL_SMTP_PORT; 
+                $mail->SMTPDebug = 1;                                      
+                $mail->isSMTP();                                           
+                $mail->Host       = EMAIL_SMTP_HOST;                   
+                $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+                $mail->Username   = EMAIL_USERNAME;                
+                $mail->Password   = EMAIL_PASSWORD;                       
+                $mail->SMTPSecure = EMAIL_SECURE;                             
+                $mail->Port       = EMAIL_SMTP_PORT; 
             
-                // $mail->setFrom(EMAIL_USERNAME, $email_name);          
-                // $mail->addAddress($to);
-                // //$mail->addAddress('receiver2@gfg.com', 'Name');
+                $mail->setFrom(EMAIL_USERNAME, $email_name);          
+                $mail->addAddress($to);
+                //$mail->addAddress('receiver2@gfg.com', 'Name');
             
-                // $mail->isHTML(true);                                 
-                // $mail->Subject = $subject;
-                // $mail->Body    = $body;
-                // //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-                // //$mail->send();
-                // if($mail->send()){
-                //     return true;
-                // }else{
-                //     return false;
-                // }
+                $mail->isHTML(true);                                 
+                $mail->Subject = $subject;
+                $mail->Body    = $body;
+                //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                //$mail->send();
+                if($mail->send()){
+                    return true;
+                }else{
+                    return false;
+                }
 
-                return true;
+                print_r('fddd');
+                exit;
+
+                //return true;
                 //echo "Mail has been sent successfully!";
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
