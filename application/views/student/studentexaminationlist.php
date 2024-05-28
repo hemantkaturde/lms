@@ -59,11 +59,44 @@
                                     </div>
                                 </div>
 
-                                <?php }else{ ?>
+                                <?php }else{  if($value['special_permission']==1){ ?>
 
-                                    
-                               <?php }
-                            } ?>
+                                    <div class="col-md-6 col-lg-4">
+                                    <!-- Copy the content below until next comment -->
+                                    <div class="card card-custom bg-white border-white border-0">
+
+                                        <!--                                    
+                                        <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);">
+                                        </div> -->
+
+                                        <!-- <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);">
+                                        </div>
+                                        
+                                        <div class="card-custom-avatar">
+                                            <img class="img-fluid" src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="Avatar" />
+                                        </div> -->
+
+                                        <div class="">
+                                            <img class="img-fluid" style=" display: block;margin-left: auto;margin-right: auto;width:50%;" src="<?php echo base_url('assets/img/logos/iictn_lms.png'); ?>" alt="Avatar" />
+                                        </div> 
+
+                                        <div class="card-body" style="overflow-y: auto;text-align: center;">
+                                            <h4 class="card-title"><b>Examination</b></h4>
+                                            <h3> <p class="card-text"> <?=$value['course_name'];?></p></h3>
+                                              </hr>
+                                            <!-- <h4 class="card-title"><b>Examination Title</b></h4>
+                                            <p class="card-text"> <?=$value['exam_title'];?></p> -->
+
+                                            <!-- <h4 class="card-title"><b>Examination Title</b></h4>
+                                            <p class="card-text"> <?=$value['exam_title'];?></p> -->
+                                        </div>
+                                        <div class="card-footer" style="background: inherit; border-color: inherit;text-align: center;">
+                                            <a href="<?php echo base_url().'studentexamination/'.$value['courseId'];?>" class="btn btn-primary">Go to Examination Page</a>
+                                            <!-- <a href="#" class="btn btn-outline-primary">Other option</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } } } ?>
                             </div>
                         </div>
                     </body>

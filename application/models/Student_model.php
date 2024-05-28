@@ -1494,6 +1494,7 @@ public function getstudentexaminListationdata($userId){
 
            $total_links = $this->upcoming_class_links_barchart($userId,$value);
 
+          
 
            if(count($total_links) > 0){
             $total_topics = count($total_links);
@@ -1531,7 +1532,8 @@ public function getstudentexaminListationdata($userId){
             foreach ($fetch_result as $key => $value)
             {  
 
-                    /*check Here Exam is completed or not*/
+                    $getspecailpermision_for_exam = $this->getspecailpermisionforexam($userId,$value['course_id']);
+                     /*check Here Exam is completed or not*/
 
                     $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
 
@@ -1548,6 +1550,7 @@ public function getstudentexaminListationdata($userId){
                     $data[$counter]['exam_time'] = $value['exam_time'];
                     $data[$counter]['status'] = $exam_status;
                     $data[$counter]['peecentage'] = $peecentage;
+                    $data[$counter]['special_permission'] = $getspecailpermision_for_exam[0]['permission'];
                     $data[$counter]['action'] = '';
                    
                 $counter++; 
@@ -1565,6 +1568,20 @@ public function getstudentexaminListationdata($userId){
             return $data; 
         
     }
+}
+
+
+public function getspecailpermisionforexam($userId,$value){
+
+    $this->db->select('permission');
+    $this->db->where(TBL_STUDENT_REQUEST.'.student_id', $userId);
+    $this->db->where(TBL_STUDENT_REQUEST.'.course_id', $value);
+    $this->db->where(TBL_STUDENT_REQUEST.'.status', 1);
+    $query = $this->db->get(TBL_STUDENT_REQUEST);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+
 }
 
 
