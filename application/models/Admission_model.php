@@ -940,7 +940,7 @@ function studentcertificateData($params)
     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.question_status', 'checked');
 
     $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
-    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.course_id');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
     $fetch_result = $query->result_array();
