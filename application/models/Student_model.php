@@ -887,7 +887,7 @@ public function getstudenttopicmeetinglinkData($params,$time_table_id,$course_id
         foreach ($fetch_result as $key => $value)
         {
             $data[$counter]['topic_name'] = $value['topic_name'];
-            $data[$counter]['timings'] =  $value['timings'];
+            // $data[$counter]['timings'] =  $value['timings'];
             $data[$counter]['link_url'] = '<a href="'.$value['link_url'].'" target="_blank">'.$value['link_url'].'</a>'; ;
             $data[$counter]['action'] = '';
             //$data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_topic_meeting_document' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Topic Meeting Link' title='Delete Topic Meeting Link'></a>"; 
