@@ -405,10 +405,10 @@ if(!function_exists(('sendwhatsapp')))
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                     $result = curl_exec($ch);
-                    // curl_close($ch);
+                     curl_close($ch);
                     // echo $result;
 
-                $response = curl_exec($ch);
+                $response = $result;
                 return $response;
                 //curl_close($curl);             
             } catch (Exception $e) {
