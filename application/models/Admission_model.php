@@ -1429,7 +1429,7 @@ function studentcertificateData($params)
         // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
         $this->db->where(TBL_COURSE.'.courseId', $value);
         $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.date', 'DESC');
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
         $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
         $fetch_result = $query->result_array();
        
