@@ -1249,7 +1249,7 @@ function studentcertificateData($params)
     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id',  $userId);
 
     $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
-    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.course_id');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
     $fetch_result = $query->result_array();
@@ -1343,6 +1343,7 @@ function studentcertificateData($params)
             }
 
              $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
+             $data[$counter]['course_name'] = $value['course_name'];
              $data[$counter]['mobile'] = $value['mobile'];
              $data[$counter]['exam_status'] = $exam_status;
              $data[$counter]['total_marks'] = $total_marks;
