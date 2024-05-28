@@ -9,8 +9,11 @@
 			$(".datepicker").datepicker({ 
 				minDate: 0,
 				todayHighlight: true,
-				format: 'dd-mm-yyyy' ,
+				//format: 'dd-mm-yyyy' ,
+				format: 'yyyy-mm-dd' ,
 				//startDate: new Date()
+
+				startDate: new Date()
 			});
 		});
 
@@ -6262,3 +6265,59 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
     </script>
 <?php } ?>
 
+
+
+<?php if($pageTitle=='Edit Timetable Record'){ ?>
+	<script type="text/javascript">
+
+         $(document).on('click','#updatetimetablerecord',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#updatetimetable_from")[0]);
+
+			var course_id_form = $('#course_id_form').val();
+			var time_table_id = $('#time_table_id').val();
+			var time_table_transection_id =  $('#time_table_transection_id').val();
+
+			$.ajax({
+				url : "<?php echo base_url();?>edittimetablerecord",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								$("#popup_modal_md").hide();
+								window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>" +'time_table_id='+time_table_id+'&course_id='+course_id_form;
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+    </script>
+<?php } ?>

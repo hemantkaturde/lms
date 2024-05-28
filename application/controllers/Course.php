@@ -1271,6 +1271,69 @@
             $this->loadViews("course/detailsviewtimetablelisting",$this->global,$data,NULL);
         }
 
+
+
+        public function edittimetablerecord(){
+            $post_submit =  $this->input->post();
+            
+            if($post_submit){
+
+                $edittimetable_response = array();
+
+                $course_id_form = $this->input->post('course_id_form');
+                $time_table_id = $this->input->post('time_table_id');
+                $time_table_transection_id = $this->input->post('time_table_transection_id');
+                $backup_trainer = $this->input->post('backup_trainer');
+
+                $this->form_validation->set_rules('date', 'Date', 'trim|required');
+                $this->form_validation->set_rules('timing', 'Timing', 'trim|required');
+                $this->form_validation->set_rules('topic', 'Topic', 'trim|required');
+                $this->form_validation->set_rules('trainer', 'Trainer', 'trim|required');
+                $this->form_validation->set_rules('backup_trainer', 'Backup Trainer', 'trim');
+
+                if($this->form_validation->run() == FALSE){
+
+                    $edittimetable_response['status'] = 'failure';
+                    $edittimetable_response['error'] = array('backup_trainer'=>strip_tags(form_error('backup_trainer')));
+                }else{
+
+                    $data = array(
+                        'timings'=> trim($this->input->post('timing')),
+                        'topic'=> trim($this->input->post('topic')),
+                        'trainer_id'=> trim($this->input->post('trainer')),
+                        'backup_trainer'=> trim($this->input->post('backup_trainer')),
+                    );
+
+                    $updatetimetablerecord = $this->course_model->savetimetablerecorddata($time_table_transection_id,$data);
+                    if($updatetimetablerecord){
+                        $edittimetable_response['status'] = 'success';
+                        $edittimetable_response['error'] = array('backup_trainer'=>'');
+                    }
+                }
+
+                echo json_encode($edittimetable_response);
+
+            }else{
+                $time_table_transection_id = $this->input->get('id');
+                $time_table_id = $this->input->get('time_table_id');
+                $course_id = $this->input->get('course_id'); 
+                $data['time_table_transection_id'] = $time_table_transection_id;
+                $data['time_table_id'] = $time_table_id;
+                $data['course_id'] = $course_id;
+                $data['getCourseinfo'] = $this->course_model->getCourseInfo($data['course_id']);
+                $data['getTimetableInfo'] = $this->course_model->getTimetableInfo($data['course_id'],$data['time_table_id']);
+                $data['getTopicinfo'] = $this->course_model->getTopicinfo($data['course_id'],$data['time_table_id'],$data['time_table_transection_id']);
+                $data['gettrainerinfo'] = $this->course_model->getbackuptrainerfortopics($data['getTopicinfo'][0]->trainer_id);
+                $data['getAlltrainerinfo'] = $this->course_model->getAllTrainerInfo();
+                $this->global['pageTitle'] = 'Edit Timetable Record';
+                $this->loadViews("course/edittimetablerecord",$this->global,$data,NULL);
+            }
+
+
+        }
+
+
+
         public function fetchTopicTimetableListing(){
 
             $time_table_id = $this->input->get('time_table_id');

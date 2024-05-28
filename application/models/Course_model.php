@@ -898,6 +898,10 @@ public function getBookscount($topic_id,$course_id){
              }else{
 
                 if($roleText!='Trainer'){
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edittimetablerecord?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
+
+
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
             
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbackuptrainer?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/user.png' alt='Add Backup Trainer' title='Add Backup Trainer'></a>  ";
@@ -1026,6 +1030,25 @@ public function getBookscount($topic_id,$course_id){
     $query = $this->db->get();
     return $query->result();
 
+  }
+
+
+  public function savetimetablerecorddata($id,$data){
+
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_TIMETABLE_TRANSECTIONS, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_TIMETABLE_TRANSECTIONS, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    }
   }
 
 

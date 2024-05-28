@@ -126,6 +126,7 @@ $route['deletetopictimetable'] = "course/deletetopictimetable";
 $route['timetablemaster'] = "course/timetablemaster";
 $route['viewtimetablelisting?(:any)'] = "course/viewtimetablelisting/$1";
 $route['fetchTopicTimetableListing?(:any)'] = "course/fetchTopicTimetableListing/$1";
+$route['edittimetablerecord?(:any)'] = "course/edittimetablerecord/$1";
 $route['addtopiclinksforonlineattendant?(:any)'] = "course/addtopiclinksforonlineattendant/$1";
 $route['fetchtopicmeetinglink?(:any)'] = "course/fetchtopicmeetinglink/$1";
 $route['delete_topic_meeting_link'] = "course/delete_topic_meeting_link";
