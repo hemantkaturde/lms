@@ -928,7 +928,6 @@ function studentcertificateData($params)
 
     $this->db->select('*');
     $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_ADD_ON_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_ADD_ON_COURSE.'.course_id','left');
     $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
     $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
 
@@ -941,7 +940,7 @@ function studentcertificateData($params)
     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.question_status', 'checked');
 
     $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
-    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+    $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id',TBL_STUDENT_ANSWER_SHEET.'.course_id');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
     $fetch_result = $query->result_array();
