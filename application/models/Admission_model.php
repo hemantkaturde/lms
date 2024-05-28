@@ -1034,6 +1034,7 @@ function studentcertificateData($params)
             }
 
              $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
+             $data[$counter]['course_name'] = $value['course_name'];
              $data[$counter]['mobile'] = $value['mobile'];
              $data[$counter]['exam_status'] = $exam_status;
              $data[$counter]['total_marks'] = $total_marks;
