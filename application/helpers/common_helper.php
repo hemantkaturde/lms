@@ -394,25 +394,31 @@ if(!function_exists(('sendwhatsapp')))
                 // ),
                 // ));
 
-                    // $url = "https://app.whatzapi.com/api/send-text.php";
+                    $url = "https://app.whatzapi.com/api/send-text.php";
                   
-                    // $ch = curl_init();
-                    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-                    // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
-                    // curl_setopt($ch, CURLOPT_URL, $url);
-                    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    // $result = curl_exec($ch);
-                    //  curl_close($ch);
-                    // echo $result;
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                    $result = curl_exec($ch);
+                     curl_close($ch);
+                    echo $result;
+                    //$test_wp =  'https://app.whatzapi.com/api/send-text.php?number=918097404125&msg=HELL0&apikey=3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c&instance=0qYcUO2erwVT7Wp';
+
+                   // header("Location:https://app.whatzapi.com/api/send-text.php?number=918097404125&msg=HELL0&apikey=3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c&instance=0qYcUO2erwVT7Wp");
+
+                   
+                  //  $page = file_get_contents($test_wp);
+
+                    //print_r($page);
+                 //   exit;
 
 
-                $test_wp =  file_get_contents('https://app.whatzapi.com/api/send-text.php?number=918097404125&msg=Your%20Messages&apikey=3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c&instance=0qYcUO2erwVT7Wp');
-
-                $response = $test_wp;
-                return $response;
+                //return $data;
                 //curl_close($curl);             
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$e}";
