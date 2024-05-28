@@ -1120,7 +1120,7 @@
                         $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
                        // $jsonData = json_encode($data_media);
                         $jsonData = $data_media;
-                        $send_wp_sms_media_text =  sendwhatsapp($mobile,$jsonData);  
+                        //$send_wp_sms_media_text =  sendwhatsapp($mobile,$jsonData);  
 
                          /* End here  Send Whats App */
                         $process = 'Enquiry Link Sent';
