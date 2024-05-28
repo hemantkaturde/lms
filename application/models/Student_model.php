@@ -551,26 +551,39 @@ class Student_model extends CI_Model
 
                     $course_id = json_decode($valueid['book_issued']);
 
-                    // print_r($course_id);
-                    // exit;
-                
-                    // $course_name = array();
-                    $course_name ="";
-                    foreach ($course_id as $key => $bookissued_value) {
-                        $course_name .= $this->getCoursenamebyid($bookissued_value)[0]['course_name'].',';        
+
+                     if($course_id){
+
+                            if (in_array($value['courseId'], $course_id))
+                            {
+                                $course_issued ='Yes';
+                            }
+                            else
+                            {
+                                $course_issued ='No';
+                            }
+                        
+                    }else{
+                        $course_issued ='No';
                     }
+                    
+                    // $course_name = array();
+                    // $course_name ="";
+                    // foreach ($course_id as $key => $bookissued_value) {
+                    //     $course_name .= $this->getCoursenamebyid($bookissued_value)[0]['course_name'].',';        
+                    // }
 
 
                     $data[$counter]['course_mode'] = $course_mode_online.' '.$course_mode_offline;
                     //$data[$counter]['course_books'] = $course_books;
                     
 
-                    if($course_name){
+                    // if($course_name){
                       
-                        $course_issued= 'Books Received';
-                    }else{
-                        $course_issued= '';
-                    }
+                    //     $course_issued= 'Books Received';
+                    // }else{
+                    //     $course_issued= '';
+                    // }
 
                    // $data[$counter]['course_issued'] =  rtrim($course_name,',');
 
