@@ -1116,7 +1116,7 @@ public function getstudentexaminationdata($params,$userId,$course_id){
                     $data[$counter]['action'] = '';
                   
                     if($exam_status_count=='1'){
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
+                       // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."showexamstatus/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/status.png' alt='Show Exam Status' title='Show Exam Status'></a> ";
                     }else{
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."attendexamination/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/exam.png' alt='Start Examination' title='Start Examination'></a> ";
                     }
