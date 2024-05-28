@@ -273,7 +273,7 @@ if(!function_exists(('sendmail')))
     function sendmail($to,$subject,$body,$email_name,$attachmentList)
     {
 
-        $mail = new PHPMailer(true);
+        //$mail = new PHPMailer(true);
 
             try {
                 // $mail->SMTPDebug = 2;                                      
