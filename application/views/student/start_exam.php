@@ -252,8 +252,8 @@ $jsonstringtoArray = json_decode($access, true);
 
 <script>
         
-        var timer2 = "<?=$exam_detail[0]['exam_time'];?>:00";
-        //var timer2 = "2:00";
+        //var timer2 = "<?=$exam_detail[0]['exam_time'];?>:00";
+        var timer2 = "2:00";
         var interval = setInterval(function() {
         var timer = timer2.split(':');
         //by parsing integer, I avoid all extra string processing
