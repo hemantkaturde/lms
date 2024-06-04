@@ -255,8 +255,6 @@ $jsonstringtoArray = json_decode($access, true);
         var timer2 = "<?=$exam_detail[0]['exam_time'];?>:00";
         //var timer2 = "2:00";
         var interval = setInterval(function() {
-
-
         var timer = timer2.split(':');
         //by parsing integer, I avoid all extra string processing
         var minutes = parseInt(timer[0], 10);
@@ -268,7 +266,13 @@ $jsonstringtoArray = json_decode($access, true);
         seconds = (seconds < 10) ? '0' + seconds : seconds;
         //minutes = (minutes < 10) ?  minutes : minutes;
         $('.countdown').html(minutes + ':' + seconds);
-        timer2 = minutes + ':' + seconds;
+           
+              timer2 = minutes + ':' + seconds;
+              if(timer2 > 1){
+                alert('hemsnt');
+              }
+       
+       
         }, 1000);
         // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
