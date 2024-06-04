@@ -750,7 +750,7 @@ public function getBookscount($topic_id,$course_id){
         {
              //$data[$counter]['file_name_original'] = $value['file_name_original'];
              $data[$counter]['doc_type'] = $value['doc_type'];
-             $data[$counter]['file_url'] = "<a  href=".trim($value['file_url'])." target=_blank>".$value['file_url']."</a>";
+             $data[$counter]['file_url'] = "<a  href=".trim($value['file_url']).'#toolbar=0&navpanes=0&scrollbar=0'." target=_blank>".$value['file_url']."</a>";
 
             //  $data[$counter]['video'] ='<iframe width="100" height="100" src="'.trim($value['file_url']).'">
             //     </iframe>';
