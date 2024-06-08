@@ -1072,73 +1072,20 @@
                         // $send_wp_sms_welcomenoti_text =  sendwhatsapp($mobile,$jsonData);
 
                         /* Media Link Whatsaap*/
-                        $media = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name.'.';
-                        $media.=' We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
-                        $media.=' Brochure Link :'.$wp_url;
+                        //  $media = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name.'.';
+                        // $media.=' We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
+                        $Brochure_link =' Brochure Link :'.$wp_url;
 
                         if($all_doc_url_val){
-                            $media.=' Syllabus Link :'.$all_doc_url_val;
+                            $Syllabus =' Syllabus Link :'.$all_doc_url_val;
                         }else{
-                            $media.='';
+                            $Syllabus ='';
                         }
-
-            
-
-                        $curl = curl_init();
-                        
-                        curl_setopt_array($curl, array(
-                          CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nujhH2TLWA?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
-                          CURLOPT_RETURNTRANSFER => true,
-                          CURLOPT_ENCODING => '',
-                          CURLOPT_MAXREDIRS => 10,
-                          CURLOPT_TIMEOUT => 0,
-                          CURLOPT_FOLLOWLOCATION => true,
-                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                          CURLOPT_CUSTOMREQUEST => 'GET',
-                          CURLOPT_POSTFIELDS =>'{
-                            "data": {
-                                "body_variables": [
-                                    "'.$all_doc_url_val.'",
-                                    "http//google.com",
-                                    "http//google.com"
-                                ]
-                            },
-                            "recipients": [
-                                {
-                                    "whatsapp_number": "+917021507157",
-                                    "first_name": "John",
-                                    "last_name": "Doe",
-                                    "attributes": {
-                                        "custom_attribute_1": "Value 1",
-                                        "custom_attribute_2": "Value 2",
-                                        "custom_attribute_3": "Value 3"
-                                    },
-                                    "lists": [
-                                        "Default"
-                                    ],
-                                    "tags": [
-                                        "new lead",
-                                        "notification sent"
-                                    ],
-                                    "replace": false
-                                }
-                            ]
-                        }',
-                          CURLOPT_HTTPHEADER => array(
-                            'Content-Type: application/json',
-                            'Cookie: PHPSESSID=cdnviv7ne4n05g6d740t02aqhq'
-                          ),
-                        ));
-                        
-                        $response = curl_exec($curl);
-                        
-                        curl_close($curl);
-                        echo $response;
-                        
-                    //     $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
-                    //    // $jsonData = json_encode($data_media);
-                    //     $jsonData = $data_media;
-                    //     //$send_wp_sms_media_text =  sendwhatsapp($mobile,$jsonData);  
+                      
+                        //     $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
+                        //    // $jsonData = json_encode($data_media);
+                        //     $jsonData = $data_media;
+                        $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile);  
 
                          /* End here  Send Whats App */
                         $process = 'Enquiry Link Sent';

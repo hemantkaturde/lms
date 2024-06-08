@@ -367,7 +367,7 @@ if(!function_exists(('multi_attach_mail')))
 
 if(!function_exists(('sendwhatsapp')))
 {
-    function sendwhatsapp($mobile,$jsonData)
+    function sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile)
     {
             try {
                 // $curl = curl_init();
@@ -428,7 +428,7 @@ if(!function_exists(('sendwhatsapp')))
                 
                 
                 
-                    $url = "https://app.whatzapi.com/api/send-text.php";
+                    // $url = "https://app.whatzapi.com/api/send-text.php";
                     // $data = [
                     //     "number" => $number,
                     //     "msg" => $msg,
@@ -436,18 +436,70 @@ if(!function_exists(('sendwhatsapp')))
                     //     "apikey" => $api
                     // ];
                 
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    $result = curl_exec($ch);
-                    curl_close($ch);
-                    echo $result;
+                    // $ch = curl_init();
+                    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+                    // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
+                    // curl_setopt($ch, CURLOPT_URL, $url);
+                    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                    // $result = curl_exec($ch);
+                    // curl_close($ch);
+                    // echo $result;
 
+
+                    $curl = curl_init();
+                        
+                    curl_setopt_array($curl, array(
+                      CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nujhH2TLWA?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
+                      CURLOPT_RETURNTRANSFER => true,
+                      CURLOPT_ENCODING => '',
+                      CURLOPT_MAXREDIRS => 10,
+                      CURLOPT_TIMEOUT => 0,
+                      CURLOPT_FOLLOWLOCATION => true,
+                      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                      CURLOPT_CUSTOMREQUEST => 'GET',
+                      CURLOPT_POSTFIELDS =>'{
+                        "data": {
+                            "body_variables": [
+                                "'.$all_course_name.'",
+                                "'.$Brochure_link.'",
+                                "'.$Syllabus.'"
+                            ]
+                        },
+                        "recipients": [
+                            {
+                                "whatsapp_number": "'.$mobile.'",
+                                "first_name": "John",
+                                "last_name": "Doe",
+                                "attributes": {
+                                    "custom_attribute_1": "Value 1",
+                                    "custom_attribute_2": "Value 2",
+                                    "custom_attribute_3": "Value 3"
+                                },
+                                "lists": [
+                                    "Default"
+                                ],
+                                "tags": [
+                                    "new lead",
+                                    "notification sent"
+                                ],
+                                "replace": false
+                            }
+                        ]
+                    }',
+                      CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Cookie: PHPSESSID=cdnviv7ne4n05g6d740t02aqhq'
+                      ),
+                    ));
+                    
+                    $response = curl_exec($curl);
+                    
+                    curl_close($curl);
+                    echo $response;
+                
 
             } catch (Exception $e) {
                 //echo "Message could not be sent. Mailer Error: {$e}";
