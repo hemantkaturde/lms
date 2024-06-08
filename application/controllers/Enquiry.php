@@ -1082,58 +1082,59 @@
                             $media.='';
                         }
 
-                    
+            
 
-                    $curl = curl_init();
-
-                    curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nujhH2TLWA?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'GET',
-                    CURLOPT_POSTFIELDS =>'{
-                        "data": {
-                            "body_variables": [
-                                "'.$all_course_name.'"
-                                "'.$wp_url.'"
+                        $curl = curl_init();
+                        
+                        curl_setopt_array($curl, array(
+                          CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nujhH2TLWA?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
+                          CURLOPT_RETURNTRANSFER => true,
+                          CURLOPT_ENCODING => '',
+                          CURLOPT_MAXREDIRS => 10,
+                          CURLOPT_TIMEOUT => 0,
+                          CURLOPT_FOLLOWLOCATION => true,
+                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                          CURLOPT_CUSTOMREQUEST => 'GET',
+                          CURLOPT_POSTFIELDS =>'{
+                            "data": {
+                                "body_variables": [
+                                    "Test Course",
+                                    "http//google.com",
+                                    "http//google.com"
+                                ]
+                            },
+                            "recipients": [
+                                {
+                                    "whatsapp_number": "+917021507157",
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "attributes": {
+                                        "custom_attribute_1": "Value 1",
+                                        "custom_attribute_2": "Value 2",
+                                        "custom_attribute_3": "Value 3"
+                                    },
+                                    "lists": [
+                                        "Default"
+                                    ],
+                                    "tags": [
+                                        "new lead",
+                                        "notification sent"
+                                    ],
+                                    "replace": false
+                                }
                             ]
-                        },
-                        "recipients": [
-                            {
-                                "whatsapp_number": "'.$mobile.'",
-                                "first_name": "IICTN",
-                                "last_name": "PVT LTD",
-                                "attributes": {
-                                    "custom_attribute_1": "Value 1",
-                                    "custom_attribute_2": "Value 2",
-                                    "custom_attribute_3": "Value 3"
-                                },
-                                "lists": [
-                                    "Default"
-                                ],
-                                "tags": [
-                                    "new lead",
-                                    "notification sent"
-                                ],
-                                "replace": false
-                            }
-                        ]
-                    }',
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type: application/json',
-                        'Cookie: PHPSESSID=cdnviv7ne4n05g6d740t02aqhq'
-                    ),
-                    ));
-
-                    $response = curl_exec($curl);
-
-                    curl_close($curl);
-                    echo $response;
-        
+                        }',
+                          CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/json',
+                            'Cookie: PHPSESSID=cdnviv7ne4n05g6d740t02aqhq'
+                          ),
+                        ));
+                        
+                        $response = curl_exec($curl);
+                        
+                        curl_close($curl);
+                        echo $response;
+                        
                     //     $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
                     //    // $jsonData = json_encode($data_media);
                     //     $jsonData = $data_media;
