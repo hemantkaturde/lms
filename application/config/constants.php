@@ -121,15 +121,26 @@ define('DATEANDTIME', Date('Y-m-d H:i:s'));
 	
 
 
-define('EMAIL_SMTP_HOST','mail.iictn.in');		// your smtp host e.g. smtp.gmail.com
+define('EMAIL_SMTP_HOST','smtpout.secureserver.net');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_SMTP_AUTH','false');		// your smtp host e.g. smtp.gmail.com
 define('EMAIL_USERNAME','admin@iictn.in');	// Your system name
-define('EMAIL_PASSWORD','PaeZplGn6G.A');	// Your email password
-define('EMAIL_SMTP_PORT','25');				    // mail, sendmail, smtp
+define('EMAIL_PASSWORD','iictn@123');	// Your email password
+define('EMAIL_SMTP_PORT','465');				    // mail, sendmail, smtp
 define('FROM_EMAIL','admin@iictn.in');		// e.g. email@example.com
 define('FROM_EMAIL_NAME','IICTN-Payment');
 define('EMAIL_SECURE','false');			// e.g. email@example.com
 define('EMAIL_NAME','IICTN');
+
+
+// define('EMAIL_SMTP_HOST','mail.iictn.in');		
+// define('EMAIL_SMTP_AUTH','false');		
+// define('EMAIL_USERNAME','admin@iictn.in');
+// define('EMAIL_PASSWORD','PaeZplGn6G.A');	
+// define('EMAIL_SMTP_PORT','25');				  
+// define('FROM_EMAIL','admin@iictn.in');
+// define('FROM_EMAIL_NAME','IICTN-Payment');
+// define('EMAIL_SECURE','false');
+// define('EMAIL_NAME','IICTN');
 
 
 // define('EMAIL_SMTP_HOST','smtp-relay.brevo.com');		// your smtp host e.g. smtp.gmail.com

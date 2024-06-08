@@ -18,6 +18,7 @@ $jsonstringtoArray = json_decode($access, true);
                 <div class="ibox-title">Question Paper Management ( <B>Course Name :</B><?=$exam_detail[0]['course_name'];?> )</div>
                 <div style="margin-left: 400px;">Timer (mins): </div>
                 <h1 id="countdown" class="countdown"></h1>
+                <!-- <div id="countdown"></div> -->
 
             </div>
             <div class="ibox-body">
@@ -238,42 +239,81 @@ $jsonstringtoArray = json_decode($access, true);
     </script>
 
     <script type="text/javascript">
-
         $("input[type='radio']").change(function() {
         // Your code for any radio button change event
                 var elemF = $(this);
                 var val = elemF.attr('id');
                 var data_id = elemF.attr('data-id');
-
                 $("#options_answers_"+data_id).val(val);
         })
        
     </script>
 
+
 <script>
-        
+// Set the initial countdown time (in seconds)
+let countdownTime = 30600;
+let extended = false;
+
+// Function to start the countdown timer
+function startCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.innerHTML = countdownTime;
+
+    const countdownInterval = setInterval(() => {
+        countdownTime--;
+
+        if (countdownTime <= 0) {
+            clearInterval(countdownInterval);
+
+            if (!extended) {
+                extendTime();
+            } else {
+                alert("Countdown finished.");
+            }
+            return;
+        }
+
+        countdownElement.innerHTML = countdownTime;
+    }, 1000);
+}
+
+// Function to prompt the user to extend time
+function extendTime() {
+    const extend = confirm("Time's up! Do you want to extend the time?");
+    
+    if (extend) {
+        // Add extra time (e.g., 10 seconds) and restart the countdown
+        countdownTime = 10; // Reset to the extension time
+        extended = true; // Set the flag to true to indicate extension has been used
+        startCountdown();
+    } else {
+        alert("Countdown stopped.");
+    }
+}
+
+// Start the countdown when the page loads
+startCountdown();
+
+
+
+
         //var timer2 = "<?=$exam_detail[0]['exam_time'];?>:00";
-        var timer2 = "2:00";
-        var interval = setInterval(function() {
-        var timer = timer2.split(':');
-        //by parsing integer, I avoid all extra string processing
-        var minutes = parseInt(timer[0], 10);
-        var seconds = parseInt(timer[1], 10);
-        --seconds;
-        minutes = (seconds < 0) ? --minutes : minutes;
-        if (minutes < 0) clearInterval(interval);
-        seconds = (seconds < 0) ? 59 : seconds;
-        seconds = (seconds < 10) ? '0' + seconds : seconds;
-        //minutes = (minutes < 10) ?  minutes : minutes;
-        $('.countdown').html(minutes + ':' + seconds);
-           
-              timer2 = minutes + ':' + seconds;
-              if(timer2 > 1){
-                alert('hemsnt');
-              }
-       
-       
-        }, 1000);
+        // var timer2 = "2:00";
+        // var interval = setInterval(function() {
+        // var timer = timer2.split(':');
+        // //by parsing integer, I avoid all extra string processing
+        // var minutes = parseInt(timer[0], 10);
+        // var seconds = parseInt(timer[1], 10);
+        // --seconds;
+        // minutes = (seconds < 0) ? --minutes : minutes;
+        // if (minutes < 0) clearInterval(interval);
+        // seconds = (seconds < 0) ? 59 : seconds;
+        // seconds = (seconds < 10) ? '0' + seconds : seconds;
+        // //minutes = (minutes < 10) ?  minutes : minutes;
+        // $('.countdown').html(minutes + ':' + seconds);
+        //       timer2 = minutes + ':' + seconds;
+        // }, 1000);
         // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     </script>
@@ -285,3 +325,4 @@ $jsonstringtoArray = json_decode($access, true);
         e.preventDefault();
         }, false);
     </script>
+    

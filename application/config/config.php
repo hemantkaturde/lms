@@ -31,7 +31,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     define('TH_DB_HOST','localhost');
     define('TH_DB_USER','root');
     define('TH_DB_PASSWORD','');
-    define('TH_DB_DBNAME','lms');
+    define('TH_DB_DBNAME','iictn');
 
 }else{
     $base  = "https://".$_SERVER['HTTP_HOST'];
