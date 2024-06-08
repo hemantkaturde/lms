@@ -371,23 +371,24 @@ if(!function_exists(('sendwhatsapp')))
     {
             try {
                  if($whatsaptype=='markating_material'){ 
+
                     $curl = curl_init();
 
                     curl_setopt_array($curl, array(
-                      CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nujhH2TLWA?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
-                      CURLOPT_RETURNTRANSFER => true,
-                      CURLOPT_ENCODING => '',
-                      CURLOPT_MAXREDIRS => 10,
-                      CURLOPT_TIMEOUT => 0,
-                      CURLOPT_FOLLOWLOCATION => true,
-                      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                      CURLOPT_CUSTOMREQUEST => 'GET',
-                      CURLOPT_POSTFIELDS =>'{
+                    CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/hWsHNm4UAH?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS =>'{
                         "data": {
                             "body_variables": [
-                                "Value 1",
-                                "Value 2",
-                                "Value 3"
+                                "'.$all_course_name.'",
+                                "'.$Brochure_link.'",
+                                "'.$Syllabus.'"
                             ]
                         },
                         "recipients": [
@@ -411,15 +412,16 @@ if(!function_exists(('sendwhatsapp')))
                             }
                         ]
                     }',
-                      CURLOPT_HTTPHEADER => array(
+                    CURLOPT_HTTPHEADER => array(
                         'Content-Type: application/json',
                         'Cookie: PHPSESSID=cdnviv7ne4n05g6d740t02aqhq'
-                      ),
+                    ),
                     ));
-                    
+
                     $response = curl_exec($curl);
+
                     curl_close($curl);
-                    echo $response;
+                    echo $response;  
                 }
 
             } catch (Exception $e) {
