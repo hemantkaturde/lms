@@ -1098,7 +1098,7 @@
                           CURLOPT_POSTFIELDS =>'{
                             "data": {
                                 "body_variables": [
-                                    "Test Course",
+                                    "'.all_doc_url_val.'",
                                     "http//google.com",
                                     "http//google.com"
                                 ]
