@@ -1060,8 +1060,8 @@
         
 
                     //$retval = mail($to,$subject,$htmlContent,$header);
-                    // $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
-                    $retval =  1;
+                    $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
+                    //$retval =  1;
                     if($retval){
 
                         /*Welcome Notification on whatsapp*/
