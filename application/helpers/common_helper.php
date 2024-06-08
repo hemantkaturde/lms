@@ -367,90 +367,12 @@ if(!function_exists(('multi_attach_mail')))
 
 if(!function_exists(('sendwhatsapp')))
 {
-    function sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile)
+    function sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile,$whatsaptype)
     {
             try {
-                // $curl = curl_init();
-                // curl_setopt_array($curl, array(
-                // CURLOPT_URL => 'https://app.whatzapi.com/api/send-text.php',
-                // CURLOPT_RETURNTRANSFER => true,
-                // CURLOPT_ENCODING => '',
-                // CURLOPT_MAXREDIRS => 10,
-                // CURLOPT_TIMEOUT => 0,
-                // CURLOPT_FOLLOWLOCATION => true,
-                // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                // CURLOPT_CUSTOMREQUEST => 'POST',
-                // CURLOPT_POSTFIELDS =>'{
-                // "number": "917021507157",
-                // "type": "text",
-                // "message": "This is text SMS FORM IICTN",
-                // "instance_id": "64FC5A51A7429",
-                // "access_token": "64e7462031534"
-                // }',
-
-                    // CURLOPT_POSTFIELDS =>http_build_query($jsonData),
-                    // CURLOPT_HTTPHEADER => array(
-                    //     'Content-Type: application/x-www-form-urlencoded',
-                    //     // 'Cookie: stackpost_session=om27q29u0j0sb3mf95gfk93v50fj6h1n'
-                    // ),
-                    // ));
-
-                    // $url = "https://app.whatzapi.com/api/send-text.php";
-                  
-                    // $ch = curl_init();
-                    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-                    // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
-                    // curl_setopt($ch, CURLOPT_URL, $url);
-                    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    // $result = curl_exec($ch);
-                    // curl_close($ch);
-                    // return $result;
-                    //$test_wp =  'https://app.whatzapi.com/api/send-text.php?number=918097404125&msg=HELL0&apikey=3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c&instance=0qYcUO2erwVT7Wp';
-
-                   // header("Location:https://app.whatzapi.com/api/send-text.php?number=918097404125&msg=HELL0&apikey=3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c&instance=0qYcUO2erwVT7Wp");
-
-                   // $page = file_get_contents($test_wp);
-                   // print_r($page);
-                   // exit;
-
-
-                // //return $data;
-                // curl_close($curl);  
-
-
-                // $number = "918097404125";
-                // $msg = "This Test Wp Meg";
-                // $ins = "0qYcUO2erwVT7Wp";
-                // $api = "3e4e9f746799bd08b6d912c8ee99ec0a0900ea0c";
-                
-                
-                
-                    // $url = "https://app.whatzapi.com/api/send-text.php";
-                    // $data = [
-                    //     "number" => $number,
-                    //     "msg" => $msg,
-                    //     "instance" => $ins,
-                    //     "apikey" => $api
-                    // ];
-                
-                    // $ch = curl_init();
-                    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-                    // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
-                    // curl_setopt($ch, CURLOPT_URL, $url);
-                    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                    // $result = curl_exec($ch);
-                    // curl_close($ch);
-                    // echo $result;
-
-
+                 if($whatsaptype=='markating_material'){ 
                     $curl = curl_init();
-                        
+
                     curl_setopt_array($curl, array(
                       CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nujhH2TLWA?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
                       CURLOPT_RETURNTRANSFER => true,
@@ -463,9 +385,9 @@ if(!function_exists(('sendwhatsapp')))
                       CURLOPT_POSTFIELDS =>'{
                         "data": {
                             "body_variables": [
-                                "'.$all_course_name.'",
-                                "'.$Brochure_link.'",
-                                "'.$Syllabus.'"
+                                "Value 1",
+                                "Value 2",
+                                "Value 3"
                             ]
                         },
                         "recipients": [
@@ -496,10 +418,9 @@ if(!function_exists(('sendwhatsapp')))
                     ));
                     
                     $response = curl_exec($curl);
-                    
                     curl_close($curl);
                     echo $response;
-                
+                }
 
             } catch (Exception $e) {
                 //echo "Message could not be sent. Mailer Error: {$e}";

@@ -1060,7 +1060,7 @@
         
 
                     //$retval = mail($to,$subject,$htmlContent,$header);
-                    //$retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
+                   // $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
                     $retval =  1;
                     if($retval){
 
@@ -1081,11 +1081,13 @@
                         }else{
                             $Syllabus ='';
                         }
+
+                        $whatsaptype = 'markating_material';
                       
                         //     $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
                         //    // $jsonData = json_encode($data_media);
                         //     $jsonData = $data_media;
-                        $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile);  
+                        $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile,$whatsaptype);  
 
                          /* End here  Send Whats App */
                         $process = 'Enquiry Link Sent';
