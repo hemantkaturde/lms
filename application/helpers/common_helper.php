@@ -342,11 +342,24 @@ if(!function_exists(('sendmail')))
                 // Attach an image file 
                 // $mail->addAttachment('images/phpmailer_mini.png'); 
                 // send the message, check for errors
-                if (!$mail->send()) {
-                    echo "Mailer Error: " . $mail->ErrorInfo;
-                } else {
-                    echo "Message sent!";
-                } 
+                // if (!$mail->send()) {
+                //     echo "Mailer Error: " . $mail->ErrorInfo;
+                // } else {
+                //     echo "Message sent!";
+                // } 
+
+                 if($mail->send()){
+                     return true;
+                 }else{
+                     return false;
+                 }
+
+
+                // if (!$mail->send()) {
+                //     echo "Mailer Error: " . $mail->ErrorInfo;
+                // } else {
+                //     echo "Message sent!";
+                // } 
 
 
             } catch (Exception $e) {
