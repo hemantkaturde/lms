@@ -275,33 +275,80 @@ if(!function_exists(('sendmail')))
 
            $mail = new PHPMailer(true);
             try {
-                $mail->SMTPDebug = 0;                                      
-                $mail->isSMTP();        
-                //$mail->SMTPKeepAlive = true;
+                // $mail->SMTPDebug = 2;                                      
+                // $mail->isSMTP();        
+                // //$mail->SMTPKeepAlive = true;
                                    
-                $mail->Host       = EMAIL_SMTP_HOST;                   
-                $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
-                $mail->Username   = EMAIL_USERNAME;                
-                $mail->Password   = EMAIL_PASSWORD;                       
-                $mail->SMTPSecure = EMAIL_SECURE;                             
-                $mail->Port       = EMAIL_SMTP_PORT; 
+                // $mail->Host       = EMAIL_SMTP_HOST;                   
+                // $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
+                // $mail->Username   = EMAIL_USERNAME;                
+                // $mail->Password   = EMAIL_PASSWORD;                       
+                // $mail->SMTPSecure = EMAIL_SECURE;                             
+                // $mail->Port       = EMAIL_SMTP_PORT; 
             
-                $mail->setFrom(EMAIL_USERNAME, $email_name);          
-                $mail->addAddress($to);
-                //$mail->addAddress('receiver2@gfg.com', 'Name');
+                // $mail->setFrom(EMAIL_USERNAME, $email_name);          
+                // $mail->addAddress($to);
+                // //$mail->addAddress('receiver2@gfg.com', 'Name');
             
-                $mail->isHTML(true);                                 
-                $mail->Subject = $subject;
-                $mail->Body    = $body;
-                //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-                //$mail->send();
-                if($mail->send()){
-                    return true;
-                }else{
-                    return false;
-                }
+                // $mail->isHTML(true);                                 
+                // $mail->Subject = $subject;
+                // $mail->Body    = $body;
+                // //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                // $mail->send();
+
+                // if($mail->send()){
+                //     return true;
+                // }else{
+                //     return false;
+                // }
                 //return true;
                 //echo "Mail has been sent successfully!";
+
+
+                $mail = new PHPMailer();
+                //Tell PHPMailer to use SMTP
+                $mail->isSMTP();
+                //Enable SMTP debugging
+                // 0 = off (for production use)
+                // 1 = client messages
+                // 2 = client and server messages
+                $mail->SMTPDebug = 2;
+                $mail->DKIM_domain = "127.0.0.1";
+                //Ask for HTML-friendly debug output
+                $mail->Debugoutput = "html";
+                //Set the hostname of the mail server
+                $mail->Host = "smtpout.secureserver.net"; 
+                // Set the SMTP port number - likely to be 25, 465 or 587
+                $mail->Port = 465; 
+                // Whether to use SMTP authentication
+                $mail->SMTPAuth = true; 
+                // Username to use for SMTP authentication
+                $mail->Username = "admin@iictn.in"; 
+                // Password to use for SMTP authentication 
+                $mail->Password = "iictn@123";
+                $mail->SMTPSecure = "ssl"; //Set who the message is to be sent from 
+                $mail->setFrom('admin@iictn.in', 'First Last'); //Set an alternative reply-to address
+                // $mail->addReplyTo('replyto@example.com', 'First Last');
+                // Set who the message is to be sent to
+                $mail->addAddress($to, " ");
+                // Set the subject line
+                $mail->Subject = $subject; 
+                // Read an HTML message body from an external file, convert referenced images to embedded, 
+                // convert HTML into a basic plain-text alternative body 
+                // $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+                $mail->Body =$body;
+                // Replace the plain text body with one created manually 
+                // $mail->AltBody = 'This is a plain-text message body'; 
+                // Attach an image file 
+                // $mail->addAttachment('images/phpmailer_mini.png'); 
+                // send the message, check for errors
+                if (!$mail->send()) {
+                    echo "Mailer Error: " . $mail->ErrorInfo;
+                } else {
+                    echo "Message sent!";
+                } 
+
+
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
