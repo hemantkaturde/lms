@@ -526,22 +526,24 @@
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
                         
-                        //$retval = mail($to,$Subject,$Body,$header);
-                        $retval =  sendmail($to,$Subject,$Body,$email_name,$attachmentList="");
+                        $retval = mail($to,$subject,$body,$header);
+                        //$retval =  sendmail($to,$Subject,$Body,$email_name,$attachmentList="");
+                        $retval=1;
                     if($retval){
 
-
-                        //  /* Send Whats App  Start Here */
-                        //  $curl = curl_init();
                         $text = 'Thank You for your interest in '.$course_name_without;
                         $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
                           //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                        $mobile = '91'.$get_equiry_data->enq_mobile;
+                        $mobile = '+91'.$get_equiry_data->enq_mobile;
 
-                         $data_media = [ "number" => $mobile, "msg" => $text, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
-                        // $jsonData = json_encode($data_media);
-                         $jsonData = $data_media;
-                         $send_wp_sms_media_text =  sendwhatsapp($mobile,$jsonData);  
+                        $whatsaptype = 'payment_link';
+
+                        $url = ' https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
+                      
+                        $Brochure_link ='';
+                        $Syllabus ='';
+
+                        $send_wp_sms_media_text =  sendwhatsapp($course_name_without,$Brochure_link,$Syllabus,$url,$mobile,$whatsaptype); 
                         
 
                         $process = 'Enquiry Link Sent';
@@ -894,12 +896,9 @@
     }
 
 
-        public function addmanualpayment(){
-
+    public function addmanualpayment(){
             $post_submit = $this->input->post();
-
             if($post_submit){
-
                 $add_manaulpayment_response = array();
 
                 $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
@@ -970,7 +969,7 @@
                     
             }
 
-        }
+    }
    
     public function sendBrochureLink(){
         $post_submit = $this->input->post();
@@ -1058,14 +1057,14 @@
                             <p><b>Team IICTN</b></p>
                         </div>'; 
         
-
                     //$retval = mail($to,$subject,$htmlContent,$header);
-                    $retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
+                    //$retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
 
-                    print_r($retval);
-                    print_r($retval.'ddd');
-                    exit;
-
+                    $headers = 'MIME-Version: 1.0' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                    // Additional headers
+                    $headers .= 'From: admin@iictn.in' . "\r\n";
+                    $retval = mail($to,$subject,$body,$header);
 
                     //$retval =  1;
                     if($retval){
@@ -1080,20 +1079,18 @@
                         /* Media Link Whatsaap*/
                         //  $media = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name.'.';
                         // $media.=' We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
-                        $Brochure_link =' Brochure Link :'.$wp_url;
+                        $Brochure_link =' :'.$wp_url;
 
                         if($all_doc_url_val){
-                            $Syllabus =' Syllabus Link :'.$all_doc_url_val;
+                            $Syllabus =' :'.$all_doc_url_val;
                         }else{
                             $Syllabus ='';
                         }
 
                         $whatsaptype = 'markating_material';
-                      
-                        //     $data_media = [ "number" => $mobile, "msg" => $media, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
-                        //    // $jsonData = json_encode($data_media);
-                        //     $jsonData = $data_media;
-                        $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile,$whatsaptype);  
+                        $url ='';
+                     
+                        $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$url,$mobile,$whatsaptype);  
 
                          /* End here  Send Whats App */
                         $process = 'Enquiry Link Sent';
@@ -1198,7 +1195,6 @@
 
     }
 
-
     public function add_on_courses($id){
 
         $process = 'Add On courses Details';
@@ -1240,7 +1236,6 @@
             echo json_encode($saveaddoncourse_response);
         }
     }
-
 
     public function activeinactiveaddoncourses(){
         $post_submit = $this->input->post();
@@ -1402,10 +1397,6 @@
         $this->loadViews("payment/viewaddoncoursepaymentdetails", $this->global, $data , NULL);
 
     }
-
-
-
-
 
     public function fetchaddoncoursepaymentdetails($id){
 

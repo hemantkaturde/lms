@@ -305,62 +305,86 @@ if(!function_exists(('sendmail')))
                 //echo "Mail has been sent successfully!";
 
 
-                $mail = new PHPMailer();
-                //Tell PHPMailer to use SMTP
-                $mail->isSMTP();
-                //Enable SMTP debugging
-                // 0 = off (for production use)
-                // 1 = client messages
-                // 2 = client and server messages
-                $mail->SMTPDebug = 2;
-                $mail->DKIM_domain = "127.0.0.1";
-                //Ask for HTML-friendly debug output
-                $mail->Debugoutput = "html";
-                //Set the hostname of the mail server
-                $mail->Host = "smtpout.secureserver.net"; 
-                // Set the SMTP port number - likely to be 25, 465 or 587
-                $mail->Port = 465; 
-                // Whether to use SMTP authentication
-                $mail->SMTPAuth = true; 
-                // Username to use for SMTP authentication
-                $mail->Username = "admin@iictn.in"; 
-                // Password to use for SMTP authentication 
-                $mail->Password = "iictn@123";
-                $mail->SMTPSecure = "ssl"; //Set who the message is to be sent from 
-                $mail->setFrom('admin@iictn.in', 'First Last'); //Set an alternative reply-to address
-                // $mail->addReplyTo('replyto@example.com', 'First Last');
-                // Set who the message is to be sent to
-                $mail->addAddress($to, " ");
-                // Set the subject line
-                $mail->Subject = $subject; 
-                // Read an HTML message body from an external file, convert referenced images to embedded, 
-                // convert HTML into a basic plain-text alternative body 
-                // $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
-                $mail->Body =$body;
-                // Replace the plain text body with one created manually 
-                // $mail->AltBody = 'This is a plain-text message body'; 
-                // Attach an image file 
-                // $mail->addAttachment('images/phpmailer_mini.png'); 
-                // send the message, check for errors
+                // $mail = new PHPMailer();
+                // //Tell PHPMailer to use SMTP
+                // $mail->isSMTP();
+                // //Enable SMTP debugging
+                // // 0 = off (for production use)
+                // // 1 = client messages
+                // // 2 = client and server messages
+                // $mail->SMTPDebug = 2;
+                // $mail->DKIM_domain = "127.0.0.1";
+                // //Ask for HTML-friendly debug output
+                // // $mail->Debugoutput = "html";
+                // //Set the hostname of the mail server
+                // $mail->Host = "smtp.gmail.com"; 
+                // // Set the SMTP port number - likely to be 25, 465 or 587
+                // $mail->Port = 587; 
+                // // Whether to use SMTP authentication
+                // $mail->SMTPAuth = true; 
+                // // Username to use for SMTP authentication
+                // $mail->Username = "hemantk@aeondigital.in"; 
+                // // Password to use for SMTP authentication 
+                // $mail->Password = "hemant@001";
+                // $mail->SMTPSecure = "ssl"; //Set who the message is to be sent from 
+                // $mail->setFrom('hemantk@aeondigital.in', 'IICTN'); //Set an alternative reply-to address
+                // // $mail->addReplyTo('replyto@example.com', 'First Last');
+                // // Set who the message is to be sent to
+                // $mail->addAddress($to, "HEMR");
+                // // Set the subject line
+                // $mail->isHTML(true);              
+                // $mail->Subject = $subject; 
+                // // Read an HTML message body from an external file, convert referenced images to embedded, 
+                // // convert HTML into a basic plain-text alternative body 
+                // // $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+                // $mail->Body =$body;
+                // // Replace the plain text body with one created manually 
+                // // $mail->AltBody = 'This is a plain-text message body'; 
+                // // Attach an image file 
+                // // $mail->addAttachment('images/phpmailer_mini.png'); 
+                // // send the message, check for errors
+                // // if (!$mail->send()) {
+                // //     echo "Mailer Error: " . $mail->ErrorInfo;
+                // // } else {
+                // //     echo "Message sent!";
+                // // } 
+
+                //  if($mail->send()){
+                //      return true;
+                //  }else{
+                //      return false;
+                //  }
+
+
                 // if (!$mail->send()) {
                 //     echo "Mailer Error: " . $mail->ErrorInfo;
                 // } else {
                 //     echo "Message sent!";
                 // } 
 
-                 if($mail->send()){
-                     return true;
-                 }else{
-                     return false;
-                 }
 
+                // $mail->SMTPDebug = 0;                      // Enable verbose debug output
+                // $mail->isSMTP();                           // Set mailer to use SMTP
+                // $mail->Host       = 'smtp.gmail.com';      // Specify main and backup SMTP servers
+                // $mail->SMTPAuth   = true;                  // Enable SMTP authentication
+                // $mail->Username   = 'hemantk@aeondigital.in'; // Your Google Workspace email address
+                // $mail->Password   = 'hemant@001';       // Your Google Workspace email password
+                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption, `PHPMailer::ENCRYPTION_SMTPS` for SSL
+                // $mail->Port       = 587;                   // TCP port to connect to
+            
+                // //Recipients
+                // $mail->setFrom('hemantk@aeondigital.in', 'Your Name');
+                // $mail->addAddress('hemantkaturde123@gmail.com', 'Recipient Name');  // Add a recipient
+            
+                // // Content
+                // $mail->isHTML(true);                        // Set email format to HTML
+                // $mail->Subject = 'Here is the subject';
+                // $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            
+                // $mail->send();
 
-                // if (!$mail->send()) {
-                //     echo "Mailer Error: " . $mail->ErrorInfo;
-                // } else {
-                //     echo "Message sent!";
-                // } 
-
+                return true;
 
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -427,7 +451,7 @@ if(!function_exists(('multi_attach_mail')))
 
 if(!function_exists(('sendwhatsapp')))
 {
-    function sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$mobile,$whatsaptype)
+    function sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$url,$mobile,$whatsaptype)
     {
             try {
                  if($whatsaptype=='markating_material'){ 
@@ -482,7 +506,58 @@ if(!function_exists(('sendwhatsapp')))
 
                     curl_close($curl);
                     echo $response;  
-                }
+                 }
+
+                 if($whatsaptype=='payment_link'){ 
+                    $curl = curl_init();
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/nX1kZg3h3H?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS =>'{
+                        "data": {
+                            "body_variables": [
+                                "'.$all_course_name.'",
+                                "'.$url.'"
+                            ]
+                        },
+                        "recipients": [
+                            {
+                                "whatsapp_number": "'.$mobile.'",
+                                "first_name": "John",
+                                "last_name": "Doe",
+                                "attributes": {
+                                    "custom_attribute_1": "Value 1",
+                                    "custom_attribute_2": "Value 2",
+                                    "custom_attribute_3": "Value 3"
+                                },
+                                "lists": [
+                                    "Default"
+                                ],
+                                "tags": [
+                                    "new lead",
+                                    "notification sent"
+                                ],
+                                "replace": false
+                            }
+                        ]
+                    }',
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Cookie: PHPSESSID=tdsrj23llm8jvqlsc81bocgvoh'
+                    ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+                    echo $response;
+                 }
 
             } catch (Exception $e) {
                 //echo "Message could not be sent. Mailer Error: {$e}";
