@@ -9,6 +9,9 @@ $jsonstringtoArray = json_decode($access, true);
   margin-right: auto;
 }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"> -->
+
 
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
@@ -250,55 +253,77 @@ $jsonstringtoArray = json_decode($access, true);
     </script>
 
 
-<script>
-// Set the initial countdown time (in seconds)
-let countdownTime = 30600;
-let extended = false;
+    <script>
+            // Set the initial countdown time in minutes
+        let countdownTime = 1;
 
-// Function to start the countdown timer
-function startCountdown() {
-    const countdownElement = document.getElementById('countdown');
-    countdownElement.innerHTML = countdownTime;
+        // Convert the countdown time to seconds
+        let timeInSeconds = countdownTime * 60;
 
-    const countdownInterval = setInterval(() => {
-        countdownTime--;
-
-        if (countdownTime <= 0) {
-            clearInterval(countdownInterval);
-
-            if (!extended) {
-                extendTime();
-            } else {
-                alert("Countdown finished.");
-            }
-            return;
+        // Function to update the timer display
+        function updateTimerDisplay(minutes, seconds) {
+            const timerElement = document.getElementById('countdown');
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
-        countdownElement.innerHTML = countdownTime;
-    }, 1000);
-}
+        // Function to handle the countdown
+        function startCountdown(duration, callback) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(() => {
+                minutes = Math.floor(timer / 60);
+                seconds = timer % 60;
 
-// Function to prompt the user to extend time
-function extendTime() {
-    const extend = confirm("Time's up! Do you want to extend the time?");
-    
-    if (extend) {
-        // Add extra time (e.g., 10 seconds) and restart the countdown
-        countdownTime = 10; // Reset to the extension time
-        extended = true; // Set the flag to true to indicate extension has been used
-        startCountdown();
-    } else {
-        alert("Countdown stopped.");
-    }
-}
+                updateTimerDisplay(minutes, seconds);
 
-// Start the countdown when the page loads
-startCountdown();
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    callback();
+                }
+            }, 1000);
+        }
+
+        // Function to start the grace period
+        function startGracePeriod(duration) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(() => {
+                minutes = Math.floor(timer / 60);
+                seconds = timer % 60;
+
+                updateTimerDisplay(minutes, seconds);
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    Swal.fire('Grace period ended!');
+                    document.querySelector('#submit_examination_anser').click();
+                }
+            }, 1000);
+        }
+
+        // Function to show the confirmation dialog
+        function showConfirmationDialog() {
+            Swal.fire({
+                title: 'Your Exam Time is Over!',
+               // text: "Do you want to start a 15-minute grace period?",
+                text : "Would you like to opt for 15 mins grace period to complete your exam, please select the option YES or if you want to submit the exam, select the option NO.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    startGracePeriod(1 * 60); // 15 minutes in seconds
+                } else {
+                   Swal.fire('No grace period started.');
+                   document.querySelector('#submit_examination_anser').click();
+                }
+            });
+        }
+
+        // Start the countdown
+        startCountdown(timeInSeconds, showConfirmationDialog);
 
 
-
-
-        //var timer2 = "<?=$exam_detail[0]['exam_time'];?>:00";
+        // var timer2 = "<?=$exam_detail[0]['exam_time'];?>:00";
         // var timer2 = "2:00";
         // var interval = setInterval(function() {
         // var timer = timer2.split(':');
@@ -315,9 +340,9 @@ startCountdown();
         //       timer2 = minutes + ':' + seconds;
         // }, 1000);
         // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         // Try using right-click on the preview page. This script disables that functionality.
         window.addEventListener('contextmenu', function (e) {
