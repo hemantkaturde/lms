@@ -521,7 +521,7 @@
                         // $message = "<b>This is HTML message.</b>";
                         // $message .= "<h1>This is headline.</h1>";
                         
-                        $header = "From: IICTN-Admin <admin@iictn.in> \r\n";
+                        $header = "From: IICTN-Payment Link <admin@iictn.in> \r\n";
                         //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
                         $header .= "MIME-Version: 1.0\r\n";
                         $header .= "Content-type: text/html\r\n";
@@ -1158,10 +1158,13 @@
 
                     $body = '<div><p><b>Dear </b> '.$enq_fullname.',</p><p>Please Follow Below Admission Link.</p></div><div><p><b>Admission Link<b></p><p>https://iictn.in/registration/new-registration-student.php?enq='.$enq_id.'</p></div>'; 
 
-                    //$retval = mail($to,$subject,$htmlContent,$header);
-
                     //$retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
-                    $retval =  1;
+                    $header = "From: IICTN - Admission Link <admin@iictn.in> \r\n";
+                    //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                    $header .= "MIME-Version: 1.0\r\n";
+                    $header .= "Content-type: text/html\r\n";
+
+                    $retval = mail($to,$subject,$body,$header);
 
                     if($retval){
                         /* Send Whats App  Start Here */
@@ -1169,23 +1172,23 @@
                         $text = 'Admission Link';
                         $text .= ' https://iictn.in/registration/new-registration-student.php?enq='.$enq_id;
                         //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                        $mobile = '91'.$get_equiry_data->enq_mobile;
-                       
-                        $data = ["number" => $mobile, "msg" => $text, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
-                        //$jsonData = json_encode($data);
+                        $mobile = '+91'.$get_equiry_data->enq_mobile;
+                    
+                        $whatsaptype = 'admission_link';
 
-                        $jsonData = $data;
-
-                        $send_wp_sms =  sendwhatsapp($mobile,$jsonData);
-
-                    //    if(json_decode($send_wp_sms)->status="success"){
-                            $process = 'Enquiry Link Sent';
-                            $processFunction = 'Enquiry/sendEnquiryLink';
-                            $this->logrecord($process,$processFunction);
-                            echo(json_encode(array('status'=>'success')));
-                    //    }else{
-                    //         echo(json_encode(array('status'=>'failure','error_sms'=>'wp sms not send')));
-                    //    }
+                        $url = ' https://iictn.in/registration/new-registration-student.php?enq='.$enq_id;
+                        $Brochure_link ='';
+                        $Syllabus ='';
+                        $send_wp_sms_media_text =  sendwhatsapp($course_name_without,$Brochure_link,$Syllabus,$url,$mobile,$whatsaptype); 
+                        
+                        //  if(json_decode($send_wp_sms)->status="success"){
+                                $process = 'Enquiry Link Sent';
+                                $processFunction = 'Enquiry/sendEnquiryLink';
+                                $this->logrecord($process,$processFunction);
+                                echo(json_encode(array('status'=>'success')));
+                        //    }else{
+                        //         echo(json_encode(array('status'=>'failure','error_sms'=>'wp sms not send')));
+                        //    }
 
                     }
         }else{

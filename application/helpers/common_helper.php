@@ -559,6 +559,57 @@ if(!function_exists(('sendwhatsapp')))
                     echo $response;
                  }
 
+                 if($whatsaptype=='admission_link'){ 
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/vl6vvKLdGE?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS =>'{
+                        "data": {
+                            "body_variables": [
+                                "'.$url.'"
+                            ]
+                        },
+                        "recipients": [
+                            {
+                                "whatsapp_number": "'.$mobile.'",
+                                "first_name": "John",
+                                "last_name": "Doe",
+                                "attributes": {
+                                    "custom_attribute_1": "Value 1",
+                                    "custom_attribute_2": "Value 2",
+                                    "custom_attribute_3": "Value 3"
+                                },
+                                "lists": [
+                                    "Default"
+                                ],
+                                "tags": [
+                                    "new lead",
+                                    "notification sent"
+                                ],
+                                "replace": false
+                            }
+                        ]
+                    }',
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Cookie: PHPSESSID=tdsrj23llm8jvqlsc81bocgvoh'
+                    ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+                    echo $response;
+                 }
+
             } catch (Exception $e) {
                 //echo "Message could not be sent. Mailer Error: {$e}";
             }
