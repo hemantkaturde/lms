@@ -293,7 +293,7 @@ $jsonstringtoArray = json_decode($access, true);
 
                 if (--timer < 0) {
                     clearInterval(interval);
-                    Swal.fire('Grace period ended!');
+                    //Swal.fire('Grace period ended!');
                     document.querySelector('#submit_examination_anser').click();
                 }
             }, 1000);
@@ -313,7 +313,7 @@ $jsonstringtoArray = json_decode($access, true);
                 if (result.isConfirmed) {
                     startGracePeriod(15 * 60); // 15 minutes in seconds
                 } else {
-                   Swal.fire('No grace period started.');
+                   //Swal.fire('No grace period started.');
                    document.querySelector('#submit_examination_anser').click();
                 }
             });
