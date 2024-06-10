@@ -528,7 +528,7 @@
                         
                         $retval = mail($to,$subject,$body,$header);
                         //$retval =  sendmail($to,$Subject,$Body,$email_name,$attachmentList="");
-                        $retval=1;
+                        //$retval=1;
                     if($retval){
 
                         $text = 'Thank You for your interest in '.$course_name_without;
