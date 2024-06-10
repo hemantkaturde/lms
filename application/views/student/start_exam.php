@@ -255,7 +255,7 @@ $jsonstringtoArray = json_decode($access, true);
 
     <script>
             // Set the initial countdown time in minutes
-        let countdownTime = 1;
+        let countdownTime = "<?=$exam_detail[0]['exam_time'];?>";
 
         // Convert the countdown time to seconds
         let timeInSeconds = countdownTime * 60;
@@ -311,7 +311,7 @@ $jsonstringtoArray = json_decode($access, true);
                 cancelButtonText: 'No'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    startGracePeriod(1 * 60); // 15 minutes in seconds
+                    startGracePeriod(15 * 60); // 15 minutes in seconds
                 } else {
                    Swal.fire('No grace period started.');
                    document.querySelector('#submit_examination_anser').click();
