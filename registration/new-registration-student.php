@@ -119,7 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
 
     if ($conn->query($sql) === TRUE) {
 
-
     
         $username = strtok($name, " ");
         $year = date("Y"); 
@@ -246,28 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
                     $header .= "MIME-Version: 1.0\r\n";
                     $header .= "Content-type: text/html\r\n";
 
-
-
-                        //$retval = mail($to,$Subject,$Body,$header);
-                        $mail = new PHPMailer(true);
-                        $mail->SMTPDebug = 0;                                      
-                        $mail->isSMTP();                                           
-                        $mail->Host       = EMAIL_SMTP_HOST;                   
-                        $mail->SMTPAuth   = EMAIL_SMTP_AUTH;                            
-                        $mail->Username   = EMAIL_USERNAME;                
-                        $mail->Password   = EMAIL_PASSWORD;                       
-                        $mail->SMTPSecure = EMAIL_SECURE;                             
-                        $mail->Port       = EMAIL_SMTP_PORT; 
-                    
-                        $mail->setFrom(EMAIL_USERNAME, $email_name);          
-                        $mail->addAddress($to);
-                        //$mail->addAddress('receiver2@gfg.com', 'Name');
-                    
-                        $mail->isHTML(true);                                 
-                        $mail->Subject = $Subject;
-                        $mail->Body    = $Body;
-                        //$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-                        $retval= $mail->send();
+                    $retval = mail($to,$Subject,$Body,$header);
 
                         if($retval){
 
@@ -275,30 +253,58 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
                             $curl = curl_init();
                             $text = 'Login Link : https://www.iictn.in/ , Username (First Name  or Email Id or Mobile Number) : '.$username .' Password :'.$main_pass;
                             //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
-                            $mobile_number = '91'.$mobile;
-                            // $url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC5A51A7429&access_token=64e7462031534";
-
-                            $data_media = [ "number" => $mobile_number, "msg" => $text, "instance" => INSTANCE_ID, "apikey" => ACCESS_TOKEN];
-
-                           // $jsonData = json_encode($data_media);
-                            $jsonData = $data_media;
+                            $mobile_number = '+91'.$mobile;
+                            //$url = "https://marketing.intractly.com/api/send.php?number=".$mobile."&type=text&message=".urlencode($text)."&instance_id=64FC5A51A7429&access_token=64e7462031534";
 
                             $curl = curl_init();
-                            $url = "https://app.whatzapi.com/api/send-text.php";
-                  
-                            $ch = curl_init();
-                            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-                            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($jsonData));
-                            curl_setopt($ch, CURLOPT_URL, $url);
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                            //$result = curl_exec($ch);
 
-                            $response = curl_exec($ch);
-                            //return $response;
+                            curl_setopt_array($curl, array(
+                            CURLOPT_URL => 'https://app.wanotifier.com/api/v1/notifications/hYMnNEBv4E?key=rvs0h0gPYwSr9m8jbmAzdvGT9UDz8J',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            CURLOPT_POSTFIELDS =>'{
+                                "data": {
+                                    "body_variables": [
+                                        "'.$username.'",
+                                        "'.$main_pass.'"
+                                    ]
+                                },
+                                "recipients": [
+                                    {
+                                        "whatsapp_number": "+918097404125",
+                                        "first_name": "John",
+                                        "last_name": "Doe",
+                                        "attributes": {
+                                            "custom_attribute_1": "Value 1",
+                                            "custom_attribute_2": "Value 2",
+                                            "custom_attribute_3": "Value 3"
+                                        },
+                                        "lists": [
+                                            "Default"
+                                        ],
+                                        "tags": [
+                                            "new lead",
+                                            "notification sent"
+                                        ],
+                                        "replace": false
+                                    }
+                                ]
+                            }',
+                            CURLOPT_HTTPHEADER => array(
+                                'Content-Type: application/json',
+                                'Cookie: PHPSESSID=tdsrj23llm8jvqlsc81bocgvoh'
+                            ),
+                            ));
 
+                            $response = curl_exec($curl);
+
+                            curl_close($curl);
+                            echo $response;
 
                             echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
                         }else{
