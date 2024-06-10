@@ -276,7 +276,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
                                 },
                                 "recipients": [
                                     {
-                                        "whatsapp_number": "+918097404125",
+                                        "whatsapp_number": "'.$mobile_number.'",
                                         "first_name": "John",
                                         "last_name": "Doe",
                                         "attributes": {
