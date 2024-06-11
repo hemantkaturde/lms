@@ -111,6 +111,12 @@ class Admin extends BaseController
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
             $data['getadditionalcourseInfostudent'] = $this->enquiry_model->getadditionalInfo($data['get_student_enquiry_id']['enq_id']);
+            
+            $data['getstudentexaminationdatafordashboardnoti'] = $this->student_model->getstudentexaminationdatafordashboardnoti($userId);
+
+          
+
+
             $this->loadViews("student/student_dashboard", $this->global, $data , NULL);
         }else{
             $this->loadViews("dashboard", $this->global, $data , NULL);

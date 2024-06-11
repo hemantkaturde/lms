@@ -430,7 +430,7 @@
 		  <div class="col-md-6 col-sm-6 col-xs-12">
               <h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Reply on your query</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
-						<marquee width="100%" direction="up"  height="210px">
+						<marquee width="100%" direction="up"  height="210px" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
 
 							<?php foreach ($getaskaqueryRecord as $key => $value) { ?>
 								<div class="testimonial pt-10 borderb">
@@ -456,18 +456,21 @@
 		  <div class="col-md-6 col-sm-6 col-xs-12">
 			<h3 class=" textcenter mrgb0 borderr1" style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Exam notification</span></h3>
 				<div style="border: 5px solid #55acee;padding: 12px;min-height: 305px;" class="borderr2">
-						<!-- <marquee width="100%" direction="up"  height="210px"> -->
-							<!-- <div class="testimonial pt-10 borderb">
-								<a href="http://localhost/lms_2/studentadmissions">
-									<div class="thumb pull-left mb-0 mr-0 pr-12">
-									   <i class="fa fa-link color2"></i>
+						 <marquee id="marquee" width="100%" direction="up"  height="210px" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+								<?php foreach ($getstudentexaminationdatafordashboardnoti as $key => $value) {  ?>
+									<div class="testimonial pt-10 borderb">
+										<a href="<?=ADMIN_PATH.'/studentexamination/'.$value['exam_id'];?>">
+										    <div class="thumb pull-left mb-0 mr-0 pr-12">
+											   <i class="fa fa-graduation-cap color2 fa-2xl"> </i>
+											</div>
+											<div class="ml-30 fs17fwb">
+											   <h4><?=$value['exam_title']?></h4>	
+											   <p><?=$value['course_name']?></p>	
+											</div>	
+										</a>
 									</div>
-									<div class="ml-30 fs17fwb">
-									  <p>This is Test Notification</p>
-									</div>
-								</a>
-					      </div> -->
-					    <!-- </marquee> -->
+								<?php } ?>
+					     </marquee>
 				</div>
 		  </div>
 		</div>
@@ -758,6 +761,8 @@ $(".print_id_card_close").click(function(){
 	location.reload();
 });
 
+
+
 </script>
 
 
@@ -787,5 +792,6 @@ $(".print_id_card_close").click(function(){
 	margin-right: -15% !important;
   }
 }
+
 
 </style>
