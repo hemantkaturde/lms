@@ -1665,13 +1665,11 @@ function studentcertificateData($params)
 
     public function getdataforexamchecking($userId,$roleText)
     {
-
-        
-
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
         $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
         $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
 
         // if($params['search']['value'] != "") 
         // {
@@ -1681,7 +1679,7 @@ function studentcertificateData($params)
         // }
 
         //$this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
-       // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
@@ -1782,11 +1780,11 @@ function studentcertificateData($params)
                     $data[$counter]['mobile'] = $value['mobile'];
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['exam_status'] = $exam_status;
-                   //  $data[$counter]['total_marks'] = $total_marks;
-                   // $data[$counter]['grade'] = $grade;
-                   // $data[$counter]['grade_point'] = $Grade_point;
-                   // $data[$counter]['remark'] = $Remark;
-                   // $data[$counter]['Quntitave_value'] = $Quntitave_value;
+                    // $data[$counter]['total_marks'] = $total_marks;
+                    // $data[$counter]['grade'] = $grade;
+                    // $data[$counter]['grade_point'] = $Grade_point;
+                    // $data[$counter]['remark'] = $Remark;
+                    // $data[$counter]['Quntitave_value'] = $Quntitave_value;
                     $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
                     $data[$counter]['action'] = '';
                     
