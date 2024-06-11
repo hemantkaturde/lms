@@ -1669,7 +1669,7 @@ function studentcertificateData($params)
         $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
         $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
         $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
-        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
+        // $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
 
         // if($params['search']['value'] != "") 
         // {
@@ -1679,7 +1679,7 @@ function studentcertificateData($params)
         // }
 
         //$this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
-        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+        //$this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
