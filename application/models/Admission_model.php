@@ -574,6 +574,12 @@ class Admission_model extends CI_Model
 
     function getexaminationdata($params)
     {
+
+        
+
+
+
+
         $this->db->select('*,BaseTbl.id as exam_id');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
@@ -1666,28 +1672,7 @@ function studentcertificateData($params)
     public function getdataforexamchecking($userId,$roleText)
     {
 
-        $access = $this->session->userdata('access');
-        $jsonstringtoArray = json_decode($access, true);
-        $pageUrl =$this->uri->segment(1);
-       
-        $current_date = date('Y-m-d');
-       
-        $this->db->select('enq_course_id');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
-        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
-        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
-        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
-
-        $data = array();
-        $counter = 0;
-         foreach ($fetch_result_enquiry_courses as $key => $value) {
-
-         $course_ids    =   explode(',', $value['enq_course_id']);
-
-         foreach ($course_ids as $key => $value) {
-
-
-
+     
         $this->db->select('*');
         $this->db->join(TBL_COURSE, TBL_STUDENT_ANSWER_SHEET.'.course_id = '.TBL_COURSE.'.courseId');
         $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
@@ -1702,7 +1687,7 @@ function studentcertificateData($params)
         // }
 
         //$this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
-        $this->db->where(TBL_EXAMINATION.'.course_id', $value);
+        //$this->db->where(TBL_EXAMINATION.'.course_id', $value);
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
@@ -1823,9 +1808,6 @@ function studentcertificateData($params)
         }
 
         return $data;
-    }
-}
-
         
     }
 
