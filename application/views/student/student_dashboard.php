@@ -464,8 +464,8 @@
 											   <i class="fa fa-graduation-cap color2 fa-2xl"> </i>
 											</div>
 											<div class="ml-30 fs17fwb">
-											   <h4><?=$value['exam_title']?></h4>	
-											   <p><?=$value['course_name']?></p>	
+											   <h4><?=$value['course_name']?></h4>	
+											   <!-- <p><?=$value['course_name']?></p>	 -->
 											</div>	
 										</a>
 									</div>
