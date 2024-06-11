@@ -75,7 +75,7 @@ $roleText = $this->session->userdata('roleText');
                     style="background: #55acee;padding: 15px;font-size: 1.5rem !important;"><span class="color3">Student
                         Query, Please Answer</span></h3>
                 <div style="border: 5px solid #55acee;padding: 12px;min-height: 300px;" class="borderr2">
-                    <!-- <marquee width="100%" direction="up"  height="210px"> -->
+                    <marquee width="100%" direction="up"  height="210px" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
 
                     <?php foreach ($getstudentqueryforttopicwisetriner as $key => $value) { ?>
                     <div class="testimonial pt-10 borderb" style="border-bottom: 1px solid rebeccapurple;">
@@ -93,7 +93,7 @@ $roleText = $this->session->userdata('roleText');
                     </div>
                     <?php  } ?>
 
-                    <!-- </marquee> -->
+                </marquee>
                 </div>
 
             </div>
