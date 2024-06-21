@@ -899,7 +899,7 @@ public function getBookscount($topic_id,$course_id){
 
                 if($roleText!='Trainer'){
 
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edittimetablerecord?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edittimetablerecord?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Add Online Meeting Link' title='Edit Record'></a>  ";
 
 
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addtopiclinksforonlineattendant?id=".$value['id']."&time_table_id=".$value['time_table_id']."&course_id=".$value['course_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/attachment.png' alt='Add Online Meeting Link' title='Add Online Meeting Link'></a>  ";
