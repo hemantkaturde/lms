@@ -4,7 +4,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "lms";
+    $dbname = "iictn";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);

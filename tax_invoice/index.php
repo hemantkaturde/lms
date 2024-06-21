@@ -293,9 +293,13 @@
         $pdf->SetXY(162, 52); // set the position of the box
         $pdf->Cell(10, 196, $prepared_by, 0, 0, 'L'); // add the text, align to Center of cell
 
-      
+        if($paymant_type=='regular_invoice'){
+          $number = $result_arry['final_amount'];
+        }else{
+          $number = $final_amount;
+        }
 
-        $number = $result_arry['totalAmount'];
+      
       
         $no = floor($number);
         $point = round($number - $no, 2) * 100;
