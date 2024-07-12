@@ -14,6 +14,10 @@ class Api extends BaseController
          $this->load->library('form_validation');
     }
 
+
+
+    /* Superadmin Part */    
+
     /*Login */
     public function login(){
         $post_submit = $this->input->post();
@@ -639,10 +643,10 @@ class Api extends BaseController
             if($courses_multipal){
                // $courses = implode(',', $courses_multipal);
 
-            //    $this->enquiry_model->getCourseInfo($id);
+               //    $this->enquiry_model->getCourseInfo($id);
 
-            //     print_r($courses_multipal);
-            //     exit;
+               //     print_r($courses_multipal);
+               //     exit;
 
                   $course_name = explode(',', $courses_multipal);
 
@@ -750,6 +754,48 @@ class Api extends BaseController
         }
 
     }
+
+
+
+   /* Superadmin Part End Here */   
+
+
+   /* Trianer Part Start Here */
+
+    /*User Details*/
+    public function gettrainerdashboarddetails(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}
+		else
+		{	
+            
+            $getAttendanceCount = $this->Api_model->getAttendanceCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getCoursescount = $this->Api_model->getCoursesCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getExaminationcount = $this->Api_model->getexaminationCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getAnsthequerycount = $this->Api_model->getAnsthequeryTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+
+            $status = 'Success';
+            $message = 'Trainer Dashboard data';
+            $count_data =  array('userid' => $userdetails['userId'],'attendance_count'=>$getAttendanceCount,'course_count'=>$getCoursescount,'examination_count'=>$getExaminationcount);
+			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
+        }
+
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data);
+		setContentLength($responseData);
+    }
+
+
+   /* Trianer Part End Here */
+
 
 
 

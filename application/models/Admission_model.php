@@ -557,12 +557,21 @@ class Admission_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_examination as BaseTbl');
         $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+        $this->db->join('tbl_timetable_transection', 'tbl_timetable_transection.course_id = course.courseId');
+        $this->db->join('tbl_users', 'tbl_users.userId = tbl_timetable_transection.trainer_id');
+        
         if($params['search']['value'] != "") 
         {
             $this->db->where("(course.course_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where("BaseTbl.exam_title LIKE '%".$params['search']['value']."%'");
             $this->db->or_where("BaseTbl.exam_time LIKE '%".$params['search']['value']."%')");
         }
+
+        if($roleText=='Trainer'){
+            $userId =  $this->session->userdata('userId');
+            $this->db->where('tbl_timetable_transection.trainer_id', $userId);
+        } 
+
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->where('BaseTbl.exam_status', 1);
         $this->db->order_by('BaseTbl.id', 'desc');
@@ -574,11 +583,6 @@ class Admission_model extends CI_Model
 
     function getexaminationdata($params)
     {
-
-        
-
-
-
 
         $this->db->select('*,BaseTbl.id as exam_id');
         $this->db->from('tbl_examination as BaseTbl');

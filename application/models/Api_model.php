@@ -899,6 +899,55 @@ class Api_model extends CI_Model
 
 
 
+    /*Trainer Data Start Here*/
+    public function getAttendanceCountTrainer($userid,$user_flag)
+    {
+            $this->db->select('*');
+            $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+            $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+            $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+            $query = $this->db->get(TBL_ATTENDANCE);
+            $fetch_result = $query->num_rows();
+            return $fetch_result;
+    }
+
+
+    public function getCoursesCountTrainer($userid,$user_flag)
+       {
+            $this->db->select('*');
+            $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userid);
+            $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+            $this->db->where(TBL_COURSE.'.isDeleted', 0);
+            $query = $this->db->get(TBL_COURSE);
+            $rowcount = $query->num_rows();
+            return $rowcount;
+
+       }
+
+
+
+    public function getexaminationCountTrainer($userid,$user_flag)
+       {
+           $this->db->select('*');
+           $this->db->from('tbl_examination as BaseTbl');
+           $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+           $this->db->join('tbl_timetable_transection', 'tbl_timetable_transection.course_id = course.courseId');
+           $this->db->join('tbl_users', 'tbl_users.userId = tbl_timetable_transection.trainer_id');
+           $this->db->where('tbl_timetable_transection.trainer_id', $userId);
+           $this->db->where('BaseTbl.isDeleted', 0);
+           $this->db->where('BaseTbl.exam_status', 1);
+           $this->db->order_by('BaseTbl.id', 'desc');
+           $query = $this->db->get();
+           return $query->num_rows();
+       }
+
+
+
+
 }
 
 ?>
