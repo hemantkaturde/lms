@@ -947,6 +947,110 @@ class Api_model extends CI_Model
 
 
 
+       public function  getallstudentquerycount($userId,$user_flag){
+
+            $getTrainercourseis = $this->gettrainercourseIds($userId);
+            $course_id =array();
+            foreach ($getTrainercourseis as $key => $value) {
+                $course_id[]= $value['course_id'];
+                 
+            }
+    
+            if( $getTrainercourseis){
+                $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+    
+            }else{
+                return 0;
+    
+            }
+    
+    
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+    
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ASK_A_QUERY.".query LIKE '%".$params['search']['value']."%')");
+        }
+    
+        $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+    
+        $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_ASK_A_QUERY);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    
+    }
+    
+    
+    public function getallstudentquerydata($userId,$user_flag){
+    
+    
+            $getTrainercourseis = $this->gettrainercourseIds($userId);
+            $course_id =array();
+            foreach ($getTrainercourseis as $key => $value) {
+                $course_id[]= $value['course_id'];
+                 
+            }
+    
+            if( $getTrainercourseis){
+                $this->db->where_in(TBL_COURSE.'.courseId', $course_id);
+    
+            }else{
+                return true;
+    
+            }
+
+    
+        $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+        $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+    
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ASK_A_QUERY.".query LIKE '%".$params['search']['value']."%')");
+        }
+    
+        $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+        // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+        $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_ASK_A_QUERY);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['topic_name'] = $value['topic'];
+                 $data[$counter]['query'] = $value['query'];          
+                $counter++; 
+            }
+        }
+    
+        return $data;
+    }
+    
+
+
+    public function gettrainercourseIds($userId){
+
+        $this->db->select('course_id');
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
+        // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isdeleted', 0);
+        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    
+    }
+
 
 }
 

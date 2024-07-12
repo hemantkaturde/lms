@@ -762,7 +762,7 @@ class Api extends BaseController
 
    /* Trianer Part Start Here */
 
-    /*User Details*/
+    /*Trainer Dashbaord Details*/
     public function gettrainerdashboarddetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -790,17 +790,50 @@ class Api extends BaseController
             $getAttendanceCount = $this->Api_model->getAttendanceCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getCoursescount = $this->Api_model->getCoursesCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getExaminationcount = $this->Api_model->getexaminationCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
-            // $getAnsthequerycount = $this->Api_model->getAnsthequeryTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getAnsthequerycount = $this->Api_model->getallstudentquerycount(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+
 
             $status = 'Success';
             $message = 'Trainer Dashboard data';
-            $count_data =  array('userid' => $userdetails['userId'],'attendance_count'=>$getAttendanceCount,'course_count'=>$getCoursescount,'examination_count'=>$getExaminationcount,'ans_the_query_count'=>12);
+            $count_data =  array('userid' => $userdetails['userId'],'attendance_count'=>$getAttendanceCount,'course_count'=>$getCoursescount,'examination_count'=>$getExaminationcount,'ans_the_query_count'=>$getAnsthequerycount);
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
         $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
 		setContentLength($responseData);
     }
+
+
+
+     /*Trainer Answer The Query List*/
+     public function gettraineranswerthequery(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $studentportal_data = $this->Api_model->getallstudentquerydata(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            if($studentportal_data){
+                $status = 'Success';
+                $message = 'Answer The Query Data Not Found';
+                $data = $studentportal_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
 
 
    /* Trianer Part End Here */
