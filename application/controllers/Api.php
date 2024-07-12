@@ -10,7 +10,7 @@ class Api extends BaseController
     public function __construct()
     {
          parent::__construct();
-         $this->load->model(array('Api_model','enquiry_model'));
+         $this->load->model(array('Api_model','enquiry_model','event'));
          $this->load->library('form_validation');
     }
 
@@ -777,6 +777,15 @@ class Api extends BaseController
 		}
 		else
 		{	
+
+            $year = null; $month = null; $day = null;
+
+            $year  = (empty($year) || !is_numeric($year))?  date('Y') :  $year;
+            $month = (is_numeric($month) &&  $month > 0 && $month < 13)? $month : date('m');
+            $day   = (is_numeric($day) &&  $day > 0 && $day < 31)?  $day : date('d');
+            
+            $date      = $this->event->getDateEvent($year, $month);
+            $cur_event = $this->event->getEvent($year, $month, $day);
             
             $getAttendanceCount = $this->Api_model->getAttendanceCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getCoursescount = $this->Api_model->getCoursesCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
@@ -789,7 +798,7 @@ class Api extends BaseController
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data);
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
 		setContentLength($responseData);
     }
 
