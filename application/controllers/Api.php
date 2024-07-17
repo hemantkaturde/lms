@@ -72,7 +72,16 @@ class Api extends BaseController
 		{	$status = 'Success';
             $message = 'User data';
             $data = array('userid' => $this->input->post('userid'));
-            $user_data =  array('userid' => $userdetails['userId'],'name' => $userdetails['name'],'email'=>$userdetails['email'],'user_flag'=>$userdetails['user_flag'],'role'=>$userdetails['role'],'access'=>$userdetails['access'],'profile_pic'=>IMGPATH.'/'.$userdetails['profile_pic']);
+
+            if($userdetails['profile_pic']){
+
+                $profile_pic_image = IMGPATH.'/'.$userdetails['profile_pic'];
+            }else{
+
+                $profile_pic_image = 'NULL';
+            }
+
+            $user_data =  array('userid' => $userdetails['userId'],'name' => $userdetails['name'],'email'=>$userdetails['email'],'user_flag'=>$userdetails['user_flag'],'role'=>$userdetails['role'],'access'=>$userdetails['access'],'profile_pic'=>$profile_pic_image);
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
