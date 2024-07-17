@@ -10,7 +10,7 @@ class Api extends BaseController
     public function __construct()
     {
          parent::__construct();
-         $this->load->model(array('Api_model','enquiry_model','event'));
+         $this->load->model(array('Api_model','enquiry_model','event','user_model'));
          $this->load->library('form_validation');
     }
 
@@ -764,6 +764,92 @@ class Api extends BaseController
 
     }
 
+
+
+    public function updateprofile(){
+
+
+        $post_submit = $this->input->post();
+        $userId = $this->input->post('userid');
+
+        if(!empty($post_submit)){
+            $profileupdate_response = array();
+
+            $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
+            $this->form_validation->set_rules('username', 'Username', 'trim|required');
+            $this->form_validation->set_rules('email', 'Email', 'trim|required');
+            $this->form_validation->set_rules('mobile', 'Mobile Number', 'trim|required|numeric|greater_than[0]|exact_length[10]');
+            if($this->input->post('new_password') && $this->input->post('confirm_password')){
+                $this->form_validation->set_rules('new_password', 'New Password', 'trim|required');
+                $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[new_password]');
+            }
+
+            if($this->form_validation->run() == FALSE){
+                $profileupdate_response['status'] = 'failure';
+                $profileupdate_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'username'=>strip_tags(form_error('username')), 'mobile'=>strip_tags(form_error('mobile')), 'password'=>strip_tags(form_error('password')),'new_password'=>strip_tags(form_error('new_password')),'confirm_password'=>strip_tags(form_error('confirm_password')));
+            }else{
+
+
+                if(!empty($_FILES['profile_photo']['name'])){
+
+                    $file = rand(1000,100000)."-".$_FILES['profile_photo']['name'];
+                    $filename = str_replace(' ','_',$file);
+    
+                    $config['upload_path'] = 'uploads/profile_pic'; 
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                    $config['max_size'] = '100000'; // max_size in kb 
+                    $config['file_name'] = $filename; 
+           
+                    // Load upload library 
+                    $this->load->library('upload',$config); 
+            
+                    // File upload
+                    if($this->upload->do_upload('profile_photo')){ 
+                       $profile_pic = $filename; 
+                    }else{
+                        $profile_pic =trim($this->input->post('existing_img'));
+                    }
+    
+                }else{
+                    $profile_pic = trim($this->input->post('existing_img'));
+    
+                }
+
+
+
+                if($this->input->post('new_password') && $this->input->post('confirm_password')){
+
+                    $password = $this->input->post('new_password');
+
+                    $data = array(
+                        'name'      => $this->input->post('full_name'),
+                        'email'     => $this->input->post('email'),
+                        'mobile'    => $this->input->post('mobile'),
+                        'password'  => base64_encode($password),
+                        'profile_pic' => $profile_pic,
+                        'username'   => trim($this->input->post('username'))
+                    );
+
+                }else{
+                    $data = array(
+                        'name'      => $this->input->post('full_name'),
+                        'email'     => $this->input->post('email'),
+                        'mobile'    => $this->input->post('mobile'),
+                        'profile_pic' => $profile_pic,
+                        'username'   => trim($this->input->post('username'))
+                    );
+                }
+
+                    $saveUserdata = $this->user_model->saveUserdata($userId,$data);
+                    if($saveUserdata){
+                            $profileupdate_response['status'] = 'success';
+                            $profileupdate_response['error'] = array('full_name'=>'', 'username'=>'', 'mobile'=>'', 'password'=>'','new_password'=>'','confirm_password'=>'');
+                        }
+            }
+            echo json_encode($profileupdate_response);
+        }
+
+    }
 
 
    /* Superadmin Part End Here */   
