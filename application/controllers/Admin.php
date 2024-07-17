@@ -167,7 +167,7 @@ class Admin extends BaseController
 
             if(!empty($_FILES['profile_photo']['name'])){
 
-                $file = 'profile_'.$this->input->post('name').$_FILES['profile_photo']['name'];
+                $file = 'profile_'.rand().$_FILES['profile_photo']['name'];
                 $filename = str_replace(' ','_',$file);
 
                 $config['upload_path'] = 'uploads/profile_pic'; 
@@ -253,7 +253,7 @@ class Admin extends BaseController
         
             if(!empty($_FILES['profile_photo1']['name'])){
 
-                $file = 'profile_'.$this->input->post('name1').$_FILES['profile_photo1']['name'];
+                $file = 'profile_'.rand().$_FILES['profile_photo1']['name'];
                 $filename = str_replace(' ','_',$file);
 
                 $config['upload_path'] = 'uploads/profile_pic'; 
