@@ -1161,6 +1161,91 @@ class Api extends BaseController
 
     
 
+    public function createcoursetype(){
+        $post_submit = $this->input->post();
+
+        if(!empty($post_submit)){
+            $createcoursetype_response = array();
+
+            $data = array(
+                'ct_name' => $this->input->post('course_type_name'),
+            );
+            $this->form_validation->set_rules('course_type_name', 'Certificate Type', 'trim|required');
+
+            if($this->form_validation->run() == FALSE){
+
+                $createcoursetype_response['status'] = 'failure';
+                $createcoursetype_response['error'] = array('course_type_name'=>strip_tags(form_error('course_type_name')));
+
+            }else{
+                   /*check If course name is unique*/
+                   $check_uniqe =  $this->course_model->checkquniqecoursetype(trim($this->input->post('course_type_name')));
+
+                   if($check_uniqe){
+                       $createcoursetype_response['status'] = 'failure';
+                       $createcoursetype_response['error'] = array('course_type_name'=>'Certificate Type Already Exist');
+                   }else{
+                       $saveCoursetypedata = $this->course_model->saveCoursetypedata('',$data);
+                       if($saveCoursetypedata){
+                           $createcoursetype_response['status'] = 'success';
+                           $createcoursetype_response['error'] = array('course_type_name'=>'');
+                       }
+                   }
+            }
+         echo json_encode($createcoursetype_response);
+        }
+    }
+
+
+
+    public function updatcoursetype(){
+
+        $post_submit = $this->input->post();
+        $coursetypeid =  $this->input->post('coursetypeid');
+
+        if(!empty($post_submit)){
+
+            $update_response = array();
+
+            $data = array(
+                'ct_name' => $this->input->post('course_type_name')
+            );
+
+            $this->form_validation->set_rules('course_type_name', 'Certificate Type', 'trim|required');
+
+            if($this->form_validation->run() == FALSE){
+                $update_response['status'] = 'failure';
+                $update_response['error'] = array('course_type_name'=>strip_tags(form_error('course_type_name')));
+            }else{
+
+                /*check If course name is unique*/
+                if($coursetypeid == null)
+                {
+                    $check_uniqe =  $this->course_model->checkquniqecoursetypename(trim($this->input->post('course_type_name')));
+                }
+                else
+                {
+                    $check_uniqe =  $this->course_model->checkquniqecoursetypename_update($coursetypeid, trim($this->input->post('course_type_name')));
+                }
+                
+                if($check_uniqe){
+                    $update_response['status'] = 'failure';
+                    $update_response['error'] = array('course_type_name'=>'Certificate Type Already Exist');
+                }else{
+                    $saveCoursetypedata = $this->course_model->saveCoursetypedata($coursetypeid,$data);
+                    if($saveCoursetypedata){
+                        $update_response['status'] = 'success';
+                        $update_response['error'] = array('course_type_name'=>'');
+                    }
+                }
+            }
+    
+            echo json_encode($update_response);
+        }
+
+    }
+
+
 
     /*class for create updateenquiry*/
 
