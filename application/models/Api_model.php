@@ -1056,7 +1056,7 @@ class Api_model extends CI_Model
     public function getEnquiryInfo($enqId)
     {
 
-        $this->db->select('enq_fullname,enq_mobile,enq_email,enq_source,tbl_enquiry.createdDtm as enquiry_date,doctor_non_doctor');
+        $this->db->select('enq_id as id,enq_fullname,enq_mobile,enq_email,enq_source,tbl_enquiry.createdDtm as enquiry_date,doctor_non_doctor');
         $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
         $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
         $this->db->from('tbl_enquiry');
@@ -1069,9 +1069,9 @@ class Api_model extends CI_Model
 
     public function getEnquirypaymentInfo($id){
 
-        $this->db->select('*');
+        $this->db->select('payment_date,razorpay_payment_id as transection_id,totalAmount as amount,payment_mode,payment_status');
         $this->db->from('tbl_payment_transaction');
-       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        //$this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('tbl_payment_transaction.paymant_type', 'regular_invoice');
         $this->db->where('enquiry_id', $id);
         $this->db->where('payment_status', 1);
@@ -1092,7 +1092,23 @@ class Api_model extends CI_Model
         $this->db->group_by('enquiry_id');
         $this->db->order_by('id', 'desc');
         $query = $this->db->get();
-        return $query->result();
+        $totalpaidAmount =$query->row_array();
+       
+        $this->db->select('sum(total_payment) as total_course_fees');
+        $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
+        $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
+        $this->db->from('tbl_enquiry');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('tbl_enquiry.enq_id', $id);
+        $query1 = $this->db->get();
+        $total_course_fees =$query1->row_array();
+
+        $payment_details = array();
+
+        $payment_details['total_course_fees'] =$total_course_fees['total_course_fees'];
+        $payment_details['totalpaidAmount'] =$totalpaidAmount['totalpaidAmount'];
+        $payment_details['totalpending'] = $total_course_fees['total_course_fees'] - $totalpaidAmount['totalpaidAmount'];
+        return $payment_details;
         
     }
 
