@@ -895,7 +895,7 @@ class Api extends BaseController
     }
 
 
-
+    /*class for create Add Course*/
     public function createcourse(){
         $post_submit = $this->input->post();
         if(!empty($post_submit)){
@@ -1020,7 +1020,7 @@ class Api extends BaseController
         }
     }
 
-
+    /*class for create Edit Course*/
     public function updatecourse(){
 
         $post_submit = $this->input->post();
