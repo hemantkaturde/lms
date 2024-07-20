@@ -1337,10 +1337,10 @@ class Api extends BaseController
         if(!empty($post_submit)){
                 $payment_details = array();
                 $id=$this->input->post('enq_id');
-                $payment_details['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
-                $payment_details['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
-                $payment_details['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
-                $payment_details['getadditionalInfo'] = $this->enquiry_model->getadditionalInfo($id);
+                $payment_details['followDataenquiry'] = $this->Api_model->getEnquiryInfo($id);
+                $payment_details['getEnquirypaymentInfo'] = $this->Api_model->getEnquirypaymentInfo($id);
+                $payment_details['gettotalpaidEnquirypaymentInfo'] = $this->Api_model->gettotalpaidEnquirypaymentInfo($id);
+                $payment_details['getadditionalInfo'] = $this->Api_model->getadditionalInfo($id);
                 $payment_details['status'] = 'success';
             echo json_encode($payment_details);
         }

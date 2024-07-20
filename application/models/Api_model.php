@@ -1053,6 +1053,60 @@ class Api_model extends CI_Model
     }
 
 
+    public function getEnquiryInfo($enqId)
+    {
+
+        $this->db->select('enq_fullname,enq_mobile,enq_email,enq_source,tbl_enquiry.createdDtm as enquiry_date,doctor_non_doctor');
+        $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
+        $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
+        $this->db->from('tbl_enquiry');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('tbl_enquiry.enq_id', $enqId);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+    public function getEnquirypaymentInfo($id){
+
+        $this->db->select('*');
+        $this->db->from('tbl_payment_transaction');
+       // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('tbl_payment_transaction.paymant_type', 'regular_invoice');
+        $this->db->where('enquiry_id', $id);
+        $this->db->where('payment_status', 1);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+        return $query->result();
+        
+    }
+
+    public function gettotalpaidEnquirypaymentInfo($id){
+
+        $this->db->select('sum(totalAmount) as totalpaidAmount');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('enquiry_id', $id);
+        $this->db->where('payment_status', 1);
+        $this->db->where('paymant_type', 'regular_invoice');
+        $this->db->group_by('enquiry_id');
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+        return $query->result();
+        
+    }
+
+
+    public function getadditionalInfo($id){
+        $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.TBL_COURSE.'.course_total_fees,'.TBL_ADD_ON_COURSE.'.discount,'.TBL_ADD_ON_COURSE.'.enquiry_id');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+        $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->result_array();
+
+    }
+
+
 }
 
 ?>
