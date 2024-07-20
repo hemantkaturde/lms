@@ -1327,6 +1327,8 @@ class Api extends BaseController
                     if($saveUserdata){
                             $profileupdate_response['status'] = 'success';
                             $profileupdate_response['error'] = array('full_name'=>'', 'username'=>'', 'mobile'=>'', 'password'=>'','new_password'=>'','confirm_password'=>'');
+                            $profileupdate_response['data'] = array('full_name'=>$this->input->post('full_name'), 'username'=>trim($this->input->post('username')), 'mobile'=>$this->input->post('mobile'), 'password'=>'','new_password'=>'','confirm_password'=>'','profile_pic'=>$profile_pic,'email'=>$this->input->post('email'));
+
                         }
             }
             echo json_encode($profileupdate_response);
