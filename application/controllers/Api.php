@@ -1159,8 +1159,7 @@ class Api extends BaseController
         }
     }
 
-    
-
+    /*class for createcoursetype*/
     public function createcoursetype(){
         $post_submit = $this->input->post();
 
@@ -1196,8 +1195,7 @@ class Api extends BaseController
         }
     }
 
-
-
+    /*class for updatcoursetype*/
     public function updatcoursetype(){
 
         $post_submit = $this->input->post();
@@ -1245,12 +1243,8 @@ class Api extends BaseController
 
     }
 
-
-
     /*class for create updateenquiry*/
-
     public function updateprofile(){
-
 
         $post_submit = $this->input->post();
         $userId = $this->input->post('userid');
@@ -1337,6 +1331,22 @@ class Api extends BaseController
     }
 
 
+    public function paymentdetails(){
+
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+                $payment_details = array();
+                $id=$this->input->post('enq_id');
+                $payment_details['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+                $payment_details['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
+                $payment_details['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
+                $payment_details['getadditionalInfo'] = $this->enquiry_model->getadditionalInfo($id);
+                $payment_details['status'] = 'success';
+            echo json_encode($payment_details);
+        }
+    }
+
+
    /* Superadmin Part End Here */   
 
 
@@ -1414,6 +1424,9 @@ class Api extends BaseController
     }
 
    /* Trianer Part End Here */
+
+
+
 
 
 }
