@@ -1423,9 +1423,53 @@ class Api extends BaseController
 
     }
 
-   /* Trianer Part End Here */
+    /* Trianer Part End Here */
 
 
+
+     /* Consellor Part Start Here */
+     /*Trainer Dashbaord Details*/
+    public function getconsellordashboarddetails(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}
+		else
+		{	
+
+            $year = null; $month = null; $day = null;
+
+            $year  = (empty($year) || !is_numeric($year))?  date('Y') :  $year;
+            $month = (is_numeric($month) &&  $month > 0 && $month < 13)? $month : date('m');
+            $day   = (is_numeric($day) &&  $day > 0 && $day < 31)?  $day : date('d');
+            
+            $date      = $this->event->getDateEvent($year, $month);
+            $cur_event = $this->event->getEvent($year, $month, $day);
+            
+            $getAttendanceCount = $this->Api_model->getAttendanceCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getCoursescount = $this->Api_model->getCoursesCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getExaminationcount = $this->Api_model->getexaminationCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getAnsthequerycount = $this->Api_model->getallstudentquerycount(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+
+
+            $status = 'Success';
+            $message = 'Consellor Dashboard data';
+            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>10,'total_enquires'=>20,'total_admissions'=>30);
+			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
+        }
+
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
+		setContentLength($responseData);
+    }
+
+    /* Consellor Part End Here */
 
 
 
