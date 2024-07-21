@@ -837,6 +837,8 @@ class Api extends BaseController
                                 $courses = '';
                             }
 
+                            $result_courses = rtrim($courses, ','); 
+
                             /*check If enquiry name is unique*/
                             $data = array(
                                 'enq_fullname' => ucwords($this->input->post('full_name')),
@@ -854,7 +856,7 @@ class Api extends BaseController
                                 //'enq_remark' => $this->input->post('remarks'),
                                 'total_payment' =>$total_fees,
                                 'final_amount' =>$total_fees,
-                                'enq_course_id' => $courses,
+                                'enq_course_id' => $result_courses,
                                 'doctor_non_doctor'=>$this->input->post('doctor_non_doctor'),
                                 'counsellor_id' => $this->input->post('counsellor'),
                             );
