@@ -1063,7 +1063,7 @@ class Api_model extends CI_Model
         // $this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('tbl_enquiry.enq_id', $enqId);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row_array();
     }
 
 
