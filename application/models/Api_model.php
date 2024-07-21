@@ -1123,6 +1123,16 @@ class Api_model extends CI_Model
     }
 
 
+    public function getcertificatetypelist(){
+
+        $this->db->select('ct_id,ct_name');
+        $this->db->where(TBL_COURSE_TYPE.'.status',0);
+        $query = $this->db->get(TBL_COURSE_TYPE);
+        return $query->result_array();
+
+    }
+
+
 }
 
 ?>

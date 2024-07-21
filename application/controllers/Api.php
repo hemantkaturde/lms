@@ -1363,6 +1363,36 @@ class Api extends BaseController
     }
 
 
+     /*Course List*/
+     public function getcertificatetypelist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $courseList_data = $this->Api_model->getcertificatetypelist();
+            if($courseList_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $courseList_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+
    /* Superadmin Part End Here */   
 
 
