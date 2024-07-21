@@ -950,13 +950,13 @@ class Api extends BaseController
             $cgst_tax_value   = 0;
 
 
-            if($this->input->post('course_mode_online')==1){
+            if($this->input->post('course_mode')==1){
                 $course_mode_online=1;
             }else{
                 $course_mode_online=0;
             }
 
-            if($this->input->post('course_mode_offline')==1){
+            if($this->input->post('course_mode')==1){
                 $course_mode_offline=1;
             }else{
                 $course_mode_offline=0;
@@ -1429,9 +1429,9 @@ class Api extends BaseController
 
     }
 
+    
+
     /* Trianer Part End Here */
-
-
 
      /* Consellor Part Start Here */
      /*Trainer Dashbaord Details*/
