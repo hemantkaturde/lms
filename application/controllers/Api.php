@@ -692,7 +692,11 @@ class Api extends BaseController
             }else{
                 $courses = '';
             }
-           
+
+
+            
+            $result_courses = rtrim($courses, ','); 
+
             if($this->form_validation->run() == FALSE){
 
                 
@@ -734,7 +738,7 @@ class Api extends BaseController
                     'final_amount' =>$total_fees,
                     'enq_source'=>$this->input->post('enquiry_type'),
                     //'enq_remark' => $this->input->post('remarks'),
-                    'enq_course_id' => $courses,
+                    'enq_course_id' => $result_courses,
                     'counsellor_id' => $this->input->post('counsellor'),
                 );
 
