@@ -1063,22 +1063,32 @@ class Api extends BaseController
 
            // $total_fess_cost = $fess + $certificate_cost + $one_time_admission_fees + $kit_cost;
 
-            $total_course_fees  = $this->input->post('total_course_fees');
+            // $total_course_fees  = $this->input->post('total_course_fees');
 
-            $sgst_tax  = $this->input->post('sgst_tax');
-            $sgst_tax_value  = $this->input->post('sgst');
+            // $sgst_tax  = $this->input->post('sgst_tax');
+            // $sgst_tax_value  = $this->input->post('sgst');
             
-            $cgst_tax  = $this->input->post('cgst_tax');
-            $cgst_tax_value   = $this->input->post('cgst');
+            // $cgst_tax  = $this->input->post('cgst_tax');
+            // $cgst_tax_value   = $this->input->post('cgst');
+
+
+            $total_course_fees  = 0;
+
+            $sgst_tax  = 0;
+            $sgst_tax_value  = 0;
+            
+            $cgst_tax  = 0;
+            $cgst_tax_value   = 0;
+
 
         
-            if($this->input->post('course_mode_online1')==1){
+            if($this->input->post('course_mode')==1){
                 $course_mode_online=1;
             }else{
                 $course_mode_online=0;
             }
 
-            if($this->input->post('course_mode_offline1')==1){
+            if($this->input->post('course_mode')==1){
                 $course_mode_offline=1;
             }else{
                 $course_mode_offline=0;
