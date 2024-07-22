@@ -807,35 +807,82 @@ class Api extends BaseController
             }else{
                 
                 if($this->input->post('course')){
+                            // $courses_multipal = $this->security->xss_clean($this->input->post('course'));
+
+                            // if($courses_multipal){
+                            //     $courses = implode(',', $courses_multipal);
+
+                            //     $course_ids    =   explode(',', $courses);
+                            //     $total_fees = 0;
+                            //     $course_name = '';
+                            //     $i = 1;
+                            //     foreach($course_ids as $id)
+                            //     {
+                            //         $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                            //         if($get_course_fees){
+                                        
+                            //             $total_fees += $get_course_fees[0]->course_total_fees;
+                            //             //$course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> ';  
+                            //             $i++;   
+                                
+                            //         }else{
+                                
+                            //             $total_fees = '';
+                            //             //$course_name = '';  
+                            //             $i++;  
+                            //         }
+                                    
+                            //     }
+        
+                            // }else{
+                            //     $courses = '';
+                            // }
+
                             $courses_multipal = $this->security->xss_clean($this->input->post('course'));
                             if($courses_multipal){
-                                $courses = implode(',', $courses_multipal);
-
-                                $course_ids    =   explode(',', $courses);
-                                $total_fees = 0;
-                                $course_name = '';
-                                $i = 1;
-                                foreach($course_ids as $id)
-                                {
-                                    $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
-                                    if($get_course_fees){
-                                        
-                                        $total_fees += $get_course_fees[0]->course_total_fees;
-                                        //$course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> ';  
-                                        $i++;   
-                                
-                                    }else{
-                                
-                                        $total_fees = '';
-                                        //$course_name = '';  
-                                        $i++;  
-                                    }
+                               // $courses = implode(',', $courses_multipal);
+                
+                               //    $this->enquiry_model->getCourseInfo($id);
+                
+                               //     print_r($courses_multipal);
+                               //     exit;
+                
+                                  $course_name = explode(',', $courses_multipal);
+                
+                                   $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($course_name);
+                
+                                    // $course_ids    =   explode(',', $courses_multipal);
+                                    $course_ids    =   $getallcourseidbycoursename ;
+                
+                                    $total_fees = 0;
+                                    $course_name = '';
+                                    $i = 1;
+                                    $courses='';
+                                    foreach($course_ids as $id)
+                                    {
+                                       $courses .= $id['courseId'] . ','; 
+                
+                                       $get_course_fees =  $this->enquiry_model->getCourseInfo($id['courseId']);
+                                        if($get_course_fees){
+                                            
+                                            $total_fees += $get_course_fees[0]->course_total_fees;
+                                            //$course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> ';  
+                                            $i++;   
                                     
-                                }
-        
+                                        }else{
+                                    
+                                            $total_fees = '';
+                                            //$course_name = '';  
+                                            $i++;  
+                                        }
+                                        
+                                    }
+                
+                
                             }else{
                                 $courses = '';
                             }
+                
 
                             $result_courses = rtrim($courses, ','); 
 
@@ -871,10 +918,10 @@ class Api extends BaseController
                             //     $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($id, trim($this->input->post('full_name')));
                             // }
 
-                            $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($enq_id, trim($this->input->post('mobile_no')));
-                            //$check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
+                            // $check_uniqe =  $this->enquiry_model->checkuniqeenquiryname_update($enq_id, trim($this->input->post('mobile_no')));
+                            // //$check_uniqe =  $this->enquiry_model->checkuniqeenquiryname(trim($this->input->post('full_name')));
 
-                            if($check_uniqe){
+                            // if($check_uniqe){
                             
                               $saveEnquirydata = $this->enquiry_model->saveEnquirydata($enq_id,$data);
                               if($saveEnquirydata){
@@ -882,11 +929,11 @@ class Api extends BaseController
                                   $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('full_name')), 'mobile_no'=>strip_tags(form_error('mobile_no')), 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'counsellor'=>strip_tags(form_error('counsellor')));
                               }
                           
-                            }else{
+                            // }else{
 
-                               $createenquiry_response['status'] = 'failure';
-                               $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('mobile_no')), 'mobile_no'=>'Mobile no Already Exists', 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'counsellor'=>strip_tags(form_error('counsellor')));
-                            }
+                            //    $createenquiry_response['status'] = 'failure';
+                            //    $createenquiry_response['error'] = array('full_name'=>strip_tags(form_error('mobile_no')), 'mobile_no'=>'Mobile no Already Exists', 'alternate_mobile'=>strip_tags(form_error('alternate_mobile')), 'email'=>strip_tags(form_error('email')),'alternamte_email'=>strip_tags(form_error('alternamte_email')),'qualification'=>strip_tags(form_error('qualification')),'purpose'=>strip_tags(form_error('purpose')),'enq_date'=>strip_tags(form_error('enq_date')),'country'=>strip_tags(form_error('country')),'state'=>strip_tags(form_error('state')),'city'=>strip_tags(form_error('city')),'remarks'=>strip_tags(form_error('remarks')),'counsellor'=>strip_tags(form_error('counsellor')));
+                            // }
 
                 }else{
                     $createenquiry_response['status'] = 'failure';
