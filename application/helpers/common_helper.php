@@ -556,7 +556,7 @@ if(!function_exists(('sendwhatsapp')))
                     $response = curl_exec($curl);
 
                     curl_close($curl);
-                    echo $response;
+                    //echo $response;
                  }
 
                  if($whatsaptype=='admission_link'){ 
@@ -607,7 +607,7 @@ if(!function_exists(('sendwhatsapp')))
                     $response = curl_exec($curl);
 
                     curl_close($curl);
-                    echo $response;
+                    //echo $response;
                  }
 
             } catch (Exception $e) {
