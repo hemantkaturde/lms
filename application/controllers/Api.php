@@ -1437,6 +1437,142 @@ class Api extends BaseController
     }
 
 
+    public function sendBrochureLink(){
+        $post_submit = $this->input->post();
+
+            if($post_submit){
+
+                $enq_id =$post_submit['enq_id'];
+                $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
+
+                 $doctor_non_doctor = $get_equiry_data->doctor_non_doctor;
+                 $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+                
+                 $total_fees = 0;
+                 $course_name = '';
+                 $doc_url_val ='';
+                 $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                        $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+
+                        $total_fees += $get_course_fees[0]->course_total_fees;
+                        $course_name .= $get_course_fees[0]->course_name. ',';
+
+                        /*For Attchment*/
+                        $getSyllabusData = $this->enquiry_model->getSyllabusData($id);
+
+                        foreach($getSyllabusData as $doc_url)
+                        {
+                            $doc_url_val .= $doc_url->doc_url. ',';
+                        }
+
+                        $i++;  
+                    }
+
+                    $all_course_name = trim($course_name, ', '); 
+                    $all_doc_url_val = trim($doc_url_val, ', '); 
+
+                    if($all_doc_url_val){
+                        $syallabus_urls = '<div>
+                            <p><b>Download Below Syllabus<b></p>
+                            <p>'.$all_doc_url_val.'</p>
+                       </div>';
+                    }else{
+                        $syallabus_urls = '';
+                    }
+
+                    $to = $get_equiry_data->enq_email;
+                    $from = 'admin@iictn.in'; 
+                    $fromName = 'IICTN'; 
+                    $enq_fullname = $get_equiry_data->enq_fullname;
+                    $email_name ='IICTN Admin '.date('Y-m-d H:i:s');
+
+                    //$email_name ='IICTN-Marketing Material '.date('Y-m-d H:i:s');
+                    //$subject = 'IICTN - Marketing Material '.date('Y-m-d H:i:s');
+                    $subject = ' IICTN Brochure and Syllabus for '.$enq_fullname;
+                    
+                   // $header = "From: IICTN-Mumbai Marketing Material <admin@iictn.in> \r\n";
+                    $header = "From: IICTN-Admin <admin@iictn.in> \r\n";
+                    //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                    $header .= "MIME-Version: 1.0\r\n";
+                    $header .= "Content-type: text/html\r\n";
+
+                     if($doctor_non_doctor=='Doctor'){
+                        $file_path ='<a href="https://iictn.in/markating_material/Doctors_Brochure.pdf">Doctors Brochure </a>';
+                        $wp_url = 'https://iictn.in/markating_material/Doctors_Brochure.pdf';
+                     }else{
+                        $file_path =' <a href="https://iictn.in/markating_material/Non_Doctors_Brochure.pdf">Non Doctors_Brochure </a>';
+                        $wp_url = 'https://iictn.in/markating_material/Non_Doctors_Brochure.pdf';
+                     }
+
+                   /// $body = '<div> <p><b>Greetings from IICTN !!</b></p>
+
+                    $body = '<div>
+                        <p><b>Dear </b> '.$enq_fullname.', </p>
+                        <p>Thank You for your interest in <b>'.$all_course_name.'.</b></p>
+                        <p>We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.</p>
+                        <p>For more details, you can also visit our website <a href="https://iictn.org/" rel="noopener" target="_blank" >www.iictn.org </a></p>
+                        </div>
+                        <div>
+                             <p><b>Download Below Brochure<b></p>
+                             <p>'.$file_path.'</p>
+                        </div>
+                          '.$syallabus_urls.'
+                        <div>
+                            <p><b>Thanks & Regards<b></p>
+                            <p><b>Team IICTN</b></p>
+                        </div>'; 
+        
+                    //$retval = mail($to,$subject,$htmlContent,$header);
+                    //$retval =  sendmail($to,$subject,$body,$email_name,$attachmentList="");
+
+                    $headers = 'MIME-Version: 1.0' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                    // Additional headers
+                    $headers .= 'From: admin@iictn.in' . "\r\n";
+                    $retval = mail($to,$subject,$body,$header);
+
+                    //$retval =  1;
+                    if($retval){
+
+                        /*Welcome Notification on whatsapp*/
+                        $mobile = '+91'.$get_equiry_data->enq_mobile;                      
+                        // $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                        // $data = ["number" => $mobile,"type" => "text","message" => $text,"instance_id" => INSTANCE_ID,"access_token" => ACCESS_TOKEN];
+                        // $jsonData = json_encode($data);
+                        // $send_wp_sms_welcomenoti_text =  sendwhatsapp($mobile,$jsonData);
+
+                        /* Media Link Whatsaap*/
+                        //  $media = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name.'.';
+                        // $media.=' We have attached the brochure and Syllabus for your reference, Feel free to contact us back, we will be delighted to assist and guide you. For more details you can also visit our website www.iictn.org';
+                        $Brochure_link =' :'.$wp_url;
+
+                        if($all_doc_url_val){
+                            $Syllabus =' :'.$all_doc_url_val;
+                        }else{
+                            $Syllabus ='';
+                        }
+
+                        $whatsaptype = 'markating_material';
+                        $url ='';
+                     
+                        $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$url,$mobile,$whatsaptype);  
+
+                         /* End here  Send Whats App */
+                        $process = 'Enquiry Link Sent';
+                        $processFunction = 'Enquiry/sendEnquiryLink';
+                        $this->logrecord($process,$processFunction);
+                        echo(json_encode(array('status'=>'success')));
+                    }
+
+            }else{
+                echo(json_encode(array('status'=>FALSE)));
+
+            }
+    }
+
+
    /* Superadmin Part End Here */   
 
 

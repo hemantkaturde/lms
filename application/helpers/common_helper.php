@@ -505,7 +505,7 @@ if(!function_exists(('sendwhatsapp')))
                     $response = curl_exec($curl);
 
                     curl_close($curl);
-                    echo $response;  
+                    //echo $response;  
                  }
 
                  if($whatsaptype=='payment_link'){ 
