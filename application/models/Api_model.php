@@ -1160,7 +1160,6 @@ class Api_model extends CI_Model
         $this->db->where(TBL_ASK_A_QUERY_ANSWER.'.query_id', $query_id);
         //$this->db->where(TBL_ASK_A_QUERY_ANSWER.'.student_id', $userId);
         $this->db->order_by(TBL_ASK_A_QUERY_ANSWER.'.id', 'DESC');
-        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_ASK_A_QUERY_ANSWER);
         $fetch_result = $query->result_array();
     
