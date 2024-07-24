@@ -1030,6 +1030,7 @@ class Api_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+                 $data[$counter]['queryid'] = $value['queryid'];
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['topic_name'] = $value['topic'];
                  $data[$counter]['query'] = $value['query'];          
