@@ -1870,7 +1870,7 @@ class Api extends BaseController
 
 
      /*Trainer Answer The Query List*/
-     public function gettraineranswerthequery(){
+    public function gettraineranswerthequery(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
@@ -1897,6 +1897,39 @@ class Api extends BaseController
         }
 
     }
+
+    /* View Trainer Answer The Query*/
+    public function viewtraineranswerthequery(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $this->form_validation->set_rules('query_id', 'Query Id', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'query_id' =>strip_tags(form_error('query_id')));
+		}else{
+            $viewtraineranswerthequery_data = $this->Api_model->viewtraineranswerthequery(trim($this->input->post('userid')),trim($this->input->post('user_flag')),trim($this->input->post('query_id')));
+            if($viewtraineranswerthequery_data){
+                $status = 'Success';
+                $message = 'Answer The Query Data Not Found';
+                $data = $viewtraineranswerthequery_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+
 
 
     /* Trianer Part End Here */
