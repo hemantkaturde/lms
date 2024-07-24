@@ -1171,6 +1171,7 @@ class Api_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                  $data[$counter]['query_id'] = $value['query_id'];
+                 $data[$counter]['student_id'] = $value['student_id'];
                  $data[$counter]['query_answer'] = $value['query_answer'];
                  $counter++; 
             }

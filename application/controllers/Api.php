@@ -10,7 +10,7 @@ class Api extends BaseController
     public function __construct()
     {
          parent::__construct();
-         $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model'));
+         $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model','student_model'));
          $this->load->library('form_validation');
     }
 
@@ -1930,6 +1930,39 @@ class Api extends BaseController
     }
 
 
+    public function addqueryanswer(){
+        $post_submit = $this->input->post();
+
+        if(!empty($post_submit)){
+
+            $addnewqueryanswer_response = array();
+            $data = array(
+                        'student_id' => $this->input->post('userId'),
+                        'query_id'=> $this->input->post('query_id'),
+                        'query_answer'=>$this->input->post('query_answer'),
+                );
+
+            $this->form_validation->set_rules('query_answer', 'Query', 'trim|required');
+
+
+            if($this->form_validation->run() == FALSE){
+                        $addnewqueryanswer_response['status'] = 'failure';
+                        $addnewqueryanswer_response['error'] = array('query_answer'=>strip_tags(form_error('query_answer')));
+            }else{
+
+                $saveCoursedata = $this->student_model->saveQueryanswerdata('',$data);
+                   if($saveCoursedata){
+                            $addnewqueryanswer_response['status'] = 'success';
+                            $addnewqueryanswer_response['error'] = array('query_answer'=>strip_tags(form_error('query_answer')));
+                        }
+
+                }
+
+                echo json_encode($addnewqueryanswer_response);
+            }
+
+
+    }
 
 
     /* Trianer Part End Here */
