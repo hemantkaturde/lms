@@ -1120,7 +1120,26 @@ class Api_model extends CI_Model
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
         $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
         $query = $this->db->get(TBL_ADD_ON_COURSE);
-        return $query->result_array();
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['addoncourse_id'] = $value['addoncourse_id'];
+                 $data[$counter]['addoncoursedatetime'] = $value['addoncoursedatetime'];
+                 $data[$counter]['course_name'] = $value['course_name'];   
+                 $data[$counter]['course_total_fees'] = $value['course_total_fees']; 
+                 $data[$counter]['discount'] = $value['discount']; 
+                 $data[$counter]['final_amount'] = $value['course_total_fees']-$value['discount']; 
+                 $data[$counter]['enquiry_id'] = $value['enquiry_id']; 
+                 
+                $counter++; 
+            }
+        }
+    
+        return $data;
 
     }
 

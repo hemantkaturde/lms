@@ -1404,7 +1404,7 @@ class Api extends BaseController
                 $payment_details['status'] = 'success';
             echo json_encode($payment_details);
         }
-    }
+}
 
 
      /*Course List*/
@@ -1898,7 +1898,6 @@ class Api extends BaseController
 
     }
 
-    
 
     /* Trianer Part End Here */
 
