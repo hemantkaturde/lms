@@ -1821,6 +1821,34 @@ class Api extends BaseController
 
     }
 
+    public function gettimetableList(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $timetableList_data = $this->Api_model->gettimetableList();
+            if($timetableList_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $timetableList_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+    }
+
 
    /* Superadmin Part End Here */   
 
@@ -2010,6 +2038,21 @@ class Api extends BaseController
     }
 
     /* Consellor Part End Here */
+
+
+
+
+    /* Student Dashbord Details*/
+
+    public function getstudentdashboarddetails(){
+
+
+        
+
+
+    }
+
+    
 
 
 

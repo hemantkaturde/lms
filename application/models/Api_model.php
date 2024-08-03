@@ -1180,6 +1180,32 @@ class Api_model extends CI_Model
     }
 
 
+
+    public function gettimetableList(){
+            
+            $this->db->select('*');
+            // $this->db->where(TBL_TIMETABLE.'.course_id', $courseid);
+            $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
+            $this->db->order_by(TBL_TIMETABLE.'.id', 'DESC');
+            $query = $this->db->get(TBL_TIMETABLE);
+            $fetch_result = $query->result_array();
+            $data = array();
+            $counter = 0;
+            if(count($fetch_result) > 0)
+            {
+                foreach ($fetch_result as $key => $value)
+                {
+                     $data[$counter]['from_date'] = date('d-m-Y', strtotime($value['from_date']));
+                     $data[$counter]['to_date'] = date('d-m-Y', strtotime($value['to_date']));
+                     $data[$counter]['month_name'] = $value['month_name'];    
+                     $counter++; 
+                }
+            }
+        
+            return $data;
+        
+          }
+        
 }
 
 ?>
