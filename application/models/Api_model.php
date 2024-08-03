@@ -1195,9 +1195,11 @@ class Api_model extends CI_Model
             {
                 foreach ($fetch_result as $key => $value)
                 {
+                     $data[$counter]['timetableid'] =$value['id'];
+                     $data[$counter]['month_name'] = $value['month_name'];   
                      $data[$counter]['from_date'] = date('d-m-Y', strtotime($value['from_date']));
                      $data[$counter]['to_date'] = date('d-m-Y', strtotime($value['to_date']));
-                     $data[$counter]['month_name'] = $value['month_name'];    
+                    
                      $counter++; 
                 }
             }
