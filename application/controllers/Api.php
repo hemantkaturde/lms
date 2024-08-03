@@ -1821,7 +1821,7 @@ class Api extends BaseController
 
     }
 
-    public function gettimetableList(){
+    public function gettimetablelist(){
 
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
