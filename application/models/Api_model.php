@@ -91,6 +91,7 @@ class Api_model extends CI_Model
                  $data[$counter]['enq_qualification'] = $value['enq_qualification'];
                  $data[$counter]['doctor_non_doctor'] = $value['doctor_non_doctor'];
                  $data[$counter]['enq_source'] = $value['enq_source'];
+                
                  if($value['payment_status']=='0'){
                     $data[$counter]['status'] = 'In Follow up';
                  }else if($value['payment_status']=='1'){
