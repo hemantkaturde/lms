@@ -1206,7 +1206,43 @@ class Api_model extends CI_Model
         
             return $data;
         
-          }
+    }
+
+
+    public function gettimetabledetailslist($timetable_id,$user_flag,$userid){
+
+
+        $this->db->select('*,b.name as backuptrainer,tbl_users.name as trainername');
+        $this->db->join('tbl_users', 'tbl_users.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id');
+        $this->db->join('tbl_users b', 'b.userId = '.TBL_TIMETABLE_TRANSECTIONS.'.backup_trainer','left');
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.time_table_id', $timetable_id);
+        $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.isDeleted', 0);
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['id'] =$value['id'];
+                 $data[$counter]['topic'] = $value['topic'];   
+                 $data[$counter]['from_date'] = date('d-m-Y', strtotime($value['from_date']));
+                 $data[$counter]['to_date'] = date('d-m-Y', strtotime($value['to_date']));
+                 $data[$counter]['class_date'] = date('d-m-Y', strtotime($value['date']));
+                 $data[$counter]['timings'] = $value['timings'];
+                 $data[$counter]['trainer'] = $value['trainername'];
+                 $data[$counter]['backuptrainer'] = $value['backuptrainer'];
+
+                 $counter++; 
+            }
+        }
+    
+        return $data;
+
+
+    }
         
 }
 
