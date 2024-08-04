@@ -65,8 +65,9 @@ class Api_model extends CI_Model
         try{
             //extract($data);
 
-            $this->db->select('*,'.TBL_ENQUIRY.'.enq_id as id,'.TBL_ENQUIRY.'.enq_id as enq_id,'.TBL_ADMISSION.'.enq_id as admission_status,'.TBL_ENQUIRY.'.enq_number,'.TBL_USER.'.name as counseller,'.TBL_ENQUIRY.'.enq_fullname,'.TBL_ENQUIRY.'.enq_mobile,'.TBL_ENQUIRY.'.enq_email,'.TBL_ENQUIRY.'.doctor_non_doctor,'.TBL_ENQUIRY.'.enq_course_id');
+            $this->db->select('*,'.TBL_ENQUIRY.'.enq_id as id,'.TBL_ENQUIRY.'.enq_id as enq_id,'.TBL_ADMISSION.'.enq_id as admission_status,'.TBL_ENQUIRY.'.enq_number,'.TBL_USER.'.name as counseller,'.TBL_ENQUIRY.'.enq_fullname,'.TBL_ENQUIRY.'.enq_mobile,'.TBL_ENQUIRY.'.enq_email,'.TBL_ENQUIRY.'.doctor_non_doctor,'.TBL_ENQUIRY.'.enq_course_id,'.TBL_CITIES.'.name city_name');
             // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+            $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_ENQUIRY.'.enq_city');
             $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
             $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
             $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
@@ -85,6 +86,7 @@ class Api_model extends CI_Model
                  $data[$counter]['enq_number'] = $value['enq_number'];
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['enq_city'] = $value['enq_city'];
+                 $data[$counter]['city_name'] = $value['city_name'];
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['enq_email'] = $value['enq_email'];
