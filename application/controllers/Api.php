@@ -2075,14 +2075,40 @@ class Api extends BaseController
 
 
 
+
+
     /* Student Dashbord Details*/
 
     public function getstudentdashboarddetails(){
 
-
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
         
+        $post_submit = $this->input->post();
+        if($this->form_validation->run() == FALSE)
+		{
+            $status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+        }else{
 
+            $userId =$this->input->post('userid');
+           // $data['getaskaqueryRecord'] = $this->admission_model->getaskaqueryRecord($userId);
+            $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
+            $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
+            $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);
+            $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
+            
+            $additional_course_payment_details = $this->enquiry_model->getadditionalInfo($data['get_student_enquiry_id']['enq_id']);
+            $examnotification = $this->student_model->getstudentexaminationdatafordashboardnoti($userId);
 
+            $total_dashboard_counts = array('amount_total'=>1000,'amount_paid_by_you'=>'200','pending_amount_by_you'=>'500');
+        }
+
+        $responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'upcoming_class_links'=>$upcoming_class_links,'exam_notification'=>$examnotification,'total_dashboard_counts'=>$total_dashboard_counts);
+		setContentLength($responseData);
+        
     }
 
     
