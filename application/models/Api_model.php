@@ -86,7 +86,7 @@ class Api_model extends CI_Model
                  $data[$counter]['enq_number'] = $value['enq_number'];
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['enq_city'] = $value['enq_city'];
-                 $data[$counter]['city_name'] = $value['city_name'];
+                 $data[$counter]['city_names'] = $value['city_name'];
                  $data[$counter]['enq_fullname'] = $value['enq_fullname'];
                  $data[$counter]['enq_mobile'] = $value['enq_mobile'];
                  $data[$counter]['enq_email'] = $value['enq_email'];
