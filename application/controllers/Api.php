@@ -2074,9 +2074,6 @@ class Api extends BaseController
 
 
 
-
-
-
     /* Student Dashbord Details*/
 
     public function getstudentdashboarddetails(){
@@ -2109,6 +2106,15 @@ class Api extends BaseController
         $responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'upcoming_class_links'=>$upcoming_class_links,'exam_notification'=>$examnotification,'total_dashboard_counts'=>$total_dashboard_counts);
 		setContentLength($responseData);
         
+    }
+
+
+    /* Student API Work Done Here*/
+
+
+    public function checkappversion(){
+         $responseData = array('android_version'=>'5','ios_version'=>'5');
+         setContentLength($responseData);
     }
 
     
