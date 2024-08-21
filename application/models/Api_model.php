@@ -1272,6 +1272,36 @@ class Api_model extends CI_Model
         return $data;
 
     }
+
+    public function getchaptersdocumentlist($course_id,$user_flag,$userid,$topic_id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.course_id', $course_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.topic_id', $topic_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.isDeleted', 0);
+        $this->db->order_by(TBL_COURSE_TOPICS_DOCUMENT.'.id', 'DESC');
+        $query = $this->db->get(TBL_COURSE_TOPICS_DOCUMENT);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['doc_id'] =$value['id'];
+                 $data[$counter]['course_id'] =$value['course_id'];
+                 $data[$counter]['topic_id'] = $value['topic_id'];
+                 $data[$counter]['doc_type'] = $value['doc_type'];
+                 $data[$counter]['module_name'] = $value['module_name'];
+                 $data[$counter]['file_name_original'] = $value['file_name_original'];
+                 $data[$counter]['file_url'] = $value['file_url'];
+                 $counter++; 
+            }
+        }
+    
+        return $data;
+
+    }
         
 }
 
