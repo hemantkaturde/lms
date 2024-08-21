@@ -667,6 +667,12 @@ class Api_model extends CI_Model
                  $data[$counter]['username']  = $value['username'];
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['role']    = $value['role'];
+                 if($value['profile_pic']){
+                    $data[$counter]['profile_pic']    = 'https://iictn.in/uploads/profile_pic/'.$value['profile_pic'];
+                 }else{
+                    $data[$counter]['profile_pic']    = 0;
+                 }
+                
                  $counter++; 
             }
         }
