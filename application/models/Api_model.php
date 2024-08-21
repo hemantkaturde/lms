@@ -1246,6 +1246,32 @@ class Api_model extends CI_Model
 
 
     }
+
+
+    public function getchapterslist($course_id,$user_flag,$userid){
+
+        $this->db->select('*');
+        //$this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
+        $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
+        $this->db->order_by(TBL_COURSE_TOPICS.'.id', 'DESC');
+        $query = $this->db->get(TBL_COURSE_TOPICS);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['chapter_id'] =$value['id'];
+                 $data[$counter]['course_id'] =$value['course_id'];
+                 $data[$counter]['topic_name'] = $value['topic_name'];
+                 $counter++; 
+            }
+        }
+    
+        return $data;
+
+    }
         
 }
 
