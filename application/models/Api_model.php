@@ -671,7 +671,7 @@ class Api_model extends CI_Model
                  if($value['profile_pic']){
                     $data[$counter]['profile_pic']    = 'https://iictn.in/uploads/profile_pic/'.$value['profile_pic'];
                  }else{
-                    $data[$counter]['profile_pic']    = 0;
+                    $data[$counter]['profile_pic']    = '';
                  }
                 
                  $counter++; 
