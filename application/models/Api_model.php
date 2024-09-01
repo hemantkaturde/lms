@@ -1309,6 +1309,32 @@ class Api_model extends CI_Model
         return $data;
 
     }
+
+
+    public function getallstudentlist($user_flag,$userid){
+
+        $this->db->select('*');
+        //$this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
+        $this->db->where(TBL_USER.'.user_flag', 'student');
+        $this->db->order_by(TBL_USER.'.userId', 'DESC');
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 $data[$counter]['userId'] =$value['userId'];
+                 $data[$counter]['name'] =$value['name'];
+                 $data[$counter]['user_flag'] = $value['user_flag'];
+                 $data[$counter]['report_url'] = ADMIN_PATH.'report/student_report.php?studentid='.$value['userId'];
+                 $counter++; 
+            }
+        }
+    
+        return $data;
+    }
         
 }
 
