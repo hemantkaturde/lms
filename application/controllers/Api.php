@@ -2187,11 +2187,11 @@ class Api extends BaseController
 
             $status = 'Success';
             $message = 'Consellor Dashboard data';
-            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>10,'total_enquires'=>20,'total_admissions'=>30);
+            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>10,'total_enquires'=>20,'total_admissions'=>30,'total_invoices'=>10);
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event,'total_invoices'=>10);
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
 		setContentLength($responseData);
     }
 
