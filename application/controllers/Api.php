@@ -2187,8 +2187,6 @@ class Api extends BaseController
             $getalltotalrevunedetailscounsellor=  $this->Api_model->getalltotalrevunedetailscounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
 
 
-
-
             $status = 'Success';
             $message = 'Consellor Dashboard data';
             $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>10,'total_enquires'=>20,'total_admissions'=>30,'total_invoices'=>10);
