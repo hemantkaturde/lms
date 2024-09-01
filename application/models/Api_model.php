@@ -1326,7 +1326,7 @@ class Api_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                  $data[$counter]['userId'] =$value['userId'];
-                 $data[$counter]['name'] =$value['name'];
+                 $data[$counter]['name'] =$value['name'].'-'.$value['mobile'];
                  $data[$counter]['user_flag'] = $value['user_flag'];
                  $data[$counter]['report_url'] = ADMIN_PATH.'report/student_report.php?studentid='.$value['userId'];
                  $counter++; 
