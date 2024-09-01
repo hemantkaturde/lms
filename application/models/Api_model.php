@@ -1371,6 +1371,24 @@ class Api_model extends CI_Model
     }
 
 
+      /*Get All Certificate List*/
+      public function getalltotalrevunedetailscounsellor($userid,$user_flag)
+      {
+
+         $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+         $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
+         $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
+         $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+ 
+         $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+         $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
+         $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
+         $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
+         $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
+         $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
+         return $data_response;
+ 
+      }
 
 
 

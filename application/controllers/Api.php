@@ -2184,6 +2184,10 @@ class Api extends BaseController
             $getExaminationcount = $this->Api_model->getexaminationCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getAnsthequerycount = $this->Api_model->getallstudentquerycount(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
 
+            $getalltotalrevunedetailscounsellor=  $this->Api_model->getalltotalrevunedetailscounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+
+
+
 
             $status = 'Success';
             $message = 'Consellor Dashboard data';
@@ -2191,7 +2195,7 @@ class Api extends BaseController
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event,'revenue_details'=>$getalltotalrevunedetailscounsellor);
 		setContentLength($responseData);
     }
 
