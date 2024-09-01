@@ -2154,7 +2154,7 @@ class Api extends BaseController
     /* Trianer Part End Here */
 
      /* Consellor Part Start Here */
-     /*Trainer Dashbaord Details*/
+     /*Consellor Dashbaord Details*/
     public function getconsellordashboarddetails(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
@@ -2191,7 +2191,7 @@ class Api extends BaseController
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event,'total_invoices'=>10);
 		setContentLength($responseData);
     }
 
