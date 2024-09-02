@@ -1551,7 +1551,7 @@ class Api_model extends CI_Model
       }
 
 
-      
+
       public function getstudentqueryforttopicwisetriner($userId,$roleText){
         $getTrainercourseis = $this->gettrainercourseIds($userId);;
 
