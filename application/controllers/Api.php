@@ -2070,7 +2070,8 @@ class Api extends BaseController
             $getCoursescount = $this->Api_model->getCoursesCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getExaminationcount = $this->Api_model->getexaminationCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getAnsthequerycount = $this->Api_model->getallstudentquerycount(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
-
+            $student_answer_sheet_for_checking = $this->Api_model->getexamcheckingdata(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getstudentqueryforttopicwisetriner = $this->Api_model->getstudentqueryforttopicwisetriner(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
 
             $status = 'Success';
             $message = 'Trainer Dashboard data';
@@ -2078,7 +2079,7 @@ class Api extends BaseController
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event);
+        $responseData = array('status' => $status,'message'=> $message,'dashbaord_count_data' => $count_data,'todays_class'=>$cur_event,'student_answer_sheet_for_checking'=>$student_answer_sheet_for_checking,'getstudentqueryforttopicwisetriner'=>$getstudentqueryforttopicwisetriner);
 		setContentLength($responseData);
     }
 
