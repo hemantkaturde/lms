@@ -1659,6 +1659,92 @@ class Api_model extends CI_Model
 
 
 
+    public function studentcourseRequestData($user_flag,$userId){
+        $access = $this->session->userdata('access');
+        $jsonstringtoArray = json_decode($access, true);
+        $pageUrl =$this->uri->segment(1);
+       
+        $current_date = date('Y-m-d');
+       
+        $this->db->select('enq_course_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
+        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+        $data = array();
+        $counter = 0;
+         foreach ($fetch_result_enquiry_courses as $key => $value) {
+
+         $course_ids    =   explode(',', $value['enq_course_id']);
+
+         foreach ($course_ids as $key => $value) {
+           
+        $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
+
+      
+        $this->db->join(TBL_TIMETABLE, TBL_TIMETABLE_TRANSECTIONS.'.time_table_id = '.TBL_TIMETABLE.'.id');
+
+        $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id','left');
+    
+        $this->db->where(TBL_COURSE.'.isDeleted', 0);
+       // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
+        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        $this->db->where(TBL_COURSE.'.courseId', $value);
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+        $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+        $fetch_result = $query->result_array();
+       
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                    $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+                    if($checkattendance){
+                        $attendance_alreday_exits = 'Attended' ;
+                    }else{
+                        $attendance_alreday_exits = 'Not Attended' ;
+                    }
+                    // $data[$counter]['courseId'] = $value['courseId'];
+                    $data[$counter]['title'] = $value['topic'];
+                    $data[$counter]['course_name'] = $value['course_name'];
+                    $data[$counter]['classdate'] = $value['classdate'];
+                    $data[$counter]['classtime'] = $value['classtime'];
+                    $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
+
+                    $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
+                  
+                    if($checkAprrovalstatus){
+
+                        if($checkAprrovalstatus['admin_approval_status'] > 0){
+                            $request_status ='Approved';
+                        }else{
+                            $request_status ='In Approval Process ..please wait';
+                        }
+                       
+                    }else{
+                        $request_status ='NA';
+                    }
+                   
+                    $data[$counter]['request_status'] =  $request_status;
+                    $data[$counter]['action'] = '';
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='request_class' data-id='".$value['topicid']."'><img width='20' src=".ICONPATH."/request_new.png alt='Request New Class' title='Request New Class'></a>&nbsp"; 
+
+                 $counter++; 
+            }
+        }
+
+         }
+       }
+ 
+       return $data;
+
+    }
+
+
+
         
 }
 
