@@ -1599,6 +1599,36 @@ class Api_model extends CI_Model
     return $data;
 }
 
+
+    public function studentaskaquerylist($user_flag,$userId){
+
+        $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid');
+        $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+        $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+
+        $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+        // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+        $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+        $query = $this->db->get(TBL_ASK_A_QUERY);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['course_name'] = $value['course_name'];
+                $data[$counter]['topic_name'] = $value['topic'];
+                $data[$counter]['query'] = $value['query'];
+                $data[$counter]['queryid'] = $value['queryid'];
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
         
 }
 
