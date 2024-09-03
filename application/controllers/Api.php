@@ -2252,14 +2252,15 @@ class Api extends BaseController
             $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
-            
-            $additional_course_payment_details = $this->enquiry_model->getadditionalInfo($data['get_student_enquiry_id']['enq_id']);
+            //$additional_course_payment_details = $this->enquiry_model->getadditionalInfo($data['get_student_enquiry_id']['enq_id']);
             $examnotification = $this->student_model->getstudentexaminationdatafordashboardnoti($userId);
+            $payment_details = array('amount_total'=>1000,'amount_paid_by_you'=>200,'pending_amount_by_you'=>500);
+            $total_dashbaord_count = array('total_courses'=>30,'total_admission'=>20,'total_invoices'=>15,'total_exam_notification'=>25,'total_replay_on_query'=>3,'total_class_request'=>30);
+            $additional_course_payment_details = array('total_courses_fees'=>1000,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
 
-            $total_dashboard_counts = array('amount_total'=>1000,'amount_paid_by_you'=>'200','pending_amount_by_you'=>'500');
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'upcoming_class_links'=>$upcoming_class_links,'exam_notification'=>$examnotification,'total_dashboard_counts'=>$total_dashboard_counts);
+        $responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'upcoming_class_links'=>$upcoming_class_links,'exam_notification'=>$examnotification,'payment_details'=>$payment_details,'total_dashbaord_count'=>$total_dashbaord_count);
 		setContentLength($responseData);
         
     }
