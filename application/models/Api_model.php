@@ -1629,6 +1629,36 @@ class Api_model extends CI_Model
         return $data;
     }
 
+
+
+    public function getquerydatabyid($user_flag,$userId,$query_id){
+
+    $this->db->select('*');
+   
+    $this->db->where(TBL_ASK_A_QUERY_ANSWER.'.query_id', $query_id);
+    //$this->db->where(TBL_ASK_A_QUERY_ANSWER.'.student_id', $userId);
+    $this->db->order_by(TBL_ASK_A_QUERY_ANSWER.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_ASK_A_QUERY_ANSWER);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+
+            //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+             $data[$counter]['query_answer'] = $value['query_answer'];
+             $counter++; 
+        }
+    }
+    return $data;
+    }
+
+
+
         
 }
 
