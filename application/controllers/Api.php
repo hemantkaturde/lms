@@ -2604,11 +2604,10 @@ class Api extends BaseController
     }
 
     /* Student API Work Done Here*/
-
     public function getcoursetopic() {
         if($this->input->post('course_id')) {
             $topics = $this->student_model->getcoursetopic($this->input->post('course_id'));
-            if($courserequestr_data){
+            if($topics){
                 $status = 'Success';
                 $message = 'Data Found';
                 $data = $topics;
@@ -2621,6 +2620,8 @@ class Api extends BaseController
             setContentLength($responseData);
         }
     }
+
+
 
 
 
