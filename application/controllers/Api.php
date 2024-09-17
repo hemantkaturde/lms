@@ -2621,7 +2621,41 @@ class Api extends BaseController
     }
 
 
-    
+
+
+    public function addnewquery(){
+        $post_submit = $this->input->post();
+  
+        if(!empty($post_submit)){
+            $userId =  $this->input->post('userid');
+
+            $addnewquery_response = array();
+            $data = array(
+                'course_id' => $this->input->post('course_id'),
+                'certificate_topic'=> $this->input->post('certificate_topic_id'),
+                'query'=> $this->input->post('query'),
+                'student_id'=>$userId
+            );
+
+            $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+            $this->form_validation->set_rules('certificate_topic', 'Certificate Topic', 'trim|required');
+            $this->form_validation->set_rules('query', 'Query', 'trim|required');
+
+            if($this->form_validation->run() == FALSE){
+                $addnewquery_response['status'] = 'failure';
+                $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'certificate_topic'=>strip_tags(form_error('certificate_topic')),'query'=>strip_tags(form_error('query')));
+            }else{
+                
+                $saveCoursedata = $this->student_model->saveQuerydata('',$data);
+                if($saveCoursedata){
+                    $addnewquery_response['status'] = 'success';
+                    $addnewquery_response['error'] = array('course_name'=>strip_tags(form_error('course_name')),'certificate_topic'=>strip_tags(form_error('certificate_topic')) ,'query'=>strip_tags(form_error('query')));
+                }
+            }
+            echo json_encode($addnewquery_response);
+        }
+     }
+
 
 
     /* Student API Work Done Here*/
