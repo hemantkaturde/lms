@@ -1744,6 +1744,15 @@ class Api_model extends CI_Model
     }
 
 
+    public function getUserRolesforappcreateuser($user_flag,$userid)
+    {
+        $this->db->select('roleId, role');
+        $this->db->from('tbl_roles');
+        $this->db->where('isDeleted',0);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 
         
 }

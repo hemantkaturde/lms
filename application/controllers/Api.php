@@ -2036,6 +2036,251 @@ class Api extends BaseController
    }
 
 
+   public function getrolelist(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+        {
+            $status = 'Failure';
+            $message = 'Validation error';
+            $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+        }else{
+            $role_data = $this->Api_model->getUserRolesforappcreateuser($this->input->post('user_flag'),$this->input->post('userid'));
+            if($role_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $role_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+   }
+
+
+   public function createstaff()
+   {
+       $post_submit = $this->input->post();
+       if(!empty($post_submit)){
+
+           $createuser_response = array();
+
+           if(!empty($_FILES['profile_photo']['name'])){
+
+               $file = 'profile_'.rand().$_FILES['profile_photo']['name'];
+               $filename = str_replace(' ','_',$file);
+
+               $config['upload_path'] = 'uploads/profile_pic'; 
+               $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+               $config['max_size'] = '1000'; // max_size in kb 
+               $config['file_name'] = $filename; 
+      
+               // Load upload library 
+               $this->load->library('upload',$config); 
+       
+               // File upload
+               if($this->upload->do_upload('profile_photo')){ 
+                  $profile_pic = $filename; 
+               }else{
+                   $profile_pic ='';
+               }
+
+           }else{
+               $profile_pic = '';
+
+           }
+
+           $data = array(
+               'name'      => $this->input->post('name'),
+               'email'     => $this->input->post('email'),
+               'mobile'    => $this->input->post('mobile'),
+               'password'  => base64_encode($this->input->post('password')),
+               'roleId'    => $this->input->post('role'),
+               'user_flag' => $this->input->post('user_flag'),
+               'profile_pic' => $profile_pic,
+               'username'   => trim($this->input->post('username'))
+           );
+
+           $this->form_validation->set_rules('name', 'User Name', 'trim|required');
+           $this->form_validation->set_rules('email', 'Email', 'trim|required');
+           $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
+           $this->form_validation->set_rules('role', 'Role', 'trim|required');
+           $this->form_validation->set_rules('password', 'Password', 'trim|required');
+           $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
+           $this->form_validation->set_rules('username', 'Username', 'trim|required');
+           $this->form_validation->set_rules('userid', 'userId', 'trim|required');
+           $this->form_validation->set_rules('user_flag', 'user_flag', 'trim|required');
+
+
+           if($this->form_validation->run() == FALSE){
+               $createuser_response['status'] = 'failure';
+               $createuser_response['error'] = array('name'=>strip_tags(form_error('name')), 'email'=>strip_tags(form_error('email')), 'mobile'=>strip_tags(form_error('mobile')), 'role'=>strip_tags(form_error('role')),'password'=>strip_tags(form_error('password')),'confirm_password'=>strip_tags(form_error('confirm_password')));
+           }else{
+
+               /*check If course name is unique*/
+               $check_uniqe =  $this->user_model->checkquniqeusername('',trim($this->input->post('name')),$this->input->post('user_flag'));
+               $check_uniqe1 =  $this->user_model->checkEmailExists('',trim($this->input->post('email')),$this->input->post('user_flag'));
+               $check_uniqe2 =  $this->user_model->checkquniqemobilenumber('',trim($this->input->post('mobile')),$this->input->post('user_flag'));
+
+
+               if($check_uniqe){
+                   $createuser_response['status'] = 'failure';
+                   $createuser_response['error'] = array('name'=>'User Name Alreday Exits', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+               }
+               else if($check_uniqe1){
+                   $createuser_response['status'] = 'failure';
+                   $createuser_response['error'] = array('name'=>'', 'email'=>'Email already Exist', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+               }
+               else if($check_uniqe2){
+                   $createuser_response['status'] = 'failure';
+                   $createuser_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'Mobile already Exist', 'role'=>'','password'=>'','confirm_password' =>'');
+           
+               }else{
+                   $saveCoursedata = $this->user_model->saveUserdata('',$data);
+                   if($saveCoursedata){
+                       $createuser_response['status'] = 'success';
+                       $createuser_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+                   }
+               }
+           }
+   
+           echo json_encode($createuser_response);
+       }
+   }
+
+   public function updatestaff($userId)
+   {
+
+       $post_submit = $this->input->post();
+       if(!empty($post_submit)){
+
+       
+           if(!empty($_FILES['profile_photo']['name'])){
+
+               $file = 'profile_'.rand().$_FILES['profile_photo']['name'];
+               $filename = str_replace(' ','_',$file);
+
+               $config['upload_path'] = 'uploads/profile_pic'; 
+               $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+               $config['max_size'] = '1000000'; // max_size in kb 
+
+               
+               $config['file_name'] = $filename; 
+      
+               // Load upload library 
+               $this->load->library('upload',$config); 
+       
+               // File upload
+               if($this->upload->do_upload('profile_photo')){ 
+                  $profile_pic = $filename; 
+               }else{
+                   $profile_pic =trim($this->input->post('existing_img'));
+               }
+
+           }else{
+               $profile_pic = trim($this->input->post('existing_img'));
+
+           }
+
+         
+
+           $createuser_response = array();
+           if(empty($this->input->post('password1')))
+           {
+               $data = array(
+                   'name'      => $this->input->post('name'),
+                   'email'     => $this->input->post('email'),
+                   'mobile'    => $this->input->post('mobile'),
+                   'roleId'    => $this->input->post('role'),
+                   'user_flag' =>$this->input->post('user_flag'),
+                   'profile_pic' => $profile_pic,
+                   'username'   => trim($this->input->post('username'))
+               );
+           }else{
+               $data = array(
+                   'name'      => $this->input->post('name'),
+                   'email'     => $this->input->post('email'),
+                   'mobile'    => $this->input->post('mobile'),
+                   'password'  => base64_encode($this->input->post('password')),
+                   'roleId'    => $this->input->post('role'),
+                   'user_flag' =>$this->input->post('user_flag'),
+                   'profile_pic' => $profile_pic,
+                   'username'   => trim($this->input->post('username'))
+               );
+           }
+
+           $this->form_validation->set_rules('name', 'User Name', 'trim|required');
+           $this->form_validation->set_rules('email', 'Email', 'trim|required');
+           $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
+           $this->form_validation->set_rules('role', 'Role', 'trim|required');
+
+           $this->form_validation->set_rules('userid', 'userId', 'trim|required');
+           $this->form_validation->set_rules('user_flag', 'user_flag', 'trim|required');
+
+           if(!empty($this->input->post('password')))
+           {
+               $this->form_validation->set_rules('password', 'Password', 'trim|required');
+               $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
+           }            
+
+           if($this->form_validation->run() == FALSE){
+               $createuser_response['status'] = 'failure';
+               $createuser_response['error'] = array('name'=>strip_tags(form_error('name')), 'email'=>strip_tags(form_error('email')), 'mobile'=>strip_tags(form_error('mobile')), 'role'=>strip_tags(form_error('role')),'password'=>strip_tags(form_error('password')),'confirm_password'=>strip_tags(form_error('confirm_password')));
+           }else{
+
+               /*check If user name & email is unique*/
+               $check_uniqe =  $this->user_model->checkquniqeusername($userId, trim($this->input->post('name')),$this->input->post('user_flag'));
+               $check_uniqe1 =  $this->user_model->checkEmailExists($userId, trim($this->input->post('email')),$this->input->post('user_flag'));
+               
+               if($check_uniqe){
+                   $createuser_response['status'] = 'failure';
+                   if(empty($this->input->post('password')))
+                   {
+                       $createuser_response['error'] = array('name'=>'User Name Alreday Exits', 'email'=>'', 'mobile'=>'', 'role'=>'');
+                   }else
+                   {
+                       $createuser_response['error'] = array('name'=>'User Name Alreday Exits', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+                   }
+               }
+               else if($check_uniqe1){
+                   $createuser_response['status'] = 'failure';
+                   
+                   if(empty($this->input->post('password')))
+                   {
+                       $createuser_response['error'] = array('name'=>'', 'email'=>'Email already Exist', 'mobile'=>'', 'role'=>'');
+                   }else
+                   {
+                       $createuser_response['error'] = array('name'=>'', 'email'=>'Email already Exist', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+                   }
+               }
+               else{
+                   $saveUserdata = $this->user_model->saveUserdata($userId,$data);
+                   if($saveUserdata){
+                       $createuser_response['status'] = 'success';
+                       
+                       if(empty($this->input->post('password')))
+                       {
+                           $createuser_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'');
+                       }else
+                       {
+                           $createuser_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password' =>'');
+                       }
+                   }
+               }
+           }
+   
+           echo json_encode($createuser_response);
+       }
+   }
+
    /* Superadmin Part End Here */   
 
 
@@ -2179,8 +2424,9 @@ class Api extends BaseController
 
     }
 
-
     /* Trianer Part End Here */
+
+
 
      /* Consellor Part Start Here */
      /*Consellor Dashbaord Details*/
@@ -2357,17 +2603,32 @@ class Api extends BaseController
         }
     }
 
-
-
-
-
     /* Student API Work Done Here*/
+
+    public function getcoursetopic() {
+        if($this->input->post('course_id')) {
+            $topics = $this->student_model->getcoursetopic($this->input->post('course_id'));
+            if($courserequestr_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $topics;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+    }
+
+
+
+    /*Version API*/
     public function checkappversion(){
          $responseData = array('android_version'=>'1.6','ios_version'=>'1.2');
          setContentLength($responseData);
     }
-
-    
 
 
 
