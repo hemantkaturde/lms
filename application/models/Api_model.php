@@ -1729,8 +1729,8 @@ class Api_model extends CI_Model
                     }
                    
                     $data[$counter]['request_status'] =  $request_status;
-                    $data[$counter]['action'] = '';
-                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='request_class' data-id='".$value['topicid']."'><img width='20' src=".ICONPATH."/request_new.png alt='Request New Class' title='Request New Class'></a>&nbsp"; 
+                    // $data[$counter]['action'] = '';
+                    // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='request_class' data-id='".$value['topicid']."'><img width='20' src=".ICONPATH."/request_new.png alt='Request New Class' title='Request New Class'></a>&nbsp"; 
 
                  $counter++; 
             }
