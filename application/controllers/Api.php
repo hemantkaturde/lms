@@ -2603,7 +2603,6 @@ class Api extends BaseController
         }
     }
 
-    /* Student API Work Done Here*/
     public function getcoursetopic() {
         if($this->input->post('course_id')) {
             $topics = $this->student_model->getcoursetopic($this->input->post('course_id'));
@@ -2622,7 +2621,10 @@ class Api extends BaseController
     }
 
 
+    
 
+
+    /* Student API Work Done Here*/
 
 
     /*Version API*/

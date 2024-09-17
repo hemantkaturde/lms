@@ -1744,6 +1744,18 @@ class Api_model extends CI_Model
     }
 
 
+    public function checkAprrovalstatus($userId,$topicid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_NEW_COURSE_REQUEST.'.time_table_id', $topicid);
+         $this->db->where(TBL_NEW_COURSE_REQUEST.'.student_id', $userId);
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+
+    }
+
     public function getUserRolesforappcreateuser($user_flag,$userid)
     {
         $this->db->select('roleId, role');
