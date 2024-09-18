@@ -2603,6 +2603,36 @@ class Api extends BaseController
         }
     }
 
+
+    public function getcourseliststudent(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $course_data = $this->Api_model->getcourseliststudent($this->input->post('userid'));
+            if($course_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $course_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+
     public function getcoursetopic() {
         if($this->input->post('course_id')) {
             $topics = $this->student_model->getcoursetopic($this->input->post('course_id'));
@@ -2619,8 +2649,6 @@ class Api extends BaseController
             setContentLength($responseData);
         }
     }
-
-
 
 
     public function addnewquery(){
