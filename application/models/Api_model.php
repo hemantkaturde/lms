@@ -630,13 +630,13 @@ class Api_model extends CI_Model
         $data_response['dashbaordcount'] = $dataCount;
 
         if($this->admission_model->total_revenue()[0]['total_revenue']!=null){
-            $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+            $dataMaincourse['total_revenue'] = intval($this->admission_model->total_revenue()[0]['total_revenue']);
         }else{
             $dataMaincourse['total_revenue'] = 0;
         }
 
         if($this->admission_model->total_pending()[0]['total_pending']!=null){
-            $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
+            $dataMaincourse['total_pending'] =  intval($this->admission_model->total_pending()[0]['total_pending']);
         }else{
             $dataMaincourse['total_pending'] = 0;
         }
