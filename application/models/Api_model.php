@@ -658,7 +658,7 @@ class Api_model extends CI_Model
         }
 
 
-        $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
+        $dataAddoncourse['total_course_fees'] =  100;
         $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
         $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
         return $data_response;
