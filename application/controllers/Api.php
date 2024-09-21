@@ -1169,7 +1169,7 @@ class Api extends BaseController
                 'course_cert_cost' => $this->input->post('certificate_cost'),
                 'course_kit_cost'=> $this->input->post('kit_cost'),
                 'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
-                'course_books'=>$this->input->post('course_books1'),
+                'course_books'=>$this->input->post('course_books'),
                 //'course_remark' => $this->input->post('remarks'),
                 'course_mode_online'=>$course_mode_online,
                 'course_mode_offline'=>$course_mode_offline,
@@ -1187,7 +1187,7 @@ class Api extends BaseController
             //$this->form_validation->set_rules('description', 'Description', 'trim');
             $this->form_validation->set_rules('course_cert_cost', 'Certificate cost', 'trim|numeric');
             $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
-            $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
+            $this->form_validation->set_rules('course_kit_cost', 'Kit Cost', 'trim|numeric');
             $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
             //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
