@@ -644,7 +644,7 @@ class Api_model extends CI_Model
         $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
         $total_course_fees =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
        
-         if($total_course_fees){
+         if($total_course_fees!=null){
             $dataAddoncourse['total_course_fees'] = $total_course_fees;
          }else{
             $dataAddoncourse['total_course_fees'] = 0;
