@@ -961,21 +961,21 @@ class Api extends BaseController
                 $fess  = 0;
             }
 
-            if($this->input->post('certificate_cost')){
-                $certificate_cost  = $this->input->post('certificate_cost');
+            if($this->input->post('course_cert_cost')){
+                $certificate_cost  = $this->input->post('course_cert_cost');
             }else{
                 $certificate_cost  = 0;
             }
 
-            if($this->input->post('one_time_admission_fees')){
-                $one_time_admission_fees  = $this->input->post('one_time_admission_fees');
+            if($this->input->post('course_onetime_adm_fees')){
+                $one_time_admission_fees  = $this->input->post('course_onetime_adm_fees');
             }else{
                 $one_time_admission_fees  = 0;
             }
 
 
-            if($this->input->post('kit_cost')){
-                $kit_cost  = $this->input->post('kit_cost');
+            if($this->input->post('course_kit_cost')){
+                $kit_cost  = $this->input->post('course_kit_cost');
             }else{
                 $kit_cost  = 0;
             }
