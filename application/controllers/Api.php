@@ -1092,6 +1092,7 @@ class Api extends BaseController
                 $fess  = 0;
             }
 
+            
 
             if($this->input->post('course_cert_cost')){
                 $certificate_cost  = $this->input->post('course_cert_cost');
