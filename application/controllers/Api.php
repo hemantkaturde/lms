@@ -2117,7 +2117,7 @@ class Api extends BaseController
                'email'     => $this->input->post('email'),
                'mobile'    => $this->input->post('mobile'),
                'password'  => base64_encode($this->input->post('password')),
-               'roleId'    => $this->input->post('role'),
+               'roleId'    => $this->input->post('roleId'),
                'user_flag' => $this->input->post('user_flag_reg'),
                'profile_pic' => $profile_pic,
                'username'   => trim($this->input->post('username'))
@@ -2126,12 +2126,12 @@ class Api extends BaseController
            $this->form_validation->set_rules('name', 'User Name', 'trim|required');
            $this->form_validation->set_rules('email', 'Email', 'trim|required');
            $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
-           $this->form_validation->set_rules('role', 'Role', 'trim|required');
+           $this->form_validation->set_rules('roleId', 'Role', 'trim|required');
            $this->form_validation->set_rules('password', 'Password', 'trim|required');
            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
            $this->form_validation->set_rules('username', 'Username', 'trim|required');
            $this->form_validation->set_rules('userid', 'userId', 'trim|required');
-           $this->form_validation->set_rules('user_flag', 'user_flag', 'trim|required');
+           $this->form_validation->set_rules('user_flag_reg', 'user_flag', 'trim|required');
 
 
            if($this->form_validation->run() == FALSE){
@@ -2140,9 +2140,9 @@ class Api extends BaseController
            }else{
 
                /*check If course name is unique*/
-               $check_uniqe =  $this->user_model->checkquniqeusername('',trim($this->input->post('name')),$this->input->post('user_flag'));
-               $check_uniqe1 =  $this->user_model->checkEmailExists('',trim($this->input->post('email')),$this->input->post('user_flag'));
-               $check_uniqe2 =  $this->user_model->checkquniqemobilenumber('',trim($this->input->post('mobile')),$this->input->post('user_flag'));
+               $check_uniqe =  $this->user_model->checkquniqeusername('',trim($this->input->post('name')),$this->input->post('user_flag_reg'));
+               $check_uniqe1 =  $this->user_model->checkEmailExists('',trim($this->input->post('email')),$this->input->post('user_flag_reg'));
+               $check_uniqe2 =  $this->user_model->checkquniqemobilenumber('',trim($this->input->post('mobile')),$this->input->post('user_flag_reg'));
 
 
                if($check_uniqe){
