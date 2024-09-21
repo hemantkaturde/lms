@@ -1421,7 +1421,7 @@ class Api_model extends CI_Model
       public function getsyllabuslist($course_id,$user_flag,$userid)
       {
         $this->db->select('*');
-        // $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
+        $this->db->where(TBL_COURSE_SYLLABUS.'.course_id', $course_id);
         $this->db->where(TBL_COURSE_SYLLABUS.'.isDeleted', 0);
     
         $this->db->order_by(TBL_COURSE_SYLLABUS.'.id', 'DESC');
