@@ -2213,7 +2213,7 @@ class Api extends BaseController
                    'name'      => $this->input->post('name'),
                    'email'     => $this->input->post('email'),
                    'mobile'    => $this->input->post('mobile'),
-                   'roleId'    => $this->input->post('role'),
+                   'roleId'    => $this->input->post('roleId'),
                    'user_flag' =>$this->input->post('user_flag_reg'),
                    'profile_pic' => $profile_pic,
                    'username'   => trim($this->input->post('username'))
@@ -2224,7 +2224,7 @@ class Api extends BaseController
                    'email'     => $this->input->post('email'),
                    'mobile'    => $this->input->post('mobile'),
                    'password'  => base64_encode($this->input->post('password')),
-                   'roleId'    => $this->input->post('role'),
+                   'roleId'    => $this->input->post('roleId'),
                    'user_flag' =>$this->input->post('user_flag_reg'),
                    'profile_pic' => $profile_pic,
                    'username'   => trim($this->input->post('username'))
@@ -2234,10 +2234,10 @@ class Api extends BaseController
            $this->form_validation->set_rules('name', 'User Name', 'trim|required');
            $this->form_validation->set_rules('email', 'Email', 'trim|required');
            $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
-           $this->form_validation->set_rules('role', 'Role', 'trim|required');
+           $this->form_validation->set_rules('roleId', 'Role', 'trim|required');
 
            $this->form_validation->set_rules('userid', 'userId', 'trim|required');
-           $this->form_validation->set_rules('user_flag', 'user_flag', 'trim|required');
+           $this->form_validation->set_rules('user_flag_reg', 'user_flag', 'trim|required');
 
            if(!empty($this->input->post('password')))
            {
@@ -2251,8 +2251,8 @@ class Api extends BaseController
            }else{
 
                /*check If user name & email is unique*/
-               $check_uniqe =  $this->user_model->checkquniqeusername($userId, trim($this->input->post('name')),$this->input->post('user_flag'));
-               $check_uniqe1 =  $this->user_model->checkEmailExists($userId, trim($this->input->post('email')),$this->input->post('user_flag'));
+               $check_uniqe =  $this->user_model->checkquniqeusername($userId, trim($this->input->post('name')),$this->input->post('user_flag_reg'));
+               $check_uniqe1 =  $this->user_model->checkEmailExists($userId, trim($this->input->post('email')),$this->input->post('user_flag_reg'));
                
                if($check_uniqe){
                    $createuser_response['status'] = 'failure';
