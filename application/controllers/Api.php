@@ -1197,7 +1197,7 @@ class Api extends BaseController
                 $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox);
             }else{
 
-                if($this->input->post('course_mode')!=1 && $this->input->post('course_mode')!=1){
+                if($this->input->post('course_mode_online')!=1){
                  $required_checkbox = '';
               
                 /*check If course name is unique*/
