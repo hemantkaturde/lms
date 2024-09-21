@@ -636,7 +636,8 @@ class Api_model extends CI_Model
         }
         
         $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
-        $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
+        $dataMaincourse['total_pending_amt'] = 100;
+        
         $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
 
         if($this->admission_model->total_revenue_add_on()[0]['total_revenue']!=null){
@@ -658,7 +659,7 @@ class Api_model extends CI_Model
         }
 
 
-        $dataAddoncourse['total_course_fees'] =  100;
+        $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
         $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
         $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
         return $data_response;
