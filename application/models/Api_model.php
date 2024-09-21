@@ -646,16 +646,14 @@ class Api_model extends CI_Model
         }
        
         $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
-        $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
-        $total_course_fees =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
-       
-         if($total_course_fees!=null){
-            $dataAddoncourse['total_course_fees'] = $total_course_fees;
-         }else{
-            $dataAddoncourse['total_course_fees'] = 0;
-         }
-       
+        if($this->admission_model->total_pending_add_on()[0]['total_pending']!=null){
+            $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
+        }else{
+            $total_pending_Add_on_single = 0;
+        }
 
+
+        $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
         $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
         $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
         return $data_response;
