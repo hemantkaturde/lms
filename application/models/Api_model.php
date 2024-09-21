@@ -65,7 +65,7 @@ class Api_model extends CI_Model
         try{
             //extract($data);
 
-            $this->db->select('*,'.TBL_ENQUIRY.'.enq_id as id,'.TBL_ENQUIRY.'.enq_id as enq_id,'.TBL_ADMISSION.'.enq_id as admission_status,'.TBL_ENQUIRY.'.enq_number,'.TBL_USER.'.name as counseller,'.TBL_ENQUIRY.'.enq_fullname,'.TBL_ENQUIRY.'.enq_mobile,'.TBL_ENQUIRY.'.enq_email,'.TBL_ENQUIRY.'.doctor_non_doctor,'.TBL_ENQUIRY.'.enq_course_id,'.TBL_CITIES.'.name city_name');
+            $this->db->select('*,'.TBL_ENQUIRY.'.enq_id as id,'.TBL_ENQUIRY.'.enq_id as enq_id,'.TBL_ADMISSION.'.enq_id as admission_status,'.TBL_ENQUIRY.'.enq_number,'.TBL_USER.'.name as counseller,'.TBL_ENQUIRY.'.enq_fullname,'.TBL_ENQUIRY.'.enq_mobile,'.TBL_ENQUIRY.'.enq_email,'.TBL_ENQUIRY.'.doctor_non_doctor,'.TBL_ENQUIRY.'.enq_course_id,'.TBL_CITIES.'.name city_name,'.TBL_ENQUIRY.'.counsellor_id');
             // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
             $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_ENQUIRY.'.enq_city');
             $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
@@ -129,6 +129,7 @@ class Api_model extends CI_Model
 
                  $data[$counter]['all_course_name'] = $all_course_name ;
                  $data[$counter]['counsellor_name'] = $value['counseller'];
+                 $data[$counter]['counsellor_id'] = $value['counsellor_id'];
 
                  if($value['cancle_status']=='1'){
                        $data[$counter]['status'] = 'Cancelled';
