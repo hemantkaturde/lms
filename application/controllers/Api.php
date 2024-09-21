@@ -2094,7 +2094,7 @@ class Api extends BaseController
 
                $config['upload_path'] = 'uploads/profile_pic'; 
                $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-               $config['max_size'] = '1000'; // max_size in kb 
+               $config['max_size'] = '1000000'; // max_size in kb 
                $config['file_name'] = $filename; 
       
                // Load upload library 
