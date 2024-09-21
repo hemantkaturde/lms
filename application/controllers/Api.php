@@ -1033,14 +1033,14 @@ class Api extends BaseController
 
             $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
             $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
-            $this->form_validation->set_rules('course_type', 'Certificate Type', 'trim|required');
+            $this->form_validation->set_rules('course_type', 'Certificate Type', 'trim');
             //$this->form_validation->set_rules('description', 'Description', 'trim');
             $this->form_validation->set_rules('certificate_cost', 'Certificate cost', 'trim|numeric');
             $this->form_validation->set_rules('one_time_admission_fees', 'One Time Admission Fees', 'trim|numeric');
             $this->form_validation->set_rules('kit_cost', 'Kit Cost', 'trim|numeric');
             $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
             //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
-            $this->form_validation->set_rules('total_course_fees', 'Total Course Fees', 'trim|required');
+            $this->form_validation->set_rules('total_course_fees', 'Total Course Fees', 'trim');
             $this->form_validation->set_rules('course_mode', 'Course_mode', 'trim');
 
             if($this->input->post('course_mode_online')!=1 && $this->input->post('course_mode_offline')!=1){
