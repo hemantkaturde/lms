@@ -2170,13 +2170,14 @@ class Api extends BaseController
        }
    }
 
-   public function updatestaff($userId)
+   public function updatestaff()
    {
 
        $post_submit = $this->input->post();
        if(!empty($post_submit)){
 
-       
+           $userId = $this->input->post('userId');
+
            if(!empty($_FILES['profile_photo']['name'])){
 
                $file = 'profile_'.rand().$_FILES['profile_photo']['name'];
@@ -2236,7 +2237,7 @@ class Api extends BaseController
            $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
            $this->form_validation->set_rules('roleId', 'Role', 'trim|required');
 
-           $this->form_validation->set_rules('userid', 'userId', 'trim|required');
+           $this->form_validation->set_rules('userId', 'userId', 'trim|required');
            $this->form_validation->set_rules('user_flag_reg', 'user_flag', 'trim|required');
 
            if(!empty($this->input->post('password')))
