@@ -72,7 +72,13 @@ class Admin extends BaseController
         }
 
         $data['total_pending_amt'] = $data['total_pending'] - $data['total_revenue'];
-        $data['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+
+        if($this->admission_model->total_revenue_add_on()[0]['total_revenue']){
+            $data['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+        }else{
+            $data['total_revenue_add_on'] = 0;
+        }
+
         $data['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
         $data['total_pending_1'] = $this->admission_model->total_pending_add_on()[0]['total_pending'];
         $data['total_pending_add_on'] =  $data['total_pending_1'] - $data['total_discount'];
