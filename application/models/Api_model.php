@@ -1218,10 +1218,10 @@ class Api_model extends CI_Model
 
 
 
-    public function gettimetableList(){
+    public function gettimetableList($userid,$user_flag,$course_id){
             
             $this->db->select('*');
-            // $this->db->where(TBL_TIMETABLE.'.course_id', $courseid);
+            $this->db->where(TBL_TIMETABLE.'.course_id', $course_id);
             $this->db->where(TBL_TIMETABLE.'.isDeleted', 0);
             $this->db->order_by(TBL_TIMETABLE.'.id', 'DESC');
             $query = $this->db->get(TBL_TIMETABLE);

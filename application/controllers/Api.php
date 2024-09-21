@@ -1841,6 +1841,7 @@ class Api extends BaseController
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $this->form_validation->set_rules('course_id', 'course_id', 'trim|required');
 
         $post_submit = $this->input->post();
         if ($this->form_validation->run() == FALSE)
@@ -1849,7 +1850,7 @@ class Api extends BaseController
 			$message = 'Validation error';
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
-            $timetableList_data = $this->Api_model->gettimetableList();
+            $timetableList_data = $this->Api_model->gettimetableList($this->input->post('userid'),$this->input->post('user_flag'),$this->input->post('course_id'));
             if($timetableList_data){
                 $status = 'Success';
                 $message = 'Data Found';
