@@ -629,7 +629,12 @@ class Api_model extends CI_Model
         $dataCount['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
         $data_response['dashbaordcount'] = $dataCount;
 
-        $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+        if($this->admission_model->total_revenue()[0]['total_revenue']!=null){
+            $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+        }else{
+            $dataMaincourse['total_revenue'] = 0;
+        }
+        
         $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
         $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
         $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
