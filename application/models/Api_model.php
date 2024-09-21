@@ -645,7 +645,12 @@ class Api_model extends CI_Model
             $dataAddoncourse['total_revenue_add_on'] = 0;
         }
        
-        $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
+        if($this->admission_model->total_discount_add_on()[0]['total_discount']!=null){
+            $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
+        }else{
+            $dataAddoncourse['total_discount'] = 0;
+        }
+       
         if($this->admission_model->total_pending_add_on()[0]['total_pending']!=null){
             $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
         }else{
