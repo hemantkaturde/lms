@@ -1081,7 +1081,7 @@ class Api extends BaseController
     public function updatecourse(){
 
         $post_submit = $this->input->post();
-        $courseId = $this->input->post('courseId');
+        $courseId = $this->input->post('courseid');
         if(!empty($post_submit)){
 
             $createcourse_response = array();
@@ -1180,7 +1180,7 @@ class Api extends BaseController
                 'course_total_fees' => $total_course_fees
             );
 
-            $this->form_validation->set_rules('courseId', 'courseId', 'trim|required');
+            $this->form_validation->set_rules('courseid', 'courseId', 'trim|required');
             $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
             $this->form_validation->set_rules('fees', 'Fees', 'trim|required|numeric');
             $this->form_validation->set_rules('course_type', 'Certificate Type', 'trim|required');
