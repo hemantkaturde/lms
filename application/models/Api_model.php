@@ -1285,7 +1285,7 @@ class Api_model extends CI_Model
     public function getchapterslist($course_id,$user_flag,$userid){
 
         $this->db->select('*');
-        $this->db->where(TBL_COURSE_TOPICS.'.course_id', $courseid);
+        $this->db->where(TBL_COURSE_TOPICS.'.course_id', $course_id);
         $this->db->where(TBL_COURSE_TOPICS.'.isDeleted', 0);
         $this->db->order_by(TBL_COURSE_TOPICS.'.id', 'DESC');
         $query = $this->db->get(TBL_COURSE_TOPICS);
