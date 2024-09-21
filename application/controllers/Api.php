@@ -1158,8 +1158,6 @@ class Api extends BaseController
             }
 
             
-
-        
             $data = array(
                 'course_name' => $this->input->post('course_name'),
                 'course_fees'=> $this->input->post('fees'),
@@ -1192,7 +1190,6 @@ class Api extends BaseController
             //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
             
-    
             if($this->form_validation->run() == FALSE){
                 $createcourse_response['status'] = 'failure';
                 $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
@@ -2121,7 +2118,7 @@ class Api extends BaseController
                'mobile'    => $this->input->post('mobile'),
                'password'  => base64_encode($this->input->post('password')),
                'roleId'    => $this->input->post('role'),
-               'user_flag' => $this->input->post('user_flag'),
+               'user_flag' => $this->input->post('user_flag_reg'),
                'profile_pic' => $profile_pic,
                'username'   => trim($this->input->post('username'))
            );
@@ -2217,7 +2214,7 @@ class Api extends BaseController
                    'email'     => $this->input->post('email'),
                    'mobile'    => $this->input->post('mobile'),
                    'roleId'    => $this->input->post('role'),
-                   'user_flag' =>$this->input->post('user_flag'),
+                   'user_flag' =>$this->input->post('user_flag_reg'),
                    'profile_pic' => $profile_pic,
                    'username'   => trim($this->input->post('username'))
                );
@@ -2228,7 +2225,7 @@ class Api extends BaseController
                    'mobile'    => $this->input->post('mobile'),
                    'password'  => base64_encode($this->input->post('password')),
                    'roleId'    => $this->input->post('role'),
-                   'user_flag' =>$this->input->post('user_flag'),
+                   'user_flag' =>$this->input->post('user_flag_reg'),
                    'profile_pic' => $profile_pic,
                    'username'   => trim($this->input->post('username'))
                );
