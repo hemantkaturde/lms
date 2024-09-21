@@ -988,14 +988,18 @@ class Api extends BaseController
             // $cgst_tax  = $this->input->post('cgst_tax');
             // $cgst_tax_value   = $this->input->post('cgst');
 
-            $total_course_fees  = 0;
 
-            $sgst_tax  = 0;
-            $sgst_tax_value  = 0;
-            
-            $cgst_tax  = 0;
-            $cgst_tax_value   = 0;
+            $value_before_tax = $fess +  $certificate_cost +  $one_time_admission_fees + $kit_cost;
 
+            $total_tax = $value_before_tax * 18 / 118;
+
+            $sgst_tax_value = $total_tax / 2;
+            $cgst_tax_value = $total_tax / 2;
+
+            $sgst_tax  = 9;
+            $cgst_tax  = 9;
+
+            $total_course_fees  = $value_before_tax;
 
             if($this->input->post('course_mode_online')==1){
                 $course_mode_online=1;
