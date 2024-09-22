@@ -2176,7 +2176,7 @@ class Api extends BaseController
        $post_submit = $this->input->post();
        if(!empty($post_submit)){
 
-           $userId = $this->input->post('userId');
+           $userId = $this->input->post('staffid');
 
            if(!empty($_FILES['profile_photo']['name'])){
 
