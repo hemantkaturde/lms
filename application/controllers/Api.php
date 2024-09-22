@@ -2238,7 +2238,7 @@ class Api extends BaseController
            $this->form_validation->set_rules('mobile', 'Mobile No', 'trim|required|numeric');
            $this->form_validation->set_rules('roleId', 'Role', 'trim|required');
 
-           $this->form_validation->set_rules('userId', 'userId', 'trim|required');
+        //    $this->form_validation->set_rules('userId', 'userId', 'trim|required');
            $this->form_validation->set_rules('user_flag_reg', 'user_flag', 'trim|required');
 
            if(!empty($this->input->post('password')))
