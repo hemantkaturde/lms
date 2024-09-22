@@ -2300,34 +2300,36 @@ class Api extends BaseController
 
    public function getenquiryfollowuplist(){
 
-    $userdetails = validateServiceRequest();
-    $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
-    $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
-    $this->form_validation->set_rules('enquiry_id', 'Enquiry Id', 'trim|required');
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $this->form_validation->set_rules('enquiry_id', 'Enquiry Id', 'trim|required');
 
-    $post_submit = $this->input->post();
-    if ($this->form_validation->run() == FALSE)
-    {
-        $status = 'Failure';
-        $message = 'Validation error';
-        $data = array('enquiry_id' =>strip_tags(form_error('enquiry_id')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
-    }else{
-        $getenquiryfollowuplist_data = $this->Api_model->getenquiryfollowuplist($this->input->post('enquiry_id'),$this->input->post('user_flag'),$this->input->post('userid'));
-        if($getenquiryfollowuplist_data){
-            $status = 'Success';
-            $message = 'Data Found';
-            $data = $getenquiryfollowuplist_data;
-        }else{
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+        {
             $status = 'Failure';
-            $message = 'No Data Found';
-            $data = '';   
+            $message = 'Validation error';
+            $data = array('enquiry_id' =>strip_tags(form_error('enquiry_id')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
+        }else{
+            $getenquiryfollowuplist_data = $this->Api_model->getenquiryfollowuplist($this->input->post('enquiry_id'),$this->input->post('user_flag'),$this->input->post('userid'));
+            if($getenquiryfollowuplist_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $getenquiryfollowuplist_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
         }
-        $responseData = array('status' => $status,'message'=> $message,'data' => $data);
-        setContentLength($responseData);
-    }
-
 
    }
+
+
+   
 
 
    /* Superadmin Part End Here */   
