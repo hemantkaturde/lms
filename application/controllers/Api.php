@@ -2208,13 +2208,14 @@ class Api extends BaseController
          
 
            $createuser_response = array();
-           if(empty($this->input->post('password1')))
+           if(empty($this->input->post('password')))
            {
                $data = array(
                    'name'      => $this->input->post('name'),
                    'email'     => $this->input->post('email'),
                    'mobile'    => $this->input->post('mobile'),
                    'roleId'    => $this->input->post('roleId'),
+                   'password'  => base64_encode($this->input->post('password')),
                    'user_flag' =>$this->input->post('user_flag_reg'),
                    'profile_pic' => $profile_pic,
                    'username'   => trim($this->input->post('username'))
@@ -2302,20 +2303,20 @@ class Api extends BaseController
     $userdetails = validateServiceRequest();
     $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
     $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
-    $this->form_validation->set_rules('_id', 'Timetable Id', 'trim|required');
+    $this->form_validation->set_rules('enquiry_id', 'Enquiry Id', 'trim|required');
 
     $post_submit = $this->input->post();
     if ($this->form_validation->run() == FALSE)
     {
         $status = 'Failure';
         $message = 'Validation error';
-        $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
+        $data = array('enquiry_id' =>strip_tags(form_error('enquiry_id')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
     }else{
-        $timetableList_data = $this->Api_model->gettimetabledetailslist($this->input->post('timetable_id'),$this->input->post('user_flag'),$this->input->post('userid'));
-        if($timetableList_data){
+        $getenquiryfollowuplist_data = $this->Api_model->getenquiryfollowuplist($this->input->post('enquiry_id'),$this->input->post('user_flag'),$this->input->post('userid'));
+        if($getenquiryfollowuplist_data){
             $status = 'Success';
             $message = 'Data Found';
-            $data = $timetableList_data;
+            $data = $getenquiryfollowuplist_data;
         }else{
             $status = 'Failure';
             $message = 'No Data Found';

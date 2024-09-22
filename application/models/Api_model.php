@@ -1845,6 +1845,13 @@ public function getcourseinfobyid($course_id){
     return $query->result();
 }
 
+
+public function getenquiryfollowuplist(){
+
+
+    
+}
+
         
 }
 
