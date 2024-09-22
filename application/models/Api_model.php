@@ -700,7 +700,7 @@ class Api_model extends CI_Model
                  $data[$counter]['username']  = $value['username'];
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['role']    = $value['role'];
-                 $data[$counter]['password']    = base64_encode($value['password']);
+                 $data[$counter]['password']    = base64_decode($value['password']);
                  $data[$counter]['roleId']    = $value['roleId'];
                  $data[$counter]['userId']    = $value['userId'];
                  if($value['profile_pic']){
