@@ -1846,10 +1846,32 @@ public function getcourseinfobyid($course_id){
 }
 
 
-public function getenquiryfollowuplist(){
+public function getenquiryfollowuplist($enquiry_id,$user_flag,$userid){
 
+         $this->db->select('*');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+        $this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $enquiry_id);
+        $this->db->order_by(TBL_ENQUIRY_FOLLOW_UP.'.id', 'DESC');
 
-    
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_ENQUIRY_FOLLOW_UP);
+        
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['enq_number'] = $value['enquiry_number'];
+                 $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['date']));
+                 $data[$counter]['remark'] = $value['remark'];
+             $counter++; 
+            }
+        }
+        return $data;
+
 }
 
         
