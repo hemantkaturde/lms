@@ -627,7 +627,7 @@ class Api_model extends CI_Model
         $dataCount['enquries'] = $this->enquiry_model->enquiryListingCount();
         $dataCount['students'] = $this->student_model->studentListingCount();
         $dataCount['admissions'] = $this->admission_model->admissionListingCount();
-        $dataCount['total_invoices'] = $this->enquiry_model->getTaxinvoicesCount(NULL);
+        $dataCount['total_invoices'] = $this->getTaxinvoicesCount();
         $data_response['dashbaordcount'] = $dataCount;
 
         if($this->admission_model->total_revenue()[0]['total_revenue']!=null){
@@ -1873,6 +1873,18 @@ public function getenquiryfollowuplist($enquiry_id,$user_flag,$userid){
         return $data;
 
 }
+
+
+public function getTaxinvoicesCount(){
+    $this->db->select('*');
+    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+    //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
+    $this->db->where(TBL_PAYMENT.'.payment_status', 1);
+    $query = $this->db->get(TBL_PAYMENT);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+}
+
 
         
 }
