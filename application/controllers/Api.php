@@ -1100,8 +1100,8 @@ class Api extends BaseController
                 $certificate_cost  = 0;
             }
 
-            if($this->input->post('one_time_admission_fees')){
-                $one_time_admission_fees  = $this->input->post('one_time_admission_fees');
+            if($this->input->post('course_onetime_adm_fees')){
+                $one_time_admission_fees  = $this->input->post('course_onetime_adm_fees');
             }else{
                 $one_time_admission_fees  = 0;
             }
