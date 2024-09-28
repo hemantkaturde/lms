@@ -1965,6 +1965,7 @@ class Api extends BaseController
     $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
     $this->form_validation->set_rules('course_id', 'Course Id', 'trim|required');
     $this->form_validation->set_rules('topic_id', 'Topic Id', 'trim|required');
+    $this->form_validation->set_rules('doc_type', 'Doc Type ', 'trim|required');
 
 
     $post_submit = $this->input->post();
@@ -1972,9 +1973,9 @@ class Api extends BaseController
     {
         $status = 'Failure';
         $message = 'Validation error';
-        $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'course_id'=>strip_tags(form_error('course_id')),'topic_id'=>strip_tags(form_error('topic_id')));
+        $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'course_id'=>strip_tags(form_error('course_id')),'topic_id'=>strip_tags(form_error('topic_id')),'doc_type'=>strip_tags(form_error('doc_type')));
     }else{
-        $getchaptersdocumentlist = $this->Api_model->getchaptersdocumentlist($this->input->post('course_id'),$this->input->post('user_flag'),$this->input->post('userid'),$this->input->post('topic_id'));
+        $getchaptersdocumentlist = $this->Api_model->getchaptersdocumentlist($this->input->post('course_id'),$this->input->post('user_flag'),$this->input->post('userid'),$this->input->post('topic_id'),$this->input->post('doc_type'));
         if($getchaptersdocumentlist){
             $status = 'Success';
             $message = 'Data Found';

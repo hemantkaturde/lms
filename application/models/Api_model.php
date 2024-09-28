@@ -1320,11 +1320,12 @@ class Api_model extends CI_Model
 
     }
 
-    public function getchaptersdocumentlist($course_id,$user_flag,$userid,$topic_id){
+    public function getchaptersdocumentlist($course_id,$user_flag,$userid,$topic_id,$doc_type){
 
         $this->db->select('*');
         $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.course_id', $course_id);
         $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.topic_id', $topic_id);
+        $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.doc_type', $doc_type);
         $this->db->where(TBL_COURSE_TOPICS_DOCUMENT.'.isDeleted', 0);
         $this->db->order_by(TBL_COURSE_TOPICS_DOCUMENT.'.id', 'DESC');
         $query = $this->db->get(TBL_COURSE_TOPICS_DOCUMENT);
