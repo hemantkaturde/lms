@@ -114,7 +114,7 @@ class Api_model extends CI_Model
                         if($get_course_fees){
                             
                             $total_fees += $get_course_fees[0]->course_total_fees;
-                            $course_name .= $i.'-'.$get_course_fees[0]->course_name.',';  
+                            $course_name .= $get_course_fees[0]->course_name.',';  
                             $i++;  
 
                         }else{
