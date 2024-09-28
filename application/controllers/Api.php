@@ -678,18 +678,14 @@ class Api extends BaseController
             //$this->form_validation->set_rules('remarks', 'Remarks', 'trim');
             $this->form_validation->set_rules('course', 'Course', 'trim|required');
             
-            $courses_multipal = $this->security->xss_clean($this->input->post('course'));
+            $courses_multipal = $this->input->post('course');
+
             if($courses_multipal){
-               // $courses = implode(',', $courses_multipal);
-
-               //    $this->enquiry_model->getCourseInfo($id);
-
-               //     print_r($courses_multipal);
-               //     exit;
-
-                  $course_name = explode(',', $courses_multipal);
-
-                   $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($course_name);
+            
+                   $course_name = explode(',',$courses_multipal);
+                   $trimmedArray = array_map('trim', $course_name);
+                   
+                   $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($trimmedArray);
 
                     // $course_ids    =   explode(',', $courses_multipal);
                     $course_ids    =   $getallcourseidbycoursename ;
@@ -700,7 +696,7 @@ class Api extends BaseController
                     $courses='';
                     foreach($course_ids as $id)
                     {
-                       $courses .= $id['courseId'] . ','; 
+                       $courses .= $id['courseId']. ','; 
 
                        $get_course_fees =  $this->enquiry_model->getCourseInfo($id['courseId']);
                         if($get_course_fees){
@@ -878,8 +874,10 @@ class Api extends BaseController
                                //     exit;
                 
                                   $course_name = explode(',', $courses_multipal);
+
+                                  $trimmedArray = array_map('trim', $course_name);
                 
-                                   $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($course_name);
+                                   $getallcourseidbycoursename = $this->enquiry_model->getallcourseidbycoursename($trimmedArray);
                 
                                     // $course_ids    =   explode(',', $courses_multipal);
                                     $course_ids    =   $getallcourseidbycoursename ;
