@@ -347,6 +347,36 @@ class Api extends BaseController
 
     }
 
+
+     /*Examination List*/
+     public function getcheckexaminationlist(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $examination_data = $this->Api_model->getExaminationdata($data);
+            if($examination_data){
+                $status = 'Success';
+                $message = 'Examination Data Found';
+                $data = $examination_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
     /*Certicate List*/
     public function getcertificatelist(){
         $userdetails = validateServiceRequest();
@@ -1091,8 +1121,6 @@ class Api extends BaseController
             }else{
                 $fess  = 0;
             }
-
-
 
             if($this->input->post('course_cert_cost')){
                 $certificate_cost  = $this->input->post('course_cert_cost');
