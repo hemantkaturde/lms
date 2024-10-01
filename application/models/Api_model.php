@@ -1416,10 +1416,17 @@ class Api_model extends CI_Model
       public function getalltotalrevunedetailscounsellor($userid,$user_flag)
       {
 
-         $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
-         $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
-         $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
-         $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+
+        $dataMaincourse['total_revenue'] = 0;
+        $dataMaincourse['total_pending'] = 0;
+        $dataMaincourse['total_pending_amt'] = 0;
+        $data_response['dashbaordtotalMaincourese'] = 0;
+        
+
+        //  $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
+        //  $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
+        //  $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
+        //  $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
  
          $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
          $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
