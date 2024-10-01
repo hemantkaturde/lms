@@ -1420,7 +1420,7 @@ class Api_model extends CI_Model
         $dataMaincourse['total_revenue'] = 0;
         $dataMaincourse['total_pending'] = 0;
         $dataMaincourse['total_pending_amt'] = 0;
-        $data_response['dashbaordtotalMaincourese'] = 0;
+        $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
         
 
         //  $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
