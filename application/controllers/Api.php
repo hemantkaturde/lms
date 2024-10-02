@@ -2610,7 +2610,7 @@ class Api extends BaseController
             
             $userId =$this->input->post('userid');
            // $data['getaskaqueryRecord'] = $this->admission_model->getaskaqueryRecord($userId);
-            $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
+            // $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
             $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
@@ -2622,9 +2622,41 @@ class Api extends BaseController
 
         }
 
-        $responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'upcoming_class_links'=>$upcoming_class_links,'exam_notification'=>$examnotification,'payment_details'=>$payment_details,'total_dashbaord_count'=>$total_dashbaord_count);
-		setContentLength($responseData);
+        //$responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'upcoming_class_links'=>$upcoming_class_links,'exam_notification'=>$examnotification,'payment_details'=>$payment_details,'total_dashbaord_count'=>$total_dashbaord_count);
+        $responseData = array('status' => $status,'message'=> $message,'additional_course_payment_details' => $additional_course_payment_details,'exam_notification'=>$examnotification,'payment_details'=>$payment_details,'total_dashbaord_count'=>$total_dashbaord_count);
+
+        setContentLength($responseData);
         
+    }
+
+
+    public function studentupcomingclasslinkslist(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+        {
+            $status = 'Failure';
+            $message = 'Validation error';
+            $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+        }else{
+            $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
+            if($upcoming_class_links){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $upcoming_class_links;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
     }
 
 
