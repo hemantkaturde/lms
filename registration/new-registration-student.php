@@ -348,27 +348,58 @@ $result_check_admission_is_exits = $conn->query($check_admission_is_alreday_exit
 
 if($result_check_admission_is_exits->num_rows > 0){ ?>
 
-
-<!DOCTYPE html>
-<html>
-
 <head>
-    <title>Admission Form Already Submitted</title>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admission Form Submitted</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 22px;
+            }
+
+            img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h2 {
+                font-size: 18px;
+            }
+
+            img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body class="">
     <article class="bg-secondary mb-3" style="background-color:#fff !important">
         <div class="card-body text-center">
-            <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
-
+            <img src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo" class="img-fluid">
             <h2 class="text-black"><b>!! Admission Form Already Submitted !!</b><br></h2>
         </div>
-        
     </article>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 
+</html>
 </html>
 
 
