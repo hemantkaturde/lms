@@ -2605,6 +2605,9 @@ class Api extends BaseController
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
         }else{
 
+            $status = 'Success';
+            $message = 'Data Found';
+            
             $userId =$this->input->post('userid');
            // $data['getaskaqueryRecord'] = $this->admission_model->getaskaqueryRecord($userId);
             $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
