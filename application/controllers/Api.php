@@ -10,7 +10,7 @@ class Api extends BaseController
     public function __construct()
     {
          parent::__construct();
-         $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model','student_model'));
+         $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model','student_model','admission_model'));
          $this->load->library('form_validation');
     }
 
