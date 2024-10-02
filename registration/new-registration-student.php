@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
 
                                 <tr>
                                     <td><b>Login Link</b></td>
-                                    <td>https://www.iictn.in/</td>
+                                    <td>https://iictn.in/</td>
                                 </tr>
 
                                 <tr>
