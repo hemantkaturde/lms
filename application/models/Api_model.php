@@ -642,8 +642,8 @@ class Api_model extends CI_Model
             $dataMaincourse['total_pending'] = 0;
         }
 
-        //$dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
-        $dataMaincourse['total_pending_amt'] = 20;
+        $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
+        //$dataMaincourse['total_pending_amt'] = 20;
 
 
 
