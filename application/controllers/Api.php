@@ -2643,7 +2643,7 @@ class Api extends BaseController
             $message = 'Validation error';
             $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
         }else{
-            $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
+            $upcoming_class_links = $this->Api_model->upcoming_class_links($userId);
             if($upcoming_class_links){
                 $status = 'Success';
                 $message = 'Data Found';
