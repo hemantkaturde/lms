@@ -2540,7 +2540,6 @@ class Api extends BaseController
     /* Trianer Part End Here */
 
 
-
      /* Consellor Part Start Here */
      /*Consellor Dashbaord Details*/
     public function getconsellordashboarddetails(){
@@ -2833,10 +2832,10 @@ class Api extends BaseController
             }
             echo json_encode($addnewquery_response);
         }
-     }
+    }
 
 
-     public function createcourserequest(){
+    public function createcourserequest(){
 
         $post_submit = $this->input->post();
         if(!empty($post_submit)){
@@ -2847,7 +2846,6 @@ class Api extends BaseController
             $this->form_validation->set_rules('student_id', 'Student Id', 'trim|required');
             $this->form_validation->set_rules('request_description', 'Request Description', 'trim|required');
 
-            
             if($this->form_validation->run() == FALSE){
                 $topirequest_response['status'] = 'failure';
                 $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')));
@@ -2872,15 +2870,73 @@ class Api extends BaseController
             }
             echo json_encode($topirequest_response);
         }
-     }
+    }
 
     
-    
-    
-    
-    
-    
-    
+    public function attendClasses(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $attendance_response = array();
+             if(trim($this->input->post('join_link')) =='YES'){
+                $data = array(
+                    'user_id'  => $this->input->post('user_id'),
+                    'topic_id' => $this->input->post('topic_id'),
+                    'course_id' => $this->input->post('course_id'),
+                    'meeting_id' => $this->input->post('meeting_id'),
+                    'meeting_link' => $this->input->post('meeting_link'),
+                    'attendance_status' => 1,
+                    'join_link' => 1,
+                );
+             }
+             else if(trim($this->input->post('print_card')) =='YES'){
+
+                $data = array(
+                    'user_id'  => $this->input->post('user_id'),
+                    'topic_id' => $this->input->post('topic_id'),
+                    'course_id' => $this->input->post('course_id'),
+                    'meeting_id' => $this->input->post('meeting_id'),
+                    'meeting_link' => $this->input->post('meeting_link'),
+                    'attendance_status' => 1,
+                    'print_card' => 1,
+                );
+
+            }else{
+                $data = array(
+                    'user_id'  => $this->input->post('user_id'),
+                    'topic_id' => $this->input->post('topic_id'),
+                    'course_id' => $this->input->post('course_id'),
+                    'meeting_id' => $this->input->post('meeting_id'),
+                    'meeting_link' => $this->input->post('meeting_link'),
+                    'attendance_status' => 1,
+                );
+            }
+
+
+            /*check if data is alreday exits */
+
+           
+            $checkifAttendanceaxist = $this->student_model->checkifAttendanceaxist($data);
+            if($checkifAttendanceaxist > 0){
+                $attendance_response['status'] = 'success';
+                echo json_encode($attendance_response);
+            }else{
+                $saveAttendancedata = $this->student_model->saveAttendancedata($data);
+
+                if($saveAttendancedata ){
+                    $attendance_response['status'] = 'success';
+                }else{
+                    $attendance_response['status'] = 'failure';
+                }
+                echo json_encode($attendance_response);
+
+            }
+        
+        }
+
+    }
+
+
      /* Student API Work Done Here*/
 
 
