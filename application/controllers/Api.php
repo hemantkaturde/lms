@@ -2815,8 +2815,8 @@ class Api extends BaseController
                 'student_id'=>$userId
             );
 
-            $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
-            $this->form_validation->set_rules('certificate_topic', 'Certificate Topic', 'trim|required');
+            // $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+            // $this->form_validation->set_rules('certificate_topic', 'Certificate Topic', 'trim|required');
             $this->form_validation->set_rules('query', 'Query', 'trim|required');
 
             if($this->form_validation->run() == FALSE){
