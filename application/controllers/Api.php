@@ -2393,6 +2393,91 @@ class Api extends BaseController
    }
 
 
+   public function createnewaddoncourse(){
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+            $saveaddoncourse_response = array();
+
+            $this->form_validation->set_rules('course', 'Course Name', 'trim|required');
+            $this->form_validation->set_rules('enquiry_id', 'Enquiry Id', 'trim|required');
+            if($this->form_validation->run() == FALSE){
+                $saveaddoncourse_response['status'] = 'failure';
+                $saveaddoncourse_response['error'] = array('course'=>strip_tags(form_error('course')), 'enquiry_id'=>strip_tags(form_error('enquiry_id')));
+            }else{
+
+                $data = array(
+                    'enquiry_id'=>trim($this->input->post('enquiry_id')),
+                    'course_id'=> trim($this->input->post('course')),
+                    'active_status'=> 0,
+                );
+
+                $save_Add_on_courses = $this->enquiry_model->save_Add_on_courses('',$data);
+                if($save_Add_on_courses){
+                    $saveaddoncourse_response['status'] = 'success';
+                    $saveaddoncourse_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+                }
+            }
+            echo json_encode($saveaddoncourse_response);
+        }
+   }
+
+
+   public function adddiscounttomaincourse(){
+
+    $post_submit = $this->input->post();
+        
+    if(!empty($post_submit)){
+        $update_discount_response = array();
+
+        $this->form_validation->set_rules('total_amount', 'Total Amount', 'trim|required');
+        $this->form_validation->set_rules('discounted_amount', 'Discounted Amount', 'trim|required');
+        // $this->form_validation->set_rules('total_benifit', 'Total Benifit', 'trim|required');
+        // $this->form_validation->set_rules('final_student_amount', 'Final Student Amount', 'trim|required');
+
+        if($this->form_validation->run() == FALSE){
+                $update_discount_response['status'] = 'failure';
+                $update_discount_response['error'] = array('total_amount'=>strip_tags(form_error('total_amount')), 'discounted_amount'=>strip_tags(form_error('discounted_amount')), 'total_benifit'=>strip_tags(form_error('total_benifit')), 'final_student_amount'=>strip_tags(form_error('final_student_amount')));
+        }else{
+
+
+           $final_student_amount =  $this->input->post('total_amount') - $this->input->post('discounted_amount');
+
+
+            $enquiry_id =   $this->input->post('enquiry_id');
+            $total_amount =   $this->input->post('total_amount');
+            $discounted_amount =   $this->input->post('discounted_amount');
+            // $total_benifit =   $this->input->post('total_benifit');
+            // $final_student_amount =   $this->input->post('final_student_amount');
+            $total_benifit = $this->input->post('discounted_amount');
+            $final_student_amount=$final_student_amount;
+
+            $data = array(
+                'total_payment'=> $total_amount,
+                'discount_amount'=> $discounted_amount,
+                'total_benifit'=> $total_benifit,
+                'final_amount'=> $final_student_amount,                          
+            );
+
+            
+            $update_enquiry_discount =  $this->enquiry_model->update_enquiry_discount($data,$enquiry_id);
+
+
+               if($update_enquiry_discount){
+                    $update_discount_response['status'] = 'success';
+                    $update_discount_response['error'] = array('total_amount'=>strip_tags(form_error('total_amount')), 'discounted_amount'=>strip_tags(form_error('discounted_amount')), 'total_benifit'=>strip_tags(form_error('total_benifit')), 'final_student_amount'=>strip_tags(form_error('final_student_amount')));
+                }else{
+                    $update_discount_response['status'] = 'failure';
+                    $update_discount_response['error'] = array('total_amount'=>strip_tags(form_error('total_amount')), 'discounted_amount'=>strip_tags(form_error('discounted_amount')), 'total_benifit'=>strip_tags(form_error('total_benifit')), 'final_student_amount'=>strip_tags(form_error('final_student_amount')));
+                }
+
+                echo json_encode($update_discount_response);
+
+        }
+        
+    }
+    
+   }
+
 
    /* Superadmin Part End Here */   
 
