@@ -39,7 +39,7 @@ class Event extends CI_Model{
 							 ->join(TBL_USER,TBL_USER.'.userId  = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id')
 							 ->join(TBL_USER.' as a','a.userId  = '.TBL_TIMETABLE_TRANSECTIONS.'.backup_trainer','left')
 							 ->join(TBL_ROLES,TBL_ROLES.'.roleId = '.TBL_USER.'.roleId')
-							// ->where(TBL_TIMETABLE_TRANSECTIONS.'.date',$year)
+							 ->where(TBL_TIMETABLE_TRANSECTIONS.'.date',$year)
 							 ->where(TBL_ROLES.'.role','Trainer')
 							 ->get();
 
