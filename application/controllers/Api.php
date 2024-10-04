@@ -2394,8 +2394,6 @@ class Api extends BaseController
 
 
 
-
-
    /* Superadmin Part End Here */   
 
 
@@ -2838,8 +2836,52 @@ class Api extends BaseController
      }
 
 
+     public function createcourserequest(){
 
-    /* Student API Work Done Here*/
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+            $topirequest_response = array();
+            // $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+            // $this->form_validation->set_rules('course_topic', 'Course Topic', 'trim|required');
+            $this->form_validation->set_rules('time_table_id', 'Time Table Id', 'trim|required');
+            $this->form_validation->set_rules('student_id', 'Student Id', 'trim|required');
+            $this->form_validation->set_rules('request_description', 'Request Description', 'trim|required');
+
+            
+            if($this->form_validation->run() == FALSE){
+                $topirequest_response['status'] = 'failure';
+                $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')));
+            }else{
+    
+                $data = array(
+                    'time_table_id'      => $this->input->post('time_table_id'),
+                    'student_id'     => $this->input->post('student_id'),
+                    'remark'  => $this->input->post('request_description'),
+                    'request_sent_status'  => 1,
+                );
+    
+                $topic_class_request = $this->admission_model->saveclassrequest('',$data);
+    
+                if($topic_class_request){
+                     $topirequest_response['status'] = 'success';
+                     $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')));
+                }else{
+                    $topirequest_response['status'] = 'failure';
+                    $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')));    
+                }
+            }
+            echo json_encode($topirequest_response);
+        }
+     }
+
+    
+    
+    
+    
+    
+    
+    
+     /* Student API Work Done Here*/
 
 
     /*Version API*/
