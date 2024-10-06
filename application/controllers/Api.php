@@ -1445,7 +1445,7 @@ class Api extends BaseController
 
 
      /*Course List*/
-     public function getcertificatetypelist(){
+    public function getcertificatetypelist(){
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
@@ -1888,39 +1888,37 @@ class Api extends BaseController
     }
 
 
-   public function gettimetabledetailslist(){
+    public function gettimetabledetailslist(){
 
-    
-    $userdetails = validateServiceRequest();
-    $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
-    $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
-    $this->form_validation->set_rules('timetable_id', 'Timetable Id', 'trim|required');
+        
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $this->form_validation->set_rules('timetable_id', 'Timetable Id', 'trim|required');
 
-    $post_submit = $this->input->post();
-    if ($this->form_validation->run() == FALSE)
-    {
-        $status = 'Failure';
-        $message = 'Validation error';
-        $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
-    }else{
-        $timetableList_data = $this->Api_model->gettimetabledetailslist($this->input->post('timetable_id'),$this->input->post('user_flag'),$this->input->post('userid'));
-        if($timetableList_data){
-            $status = 'Success';
-            $message = 'Data Found';
-            $data = $timetableList_data;
-        }else{
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+        {
             $status = 'Failure';
-            $message = 'No Data Found';
-            $data = '';   
+            $message = 'Validation error';
+            $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
+        }else{
+            $timetableList_data = $this->Api_model->gettimetabledetailslist($this->input->post('timetable_id'),$this->input->post('user_flag'),$this->input->post('userid'));
+            if($timetableList_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $timetableList_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
         }
-        $responseData = array('status' => $status,'message'=> $message,'data' => $data);
-        setContentLength($responseData);
+
+
     }
-
-
-   }
-
-
 
    public function getchapterslist(){
 
@@ -2475,6 +2473,83 @@ class Api extends BaseController
     }
     
    }
+
+
+   public function addmanualpayment(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $add_manaulpayment_response = array();
+
+        $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
+        $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required');
+        $this->form_validation->set_rules('manual_payment_amount', 'Manual Payment Amount', 'trim|required');
+        $this->form_validation->set_rules('payment_date', 'Payment Date', 'trim|required');
+        $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
+        $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
+        $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
+        $this->form_validation->set_rules('description', 'Description', 'trim');
+
+        if($this->form_validation->run() == FALSE){
+            $add_manaulpayment_response['status'] = 'failure';
+            $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+        }else{
+
+                    $add_on_course_id_post_value =  trim($this->input->post('add_on_course_id'));
+
+                    if($add_on_course_id_post_value){
+                        $add_on_course_id =  trim($this->input->post('add_on_course_id'));
+                        $paymant_type = 'add_on_course_invoice';
+
+                        $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul_add_course($this->input->post('enquiry_id'),trim($this->input->post('add_on_course_id')));
+
+                    }else{
+
+                        $paymant_type = 'regular_invoice';
+                        $add_on_course_id ='';
+                        $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
+                    }
+
+                  
+                    if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
+                        $add_manaulpayment_response['status'] = 'failure';
+                        $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Greater Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
+                    }else{
+
+                            $data = array(
+                                'enquiry_id'=> $this->input->post('enquiry_id'),
+                                'enquiry_number'=>  $this->input->post('enquiry_number'),
+                                'totalAmount'=>  $this->input->post('manual_payment_amount'),
+                                'payment_status'=> '1',
+                                'payment_mode'=> $this->input->post('payment_mode'),
+                                'cheuqe_number'=> $this->input->post('cheuqe_number'),
+                                'bank_name'=> $this->input->post('bank_name'),
+                                'prepared_by'=> $this->input->post('prepared_by'),
+                                'description'=> $this->input->post('description'),
+                                'paymant_type' => $paymant_type,
+                                'add_on_course_id' => trim($add_on_course_id),
+                                'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
+                            );
+
+                           $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
+
+                           if($insert_manualpayment_details){
+                                $add_manaulpayment_response['status'] = 'success';
+                                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                            }else{
+                                $add_manaulpayment_response['status'] = 'failure';
+                                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                            }
+
+                    }
+            
+        }
+
+        echo json_encode($add_manaulpayment_response);
+            
+    }
+ }
+
+
 
 
    /* Superadmin Part End Here */   
