@@ -14,8 +14,6 @@ class Api extends BaseController
          $this->load->library('form_validation');
     }
 
-
-
     /* Superadmin Part */    
 
     /*Login */
@@ -1443,7 +1441,7 @@ class Api extends BaseController
                 $payment_details['status'] = 'success';
             echo json_encode($payment_details);
         }
-}
+    }
 
 
      /*Course List*/
