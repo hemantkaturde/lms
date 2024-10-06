@@ -2550,7 +2550,48 @@ class Api extends BaseController
  }
 
 
- 
+
+ public function addcourserequestapproved(){
+
+    $post_submit = $this->input->post();
+    if(!empty($post_submit)){
+
+        $topirequest_response = array();
+        // $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+        // $this->form_validation->set_rules('course_topic', 'Course Topic', 'trim|required');
+        // $this->form_validation->set_rules('request_description', 'Request Description', 'trim|required');
+       
+        // $this->form_validation->set_rules('time_table_id', 'Time Table Id', 'trim|required');
+        $this->form_validation->set_rules('request_id', 'Request id', 'trim|required');
+        $this->form_validation->set_rules('updated_status', 'Updated Status', 'trim|required');
+        
+        if($this->form_validation->run() == FALSE){
+    
+            $topirequest_response['status'] = 'failure';
+            $topirequest_response['error'] = array('request_id'=>strip_tags(form_error('request_id')), 'updated_status'=>strip_tags(form_error('updated_status')));
+        }else{
+
+            $data = array(
+                'approval_status'  => 1,
+                'admin_approval_status'  => $this->input->post('updated_status'),
+            );
+
+            $request_id = $this->input->post('request_id');
+
+            $topic_class_request = $this->admission_model->saveclassrequest($request_id,$data);
+
+            if($topic_class_request){
+                 $topirequest_response['status'] = 'success';
+                 $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')),'updated_status'=>strip_tags(form_error('updated_status')));
+            }else{
+                $topirequest_response['status'] = 'failure';
+                $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')),'updated_status'=>strip_tags(form_error('updated_status')));    
+            }
+        }
+        echo json_encode($topirequest_response);
+    }
+ }
+
 
 
 

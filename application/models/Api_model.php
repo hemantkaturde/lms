@@ -755,6 +755,7 @@ class Api_model extends CI_Model
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['classdate'] = $value['classdate'];
                     $data[$counter]['classtime'] = $value['classtime'];
+                    $data[$counter]['request_id'] =  $value['request_id'];
                     $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
 
                 
