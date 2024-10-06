@@ -721,7 +721,7 @@ class Api_model extends CI_Model
      {
 
          //$this->db->select('*');
-         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate,'.TBL_NEW_COURSE_REQUEST.'.id as request_id');
+         $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate,'.TBL_NEW_COURSE_REQUEST.'.id as request_id,'.TBL_NEW_COURSE_REQUEST.'.time_table_id,'.TBL_NEW_COURSE_REQUEST.'.student_id as stuid');
          $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_NEW_COURSE_REQUEST.'.time_table_id');
          $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
          $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
@@ -747,6 +747,8 @@ class Api_model extends CI_Model
                     }else{
                         $attendance_alreday_exits = 'Not Attended' ;
                     }
+                    $data[$counter]['time_table_id'] = $value['time_table_id'];
+                    $data[$counter]['student_id'] = $value['stuid'];
                     $data[$counter]['name'] = $value['name'];
                     $data[$counter]['mobile'] = $value['mobile'];
                     $data[$counter]['title'] = $value['topic'];
