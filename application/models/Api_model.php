@@ -625,7 +625,7 @@ class Api_model extends CI_Model
         $dataCount['users'] = $this->user_model->userListingCount();
         $dataCount['courses'] = $this->course_model->courseListingCount();
         $dataCount['enquries'] = $this->enquiry_model->enquiryListingCount();
-        $dataCount['students'] = $this->student_model->studentListingCount();
+        $dataCount['students'] = $this->student_model->totalstudentCount();
         $dataCount['admissions'] = $this->admission_model->admissionListingCount();
         $dataCount['total_invoices'] = $this->getTaxinvoicesCount();
         $data_response['dashbaordcount'] = $dataCount;

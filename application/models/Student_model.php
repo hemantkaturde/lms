@@ -2,6 +2,20 @@
 
 class Student_model extends CI_Model
 {
+
+
+    function totalstudentCount()
+    {
+        $this->db->select('roleId, role');
+        $this->db->from('tbl_roles');
+        $this->db->where('isDeleted',0);
+        $this->db->where('user_flag','student');
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+
+
     function studentListingCount($searchText = '')
     {
         $this->db->select('BaseTbl.studentId , BaseTbl.student_fname, BaseTbl.student_lname, BaseTbl.student_mobile, BaseTbl.student_gender, BaseTbl.student_dob, BaseTbl.student_address,BaseTbl.student_course');
