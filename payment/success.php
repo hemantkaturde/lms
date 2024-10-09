@@ -105,51 +105,56 @@ if ($conn->query($sql) === TRUE) {
                 $response = curl_exec($curl);
                 
                 curl_close($curl);
-                echo $response;
+                //echo $response;
     }
 
   
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You - Razorpay Payment Success</title>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
 </head>
 
-<body class="">
-    <article class="bg-secondary mb-3" style="background-color:#fff !important">
-        <div class="card-body text-center">
-            <img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="150px" height="150px" alt="Company Logo"/>
+<body>
+    <div class="container mt-5">
+        <article class="bg-secondary mb-3" style="background-color:#fff !important;">
+            <div class="card-body text-center">
+                <img src="https://iictn.in/assets/img/logos/iictn_lms.png" class="img-fluid mb-3" width="150" alt="Company Logo" />
 
-            <h2 class="text-black"><b>!! Thank You for Joining IICTN !!</b><br></h2>
-            <br>
-            <p>Dear <b><?=$row['enq_fullname'];?></b>,</p>
-            <p>Please check your Inbox / Spam on your Email with</p>
-            <p>The subject name IICTN RECEIPT, We have attached the copy of your</p>
-            <!-- <p>Payment Receipt</p> -->
-            <p><b>Payment Receipt : </b></p>
-            <!-- <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/paymentrecipt.php?enq='.$enq_id; ?>">Download Payment Receipt </a></p> -->
+                <h2 class="text-black"><strong>!! Thank You for Joining IICTN !!</strong></h2>
+                <p class="mt-4">Dear <strong><?=$row['enq_fullname'];?></strong>,</p>
+                <p>Please check your Inbox/Spam folder for an email with the subject <strong>"IICTN RECEIPT"</strong>. We have attached a copy of your payment receipt.</p>
 
-            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/tax_invoice/index.php?enq_id='.$enq_id.'&paymentid='.$row_last_payment['id']; ?>">Download Payment Receipt </a></p>
+                <p><strong>Payment Receipt: </strong></p>
+                <p>
+                    <a class="btn btn-primary" target="_blank" href="<?php echo 'https://iictn.in/tax_invoice/index.php?enq_id='.$enq_id.'&paymentid='.$row_last_payment['id']; ?>">
+                        Download Payment Receipt
+                    </a>
+                </p>
 
-            <p><b>Admission Form : </b></p>
-            <p><a class="" target="_blank"  href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">Admission Form Link </a></p>
+                <p><strong>Admission Form: </strong></p>
+                <p>
+                    <a class="btn btn-success" target="_blank" href="<?php echo 'https://iictn.in/registration/new-registration-student.php?enq='.$enq_id; ?>">
+                        Admission Form Link
+                    </a>
+                </p>
 
-            <p>Kindly contact your Counsellors for more Details</p>
-            <!-- <p><a class="btn btn-warning" target="_blank" href="https://doctor.iictn.org/"> <br> -->
-                <p><b>Thanks & Regards</b></p>
-                <p><h2><a class="" target="_blank" href="https://doctor.iictn.org/"><b style="color:black">IICTN</b></a></h2></p>
-            <i class="fa fa-window-restore "></i></a></p>
-        </div>
-        
-    </article>
+                <p>Kindly contact your Counsellors for more details.</p>
+                <p class="mt-4"><strong>Thanks & Regards</strong></p>
+                <h2><a href="https://doctor.iictn.org/" target="_blank" class="text-dark"><strong>IICTN</strong></a></h2>
+            </div>
+        </article>
+    </div>
 </body>
 
 </html>
+
 
 <?php
 $conn->close();
