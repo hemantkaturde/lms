@@ -4,15 +4,15 @@ class Student_model extends CI_Model
 {
 
 
-    function totalstudentCount()
+    public function totalstudentCount()
     {
-        $this->db->select('roleId, role');
-        $this->db->from('tbl_roles');
+        $this->db->select('userId');
+        $this->db->from('tbl_users');
         $this->db->where('isDeleted',0);
         $this->db->where('user_flag','student');
         $query = $this->db->get();
         
-        return $query->result();
+        return $query->num_rows();
     }
 
 
