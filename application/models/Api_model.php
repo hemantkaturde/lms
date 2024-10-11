@@ -1711,13 +1711,13 @@ class Api_model extends CI_Model
 
 
     public function studentcourseRequestData($user_flag,$userId){
-        $access = $this->session->userdata('access');
-        $jsonstringtoArray = json_decode($access, true);
-        $pageUrl =$this->uri->segment(1);
+        // $access = $this->session->userdata('access');
+        // $jsonstringtoArray = json_decode($access, true);
+        // $pageUrl =$this->uri->segment(1);
        
         $current_date = date('Y-m-d');
        
-        $this->db->select('enq_course_id');
+        $this->db->select('enq_course_id,user_id');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
         $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
@@ -1725,13 +1725,13 @@ class Api_model extends CI_Model
 
         $data = array();
         $counter = 0;
-         foreach ($fetch_result_enquiry_courses as $key => $value) {
+         foreach ($fetch_result_enquiry_courses as $key => $value2) {
 
-         $course_ids    =   explode(',', $value['enq_course_id']);
+         $course_ids    =   explode(',', $value2['enq_course_id']);
 
          foreach ($course_ids as $key => $value) {
            
-        $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate');
+        $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TIMETABLE_TRANSECTIONS.'.date as classdate,'.TBL_TIMETABLE_TRANSECTIONS.'.time_table_id as tt_id');
         $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_TIMETABLE_TRANSECTIONS.'.course_id');
         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
 
@@ -1764,6 +1764,10 @@ class Api_model extends CI_Model
                     $data[$counter]['classdate'] = $value['classdate'];
                     $data[$counter]['classtime'] = $value['classtime'];
                     $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
+
+                    $data[$counter]['time_table_id'] = $value['tt_id'];
+                    $data[$counter]['student_id'] =  $value2['user_id'];
+
 
                     $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
                   

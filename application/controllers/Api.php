@@ -2436,15 +2436,15 @@ class Api extends BaseController
         }else{
 
 
-           $final_student_amount =  $this->input->post('total_amount') - $this->input->post('discounted_amount');
+           $final_student_amount =  trim($this->input->post('total_amount')) - trim($this->input->post('discounted_amount'));
 
 
-            $enquiry_id =   $this->input->post('enquiry_id');
-            $total_amount =   $this->input->post('total_amount');
-            $discounted_amount =   $this->input->post('discounted_amount');
+            $enquiry_id =   trim($this->input->post('enquiry_id'));
+            $total_amount =   trim($this->input->post('total_amount'));
+            $discounted_amount =   trim($this->input->post('discounted_amount'));
             // $total_benifit =   $this->input->post('total_benifit');
             // $final_student_amount =   $this->input->post('final_student_amount');
-            $total_benifit = $this->input->post('discounted_amount');
+            $total_benifit = trim($this->input->post('discounted_amount'));
             $final_student_amount=$final_student_amount;
 
             $data = array(
