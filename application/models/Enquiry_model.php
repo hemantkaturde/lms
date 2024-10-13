@@ -635,7 +635,7 @@ class Enquiry_model extends CI_Model
 
     public function check_payment_maount_lessthan_actaul($enquiry_id){
         $this->db->select('final_amount');
-        $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);
+        $this->db->where(TBL_ENQUIRY.'.enq_number', $enquiry_id);
         $query = $this->db->get(TBL_ENQUIRY);
         return $query->result_array();
     }
