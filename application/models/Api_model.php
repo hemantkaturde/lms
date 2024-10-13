@@ -1159,6 +1159,7 @@ class Api_model extends CI_Model
 
         $payment_details['total_course_fees'] =$total_course_fees['total_course_fees'];
         $payment_details['totalpaidAmount'] =$totalpaidAmount['totalpaidAmount'];
+        $payment_details['total_discount'] =$total_course_fees['discount_amount'];
         $payment_details['totalpending'] = $total_course_fees['total_course_fees'] - $totalpaidAmount['totalpaidAmount'];
         return $payment_details;
         
