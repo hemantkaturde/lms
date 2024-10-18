@@ -1880,6 +1880,8 @@ public function getenquiryfollowuplist($enquiry_id,$user_flag,$userid){
             foreach ($fetch_result as $key => $value)
             {
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['followup_id'] = $value['id'];
+                 $data[$counter]['enq_id'] = $value['enq_id'];
                  $data[$counter]['enq_number'] = $value['enquiry_number'];
                  $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['date']));
                  $data[$counter]['remark'] = $value['remark'];

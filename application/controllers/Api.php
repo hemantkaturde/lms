@@ -2389,6 +2389,45 @@ class Api extends BaseController
    }
 
 
+   public function editenquiryfollowup(){
+
+    $post_submit = $this->input->post();
+
+    if($post_submit){
+       $createfollow_response = array();        
+       $this->form_validation->set_rules('follow_up_date', 'Follow Up Date', 'trim|required');
+       $this->form_validation->set_rules('remark', 'Remark', 'trim|required');
+       $this->form_validation->set_rules('followup_id', 'followup_id', 'trim|required');
+
+       if($this->form_validation->run() == FALSE){
+
+           $createfollow_response['status'] = 'failure';
+           $createfollow_response['error'] = array('follow_up_date'=>strip_tags(form_error('follow_up_date')), 'remark'=>strip_tags(form_error('remark')),'followup_id'=>strip_tags(form_error('followup_id')));
+   
+       }else{
+           $data = array(
+               'enq_id' => $this->input->post('enquiry_id'),
+               'date'  => date('Y-m-d', strtotime($this->input->post('follow_up_date'))),
+               'remark' => $this->input->post('remark'),
+               'enquiry_number'=> $this->input->post('enquiry_number'),
+               //'createdBy'=>
+           );
+            $followup_id = trim($this->input->post('followup_id'));
+            
+           $saveFollowdata = $this->enquiry_model->saveEnquiryFollowupdata($followup_id,$data);
+           if($saveFollowdata){
+               $createfollow_response['status'] = 'success';
+               $createfollow_response['error'] = array('follow_up_date'=>'', 'remark'=>'');
+           }
+              
+       }
+       echo json_encode($createfollow_response);
+   }
+
+
+  }
+
+
    public function createnewaddoncourse(){
         $post_submit = $this->input->post();
         if(!empty($post_submit)){
