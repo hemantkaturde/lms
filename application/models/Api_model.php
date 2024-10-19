@@ -63,7 +63,8 @@ class Api_model extends CI_Model
     public function getEnquiryData($data){
 
         try{
-            extract($data);
+           
+            print_r($data);
             exit;
 
             $this->db->select('*,'.TBL_ENQUIRY.'.enq_id as id,'.TBL_ENQUIRY.'.enq_id as enq_id,'.TBL_ADMISSION.'.enq_id as admission_status,'.TBL_ENQUIRY.'.enq_number,'.TBL_USER.'.name as counseller,'.TBL_ENQUIRY.'.enq_fullname,'.TBL_ENQUIRY.'.enq_mobile,'.TBL_ENQUIRY.'.enq_email,'.TBL_ENQUIRY.'.doctor_non_doctor,'.TBL_ENQUIRY.'.enq_course_id,'.TBL_CITIES.'.name city_name,'.TBL_ENQUIRY.'.counsellor_id');
