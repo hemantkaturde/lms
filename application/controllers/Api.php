@@ -216,6 +216,9 @@ class Api extends BaseController
 
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
 
+            print_r($data);
+            exit;
+
             $equiry_data = $this->Api_model->getEnquiryData($data);
             if($equiry_data){
                 $status = 'Success';
