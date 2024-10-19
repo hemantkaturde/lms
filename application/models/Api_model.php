@@ -70,6 +70,10 @@ class Api_model extends CI_Model
             $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_ENQUIRY.'.enq_city');
             $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
             $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+
+            if($data['user_flag']=='Counsellor'){
+                $this->db->where(TBL_ENQUIRY.'.counsellor_id', $data['userid']);
+            }
             $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
             $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
             $query = $this->db->get(TBL_ENQUIRY);
