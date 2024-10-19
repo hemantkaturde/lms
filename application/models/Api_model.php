@@ -1285,6 +1285,7 @@ class Api_model extends CI_Model
                  $data[$counter]['class_date'] = date('d-m-Y', strtotime($value['date']));
                  $data[$counter]['timings'] = $value['timings'];
                  $data[$counter]['trainer'] = $value['trainername'];
+                 $data[$counter]['meeting_link'] = '';
                  if($value['backuptrainer']){
                     $data[$counter]['backuptrainer'] = $value['backuptrainer'];
                  }else{
