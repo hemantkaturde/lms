@@ -2904,6 +2904,8 @@ class Api extends BaseController
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
         $this->form_validation->set_rules('exam_id', 'exam_id', 'trim|required');
+        $this->form_validation->set_rules('course_id', 'course_id', 'trim|required');
+
 
         $post_submit = $this->input->post();
         if ($this->form_validation->run() == FALSE)
@@ -2912,7 +2914,7 @@ class Api extends BaseController
             $message = 'Validation error';
             $data = array('exam_id' =>strip_tags(form_error('exam_id')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
         }else{
-            $getanswersheetlist_data = $this->Api_model->getanswersheetlist($this->input->post('exam_id'),$this->input->post('user_flag'),$this->input->post('userid'));
+            $getanswersheetlist_data = $this->Api_model->getanswersheetlist(trim($this->input->post('course_id')),trim($this->input->post('exam_id')));
             if($getanswersheetlist_data){
                 $status = 'Success';
                 $message = 'Data Found';
