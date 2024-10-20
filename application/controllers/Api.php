@@ -1476,6 +1476,239 @@ class Api extends BaseController
     }
 
 
+    public function sendPaymentLinkaddoncourse(){
+
+        $post_submit = $this->input->post();
+    
+            if($post_submit){
+                 $enq_id =trim($this->input->post('enq_id'));
+                 $add_on_course_id =trim($this->input->post('add_on_course_id'));
+                //$enq_id =38;
+                 $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
+
+                //  $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+                
+                 $total_fees = 0;
+                 $course_name = ''; 
+                 $course_name_without ='';
+                 $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                        $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                        $total_fees += $get_course_fees[0]->course_total_fees;
+                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
+                        $course_name_without .= $get_course_fees[0]->course_name. ',';  
+                        $i++;  
+                    }
+                $all_course_name = trim($course_name, ', '); 
+
+
+                $get_final_amount_of_add_on_course =  $this->enquiry_model->get_final_amount_of_add_on_course($enq_id,$add_on_course_id);
+
+                $final_course_amount = $get_final_amount_of_add_on_course['course_total_fees'] - $get_final_amount_of_add_on_course['discount'];
+
+                $all_course_name =$get_final_amount_of_add_on_course['course_name'];
+
+
+                $get_equiry_datapayment_transaction =  $this->enquiry_model->gettotalpaidamountof_add_on_course($add_on_course_id,$enq_id);
+                
+                $get_equiry_datapayment =  $final_course_amount;
+
+             
+               
+                if($get_equiry_datapayment_transaction){
+                    $total_paybal = $get_equiry_datapayment - $get_equiry_datapayment_transaction[0]->totalpaidamount;
+
+
+                }else{
+                    $total_paybal  = $get_equiry_datapayment;
+                }
+
+
+                $to = $get_equiry_data->enq_email;
+                $email_name ='IICTN-Payment Link';
+                $Subject = 'IICTN - Admission Payment Link '.date('Y-m-d H:i:s');
+                $Body  = '   <html xmlns="http://www.w3.org/1999/xhtml">
+                            <head>
+                                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                                <title>Invoice details</title>
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                            </head>
+                
+                            <body style="margin: 0; padding: 0; background-color:#eaeced " bgcolor="#eaeced">
+                            <table bgcolor="#eaeced" cellpadding="0" cellspacing="0" width="100%" style="background-color: #eaeced; ">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            <tr>
+                                <td>
+                                <table align="center" bgcolor="#ffffff" cellpadding="20" cellspacing="0" width="600" 
+                                        style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #f0f0f0;">
+                                    <tr style="border-top: 4px solid #ca9331;">
+                                    <td align="left" style="padding: 15px 20px 20px;">
+                                    <table width="100%">
+                                        <tr>
+                                        <td><img  src="https://iictn.in/assets/img/logos/iictn_lms.png" width="130px" height="130px" alt="Company Logo"/></td>
+                                        <td align="right">
+                                            <span>Inquiry Number: '.$get_equiry_data->enq_number.'</span><br>
+                                            <span style="padding: 5px 0; display: block;">'.$get_equiry_data->enq_date.'</span>
+                                        </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="center" style="padding: 20px; border-top: 1px solid #f0f0f0; background: #fafafa;,; ">
+                                    <div>Total Course Fee:</div>
+                                    <h2 style="margin: 10px 0; color: #333; font-weight: 500; font-size: 48px;">
+                                    ₹  '.$total_paybal.'
+                                    </h2>
+                                    <div style="line-height: 1.4; font-size: 1.2; font-size: 14px; color: #777;"></div>
+                                    </td>
+                                    </tr>
+
+                                    <tr style="">
+                                    <td align="center" style="padding: 15px 20px 20px;">
+                                    <table width="80%">
+                                        <tr>
+                                        <td><b>Full Name</b></td>
+                                        <td>'.$get_equiry_data->enq_fullname.'</td>
+                                        </tr>
+
+                                        <tr>
+                                        <td><b>Mobile Number</b></td>
+                                        <td>'.$get_equiry_data->enq_mobile.'</td>
+                                        </tr>
+
+                                        <tr>
+                                        <td><b>Email id</b></td>
+                                        <td>'.$get_equiry_data->enq_email.'</td>
+                                        </tr>
+
+                                        <tr>
+                                        <td><b>Course</b></td>
+                                        <td>'.$all_course_name.'</td>
+                                        </tr>
+                                    </table>
+                                    </td>
+                                    </tr>
+
+                                    <tr>
+                                    <td align="center" style="padding: 20px 40px;font-size: 16px;line-height: 1.4;color: #333;">
+                                    <div> </div>
+                                    <div><br></div>
+                                    <div style="background: #ca9331; display: inline-block;padding: 15px 25px; color: #fff; border-radius: 6px">
+
+                                    <a href="https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id.'" class="btn btn-sm btn-primary float-right pay_now"
+                                    data-amount="1000" data-id="1">Pay Now</a>
+                                    
+                                    </div>
+                                    <div style="color: #777; padding: 5px;"></div>
+                                    <div><br></div>
+                                    </td>
+                                    </tr>
+                                    <tr style="border-top: 1px solid #eaeaea;">
+                                    <td align="center">
+                                        <div style="font-size: 14px;line-height: 1.4;color: #777;">
+                                        Regards,<br>
+                                        IICTN
+                                    </div>
+                                    </td>
+                                    </tr>
+                                </table>
+                                
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            </body>
+                    </html>';
+
+                    // $to = "hemantkaturde123@gmail.com";
+                    // $subject = "This is subject";
+                    
+                    // $message = "<b>This is HTML message.</b>";
+                    // $message .= "<h1>This is headline.</h1>";
+                    
+                    $header = "From: IICTN-Payment Link <admin@iictn.in> \r\n";
+                    //$header .= "Cc:ahemantkaturde123@gmail.com \r\n";
+                    $header .= "MIME-Version: 1.0\r\n";
+                    $header .= "Content-type: text/html\r\n";
+                    
+                    $retval = mail($to,$Subject,$Body,$header);
+                    //$retval =  sendmail($to,$Subject,$Body,$email_name,$attachmentList="");
+                    //$retval=1;
+                if($retval){
+
+
+                    //  /* Send Whats App  Start Here */
+                    //  $curl = curl_init();
+                      $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
+                      $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
+                      //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
+                      $mobile = '+91'.$get_equiry_data->enq_mobile;
+                    
+                      $whatsaptype = 'payment_link';
+                      $url = ' https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number;
+                      $Brochure_link ='';
+                      $Syllabus ='';
+
+                      $send_wp_sms_media_text =  sendwhatsapp($all_course_name,$Brochure_link,$Syllabus,$url,$mobile,$whatsaptype); 
+                      
+                    
+
+                    $process = 'Enquiry Link Sent';
+                    $processFunction = 'Enquiry/sendEnquiryLink';
+                    $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            }else{
+                echo(json_encode(array('status'=>FALSE)));
+
+            }
+    }
+
+
+    public function addaddondiscountpayment(){
+
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+            $add_addon_discount_response = array();
+            $this->form_validation->set_rules('discount_amount', 'Discount Amount', 'trim|required');
+            if($this->form_validation->run() == FALSE){
+                $add_addon_discount_response['status'] = 'failure';
+                $add_addon_discount_response['error'] = array('discount_amount'=>strip_tags(form_error('discount_amount')));
+            }else{
+
+                $add_discount_tarnsaction_id = trim($this->input->post('addoncourse_id'));
+
+                $data = array(
+                    'discount'=> trim($this->input->post('discount_amount')),
+                );
+
+                $save_Add_on_courses_discounr = $this->enquiry_model->save_addon_discount_payment($add_discount_tarnsaction_id ,$data);
+                if($save_Add_on_courses_discounr){
+                    $add_addon_discount_response['status'] = 'success';
+                    $add_addon_discount_response['error'] = array('course'=>'', 'enquiry_id'=>'');
+                }
+
+            }
+
+            echo json_encode($add_addon_discount_response);
+        }
+    }
+
+
      /*Course List*/
     public function getcertificatetypelist(){
         $userdetails = validateServiceRequest();
@@ -2421,43 +2654,43 @@ class Api extends BaseController
    }
 
 
-   public function editenquiryfollowup(){
+    public function editenquiryfollowup(){
 
-    $post_submit = $this->input->post();
+        $post_submit = $this->input->post();
 
-    if($post_submit){
-       $createfollow_response = array();        
-       $this->form_validation->set_rules('follow_up_date', 'Follow Up Date', 'trim|required');
-       $this->form_validation->set_rules('remark', 'Remark', 'trim|required');
-       $this->form_validation->set_rules('followup_id', 'followup_id', 'trim|required');
+        if($post_submit){
+        $createfollow_response = array();        
+        $this->form_validation->set_rules('follow_up_date', 'Follow Up Date', 'trim|required');
+        $this->form_validation->set_rules('remark', 'Remark', 'trim|required');
+        $this->form_validation->set_rules('followup_id', 'followup_id', 'trim|required');
 
-       if($this->form_validation->run() == FALSE){
+        if($this->form_validation->run() == FALSE){
 
-           $createfollow_response['status'] = 'failure';
-           $createfollow_response['error'] = array('follow_up_date'=>strip_tags(form_error('follow_up_date')), 'remark'=>strip_tags(form_error('remark')),'followup_id'=>strip_tags(form_error('followup_id')));
-   
-       }else{
-           $data = array(
-               'enq_id' => $this->input->post('enquiry_id'),
-               'date'  => date('Y-m-d', strtotime($this->input->post('follow_up_date'))),
-               'remark' => $this->input->post('remark'),
-               'enquiry_number'=> $this->input->post('enquiry_number'),
-               //'createdBy'=>
-           );
-            $followup_id = trim($this->input->post('followup_id'));
-            
-           $saveFollowdata = $this->enquiry_model->saveEnquiryFollowupdata($followup_id,$data);
-           if($saveFollowdata){
-               $createfollow_response['status'] = 'success';
-               $createfollow_response['error'] = array('follow_up_date'=>'', 'remark'=>'');
-           }
-              
-       }
-       echo json_encode($createfollow_response);
-   }
+            $createfollow_response['status'] = 'failure';
+            $createfollow_response['error'] = array('follow_up_date'=>strip_tags(form_error('follow_up_date')), 'remark'=>strip_tags(form_error('remark')),'followup_id'=>strip_tags(form_error('followup_id')));
+    
+        }else{
+            $data = array(
+                'enq_id' => $this->input->post('enquiry_id'),
+                'date'  => date('Y-m-d', strtotime($this->input->post('follow_up_date'))),
+                'remark' => $this->input->post('remark'),
+                'enquiry_number'=> $this->input->post('enquiry_number'),
+                //'createdBy'=>
+            );
+                $followup_id = trim($this->input->post('followup_id'));
+                
+            $saveFollowdata = $this->enquiry_model->saveEnquiryFollowupdata($followup_id,$data);
+            if($saveFollowdata){
+                $createfollow_response['status'] = 'success';
+                $createfollow_response['error'] = array('follow_up_date'=>'', 'remark'=>'');
+            }
+                
+        }
+        echo json_encode($createfollow_response);
+        }
 
 
-  }
+    }
 
 
    public function createnewaddoncourse(){
@@ -2546,122 +2779,156 @@ class Api extends BaseController
    }
 
 
-   public function addmanualpayment(){
-        $post_submit = $this->input->post();
-        if($post_submit){
-            $add_manaulpayment_response = array();
+    public function addmanualpayment(){
+            $post_submit = $this->input->post();
+            if($post_submit){
+                $add_manaulpayment_response = array();
 
-            $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
-            $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required');
-            $this->form_validation->set_rules('manual_payment_amount', 'Manual Payment Amount', 'trim|required');
-            $this->form_validation->set_rules('payment_date', 'Payment Date', 'trim|required');
-            $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
-            $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
-            $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
-            $this->form_validation->set_rules('description', 'Description', 'trim');
+                $this->form_validation->set_rules('enquiry_number', 'Enquiry Eumber', 'trim|required');
+                $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required');
+                $this->form_validation->set_rules('manual_payment_amount', 'Manual Payment Amount', 'trim|required');
+                $this->form_validation->set_rules('payment_date', 'Payment Date', 'trim|required');
+                $this->form_validation->set_rules('cheuqe_number', 'Cheuqe Number', 'trim');
+                $this->form_validation->set_rules('bank_name', 'Bank Name', 'trim');
+                $this->form_validation->set_rules('prepared_by', 'Prepared By', 'trim');
+                $this->form_validation->set_rules('description', 'Description', 'trim');
 
-            if($this->form_validation->run() == FALSE){
-                $add_manaulpayment_response['status'] = 'failure';
-                $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-            }else{
+                if($this->form_validation->run() == FALSE){
+                    $add_manaulpayment_response['status'] = 'failure';
+                    $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                }else{
 
-                        $add_on_course_id_post_value =  trim($this->input->post('add_on_course_id'));
+                            $add_on_course_id_post_value =  trim($this->input->post('add_on_course_id'));
 
-                        if($add_on_course_id_post_value){
-                            $add_on_course_id =  trim($this->input->post('add_on_course_id'));
-                            $paymant_type = 'add_on_course_invoice';
+                            if($add_on_course_id_post_value){
+                                $add_on_course_id =  trim($this->input->post('add_on_course_id'));
+                                $paymant_type = 'add_on_course_invoice';
 
-                            $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul_add_course($this->input->post('enquiry_number'),trim($this->input->post('add_on_course_id')));
+                                $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul_add_course($this->input->post('enquiry_number'),trim($this->input->post('add_on_course_id')));
 
-                        }else{
+                            }else{
 
-                            $paymant_type = 'regular_invoice';
-                            $add_on_course_id ='';
-                            $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_number'));
-                        }
+                                $paymant_type = 'regular_invoice';
+                                $add_on_course_id ='';
+                                $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_number'));
+                            }
 
+                        
+                            // if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
+                            //     $add_manaulpayment_response['status'] = 'failure';
+                            //     $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Greater Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
+                            // }else{
+
+                                    $data = array(
+                                        'enquiry_id'=> $this->input->post('enquiry_number'),
+                                        'enquiry_number'=>  $this->input->post('enquiry_number'),
+                                        'totalAmount'=>  $this->input->post('manual_payment_amount'),
+                                        'payment_status'=> '1',
+                                        'payment_mode'=> $this->input->post('payment_mode'),
+                                        'cheuqe_number'=> $this->input->post('cheuqe_number'),
+                                        'bank_name'=> $this->input->post('bank_name'),
+                                        'prepared_by'=> $this->input->post('prepared_by'),
+                                        'description'=> $this->input->post('description'),
+                                        'paymant_type' => $paymant_type,
+                                        'add_on_course_id' => trim($add_on_course_id),
+                                        'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
+                                    );
+
+                                $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
+
+                                if($insert_manualpayment_details){
+                                        $add_manaulpayment_response['status'] = 'success';
+                                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                                    }else{
+                                        $add_manaulpayment_response['status'] = 'failure';
+                                        $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
+                                    }
+
+                            // }
                     
-                        // if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
-                        //     $add_manaulpayment_response['status'] = 'failure';
-                        //     $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Greater Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
-                        // }else{
+                }
 
-                                $data = array(
-                                    'enquiry_id'=> $this->input->post('enquiry_number'),
-                                    'enquiry_number'=>  $this->input->post('enquiry_number'),
-                                    'totalAmount'=>  $this->input->post('manual_payment_amount'),
-                                    'payment_status'=> '1',
-                                    'payment_mode'=> $this->input->post('payment_mode'),
-                                    'cheuqe_number'=> $this->input->post('cheuqe_number'),
-                                    'bank_name'=> $this->input->post('bank_name'),
-                                    'prepared_by'=> $this->input->post('prepared_by'),
-                                    'description'=> $this->input->post('description'),
-                                    'paymant_type' => $paymant_type,
-                                    'add_on_course_id' => trim($add_on_course_id),
-                                    'payment_date'=>  date('Y-m-d h:i:sa', strtotime($this->input->post('payment_date'))),
-                                );
-
-                            $insert_manualpayment_details =  $this->enquiry_model->insert_manualpayment_details($data);
-
-                            if($insert_manualpayment_details){
-                                    $add_manaulpayment_response['status'] = 'success';
-                                    $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-                                }else{
-                                    $add_manaulpayment_response['status'] = 'failure';
-                                    $add_manaulpayment_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')), 'payment_mode'=>strip_tags(form_error('payment_mode')), 'manual_payment_amount'=>strip_tags(form_error('manual_payment_amount')), 'payment_date'=>strip_tags(form_error('payment_date')),'cheuqe_number'=>strip_tags(form_error('cheuqe_number')),'bank_name'=>strip_tags(form_error('bank_name')),'prepared_by'=>strip_tags(form_error('prepared_by')));
-                                }
-
-                        // }
-                
+                echo json_encode($add_manaulpayment_response);
+                    
             }
-
-            echo json_encode($add_manaulpayment_response);
-                
-        }
-  }
-
-
-
- public function addcourserequestapproved(){
-
-    $post_submit = $this->input->post();
-    if(!empty($post_submit)){
-
-        $topirequest_response = array();
-        // $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
-        // $this->form_validation->set_rules('course_topic', 'Course Topic', 'trim|required');
-        // $this->form_validation->set_rules('request_description', 'Request Description', 'trim|required');
-       
-        // $this->form_validation->set_rules('time_table_id', 'Time Table Id', 'trim|required');
-        $this->form_validation->set_rules('request_id', 'Request id', 'trim|required');
-        $this->form_validation->set_rules('updated_status', 'Updated Status', 'trim|required');
-        
-        if($this->form_validation->run() == FALSE){
-    
-            $topirequest_response['status'] = 'failure';
-            $topirequest_response['error'] = array('request_id'=>strip_tags(form_error('request_id')), 'updated_status'=>strip_tags(form_error('updated_status')));
-        }else{
-
-            $data = array(
-                'approval_status'  => 1,
-                'admin_approval_status'  => $this->input->post('updated_status'),
-            );
-
-            $request_id = $this->input->post('request_id');
-
-            $topic_class_request = $this->admission_model->saveclassrequest($request_id,$data);
-
-            if($topic_class_request){
-                 $topirequest_response['status'] = 'success';
-                 $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')),'updated_status'=>strip_tags(form_error('updated_status')));
-            }else{
-                $topirequest_response['status'] = 'failure';
-                $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')),'updated_status'=>strip_tags(form_error('updated_status')));    
-            }
-        }
-        echo json_encode($topirequest_response);
     }
- }
+
+
+
+    public function addcourserequestapproved(){
+
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+
+            $topirequest_response = array();
+            // $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+            // $this->form_validation->set_rules('course_topic', 'Course Topic', 'trim|required');
+            // $this->form_validation->set_rules('request_description', 'Request Description', 'trim|required');
+        
+            // $this->form_validation->set_rules('time_table_id', 'Time Table Id', 'trim|required');
+            $this->form_validation->set_rules('request_id', 'Request id', 'trim|required');
+            $this->form_validation->set_rules('updated_status', 'Updated Status', 'trim|required');
+            
+            if($this->form_validation->run() == FALSE){
+        
+                $topirequest_response['status'] = 'failure';
+                $topirequest_response['error'] = array('request_id'=>strip_tags(form_error('request_id')), 'updated_status'=>strip_tags(form_error('updated_status')));
+            }else{
+
+                $data = array(
+                    'approval_status'  => 1,
+                    'admin_approval_status'  => $this->input->post('updated_status'),
+                );
+
+                $request_id = $this->input->post('request_id');
+
+                $topic_class_request = $this->admission_model->saveclassrequest($request_id,$data);
+
+                if($topic_class_request){
+                    $topirequest_response['status'] = 'success';
+                    $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')),'updated_status'=>strip_tags(form_error('updated_status')));
+                }else{
+                    $topirequest_response['status'] = 'failure';
+                    $topirequest_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'course_topic'=>strip_tags(form_error('course_topic')), 'request_description'=>strip_tags(form_error('request_description')),'updated_status'=>strip_tags(form_error('updated_status')));    
+                }
+            }
+            echo json_encode($topirequest_response);
+        }
+    }
+
+
+
+    public function getanswersheetlist(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $this->form_validation->set_rules('exam_id', 'exam_id', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+        {
+            $status = 'Failure';
+            $message = 'Validation error';
+            $data = array('exam_id' =>strip_tags(form_error('exam_id')),'user_flag' =>strip_tags(form_error('user_flag')),'timetable_id'=>strip_tags(form_error('user_flag')));
+        }else{
+            $getanswersheetlist_data = $this->Api_model->getanswersheetlist($this->input->post('exam_id'),$this->input->post('user_flag'),$this->input->post('userid'));
+            if($getanswersheetlist_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $getanswersheetlist_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+    }
+
+    
+
 
    /* Superadmin Part End Here */   
 

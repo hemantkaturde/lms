@@ -1679,33 +1679,33 @@ class Api_model extends CI_Model
 
         }
 
-    $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid,'.TBL_ASK_A_QUERY.'.createdDtm as datequery');
-    $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
-    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
-    $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
-    $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
-    $this->db->where(TBL_ASK_A_QUERY.'.id NOT IN (SELECT `query_id` FROM '.TBL_ASK_A_QUERY_ANSWER.')', NULL, TRUE);
+        $this->db->select('*,'.TBL_ASK_A_QUERY.'.id as queryid,'.TBL_ASK_A_QUERY.'.createdDtm as datequery');
+        $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+        $this->db->join(TBL_USER, TBL_ASK_A_QUERY.'.student_id = '.TBL_USER.'.userId');
+        $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+        $this->db->where(TBL_ASK_A_QUERY.'.id NOT IN (SELECT `query_id` FROM '.TBL_ASK_A_QUERY_ANSWER.')', NULL, TRUE);
 
-    // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
-    $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
+        // $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+        $this->db->order_by(TBL_ASK_A_QUERY.'.id', 'DESC');
 
-    $query = $this->db->get(TBL_ASK_A_QUERY);
-    $fetch_result = $query->result_array();
-    $data = array();
-    $counter = 0;
-    if(count($fetch_result) > 0)
-    {
-        foreach ($fetch_result as $key => $value)
+        $query = $this->db->get(TBL_ASK_A_QUERY);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
         {
-             $data[$counter]['queryid'] = $value['queryid'];
-             $data[$counter]['course_name'] = $value['course_name'];
-             $data[$counter]['topic_name'] = $value['topic'];
-             $data[$counter]['name'] = $value['name'];
-             $data[$counter]['query'] = $value['query'];
-             $data[$counter]['datequery'] = $value['datequery'];
-            $counter++; 
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['queryid'] = $value['queryid'];
+                $data[$counter]['course_name'] = $value['course_name'];
+                $data[$counter]['topic_name'] = $value['topic'];
+                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['query'] = $value['query'];
+                $data[$counter]['datequery'] = $value['datequery'];
+                $counter++; 
+            }
         }
-    }
 
     return $data;
 }
@@ -1960,6 +1960,20 @@ public function getTaxinvoicesCount(){
     $query = $this->db->get(TBL_PAYMENT);
     $rowcount = $query->num_rows();
     return $rowcount;
+}
+
+
+
+public function getanswersheetlist($exam_id){
+
+    $this->db->select('*,'.TBL_EXAMINATION.'.course_id as c_id');
+    $this->db->from(TBL_EXAMINATION);
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId ='.TBL_EXAMINATION.'.course_id');
+    $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+    $this->db->where(TBL_EXAMINATION.'.id', $exam_id);
+    $query = $this->db->get();
+    return $query->result();
+
 }
 
 
