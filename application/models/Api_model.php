@@ -391,6 +391,8 @@ class Api_model extends CI_Model
                  $data[$counter]['exam_time'] = $value['exam_time'];
                  $data[$counter]['total_marks'] = $value['total_marks'];
                  $data[$counter]['exam_status'] = $exam_status;
+                 $data[$counter]['exam_id'] = $value['id'];
+                 $data[$counter]['course_id'] = $value['course_id'];
                  $counter++; 
             }
         }

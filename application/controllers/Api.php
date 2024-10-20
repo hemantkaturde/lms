@@ -2905,8 +2905,7 @@ class Api extends BaseController
         $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
         $this->form_validation->set_rules('exam_id', 'exam_id', 'trim|required');
         $this->form_validation->set_rules('course_id', 'course_id', 'trim|required');
-
-
+        
         $post_submit = $this->input->post();
         if ($this->form_validation->run() == FALSE)
         {
