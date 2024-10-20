@@ -1708,7 +1708,6 @@ class Api extends BaseController
         }
     }
 
-
      /*Course List*/
     public function getcertificatetypelist(){
         $userdetails = validateServiceRequest();
