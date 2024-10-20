@@ -3459,8 +3459,15 @@ class Api extends BaseController
             }else{
                 $saveAttendancedata = $this->student_model->saveAttendancedata($data);
 
-                if($saveAttendancedata ){
+                if($saveAttendancedata){
+                    if(trim($this->input->post('print_card')) =='YES'){
+
+                     $attendance_response['print_idcard'] = 'https://iictn.in/print_idcard?student_id='.$this->input->post('user_id');
+
+                    }
                     $attendance_response['status'] = 'success';
+
+                    
                 }else{
                     $attendance_response['status'] = 'failure';
                 }
