@@ -1198,6 +1198,64 @@ class Api_model extends CI_Model
     }
 
 
+
+
+    public function getaddoncoursepaymentdetails($id){
+        $this->db->select('*,tbl_payment_transaction.id as paymentid');
+        $this->db->from('tbl_payment_transaction');
+        // $this->db->where('tbl_enquiry.isDeleted', 0);
+        $this->db->where('tbl_payment_transaction.paymant_type', 'add_on_course_invoice');
+        $this->db->where('add_on_course_id', $id);
+        $this->db->where('payment_status', 1);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+        $fetch_result = $query->result_array();
+
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                if($value['payment_status']==1){
+                    $status='Completed';
+                }else{
+                    $status='';
+                }
+
+                if($value['razorpay_payment_id']!=NULL){
+                    $transaction_id = $value['razorpay_payment_id'];
+                    $payment_date = $value['datetime'];
+                }else{
+                    $transaction_id = 'Manual-Transaction';
+                    $payment_date = $value['payment_date'];
+                }
+
+           
+        
+                $data[$counter]['payment_date'] = $payment_date;
+                $data[$counter]['transaction_id'] =$transaction_id;
+                $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
+                $data[$counter]['payment_mode'] =$value['payment_mode'];
+                $data[$counter]['status'] =$status;
+
+                $data[$counter]['action'] = '';
+                //$data[$counter]['action'] .= "<a style='cursor: pointer;'  href='tax_invoice/index.php?enq_id=".$value['enq_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> ";
+            
+                $data[$counter]['action'] .= "<a style='cursor: pointer;'  href='../tax_invoice/index.php?enq_id=".$value['enquiry_id']."&paymentid=".$value['paymentid']."' target='_blank'  class='print_tax_invoices' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/print.png alt='Print Invoice' title='Print Invoice'></a> ";
+               
+             
+                $counter++; 
+            }
+        }
+        return $data;
+
+
+    }
+
+
     public function getcertificatetypelist(){
 
         $this->db->select('ct_id,ct_name');

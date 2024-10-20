@@ -1446,6 +1446,36 @@ class Api extends BaseController
     }
 
 
+    public function getaddoncoursepaymentdetails(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+        $this->form_validation->set_rules('addoncourse_id', 'Addoncourse Id', 'trim|required');
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')),'addoncourse_id' =>strip_tags(form_error('addoncourse_id')));
+		}else{
+
+            $add_on_course_data = $this->Api_model->getaddoncoursepaymentdetails(trim($this->input->post('addoncourse_id')));
+            if($add_on_course_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $add_on_course_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+    }
+
+
      /*Course List*/
     public function getcertificatetypelist(){
         $userdetails = validateServiceRequest();
