@@ -967,6 +967,18 @@ class Api_model extends CI_Model
     }
 
 
+    public function getTotalenquirycountCounsellor($userid,$user_flag){
+
+        $this->db->select('*');
+        $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        $this->db->where(TBL_ENQUIRY.'.counsellor_id', $userid);
+        $query = $this->db->get(TBL_ENQUIRY);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
     /*Trainer Data Start Here*/
     public function getAttendanceCountTrainer($userid,$user_flag)
     {
