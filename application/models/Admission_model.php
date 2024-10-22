@@ -579,6 +579,45 @@ class Admission_model extends CI_Model
     }
 
 
+    public function total_revenue_add_on_consellor($userid,$user_flag){
+    
+        $this->db->select('sum(totalAmount) as total_revenue');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_number');
+        // $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_PAYMENT.'.enquiry_number');
+        $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userid);
+        $this->db->where(TBL_PAYMENT.'.payment_status',1);
+        $this->db->where(TBL_PAYMENT.'.paymant_type','add_on_course_invoice');
+        $query = $this->db->get(TBL_PAYMENT);
+        return $query->result_array();
+    }
+
+    public function total_pending_add_on_consellor($userid,$user_flag){
+        
+        $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_id');
+        $this->db->select('sum(tbl_course.course_total_fees) as total_pending');
+        $this->db->join(TBL_COURSE, TBL_ADD_ON_COURSE.'.course_id = '.TBL_COURSE.'.courseId');
+        // $this->db->where(TBL_ADD_ON_COURSE.'.active_status',1);
+        $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userid);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->result_array();
+    }
+
+
+    public function total_discount_add_on_consellor($userid,$user_flag){
+        
+    
+        $this->db->join(TBL_ENQUIRY, TBL_ADD_ON_COURSE.'.enquiry_id = '.TBL_ENQUIRY.'.enq_id');
+        $this->db->where(TBL_ENQUIRY.'.counsellor_id',$userid);
+
+        $this->db->select('sum('.TBL_ADD_ON_COURSE.'.discount	) as total_discount');
+    
+        $this->db->join(TBL_COURSE, TBL_ADD_ON_COURSE.'.course_id = '.TBL_COURSE.'.courseId');
+        // $this->db->where(TBL_ADD_ON_COURSE.'.active_status',1);
+        $query = $this->db->get(TBL_ADD_ON_COURSE);
+        return $query->result_array();
+    }
+
+
     
 
         

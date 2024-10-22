@@ -640,20 +640,15 @@ class Api_model extends CI_Model
         }else{
             $dataMaincourse['total_revenue'] = 0;
         }
-
         if($this->admission_model->total_pending()[0]['total_pending']!=null){
             $dataMaincourse['total_pending'] =  intval($this->admission_model->total_pending()[0]['total_pending']);
         }else{
             $dataMaincourse['total_pending'] = 0;
         }
-
-        $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
-        //$dataMaincourse['total_pending_amt'] = 20;
-
-
-
-        
+        $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];    
         $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+
+
 
         if($this->admission_model->total_revenue_add_on()[0]['total_revenue']!=null){
             $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
@@ -1552,12 +1547,38 @@ class Api_model extends CI_Model
 
 
  
-         $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
-         $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
-         $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
-         $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
-         $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
-         $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
+        //  $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+        //  $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
+        //  $total_pending_Add_on_single = $this->admission_model->total_pending_add_on()[0]['total_pending'];
+        //  $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
+        //  $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
+        //  $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
+
+
+        if($this->admission_model->total_revenue_add_on_consellor()[0]['total_revenue']!=null){
+            $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on_consellor()[0]['total_revenue'];
+        }else{
+            $dataAddoncourse['total_revenue_add_on'] = 0;
+        }
+       
+        if($this->admission_model->total_discount_add_on_consellor()[0]['total_discount']!=null){
+            $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on_consellor()[0]['total_discount'];
+        }else{
+            $dataAddoncourse['total_discount'] = 0;
+        }
+       
+        if($this->admission_model->total_pending_add_on_consellor()[0]['total_pending']!=null){
+            $total_pending_Add_on_single = $this->admission_model->total_pending_add_on_consellor()[0]['total_pending'];
+        }else{
+            $total_pending_Add_on_single = 0;
+        }
+
+
+        $dataAddoncourse['total_course_fees'] =  $total_pending_Add_on_single - $dataAddoncourse['total_discount'];
+        $dataAddoncourse['total_pending_amt_add_on'] = $dataAddoncourse['total_course_fees'] - $dataAddoncourse['total_revenue_add_on'];
+        $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
+
+
          return $data_response;
  
       }
