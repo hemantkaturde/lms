@@ -3112,7 +3112,7 @@ class Api extends BaseController
 
             $status = 'Success';
             $message = 'Consellor Dashboard data';
-            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>$getCoursescount,'total_enquires'=>$getTotalenquirycount,'admissions'=>$getTotalAdmissioncoun,'total_invoices'=>$getTotalInvoicecount);
+            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>$getCoursescount,'total_enquires'=>$getTotalenquirycount,'total_admissions'=>$getTotalAdmissioncoun,'total_invoices'=>$getTotalInvoicecount);
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
