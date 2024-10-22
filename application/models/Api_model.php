@@ -956,6 +956,17 @@ class Api_model extends CI_Model
 
 
 
+    public function getCoursesCountCounsellor($userid,$user_flag)
+    {
+         $this->db->select('*');
+         $this->db->where(TBL_COURSE.'.isDeleted', 0);
+         $query = $this->db->get(TBL_COURSE);
+         $rowcount = $query->num_rows();
+         return $rowcount;
+
+    }
+
+
     /*Trainer Data Start Here*/
     public function getAttendanceCountTrainer($userid,$user_flag)
     {
@@ -971,8 +982,9 @@ class Api_model extends CI_Model
     }
 
 
+
     public function getCoursesCountTrainer($userid,$user_flag)
-       {
+    {
             $this->db->select('*');
             $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
             $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
@@ -983,7 +995,7 @@ class Api_model extends CI_Model
             $rowcount = $query->num_rows();
             return $rowcount;
 
-       }
+    }
 
 
 
