@@ -989,6 +989,16 @@ class Api_model extends CI_Model
     }
 
 
+    public function getTotalInvoicecountCounsellor($userid,$user_flag){
+        $this->db->select('*');
+        // $this->db->where(TBL_ADMISSION.'.counsellor_id', $userid);
+        $query = $this->db->get(TBL_PAYMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
     /*Trainer Data Start Here*/
     public function getAttendanceCountTrainer($userid,$user_flag)
     {
