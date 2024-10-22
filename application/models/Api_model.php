@@ -1524,18 +1524,33 @@ class Api_model extends CI_Model
       /*Get All Certificate List*/
       public function getalltotalrevunedetailscounsellor($userid,$user_flag)
       {
-
-
-        $dataMaincourse['total_revenue'] = 0;
-        $dataMaincourse['total_pending'] = 0;
-        $dataMaincourse['total_pending_amt'] = 0;
-        $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
-        
-
+        // $dataMaincourse['total_revenue'] = 0;
+        // $dataMaincourse['total_pending'] = 0;
+        // $dataMaincourse['total_pending_amt'] = 0;
+        // $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+    
         //  $dataMaincourse['total_revenue'] = $this->admission_model->total_revenue()[0]['total_revenue'];
         //  $dataMaincourse['total_pending'] = $this->admission_model->total_pending()[0]['total_pending'];
         //  $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];
         //  $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+
+
+        if($this->admission_model->total_revenueconsellor($userid,$user_flag)[0]['total_revenue']!=null){
+            $dataMaincourse['total_revenue'] = intval($this->admission_model->total_revenueconsellor($userid,$user_flag)[0]['total_revenue']);
+        }else{
+            $dataMaincourse['total_revenue'] = 0;
+        }
+
+        if($this->admission_model->total_pendingconsellor($userid,$user_flag)[0]['total_pending']!=null){
+            $dataMaincourse['total_pending'] =  intval($this->admission_model->total_pendingconsellor($userid,$user_flag)[0]['total_pending']);
+        }else{
+            $dataMaincourse['total_pending'] = 0;
+        }
+
+        $dataMaincourse['total_pending_amt'] = $dataMaincourse['total_pending'] - $dataMaincourse['total_revenue'];        
+        $data_response['dashbaordtotalMaincourese'] = $dataMaincourse;
+
+
  
          $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
          $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];

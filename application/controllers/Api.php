@@ -3107,6 +3107,7 @@ class Api extends BaseController
             $getTotalenquirycount = $this->Api_model->getTotalenquirycountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getTotalAdmissioncount = $this->Api_model->getTotalAdmissioncountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getTotalInvoicecount = $this->Api_model->getTotalInvoicecountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+           
             $getalltotalrevunedetailscounsellor=  $this->Api_model->getalltotalrevunedetailscounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
 
 
