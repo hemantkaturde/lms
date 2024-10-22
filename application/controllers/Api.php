@@ -3102,14 +3102,17 @@ class Api extends BaseController
             $date      = $this->event->getDateEvent($year, $month);
             $cur_event = $this->event->getEvent($year, $month, $day);
             
+        
             $getCoursescount = $this->Api_model->getCoursesCountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getTotalenquirycount = $this->Api_model->getTotalenquirycountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getTotalAdmissioncount = $this->Api_model->getTotalAdmissioncountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getTotalInvoicecount = $this->Api_model->getTotalInvoicecountCounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+            $getalltotalrevunedetailscounsellor=  $this->Api_model->getalltotalrevunedetailscounsellor(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+
 
             $status = 'Success';
             $message = 'Consellor Dashboard data';
-            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>$getCoursescount,'total_enquires'=>$getTotalenquirycount,'total_admissions'=>$getTotalAdmissioncount,'total_invoices'=>$getTotalInvoicecount);
+            $count_data =  array('userid' => $userdetails['userId'],'total_courses'=>$getCoursescount,'total_enquires'=>$getTotalenquirycount,'total_admissions'=>$getTotalAdmissioncoun,'total_invoices'=>$getTotalInvoicecount);
 			logInformationcollection($userdetails['userId'],$userdetails['username'],$userdetails['mobile'],'User Details Fetched', 'API to user app', 'User Details', $user_data);
         }
 
