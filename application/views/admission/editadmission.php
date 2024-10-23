@@ -183,7 +183,7 @@ if(!empty($editDataAdmission))
                                             </div>  
 
 
-                                            <input type="text" id="counsellor_name" name="counsellor_name" value="<?php echo $counsellor_name;?>">
+                                            <input type="hidden" id="counsellor_name" name="counsellor_name" value="<?php echo $counsellor_name;?>">
 
 
                                             <div class="form-group">
