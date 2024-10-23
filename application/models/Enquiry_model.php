@@ -12,6 +12,12 @@ class Enquiry_model extends CI_Model
                             OR  BaseTbl.enq_email  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
+
+        if($this->session->userdata('roleText')=='Counsellor'){
+
+            $this->db->where('tbl_enquiry.counsellor_id', $this->session->userdata('userId'));
+        }
+
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->order_by('BaseTbl.enq_id', 'desc');
         $query = $this->db->get();

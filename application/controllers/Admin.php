@@ -52,6 +52,9 @@ class Admin extends BaseController
 						'events'=> $cur_event
 					);
 
+
+                    
+
         $data['users'] = $this->user_model->userListingCount();
         $data['courses'] = $this->course_model->courseListingCount();
         $data['enquries'] = $this->enquiry_model->enquiryListingCount();
