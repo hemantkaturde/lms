@@ -1555,19 +1555,19 @@ class Api_model extends CI_Model
         //  $data_response['dashbaordtotaladdoncourese'] = $dataAddoncourse;
 
 
-        if($this->admission_model->total_revenue_add_on_consellor()[0]['total_revenue']!=null){
+        if($this->admission_model->total_revenue_add_on_consellor($userid,$user_flag)[0]['total_revenue']!=null){
             $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on_consellor()[0]['total_revenue'];
         }else{
             $dataAddoncourse['total_revenue_add_on'] = 0;
         }
        
-        if($this->admission_model->total_discount_add_on_consellor()[0]['total_discount']!=null){
+        if($this->admission_model->total_discount_add_on_consellor($userid,$user_flag)[0]['total_discount']!=null){
             $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on_consellor()[0]['total_discount'];
         }else{
             $dataAddoncourse['total_discount'] = 0;
         }
        
-        if($this->admission_model->total_pending_add_on_consellor()[0]['total_pending']!=null){
+        if($this->admission_model->total_pending_add_on_consellor($userid,$user_flag)[0]['total_pending']!=null){
             $total_pending_Add_on_single = $this->admission_model->total_pending_add_on_consellor()[0]['total_pending'];
         }else{
             $total_pending_Add_on_single = 0;
