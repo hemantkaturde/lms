@@ -200,7 +200,7 @@ if(!empty($editDataAdmission))
                                                 <label style="text-align: left;" for="counsellor_name">Counsellor Name <span class="required">*</span></label>
                                                 <div>
                                                 <input type="text" id="counsellor_name" name="counsellor_name" value="<?php echo $value['userId'];?>">
-                                                <input type="text" id="counsellor_name" name="counsellor_name" value="<?php echo $counsellor_name;?>">
+                                                <input type="text" id="counsellor_name_var" name="counsellor_name_var" value="<?php echo $counsellor_name;?>">
 
                                                     <p class="error counsellor_name_error"></p>
                                                 </div>
