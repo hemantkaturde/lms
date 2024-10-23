@@ -183,16 +183,19 @@ if(!empty($editDataAdmission))
                                             </div>  
 
 
+                                            <input type="text" id="counsellor_name" name="counsellor_name" placeholder="Enter PIN Number" value="<?php echo $value['userId'];?>">
+
+
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="counsellor_name">Counsellor Name <span class="required">*</span></label>
+                                                <label style="text-align: left;" for="counsellor_name_varchar">Counsellor Name <span class="required">*</span></label>
                                                 <div>
-                                                    <select class="form-control counsellor_name" name="counsellor_name" id="counsellor_name">
+                                                    <select class="form-control counsellor_name_varchar" name="counsellor_name_varchar" id="counsellor_name_varchar">
                                                     <option st-id="" value="0">Select Counsellor Name</option>
                                                     <?php foreach ($counsellor_list_data as $key => $value) { ?>       
-                                                        <option st-id="" value="<?php echo $value['userId'] ?>" <?php if($counsellor_name==$value['userId']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
+                                                        <option st-id="" value="<?php echo $value['userId'] ?>" <?php if($counsellor_name==$value['userId']){ echo 'disabled';} ?>><?php echo $value['name'] ?></option>
                                                     <?php } ?>
                                                     </select>
-                                                    <p class="error counsellor_name_error"></p>
+                                                    <p class="error counsellor_name_varchar_error"></p>
                                                 </div>
                                             </div>
 
