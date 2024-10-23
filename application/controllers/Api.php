@@ -155,6 +155,7 @@ class Api extends BaseController
 			$message = 'Validation error';
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
+            $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
             $course_data = $this->Api_model->getCourseData($data);
             if($course_data){
                 $status = 'Success';
@@ -2962,6 +2963,7 @@ class Api extends BaseController
             
             $getAttendanceCount = $this->Api_model->getAttendanceCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getCoursescount = $this->Api_model->getCoursesCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
+           
             $getExaminationcount = $this->Api_model->getexaminationCountTrainer(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $getAnsthequerycount = $this->Api_model->getallstudentquerycount(trim($this->input->post('userid')),trim($this->input->post('user_flag')));
             $student_answer_sheet_for_checking = $this->Api_model->getexamcheckingdata(trim($this->input->post('userid')),trim($this->input->post('user_flag')));

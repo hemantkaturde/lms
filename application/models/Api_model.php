@@ -161,6 +161,12 @@ class Api_model extends CI_Model
         $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name,BaseTbl.course_total_fees,BaseTbl.course_books,BaseTbl.course_mode_online,BaseTbl.course_mode_offline,BaseTbl.course_cert_cost,BaseTbl.course_onetime_adm_fees,BaseTbl.course_kit_cost,BaseTbl.course_cgst_tax_value,BaseTbl.course_sgst_tax_value,BaseTbl.course_total_fees,Type.ct_id as course_type_id');
         $this->db->from('tbl_course as BaseTbl');
         $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
+
+        if($data['user_flag']=='Trainer'){
+            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = tbl_course.courseId');
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $data['userid']);
+            $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+        } 
        
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->order_by('BaseTbl.courseId', 'desc');
