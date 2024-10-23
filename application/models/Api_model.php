@@ -163,7 +163,7 @@ class Api_model extends CI_Model
         $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
 
         if($data['user_flag']=='Trainer'){
-            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = tbl_course.courseId');
+            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = BaseTbl.courseId');
             $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $data['userid']);
             $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.course_id');
         } 
