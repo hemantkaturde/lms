@@ -15,7 +15,7 @@ class Enquiry_model extends CI_Model
 
         if($this->session->userdata('roleText')=='Counsellor'){
 
-            $this->db->where('tbl_enquiry.counsellor_id', $this->session->userdata('userId'));
+            $this->db->where('BaseTbl.counsellor_id', $this->session->userdata('userId'));
         }
 
         $this->db->where('BaseTbl.isDeleted', 0);
