@@ -914,6 +914,13 @@ class Api_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_course as BaseTbl');
         $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
+
+        if($data['user_flag']=='Trainer'){
+            $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = BaseTbl.courseId');
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $data['userid']);
+            $this->db->group_by(TBL_TIMETABLE_TRANSECTIONS.'.course_id');
+        } 
+
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->order_by('BaseTbl.courseId', 'desc');
         // $this->db->limit($page, $segment);
