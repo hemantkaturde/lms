@@ -183,7 +183,7 @@ if(!empty($editDataAdmission))
                                             </div>  
 
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label style="text-align: left;" for="counsellor_name">Counsellor Name <span class="required">*</span></label>
                                                 <div>
                                                     <select class="form-control counsellor_name" name="counsellor_name" id="counsellor_name">
@@ -192,6 +192,16 @@ if(!empty($editDataAdmission))
                                                         <option st-id="" value="<?php echo $value['userId'] ?>" <?php if($counsellor_name==$value['userId']){ echo 'selected';} ?>><?php echo $value['name'] ?></option>
                                                     <?php } ?>
                                                     </select>
+                                                    <p class="error counsellor_name_error"></p>
+                                                </div>
+                                            </div> -->
+
+                                            <div class="form-group">
+                                                <label style="text-align: left;" for="counsellor_name">Counsellor Name <span class="required">*</span></label>
+                                                <div>
+                                                <input type="text" id="counsellor_name" name="counsellor_name" value="<?php echo $value['userId'];?>">
+                                                <input type="text" id="counsellor_name" name="counsellor_name" value="<?php echo $counsellor_name;?>">
+
                                                     <p class="error counsellor_name_error"></p>
                                                 </div>
                                             </div>
