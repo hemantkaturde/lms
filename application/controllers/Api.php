@@ -3080,6 +3080,18 @@ class Api extends BaseController
 
     }
 
+
+    public function deleteansawerthequery(){
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('id', 'Id', 'trim|required');
+
+        $addnewqueryanswer_response = array();
+        $addnewqueryanswer_response['status'] = 'success';
+        $addnewqueryanswer_response['error'] = array('query_answer'=>strip_tags(form_error('query_answer')));
+        echo json_encode($addnewqueryanswer_response);
+
+    }
+
     /* Trianer Part End Here */
 
 
@@ -3496,7 +3508,6 @@ class Api extends BaseController
          $responseData = array('android_version'=>'1.8','ios_version'=>'1.3');
          setContentLength($responseData);
     }
-
 
 
 }
