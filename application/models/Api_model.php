@@ -1046,7 +1046,7 @@ class Api_model extends CI_Model
            $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
            $this->db->join('tbl_timetable_transection', 'tbl_timetable_transection.course_id = course.courseId');
            $this->db->join('tbl_users', 'tbl_users.userId = tbl_timetable_transection.trainer_id');
-           $this->db->where('tbl_timetable_transection.trainer_id', $userId);
+           $this->db->where('tbl_timetable_transection.trainer_id', $userid);
            $this->db->where('BaseTbl.isDeleted', 0);
            $this->db->where('BaseTbl.exam_status', 1);
            $this->db->order_by('BaseTbl.id', 'desc');
