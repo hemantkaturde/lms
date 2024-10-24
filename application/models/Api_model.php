@@ -424,6 +424,8 @@ class Api_model extends CI_Model
     
         $this->db->where('BaseTbl.isDeleted', 0);
         $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->group_by('BaseTbl.id');
+
         $query = $this->db->get();
 
         $fetch_result = $query->result_array();
