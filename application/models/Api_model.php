@@ -1050,6 +1050,7 @@ class Api_model extends CI_Model
            $this->db->where('BaseTbl.isDeleted', 0);
            $this->db->where('BaseTbl.exam_status', 1);
            $this->db->order_by('BaseTbl.id', 'desc');
+           $this->db->group_by('BaseTbl.id');
            $query = $this->db->get();
            return $query->num_rows();
        }
