@@ -3087,7 +3087,7 @@ class Api extends BaseController
 
         $addnewqueryanswer_response = array();
         $addnewqueryanswer_response['status'] = 'success';
-        $addnewqueryanswer_response['error'] = array('query_answer'=>strip_tags(form_error('query_answer')));
+        $addnewqueryanswer_response['error'] = array('delete_answer'=>strip_tags(form_error('delete_answer')));
         echo json_encode($addnewqueryanswer_response);
 
     }
