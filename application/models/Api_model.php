@@ -909,7 +909,7 @@ class Api_model extends CI_Model
     }
 
 
-    public function getCourseList()
+    public function getCourseList($data)
     {
         $this->db->select('*');
         $this->db->from('tbl_course as BaseTbl');
