@@ -408,6 +408,54 @@ class Api_model extends CI_Model
     }
 
 
+     /*Get Examination List*/
+     public function getcheckexaminationlist($data){
+        $this->db->select('*');
+        $this->db->from('tbl_examination as BaseTbl');
+        $this->db->join('tbl_course as course', 'course.courseId = BaseTbl.course_id');
+
+        if($data['user_flag']=='Trainer'){
+            $this->db->join('tbl_timetable_transection', 'tbl_timetable_transection.course_id = course.courseId');
+            $this->db->join('tbl_users', 'tbl_users.userId = tbl_timetable_transection.trainer_id');
+
+            $userId =  $this->session->userdata('userId');
+            $this->db->where('tbl_timetable_transection.trainer_id', $data['userid']);
+        } 
+    
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->order_by('BaseTbl.id', 'DESC');
+        $query = $this->db->get();
+
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                 if($value['exam_status']==1){
+                    $exam_status ='Active';
+                 }else{
+                    $exam_status ='In-Active';
+                 }
+
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['exam_title'] = $value['exam_title'];
+                 $data[$counter]['exam_time'] = $value['exam_time'];
+                 $data[$counter]['total_marks'] = $value['total_marks'];
+                 $data[$counter]['exam_status'] = $exam_status;
+                 $data[$counter]['exam_id'] = $value['id'];
+                 $data[$counter]['course_id'] = $value['course_id'];
+                 $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+
     /*Get Attendance List*/
     public function getattendancedata($data){
        
