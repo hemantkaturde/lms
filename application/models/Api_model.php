@@ -1014,7 +1014,7 @@ class Api_model extends CI_Model
             $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
             $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
             $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
-            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userid);
             $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
             $query = $this->db->get(TBL_ATTENDANCE);
             $fetch_result = $query->num_rows();
