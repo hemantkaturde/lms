@@ -3181,7 +3181,7 @@ class Api extends BaseController
             $followDataenquiry= $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id'])[0];
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
 
-            print_r($followDataenquiry);
+            print_r($followDataenquiry->final_amount);
             exit;
 
           
