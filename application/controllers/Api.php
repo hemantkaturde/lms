@@ -3199,10 +3199,14 @@ class Api extends BaseController
            
             $getadditionalcourseInfostudent = $this->Api_model->getadditionalInfostudent($data['get_student_enquiry_id']['enq_id'])[0];
 
-            print_r($getadditionalcourseInfostudent);
-            exit;
+            if($getadditionalcourseInfostudent['course_total_fees']){
+                $total_courses_fees =  $int1 = (int) filter_var($getadditionalcourseInfostudent['course_total_fees'], FILTER_SANITIZE_NUMBER_INT);
+            }else{
+                $total_courses_fees =0;
+            }
+         
            
-            $additional_course_payment_details = array('total_courses_fees'=>1000,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
+            $additional_course_payment_details = array('total_courses_fees'=>$total_courses_fees,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
 
         }
 
