@@ -2317,6 +2317,19 @@ public function upcoming_class_links($userId){
 
 
 
+public function  getstudentCourseCount($userId){
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+
+    $this->db->where(TBL_COURSE.'.isDeleted', 0);
+    $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+    $query = $this->db->get(TBL_COURSE);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
+
         
 }
 
