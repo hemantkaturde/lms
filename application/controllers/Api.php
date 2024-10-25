@@ -3173,10 +3173,14 @@ class Api extends BaseController
             $total_course_count = $this->Api_model->getstudentCourseCount($userId);
             $getstudentEnquiryCount = $this->Api_model->getstudentEnquiryCount($userId);
             $getTaxinvoicesCountstudent = $this->Api_model->getTaxinvoicesCountstudent($userId);
+            $getClassrequestcountstudent = $this->Api_model->getClassrequestcountstudent($userId);
+
 
           
             $payment_details = array('amount_total'=>1000,'amount_paid_by_you'=>200,'pending_amount_by_you'=>500);
-            $total_dashbaord_count = array('total_courses'=>$total_course_count,'total_admission'=>$getstudentEnquiryCount,'total_invoices'=>$getTaxinvoicesCountstudent,'total_exam_notification'=>25,'total_replay_on_query'=>3,'total_class_request'=>30);
+            $total_dashbaord_count = array('total_courses'=>$total_course_count,'total_admission'=>$getstudentEnquiryCount,'total_invoices'=>$getTaxinvoicesCountstudent,'total_exam_notification'=>25,'total_replay_on_query'=>3,'total_class_request'=>$getClassrequestcountstudent);
+           
+           
             $additional_course_payment_details = array('total_courses_fees'=>1000,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
 
         }
