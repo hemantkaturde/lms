@@ -3175,8 +3175,16 @@ class Api extends BaseController
             $getTaxinvoicesCountstudent = $this->Api_model->getTaxinvoicesCountstudent($userId);
             $getClassrequestcountstudent = $this->Api_model->getClassrequestcountstudent($userId);
             $getReplyonyourquerystudent = $this->Api_model->getReplyonyourquerystudent($userId);
+
+
+            $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
+            $followDataenquiry= $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id'])[0];
+            $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
+
+            
+
           
-            $payment_details = array('amount_total'=>1000,'amount_paid_by_you'=>200,'pending_amount_by_you'=>500);
+            $payment_details = array('amount_total'=>$followDataenquiry['final_amount'],'amount_paid_by_you'=>200,'pending_amount_by_you'=>500);
             $total_dashbaord_count = array('total_courses'=>$total_course_count,'total_admission'=>$getstudentEnquiryCount,'total_invoices'=>$getTaxinvoicesCountstudent,'total_exam_notification'=>count($examnotification),'total_replay_on_query'=>$getReplyonyourquerystudent,'total_class_request'=>$getClassrequestcountstudent);
            
            
