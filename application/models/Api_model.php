@@ -713,7 +713,9 @@ class Api_model extends CI_Model
         }
        
         if($this->admission_model->total_discount_add_on()[0]['total_discount']!=null){
-            $dataAddoncourse['total_discount'] = $this->admission_model->total_discount_add_on()[0]['total_discount'];
+
+           
+            $dataAddoncourse['total_discount'] = trim($this->admission_model->total_discount_add_on()[0]['total_discount'], '"');
         }else{
             $dataAddoncourse['total_discount'] = 0;
         }
