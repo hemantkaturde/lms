@@ -3209,7 +3209,7 @@ class Api extends BaseController
 
            
             $result_of_total_paid = $this->enquiry_model->gettotalpaidamountof_add_on_course(trim($getadditionalcourseInfostudent['addoncourse_id']),trim($getadditionalcourseInfostudent['enquiry_id']));
-            $total_paid = $result_of_total_paid[0]->totalpaidamount;
+            $total_paid = (int) filter_var($result_of_total_paid[0]->totalpaidamount, FILTER_SANITIZE_NUMBER_INT);
             $total_pending_amount = $total_amount_after_discount - $total_paid;
 
 
