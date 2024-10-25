@@ -3191,13 +3191,15 @@ class Api extends BaseController
 
 
             $pending_amount_by_you = $followDataenquiry->final_amount -  $totalpaidAmount;
-    
             $int1 = (int) filter_var($followDataenquiry->final_amount, FILTER_SANITIZE_NUMBER_INT);
             $int2 = (int) filter_var($totalpaidAmount, FILTER_SANITIZE_NUMBER_INT);
-
             $payment_details = array('amount_total'=>$int1,'amount_paid_by_you'=>$int2,'pending_amount_by_you'=> $pending_amount_by_you);
             $total_dashbaord_count = array('total_courses'=>$total_course_count,'total_admission'=>$getstudentEnquiryCount,'total_invoices'=>$getTaxinvoicesCountstudent,'total_exam_notification'=>count($examnotification),'total_replay_on_query'=>$getReplyonyourquerystudent,'total_class_request'=>$getClassrequestcountstudent);
            
+            $getadditionalcourseInfostudent = $this->Api_model->getadditionalInfostudent($data['get_student_enquiry_id']['enq_id'])[0];
+
+            print_r($getadditionalcourseInfostudent);
+            exit;
            
             $additional_course_payment_details = array('total_courses_fees'=>1000,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
 

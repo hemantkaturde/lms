@@ -2475,6 +2475,16 @@ public function getReplyonyourquerystudent($userId){
 
 }
 
+
+public function getadditionalInfostudent($id){
+    $this->db->select(TBL_ADD_ON_COURSE.'.id as addoncourse_id,'.TBL_ADD_ON_COURSE.'.createdDtm as addoncoursedatetime,'.TBL_COURSE.'.course_name,'.'sum('.TBL_COURSE.'.course_total_fees) as course_total_fees,'.'sum('.TBL_ADD_ON_COURSE.'.discount) as discount,'.TBL_ADD_ON_COURSE.'.enquiry_id');
+    $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ADD_ON_COURSE.'.course_id');
+    $this->db->where(TBL_ADD_ON_COURSE.'.enquiry_id', $id);
+    $query = $this->db->get(TBL_ADD_ON_COURSE);
+    return $query->result_array();
+
+}
+
         
 }
 
