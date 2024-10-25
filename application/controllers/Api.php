@@ -3208,7 +3208,12 @@ class Api extends BaseController
             $total_amount_after_discount = $getadditionalcourseInfostudent['course_total_fees']-$getadditionalcourseInfostudent['discount'];
 
            
-            $additional_course_payment_details = array('total_courses_fees'=>$total_amount_after_discount,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
+            $result_of_total_paid = $this->enquiry_model->gettotalpaidamountof_add_on_course(trim($getadditionalcourseInfostudent['addoncourse_id']),trim($getadditionalcourseInfostudent['enquiry_id']));
+            $total_paid = $result_of_total_paid[0]->totalpaidamount;
+            $total_pending_amount = $total_amount_after_discount - $total_paid;
+
+
+            $additional_course_payment_details = array('total_courses_fees'=>$total_amount_after_discount,'total_paid_amount'=>$total_paid,'total_pending_amount'=>$total_pending_amount);
 
         }
 
