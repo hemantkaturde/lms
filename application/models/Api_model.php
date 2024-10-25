@@ -2461,6 +2461,20 @@ public function checkAprrovalstatussss($userId,$topicid){
 
 }
 
+public function getReplyonyourquerystudent($userId){
+
+    $this->db->select('*');
+    $this->db->join(TBL_COURSE, TBL_ASK_A_QUERY.'.course_id = '.TBL_COURSE.'.courseId');
+    $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ASK_A_QUERY.'.certificate_topic');
+    $this->db->where(TBL_ASK_A_QUERY.'.status', 1);
+    $this->db->where(TBL_ASK_A_QUERY.'.student_id', $userId);
+    $query = $this->db->get(TBL_ASK_A_QUERY);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+
+}
+
         
 }
 
