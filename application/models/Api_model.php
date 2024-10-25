@@ -2372,7 +2372,7 @@ public function getClassrequestcountstudent($userId){
     $current_date = date('Y-m-d');
        
     $this->db->select('enq_course_id');
-    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
     $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
     $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
@@ -2398,7 +2398,8 @@ public function getClassrequestcountstudent($userId){
    // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.date =', $current_date);
     // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
     $this->db->where(TBL_COURSE.'.courseId', $value);
-    // $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
     $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
     $fetch_result = $query->result_array();
    
@@ -2406,7 +2407,34 @@ public function getClassrequestcountstudent($userId){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['courseId'] = $value['courseId'];
+                // $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+                // if($checkattendance){
+                //     $attendance_alreday_exits = 'Attended' ;
+                // }else{
+                //     $attendance_alreday_exits = 'Not Attended' ;
+                // }
+                // // $data[$counter]['courseId'] = $value['courseId'];
+                // $data[$counter]['title'] = $value['topic'];
+                // $data[$counter]['course_name'] = $value['course_name'];
+                // $data[$counter]['classdate'] = $value['classdate'];
+                // $data[$counter]['classtime'] = $value['classtime'];
+                // $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
+
+                $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
+              
+                if($checkAprrovalstatus){
+
+                    if($checkAprrovalstatus['admin_approval_status'] > 0){
+                        $request_status ='Approved';
+                        $data[$counter]['title'] = $value['topic'];
+                    }else{
+                        $request_status ='In Approval Process ..please wait';
+                    }
+                   
+                }else{
+                    $request_status ='NA';
+                }
+              
              $counter++; 
         }
     }
@@ -2414,7 +2442,7 @@ public function getClassrequestcountstudent($userId){
      }
    }
 
-  return count($data);
+   return count($data);
 
 }
 
