@@ -3181,6 +3181,7 @@ class Api extends BaseController
             $followDataenquiry= $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id'])[0];
             $getEnquirypaymentInfo= $this->enquiry_model->getEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id'])[0];
             $gettotalpaidEnquirypaymentInfo = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($data['get_student_enquiry_id']['enq_id']);
+            $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
 
 
             if(!empty($gettotalpaidEnquirypaymentInfo[0]->totalpaidAmount)){
