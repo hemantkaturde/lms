@@ -2349,7 +2349,6 @@ public function  getstudentCourseCount($userId){
         $this->db->where(TBL_COURSE.'.courseId', $value);
 
         $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
-        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_COURSE);
         $fetch_result = $query->num_rows();
        
