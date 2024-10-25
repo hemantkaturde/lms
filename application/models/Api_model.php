@@ -2319,7 +2319,7 @@ public function upcoming_class_links($userId){
 
 public function  getstudentCourseCount($userId){
    
-    $this->db->select('*');
+        $this->db->select('*');
         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
         $this->db->where(TBL_COURSE.'.isDeleted', 0);
         $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
@@ -2327,6 +2327,25 @@ public function  getstudentCourseCount($userId){
         $rowcount = $query->num_rows();
         return $rowcount;
 }
+
+
+public function getstudentEnquiryCount($userId){
+
+    $this->db->select('*');
+    // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+    $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+    $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+    $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+    $query = $this->db->get(TBL_ENQUIRY);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
+
+
 
 
         
