@@ -3205,8 +3205,10 @@ class Api extends BaseController
                 $total_courses_fees =0;
             }
          
+            $total_amount_after_discount = $getadditionalcourseInfostudent['course_total_fees']-$getadditionalcourseInfostudent['discount'];
+
            
-            $additional_course_payment_details = array('total_courses_fees'=>$total_courses_fees,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
+            $additional_course_payment_details = array('total_courses_fees'=>$total_amount_after_discount,'total_paid_amount'=>5000,'total_pending_amount'=>5000);
 
         }
 
