@@ -2420,15 +2420,16 @@ public function getClassrequestcountstudent($userId){
                 // $data[$counter]['classtime'] = $value['classtime'];
                 // $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
 
-                $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
+                $checkAprrovalstatus = $this->checkAprrovalstatussss($userId,$value['topicid']);
               
                 if($checkAprrovalstatus){
 
                     if($checkAprrovalstatus['admin_approval_status'] > 0){
                         $request_status ='Approved';
-                        $data[$counter]['title'] = $value['topic'];
+                       
                     }else{
                         $request_status ='In Approval Process ..please wait';
+                        $data[$counter]['title'] = $value['topic'];
                     }
                    
                 }else{
@@ -2448,6 +2449,17 @@ public function getClassrequestcountstudent($userId){
 
 
 
+public function checkAprrovalstatussss($userId,$topicid){
+
+    $this->db->select('*');
+    $this->db->where(TBL_NEW_COURSE_REQUEST.'.time_table_id', $topicid);
+     $this->db->where(TBL_NEW_COURSE_REQUEST.'.student_id', $userId);
+    $this->db->limit(1);
+    $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
+}
 
         
 }
