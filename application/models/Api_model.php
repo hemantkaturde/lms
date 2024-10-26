@@ -70,6 +70,11 @@ class Api_model extends CI_Model
             $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
             $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
 
+            if($data['user_flag']=='Student'){
+                $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+                $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+            }
+
             if($data['user_flag']=='Counsellor'){
                 $this->db->where(TBL_ENQUIRY.'.counsellor_id', $data['userid']);
             }
