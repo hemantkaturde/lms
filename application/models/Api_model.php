@@ -501,6 +501,10 @@ class Api_model extends CI_Model
         // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');       
         $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
 
+        if($data['user_flag']=='Student'){
+            $this->db->where(TBL_USER.'.userId', $data['userid']);
+        }
+
         $query = $this->db->get(TBL_ATTENDANCE);
         $fetch_result = $query->result_array();
 
