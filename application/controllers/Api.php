@@ -157,11 +157,11 @@ class Api extends BaseController
 		}else{
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
           
-            // if(trim($this->input->post('user_flag'))=='Student'){
-            //     $course_data = $this->Api_model->getcourseliststudent($data);
-            // }else{
+            if(trim($this->input->post('user_flag'))=='Student'){
+                $course_data = $this->Api_model->getcourseliststudent($data);
+            }else{
                 $course_data = $this->Api_model->getCourseData($data);
-            // }
+            }
         
             if($course_data){
                 $status = 'Success';
