@@ -156,13 +156,13 @@ class Api extends BaseController
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
-           
+          
             if(trim($this->input->post('user_flag'))=='Student'){
-                $course_data = $this->Api_model->getCourseDataStudent($data);
+                $course_data = $this->Api_model->getcourseliststudent($data);
             }else{
                 $course_data = $this->Api_model->getCourseData($data);
             }
-           
+        
             if($course_data){
                 $status = 'Success';
                 $message = 'Data Found';
@@ -585,12 +585,7 @@ class Api extends BaseController
 
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
 
-            if(trim($this->input->post('user_flag'))=='Student'){
-                $view_CourseList = $this->Api_model->getCourseDataStudent($data);
-            }else{
-                $view_CourseList = $this->Api_model->getCourseList($data);
-            }
-            
+            $view_CourseList = $this->Api_model->getCourseList($data);
             if($view_CourseList){
                 $status = 'Success';
                 $message = 'Course List Detials Found';

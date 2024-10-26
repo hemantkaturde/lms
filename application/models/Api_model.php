@@ -183,64 +183,31 @@ class Api_model extends CI_Model
     }
 
 
-    public function getCourseDataStudent($data){
+    public function getCourselistDataStudent($data){
        
-        $this->db->select(TBL_ENQUIRY.'.enq_course_id,'.TBL_USER.'.book_issued');
-        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
-        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
-        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$data['userid']);
-        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
-        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
-
+        $this->db->select('enq_course_id');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $student_name);
+        $query = $this->db->get(TBL_USERS_ENQUIRES);
+        $fetch_result_enquiry_courses = $query->result_array();
+    
         $data = array();
         $counter = 0;
-        foreach ($fetch_result_enquiry_courses as $key => $valueid) {
+         foreach ($fetch_result_enquiry_courses as $key => $value) {
     
-            $course_ids    =   explode(',', $valueid['enq_course_id']);
-
+         $course_ids    =   explode(',', $value['enq_course_id']);
+    
             foreach ($course_ids as $key => $value) {
-                $this->db->select('*');
-                $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
-                $this->db->where(TBL_COURSE.'.isDeleted', 0);
-                // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
-                $this->db->where(TBL_COURSE.'.courseId', $value);
-
-                $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
-                $query = $this->db->get(TBL_COURSE);
-                $fetch_result = $query->result_array();
-                
-                    if(count($fetch_result) > 0)
-                    {
-                        foreach ($fetch_result as $key => $value)
-                        {
-
-                                $data[$counter]['courseId'] = $value['courseId'];
-                                $data[$counter]['course_name'] = $value['course_name'];
-                                $data[$counter]['course_desc'] = $value['course_desc'];
-                                $data[$counter]['course_date'] = $value['course_date'];
-                                $data[$counter]['createdDtm'] = $value['createdDtm'];
-                                $data[$counter]['course_fees'] = $value['course_fees'];
-                                $data[$counter]['ct_name'] = $value['ct_name'];
-                                $data[$counter]['course_total_fees'] = $value['course_total_fees'];
-                                $data[$counter]['course_books'] = $value['course_books'];
-                                $data[$counter]['course_mode_online'] = $value['course_mode_online'];
-                                $data[$counter]['course_mode_offline'] = $value['course_mode_offline'];
-                                $data[$counter]['course_cert_cost'] = $value['course_cert_cost'];
-                                $data[$counter]['course_onetime_adm_fees'] = $value['course_onetime_adm_fees'];
-                                $data[$counter]['course_kit_cost'] = $value['course_kit_cost'];
-                                $data[$counter]['course_cgst_tax_value'] = $value['course_cgst_tax_value'];
-                                $data[$counter]['course_sgst_tax_value'] = $value['course_sgst_tax_value'];
-                                $data[$counter]['course_total_fees'] = $value['course_total_fees'];
-                                $data[$counter]['course_type_id'] = $value['ct_id'];
-
-
-                                $counter++; 
-                        }
-                    }
-                }
-            return $data;
+    
+                  $getCourseInfo = $this->getcourseinfobyid($value);
+    
+                  $data[$counter]['courseId'] = $getCourseInfo[0]->courseId;
+                  $data[$counter]['course_name'] = $getCourseInfo[0]->course_name;
+                  $counter++; 
+            }
         }
-
+    
+        return $data;
     }
 
     /*get All Course List*/
@@ -2098,11 +2065,11 @@ class Api_model extends CI_Model
 
 
     
-    public function getcourseliststudent($student_name){
+    public function getcourseliststudent($data){
 
         $this->db->select('enq_course_id');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
-        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $student_name);
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $data['userid']);
         $query = $this->db->get(TBL_USERS_ENQUIRES);
         $fetch_result_enquiry_courses = $query->result_array();
     
@@ -2114,10 +2081,26 @@ class Api_model extends CI_Model
     
             foreach ($course_ids as $key => $value) {
     
-                  $getCourseInfo = $this->getcourseinfobyid($value);
+                  $getCourseInfo = $this->getcourseinfobyidforstudent($value);
     
                   $data[$counter]['courseId'] = $getCourseInfo[0]->courseId;
                   $data[$counter]['course_name'] = $getCourseInfo[0]->course_name;
+                  $data[$counter]['course_desc'] = $getCourseInfo[0]->course_desc;
+                  $data[$counter]['course_date'] = $getCourseInfo[0]->course_date;
+                  $data[$counter]['createdDtm'] = $getCourseInfo[0]->createdDtm;
+                  $data[$counter]['course_fees'] = $getCourseInfo[0]->course_fees;
+                  $data[$counter]['ct_name'] = $getCourseInfo[0]->ct_name;
+                  $data[$counter]['course_total_fees'] = $getCourseInfo[0]->course_total_fees;
+                  $data[$counter]['course_books'] = $getCourseInfo[0]->course_books;
+                  $data[$counter]['course_mode_online'] = $getCourseInfo[0]->course_mode_online;
+                  $data[$counter]['course_mode_offline'] = $getCourseInfo[0]->course_mode_offline;
+                  $data[$counter]['course_cert_cost'] = $getCourseInfo[0]->course_cert_cost;
+                  $data[$counter]['course_onetime_adm_fees'] = $getCourseInfo[0]->course_onetime_adm_fees;
+                  $data[$counter]['course_kit_cost'] = $getCourseInfo[0]->course_kit_cost;
+                  $data[$counter]['course_cgst_tax_value'] = $getCourseInfo[0]->course_cgst_tax_value;
+                  $data[$counter]['course_sgst_tax_value'] = $getCourseInfo[0]->course_sgst_tax_value;
+                  $data[$counter]['course_total_fees'] = $getCourseInfo[0]->course_total_fees;
+                  $data[$counter]['course_type_id'] = $getCourseInfo[0]->course_type_id;
                   $counter++; 
             }
         }
@@ -2126,6 +2109,21 @@ class Api_model extends CI_Model
        
     }
     
+
+    public function getcourseinfobyidforstudent($course_id){
+    
+        $this->db->select('BaseTbl.courseId,BaseTbl.course_name,BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name,BaseTbl.course_total_fees,BaseTbl.course_books,BaseTbl.course_mode_online,BaseTbl.course_mode_offline,BaseTbl.course_cert_cost,BaseTbl.course_onetime_adm_fees,BaseTbl.course_kit_cost,BaseTbl.course_cgst_tax_value,BaseTbl.course_sgst_tax_value,BaseTbl.course_total_fees,Type.ct_id as course_type_id');
+        $this->db->from('tbl_course as BaseTbl');
+        $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
+        $this->db->where('BaseTbl.courseId', $course_id);
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->order_by('BaseTbl.courseId', 'desc');
+        // $this->db->limit($page, $segment);
+        $query = $this->db->get();
+        
+        $result = $query->result();
+        return $result;      
+    }    
     
 public function getcourseinfobyid($course_id){
     $this->db->select('courseId,course_name');
