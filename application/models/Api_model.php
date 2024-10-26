@@ -72,7 +72,7 @@ class Api_model extends CI_Model
 
             if($data['user_flag']=='Student'){
                 $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
-                $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+                $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $data['userid']);
             }
 
             if($data['user_flag']=='Counsellor'){
