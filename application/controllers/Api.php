@@ -585,7 +585,12 @@ class Api extends BaseController
 
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
 
-            $view_CourseList = $this->Api_model->getCourseList($data);
+            if(trim($this->input->post('user_flag'))=='Student'){
+                $view_CourseList = $this->Api_model->getCourseDataStudent($data);
+            }else{
+                $view_CourseList = $this->Api_model->getCourseList($data);
+            }
+            
             if($view_CourseList){
                 $status = 'Success';
                 $message = 'Course List Detials Found';
