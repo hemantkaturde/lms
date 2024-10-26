@@ -156,7 +156,13 @@ class Api extends BaseController
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
-            $course_data = $this->Api_model->getCourseData($data);
+           
+            if(trim($this->input->post('user_flag'))=='Student'){
+                $course_data = $this->Api_model->getCourseDataStudent($data);
+            }else{
+                $course_data = $this->Api_model->getCourseData($data);
+            }
+           
             if($course_data){
                 $status = 'Success';
                 $message = 'Data Found';
