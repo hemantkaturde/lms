@@ -182,6 +182,67 @@ class Api_model extends CI_Model
         return $result;      
     }
 
+
+    public function getCourseDataStudent($data){
+       
+        $this->db->select(TBL_ENQUIRY.'.enq_course_id,'.TBL_USER.'.book_issued');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$data['userid']);
+        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+        $data = array();
+        $counter = 0;
+        foreach ($fetch_result_enquiry_courses as $key => $valueid) {
+    
+            $course_ids    =   explode(',', $valueid['enq_course_id']);
+
+            foreach ($course_ids as $key => $value) {
+                $this->db->select('*');
+                $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+                $this->db->where(TBL_COURSE.'.isDeleted', 0);
+                // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_number=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+                $this->db->where(TBL_COURSE.'.courseId', $value);
+
+                $this->db->order_by(TBL_COURSE.'.courseId', 'DESC');
+                $query = $this->db->get(TBL_COURSE);
+                $fetch_result = $query->result_array();
+                
+                    if(count($fetch_result) > 0)
+                    {
+                        foreach ($fetch_result as $key => $value)
+                        {
+
+                                $data[$counter]['courseId'] = $value['courseId'];
+                                $data[$counter]['course_name'] = $value['course_name'];
+                                $data[$counter]['course_desc'] = $value['course_desc'];
+                                $data[$counter]['course_date'] = $value['course_date'];
+                                $data[$counter]['createdDtm'] = $value['createdDtm'];
+                                $data[$counter]['course_fees'] = $value['course_fees'];
+                                $data[$counter]['ct_name'] = $value['ct_name'];
+                                $data[$counter]['course_total_fees'] = $value['course_total_fees'];
+                                $data[$counter]['course_books'] = $value['course_books'];
+                                $data[$counter]['course_mode_online'] = $value['course_mode_online'];
+                                $data[$counter]['course_mode_offline'] = $value['course_mode_offline'];
+                                $data[$counter]['course_cert_cost'] = $value['course_cert_cost'];
+                                $data[$counter]['course_onetime_adm_fees'] = $value['course_onetime_adm_fees'];
+                                $data[$counter]['course_kit_cost'] = $value['course_kit_cost'];
+                                $data[$counter]['course_cgst_tax_value'] = $value['course_cgst_tax_value'];
+                                $data[$counter]['course_sgst_tax_value'] = $value['course_sgst_tax_value'];
+                                $data[$counter]['course_total_fees'] = $value['course_total_fees'];
+                                $data[$counter]['course_type_id'] = $value['ct_id'];
+
+
+                                $counter++; 
+                        }
+                    }
+                }
+            return $data;
+        }
+
+    }
+
     /*get All Course List*/
     public function getCourseTypedata($data){
         $this->db->select('BaseTbl.ct_id , BaseTbl.ct_name');
