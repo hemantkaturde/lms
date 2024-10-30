@@ -306,7 +306,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' ) { ?>
                             curl_close($curl);
                             echo $response;
 
-                            echo ("<script> window.alert('Succesfully Registerd');window.location.href='success.php?enq=$enq_id';</script>");
+                            echo ("<script> window.alert('Succesfully Registered');window.location.href='success.php?enq=$enq_id';</script>");
                         }else{
     
                             echo ("<script> window.alert('No Record Store')");
