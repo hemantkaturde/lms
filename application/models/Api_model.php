@@ -1269,10 +1269,7 @@ class Api_model extends CI_Model
 
     public function getEnquirypaymentInfo($id){
 
-        $this->db->select('payment_date,CASE
-           WHEN razorpay_payment_id IS NULL THEN "Manual-Transaction"
-           ELSE razorpay_payment_id
-            END AS transection_id,totalAmount as amount,payment_mode,payment_status');
+        $this->db->select('payment_date,razorpay_payment_id as transection_id,totalAmount as amount,payment_mode,payment_status');
         $this->db->from('tbl_payment_transaction');
         //$this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('tbl_payment_transaction.paymant_type', 'regular_invoice');
