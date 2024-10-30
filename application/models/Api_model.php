@@ -1305,23 +1305,27 @@ class Api_model extends CI_Model
 
         $payment_details = array();
 
-        if($total_course_fees['total_course_fees']){
-            $payment_details['total_course_fees'] =$total_course_fees['total_course_fees'];
-        }else{
-            $payment_details['total_course_fees'] =0;
-        }
+        // if($total_course_fees['total_course_fees']){
+        //     $payment_details['total_course_fees'] =$total_course_fees['total_course_fees'];
+        // }else{
+        //     $payment_details['total_course_fees'] =0;
+        // }
 
-        if($totalpaidAmount['totalpaidAmount']){
-            $payment_details['totalpaidAmount'] =$totalpaidAmount['totalpaidAmount'];
-        }else{
-            $payment_details['totalpaidAmount'] =0;
-        }
+        // if($totalpaidAmount['totalpaidAmount']){
+        //     $payment_details['totalpaidAmount'] =$totalpaidAmount['totalpaidAmount'];
+        // }else{
+        //     $payment_details['totalpaidAmount'] =0;
+        // }
 
-        if($total_course_fees['discount_amount']){
-            $payment_details['total_discount'] =$total_course_fees['discount_amount'];
-        }else{
-            $payment_details['total_discount']=0;
-        }
+        // if($total_course_fees['discount_amount']){
+        //     $payment_details['total_discount'] =$total_course_fees['discount_amount'];
+        // }else{
+        //     $payment_details['total_discount']=0;
+        // }
+
+        $payment_details['total_course_fees'] =$total_course_fees['total_course_fees'];
+        $payment_details['totalpaidAmount'] =$totalpaidAmount['totalpaidAmount'];
+        $payment_details['total_discount'] =$total_course_fees['discount_amount'];
 
        
         $payment_details['totalpending'] = $total_course_fees['total_course_fees'] - $totalpaidAmount['totalpaidAmount'];
