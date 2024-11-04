@@ -1291,7 +1291,7 @@ class Api_model extends CI_Model
                     $transection_id = $value['razorpay_payment_id'];
                     $payment_date = $value['datetime'];
                 }else{
-                    $transaction_id = 'Manual-Transaction';
+                    $transection_id = 'Manual-Transaction';
                     $payment_date =$value['payment_date'];
                 }
 
