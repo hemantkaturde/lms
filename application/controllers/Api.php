@@ -251,6 +251,8 @@ class Api extends BaseController
 			$message = 'Validation error';
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
+
+            $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
             $taxinvoice_data = $this->Api_model->getTaxinvoiceData($data);
             if($taxinvoice_data){
                 $status = 'Success';

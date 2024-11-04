@@ -223,11 +223,16 @@ class Api_model extends CI_Model
     }
 
     /*get All Invoice List*/
-    public function getTaxinvoiceData(){
+    public function getTaxinvoiceData($data){
 
         
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+        
+        if($data['user_flag']=='Student'){
+            $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+            $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$data['userid']);
+        }
 
         if($params['search']['value'] != "") 
         {
