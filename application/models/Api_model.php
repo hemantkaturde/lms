@@ -446,6 +446,124 @@ class Api_model extends CI_Model
     }
 
 
+    public function getExaminationStudnet($data){
+
+        /*check if user Having Direct Access to attend Exam*/
+        $this->db->select('enq_course_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.enq_id = '.TBL_ENQUIRY.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$data['userid']);
+        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+
+        $data = array();
+        $counter = 0;
+
+        foreach ($fetch_result_enquiry_courses as $key => $value) {
+
+            $course_ids    =   explode(',', $value['enq_course_id']);
+            foreach ($course_ids as $key => $value) {
+
+            // $this->db->select('count(*) as attendance');
+            // $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+            // $this->db->where(TBL_ATTENDANCE.'.course_id', $value);
+            // $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
+            // $query = $this->db->get(TBL_ATTENDANCE);
+            // $attendance[] = $query->result_array();
+
+            // $this->db->select('count(*) as topic');
+            // $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.course_id', $value);
+            // $query = $this->db->get(TBL_TIMETABLE_TRANSECTIONS);
+            // $topic[] = $query->result_array();
+
+
+            $this->db->select('*');
+            $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+            // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+            // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+            // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
+
+            if($params['search']['value'] != "") 
+            {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_EXAMINATION.".exam_title LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_EXAMINATION.".exam_time LIKE '%".$params['search']['value']."%')");
+            }
+            $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+            $this->db->where(TBL_EXAMINATION.'.course_id', $value);
+            // $this->db->where(TBL_COURSE.'.courseId', $course_id);
+            $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
+        // $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
+            $this->db->limit($params['length'],$params['start']);
+            $query = $this->db->get(TBL_EXAMINATION);
+            $fetch_result = $query->result_array();
+
+
+            if(count($fetch_result) > 0)
+            {
+                foreach ($fetch_result as $key => $value)
+                {  
+
+                        /*check Here Exam is completed or not*/
+
+                        $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+
+                        if($check_exam_completed_or_pending){
+                            $exam_status ='<b style="color:green">Exam Completed</b>';
+                            $exam_status_for_condition ='Exam Completed';
+                            $exam_status_count =1;
+                        }else{
+                            $exam_status ='<b style="color:red"></b>';
+
+                            $exam_status_for_condition ='';
+                            $exam_status_count =0;
+                        }
+
+                        // $data[$counter]['course_name'] = $value['course_name'];
+                        // $data[$counter]['exam_title'] = $value['exam_title'];
+                        // $data[$counter]['exam_time'] = $value['exam_time'];
+                        // $data[$counter]['status'] = $exam_status;
+
+
+                        if($value['exam_status']==1){
+                            $exam_status ='Active';
+                         }else{
+                            $exam_status ='In-Active';
+                         }
+        
+                         $data[$counter]['course_name'] = $value['course_name'];
+                         $data[$counter]['exam_title'] = $value['exam_title'];
+                         $data[$counter]['exam_time'] = $value['exam_time'];
+                         $data[$counter]['total_marks'] = $value['total_marks'];
+                         $data[$counter]['exam_status'] = $exam_status_for_condition;
+                         $data[$counter]['exam_id'] = $value['id'];
+                         $data[$counter]['course_id'] = $value['course_id'];
+                         $counter++; 
+                       
+                    $counter++; 
+                }
+            }
+
+        }        
+        }
+
+        return $data; 
+
+    }
+
+
+    public function checkexamiscompletedornot($userId,$exam_id,$course_id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    
+    }
+
+
      /*Get Examination List*/
      public function getcheckexaminationlist($data){
         $this->db->select('*');
