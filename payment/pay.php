@@ -42,6 +42,11 @@
             color: #999;
         }
 
+        .loader_ajax {background-color: #242424;bottom: 0;height: 100%;left: 0;opacity: 0.9;position: fixed;top: 0;width: 100%;z-index: 999;}
+    	.loader_ajax_inner {background: transparent url("bg.png") no-repeat scroll center center;height: 44px;left: 50%;margin: -22px 0 0 -22px;position: absolute;top: 50%;width: 44px;}
+	    .loader_ajax img {margin: 9px 0 0 8px;width: 28px;}
+
+
         @media (max-width: 576px) {
             .img-wrap {
                 height: 150px;
@@ -243,11 +248,13 @@
                                 add_on_course_id: addoncourseid,
                             },
                             success: function(msg) {
+                                $(".loader_ajax").show();
                                 if(addoncourseid) {
                                     window.location.href = '<?php echo SERVER; ?>payment/success.php?enq=<?=$enq_id;?>&&add_on_course_id=<?=$add_on_course_id?>';
                                 } else {
                                     window.location.href = '<?php echo SERVER; ?>payment/success.php?enq=<?=$enq_id;?>';
                                 }
+                                $(".loader_ajax").hide();
                             }
                         });
                     },
@@ -267,3 +274,31 @@
 <?php
       }
 ?>
+
+<div class="loader_ajax" style="display:none;">
+	    <div class="loader_ajax_inner"><img src="preloader_ajax.gif"></div>
+        <p style="margin-left: 34%;margin-top: 25%;font-size: xx-large;">Please Wait Your Payment is in process...</p>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://iictn.org.in/admission/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"> </script>
+    <script src="https://iictn.org.in/admission/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://iictn.org.in/admission/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="https://iictn.org.in/admission/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="https://iictn.org.in/admission/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script src="https://iictn.org.in/admission/js/charts-home.js"></script>
+    <script src="https://iictn.org.in/admission/js/front.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+        // $(document).ready(function() {
+        //     $("#registration_form_details").on("submit", function(){
+        //         $(".loader_ajax").show();
+        //     });
+        // });
+    </script>
