@@ -158,7 +158,7 @@ class Api extends BaseController
             $data = array('userid' =>trim($this->input->post('userid')),'user_flag' =>trim($this->input->post('user_flag')));
           
             if(trim($this->input->post('user_flag'))=='Student'){
-                $course_data = $this->Api_model->getcourseliststudent($data);
+                $course_data = $this->Api_model->getcourseliststudent($this->input->post('userid'));
             }else{
                 $course_data = $this->Api_model->getCourseData($data);
             }
