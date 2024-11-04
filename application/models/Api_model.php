@@ -551,17 +551,17 @@ class Api_model extends CI_Model
     }
 
 
-    public function checkexamiscompletedornot($userId,$exam_id,$course_id){
+    // public function checkexamiscompletedornot($userId,$exam_id,$course_id){
 
-        $this->db->select('*');
-        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
-        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
-        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
-        $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
-        $fetch_result = $query->result_array();
-        return $fetch_result;
+    //     $this->db->select('*');
+    //     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+    //     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+    //     $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+    //     $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+    //     $fetch_result = $query->result_array();
+    //     return $fetch_result;
     
-    }
+    // }
 
 
      /*Get Examination List*/
