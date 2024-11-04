@@ -228,7 +228,7 @@ class Api_model extends CI_Model
         
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
-        
+
         if($data['user_flag']=='Student'){
             $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
             $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$data['userid']);
@@ -295,7 +295,7 @@ class Api_model extends CI_Model
 
             
                 //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
-                 $data[$counter]['receipt_no'] = $value['id'];
+                 $data[$counter]['receipt_no'] = $value['paymentid'];
                  $data[$counter]['enquiry_no'] = $value['enquiry_number'];
 
                  if($value['razorpay_payment_id']){
