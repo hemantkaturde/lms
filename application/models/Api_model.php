@@ -1269,7 +1269,7 @@ class Api_model extends CI_Model
 
     public function getEnquirypaymentInfo($id){
 
-        $this->db->select('payment_date,razorpay_payment_id,totalAmount as amount,payment_mode,payment_status');
+        $this->db->select('payment_date,razorpay_payment_id,totalAmount as amount,payment_mode,payment_status,datetime');
         $this->db->from('tbl_payment_transaction');
         //$this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('tbl_payment_transaction.paymant_type', 'regular_invoice');
