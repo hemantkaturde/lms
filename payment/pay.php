@@ -42,9 +42,9 @@
             color: #999;
         }
 
-        .loader_ajax {background-color: #242424;bottom: 0;height: 100%;left: 0;opacity: 0.9;position: fixed;top: 0;width: 100%;z-index: 999;}
+        /* .loader_ajax {background-color: #242424;bottom: 0;height: 100%;left: 0;opacity: 0.9;position: fixed;top: 0;width: 100%;z-index: 999;}
         .loader_ajax_inner {background: transparent url("bg.png") no-repeat scroll center center;height: 44px;left: 50%;margin: -22px 0 0 -22px;position: absolute;top: 50%;width: 44px;}
-        .loader_ajax img {margin: 9px 0 0 8px;width: 28px;}
+        .loader_ajax img {margin: 9px 0 0 8px;width: 28px;} */
 
 
         .loader_ajax {
@@ -276,10 +276,10 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
-        //  $(document).ready(function() {
-        //         $(".loader_ajax").show();
+         $(document).ready(function() {
+                $(".loader_ajax").show();
 
-        //     });
+            });
 
         $('body').on('click', '.buy_now', function(e) {
             var final_amt = $("#final_student_amount").val();
