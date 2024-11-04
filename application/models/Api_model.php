@@ -505,18 +505,18 @@ class Api_model extends CI_Model
 
                         /*check Here Exam is completed or not*/
 
-                        $check_exam_completed_or_pending = $this->checkexamiscompletedornot($data['userid'],$value['id'],$value['course_id']);
+                        // $check_exam_completed_or_pending = $this->checkexamiscompletedornot($data['userid'],$value['id'],$value['course_id']);
 
-                        if($check_exam_completed_or_pending){
-                            $exam_status ='<b style="color:green">Exam Completed</b>';
-                            $exam_status_for_condition ='Exam Completed';
-                            $exam_status_count =1;
-                        }else{
-                            $exam_status ='<b style="color:red"></b>';
+                        // if($check_exam_completed_or_pending){
+                        //     $exam_status ='<b style="color:green">Exam Completed</b>';
+                        //     $exam_status_for_condition ='Exam Completed';
+                        //     $exam_status_count =1;
+                        // }else{
+                        //     $exam_status ='<b style="color:red"></b>';
 
-                            $exam_status_for_condition ='';
-                            $exam_status_count =0;
-                        }
+                        //     $exam_status_for_condition ='';
+                        //     $exam_status_count =0;
+                        // }
 
                         // $data[$counter]['course_name'] = $value['course_name'];
                         // $data[$counter]['exam_title'] = $value['exam_title'];
@@ -534,7 +534,7 @@ class Api_model extends CI_Model
                          $data[$counter]['exam_title'] = $value['exam_title'];
                          $data[$counter]['exam_time'] = $value['exam_time'];
                          $data[$counter]['total_marks'] = $value['total_marks'];
-                         $data[$counter]['exam_status'] = $exam_status_for_condition;
+                         $data[$counter]['exam_status'] = 0;
                          $data[$counter]['exam_id'] = $value['id'];
                          $data[$counter]['course_id'] = $value['course_id'];
                          $counter++; 
