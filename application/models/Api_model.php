@@ -859,7 +859,8 @@ class Api_model extends CI_Model
                     $data[$counter]['classtime'] = $value['classtime'];
                     $data[$counter]['request_id'] =  $value['request_id'];
                     $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
-
+                    $data[$counter]['student_name'] =  $value['name'];
+                    $data[$counter]['student_mobile_no'] =  $value['mobile'];
                 
                         if($value['admin_approval_status']){
                             $request_status = $value['admin_approval_status'];
