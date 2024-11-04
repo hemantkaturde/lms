@@ -1004,7 +1004,7 @@
                     }
 
                     $all_course_name = trim($course_name, ', '); 
-                    $all_doc_url_val = trim($doc_url_val, ', '); 
+                    $all_doc_url_val = trim($doc_url_val, ' , <br>'); 
 
                     if($all_doc_url_val){
                         $syallabus_urls = '<div>
