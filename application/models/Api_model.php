@@ -1269,7 +1269,7 @@ class Api_model extends CI_Model
 
     public function getEnquirypaymentInfo($id){
 
-        $this->db->select('payment_date,razorpay_payment_id as transection_id,totalAmount as amount,payment_mode,payment_status');
+        $this->db->select('payment_date,razorpay_payment_id,totalAmount as amount,payment_mode,payment_status');
         $this->db->from('tbl_payment_transaction');
         //$this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('tbl_payment_transaction.paymant_type', 'regular_invoice');
@@ -1287,8 +1287,8 @@ class Api_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                if($value['transection_id']!=NULL){
-                    $transection_id = $value['transection_id'];
+                if($value['razorpay_payment_id']!=NULL){
+                    $transection_id = $value['razorpay_payment_id'];
                     $payment_date = $value['datetime'];
                 }else{
                     $transaction_id = 'Manual-Transaction';
