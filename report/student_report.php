@@ -404,6 +404,7 @@ $resultStudentEnquirydetails_add_on = $conn->query($getStudentEnquirydetails_add
 <div class="container">
   <div class="row">
     <div class="col-12">
+    <h3>Add On Course Paid Fees Details</h3>
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
