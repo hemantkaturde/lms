@@ -341,14 +341,8 @@ class Api extends BaseController
 			$message = 'Validation error';
 			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
 		}else{
-
-            if(trim($this->input->post('user_flag'))=='Student'){
-                $examination_data = $this->Api_model->getExaminationStudnet($this->input->post('userid'));
-            }else{
-                $examination_data = $this->Api_model->getExaminationdata($data);
-            }
-        
-
+            
+            $examination_data = $this->Api_model->getExaminationdata($data);
             if($examination_data){
                 $status = 'Success';
                 $message = 'Examination Data Found';
