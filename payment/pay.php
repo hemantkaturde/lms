@@ -47,6 +47,58 @@
         .loader_ajax img {margin: 9px 0 0 8px;width: 28px;}
 
 
+        .loader_ajax {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent black */
+    z-index: 1000;
+}
+
+.loader_ajax_inner {
+    text-align: center;
+    color: #ffffff;
+}
+
+.loader_ajax_inner img {
+    max-width: 100px;
+    width: 20%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.loader_ajax_inner p {
+    font-size: 1.5em;
+    color: #ffffff;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .loader_ajax_inner img {
+        width: 40%;
+    }
+
+    .loader_ajax_inner p {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .loader_ajax_inner img {
+        width: 50%;
+    }
+
+    .loader_ajax_inner p {
+        font-size: 1em;
+    }
+}
+
+
         @media (max-width: 576px) {
             .img-wrap {
                 height: 150px;
@@ -224,10 +276,10 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
-         $(document).ready(function() {
-                $(".loader_ajax").show();
+        //  $(document).ready(function() {
+        //         $(".loader_ajax").show();
 
-            });
+        //     });
 
         $('body').on('click', '.buy_now', function(e) {
             var final_amt = $("#final_student_amount").val();
@@ -284,8 +336,9 @@
 <?php
       }
 ?>
-
 <div class="loader_ajax" style="display:none;">
-	    <div class="loader_ajax_inner"><img src="preloader_ajax.gif"></div>
-        <p style="margin-left: 34%;margin-top: 25%;font-size: xx-large;text:#ffff">Please Wait Your Payment is in process...</p>
+    <div class="loader_ajax_inner">
+        <img src="preloader_ajax.gif" alt="Loading...">
+        <p>Please Wait, Your Payment is in process...</p>
+    </div>
 </div>
