@@ -252,11 +252,15 @@
                                 add_on_course_id: addoncourseid,
                             },
                             success: function(msg) {
+                                $(".loader_ajax").show();
+
                                 if(addoncourseid) {
                                     window.location.href = '<?php echo SERVER; ?>payment/success.php?enq=<?=$enq_id;?>&&add_on_course_id=<?=$add_on_course_id?>';
                                 } else {
                                     window.location.href = '<?php echo SERVER; ?>payment/success.php?enq=<?=$enq_id;?>';
                                 }
+                                $(".loader_ajax").show();
+
                             }
                         });
                     },
