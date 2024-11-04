@@ -281,10 +281,10 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
-         $(document).ready(function() {
-                $(".loader_ajax").show();
+        //  $(document).ready(function() {
+        //         $(".loader_ajax").show();
 
-            });
+        //     });
 
         $('body').on('click', '.buy_now', function(e) {
             var final_amt = $("#final_student_amount").val();
