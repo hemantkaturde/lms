@@ -1277,8 +1277,35 @@ class Api_model extends CI_Model
         $this->db->where('payment_status', 1);
         $this->db->order_by('id', 'desc');
         $query = $this->db->get();
-        return $query->result();
-        
+        // return $query->result();
+
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                if($value['transection_id']!=NULL){
+                    $transection_id = $value['transection_id'];
+                    $payment_date = $value['datetime'];
+                }else{
+                    $transaction_id = 'Manual-Transaction';
+                    $payment_date =$value['payment_date'];
+                }
+
+                $data[$counter]['payment_date'] =  $payment_date;
+                $data[$counter]['transection_id'] = $transection_id;
+                $data[$counter]['amount'] = $value['amount'];
+                $data[$counter]['payment_mode'] = $value['payment_mode'];         
+                $data[$counter]['payment_status'] = $value['payment_status'];          
+               $counter++; 
+
+            }
+        }
+
+        return $data;
     }
 
     public function gettotalpaidEnquirypaymentInfo($id){
