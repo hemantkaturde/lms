@@ -531,7 +531,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                             <td><?=$row['datetime']?></td>
                             <td><?=$row['razorpay_payment_id']?></td>
                             <td><?=$row['payment_mode']?></td>
-                            <td><?=$row['totalAmount']?></td>
+                            <td><?= '₹ '.$row['totalAmount']?></td>
                             <td><?=$paymant_type?></td>
                         </tr>
                         <?php } ?>
