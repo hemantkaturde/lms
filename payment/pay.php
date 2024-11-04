@@ -226,6 +226,7 @@
     <script>
        
         $('body').on('click', '.buy_now', function(e) {
+            $(".loader_ajax").show();
             var final_amt = $("#final_student_amount").val();
             if (final_amt) {
                 var totalAmount = final_amt;
