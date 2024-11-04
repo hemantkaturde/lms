@@ -997,14 +997,14 @@
 
                         foreach($getSyllabusData as $doc_url)
                         {
-                            $doc_url_val .= $doc_url->doc_url. ',';
+                            $doc_url_val .= $doc_url->doc_url. ',    <br> ';
                         }
 
                         $i++;  
                     }
 
                     $all_course_name = trim($course_name, ', '); 
-                    $all_doc_url_val = trim($doc_url_val, ' , <br>'); 
+                    $all_doc_url_val = trim($doc_url_val, ', '); 
 
                     if($all_doc_url_val){
                         $syallabus_urls = '<div>
