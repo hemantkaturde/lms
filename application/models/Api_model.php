@@ -1287,7 +1287,7 @@ class Api_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                if($value['razorpay_payment_id']!=NULL){
+                if($value['razorpay_payment_id']){
                     $transection_id = $value['razorpay_payment_id'];
                     $payment_date = $value['datetime'];
                 }else{
@@ -1297,7 +1297,7 @@ class Api_model extends CI_Model
 
                 $data[$counter]['payment_date'] =  $payment_date;
                 $data[$counter]['transection_id'] = $transection_id;
-                $data[$counter]['amount'] = $value['amount'];
+                $data[$counter]['amount'] = '₹ '.$value['amount'];
                 $data[$counter]['payment_mode'] = $value['payment_mode'];         
                 $data[$counter]['payment_status'] = $value['payment_status'];          
                $counter++; 
