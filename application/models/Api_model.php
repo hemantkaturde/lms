@@ -482,18 +482,12 @@ class Api_model extends CI_Model
             // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
             // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
 
-            if($params['search']['value'] != "") 
-            {
-            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_EXAMINATION.".exam_title LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_EXAMINATION.".exam_time LIKE '%".$params['search']['value']."%')");
-            }
+            
             $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
             $this->db->where(TBL_EXAMINATION.'.course_id', $value);
             // $this->db->where(TBL_COURSE.'.courseId', $course_id);
             $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
         // $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
-            $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_EXAMINATION);
             $fetch_result = $query->result_array();
 
