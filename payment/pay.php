@@ -222,6 +222,7 @@
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+        $(".loader_ajax").show();
         $('body').on('click', '.buy_now', function(e) {
             var final_amt = $("#final_student_amount").val();
             if (final_amt) {
@@ -279,26 +280,3 @@
 	    <div class="loader_ajax_inner"><img src="preloader_ajax.gif"></div>
         <p style="margin-left: 34%;margin-top: 25%;font-size: xx-large;">Please Wait Your Payment is in process...</p>
 </div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://iictn.org.in/admission/js/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"> </script>
-    <script src="https://iictn.org.in/admission/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://iictn.org.in/admission/vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="https://iictn.org.in/admission/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
-    <script src="https://iictn.org.in/admission/vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="https://iictn.org.in/admission/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-
-    <script src="https://iictn.org.in/admission/js/charts-home.js"></script>
-    <script src="https://iictn.org.in/admission/js/front.js"></script>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script type="text/javascript">
-
-        // $(document).ready(function() {
-        //     $("#registration_form_details").on("submit", function(){
-        //         $(".loader_ajax").show();
-        //     });
-        // });
-    </script>
