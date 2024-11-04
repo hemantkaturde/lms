@@ -226,9 +226,10 @@
     <script>
        
         $('body').on('click', '.buy_now', function(e) {
-            $(".loader_ajax").show();
+
             var final_amt = $("#final_student_amount").val();
             if (final_amt) {
+                $(".loader_ajax").show();
                 var totalAmount = final_amt;
                 var addoncourseid = <?php echo $add_on_course_id_condition; ?>;
                 var product_id = $(this).attr("data-id");
