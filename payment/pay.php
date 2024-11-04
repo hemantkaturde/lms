@@ -339,6 +339,6 @@
 <div class="loader_ajax" style="display:none;">
     <div class="loader_ajax_inner">
         <img src="preloader_ajax.gif" alt="Loading...">
-        <p>Please Wait, Your Payment is in process...</p>
+        <p style="font-size: xx-large;">Please Wait, Your Payment is in process...</p>
     </div>
 </div>
