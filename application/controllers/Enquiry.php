@@ -997,7 +997,7 @@
 
                         foreach($getSyllabusData as $doc_url)
                         {
-                            $doc_url_val .= $doc_url->doc_url. ',';
+                            $doc_url_val .= $doc_url->doc_url. '"\r\n",';
                         }
 
                         $i++;  
