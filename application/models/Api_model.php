@@ -2072,16 +2072,24 @@ class Api_model extends CI_Model
 
                     $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
                   
-                    if($checkAprrovalstatus){
+                    // if($checkAprrovalstatus){
 
-                        if($checkAprrovalstatus['admin_approval_status'] > 0){
-                            $request_status ='Approved';
-                        }else{
-                            $request_status ='In Approval Process ..please wait';
-                        }
+                    //     if($checkAprrovalstatus['admin_approval_status'] > 0){
+                    //         $request_status ='Approved';
+                    //     }else{
+                    //         $request_status ='In Approval Process ..please wait';
+                    //     }
                        
+                    // }else{
+                    //     $request_status ='NA';
+                    // }
+
+                    if($checkAprrovalstatus['admin_approval_status']=='Approved'){
+                        $request_status =$checkAprrovalstatus['admin_approval_status'];
+                    }else if($checkAprrovalstatus['admin_approval_status']=='Not Approved'){
+                        $request_status =$checkAprrovalstatus['admin_approval_status'];
                     }else{
-                        $request_status ='NA';
+                        $request_status ='In Approval Process ..please wait';
                     }
                    
                     $data[$counter]['request_status'] =  $request_status;
@@ -2105,6 +2113,8 @@ class Api_model extends CI_Model
         $this->db->select('*');
         $this->db->where(TBL_NEW_COURSE_REQUEST.'.time_table_id', $topicid);
          $this->db->where(TBL_NEW_COURSE_REQUEST.'.student_id', $userId);
+         $this->db->order_by(TBL_NEW_COURSE_REQUEST.'.id', 'DESC');
+
         $this->db->limit(1);
         $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
         $fetch_result = $query->row_array();
