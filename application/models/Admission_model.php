@@ -1611,6 +1611,8 @@ function studentcertificateData($params)
         $this->db->select('*');
         $this->db->where(TBL_NEW_COURSE_REQUEST.'.time_table_id', $topicid);
          $this->db->where(TBL_NEW_COURSE_REQUEST.'.student_id', $userId);
+         $this->db->order_by(TBL_NEW_COURSE_REQUEST.'.id', 'DESC');
+
         $this->db->limit(1);
         $query = $this->db->get(TBL_NEW_COURSE_REQUEST);
         $fetch_result = $query->row_array();
