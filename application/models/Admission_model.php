@@ -1534,10 +1534,16 @@ function studentcertificateData($params)
                   
                     if($checkAprrovalstatus){
 
-                        if($checkAprrovalstatus['approval_status'] > 0){
-                            $request_status ='Approved';
+                        // if($checkAprrovalstatus['approval_status'] > 0){
+                        //     $request_status ='Approved';
+                        // }else{
+                        //     $request_status ='In Approval Process ..please wait';
+                        // }
+
+                        if($checkAprrovalstatus['admin_approval_status']){
+                            $request_status =$checkAprrovalstatus['admin_approval_status'];
                         }else{
-                            $request_status ='In Approval Process ..please wait';
+                            $request_status = 'In Approval Process ..please wait';
                         }
                        
                     }else{
