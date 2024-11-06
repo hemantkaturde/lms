@@ -1534,17 +1534,26 @@ function studentcertificateData($params)
                   
                     if($checkAprrovalstatus){
 
-                        if($checkAprrovalstatus['request_sent_status']==1  ||  $checkAprrovalstatus['approval_status']==1){
-                            $request_status ='Approved';
-                        }else{
+                        // if($checkAprrovalstatus['request_sent_status']==1  ||  $checkAprrovalstatus['approval_status']==1){
+                        //     $request_status ='Approved';
+                        // }else{
 
-                            if($checkAprrovalstatus['admin_approval_status']!=NULL){
-                                $request_status =$checkAprrovalstatus['admin_approval_status'];
-                            }else{
+                        //     if($checkAprrovalstatus['admin_approval_status']!=NULL){
+                        //         $request_status =$checkAprrovalstatus['admin_approval_status'];
+                        //     }else{
                               
-                                $request_status ='In Approval Process ..please wait';
-                            }
+                        //         $request_status ='In Approval Process ..please wait';
+                        //     }
+                        // }
+
+                        if($checkAprrovalstatus['admin_approval_status']=='Approved'){
+                            $request_status =$checkAprrovalstatus['admin_approval_status'];
+                        }else if($checkAprrovalstatus['admin_approval_status']=='Not Approved'){
+                            $request_status =$checkAprrovalstatus['admin_approval_status'];
+                        }else{
+                            $request_status ='In Approval Process ..please wait';
                         }
+
                        
                     }else{
                         $request_status ='NA';
