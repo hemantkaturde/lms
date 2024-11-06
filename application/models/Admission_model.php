@@ -1534,7 +1534,7 @@ function studentcertificateData($params)
                   
                     if($checkAprrovalstatus){
 
-                        if($checkAprrovalstatus['admin_approval_status'] > 0){
+                        if($checkAprrovalstatus['approval_status'] > 0){
                             $request_status ='Approved';
                         }else{
                             $request_status ='In Approval Process ..please wait';
