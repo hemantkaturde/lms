@@ -2893,8 +2893,14 @@ class Api extends BaseController
                 $topirequest_response['error'] = array('request_id'=>strip_tags(form_error('request_id')), 'updated_status'=>strip_tags(form_error('updated_status')));
             }else{
 
+                if(trim($this->input->post('updated_status'))=='Approved'){
+                    $approval_status = 1;
+                }else{
+                    $approval_status = 0;
+                }
+
                 $data = array(
-                    'approval_status'  => 1,
+                    'approval_status'  => $approval_status,
                     'admin_approval_status'  => $this->input->post('updated_status'),
                 );
 
