@@ -2066,9 +2066,9 @@ class Api_model extends CI_Model
                     $data[$counter]['classtime'] = $value['classtime'];
                     $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
 
-                    $data[$counter]['time_table_id'] = $value['tt_id'];
+                    // $data[$counter]['time_table_id'] = $value['tt_id'];
                     $data[$counter]['student_id'] =  $value2['user_id'];
-
+                    $data[$counter]['time_table_id'] = $value['topicid'];
 
                     $checkAprrovalstatus = $this->checkAprrovalstatus($userId,$value['topicid']);
                   
