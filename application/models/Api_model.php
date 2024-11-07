@@ -1006,6 +1006,113 @@ class Api_model extends CI_Model
     }
 
 
+    public function getstudentupcomingexaminationlist($userId,$user_flag){
+
+        $this->db->select('enq_course_id');
+        $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
+        $get_enquiry_courses = $this->db->get(TBL_ENQUIRY);
+        $fetch_result_enquiry_courses = $get_enquiry_courses->result_array();
+    
+        $data = array();
+        $counter = 0;
+        foreach ($fetch_result_enquiry_courses as $key => $value) {
+            
+            $course_ids    =   explode(',', $value['enq_course_id']);
+            foreach ($course_ids as $key => $value) {
+    
+
+            $this->db->select('count(*) as count,course_name,course_id');
+            $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+            $this->db->where(TBL_ATTENDANCE.'.user_id', $userId);
+            $this->db->where(TBL_ATTENDANCE.'.attendance_status', 1);
+            $this->db->group_by(TBL_ATTENDANCE.'.course_id');
+            $query = $this->db->get(TBL_ATTENDANCE);
+            $fetch_result = $query->result_array();
+    
+         
+    
+               $total_links = $this->student_model->upcoming_class_links_barchart($userId,$value);
+    
+              
+    
+               if(count($total_links) > 0){
+                $total_topics = count($total_links);
+               }else{
+                $total_topics =0;
+               }
+    
+               if($total_topics > 0){
+    
+                $peecentage =  $fetch_result[0]['count']/$total_topics * 100;
+               }else{
+                $peecentage = 0;
+    
+               }
+    
+        
+            $this->db->select('*');
+            $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
+            // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
+            // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
+            // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
+    
+            $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
+            $this->db->where(TBL_EXAMINATION.'.course_id', $value);
+    
+            $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
+            $this->db->group_by(TBL_COURSE.'.courseId');
+            $this->db->limit($params['length'],$params['start']);
+            $query = $this->db->get(TBL_EXAMINATION);
+            $fetch_result = $query->result_array();
+    
+    
+            if(count($fetch_result) > 0)
+            {
+                foreach ($fetch_result as $key => $value)
+                {  
+    
+                        $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
+                         /*check Here Exam is completed or not*/
+    
+                        // $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+    
+                        // if($check_exam_completed_or_pending){
+                        //     $exam_status ='<b style="color:green">Exam Completed</b>';
+                        //     $exam_status_count =1;
+                        // }else{
+                        //     $exam_status ='<b style="color:red">Pending</b>';
+                        //     $exam_status_count =0;
+                        // }
+                        $data[$counter]['courseId'] = $value['courseId'];
+                        $data[$counter]['course_name'] = $value['course_name'];
+                        $data[$counter]['exam_title'] = $value['exam_title'];
+                        $data[$counter]['icon_list'] = 'https://iictn.in/assets/img/logos/iictn_lms.png';
+                        // $data[$counter]['exam_time'] = $value['exam_time'];
+                        // $data[$counter]['status'] = $exam_status;
+                        // $data[$counter]['peecentage'] = $peecentage;
+                        // $data[$counter]['special_permission'] = $getspecailpermision_for_exam[0]['permission'];
+                        $data[$counter]['action'] = '';
+                       
+                    $counter++; 
+                }
+            }
+    
+        }
+            // if($fetch_time_table_attendance[0]['count'] == $fetch_topic_table_attendance[0]['count']){
+            //     return $data; 
+            // }else{
+               
+            //     return array(); 
+            // }
+    
+                return $data; 
+            
+        }
+
+    }
+
+
     public function getCourseList($data)
     {
         $this->db->select('*');
@@ -1236,6 +1343,7 @@ class Api_model extends CI_Model
             {
                  $data[$counter]['queryid'] = $value['queryid'];
                  $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['student_name'] = 'TEST';
                  $data[$counter]['topic_name'] = $value['topic'];
                  $data[$counter]['query'] = $value['query'];          
                 $counter++; 

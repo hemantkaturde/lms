@@ -2952,6 +2952,35 @@ class Api extends BaseController
         }
     }
 
+
+    public function getstudentupcomingexaminationlist(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+		{
+			$status = 'Failure';
+			$message = 'Validation error';
+			$data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+		}else{
+            $student_upcoming_data = $this->Api_model->getstudentupcomingexaminationlist($this->input->post('userid'),$this->input->post('user_flag'));
+            if($student_upcoming_data){
+                $status = 'Success';
+                $message = 'Student Portal Data Found';
+                $data = $student_upcoming_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+    }
+
     
 
 
