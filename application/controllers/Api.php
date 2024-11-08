@@ -2969,7 +2969,7 @@ class Api extends BaseController
             $student_upcoming_data = $this->Api_model->getstudentupcomingexaminationlist($this->input->post('userid'),$this->input->post('user_flag'));
             if($student_upcoming_data){
                 $status = 'Success';
-                $message = 'Student Portal Data Found';
+                $message = 'Student Portal Exam Data Found';
                 $data = $student_upcoming_data;
             }else{
                 $status = 'Failure';
