@@ -1088,7 +1088,7 @@ class Api_model extends CI_Model
                         $data[$counter]['course_name'] = $value['course_name'];
                         $data[$counter]['exam_title'] = $value['exam_title'];
                         $data[$counter]['icon_list'] = 'https://iictn.in/assets/img/logos/iictn_lms.png';
-                        // $data[$counter]['exam_time'] = $value['exam_time'];
+                        $data[$counter]['exam_time'] = $value['exam_time'];
                         // $data[$counter]['status'] = $exam_status;
                         // $data[$counter]['peecentage'] = $peecentage;
                         // $data[$counter]['special_permission'] = $getspecailpermision_for_exam[0]['permission'];
