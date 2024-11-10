@@ -545,7 +545,7 @@ class Api_model extends CI_Model
 
 
     /*Get All Certificate List*/
-    public function getCertificatedata($params)
+    public function getCertificatedata($data)
     {
 
         $this->db->select('*');
@@ -553,6 +553,11 @@ class Api_model extends CI_Model
         $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
         $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
         $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.question_status', 'checked');
+
+        if($data['user_flag']=='Student'){
+            $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $data['userid']);
+        }
+
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
