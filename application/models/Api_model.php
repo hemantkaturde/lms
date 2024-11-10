@@ -1051,7 +1051,7 @@ class Api_model extends CI_Model
                }
     
         
-            $this->db->select('*');
+            $this->db->select('*,'.TBL_EXAMINATION.'.id as examination_id');
             $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
             // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
             // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
@@ -1075,7 +1075,7 @@ class Api_model extends CI_Model
                         $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
                          /*check Here Exam is completed or not*/
 
-                        $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+                        $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['examination_id'],$value['course_id']);
     
                         if($check_exam_completed_or_pending){
                             $exam_status ='Exam Completed';
