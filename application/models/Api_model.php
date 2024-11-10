@@ -1075,6 +1075,12 @@ class Api_model extends CI_Model
                         $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
                          /*check Here Exam is completed or not*/
     
+
+                         print_r($userId)."<br/>";
+                         print_r($value['id'])."<br/>";
+                         print_r($value['course_id']);
+                         exit;
+
                         $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
 
                         print_r($check_exam_completed_or_pending);
