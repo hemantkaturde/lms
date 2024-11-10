@@ -1058,7 +1058,7 @@ class Api_model extends CI_Model
             // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
     
             $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
-            $this->db->where(TBL_EXAMINATION.'.course_id', $value);
+            $this->db->where(TBL_EXAMINATION.'.course_id', 3);
     
             $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
             $this->db->group_by(TBL_COURSE.'.courseId');
