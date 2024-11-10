@@ -1058,7 +1058,7 @@ class Api_model extends CI_Model
             // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $value);
     
             $this->db->where(TBL_EXAMINATION.'.isDeleted', 0);
-            $this->db->where(TBL_EXAMINATION.'.course_id', 3);
+            $this->db->where(TBL_EXAMINATION.'.course_id', $value);
     
             $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
             $this->db->group_by(TBL_COURSE.'.courseId');
@@ -1068,9 +1068,9 @@ class Api_model extends CI_Model
             print_r($fetch_result1);
             exit;
     
-            if(count($fetch_result) > 0)
+            if(count($fetch_result1) > 0)
             {
-                foreach ($fetch_result as $key => $value)
+                foreach ($fetch_result1 as $key => $value)
                 {  
     
                         $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
