@@ -1076,6 +1076,9 @@ class Api_model extends CI_Model
                          /*check Here Exam is completed or not*/
     
                         $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+
+                        print_r($check_exam_completed_or_pending);
+                        exit;
     
                         if($check_exam_completed_or_pending){
                             $exam_status ='Exam Completed';
