@@ -1078,7 +1078,7 @@ class Api_model extends CI_Model
 
                          print_r($userId)."<br/>";
                          print_r($value['id'])."<br/>";
-                         print_r($value['course_id']);
+                        // print_r($value['course_id']);
                          exit;
 
                         $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
