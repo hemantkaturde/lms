@@ -1062,10 +1062,8 @@ class Api_model extends CI_Model
     
             $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
             $this->db->group_by(TBL_COURSE.'.courseId');
-            $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_EXAMINATION);
             $fetch_result = $query->result_array();
-    
     
             if(count($fetch_result) > 0)
             {
@@ -1074,6 +1072,17 @@ class Api_model extends CI_Model
     
                         $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
                          /*check Here Exam is completed or not*/
+
+                         print_r($value['examination_id']);
+                         exit;
+
+
+                        //  print_r();
+                        //  exit;
+
+
+                        //  print_r();
+                        //  exit;
 
                         $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['examination_id'],$value['course_id']);
     
