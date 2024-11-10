@@ -1075,20 +1075,24 @@ class Api_model extends CI_Model
                         $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
                          /*check Here Exam is completed or not*/
     
-                        // $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
+                        $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['id'],$value['course_id']);
     
-                        // if($check_exam_completed_or_pending){
-                        //     $exam_status ='<b style="color:green">Exam Completed</b>';
-                        //     $exam_status_count =1;
-                        // }else{
-                        //     $exam_status ='<b style="color:red">Pending</b>';
-                        //     $exam_status_count =0;
-                        // }
+                        if($check_exam_completed_or_pending){
+                            $exam_status ='Exam Completed';
+                            $exam_status_count =1;
+                        }else{
+                            $exam_status ='Your Exam is Due, Please login from computer and appear for the exam';
+                            $exam_status_count =0;
+                        }
+
                         $data[$counter]['courseId'] = $value['courseId'];
                         $data[$counter]['course_name'] = $value['course_name'];
                         $data[$counter]['exam_title'] = $value['exam_title'];
                         $data[$counter]['icon_list'] = 'https://iictn.in/assets/img/logos/iictn_lms.png';
                         $data[$counter]['exam_time'] = $value['exam_time'];
+
+                        $data[$counter]['note'] = $exam_status;
+                        
                         // $data[$counter]['status'] = $exam_status;
                         // $data[$counter]['peecentage'] = $peecentage;
                         // $data[$counter]['special_permission'] = $getspecailpermision_for_exam[0]['permission'];
