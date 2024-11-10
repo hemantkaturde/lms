@@ -660,7 +660,7 @@ class Api_model extends CI_Model
                 $data[$counter]['remark'] = $Remark;
                 $data[$counter]['Quntitave_value'] = $Quntitave_value;
                 $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
-                $data[$counter]['course_name'] = '';
+                $data[$counter]['course_name'] = $value['course_name'];
                 
                 if($Quntitave_value=='Fail'){
 
