@@ -1051,7 +1051,7 @@ class Api_model extends CI_Model
                }
     
         
-            $this->db->select('*,'.TBL_EXAMINATION.'.id as examination_id');
+            $this->db->select('*,'.TBL_EXAMINATION.'.id as examination_id_last,MAX('.TBL_EXAMINATION.'.id) as examination_id');
             $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_EXAMINATION.'.course_id');
             // $this->db->join(TBL_STUDENT_ANSWER_SHEET, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
             // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
@@ -1061,7 +1061,7 @@ class Api_model extends CI_Model
             $this->db->where(TBL_EXAMINATION.'.course_id', $value);
     
             $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
-            // $this->db->group_by(TBL_EXAMINATION.'.course_id');
+            $this->db->group_by(TBL_EXAMINATION.'.course_id');
             $query = $this->db->get(TBL_EXAMINATION);
             $fetch_result1 = $query->result_array();
             ;
