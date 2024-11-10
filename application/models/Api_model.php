@@ -1064,6 +1064,9 @@ class Api_model extends CI_Model
             $this->db->group_by(TBL_COURSE.'.courseId');
             $query = $this->db->get(TBL_EXAMINATION);
             $fetch_result = $query->result_array();
+
+            print_r($fetch_result);
+            exit;
     
             if(count($fetch_result) > 0)
             {
