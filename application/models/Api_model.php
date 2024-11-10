@@ -1061,7 +1061,7 @@ class Api_model extends CI_Model
             $this->db->where(TBL_EXAMINATION.'.course_id', $value);
     
             $this->db->order_by(TBL_EXAMINATION.'.id', 'DESC');
-            $this->db->group_by(TBL_COURSE.'.courseId');
+            // $this->db->group_by(TBL_COURSE.'.courseId');
             $query = $this->db->get(TBL_EXAMINATION);
             $fetch_result1 = $query->result_array();
 
