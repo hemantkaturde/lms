@@ -1078,6 +1078,9 @@ class Api_model extends CI_Model
 
                     $getspecailpermision_for_exam = $this->getspecailpermisionforexam($userId,$value['course_id']);
 
+                    print_r($getspecailpermision_for_exam);
+                    exit;
+
    
                     if($peecentage==100){
                 
