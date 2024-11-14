@@ -1110,8 +1110,6 @@ class Api_model extends CI_Model
 
                         if($getspecailpermision_for_exam[0]['permission']==1){
 
-
-                            
                         $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['examination_id'],$value['course_id']);
     
                         if($check_exam_completed_or_pending){
@@ -2432,8 +2430,8 @@ public function getanswersheetlist($course_id,$exam_id){
         $this->db->join(TBL_EXAMINATION, TBL_STUDENT_ANSWER_SHEET.'.exam_id = '.TBL_EXAMINATION.'.id');
         $this->db->join(TBL_USER, TBL_STUDENT_ANSWER_SHEET.'.student_id = '.TBL_USER.'.userId');
 
-        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
-        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+       // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
+       // $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
 
