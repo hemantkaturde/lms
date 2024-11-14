@@ -1076,7 +1076,7 @@ class Api_model extends CI_Model
                 foreach ($fetch_result1 as $key => $value)
                 {  
 
-                    $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
+                    $getspecailpermision_for_exam = $this->getspecailpermisionforexam($userId,$value['course_id']);
 
    
                     if($peecentage==100){
@@ -1169,6 +1169,21 @@ class Api_model extends CI_Model
         return $fetch_result;
     
     }
+
+
+    public function getspecailpermisionforexam($userId,$value){
+
+        $this->db->select('permission');
+        $this->db->where(TBL_STUDENT_REQUEST.'.student_id', $userId);
+        $this->db->where(TBL_STUDENT_REQUEST.'.course_id', $value);
+        $this->db->where(TBL_STUDENT_REQUEST.'.status', 1);
+        $query = $this->db->get(TBL_STUDENT_REQUEST);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    
+    
+    }
+    
 
     public function getCourseList($data)
     {
