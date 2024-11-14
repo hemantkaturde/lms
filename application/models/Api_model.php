@@ -1081,7 +1081,7 @@ class Api_model extends CI_Model
    
                     if($peecentage==100){
                 
-                        $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['examination_id'],$value['course_id']);
+                        $check_exam_completed_or_pending = $this->student_model->checkexamiscompletedornot($userId,$value['examination_id'],$value['course_id']);
     
                         if($check_exam_completed_or_pending){
                             $exam_status ='Exam Completed';
