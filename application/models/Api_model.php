@@ -1076,17 +1076,8 @@ class Api_model extends CI_Model
                 foreach ($fetch_result1 as $key => $value)
                 {  
 
-
-                    print_r($userId.'ttt');
-                    exit;
-
-                    print_r($value['course_id']);
-                    exit;
-
                     $getspecailpermision_for_exam = $this->getspecailpermisionforexam($userId,$value['course_id']);
 
-
-   
                     if($peecentage==100){
                 
                         $check_exam_completed_or_pending = $this->checkexamiscompletedornot($userId,$value['examination_id'],$value['course_id']);
