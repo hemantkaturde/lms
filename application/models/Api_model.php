@@ -1035,9 +1035,7 @@ class Api_model extends CI_Model
             $query = $this->db->get(TBL_ATTENDANCE);
             $fetch_result = $query->result_array();
     
-         
-    
-               $total_links = $this->student_model->upcoming_class_links_barchart($userId,$value);
+            $total_links = $this->student_model->upcoming_class_links_barchart($userId,$value);
     
               
     
@@ -1069,12 +1067,34 @@ class Api_model extends CI_Model
             $this->db->group_by(TBL_EXAMINATION.'.course_id');
             $query = $this->db->get(TBL_EXAMINATION);
             $fetch_result1 = $query->result_array();
-            ;
+            
+            
+           $total_links = $this->upcoming_class_links_barchart($userId,$value);
+
+          
+
+           if(count($total_links) > 0){
+            $total_topics = count($total_links);
+           }else{
+            $total_topics =0;
+           }
+
+           if($total_topics > 0){
+
+            $peecentage =  $fetch_result[0]['count']/$total_topics * 100;
+           }else{
+            $peecentage = 0;
+
+           }
     
             if(count($fetch_result1) > 0)
             {
                 foreach ($fetch_result1 as $key => $value)
                 {  
+
+   
+                    if($peecentage==100){
+                    
     
                         $getspecailpermision_for_exam = $this->student_model->getspecailpermisionforexam($userId,$value['course_id']);
                        
@@ -1103,6 +1123,8 @@ class Api_model extends CI_Model
                         $data[$counter]['action'] = '';
                        
                     $counter++; 
+
+                    }
                 }
             }
     
