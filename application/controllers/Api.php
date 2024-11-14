@@ -1786,14 +1786,16 @@ class Api extends BaseController
 
                         foreach($getSyllabusData as $doc_url)
                         {
-                            $doc_url_val .= $doc_url->doc_url. ',';
+                            $doc_url_val .= '<Link>'.$i.') '.$doc_url->doc_url.' ';
                         }
 
                         $i++;  
                     }
 
                     $all_course_name = trim($course_name, ', '); 
-                    $all_doc_url_val = trim($doc_url_val, ', '); 
+                    //$all_doc_url_val = trim($doc_url_val, ', '); 
+
+                    $all_doc_url_val = $doc_url_val;
 
                     if($all_doc_url_val){
                         $syallabus_urls = '<div>
