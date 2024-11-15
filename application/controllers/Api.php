@@ -1706,7 +1706,7 @@ class Api extends BaseController
             //$enq_id =38;
              $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
-            $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+             // $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
             
              $total_fees = 0;
              $course_name = ''; 
@@ -1873,7 +1873,8 @@ class Api extends BaseController
                 //  /* Send Whats App  Start Here */
                 //  $curl = curl_init();
                   $text = 'Greetings from IICTN !!,  Thank You for your interest in '.$all_course_name;
-                  $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id;
+                //   $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id;
+                 $text .= ', Attached is the Payment Link, Once Payment done you will receive  payment receipt https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id;
                   //$text = 'Dear '.$enq_fullname.' Thank You for your interest in '.$all_course_name.', We have attached the brochure and Syllabus for your reference. Feel free to contact us back, we will be delighted to assist and guide you.For more details, you can also visit our website www.iictn.org';      
                   $mobile = '+91'.$get_equiry_data->enq_mobile;
                 
