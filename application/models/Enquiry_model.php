@@ -657,7 +657,7 @@ class Enquiry_model extends CI_Model
         $this->db->from('tbl_payment_transaction');
         // $this->db->where('tbl_enquiry.isDeleted', 0);
         $this->db->where('enquiry_id', $enquiry_id);
-        $this->db->where('add_on_course_id', $add_on_course_id);
+       // $this->db->where('add_on_course_id', $add_on_course_id);
         $this->db->where('paymant_type', 'add_on_course_invoice');
         $query = $this->db->get();
         $data_1 =  $query->result_array();
