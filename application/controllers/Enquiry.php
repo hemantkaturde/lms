@@ -930,6 +930,11 @@
                                 $check_payment_is_less_than  = $this->enquiry_model->check_payment_maount_lessthan_actaul($this->input->post('enquiry_id'));
                             }
 
+
+                            print_r($check_payment_is_less_than[0]['final_amount']."TET");
+
+                            print_r(trim($this->input->post('manual_payment_amount')));
+                            exit;
                           
                             if($check_payment_is_less_than[0]['final_amount'] <= trim($this->input->post('manual_payment_amount')) ){
                                 $add_manaulpayment_response['status'] = 'failure';
