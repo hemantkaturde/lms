@@ -1040,6 +1040,10 @@ function studentcertificateData($params)
 
             $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
 
+            print_r($total_marks);
+            exit;
+
+
             if($total_marks[0]['totalmarks']){
                 $total_marks=  $total_marks[0]['totalmarks'];
                 $ans_sheet_status ='Checked';
@@ -1872,14 +1876,6 @@ function studentcertificateData($params)
                     $Remark ='NA';
                     $Quntitave_value='NA';
                 }
-
-
-                print_r($ans_sheet_status);
-                exit;
-
-                print_r('sdd');
-                exit;
-
 
                  if($ans_sheet_status!='Checked'){
 
