@@ -1782,13 +1782,7 @@ function studentcertificateData($params)
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
 
-
-        print_r($this->db->last_query());
-
-        exit;
-
-
-
+        
         $fetch_result = $query->result_array();
 
         $data = array();
@@ -1878,6 +1872,13 @@ function studentcertificateData($params)
                     $Remark ='NA';
                     $Quntitave_value='NA';
                 }
+
+
+                print_r($ans_sheet_status);
+                exit;
+
+                print_r('sdd');
+                exit;
 
 
                  if($ans_sheet_status!='Checked'){
