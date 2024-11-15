@@ -2730,7 +2730,7 @@ class Api extends BaseController
                 $data = array(
                     'enquiry_id'=>trim($this->input->post('enquiry_id')),
                     'course_id'=> trim($this->input->post('course')),
-                    'active_status'=> 0,
+                    'active_status'=> 1,
                 );
 
                 $save_Add_on_courses = $this->enquiry_model->save_Add_on_courses('',$data);
