@@ -149,7 +149,7 @@ $pdf->Cell(0, 5,  '100', 0, 0, 'L');
 
 $pdf->SetFontSize('10','B');
 $pdf->SetXY(168, 139.5);
-$new_date = date("Y-m-d",strtotime($examdate));
+$new_date = date("d-m-Y",strtotime($examdate));
 $pdf->Cell(0, 5,  $new_date, 0, 0, 'L');
 
 
@@ -158,7 +158,7 @@ $pdf->SetFontSize('10','B');
 $pdf->SetXY(168,145.5);
 
 if($result_date){
-    $result_date_val = date("Y-m-d",strtotime($result_date));
+    $result_date_val = date("d-m-Y",strtotime($result_date));
 }else{
     $result_date_val='';
 }
