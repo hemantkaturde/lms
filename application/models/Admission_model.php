@@ -1040,10 +1040,7 @@ function studentcertificateData($params)
 
             $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
 
-            print_r($total_marks[0]['totalmarks']);
-            print_r('Hemfr');
-            exit;
-
+        
 
             if($total_marks[0]['totalmarks']){
                 $total_marks=  $total_marks[0]['totalmarks'];
@@ -1805,6 +1802,11 @@ function studentcertificateData($params)
                 }
 
                 $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
+
+                print_r($total_marks[0]['totalmarks']);
+                print_r('Hemfr');
+                exit;
+    
 
 
                 if($total_marks[0]['totalmarks']){
