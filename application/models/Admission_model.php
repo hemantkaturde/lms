@@ -966,9 +966,9 @@ public function getquestionPaperListMATCHPAIRInfo($course_id,$examination_id,$st
 
 public function gettotalmarks($courseId,$exam_id,$userId){
     $this->db->select('sum(marks) as totalmarks');
-    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', 3);
-    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id',5);
-    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id',206);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $courseId);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.exam_id', $exam_id);
+    $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
     $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
     $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
     $fetch_result = $query->result_array();
@@ -1778,7 +1778,6 @@ function studentcertificateData($params)
 
         //$this->db->where(TBL_STUDENT_ANSWER_SHEET.'.course_id', $course_id);
         //$this->db->where(TBL_EXAMINATION.'.course_id', $value);
-        $this->db->where(TBL_STUDENT_ANSWER_SHEET.'.student_id', $userId);
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
@@ -1800,9 +1799,7 @@ function studentcertificateData($params)
                     $exam_status = 'Pending';
                 }
 
-                //$total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
-
-                $total_marks =  $this->gettotalmarks(3,5,206);
+                $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
 
 
                 if($total_marks[0]['totalmarks']){
@@ -1875,7 +1872,6 @@ function studentcertificateData($params)
                     $Remark ='NA';
                     $Quntitave_value='NA';
                 }
-
 
 
 
