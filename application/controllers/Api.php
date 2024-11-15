@@ -1878,7 +1878,7 @@ class Api extends BaseController
                   $mobile = '+91'.$get_equiry_data->enq_mobile;
                 
                   $whatsaptype = 'payment_link';
-                  $url = ' https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id.'" ;
+                  $url = ' https://iictn.in/payment/pay.php?enq='.$get_equiry_data->enq_number.'&&add_on_course_id='.$add_on_course_id;
                   $Brochure_link ='';
                   $Syllabus ='';
 
