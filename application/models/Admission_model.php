@@ -1040,8 +1040,6 @@ function studentcertificateData($params)
 
             $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
 
-        
-
             if($total_marks[0]['totalmarks']){
                 $total_marks=  $total_marks[0]['totalmarks'];
                 $ans_sheet_status ='Checked';
@@ -1801,12 +1799,9 @@ function studentcertificateData($params)
                     $exam_status = 'Pending';
                 }
 
-                $total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
+                //$total_marks =  $this->gettotalmarks($value['courseId'],$value['id'],$value['userId']);
 
-                print_r($total_marks[0]['totalmarks']);
-                print_r('Hemfr');
-                exit;
-    
+                $total_marks =  $this->gettotalmarks(3,5,206);
 
 
                 if($total_marks[0]['totalmarks']){
@@ -1879,6 +1874,9 @@ function studentcertificateData($params)
                     $Remark ='NA';
                     $Quntitave_value='NA';
                 }
+
+
+
 
                  if($ans_sheet_status!='Checked'){
 
