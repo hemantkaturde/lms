@@ -1507,7 +1507,7 @@ class Api extends BaseController
                 //$enq_id =38;
                  $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
-                //  $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
+                 $course_ids    =   explode(',',$get_equiry_data->enq_course_id);
                 
                  $total_fees = 0;
                  $course_name = ''; 
