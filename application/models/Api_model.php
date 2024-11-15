@@ -755,7 +755,9 @@ class Api_model extends CI_Model
 
 
         if($this->admission_model->total_revenue_add_on()[0]['total_revenue']!=null){
-            $dataAddoncourse['total_revenue_add_on'] = $this->admission_model->total_revenue_add_on()[0]['total_revenue'];
+            $int1 = (int) filter_var($this->admission_model->total_revenue_add_on()[0]['total_revenue'], FILTER_SANITIZE_NUMBER_INT);
+
+            $dataAddoncourse['total_revenue_add_on'] = $int1;
         }else{
             $dataAddoncourse['total_revenue_add_on'] = 0;
         }
