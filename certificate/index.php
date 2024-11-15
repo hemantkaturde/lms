@@ -25,6 +25,12 @@ include "phpqrcode/qrlib.php" ;
 
  $admision_date = $result_arry['createdDtm'];
 
+ if($admision_date){
+    $ad_date =date('d-m-Y H:i:s', strtotime($admision_date)); 
+ }else{
+    $ad_date = '';
+ }
+
  $ct_name = $result_arry['ct_name'];
 
  $userid=$result_arry['userId'];
@@ -117,12 +123,12 @@ $pdf->Cell(8, 8, $pdf->Image($orcode_file, $pdf->GetX(), $pdf->GetY(), 23.78), 0
 
 $pdf->SetFontSize('10');
 $pdf->SetXY(42,270.2);
-$pdf->Cell(0, 1,  $admision_date, 0, 0, 'L');
+$pdf->Cell(0, 1,  $ad_date, 0, 0, 'L');
 
 
 $pdf->SetFontSize('10');
 $pdf->SetXY(42,275.6);
-$pdf->Cell(0, 1,  date('Y-m-d H:i:s'), 0, 0, 'L');
+$pdf->Cell(0, 1,  date('d-m-Y H:i:s'), 0, 0, 'L');
 
 $pdf->SetFontSize('10');
 $pdf->SetXY(142,272);
