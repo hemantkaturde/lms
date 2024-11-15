@@ -1503,7 +1503,7 @@ class Api extends BaseController
     
             if($post_submit){
                  $enq_id =trim($this->input->post('enq_id'));
-                 $add_on_course_id =trim($this->input->post('add_on_course_id'));
+                 $add_on_course_id =trim($this->input->post('addoncourse_id'));
                 //$enq_id =38;
                  $get_equiry_data =  $this->enquiry_model->getEnquiryInfo($enq_id)[0];
 
