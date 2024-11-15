@@ -931,7 +931,7 @@
                             }
 
                           
-                            if($check_payment_is_less_than[0]['final_amount'] < trim($this->input->post('manual_payment_amount')) ){
+                            if($check_payment_is_less_than[0]['final_amount'] > trim($this->input->post('manual_payment_amount')) ){
                                 $add_manaulpayment_response['status'] = 'failure';
                                 $add_manaulpayment_response['error'] = array('enquiry_number'=>"", 'payment_mode'=>"", 'manual_payment_amount'=>'Payment Amount is Greater Than Actual Amount', 'payment_date'=>"",'cheuqe_number'=>"",'bank_name'=>"",'prepared_by'=>"");
                             }else{
