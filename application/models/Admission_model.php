@@ -1781,6 +1781,14 @@ function studentcertificateData($params)
         $this->db->order_by(TBL_STUDENT_ANSWER_SHEET.'.ans_id', 'DESC');
         $this->db->group_by(TBL_STUDENT_ANSWER_SHEET.'.student_id');
         $query = $this->db->get(TBL_STUDENT_ANSWER_SHEET);
+
+
+        print_r($this->db->last_query());
+
+        exit;
+
+
+
         $fetch_result = $query->result_array();
 
         $data = array();
@@ -1863,30 +1871,12 @@ function studentcertificateData($params)
                         }
 
                 }else{
-                    // $total_marks='NA';
-                    // $ans_sheet_status ='Checking Pending';
-                    // $grade ='NA';
-                    // $Grade_point='NA';
-                    // $Remark ='NA';
-                    // $Quntitave_value='NA';
-
-                    
-                    $data[$counter]['name'] = $value['name'].' '.$value['lastname'];
-                    $data[$counter]['mobile'] = $value['mobile'];
-                    $data[$counter]['course_name'] = $value['course_name'];
-                    $data[$counter]['exam_status'] = $exam_status;
-                    // $data[$counter]['total_marks'] = $total_marks;
-                    // $data[$counter]['grade'] = $grade;
-                    // $data[$counter]['grade_point'] = $Grade_point;
-                    // $data[$counter]['remark'] = $Remark;
-                    // $data[$counter]['Quntitave_value'] = $Quntitave_value;
-                    $data[$counter]['ans_sheet_status'] = $ans_sheet_status;
-                    $data[$counter]['action'] = '';
-                    
-                    if($ans_sheet_status=='Checked'){
-                    }else{
-                       $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addmarkstoexam?course_id=".$value['courseId']."&&exam_id=".$value['id']."&&student_id=".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/view_doc.png' alt='View/Check Student Answer Paper' title='View/Check Student Answer Paper'></a>";
-                    }
+                    $total_marks='NA';
+                    $ans_sheet_status ='Checking Pending';
+                    $grade ='NA';
+                    $Grade_point='NA';
+                    $Remark ='NA';
+                    $Quntitave_value='NA';
                 }
 
 
