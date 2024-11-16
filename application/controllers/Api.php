@@ -1461,6 +1461,7 @@ class Api extends BaseController
                 $payment_details['getEnquirypaymentInfo'] = $this->Api_model->getEnquirypaymentInfo($id);
                 $payment_details['gettotalpaidEnquirypaymentInfo'] = $this->Api_model->gettotalpaidEnquirypaymentInfo($id);
                 $payment_details['getadditionalInfo'] = $this->Api_model->getadditionalInfo($id);
+                $payment_details['payment_url'] = 'https://iictn.in/payment/pay.php?enq=2';
                 $payment_details['status'] = 'success';
             echo json_encode($payment_details);
         }
