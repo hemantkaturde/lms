@@ -1492,7 +1492,9 @@ class Api extends BaseController
                 $message = 'No Data Found';
                 $data = '';   
             }
-            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+
+            $payment_link= 'https://iictn.in/payment/pay.php?enq=3&&add_on_course_id=7';
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data,'payment_link'=>$payment_link);
             setContentLength($responseData);
         }
     }
