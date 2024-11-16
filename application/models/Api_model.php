@@ -1447,7 +1447,7 @@ class Api_model extends CI_Model
         $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
         $this->db->from('tbl_enquiry');
         // $this->db->where('tbl_enquiry.isDeleted', 0);
-        $this->db->where('tbl_enquiry.enq_number', $enqId);
+        $this->db->where('tbl_enquiry.enq_id', $enqId);
         $query = $this->db->get();
         return $query->row_array();
     }
