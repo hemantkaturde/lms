@@ -1442,7 +1442,7 @@ class Api_model extends CI_Model
     public function getEnquiryInfo($enqId)
     {
 
-        $this->db->select('enq_id as id,enq_fullname,enq_mobile,enq_email,enq_source,tbl_enquiry.createdDtm as enquiry_date,doctor_non_doctor');
+        $this->db->select('enq_id as id,enq_fullname,enq_mobile,enq_email,enq_source,tbl_enquiry.createdDtm as enquiry_date,doctor_non_doctor,tbl_enquiry.enq_number');
         $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
         $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
         $this->db->from('tbl_enquiry');
