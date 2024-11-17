@@ -2642,7 +2642,7 @@ public function  getstudentCourseCount($userId){
         // $rowcount = $query->num_rows();
         // return $rowcount;
 
-        $this->db->select('enq_id');
+        $this->db->select(TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
         $query = $this->db->get(TBL_USERS_ENQUIRES);
