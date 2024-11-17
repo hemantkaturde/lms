@@ -2665,7 +2665,7 @@ public function  getstudentCourseCount($userId){
         }
     
         if($data){
-           count($data);
+            return count($data);
         }else{
             return 0;
         }
