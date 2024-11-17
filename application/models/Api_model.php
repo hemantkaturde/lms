@@ -2634,13 +2634,61 @@ public function upcoming_class_links($userId){
 
 public function  getstudentCourseCount($userId){
    
-        $this->db->select('*');
-        $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
-        $this->db->where(TBL_COURSE.'.isDeleted', 0);
-        $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
-        $query = $this->db->get(TBL_COURSE);
-        $rowcount = $query->num_rows();
-        return $rowcount;
+        // $this->db->select('*');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        // $this->db->where(TBL_COURSE.'.isDeleted', 0);
+        // $this->db->where(TBL_COURSE.'.courseId IN (SELECT  enq_course_id from  tbl_enquiry join tbl_users_enquires on tbl_enquiry.enq_id=tbl_users_enquires.enq_id where tbl_users_enquires.user_id='.$userId.')');
+        // $query = $this->db->get(TBL_COURSE);
+        // $rowcount = $query->num_rows();
+        // return $rowcount;
+
+        $this->db->select('enq_id');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
+        $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+        $query = $this->db->get(TBL_USERS_ENQUIRES);
+
+        if($query){
+            $fetch_result_enquiry_courses = $query->num_rows();
+        }else{
+            $fetch_result_enquiry_courses = 0;
+        }
+
+        //$rowcount = $query->num_rows();
+        return $fetch_result_enquiry_courses;
+    
+        // $data = array();
+        // $counter = 0;
+        //  foreach ($fetch_result_enquiry_courses as $key => $value) {
+    
+        //  $course_ids    =   explode(',', $value['enq_course_id']);
+    
+        //     foreach ($course_ids as $key => $value) {
+    
+        //           $getCourseInfo = $this->getcourseinfobyidforstudent($value);
+    
+        //           $data[$counter]['courseId'] = $getCourseInfo[0]->courseId;
+        //           $data[$counter]['course_name'] = $getCourseInfo[0]->course_name;
+        //           $data[$counter]['course_desc'] = $getCourseInfo[0]->course_desc;
+        //           $data[$counter]['course_date'] = $getCourseInfo[0]->course_date;
+        //           $data[$counter]['createdDtm'] = $getCourseInfo[0]->createdDtm;
+        //           $data[$counter]['course_fees'] = $getCourseInfo[0]->course_fees;
+        //           $data[$counter]['ct_name'] = $getCourseInfo[0]->ct_name;
+        //           $data[$counter]['course_total_fees'] = $getCourseInfo[0]->course_total_fees;
+        //           $data[$counter]['course_books'] = $getCourseInfo[0]->course_books;
+        //           $data[$counter]['course_mode_online'] = $getCourseInfo[0]->course_mode_online;
+        //           $data[$counter]['course_mode_offline'] = $getCourseInfo[0]->course_mode_offline;
+        //           $data[$counter]['course_cert_cost'] = $getCourseInfo[0]->course_cert_cost;
+        //           $data[$counter]['course_onetime_adm_fees'] = $getCourseInfo[0]->course_onetime_adm_fees;
+        //           $data[$counter]['course_kit_cost'] = $getCourseInfo[0]->course_kit_cost;
+        //           $data[$counter]['course_cgst_tax_value'] = $getCourseInfo[0]->course_cgst_tax_value;
+        //           $data[$counter]['course_sgst_tax_value'] = $getCourseInfo[0]->course_sgst_tax_value;
+        //           $data[$counter]['course_total_fees'] = $getCourseInfo[0]->course_total_fees;
+        //           $data[$counter]['course_type_id'] = $getCourseInfo[0]->course_type_id;
+        //           $counter++; 
+        //     }
+        // }
+    
+        //return $data;
 }
 
 
