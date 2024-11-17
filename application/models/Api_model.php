@@ -2675,11 +2675,28 @@ public function  getstudentCourseCount($userId){
 
 public function getstudentEnquiryCount($userId){
 
+    // $this->db->select('*');
+    // // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+    // $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
+    // $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+    // $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+    // $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+    // $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
+    // $query = $this->db->get(TBL_ENQUIRY);
+    // $rowcount = $query->num_rows();
+    // return $rowcount;
+
     $this->db->select('*');
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_number = '.TBL_USERS_ENQUIRES.'.enq_id');
-    // $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+    $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+    //     $this->db->where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
+    // }
     $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
     $this->db->where(TBL_USERS_ENQUIRES.'.user_id', $userId);
     $query = $this->db->get(TBL_ENQUIRY);
