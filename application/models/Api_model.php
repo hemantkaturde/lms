@@ -2658,6 +2658,8 @@ public function  getstudentCourseCount($userId){
             foreach ($course_ids as $key => $value) {
     
                   $getCourseInfo = $this->getcourseinfobyidforstudent($value);
+    
+                  $data[$counter]['courseId'] = $getCourseInfo[0]->courseId;
                   $counter++; 
             }
         }
