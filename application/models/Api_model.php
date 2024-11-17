@@ -2263,12 +2263,16 @@ class Api_model extends CI_Model
                     //     $request_status ='NA';
                     // }
 
-                    if($checkAprrovalstatus['admin_approval_status']=='Approved'){
-                        $request_status =$checkAprrovalstatus['admin_approval_status'];
-                    }else if($checkAprrovalstatus['admin_approval_status']=='Not Approved'){
-                        $request_status =$checkAprrovalstatus['admin_approval_status'];
+                    if($checkAprrovalstatus){
+                        if($checkAprrovalstatus['admin_approval_status']=='Approved'){
+                            $request_status =$checkAprrovalstatus['admin_approval_status'];
+                        }else if($checkAprrovalstatus['admin_approval_status']=='Not Approved'){
+                            $request_status =$checkAprrovalstatus['admin_approval_status'];
+                        }else{
+                            $request_status ='In Approval Process ..please wait';
+                        }
                     }else{
-                        $request_status ='In Approval Process ..please wait';
+                        $request_status ='NA';
                     }
                    
                     $data[$counter]['request_status'] =  $request_status;
