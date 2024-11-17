@@ -791,9 +791,10 @@ class Admin extends BaseController
         $savesnswerdata_response['error'] = array('exam'=>'Total marks cannot be more than 100');
     
         echo json_encode($savesnswerdata_response);
+        exit;
     }else{
 
-        $savesnswerdata_response =array();
+        $savesnswerdata_response1 =array();
         if($exam_answer_data){
 
             $examination_id = $this->input->post('examination_id');
@@ -820,14 +821,14 @@ class Admin extends BaseController
 
                         if($updateAnswerdata){
                             
-                            $savesnswerdata_response['status'] = 'success';
-                            $savesnswerdata_response['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
+                            $savesnswerdata_response1['status'] = 'success';
+                            $savesnswerdata_response1['error'] = array('name'=>'', 'email'=>'', 'mobile'=>'', 'role'=>'','password'=>'','confirm_password'=>'');
                         
                         }
                 }
             }
 
-            echo json_encode($savesnswerdata_response);
+            echo json_encode($savesnswerdata_response1);
 
         }
 
