@@ -872,7 +872,9 @@ class Api_model extends CI_Model
                         if($value['admin_approval_status']){
                             $request_status = $value['admin_approval_status'];
                         }else{
-                            $request_status ='In Approval Process ..please wait';
+                            // $request_status ='In Approval Process ..please wait';
+
+                            $request_status ='New Class Request';
                         }
                    
                    
