@@ -3579,7 +3579,7 @@ class Api extends BaseController
                 if($saveAttendancedata){
                     if(trim($this->input->post('print_card')) =='YES'){
 
-                     $attendance_response['print_idcard'] = 'https://iictn.in/print_idcard?student_id='.$this->input->post('user_id');
+                     $attendance_response['print_idcard'] = 'https://iictn.in/print_idcard/index.php?user_id='.trim($this->input->post('user_id')).'&topic_id='.trim($this->input->post('topic_id')).'&course_id='.trim($this->input->post('course_id')).'&meeting_id='.trim($this->input->post('meeting_id')).'&meeting_link='.trim($this->input->post('meeting_link'));
 
                     }
                     $attendance_response['status'] = 'success';

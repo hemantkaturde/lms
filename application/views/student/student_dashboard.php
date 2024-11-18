@@ -382,7 +382,7 @@
 											<p class="text-muted"><b style="color:black">Class Time : </b> <text id="class_time" name="class_time" style="color:black"></text></p>
 												<hr>
 
-											<p class="text-muted"><b style="color:black">Class Time : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
+											<p class="text-muted"><b style="color:black">Class Date : </b> <text id="class_date" name="class_date" style="color:black"></text></p>
 												<hr>
 
 											<p class="text-muted"><b style="color:black">Website : </b> <text style="color:black">www.iictn.in</text></p>
