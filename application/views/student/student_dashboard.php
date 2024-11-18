@@ -669,7 +669,6 @@ $(".print_id_card").click(function(){
 								$("#class_time").append(classtime);
 								$("#class_date").append(date);
 								
-								window.open("<?php echo base_url();?>print_idcard/index.php?user_id="+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link);
 								// window.location.href = "<?php echo base_url();?>?student_profile_pic="+student_profile_pic+"&student_name="+student_name+"&topic_name="+topic_name+"&course_name="+course_name+"&classtime="+classtime+"&date="+date+"&mobile="+mobile;
 								
 								$.ajax({
@@ -699,7 +698,8 @@ $(".print_id_card").click(function(){
 													$("#popup_modal_md").hide();
 													//window.location.href = meeting_link;
 													//window.open(meeting_link, '_blank');
-													$("#idcarddata").modal("show");
+													// $("#idcarddata").modal("show");
+													window.open("<?php echo base_url();?>print_idcard/index.php?user_id="+user_id+'&topic_id='+topic_id+'&course_id='+course_id+'&meeting_id='+meeting_id+'&meeting_link='+meeting_link);
 													//window.location.href = "<?php echo base_url().'dashboard'?>";
 											});						
 										}
