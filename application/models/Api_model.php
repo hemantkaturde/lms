@@ -850,7 +850,7 @@ class Api_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                    $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+                    $checkattendance = $this->checkifAttendanceisexits($value['userId'],$value['courseId'],$value['topicid']);
                     if($checkattendance){
                         $attendance_alreday_exits = 'Attended' ;
                     }else{
