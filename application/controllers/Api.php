@@ -3217,7 +3217,7 @@ class Api extends BaseController
             $message = 'Data Found';
             
             $userId =$this->input->post('userid');
-           // $data['getaskaqueryRecord'] = $this->admission_model->getaskaqueryRecord($userId);
+            // $data['getaskaqueryRecord'] = $this->admission_model->getaskaqueryRecord($userId);
             // $upcoming_class_links = $this->admission_model->upcoming_class_links($userId);
             $data['get_student_enquiry_id'] = $this->admission_model->getstudentEenquiryid($userId)[0];
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($data['get_student_enquiry_id']['enq_id']);
@@ -3266,7 +3266,6 @@ class Api extends BaseController
             $result_of_total_paid = $this->enquiry_model->gettotalpaidamountof_add_on_course(trim($getadditionalcourseInfostudent['addoncourse_id']),trim($getadditionalcourseInfostudent['enquiry_id']));
             $total_paid = (int) filter_var($result_of_total_paid[0]->totalpaidamount, FILTER_SANITIZE_NUMBER_INT);
             $total_pending_amount = $total_amount_after_discount - $total_paid;
-
 
             $additional_course_payment_details = array('total_courses_fees'=>$total_amount_after_discount,'total_paid_amount'=>$total_paid,'total_pending_amount'=>$total_pending_amount);
 
