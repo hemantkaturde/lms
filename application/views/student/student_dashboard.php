@@ -328,7 +328,6 @@
 							<button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
 						<?php } ?>
 								<button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
-							    <button id="print_id_card" class="print_id_card" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
                        <?php }else {?>
 						<b>Attended</b>
                      <?php } }else{ ?>
@@ -669,6 +668,7 @@ $(".print_id_card").click(function(){
 								$("#class_time").append(classtime);
 								$("#class_date").append(date);
 
+								window.location.href = <?php echo base_url();?>"/?student_profile_pic="+student_profile_pic+"&student_name="+student_name+"&topic_name="+topic_name+"&course_name="+course_name+"&classtime="+classtime+"&date="+date+"&mobile="+mobile;
 								
 								$.ajax({
 									url : "<?php echo base_url();?>attendClasses",
