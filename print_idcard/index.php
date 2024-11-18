@@ -25,32 +25,32 @@
   foreach($course_ids as $id)
       {
 
-          $result1 = $conn->query("SELECT 
+        $result1 = $conn->query("SELECT 
                                     *,
                                     `tbl_topic_meeting_link`.`id` AS `meeting_id`,
                                     `tbl_timetable_transection`.`id` AS `topicid`,
                                     `tbl_timetable_transection`.`timings` AS `classtime`
                                 FROM 
-                                    `TBL_COURSE`
+                                    `tbl_course`
                                 JOIN 
-                                    `TBL_COURSE_TYPE` 
-                                    ON `TBL_COURSE_TYPE`.`ct_id` = `TBL_COURSE`.`course_type_id`
+                                    `tbl_course_type` 
+                                    ON `tbl_course_type`.`ct_id` = `tbl_course`.`course_type_id`
                                 JOIN 
                                     `tbl_timetable_transection` 
-                                    ON `tbl_timetable_transection`.`course_id` = `TBL_COURSE`.`courseId`
+                                    ON `tbl_timetable_transection`.`course_id` = `tbl_course`.`courseId`
                                 JOIN 
-                                    `TBL_TIMETABLE` 
-                                    ON `tbl_timetable_transection`.`time_table_id` = `TBL_TIMETABLE`.`id`
+                                    `tbl_timetable` 
+                                    ON `tbl_timetable_transection`.`time_table_id` = `tbl_timetable`.`id`
                                 LEFT JOIN 
                                     `tbl_topic_meeting_link` 
                                     ON `tbl_topic_meeting_link`.`time_table_transection_id` = `tbl_timetable_transection`.`id`
                                 WHERE 
-                                    `TBL_COURSE`.`isDeleted` = 0
+                                    `tbl_course`.`isDeleted` = 0
                                     AND `tbl_timetable_transection`.`id` = $topic_id
                                     AND `tbl_timetable_transection`.`course_id` = $course_id
-                                    AND `TBL_COURSE`.`courseId` = $id
+                                    AND `tbl_course`.`courseId` = $id
                                 ORDER BY 
-                                    `TBL_COURSE`.`courseId` DESC");
+                                    `tbl_course`.`courseId` DESC");
 
         $result_arry_1 = $result1->fetch_assoc();
 
