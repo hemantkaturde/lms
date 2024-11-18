@@ -668,8 +668,9 @@ $(".print_id_card").click(function(){
 								$("#course_name").append(course_name);
 								$("#class_time").append(classtime);
 								$("#class_date").append(date);
-
-								window.location.href = '<?php echo base_url();?>"?student_profile_pic="+student_profile_pic+"&student_name="+student_name+"&topic_name="+topic_name+"&course_name="+course_name+"&classtime="+classtime+"&date="+date+"&mobile="+mobile';
+								
+								window.open("<?php echo base_url();?>?student_profile_pic="+student_profile_pic+"&student_name="+student_name+"&topic_name="+topic_name+"&course_name="+course_name+"&classtime="+classtime+"&date="+date+"&mobile="+mobile, '_blank');
+								//window.location.href = "<?php echo base_url();?>?student_profile_pic="+student_profile_pic+"&student_name="+student_name+"&topic_name="+topic_name+"&course_name="+course_name+"&classtime="+classtime+"&date="+date+"&mobile="+mobile;
 								
 								$.ajax({
 									url : "<?php echo base_url();?>attendClasses",
