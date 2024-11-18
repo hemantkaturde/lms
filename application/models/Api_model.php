@@ -851,10 +851,17 @@ class Api_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                     $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+                    // if($checkattendance){
+                    //     $attendance_alreday_exits = 'Attended' ;
+                    // }else{
+                    //     $attendance_alreday_exits = 'Not Attended' ;
+                    // }
                     if($checkattendance){
-                        $attendance_alreday_exits = 'Attended' ;
+
+                        $attendance_alreday_exits = 1 ;
+    
                     }else{
-                        $attendance_alreday_exits = 'Not Attended' ;
+                        $attendance_alreday_exits = 0 ;
                     }
                     $data[$counter]['time_table_id'] = $value['time_table_id'];
                     $data[$counter]['student_id'] = $value['stuid'];
@@ -2770,18 +2777,28 @@ public function getClassrequestcountstudent($userId){
     {
         foreach ($fetch_result as $key => $value)
         {
-                // $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
+                $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
                 // if($checkattendance){
                 //     $attendance_alreday_exits = 'Attended' ;
                 // }else{
                 //     $attendance_alreday_exits = 'Not Attended' ;
                 // }
+
+
+                if($checkattendance){
+
+                    $attendance_alreday_exits = 1 ;
+
+                }else{
+                    $attendance_alreday_exits = 0 ;
+                }
+
                 // // $data[$counter]['courseId'] = $value['courseId'];
                 // $data[$counter]['title'] = $value['topic'];
                 // $data[$counter]['course_name'] = $value['course_name'];
                 // $data[$counter]['classdate'] = $value['classdate'];
                 // $data[$counter]['classtime'] = $value['classtime'];
-                // $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
+                $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
 
                 $checkAprrovalstatus = $this->checkAprrovalstatussss($userId,$value['topicid']);
               
