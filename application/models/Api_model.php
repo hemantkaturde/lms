@@ -2717,7 +2717,7 @@ public function getstudentEnquiryCount($userId){
 
 public function getTaxinvoicesCountstudent($userId){
     $this->db->select('*');
-    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_number = '.TBL_PAYMENT.'.enquiry_id');
+    $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
 
     // if($params['search']['value'] != "") 
