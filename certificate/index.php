@@ -144,7 +144,7 @@ $pdf->Cell(0, 1,  $mobile.'/'.date("y",strtotime("-1 year")).'-'.date("y").'/WEB
 // $pdf->Cell(20, 10, date('y'), 0, 0, 'L');
 
 // render PDF to browser
-$pdf->Output('certificate.pdf');
+$pdf->Output('filename.pdf','F');
 
 
 ?>
