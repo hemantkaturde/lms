@@ -222,7 +222,7 @@ if(!empty($editDataAdmission))
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
-                                                <label style="text-align: left;" for="how_about_us">How Did You Know About us<span class="required">*</span></label>
+                                                <label style="text-align: left;" for="how_about_us">How Did You Know About us</label>
                                                 <div>
                                                     <input autocomplete="off" autocomplete="off" type="text" id="how_about_us" name="how_about_us" placeholder="How Did You Know About us" value="<?php echo $source_ans;?>" class="form-control col-md-12 col-xs-12">
                                                     <p class="error full_name_error"></p>

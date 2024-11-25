@@ -276,7 +276,7 @@
                 $this->form_validation->set_rules('counsellor_name', 'Counsellor Name', 'trim|required');
                 $this->form_validation->set_rules('permanent_address', 'Permanent Address', 'trim|required');
                 $this->form_validation->set_rules('how_did_you_know', 'How Did You Know', 'trim|required');
-                $this->form_validation->set_rules('how_about_us', 'How About Us', 'trim|required');
+                $this->form_validation->set_rules('how_about_us', 'How About Us', 'trim');
 
                 $this->form_validation->set_rules('student_photo_existing', 'Student Photo', 'trim|required');
                 $this->form_validation->set_rules('edu_certificate_existing', 'Edu Certificate', 'trim|required');
