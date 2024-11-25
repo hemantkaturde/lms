@@ -76,7 +76,14 @@
       $name =$data[0]['name'];
       $course_name_1 = $data[0]['course_name'];
       $title= $data[0]['title'];
-      $classtime = $data[0]['classtime'];
+     
+      if($data[0]['classtime']){
+        $classtime = date("d-m-Y",strtotime($data[0]['classtime']));
+      }else{
+        $classtime = '';
+      }
+
+
       $date = $data[0]['date'];
       $profile_pic = $data[0]['profile_pic'];
       if($profile_pic){
