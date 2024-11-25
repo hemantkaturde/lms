@@ -224,7 +224,7 @@
                                                         $transaction_id = $paymentvalue->razorpay_payment_id;
                                                         $payment_date = $paymentvalue->datetime;
                                                     }else{
-                                                        $transaction_id = 'Manaul-Transaction';
+                                                        $transaction_id = 'Manual-Transaction';
                                                         $payment_date = $paymentvalue->payment_date;
                                                     }
                                                 ?>
