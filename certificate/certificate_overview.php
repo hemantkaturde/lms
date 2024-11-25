@@ -71,5 +71,5 @@ $pdf->Cell(0, 10,  $Roll_no, 0, 0, 'C'); // add the text, align to Center of cel
 
 
 // render PDF to browser
-$pdf->Output('Certifucate_overview.pdf','I');
+$pdf->Output('Certificate_overview.pdf','I');
 
