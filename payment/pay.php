@@ -332,7 +332,7 @@
                         // This callback is triggered when the popup is closed without payment
                         ondismiss: function () {
                             console.log("Razorpay Popup Closed");
-                            alert("Payment process was not completed. Please try again.");
+                            $(".loader_ajax").hide();
                         },
                     }
                 };
