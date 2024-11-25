@@ -322,7 +322,11 @@
                                 }
                                 $(".loader_ajax").show();
 
-                            }
+                            },
+
+                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                            } 
                         });
                     },
                     "theme": {
