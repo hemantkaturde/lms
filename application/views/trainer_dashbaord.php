@@ -117,6 +117,8 @@ $roleText = $this->session->userdata('roleText');
                              <?php 
                              if($getdataforexamchecking){
                                 foreach ($getdataforexamchecking as $key_exam => $value_exam) {
+
+                                    if($value_exam['ans_sheet_status']=='Checking Pending'){
                                                                         ?>
                                     <tr>
                                         <td><?=$value_exam['name']?></td>
@@ -126,7 +128,7 @@ $roleText = $this->session->userdata('roleText');
                                         <td><?=$value_exam['ans_sheet_status']?></td>
                                         <td><?=$value_exam['action']?></td>
                                     </tr>
-                                 <?php } 
+                                 <?php } }
                              }else{ ?>
                                     <tr>
                                        <td> No Records Found</td>
