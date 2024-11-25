@@ -323,10 +323,6 @@
                                 $(".loader_ajax").show();
 
                             },
-
-                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-                            } 
                         });
                     },
                     "theme": {
@@ -334,6 +330,20 @@
                     }
                 };
                 var rzp1 = new Razorpay(options);
+
+                // Adding event listener for Razorpay instance
+                rzp1.on('payment.failed', function (response) {
+                    console.log("Payment Failed:", response);
+                    alert("Payment Failed! Reason: " + response.error.description);
+                });
+
+                // Adding event listener for external wallet (if applicable)
+                rzp1.on('externalwallet', function (response) {
+                    console.log("External Wallet Selected:", response);
+                    alert("External Wallet Selected: " + response.wallet_name);
+                });
+
+
                 rzp1.open();
                 e.preventDefault();
             } else {
