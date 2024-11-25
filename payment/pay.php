@@ -327,22 +327,16 @@
                     },
                     "theme": {
                         "color": "#528FF0"
+                    },
+                    "modal": {
+                        // This callback is triggered when the popup is closed without payment
+                        ondismiss: function () {
+                            console.log("Razorpay Popup Closed");
+                            alert("Payment process was not completed. Please try again.");
+                        },
                     }
                 };
                 var rzp1 = new Razorpay(options);
-
-                // Adding event listener for Razorpay instance
-                rzp1.on('payment.failed', function (response) {
-                    console.log("Payment Failed:", response);
-                    alert("Payment Failed! Reason: " + response.error.description);
-                });
-
-                // Adding event listener for external wallet (if applicable)
-                rzp1.on('externalwallet', function (response) {
-                    console.log("External Wallet Selected:", response);
-                    alert("External Wallet Selected: " + response.wallet_name);
-                });
-
 
                 rzp1.open();
                 e.preventDefault();
