@@ -748,304 +748,522 @@ if($result_check_admission_is_exits->num_rows > 0){ ?>
                                             <div
                                                 style="height:300px;overflow: scroll;font-size:0.9rem;font-size:10px;color:grey;">
                                                 <b>PLEASE READ TERMS &amp; CONDITION CAREFULLY </b>
-                                                <br>
-                                                Applicants are advised to note, The selection of the courses and
-                                                packages are based on individual’s understanding and due diligence.
-                                                Course fee and package can differ from other applicants.
-                                                <br>
-                                                <br>
+                                                <body style="color: black;">
+                                                    <p>Greetings !!!</p>
+                                                    <p style="text-align:justify;"> Welcome to Destination for Excellence from 19 years. Dr. Jhoumer Jaiitly, Founder,
+                                                        Head of Faculty & CMD is a renowned iconic personality in the Health & Wellness industry with over 24 years of
+                                                        experience. <b>The Indian Institute of Cosmetology, Trichology, and Nutrition Private Limited (IICTN)</b>, is an
+                                                        industry leader to provide course consultations and career guidance, offering a range of programs aimed at
+                                                        enhancing and upgrading skills, from empowerment to employment. The curriculum and lectures are designed to meet
+                                                        global standards and industry requirements, Featuring extensive hands-on training, supplemented by in-depth
+                                                        theoretical knowledge of Course, Business Fundamentals and Legal framework. Additionally, IICTN facilitates
+                                                        admissions for degree programs from universities and colleges for Beauty, Health, & Wellness industries.</p>
+                                                    <p style="text-align:justify;"> Applicants are advised to note that the selection of courses and packages is based
+                                                        on individual understanding, choice, and due diligence before opting for courses offered and facilitated by our
+                                                        counsellors. By doing so, they consent to having understood the current scheme, discounted offers, fee package,
+                                                        fee breakdown, fee installment policy, and related terms. Please note that course fees and packages may differ
+                                                        from other applicants.</p>
+                                                    <p>Please review the Joining Instructions, Terms and Conditions, and Company Policies. If you have any questions,
+                                                        kindly respond to this email within 24 hours. If no response is received, your consent to the terms and
+                                                        conditions will be acknowledged by default.</p>
+                                                    <h3 style="font-size:11px;"><u>INSTITUTE OFFERS TWO OPTIONS FOR LEARNING:</u></h3>
+                                                    <p><b>Option 1 - </b><u>Offline Course -:</u> Applicants will attend theory by online class of the course and can
+                                                        attend practical sessions within 6 months at IICTN Mumbai centre or designated centre in other cities from
+                                                        time to time. If the applicant does not complete the practical sessions within this period, the course will
+                                                        automatically convert to Option 2.</p>
+                                                    <p><b>Option 2 - </b><u>Offline Course -:</u> Applicants will not attend practical sessions at the institute but
+                                                        will have access to live practical demonstrations or online sessions. No pre-recorded lectures will be
+                                                        provided. If the applicant wishes to switch to an option 1 - offline course, they can do so by paying an
+                                                        additional fee of Rs. 6,000/- per course.</p>
+                                                    <p style="text-align:justify;">In the case of pregnancy or medical issues affecting the applicant or their family
+                                                        members, the applicant may request a hold or extension of the course duration by submitting relevant supporting
+                                                        documents, duly signed and stamped by the doctor and hospital (Management reserves the right to verify the
+                                                        authenticity of the documents). Please note that fee refund requests at any stage of the course will not be
+                                                        considered or accepted under any circumstances, and our refund policy will strictly apply. </p>
+                                                    <h3 style="font-size:11px;"><u>JOINING INSTRUCTIONS</u></h3>
+                                                    <p style="text-align:justify;">1. Applicants must fill out their correct details on the admission form link, along
+                                                        with uploading all mandatory required documents in color format. click on admission link:
+                                                        https://iictn.org.i/admission (ignore if already filled and submitted).</p>
+                                                    <p style="text-align:justify;">2. Applicants must Fill and submit the Admission form to enable themselves to be
+                                                        added to online / offline study groups to start the course.</a>
+                                                    <p style="text-align:justify;">3. Documentation: All required documents are mandatory and must be submitted in one
+                                                        go within 7 working days from the receipt of the fee paid to IICTN. Please note that document submission is only
+                                                        accepted via email at bills.iictn@gmail.com; any other form of submission will not be acknowledged or accepted
+                                                        under any circumstances. Failure to comply may result in delays in admission, cancellation, or penalties
+                                                        (minimum Rs. 3000/-), for which IICTN will not be held liable. If applicants require further clarification, they
+                                                        are advised to contact the Administration Team or their consultant. Applicant adherence to the processes and
+                                                        timelines detailed above is mandatory</a>
+                                                    <p style="text-align:justify;">
+                                                        MANDATORY DOCUMENTS LIST FOR ADMISSION:
+                                                    <p>1. Photo (Passport Size)</p>
+                                                    <p>2. Aadhar (both side)</p>
+                                                    <p>3. Active Mobile Number</p>
+                                                    <p>4. Valid Email ID</p>
+                                                    <p>5. 10th Marksheet </p>
+                                                    <p>6. 12th Marksheet </p>
+                                                    <p>7. Graduation Marksheet</p>
+                                                    <p>8. Students Signature</p>
+                                                    <p>9. Degree Certificate / All Semester Marksheet & Internship Certificate 10. Excel Sheet filled by the applicant
+                                                        with correct details</p>
+                                                    </p>
+                                                    <p style="text-align:justify;">The applicant hereby affirms that all details provided and documents uploaded or
+                                                        submitted through our online or digital admission form, as well as any information shared via email, are
+                                                        accurate, authentic, and in compliance with the institute's requirements. The applicant acknowledges that in the
+                                                        event any information or documents are found to be inaccurate, misleading, or fraudulent, the applicant will
+                                                        bear full responsibility. The institute and its management will not be held liable for any consequences arising
+                                                        from such discrepancies at any point in the future.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        We kindly request that you refrain from ignoring calls, raising concerns, or citing medical reasons when
+                                                        management or your counsellor contacts you regarding any pending documents or outstanding fees. Please note that
+                                                        if the payment is overdue by more than 30 days, the applicant will be temporarily removed from the group and
+                                                        re-added once pending fee is paid.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        4. Study material will be dispatched within 7 working days only after the full fee of the course is received for
+                                                        the particular course.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        5. Applications: Applicants must download such as Telegram, Zoom, Google Meet application to start the course..
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        6. Once the applicant has joined the Telegram group, ensure that notifications are turned on for all
+                                                        communications. Set reminders for classes (30 minutes before each session). The monthly timetable is shared in
+                                                        the respective course group on Telegram only; kindly take a screenshot and save it in your phone gallery.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        7. No information will be shared individually with any students regarding classes, exams, or practical sessions.
+                                                        Students must remain active in the course groups to stay informed and updated.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        8. Study Links: The study link will be sent in the course’s group from one day to 10 minutes before the start of
+                                                        the lecture. Applicants are advised to attend classes from a location with good network coverage. Please be
+                                                        ensure that both your background audio and video are turned off during the lecture to avoid disturbance along
+                                                        with your audio on mute.
+                                                    </p>
 
-                                                <b>MANDATORY DOCUMENTS REQUIRED BEFORE STARTING THE COURSE:</b><br>
-                                                a. Passport size colour photograph<br>
-                                                b. For Doctors - Medical Registration / For Non-Doctor - Highest
-                                                Education Certificate<br>
-                                                c. Aadhar Card<br><br>
-                                                <br>
+                                                    <p style="text-align:justify;">
+                                                        9. Queries: Any queries, besides course topics, should be discussed via WhatsApp with your counsellor instead of
+                                                        asking in the study groups. Counsellors are available between 10 am to 6 pm, Monday to Saturday. Please wait up
+                                                        to 7 working days for a response.
+                                                    </p>
 
-                                                1. <b> Fees:</b>If Applicant has paid a registration fee of Rs. 5,000/-
-                                                Registration will be valid for 3 months from the date of admission.
-                                                Kindly note along with each enrolled course, Applicant has to pay
-                                                Applicable exam fee of Rs. 2,600/- plus one time admin fee of Rs.
-                                                2,600/- extra. Apron Reissue Fee is Rs. 600/-, Hair Basic Kit is Rs.
-                                                7,800/-, Basic Make-up Kit is Rs. 7,800/-, Advance Make-up Kit is Rs.
-                                                26,000/- to 1, 00,000/- (Optional).
-                                                <br><br>
+                                                    <p style="text-align:justify;">
+                                                        10. Post-Lecture Queries: After the lecture, applicants can write their topic or course related queries in the
+                                                        chat box. This allows everyone in the class to benefit from the discussion. Please refrain from personally
+                                                        messaging trainers after the class, as they are scheduled for back-to-back sessions.
+                                                    </p>
 
-                                                2. <b>Instalments:</b> Fees can be paid in two installments of two weeks
-                                                apart, 75% as the first installment with exam fee extra to begin the
-                                                course, if paying in installment, applicants are only allowed to attend
-                                                lectures once in a week. Kindly note the book / study materials will be
-                                                issued after full payment of the course fees. If, the applicant is
-                                                unable to pay the balance fee amount within two months due to whatsoever
-                                                reason, the applicant will not be entitled for any refund. The institute
-                                                however may be at the sole discretion to accommodate applicant with the
-                                                next batch schedule and can guide to convert the course into a short
-                                                certificate course or services.
-                                                <br><br>
-                                                3. <b>Education Loan:</b> Applicants are advised to do their own due
-                                                diligence before opting for any education loan service from the
-                                                financial institutions provided by IICTN or from any other financial
-                                                Institutions, Institute will not be Responsible / Accountable for any
-                                                dispute now and in the future.
-                                                <br><br>
-                                                4. <b>Online / Offline Classes:</b> Kindly cooperate with the faculty
-                                                &amp; attend courses as per Institute’s Class timings / Topics /
-                                                Trainers &amp; lecturers / Method of teaching / Online and Offline
-                                                Platform of Teaching &amp; Time table. Topics once taught will not be
-                                                repeated, Topics if missed have to be studied by the applicant
-                                                themselves from books / notes provided by the institute. Applicants can
-                                                give exams online if their courses have only theory and no practical.
-                                                Classes are daily for 1.5 hour for each courses (subjective to course
-                                                opted) for which time table is posted in start of every month, Each
-                                                course duration will last for 3 months but if due to any medical issues
-                                                / marriage etc, course completion validity can be extended to 06 months
-                                                if relevant documents are provided by the applicant via email.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;<b>Offline Practical Sessions:</b> Once the
-                                                relevant theory class is completed, students can come for offline
-                                                practical. Schedule can change any time subject to government
-                                                rules/norms from time to time and the institute holds no responsibility
-                                                or liability for the same.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;<b>Online Practicals:</b> Once the relevant
-                                                theory class is completed , student will be removed from theory group
-                                                &amp; added in Online practical group with online / live videos that can
-                                                be shared &amp; explained once or twice a week.
-                                                <br><br>
-                                                5. <b>Machines Use:</b> If Applicant breaks any machine he / she has to
-                                                pay Rs. 5,000/- or 30% of the actual cost of the part of the machines on
-                                                very next day itself. Thus while Practicals applicants are advised look
-                                                after Equipment / Machines carefully.
-                                                <br><br>
-                                                6. <b>Certificates:</b> In order to secure the certificate, Applicants
-                                                should complete theory and practical’s both and clear the examination of
-                                                the course (s) with 75% passing mark. Certificate will be awarded after
-                                                3 months after institute receives confirmation email of applicant for
-                                                completion of the course.It is mandatory to email copy of all bills on
-                                                admin@iictn.org when applying for certification as all applicants have
-                                                different combinations of courses. Applicants are not allowed to attend
-                                                theory and Practical classes after the exams orissuance of
-                                                certifications, Please be ethical and start making your professional
-                                                commitment only after you have been awarded the certificate.
-                                                <br><br>
-                                                7. <b>Books / Certificate:</b> canbe couriered or can be collected
-                                                personally. Applicable charge of Rs.200/-per courier should be borne by
-                                                applicant withinIndia andfor international actual cost of courier must
-                                                be borne by the applicant only. Institute will not beresponsible for any
-                                                damages / Loss of any documents.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;a. In case of damage / Loss of book - per book
-                                                Reissue charges areRs. 600/-
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;b. In case of damage / Loss / Name Changed etc.
-                                                of Certificate -per certificateReissue charges are Rs. 5000/-. All the
-                                                cost of any reissuing of any documents must be borne by applicant only.
-                                                <br><br>
-                                                8. <b>Attendance:</b> Minimum attendance required is 85%, failing which
-                                                Applicant will not be allowed to appear for the exams. For more than 3
-                                                days absence please email documents for leave. However, in case of
-                                                sudden illness where prior permission is not possible, a medical
-                                                certificate by a doctor must be emailed at admin@iictn.org, Please do
-                                                not attend class or be the model for the practical of the courses which
-                                                you have notpaid fees / Enrolled otherwise Applicant will have to pay
-                                                Rs. 2,600/per lecture extra by next day only.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;a. Course completion validity period is up-to 06
-                                                months only, Post 6 months Applicant will be charged Rs. 2,600/- for
-                                                each course to finish the pending portion within one month.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;b. Institute is not responsible for cover-up, if
-                                                the Applicant misses his / her classes for whatsoever reason or course
-                                                duration extends beyond 6 months.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;c. The institute reserves the rights to Change
-                                                and Modify the Course Curriculum / location of classes / Class timings /
-                                                Topics / Trainers &amp; lecturers / Method of teaching / Online and
-                                                Offline Platform of Teaching / Time table may be changed at any given
-                                                time subject to the discretion of the management and It shall be abiding
-                                                on the Applicant to undergo for the same.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;d. Post 6 months, if applicants wish to learn
-                                                full course again, they have to pay 30% of course fee again for study of
-                                                that course within 02 months. Please do not take leave during these 02
-                                                months.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;e. Applicant authorize and give consent to the
-                                                institute that they have been clearly explained and informed by the
-                                                trainer / staff / Management that the Practicals Class, Demonstration
-                                                class, procedure will be done with due care and the possible effects and
-                                                Post care precautions have to take after the procedures.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;f. Applicants are consensually and volunteering
-                                                taking the part as a model in practical / demonstration / procedures
-                                                during the class at their own will and risk and they will not hold the
-                                                trainer, students, owner, associate owner or any other staff of the
-                                                Institute responsible for any side effects / injury like redness,
-                                                swelling, discoloration of skin, peeling, pain, burn, burning sensation,
-                                                or mishap if any during the course of treatment. Further complications
-                                                like infection, haemorrhage, bleeding, scaring, contraction, possible
-                                                deformities, prolonged healing time over the estimate reaction to any
-                                                drug before and after or during Procedures, numbness or itching of the
-                                                area have been clearly explained.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;g. I am willingly and voluntarily participating
-                                                in the video / photo shoot . I feel privileged to be part of this video
-                                                &amp; photo. I allow Institute to use my Photo / Video Testimony /
-                                                Lecture / Practical / Demo with other students / Staff / Clients &amp;
-                                                also I agree &amp; endorse my consent that my video / photo / credential
-                                                can be used by the Institute for Branding, Marketing, Hoardings,
-                                                Promotions, Website, Press Releases , Media advertisements , DVD /
-                                                Brochures / PPT / books / Online / Offline Purposes. I will not claim
-                                                any charges, Royalty or compensations now or any time in future also
-                                                from the institute or institute chains or any channel owner etc.
-                                                <br><br>
-                                                9. <b>Refund Policy:</b> fee refund request will not be entertained and
-                                                excepted due to Epidemic / Pandemic / Government regulation / Medical
-                                                issues of self or family member in the beginning or anytime during the
-                                                duration of the course, even if the duration extends longer than actual
-                                                duration and also if Institute is asked to be kept closed due to Govt
-                                                Regulation. Thus please do not panic and create nuisance as admission
-                                                once granted will not be cancelled as Institute strictly follows no
-                                                refund policy. Please note each webinar / lecture cost is Rs 2600/-
-                                                <br><br>
-                                                10. <b>Products &amp; Vendors:</b> Institute follows strict policy not
-                                                to patronize any brand or supplier. Institute’s trainers and consultants
-                                                are responsible for courses that applicants have enrolled, While
-                                                teaching trainers do use products and machines and talk about the
-                                                specifications, brand or supplier etc. But that should not be presumed
-                                                as recommendation or sale pitch as if staff is acting as agent on behalf
-                                                of suppliers. Many vendors may indulge in wrong doing like providing
-                                                defective products, machines or promise urgent delivery, guarantee,
-                                                warranty, AMC and may even use staff names to collect huge advance etc.
-                                                Applicants must do their own due diligence and survey before purchase of
-                                                any product or machines and be responsible for their purchase decision.
-                                                We advise you to be careful and vigilant. Any deal by any student with
-                                                any supplier or representative citing staff connection / recommendation
-                                                will not be entertained by IICTN as per above policies. IICTN will not
-                                                be responsible and answerable for the same anytime in the future.
-                                                <br><br>
-                                                11. <b>Data Protection Policy:</b> Applicants are not allowed to share
-                                                any data provided by the management from any online / offline sources .
-                                                All Documents/ Contact Details / Study Material / Notes / PPT / Video /
-                                                Audio etc. are copyrighted and property of the institute.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;If management finds any applicant having wrong
-                                                conduct, misguiding, misleading and mis behaving with other Applicants /
-                                                Trainer / Lecturer / Staff as per their own conclusions and or against
-                                                the Institute policy in any digital / verbal / online / offline or any
-                                                other media, they will be immediately removed from the group without any
-                                                prior notice /explanation by the management.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;Also if the mis conduct continues , their
-                                                admission will stand cancelled with immediate effect without any
-                                                refund&amp; Penalty will be imposed on them. Institute reserves the
-                                                right to put defamation case against related applicant for spoiling the
-                                                name of the brand if found necessary and all legal expenses will be
-                                                borne by students.
-                                                <br><br>
-                                                12. <b>Job Assistance:</b> Indian Institute of Cosmetology, Trichology
-                                                and Nutrition Private Limited (IICTN) is a private body in skills
-                                                enhancing courses for the Beauty Health &amp; Wellness sector. The said
-                                                institute is neither a college, nor a University or a Deemed University.
-                                                Course fees paid by applicant is only to get skill in course.If, IICTN
-                                                Staff / Counsellor has promised anything apart from mentioned terms, it
-                                                will not be acknowledged by the institute. The applicant understands
-                                                that IICTN provides only guidance for job but does not guarantee or
-                                                assure any job Nationally / Internationally.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;Success or failure of the individual in Practice
-                                                / Job / Business is attributable to the individual’s capabilities and
-                                                IICTN shall not be responsible for any lapses / failure. IICTN is to be
-                                                indemnified for any claim by the applicant / clients of any kind
-                                                whatsoever as IICTN is opposed to all malpractices. These certificates
-                                                are awarded for skills and are not a license to practice in the
-                                                injectable procedures such as Botox, Fillers and Hair Transplant etc.
-                                                Such procedures are to be done under supervision of or by M.B.B.S.
-                                                doctor duly qualified or as per prevailing Acts / Regulations.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;If applicant is applying for a job and require
-                                                to verify their certificate by Institute or require extra documents like
-                                                Marksheet and Appraisal letter than applicant should pay Rs. 10,000/-
-                                                Extra.
-                                                <br><br>
-                                                13. <b>Collaborated Courses Admissions Terms:</b> IICTN vision and
-                                                mission are to provide opportunities in specialisations and skill
-                                                education which are demographically relevant, in-demand and as per laid
-                                                down standards, To meet the mission, IICTN collaborates with University
-                                                / Council / Institution and Private organizations for relevant courses,
-                                                but Applicants are advised to do their due diligence before opting for
-                                                Collaborated courses. Applicant should not hold IICTN responsible for
-                                                any guidance of Admission / Study facilitation / Placement in India or
-                                                Abroad anytime in the future. Thereafter, the duly filled application
-                                                forms along with documents are sent for acceptance and approval, Once
-                                                its approved, such applicant can proceed to undertake studies as per
-                                                syllabus and schedule.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;Please note If applicant has joined any third
-                                                party collaborated institute / university / Council courses through
-                                                IICTN, Applicant is advised to coordinate directly to them for any
-                                                query, IICTN will not be responsible and answerable for the same.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;Further note, that the time frames for receipt
-                                                of certificates are not in control of IICTN for Non-IICTN course. If,
-                                                Applicant has any query regarding Fee, Classes, Practicals, Exams,
-                                                Certifications and Placement, IICTN advises that the Applicant should
-                                                send their queries directly to the related University / Council /
-                                                Private organisation onlynow or anytime in future.
-                                                <br><br>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;The courses opted at IICTN comes with IICTN
-                                                certification and courses from University / Council / Institution and
-                                                Private organisation comes with their certification. Certificates will
-                                                be issued after clearing theory and practical examinations held at
-                                                nominated examination centres.
-                                                <br><br>
-                                                14. <b>Please Note:</b> National / International Document Verification
-                                                &amp; Recruitment agencies have different Systems / Criteria /
-                                                Parameters and institute may not fulfil and meet those criteria,
-                                                Applicant’s authenticity of certificate verification will be done by
-                                                Institute through email only and no other documents of Institute /
-                                                Company will be share with Applicant, Recruitment and Document
-                                                Verification agency as per confidential policy of the company. Institute
-                                                reserves the right to deny any request for the same.
-                                                <br><br>
-                                                15. <b>Administration:</b> If Applicant has any query regarding Courses
-                                                Fee, Learning, Classes, Practicals, Exams or Certifications, Therefore,
-                                                we advise that Applicant should send their queries viaWhatsApp /
-                                                Telegram on 9820000030 or email <a
-                                                    href="mailto:info@iictn.org">info@iictn.org</a> Applicant queries
-                                                will be attended in 10 working days as approvals come from management,
-                                                Applicant cooperation will be appreciated.
-                                                <br><br>
-                                                16. <b>Reference:</b> If applicant wishes to refer other student for
-                                                courses at IICTN, Institute gives 3% incentive on actual course fees
-                                                only to the referrer or the referrer can do workshop worth 10% , To
-                                                claim an incentive, applicant must provide joiner’s details prior
-                                                (Before the applicant visits or joins us) by email only on <a
-                                                    href="mailto:info@iictn.org">info@iictn.org</a> with joinee’s name,
-                                                contact Details, Qualification &amp; course suggested to joiner, The
-                                                reference should be of the person who has not yet joined IICTN &amp; has
-                                                come to know about us, only through referrer. Please do not refer a
-                                                colleague or friend who has already joined course with us and referrer
-                                                has met the joinee in our premise or outside. Incentive will be given
-                                                only after the full payment by the joiner and amount will be given only
-                                                on course fee amount, excluding 20% tax, admin and exam fees paid,
-                                                Incentive will give on the enrolment of first fee package Joined / Paid
-                                                by joinee, joining of further consecutive courses by the reference will
-                                                not be considered. Incentives of references for the whole month be
-                                                credited to the referrer bank account between 25th to 30th day of the
-                                                month along with deduction of TDS. In case of any confusion among the
-                                                Institute, Referrer &amp; Reference, incentive will stand cancelled.
-                                                <br> <br>
+                                                    <p style="text-align:justify;">
+                                                        11. Practical Sessions: Practical sessions will be conducted at the IICTN Mumbai head office only. Applicants
+                                                        from outside Mumbai should email their schedule to bills.iictn@gmail.com to inform the institute of their
+                                                        intended dates for attending practical classes. The institute will confirm practical session details via email,
+                                                        WhatsApp, or Telegram within 15 working days. Please note: The diet course does not have practical sessions, as
+                                                        it is only a theory course.
+                                                    </p>
 
-                                                <b>Note:</b> This is a computer generated copy, Applicant signature is
-                                                not required. Acceptance of the terms and conditions will be
-                                                acknowledged by default and applicants shall abide by the same.<br> <br>
+                                                    <p style="text-align:justify;">
+                                                        12. Group Conduct: Do not send forwarded messages or share social, news, emergency, festival, or promotional
+                                                        content in the groups. Personal queries should not be posted in the group; kindly contact the admin team or your
+                                                        counselor directly for such matters. Course study links will be shared exclusively in the Telegram group.
+                                                    </p>
 
-                                                <b>By-Laws:</b> Terms and Conditions are non-negotiable and subject to
-                                                change without any prior notice and will be abided by the applicant,
-                                                Dispute if any, is subject to Mumbai Jurisdiction only.<br> <br>
+                                                    <p style="text-align:justify;">
+                                                        12. Group Conduct: Do not send forwarded messages or share social, news, emergency, festival, or promotional
+                                                        content in the groups. Personal queries should not be posted in the group; kindly contact the admin team or your
+                                                        counselor directly for such matters. Course study links will be shared exclusively in the Telegram group.
+                                                    </p>
 
+                                                    <p style="text-align:justify;">
+                                                        13. Please study and thoroughly understand the topics and subjects covered in the curriculum lectures. Kindly
+                                                        note that no videos of live lectures, Practical sessions will be shared and provided.
+                                                    </p>
 
+                                                    <p style="text-align:justify;">
+                                                        14. Books / Certificates can be couriered or collected personally. Within India, the applicant must bear the
+                                                        applicable courier charge of Rs. 300 per courier, and for international shipments, the applicant must bear the
+                                                        actual cost of the courier. The Institute will not be responsible for any damages or loss of any documents. In
+                                                        the event of damage, loss, or the need for an updated version of a book, per-book reissue
+                                                        charges are Rs. 1500/-.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        15. We follow a modular study pattern, meaning that an applicant's class will begin with the topic being covered
+                                                        in the selected course on that day. Once the full cycle of the course module has been completed, the applicant
+                                                        should either leave the group or will be removed by the management.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        16. IICTN Exam & Certification:
+                                                        <li>Upon completion of the course, applicants are required to email the administration to request their exam
+                                                            papers.</li>
+                                                        <li>IICTN exams are not conducted on a batch basis but rather upon individual request when students are
+                                                            prepared.</li>
+                                                        <li>The completed exam sheet must be submitted to the administration via the applicant's registered email
+                                                            address only.</li>
+                                                        <li>After submitting the exam sheet, applicants must initiate the certificate process by contacting the
+                                                            administration team and requesting the certificate format for submission.</li>
+                                                        <li>Certification: IICTN Certificates will be issued within 3 to 6 months after the receipt of the exam
+                                                            completion and exam sheet submission by applicant or as determined by the Management.</li>
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        17. (B&WSSC – NCVET) Government Exam & Certification: Please note that the dates and timelines for the receipt
+                                                        of exams and certificates issued by the B&WSSC are not under the control of IICTN.
+                                                        <li> Applicants are advised to register for the government exam only when they are fully prepared. Attendance is
+                                                            mandatory.</li>
+                                                        <li>Exams are conducted on a batch-wise basis, primarily every month, and are not administered individually.
+                                                        </li>
+                                                        <li>Offline theory exams must be completed using the designated application.</li>
+                                                        <li>A half-hour viva and practical exam will be conducted individually for each applicant.</li>
+                                                        <li>Government exams are overseen by external government examiners, and a 100% passing rate is required.</li>
+                                                        <li>Failure to pass on the first attempt will result in a certification noting the need for a second attempt.
+                                                        </li>
+                                                        <li>Failure to attend the exam for any reason, including medical emergencies, will result in a ₹5,100 penalty.
+                                                            This penalty is strictly enforced and non-negotiable.</li>
+                                                        <li>Certification: Certificates will be issued within 3 months or as determined by the respective
+                                                            Body’s Schedule.</li>
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        18. University Exam & Certification: Please note that the dates and timelines for the receipt of exams and
+                                                        certificates issued by the university are not under the control of IICTN.
+                                                        <li>University exams are scheduled every six months, primarily in July and December.</li>
+                                                        <li>It is iUniversity exams are conducted over a span of 10 daysmperative that applicants submit all required
+                                                            documentation within 2 to 3 days of the request to avoid delays in exam scheduling.</li>
+                                                        <li>University exams are conducted over a span of 10 days</li>
+                                                        <li>The exams include topics related to Spoken English, Computer Knowledge, Nutrition, and Safety Measures, in
+                                                            addition to the curriculum pursued.</li>
+                                                        <li>University Certification: Certificates will be issued after 9 months or as determined by the respective
+                                                            body’s schedule.</li>
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        19. To use the prefix "Dr." before your name on certificates or any other documents issued by IICTN, applicants
+                                                        must submit a copy of their medical registration.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        20. The institute will not be responsible or liable if applicants fail to collect their certificates,
+                                                        marksheets, or any other documents within 9 months, whether they pertain to IICTN or any other collaborating
+                                                        entities, after IICTN has received the documents.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        21. IICTN each course's validity and duration will last as per the syllabus, or up to six months; after six
+                                                        months, applicants will be charged extra fees of 30% including applicable taxes for each course to finish the
+                                                        pending portion only within the period of 30 days / within one month.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        22. As per company policy, once granted, admission cannot be canceled. The institute strictly adheres to a
+                                                        no-refund policy, and fee refund requests will not be addressed or accepted for any reason and circumstances,
+                                                        including epidemics, pandemics, government regulations, dissatisfaction with topics, class timings and days,
+                                                        trainers and lecturers, or personal or family medical issues at the beginning of the course or at any time
+                                                        during its duration.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        23. The Institute will not address or accept any requests beyond those mentioned in this document, the final
+                                                        invoice, and the admission form. We recognize only the course(s) specified on your final invoice, which has been
+                                                        sent to your email by IICTN management based on your course selection and full fee payment received. If there
+                                                        are any outstanding fees, the applicant will only be eligible for IICTN-issued courses and certifications and
+                                                        will not be eligible for those from any collaborative body, even if mentioned on the invoice.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        24. If the applicant fails to submit the admission form (offline, online, or digitally) before or after the
+                                                        course starts, all terms, conditions, and policies will apply by default, and the applicant must
+                                                        comply with them.
+                                                    </p>
+
+                                                    <h1 style="text-align: center; text-transform: capitalize; text-decoration: underline;">
+                                                        TERMS, CONDITIONS & POLICIES
+                                                    </h1>
+                                                    <p style="text-align:justify;">
+                                                        25. Administration: If Applicant has any query regarding Courses Fee, Learning, Classes, Practicals, Exams or
+                                                        Certifications, Therefore, we advise that Applicant should send their queries via WhatsApp / Telegram on
+                                                        9820000030 or email on admin@iictn.org / bills.iictn@gmail.com Applicant queries will be attended in 10 working
+                                                        days subject to approvals from the management, Applicant cooperation will be appreciated.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        26. Fees: As per policy, full course fees must be paid in advance, whether for an IICTN course or a
+                                                        collaborative body’s course, even if the course or package is opted for under a discounted scheme or separately.
+                                                        In addition, if the applicant has paid less than Rs. 5,000, it will be considered only as a registration or
+                                                        booking amount. This amount will be valid for 3 months from the date of payment and is non-refundable and
+                                                        non-transferable.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        27. Fee Installments: Fees can be paid in two installments, spaced two weeks apart, with 75% paid as the first
+                                                        installment, plus an additional exam fee to begin the course. However, if paying in installments, applicants are
+                                                        permitted to attend lectures only once a week. Please note that books and study materials will be issued after
+                                                        full payment of the course fees. If the applicant is unable to pay the remaining balance within 3 months for any
+                                                        reason, they will not be entitled to a refund. However, at its sole discretion, the institute may accommodate
+                                                        applicants in the next batch or advise on converting the course into a short certificate program or other
+                                                        services.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        28. Fees Breakdown: Please note that the actual cost of each course is Rs. 78,000. The original cost of each
+                                                        online and offline session (webinar or lecture) is Rs. 2,600. However, the fee charged by IICTN may vary based
+                                                        on the current discount scheme or package, which can be significantly lower. The discounted course fee includes
+                                                        taxes (GST 18%), a one-time administration fee of ₹2,600, exam fees of ₹2,600 per course, certification fees of
+                                                        ₹2,600 per course, book fees of ₹1,500 per course, plus training fees, etc. Additionally, for each sponsored
+                                                        course by IICTN, only a separate certification fee of ₹2,600 is applicable, and other fees such as
+                                                        administration, book, training, and exam fees are not charged for each sponsored course, as specified in your
+                                                        invoice copy.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        The fee structures and breakdown provided above are intended for transparency to prevent any misunderstandings
+                                                        regarding fees. In the event of any discrepancies or disputes, only the specified breakdown, original course
+                                                        fee, and the cost of each online/offline lecture will be considered binding. Applicants must adhere to these
+                                                        terms.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        29. Education Loan: Applicants are advised to do their own due diligence before opting for any education loan
+                                                        service from any financial institutions and platform provided by the institute or from any other financial
+                                                        institutions. The Institute will not be responsible, answerable, or accountable for any dispute that arises now
+                                                        or in the future.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        30. Online / Offline Classes: Kindly cooperate with the faculty and attend course lectures as per the
+                                                        institute’s class timings, topics, trainers and lecturers, methods of teaching, online and offline platforms of
+                                                        teaching, and timetable. Topics once taught will not be repeated; if missed, they have to be studied by the
+                                                        applicant themselves from study material in any form, such as printable, digital, book, PPTs, notes, video,
+                                                        audio, online or offline, once shared and provided by the institute. Classes and lectures are weekly or
+                                                        fortnightly for 1.5 hours for each course (subject to the course opted), for which a timetable is posted or
+                                                        shared in respective Telegram groups at the start of every month. Each course duration will last as per the
+                                                        syllabus, or for 3 months, whichever is earlier, but if, due to any medical issues, marriage, etc., the course
+                                                        completion validity has expired, it can be extended to another 3 months if relevant supporting documents are
+                                                        provided by the applicant via email at admin@iictn.org or bills.iictn@gmail.com Applicants can give exams online
+                                                        if their courses have only theory and no practical.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        31. Machines Use: If Applicant breaks any machine, he / she has to pay Rs. 5,000/- or 30% of the actual cost of
+                                                        the part of the machines on the very next day itself. Thus, while Practicals applicants are advised to look
+                                                        after for Equipment / Machines carefully.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        32. Certificates: In order to secure the certificate, applicants should complete the theory and practical
+                                                        portions of both and clear the examination of the course(s) with a 75% passing mark. A certificate will be
+                                                        issued three months after the institute receives the applicant's course completion confirmation email by the
+                                                        applicant email id only. It is mandatory to email a copy of all bills and final Invoice copy to
+                                                        bills.iictn@gmail.com when applying for certification. Applicants are not allowed to attend theory and practical
+                                                        classes after the exams or issuance of certifications, please be ethical and start making your professional
+                                                        commitment only after you have been awarded the certificate. The institute reserves the right to change, modify,
+                                                        or update the format of the certificate at any given time, subject to the discretion of the management.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        33. Workshop Certificate: A workshop certificate will be awarded on the last day of the workshop to only those
+                                                        applicants who have made their full fee 15 days in advance before the start of the workshop. If the applicant
+                                                        has only made a partial payment and attended the workshop, they must pay their outstanding fees in order to
+                                                        receive their workshop certificate. Applicants who clear their dues after the workshop are only eligible to
+                                                        receive their workshop certificate 15 working days after receiving their pending dues. Courier charges must be
+                                                        borne solely by the applicants.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        34. Books / Certificate Collection: It can be couriered or collected personally. Within India, the applicant
+                                                        must bear the applicable courier charge of Rs. 300 per courier, and for international shipments, the applicant
+                                                        must bear the actual cost of the courier. The Institute will not be responsible for any damages or loss of any
+                                                        documents.
+                                                        <li>In the event of damage, loss, or the need for an updated version of a book, per-book reissue charges are Rs.
+                                                            1500/-.</li>
+                                                        <li>In the event of damage, loss, name change, etc., per certificate reissue charges are Rs. 2600/-.</li>
+                                                        <li>Fees for any reissuing of any documents should be paid in advance and must be borne by the applicant only.
+                                                        </li>
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        35. Attendance: The minimum attendance required is 85%, failing which the applicant will not be allowed to
+                                                        appear for the exams. For more than 3 days' absence, please email documents for leave. However, in cases of
+                                                        sudden illness where prior permission is not possible, a medical certificate from a doctor must be emailed to
+                                                        admin@iictn.org or mumbai.iictn@gmail.com.
+                                                        <li>Each course's validity and duration will last as per the syllabus, or up to six months; after six months,
+                                                            applicants will be charged 30% course fees for each course to finish the pending portion within one month.
+                                                        </li>
+                                                        <li>The institute is not responsible for covering up if the applicant misses his or her classes for whatever
+                                                            reason or if the course duration extends beyond 6 months.</li>
+                                                        <li>The institute reserves the right to change and modify the course curriculum, location of classes, class
+                                                            timings, topics, trainers and lecturers, method of teaching, online and offline platforms of teaching, and
+                                                            timetable at any given time, subject to the discretion of the management, and it shall be the applicant's
+                                                            responsibility to undergo the same.</li>
+                                                        <li>After 6 months, if applicants wish to learn the full course again, they have to pay 30% of the course fee
+                                                            again for the study of that course within 2 months. Please do not take leave during these two months.</li>
+                                                        <li>The applicant authorises and gives consent to the institute, stating that they have been clearly explained
+                                                            and informed by the trainer, staff, and management that the practical class, demonstration class, and
+                                                            procedure will be done with due care and that the possible effects and post-care precautions have to be
+                                                            taken after the procedures.</li>
+                                                        <li>Applicants are consensually and voluntarily taking part as models in practical, demonstrations, and
+                                                            procedures during the class at their own will and risk and will not hold the trainer, owner, associate
+                                                            owner, or any other staff of the institute responsible for any side effects or injuries.</li>
+                                                        <li>Applicants voluntarily participating in the video and photo shoot consent to their usage for marketing and
+                                                            promotional activities without claiming royalties or charges.</li>
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        36. Collaborative Course Terms: The vision and mission of IICTN are to provide opportunities for specialization
+                                                        and skill education that are demographically relevant, in demand, and in accordance with established standards.
+                                                        To achieve this mission, IICTN collaborates with universities, councils, institutions, and private organisations
+                                                        to offer relevant courses and opportunities. However, applicants are advised to conduct their due diligence
+                                                        before enrolling in a collaborative body’s courses. The applicant should not hold IICTN responsible for any
+                                                        guidance related to admission, study facilitation, or placement in India or abroad at any time in the future.
+                                                        IICTN is merely facilitating the details and processes regarding fees, admission, exams, marksheets, and the
+                                                        certification process, as clearly explained by the counsellors before opting for any collaborative courses.
+                                                        Having provided your consent and expressed satisfaction with this understanding, IICTN will not be held
+                                                        responsible for any delays in admission, exams, certifications, or course discontinuation.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        Please note that the dates and time frames for the receipt of exams and certificates issued by the collaborating
+                                                        body are not under the control of IICTN. Any delays regarding exams and certificates are subject to the terms
+                                                        and conditions of the collaborating body and will be the sole responsibility of that entity. If an applicant has
+                                                        any queries regarding exams, marksheets, or certifications, IICTN advises that the applicant should send their
+                                                        inquiries directly to the related body, while keeping IICTN in the loop to maintain transparency. IICTN assures
+                                                        the best possible support for our students but will not be held liable or accountable for any delays in the
+                                                        process of admission, examination, or issuance of marksheets and certifications by the collaborating entities.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        The duly completed application forms, along with the mandatory documents required by the collaborating body,
+                                                        will be submitted for acceptance and approval of admission. Once approved, the applicant may proceed to
+                                                        undertake studies and exams according to the parameters and protocols of the related body.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        37. Certifications: The courses offered at IICTN come with IICTN certification, while courses from collaborating
+                                                        entities come with their respective certifications. Certificates will be issued only after the completion of the
+                                                        course and successful completion of the examinations. IICTN will not be responsible or accountable for the
+                                                        quality, design, or format of any online or offline documents from the collaborating universities, councils,
+                                                        institutions, or private organizations.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        38. Job Assistance: Indian Institute of Cosmetology, Trichology and Nutrition Private Limited (IICTN) is a
+                                                        private body that offers skills-enhancing courses for the beauty, health, and wellness sectors. The said
+                                                        institute is neither a college nor a university, nor is it a deemed university. The course fees paid by
+                                                        applicants are only for the purpose of learning the course. If, IICTN Staff / Counsellor has promised anything
+                                                        apart from mentioned terms, it will not be acknowledged by the institute.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        Success or failure of the individual in practice, a job, or business is attributable to the individual’s
+                                                        capabilities, and IICTN shall not be responsible for any lapses or failures. IICTN is to be indemnified for any
+                                                        claim by the applicant or client of any kind whatsoever, as IICTN is opposed to malpractice. The certificates
+                                                        are awarded for course learning and are not a licence to practise injectable procedures such as Botox, Fillers,
+                                                        and Hair Transplant etc. The procedures must be carried out in accordance with applicable government laws,
+                                                        regulations, and guidelines.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        If an applicant is applying for a job and the institute needs to verify their certificate or if they need
+                                                        additional documents such as a marksheet, appraisal letter, or syllabus of the related course, they must pay an
+                                                        additional charge of Rs. 10,000/-.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        39. Documents Verifications: National and international document verification and recruitment agencies have
+                                                        different systems, criteria, and parameters, and an institute may not fulfil or meet those criteria. The
+                                                        institute will verify the authenticity of the applicant's certificate only via email, and no other documents of
+                                                        the institute or company will be shared with the applicant, recruitment agency, or document verification agency
+                                                        in accordance with the company's data protection and confidentiality policy. The institute reserves the right to
+                                                        deny any request for the same.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        40. Refund Policy: According to company policy, once admission is granted, it cannot be cancelled. The institute
+                                                        strictly adheres to a no-refund policy for any reason. Any study materials in any form including printable,
+                                                        digital, books, PPTs, notes, videos, audios, or online and offline lectures once shared with the applicant or
+                                                        accessed by the applicant through any method or platform, will be considered delivered. Additionally, if the
+                                                        applicant has been added to the course group and a topic or relevant class has commenced, or if the applicant
+                                                        has attended even a single offline or online theory or practical class, it will be acknowledged by the
+                                                        institute. The terms stated above under the fee section will apply in such cases.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        Furthermore, fee refund requests will not be addressed or accepted under any circumstances, including epidemics,
+                                                        pandemics, civil wars, world wars, government regulations, medical issues affecting the applicant or a family
+                                                        member, or the sudden demise of the student, whether occurring at the beginning or at any time during the
+                                                        course, even if the duration extends beyond the actual course duration. This policy also applies if the
+                                                        institute is required to remain closed due to regulations from central or state governments or local
+                                                        authorities, or for any other reason. Therefore, we kindly ask that applicants refrain from creating panic or
+                                                        disturbances. If government rules and regulations change for any reason, the institute accepts no responsibility
+                                                        or liability for any refunds or compensation for the same.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        41. Products & Vendors Policy: The institute follows a strict policy not to patronise any brand or supplier. The
+                                                        institute’s trainers and consultants are responsible for the courses that applicants have enrolled in. While
+                                                        teaching, trainers do use products and machines and talk about the specifications, brand, supplier, etc.
+                                                        However, this should not be interpreted as a recommendation or sales pitch by staff acting as an agent on behalf
+                                                        of suppliers. Many vendors may indulge in wrongdoing, like providing defective products or machines, or
+                                                        promising urgent delivery, a guarantee, a warranty, or an AMC, and may even use staff names to collect any
+                                                        advances, etc. Applicants must do their own due diligence and survey before purchasing any product or machine
+                                                        and be responsible for their purchase decision. We advise you to be careful and vigilant. Any deal by any
+                                                        student with any supplier or representative citing staff connection or recommendation will not be entertained by
+                                                        the institute as per the above policies. Institute will not be held accountable or responsible for the same in
+                                                        the future.
+                                                    </p>
+
+                                                    <p style="text-align:justify;">
+                                                        42. Referral Incentives Policy: If an applicant refers other applicants to the institute for courses, the
+                                                        institute offers an 8% incentive on actual course fees only to the referrer, or the referrer can take a workshop
+                                                        or service at the institute for a 10% incentive. To claim an incentive, the applicant must provide the joiner's
+                                                        details well in advance (before the applicant visits or joins us) by email only at info@iictn.org with the
+                                                        joiner’s name, contact details, qualifications, and course suggested to the joiner. The reference should be of
+                                                        the person who has not yet joined the institute and has come to know about us only through the referrer. Please
+                                                        do not refer a colleague or friend who has already enrolled in a course with us and whose referrer has met the
+                                                        joinee in our premises or outside, or even visited with the referrer during their own first or other previous or
+                                                        later inquiries and enrollment in the institute, as it will not be conceded under our incentive policy. The
+                                                        incentive will be given only after the full payment is made by the joiner, and the amount will be given only on
+                                                        the course fee amount, excluding 20% tax and levies, admin, and exam fees. The incentive will be given on the
+                                                        enrollment of the first fee package. If joined or paid for by the joinee only, the joining of further
+                                                        consecutive courses by the reference will not be considered. Incentives for referrals for the entire month are
+                                                        credited to the referrer's bank account between the 25th and 30th of the next month, after TDS is deducted. The
+                                                        incentive will be cancelled if there is any confusion between the institute, referrer, and reference.
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        43. Data Protection Policy: Applicants are strictly prohibited from using their personal electronic devices such
+                                                        as laptops, mobile phones, tablets, cameras, headphones, etc. and are also restricted from recording videos,
+                                                        short clips, clicking photographs, taking screenshots, etc. during their online or offline theory classes or
+                                                        lectures, practical sessions, or treatments, etc. They are also not allowed to share any data provided by the
+                                                        institute, trainers, or management through any online or offline sources. All documents, contact details, study
+                                                        materials, notes, PPTs, videos, audios, etc. are copyrighted and the sole property of the institute.
+                                                        <li>Applicants are strongly advised and prohibited from sharing or exchanging their personal details like mobile
+                                                            numbers, personal email ids, online and offline social media accounts with trainers or lecturers, and from
+                                                            inviting any staff of the institute for seminars, workshops, chief guests, personal and client treatment,
+                                                            consultation, training, personal and professional ceremonies, the inauguration or opening of their centre,
+                                                            or by any other means. As per policy, institute staff are strictly restricted from sharing personal details
+                                                            like mobile numbers, online and offline social media platforms, and attending any of the above-mentioned
+                                                            events and activities without prior written or email approval from the board members of the institute. If
+                                                            the institute finds you indulging in any of the above-mentioned events, activities, knowingly or
+                                                            unknowingly, from any open or confidential source, it will be considered anti-organisational activity, and
+                                                            the applicant's admission will be cancelled with immediate effect without any refund or compensation; for
+                                                            pass-out applicants, their certificate will be cancelled and nullified with immediate effect, and they are
+                                                            bound to submit their original certificate to the institute within 48 hours. The institute reserves the
+                                                            right to take any appropriate online and offline applicant awareness action as well as legal action against
+                                                            the related applicant and staff, and all the losses and legal expenses will be recovered from the applicant.
+                                                        </li>
+                                                        <li>Furthermore, as per the employee protection policy, applicants are strictly advised to maintain the most
+                                                            civilised manners and ethics throughout their entire course(s) duration and are strictly prohibited from
+                                                            having any personal relationship or affair with any permanent, contractual, or probationary employee,
+                                                            vendor, dealer, business associate, etc., of the Institute / company. If these things happen or are found
+                                                            for any reason, the company has the right to cancel your admission and terminate the employment of any
+                                                            related employees with immediate effect, without any refund, partial or full, and without any compensation.
+                                                            The company has the right to take other appropriate action against both parties.</li>
+                                                        <li>If management finds any applicant having wrong conduct, misguiding, misleading, and misbehaving with other
+                                                            applicants, trainers, lecturers, or staff as per their own conclusions and/or against the Institute policy
+                                                            in any digital, verbal, online, offline, or any other media, they will be immediately removed from the group
+                                                            without any prior notice or explanation by the management.</li>
+                                                        <li>If the misbehaviour continues, their admission will be revoked with immediate effect, with no refund or
+                                                            compensation, and they will be charged the monetary penalty. The institute reserves the right to file a
+                                                            defamation case against a related applicant for spoiling the brand name if found necessary, and all legal
+                                                            expenses will be borne by applicants.</li>
+                                                    </p>
+                                                    <p style="text-align:justify;">
+                                                        44. Indemnity: Applicants, their family, relatives, friends, or any other associates agree to release, defend,
+                                                        indemnify, and hold harmless the company and its directors, board members, staff, employees, trainers,
+                                                        lecturers, visiting faculty, vendors, dealers, business associates, and so on, whether permanent, contractual,
+                                                        or probationary, from and against any claims, liabilities, damages, losses, expenses, and compensation arising
+                                                        out of or in any way related to the use of our resources, methods, practice, services, treatment or any other
+                                                        reason whatsoever weather.
+                                                    </p>
+                                                </body>
 
                                             </div>
                                         </div>
