@@ -89,7 +89,7 @@ include "../db/config.php";
             <input type="text" id="mobile" name="mobile" placeholder="Please Enter Mobile Number" required>
 
             <label for="city">City:</label>
-            <input type="text" id="city" name="city" placeholder="Please Enter Mobile Number" required>
+            <input type="text" id="city" name="city" placeholder="Please Enter city" required>
 
             <input type="submit"  onclick="startDownload()" value="Submit">
 
