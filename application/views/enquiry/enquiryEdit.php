@@ -13,6 +13,8 @@ $alternet_email  = '';
 $enq_course_id  = '';
 $remark  = '';
 $counsellor_id ='';
+$gst_number ='';
+$gst_holder_name ='';
 
 if(!empty($editDataenquiry))
 {
@@ -34,6 +36,9 @@ if(!empty($editDataenquiry))
         $doctor_non_doctor	  =  $rf->doctor_non_doctor;
         $enq_city	  =  $rf->enq_city;
         $counsellor_id =  $rf->counsellor_id;
+        $gst_number = $rf->gst_number;
+        $gst_holder_name = $rf->gst_holder_name;
+
 
     }
 }
@@ -256,6 +261,24 @@ if(!empty($editDataenquiry))
                                             <?php } ?>    
                                                 <p class="error counsellor_error"></p>       
                                             </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label style="text-align: left;"  for="gst_number">GST Number
+                                                </label>
+                                                <div>
+                                                <input autocomplete="off" autocomplete="off" maxlength="50" value="<?php echo $gst_number;?>" type="text" id="gst_number" name="gst_number" placeholder="GST Number" class="form-control col-md-12 col-xs-12">
+                                                <p class="error gst_number_error"></p>
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label style="text-align: left;"  for="gst_holder_name">GST Holder Name
+                                            </label>
+                                                <div >
+                                                <input autocomplete="off" autocomplete="off" maxlength="50" type="text" value="<?php echo $gst_holder_name;?>" id="gst_holder_name" name="gst_holder_name" placeholder="GST Holder Name" class="form-control col-md-12 col-xs-12">
+                                                <p class="error gst_holder_name_error"></p>
+                                                </div>
                                         </div>
 
                                         </div>
