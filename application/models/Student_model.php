@@ -2437,6 +2437,58 @@ public function getstudentexaminationdatafordashboardnoti($userId){
 }
 
 
+
+public function  getallleaverequestcount($params){
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_LEAVE.".leave_title LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_LEAVE.".leave_from_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_LEAVE.".leave_to_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_LEAVE.".leave_description LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_LEAVE.'.status', 1);
+    $query = $this->db->get(TBL_LEAVE);
+    $rowcount = $query->num_rows();
+    
+    return $rowcount;
+
+}
+
+public function getallleaverequestdata($params){
+    $this->db->select('*');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_LEAVE.".leave_title LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_LEAVE.".leave_from_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_LEAVE.".leave_to_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_LEAVE.".leave_description LIKE '%".$params['search']['value']."%')");
+    }
+    $this->db->where(TBL_LEAVE.'.status', 1);
+    $this->db->order_by(TBL_LEAVE.'.id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_LEAVE);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+             $data[$counter]['leave_title']    = $value['leave_title'];
+             $data[$counter]['leave_from_date']  = $value['leave_from_date'];
+             $data[$counter]['leave_to_date']   = $value['leave_to_date'];
+             $data[$counter]['leave_description']   =  $value['leave_description'];
+             $data[$counter]['leave_document']   =  $value['leave_document'];
+            $counter++; 
+        }
+    }
+    return $data;
+}
+
+
+
 }
 
 ?>

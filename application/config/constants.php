@@ -117,6 +117,7 @@ define('TBL_ACTIVITY_APP_LOG', 'tbl_activity_log_app');
 define('TBL_ADD_ON_COURSE', 'tbl_add_on_courses');
 define('TBL_NEW_COURSE_REQUEST', 'tb_new_course_request');
 define('TBL_SETTINGS', 'tbl_settings');
+define('TBL_LEAVE', 'tbl_leave');
 define('DATEANDTIME', Date('Y-m-d H:i:s'));
 	
 

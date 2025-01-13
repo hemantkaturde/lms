@@ -281,6 +281,11 @@ $route['settings'] = "admin/settings";
 $route['whatappconfigupdate'] = "admin/whatappconfigupdate";
 
 
+$route['leaverequest'] = "student/leaverequest";
+$route['fetchleaverequestlist'] = "student/fetchleaverequestlist";
+
+
+
 
 
 

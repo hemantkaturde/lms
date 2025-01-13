@@ -614,7 +614,7 @@
         public function studentattendance(){
             $this->global['pageTitle'] = 'view Student Attendance';
             $this->loadViews("student/view_student_Attendance", $this->global, NULL, NULL);
-        
+
         }
 
         public function fetchstudentattendancestudentpanel(){
@@ -1269,6 +1269,39 @@
         }
         
 
+        public function leaverequest(){
+            $this->global['pageTitle'] = 'view Leave Request';
+            $this->loadViews("student/view_leaverequest", $this->global, NULL, NULL);
+        }
+
+
+        public function fetchleaverequestlist(){
+
+            $params = $_REQUEST;
+
+            $totalRecords = $this->student_model->getallleaverequestcount($params); 
+            $queryRecords = $this->student_model->getallleaverequestdata($params); 
+
+            $data = array();
+            foreach ($queryRecords as $key => $value)
+            {
+                $i = 0;
+                foreach($value as $v)
+                {
+                    $data[$key][$i] = $v;
+                    $i++;
+                }
+            }
+            $json_data = array(
+                "draw"            => intval( $params['draw'] ),   
+                "recordsTotal"    => intval( $totalRecords ),  
+                "recordsFiltered" => intval($totalRecords),
+                "data"            => $data   // total data array
+                );
+        
+            echo json_encode($json_data);
+
+        }
 
     }
 
