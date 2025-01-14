@@ -1,6 +1,7 @@
 <?php 
 $access = $this->session->userdata('access');
 $jsonstringtoArray = json_decode($access, true);
+$roleText = $this->session->userdata('roleText');
 ?>
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
@@ -9,9 +10,12 @@ $jsonstringtoArray = json_decode($access, true);
             <div class="ibox-head">
                 <div>
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewleaverequest">
-                     <i class="fa fa-plus"></i> Add New Leave Request
-                    </button>
+                   <?php if($roleText=='Student'){ ?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewleaverequest">
+                        <i class="fa fa-plus"></i> Add New Leave Request
+                        </button>
+                   <?php }?>
+                 
 
                     <button type="button" class="btn btn-primary">
                         <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
@@ -31,7 +35,9 @@ $jsonstringtoArray = json_decode($access, true);
                                 <th>Leave To Date</th>
                                 <th>Description</th>
                                 <th>Link</th>
+                                <?php if($roleText=='Student'){ ?>
                                 <th>Action</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody></tbody>

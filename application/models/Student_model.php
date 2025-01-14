@@ -2447,6 +2447,11 @@ public function  getallleaverequestcount($params){
         $this->db->or_where(TBL_LEAVE.".leave_to_date LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_LEAVE.".leave_description LIKE '%".$params['search']['value']."%')");
     }
+     
+    if($roleText=='Student'){ 
+        $userId =  $this->session->userdata('userId');
+        $this->db->where(TBL_LEAVE.'.student_id', $userId);
+    }
     $this->db->where(TBL_LEAVE.'.status', 1);
     $query = $this->db->get(TBL_LEAVE);
     $rowcount = $query->num_rows();
@@ -2456,6 +2461,9 @@ public function  getallleaverequestcount($params){
 }
 
 public function getallleaverequestdata($params){
+
+    $roleText = $this->session->userdata('roleText');
+
     $this->db->select('*');
     if($params['search']['value'] != "") 
     {
@@ -2464,7 +2472,14 @@ public function getallleaverequestdata($params){
         $this->db->or_where(TBL_LEAVE.".leave_to_date LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_LEAVE.".leave_description LIKE '%".$params['search']['value']."%')");
     }
+    
+    if($roleText=='Student'){ 
+        $userId =  $this->session->userdata('userId');
+        $this->db->where(TBL_LEAVE.'.student_id', $userId);
+    }
+    
     $this->db->where(TBL_LEAVE.'.status', 1);
+
     $this->db->order_by(TBL_LEAVE.'.id', 'DESC');
     $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_LEAVE);
@@ -2482,9 +2497,12 @@ public function getallleaverequestdata($params){
              $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));
              $data[$counter]['leave_description']   =  $value['leave_description'];
              $data[$counter]['leave_document']   =  '<a href="'.$value['leave_document'].'" target="_blank">'.$value['leave_document']."</a>";
-             $data[$counter]['action'] = '';
-             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editleaverequest/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
-             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deleteleaverequestdata' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Leave Request'></a> "; 
+           
+             if($roleText=='Student'){ 
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editleaverequest/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
+                $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deleteleaverequestdata' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Leave Request'></a> "; 
+             }
             $counter++; 
         }
     }

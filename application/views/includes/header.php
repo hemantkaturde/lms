@@ -347,7 +347,15 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
 
-                         
+                        <?php if($role_text=="Superadmin"){ ?>
+                         <li class="<?php if($pageUrl =='leaverequest'){ echo 'active';} ?>">
+                            <a href="<?php echo base_url()."leaverequest"; ?>"><i class="sidebar-item-icon fa fa-file-text" ></i>
+                                <span class="nav-label">View Leave Requests</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+
+
                         <?php if($role_text=="Superadmin"){ ?>
                          <li class="<?php if($pageUrl =='settings'){ echo 'active';} ?>">
                             <a href="<?php echo base_url()."settings"; ?>"><i class="sidebar-item-icon fa fa-cog" ></i>

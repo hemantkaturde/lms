@@ -6336,7 +6336,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						{ "width": "15%", "targets": 2 },
 						{ "width": "15%", "targets": 3 },
 						{ "width": "15%", "targets": 4 },
+
+						<?php if($roleText=='Student'){ ?>
 						{ "width": "10%", "targets": 5 },
+						<?php } ?>
 
 				],
 				responsive: true,
