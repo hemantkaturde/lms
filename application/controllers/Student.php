@@ -1307,7 +1307,7 @@
         public function addnewcoursetopicrequest(){
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
-
+                $userId =  $this->session->userdata('userId');
                 $addnewcoursetopicrequest_response = array();
 
                 $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
@@ -1345,7 +1345,8 @@
                             'leave_from_date'=> $this->input->post('leave_from_date'),
                             'leave_to_date'=>$this->input->post('leave_to_date'),
                             'leave_description'=>$this->input->post('leave_description'),
-                            'leave_document' =>$doc_url
+                            'leave_document' =>$doc_url,
+                            'student_id'=>$userId,
                         );
                     
                         if($this->form_validation->run() == FALSE){
@@ -1395,7 +1396,7 @@
             $post_submit = $this->input->post();
 
             if(!empty($post_submit)){
-
+                $userId =  $this->session->userdata('userId');
                 $addnewcoursetopicrequest_response = array();
 
                 $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
@@ -1433,7 +1434,8 @@
                             'leave_from_date'=> $this->input->post('leave_from_date'),
                             'leave_to_date'=>$this->input->post('leave_to_date'),
                             'leave_description'=>$this->input->post('leave_description'),
-                            'leave_document' =>$doc_url
+                            'leave_document' =>$doc_url,
+                            'student_id'=>$userId,
                         );
                     
                         if($this->form_validation->run() == FALSE){
@@ -1454,7 +1456,8 @@
                         'leave_title' => $this->input->post('leave_title'),
                         'leave_from_date'=> $this->input->post('leave_from_date'),
                         'leave_to_date'=>$this->input->post('leave_to_date'),
-                        'leave_description'=>$this->input->post('leave_description')
+                        'leave_description'=>$this->input->post('leave_description'),
+                        'student_id'=>$userId,
                     );
                 
                     if($this->form_validation->run() == FALSE){
