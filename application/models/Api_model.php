@@ -2869,6 +2869,37 @@ public function getadditionalInfostudent($id){
 
 }
 
+
+public function getstudentleaverequest_data($user_flag,$userid){
+
+    $this->db->select('*');
+    $this->db->where(TBL_LEAVE.'.status', 1);
+    // if($user_flag=='Student'){
+    //     $this->db->where(TBL_LEAVE.'.id',$userid);
+    // }
+    $query = $this->db->get(TBL_LEAVE);
+    $fetch_result = $query->result_array();
+    $data = array();
+    $counter = 0;
+
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+
+             $data[$counter]['leave_title']    = $value['leave_title'];
+             $data[$counter]['leave_from_date']  =  date('d-m-Y', strtotime($value['leave_from_date']));
+             $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));
+             $data[$counter]['leave_description']   =  $value['leave_description'];
+             $data[$counter]['leave_document']   =  $value['leave_document'];
+            $counter++; 
+        }
+    }
+    return $data;
+}
+
+
+
         
 }
 

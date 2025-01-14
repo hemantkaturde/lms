@@ -3607,6 +3607,172 @@ class Api extends BaseController
     }
 
 
+    public function getleaverequestlist(){
+
+        $userdetails = validateServiceRequest();
+        $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
+        $this->form_validation->set_rules('user_flag', 'User Flag', 'trim|required');
+
+        $post_submit = $this->input->post();
+        if ($this->form_validation->run() == FALSE)
+        {
+            $status = 'Failure';
+            $message = 'Validation error';
+            $data = array('userid' =>strip_tags(form_error('userid')),'user_flag' =>strip_tags(form_error('user_flag')));
+        }else{
+            $getstudentleaverequest_data = $this->Api_model->getstudentleaverequest_data($this->input->post('user_flag'),$this->input->post('userid'));
+            if($getstudentleaverequest_data){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $getstudentleaverequest_data;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+    }
+
+    public function addnewleaverequest(){
+        $post_submit = $this->input->post();
+        if(!empty($post_submit)){
+            $userId =  $this->input->post('userId');
+            $addnewcoursetopicrequest_response = array();
+
+            $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
+            $this->form_validation->set_rules('leave_from_date', 'Leave From Date', 'trim|required');
+            $this->form_validation->set_rules('leave_to_date', 'Leave To Date', 'trim|required');
+            $this->form_validation->set_rules('leave_description', 'Leave Description', 'trim');
+            //$this->form_validation->set_rules('file', 'Leave Description', 'trim|required');
+
+
+            $filesize = round($_FILES['file']['size'] / 1024 , 2);
+            $file_error="";
+            if(!empty($_FILES['file']['size'])){ 
+                if($_FILES['file']['size'] > 0){ 
+
+                    $targetDir = "uploads/leave_request_doc/"; 
+                    $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                    $fileName_original = basename($_FILES['file']['name']); 
+                    $fileName_original_for_download = $_FILES['file']['name']; 
+                    //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    $fileName =$_FILES['file']['name']; 
+                   // $fileName =basename($_FILES['file']['name']); 
+                    $targetFilePath = $targetDir.$fileName; 
+                    // Check whether file type is valid 
+                    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+
+
+                    if(in_array($fileType, $allowTypes)){ 
+                        if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
+                          $doc_url = base_url().str_replace(' ', '_', $targetFilePath);
+                        }
+                    }
+
+                }
+                }else{
+                    $doc_url ='';
+                }
+
+                    $data = array(
+                        'leave_title' => $this->input->post('leave_title'),
+                        'leave_from_date'=> $this->input->post('leave_from_date'),
+                        'leave_to_date'=>$this->input->post('leave_to_date'),
+                        'leave_description'=>$this->input->post('leave_description'),
+                        'leave_document' =>$doc_url,
+                        'student_id'=>$userId,
+                    );
+                
+                    if($this->form_validation->run() == FALSE){
+                                $addnewcoursetopicrequest_response['status'] = 'failure';
+                                $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
+                    }else{
+                        $saveCoursedata = $this->student_model->savenewcoursetopicrequest('',$data);
+                        if($saveCoursedata){
+                                    $addnewcoursetopicrequest_response['status'] = 'success';
+                                    $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
+                            }
+                    }
+
+
+        
+            echo json_encode($addnewcoursetopicrequest_response);
+        }
+
+    }
+
+
+    public function editleaverequest(){
+        $post_submit = $this->input->post();
+
+        if(!empty($post_submit)){
+            $userId =  $this->input->post('userId');
+            $id = $this->input->post('id');
+            $addnewcoursetopicrequest_response = array();
+
+            $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
+            $this->form_validation->set_rules('leave_from_date', 'Leave From Date', 'trim|required');
+            $this->form_validation->set_rules('leave_to_date', 'Leave To Date', 'trim|required');
+            $this->form_validation->set_rules('leave_description', 'Leave Description', 'trim');
+
+            $leave_id = $this->input->post('leave_id');
+            
+            $filesize = round($_FILES['file']['size'] / 1024 , 2);
+            $file_error="";
+            if(!empty($_FILES['file']['size'])){ 
+                if($_FILES['file']['size'] > 0){ 
+
+                    $targetDir = "uploads/leave_request_doc/"; 
+                    $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif','xls','xlsx','txt'); 
+                    $fileName_original = basename($_FILES['file']['name']); 
+                    $fileName_original_for_download = $_FILES['file']['name']; 
+                    //$fileName =uniqid(rand(), true).'-'.$doc_type.'-'.basename($_FILES['file']['name']); 
+                    $fileName =$_FILES['file']['name']; 
+                   // $fileName =basename($_FILES['file']['name']); 
+                    $targetFilePath = $targetDir.$fileName; 
+                    // Check whether file type is valid 
+                    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+
+
+                    if(in_array($fileType, $allowTypes)){ 
+                        if(move_uploaded_file($_FILES['file']['tmp_name'], str_replace(' ', '_', $targetFilePath))){ 
+                          $doc_url = base_url().str_replace(' ', '_', $targetFilePath);
+                        }
+                    }
+
+                }
+            }
+                    $data = array(
+                        'leave_title' => $this->input->post('leave_title'),
+                        'leave_from_date'=> $this->input->post('leave_from_date'),
+                        'leave_to_date'=>$this->input->post('leave_to_date'),
+                        'leave_description'=>$this->input->post('leave_description'),
+                        'leave_document' =>$doc_url,
+                        'student_id'=>$userId,
+                    );
+                
+                    if($this->form_validation->run() == FALSE){
+                                $addnewcoursetopicrequest_response['status'] = 'failure';
+                                $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
+                    }else{
+                        $saveCoursedata = $this->student_model->savenewcoursetopicrequest($id,$data);
+                        if($saveCoursedata){
+                                    $addnewcoursetopicrequest_response['status'] = 'success';
+                                    $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
+                            }
+                    }
+        
+            echo json_encode($addnewcoursetopicrequest_response);
+        }else{
+            $this->global['pageTitle'] = 'Edit Leave Request';
+            $data['getLeaveRequestdata'] =  $this->student_model->getLeaveRequestdata($id);
+            $this->loadViews("student/edit_leaverequest", $this->global, $data, NULL);
+        }
+    }
+    
+
      /* Student API Work Done Here*/
 
 

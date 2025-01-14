@@ -77,7 +77,7 @@ if(!empty($getLeaveRequestdata))
                                         </div>
 
                                         <div class="form-group">
-                                            <label style="text-align: left;"  for="leave_description">Leave Description<span class="required">*</span>
+                                            <label style="text-align: left;"  for="leave_description">Leave Description
                                             </label>
                                             <div >
                                             <textarea class="form-control" id="leave_description" name="leave_description" rows="5" Placeholder="Leave Description"><?php echo $leave_description; ?></textarea>                                        

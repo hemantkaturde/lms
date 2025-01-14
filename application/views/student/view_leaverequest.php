@@ -93,7 +93,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="text-align: left;"  for="leave_description">Leave Description<span class="required">*</span>
+                                    <label style="text-align: left;"  for="leave_description">Leave Description
                                     </label>
                                     <div >
                                       <textarea class="form-control" id="leave_description" name="leave_description" rows="5" Placeholder="Leave Description"></textarea>                                        
@@ -102,7 +102,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="text-align: left;"  for="leave_document">Leave Document<span class="required">*</span>
+                                    <label style="text-align: left;"  for="leave_document">Leave Document
                                     </label>
                                     <div>
                                         <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>

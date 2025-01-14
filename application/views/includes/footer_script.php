@@ -6361,7 +6361,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			//$(".loader_ajax").show();
 			var formData = new FormData($("#addnewleaverequest_form")[0]);
 			$.ajax({
-				url : "<?php echo base_url();?>addnewcoursetopicrequest",
+				url : "<?php echo base_url();?>addnewleaverequest",
 				type: "POST",
 				data : formData,
 				cache: false,

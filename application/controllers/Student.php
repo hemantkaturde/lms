@@ -1304,7 +1304,7 @@
         }
 
 
-        public function addnewcoursetopicrequest(){
+        public function addnewleaverequest(){
             $post_submit = $this->input->post();
             if(!empty($post_submit)){
                 $userId =  $this->session->userdata('userId');
@@ -1313,8 +1313,8 @@
                 $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
                 $this->form_validation->set_rules('leave_from_date', 'Leave From Date', 'trim|required');
                 $this->form_validation->set_rules('leave_to_date', 'Leave To Date', 'trim|required');
-                $this->form_validation->set_rules('leave_description', 'Leave Description', 'trim|required');
-                // $this->form_validation->set_rules('file', 'Leave Description', 'trim|required');
+                $this->form_validation->set_rules('leave_description', 'Leave Description', 'trim');
+                //$this->form_validation->set_rules('file', 'Leave Description', 'trim|required');
 
 
                 $filesize = round($_FILES['file']['size'] / 1024 , 2);
@@ -1340,6 +1340,11 @@
                             }
                         }
 
+                    }
+                    }else{
+                        $doc_url ='';
+                    }
+
                         $data = array(
                             'leave_title' => $this->input->post('leave_title'),
                             'leave_from_date'=> $this->input->post('leave_from_date'),
@@ -1360,19 +1365,14 @@
                                 }
                         }
 
-                    }
-                }else{
-
-                    $file_error = "Leave Document Required";
-                    $addnewcoursetopicrequest_response['status'] = 'failure';
-                    $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
-                }
+    
             
                 echo json_encode($addnewcoursetopicrequest_response);
             }
 
         }
 
+        
         public function deleteleaverequestdata(){
 
             $post_submit = $this->input->post();
@@ -1402,7 +1402,7 @@
                 $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
                 $this->form_validation->set_rules('leave_from_date', 'Leave From Date', 'trim|required');
                 $this->form_validation->set_rules('leave_to_date', 'Leave To Date', 'trim|required');
-                $this->form_validation->set_rules('leave_description', 'Leave Description', 'trim|required');
+                $this->form_validation->set_rules('leave_description', 'Leave Description', 'trim');
 
                 $leave_id = $this->input->post('leave_id');
                 
@@ -1429,6 +1429,8 @@
                             }
                         }
 
+                    }
+                }
                         $data = array(
                             'leave_title' => $this->input->post('leave_title'),
                             'leave_from_date'=> $this->input->post('leave_from_date'),
@@ -1448,29 +1450,6 @@
                                         $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
                                 }
                         }
-
-                    }
-                }else{
-
-                    $data = array(
-                        'leave_title' => $this->input->post('leave_title'),
-                        'leave_from_date'=> $this->input->post('leave_from_date'),
-                        'leave_to_date'=>$this->input->post('leave_to_date'),
-                        'leave_description'=>$this->input->post('leave_description'),
-                        'student_id'=>$userId,
-                    );
-                
-                    if($this->form_validation->run() == FALSE){
-                                $addnewcoursetopicrequest_response['status'] = 'failure';
-                                $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
-                    }else{
-                        $saveCoursedata = $this->student_model->savenewcoursetopicrequest($leave_id,$data);
-                        if($saveCoursedata){
-                                    $addnewcoursetopicrequest_response['status'] = 'success';
-                                    $addnewcoursetopicrequest_response['error'] = array('leave_title'=>strip_tags(form_error('leave_title')),'leave_from_date'=>strip_tags(form_error('leave_from_date')),'leave_to_date'=>strip_tags(form_error('leave_to_date')),'leave_description'=>strip_tags(form_error('leave_description')),'leave_document'=>$file_error);
-                            }
-                    }
-                }
             
                 echo json_encode($addnewcoursetopicrequest_response);
             }else{

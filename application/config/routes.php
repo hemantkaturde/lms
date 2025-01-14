@@ -283,7 +283,7 @@ $route['whatappconfigupdate'] = "admin/whatappconfigupdate";
 
 $route['leaverequest'] = "student/leaverequest";
 $route['fetchleaverequestlist'] = "student/fetchleaverequestlist";
-$route['addnewcoursetopicrequest'] = "student/addnewcoursetopicrequest";
+$route['addnewleaverequest'] = "student/addnewleaverequest";
 $route['deleteleaverequestdata'] = "student/deleteleaverequestdata";
 $route['editleaverequest/(:any)'] = "student/editleaverequest/$1";
 
