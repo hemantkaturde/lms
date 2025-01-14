@@ -464,7 +464,7 @@ $jsonstringtoArray = json_decode($access, true);
                             </a>
                         </li>
 
-                        <li  class="<?php if($pageUrl =='leaverequest'){ echo 'active';} ?>">
+                        <li  class="<?php if($pageUrl =='leaverequest' || $pageUrl =='editleaverequest'){ echo 'active';} ?>">
                             <a  href="<?php echo base_url()."leaverequest"; ?>"><i
                                     class="sidebar-item-icon fa fa-file-text"></i>
                                 <span class="nav-label">Leave Request</span>

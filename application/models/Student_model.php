@@ -2476,17 +2476,51 @@ public function getallleaverequestdata($params){
     {
         foreach ($fetch_result as $key => $value)
         {
+
              $data[$counter]['leave_title']    = $value['leave_title'];
-             $data[$counter]['leave_from_date']  = $value['leave_from_date'];
-             $data[$counter]['leave_to_date']   = $value['leave_to_date'];
+             $data[$counter]['leave_from_date']  =  date('d-m-Y', strtotime($value['leave_from_date']));
+             $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));
              $data[$counter]['leave_description']   =  $value['leave_description'];
-             $data[$counter]['leave_document']   =  $value['leave_document'];
+             $data[$counter]['leave_document']   =  '<a href="'.$value['leave_document'].'" target="_blank">'.$value['leave_document']."</a>";
+             $data[$counter]['action'] = '';
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editleaverequest/".$value['id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
+             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='deleteleaverequestdata' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Leave Request'></a> "; 
             $counter++; 
         }
     }
     return $data;
 }
 
+
+
+public function savenewcoursetopicrequest($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_LEAVE, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_LEAVE, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    }
+
+}
+
+public function getLeaveRequestdata($id){
+
+    $this->db->select('*');
+    $this->db->where(TBL_LEAVE.'.id', $id);
+    $this->db->order_by(TBL_LEAVE.'.id', 'DESC');
+    $query = $this->db->get(TBL_LEAVE);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
 
 
 }

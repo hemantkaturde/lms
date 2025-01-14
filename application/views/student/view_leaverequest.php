@@ -69,7 +69,7 @@ $jsonstringtoArray = json_decode($access, true);
                                     <label style="text-align: left;"  for="leave_title">Leave Title<span class="required">*</span>
                                     </label>
                                     <div>
-                                        <input class="form-control" autocomplete="off" autocomplete="off"  type="text" id="leave_title" name="leave_title">
+                                        <input class="form-control" autocomplete="off" autocomplete="off"  type="text" id="leave_title" name="leave_title" Placeholder="Leave Title">
                                         <p class="error leave_title_error"></p>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@ $jsonstringtoArray = json_decode($access, true);
                                     <label style="text-align: left;"  for="leave_from_date">Leave From Date<span class="required">*</span>
                                     </label>
                                     <div>
-                                        <input class="form-control datepicker" autocomplete="off" autocomplete="off"  type="text" id="leave_from_date" name="leave_from_date">
+                                        <input class="form-control datepicker" autocomplete="off" autocomplete="off"  type="text" id="leave_from_date" name="leave_from_date" Placeholder="Leave From Date">
                                         <p class="error leave_from_date_error"></p>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@ $jsonstringtoArray = json_decode($access, true);
                                     <label style="text-align: left;"  for="leave_to_date">Leave To Date<span class="required">*</span>
                                     </label>
                                     <div>
-                                        <input class="form-control datepicker" autocomplete="off" autocomplete="off"  type="text" id="leave_to_date" name="leave_to_date">
+                                        <input class="form-control datepicker" autocomplete="off" autocomplete="off"  type="text" id="leave_to_date" name="leave_to_date" Placeholder="Leave To Date">
                                         <p class="error leave_to_date_error"></p>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@ $jsonstringtoArray = json_decode($access, true);
                                     <label style="text-align: left;"  for="leave_description">Leave Description<span class="required">*</span>
                                     </label>
                                     <div >
-                                      <textarea class="form-control" id="leave_description" name="leave_description" rows="5"></textarea>                                        
+                                      <textarea class="form-control" id="leave_description" name="leave_description" rows="5" Placeholder="Leave Description"></textarea>                                        
                                       <p class="error leave_description_error"></p>
                                     </div>
                                 </div>
@@ -105,7 +105,8 @@ $jsonstringtoArray = json_decode($access, true);
                                     <label style="text-align: left;"  for="leave_document">Leave Document<span class="required">*</span>
                                     </label>
                                     <div>
-                                    
+                                        <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>
+                                        <p class="error leave_document_error"></p>
                                     </div>
                                 </div>
                             </div>   

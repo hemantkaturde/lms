@@ -6272,7 +6272,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Edit Timetable Record'){ ?>
 	<script type="text/javascript">
 
-         $(document).on('click','#updatetimetablerecord',function(e){
+        $(document).on('click','#updatetimetablerecord',function(e){
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			var formData = new FormData($("#updatetimetable_from")[0]);
@@ -6325,7 +6325,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-<?php if($pageTitle=='view Leave Request'){ ?>
+<?php if($pageTitle=='view Leave Request' || $pageTitle=='Edit Leave Request'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
 			var dt = $('#view_leave_request').DataTable({
@@ -6336,7 +6336,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						{ "width": "15%", "targets": 2 },
 						{ "width": "15%", "targets": 3 },
 						{ "width": "15%", "targets": 4 },
-						{ "width": "15%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
 
 				],
 				responsive: true,
@@ -6355,5 +6355,107 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					},
 				});
 	    });
+
+		$(document).on('click','#addnewleaverequestdata',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var formData = new FormData($("#addnewleaverequest_form")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewcoursetopicrequest",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								//$("#addCourseRequest").hide();
+								window.location.href = "<?php echo base_url().'leaverequest'?>";
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deleteleaverequestdata',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			$.ajax({
+				url : "<?php echo base_url();?>deleteleaverequestdata",
+				type: "POST",
+				data : 'id='+elemF.attr('data-id'),
+				success: function(data, textStatus, jqXHR)
+					{
+						window.location.href = "<?php echo base_url().'leaverequest'?>";
+					},
+				error: function (jqXHR, textStatus, errorThrown)
+					{
+					    //$(".loader_ajax").hide();
+					}
+		    })
+        });
+
+		$(document).on('click','#update_leaverequest',function(e){
+					e.preventDefault();
+					//$(".loader_ajax").show();
+					var formData = new FormData($("#update_leave_request_form")[0]);
+					var leave_id =  $('#leave_id').val();
+					$.ajax({
+						url : "<?php echo base_url();?>editleaverequest/"+leave_id,
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								
+								window.location.href = "<?php echo base_url().'leaverequest'?>";
+													
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+			});
+
 	</script>
 <?php } ?>
