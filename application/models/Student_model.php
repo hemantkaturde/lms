@@ -2452,6 +2452,9 @@ public function  getallleaverequestcount($params){
         $userId =  $this->session->userdata('userId');
         $this->db->where(TBL_LEAVE.'.student_id', $userId);
     }
+
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_LEAVE.'.student_id');
+    $this->db->where(TBL_USER.'.user_flag', 'student');
     $this->db->where(TBL_LEAVE.'.status', 1);
     $query = $this->db->get(TBL_LEAVE);
     $rowcount = $query->num_rows();
@@ -2477,7 +2480,9 @@ public function getallleaverequestdata($params){
         $userId =  $this->session->userdata('userId');
         $this->db->where(TBL_LEAVE.'.student_id', $userId);
     }
-    
+
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_LEAVE.'.student_id');
+    $this->db->where(TBL_USER.'.user_flag', 'student');
     $this->db->where(TBL_LEAVE.'.status', 1);
 
     $this->db->order_by(TBL_LEAVE.'.id', 'DESC');
@@ -2491,7 +2496,8 @@ public function getallleaverequestdata($params){
     {
         foreach ($fetch_result as $key => $value)
         {
-
+             $data[$counter]['student_name']    = $value['name'].' '.$value['name'];
+             $data[$counter]['mobile']    = $value['mobile'];
              $data[$counter]['leave_title']    = $value['leave_title'];
              $data[$counter]['leave_from_date']  =  date('d-m-Y', strtotime($value['leave_from_date']));
              $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));

@@ -30,6 +30,8 @@ $roleText = $this->session->userdata('roleText');
                     <table id="view_leave_request" class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>Student Name</th>
+                                <th>Mobile No</th>
                                 <th>Leave Title</th>
                                 <th>Leave From Date</th>
                                 <th>Leave To Date</th>
