@@ -185,14 +185,14 @@
         
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(50, 70.5); // set the position of the box
-        $pdf->Cell(100, 66, "hemant Keshav", 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->SetXY(30, 70.5); // set the position of the box
+        $pdf->Cell(160, 66, "hemant Keshav", 0, 0, 'L'); // add the text, align to Center of cell
 
 
             // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(50, 70.5); // set the position of the box
-        $pdf->Cell(190, 66, "hemant Keshav 2", 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->SetXY(160, 70.5); // set the position of the box
+        $pdf->Cell(150, 66, "hemant Keshav 2", 0, 0, 'L'); // add the text, align to Center of cell
 
                
         // $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
