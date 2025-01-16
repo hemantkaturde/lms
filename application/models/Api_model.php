@@ -2877,6 +2877,7 @@ public function getstudentleaverequest_data($user_flag,$userid){
     // if($user_flag=='Student'){
     //     $this->db->where(TBL_LEAVE.'.id',$userid);
     // }
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_LEAVE.'.student_id');
     $query = $this->db->get(TBL_LEAVE);
     $fetch_result = $query->result_array();
     $data = array();
@@ -2888,6 +2889,8 @@ public function getstudentleaverequest_data($user_flag,$userid){
         {
 
              $data[$counter]['leave_title']    = $value['leave_title'];
+             $data[$counter]['student_name']    = $value['name'].' '.$value['name'];
+             $data[$counter]['mobile']    = $value['mobile'];
              $data[$counter]['leave_from_date']  =  date('d-m-Y', strtotime($value['leave_from_date']));
              $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));
              $data[$counter]['leave_description']   =  $value['leave_description'];
