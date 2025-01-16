@@ -20,7 +20,8 @@
    $paymant_type = $result_arry['paymant_type'];
    $add_on_course_id = $result_arry['add_on_course_id'];
    $enquiry_id = $result_arry['enquiry_id'];
-
+   $gst_number = $result_arry['gst_number'];
+   $gst_holder_name = $result_arry['gst_holder_name'];
 
    if($paymant_type=='regular_invoice'){
 
@@ -181,18 +182,18 @@
        // $pdf->Cell(0, 80, $all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')', 0, 0, 'L'); // add the text, align to Center of cell
        
         $pdf->MultiCell(120,5,$all_course_name. ' - ('.$course_mode_online.','.$course_mode_offline.')',0);       
-        
-        
+      
+
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(40, 70.5); // set the position of the box
-        $pdf->Cell(160, 66, "hemant Keshav", 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(160, 66, $gst_holder_name, 0, 0, 'L'); // add the text, align to Center of cell
 
 
             // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(155, 70.5); // set the position of the box
-        $pdf->Cell(150, 66, "hemant Keshav 2", 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(150, 66,  $gst_number, 0, 0, 'L'); // add the text, align to Center of cell
 
                
         // $excluding_GST = $result_arry['totalAmount'] * 100 / 118;
