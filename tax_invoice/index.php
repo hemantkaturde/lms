@@ -155,7 +155,7 @@
 
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(50, 55); // set the position of the box
+        $pdf->SetXY(50, 54.5); // set the position of the box
         $pdf->Cell(160, 43, $result_arry['enq_mobile'], 0, 0, 'L'); // add the text, align to Center of cell
 
         if($result_arry['conser_name']){
