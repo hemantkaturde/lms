@@ -2502,7 +2502,12 @@ public function getallleaverequestdata($params){
              $data[$counter]['leave_from_date']  =  date('d-m-Y', strtotime($value['leave_from_date']));
              $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));
              $data[$counter]['leave_description']   =  $value['leave_description'];
-             $data[$counter]['leave_document']   =  '<a href="'.$value['leave_document'].'" target="_blank">'.$value['leave_document']."</a>";
+
+             if($value['leave_document']){
+                $data[$counter]['leave_document']   =  '<a href="'.$value['leave_document'].'" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a>';
+             }else{
+                $data[$counter]['leave_document']   =  '';
+             }
            
              if($roleText=='Student'){ 
                 $data[$counter]['action'] = '';
