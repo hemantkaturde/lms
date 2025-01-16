@@ -31,7 +31,7 @@ $roleText = $this->session->userdata('roleText');
                         <thead>
                             <tr>
                                 <th>Student Name</th>
-                                <th>Mobile No / </th>
+                                <th>Enrollment No / Mobile No</th>
                                 <th>Leave Title</th>
                                 <th>Leave From Date</th>
                                 <th>Leave To Date</th>
