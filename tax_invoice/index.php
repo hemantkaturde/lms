@@ -185,13 +185,13 @@
         
         // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(30, 70.5); // set the position of the box
+        $pdf->SetXY(40, 70.5); // set the position of the box
         $pdf->Cell(160, 66, "hemant Keshav", 0, 0, 'L'); // add the text, align to Center of cell
 
 
             // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(160, 70.5); // set the position of the box
+        $pdf->SetXY(150, 70.5); // set the position of the box
         $pdf->Cell(150, 66, "hemant Keshav 2", 0, 0, 'L'); // add the text, align to Center of cell
 
                
