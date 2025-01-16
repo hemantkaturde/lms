@@ -285,13 +285,13 @@
 
         if($paymant_type=='regular_invoice'){
           $pdf->SetFontSize('8'); // set font size
-          $pdf->SetXY(162, 52.5); // set the position of the box
+          $pdf->SetXY(162, 53); // set the position of the box
           $pdf->Cell(10, 184, $result_arry['final_amount'], 0, 0, 'L'); // add the text, align to Center of cell
 
         }else{
 
           $pdf->SetFontSize('8'); // set font size
-          $pdf->SetXY(162, 52.5); // set the position of the box
+          $pdf->SetXY(162, 53); // set the position of the box
           $pdf->Cell(10, 184, $final_amount, 0, 0, 'L'); // add the text, align to Center of cell
 
         }
@@ -303,7 +303,7 @@
         }
         
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 52.5); // set the position of the box
+        $pdf->SetXY(162, 53); // set the position of the box
         $pdf->Cell(10, 196, $prepared_by, 0, 0, 'L'); // add the text, align to Center of cell
 
         if($paymant_type=='regular_invoice'){
@@ -357,7 +357,7 @@
        //$words = $result . "Rupees  " . $points . " Paise";
 
        $pdf->SetFontSize('8'); // set font size
-       $pdf->SetXY(43, 58.5); // set the position of the box
+       $pdf->SetXY(43, 59); // set the position of the box
        $pdf->Cell(10, 196, $words, 0, 0, 'L'); // add the text, align to Center of cell
 
 
