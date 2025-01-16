@@ -166,7 +166,7 @@
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(50, 56); // set the position of the box
+        $pdf->SetXY(50, 55); // set the position of the box
         $pdf->Cell(160, 54, $couns_name, 0, 0, 'L'); // add the text, align to Center of cell
      
          
