@@ -218,12 +218,12 @@
    
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 58.5); // set the position of the box
+        $pdf->SetXY(162, 57); // set the position of the box
         $pdf->Cell(10, 130, round($cgst_amount,2), 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 60.5); // set the position of the box
+        $pdf->SetXY(162, 58); // set the position of the box
         $pdf->Cell(10, 140, round($sgst_amount,2), 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
