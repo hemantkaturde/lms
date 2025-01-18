@@ -228,7 +228,7 @@
 
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 62.5); // set the position of the box
+        $pdf->SetXY(162, 59); // set the position of the box
         // $pdf->Cell(10, 151, 'Rs.'.$result_arry['totalAmount'], 0, 0, 'L'); // add the text, align to Center of cell
         $pdf->Cell(10, 151, round($excluding_GST,2), 0, 0, 'L'); // add the text, align to Center of cell
 
@@ -259,7 +259,7 @@
         }
 
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 65.5); // set the position of the box
+        $pdf->SetXY(162, 60); // set the position of the box
         $pdf->Cell(10, 162, $abv, 0, 0, 'L'); // add the text, align to Center of cell
 
 
