@@ -1102,20 +1102,42 @@
                                                                                 $savetimetable_response['error'] = array('importing'=>'Kindly Check trainer, topic, date, timing in excel => '.$i);
     
                                                                             }else{
+                                                                             
+                                                                                $explod_by_from_and_to = explode("to",$allDataInSheet[$i]['B']);
 
-                                                                                //$insertArr['vendor_id'] = $vendor_id;
-                                                                                $insertArr['course_id'] =  $this->input->post('course_id_post');
-                                                                                $insertArr['time_table_id'] = $saveCoursetimetabledata;
-                                                                                $insertArr['trainer_id'] = trim($getTrainerDetails[0]->trainer_id);
-                                                                                $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
-                                                                                
-                                                                                $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
-                                                                                $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
-                                                                                $insertArr['timings'] =$allDataInSheet[$i]['B'];
-                                                                                $insertArr['topic'] = $allDataInSheet[$i]['C'];
-                                                                                $insertArr['trainer_id'] = trim($getTrianerid[0]->userId);
-                                                                                $timetabledata[] = $insertArr;
-                                                                                $passdataToOrderAPi = $this->course_model->insertBlukTimetabledata($insertArr);
+                                                                                if (preg_match('/\bto\b/', $allDataInSheet[$i]['B'])) {
+
+                                                                                // if (strpos($allDataInSheet[$i]['B'], 'to') !== false) {
+
+                                                                            
+                                                                                    $start_time = new DateTime($explod_by_from_and_to[0]);
+                                                                                    $end_time = new DateTime($explod_by_from_and_to[1]);
+
+                                                                                    // Calculate the difference
+                                                                                    $interval = $start_time->diff($end_time);
+
+                                                                                    // Get the hours difference
+                                                                                    $hours_difference = $interval->h + ($interval->days * 24);
+
+
+                                                                                    //$insertArr['vendor_id'] = $vendor_id;
+                                                                                    $insertArr['course_id'] =  $this->input->post('course_id_post');
+                                                                                    $insertArr['time_table_id'] = $saveCoursetimetabledata;
+                                                                                    $insertArr['trainer_id'] = trim($getTrainerDetails[0]->trainer_id);
+                                                                                    $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
+                                                                                    
+                                                                                    $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
+                                                                                    $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
+                                                                                    $insertArr['timings'] =$allDataInSheet[$i]['B'];
+                                                                                    $insertArr['topic'] = $allDataInSheet[$i]['C'];
+                                                                                    $insertArr['trainer_id'] = trim($getTrianerid[0]->userId);
+                                                                                    $insertArr['total_hrs'] =  $hours_difference;
+                                                                                    $timetabledata[] = $insertArr;
+                                                                                    $passdataToOrderAPi = $this->course_model->insertBlukTimetabledata($insertArr);
+                                                                                }else{
+                                                                                    $savetimetable_response['status'] = 'failure';
+                                                                                    $savetimetable_response['error'] = array('importing'=>'Check Timings Details');
+                                                                                }
                                                                         }
                                                                      }
 

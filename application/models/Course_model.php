@@ -883,6 +883,7 @@ public function getBookscount($topic_id,$course_id){
         {
              $data[$counter]['date'] = date('d-m-Y', strtotime($value['date']));
              $data[$counter]['timings'] = $value['timings'];
+             $data[$counter]['total_hrs'] = $value['total_hrs'].' hrs';
              $data[$counter]['topic'] =  $value['topic'];
              $data[$counter]['trainer'] =  $value['real_trainer'];
 
