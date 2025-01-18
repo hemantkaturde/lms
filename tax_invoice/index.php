@@ -213,12 +213,12 @@
 
           // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 51); // set the position of the box
+        $pdf->SetXY(162, 53); // set the position of the box
         $pdf->Cell(10, 118, 'Rs.'.$total_amount_payment_transection , 0, 0, 'L'); // add the text, align to Center of cell
    
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 51.5); // set the position of the box
+        $pdf->SetXY(162, 54.5); // set the position of the box
         $pdf->Cell(10, 130, round($cgst_amount,2), 0, 0, 'L'); // add the text, align to Center of cell
 
          // Secand box - the user's Name
