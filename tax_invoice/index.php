@@ -304,7 +304,7 @@
         }
         
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(162, 65); // set the position of the box
+        $pdf->SetXY(162, 63); // set the position of the box
         $pdf->Cell(10, 196, $prepared_by, 0, 0, 'L'); // add the text, align to Center of cell
 
         if($paymant_type=='regular_invoice'){
