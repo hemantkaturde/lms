@@ -2889,7 +2889,8 @@ public function getstudentleaverequest_data($user_flag,$userid){
         {
 
              $data[$counter]['leave_title']    = $value['leave_title'];
-             $data[$counter]['student_name']    = $value['name'].' '.$value['name'];
+             $data[$counter]['student_id']    = $value['student_id'];
+             $data[$counter]['student_name']    = $value['name'];
              $data[$counter]['mobile']    = $value['mobile'];
              $data[$counter]['leave_from_date']  =  date('d-m-Y', strtotime($value['leave_from_date']));
              $data[$counter]['leave_to_date']   =  date('d-m-Y', strtotime($value['leave_to_date']));
