@@ -2878,6 +2878,7 @@ public function getstudentleaverequest_data($user_flag,$userid){
     //     $this->db->where(TBL_LEAVE.'.id',$userid);
     // }
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_LEAVE.'.student_id');
+    $this->db->order_by(TBL_LEAVE.'.id', 'DESC');
     $query = $this->db->get(TBL_LEAVE);
     $fetch_result = $query->result_array();
     $data = array();
