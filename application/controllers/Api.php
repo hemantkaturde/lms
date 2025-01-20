@@ -3638,7 +3638,7 @@ class Api extends BaseController
     public function addnewleaverequest(){
         $post_submit = $this->input->post();
         if(!empty($post_submit)){
-            $userId =  $this->input->post('userId');
+            $userId =  $this->input->post('userid');
             $addnewcoursetopicrequest_response = array();
 
             $this->form_validation->set_rules('leave_title', 'Leave Title', 'trim|required');
