@@ -3678,8 +3678,8 @@ class Api extends BaseController
 
                     $data = array(
                         'leave_title' => $this->input->post('leave_title'),
-                        'leave_from_date'=> $this->input->post('leave_from_date'),
-                        'leave_to_date'=>$this->input->post('leave_to_date'),
+                        'leave_from_date'=>  date('Y-m-d', strtotime($this->input->post('leave_from_date'))),
+                        'leave_to_date'=> date('Y-m-d', strtotime($this->input->post('leave_to_date'))),
                         'leave_description'=>$this->input->post('leave_description'),
                         'leave_document' =>$doc_url,
                         'student_id'=>$userId,
@@ -3745,8 +3745,8 @@ class Api extends BaseController
             }
                     $data = array(
                         'leave_title' => $this->input->post('leave_title'),
-                        'leave_from_date'=> $this->input->post('leave_from_date'),
-                        'leave_to_date'=>$this->input->post('leave_to_date'),
+                        'leave_from_date'=>  date('Y-m-d', strtotime($this->input->post('leave_from_date'))),
+                        'leave_to_date'=> date('Y-m-d', strtotime($this->input->post('leave_to_date'))),
                         'leave_description'=>$this->input->post('leave_description'),
                         'leave_document' =>$doc_url,
                         'student_id'=>$userId,
