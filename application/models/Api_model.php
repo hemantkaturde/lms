@@ -2872,7 +2872,7 @@ public function getadditionalInfostudent($id){
 
 public function getstudentleaverequest_data($user_flag,$userid){
 
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_LEAVE.'.id as leave_id');
     $this->db->where(TBL_LEAVE.'.status', 1);
     // if($user_flag=='Student'){
     //     $this->db->where(TBL_LEAVE.'.id',$userid);
@@ -2887,7 +2887,7 @@ public function getstudentleaverequest_data($user_flag,$userid){
     {
         foreach ($fetch_result as $key => $value)
         {
-
+             $data[$counter]['leave_id']    = $value['leave_id'];
              $data[$counter]['leave_title']    = $value['leave_title'];
              $data[$counter]['student_id']    = $value['student_id'];
              $data[$counter]['student_name']    = $value['name'];
