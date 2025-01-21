@@ -1729,7 +1729,7 @@ class Api_model extends CI_Model
                  $data[$counter]['from_date'] = date('d-m-Y', strtotime($value['from_date']));
                  $data[$counter]['to_date'] = date('d-m-Y', strtotime($value['to_date']));
                  $data[$counter]['class_date'] = date('d-m-Y', strtotime($value['date']));
-                 $data[$counter]['timings'] = $value['timings'].''.$value['total_hrs'];
+                 $data[$counter]['timings'] = $value['timings'].' / Class Duration'.$value['total_hrs'];
                  $data[$counter]['trainer'] = $value['trainername'];
                  $data[$counter]['meeting_link'] = '';
                  if($value['backuptrainer']){
