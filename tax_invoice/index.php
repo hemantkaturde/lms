@@ -129,12 +129,12 @@
 
         // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(20, 56); // set the position of the box
+        $pdf->SetXY(20, 58); // set the position of the box
         $pdf->Cell(100, 1, $result_arry['datetime'], 0, 0, 'L'); // add the text, align to Center of cell
 
          // First box - the user's Name
         $pdf->SetFontSize('8'); // set font size
-        $pdf->SetXY(174, 56); // set the position of the box
+        $pdf->SetXY(174, 58); // set the position of the box
         $pdf->Cell(160, 1, $result_arry['invoice_number'], 0, 0, 'L'); // add the text, align to Center of cell
 
         // First box - the user's Name
