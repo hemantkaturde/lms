@@ -10,7 +10,7 @@ class Api extends BaseController
     public function __construct()
     {
          parent::__construct();
-         $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model','student_model','admission_model'));
+         $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model','student_model','admission_model','database'));
          $this->load->library('form_validation');
     }
 
@@ -3770,7 +3770,44 @@ class Api extends BaseController
             $this->loadViews("student/edit_leaverequest", $this->global, $data, NULL);
         }
     }
+
+
+    public function deleteleave(){
+        $post_submit = $this->input->post();
+
+        $DeleteLeaverequest = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+        $result = $this->database->data_update('tbl_leave',$DeleteLeaverequest,'id',$this->input->post('id'));
+
+        if ($result > 0) {
+             echo(json_encode(array('status'=>TRUE)));
+
+             $process = 'Leave Request Delete';
+             $processFunction = 'Enquiry/deleteleaverequestdata';
+             $this->logrecord($process,$processFunction);
+
+            }
+        else { echo(json_encode(array('status'=>FALSE))); }
+
+    }
     
+
+    public function deleteleavedocument(){
+
+        $id = $this->input->post('id');
+        $data =array('leave_document'=>'');
+
+        $this->db->where('id', $id);
+        $this->db->update('tbl_leave', $data);
+
+        if($this->db->trans_complete()){
+            echo(json_encode(array('status'=>TRUE)));
+            $process = 'Leave Request Delete';
+            $processFunction = 'Enquiry/deleteaddattachment';
+            $this->logrecord($process,$processFunction);
+        }else { echo(json_encode(array('status'=>FALSE))); }
+    }
+
+
 
      /* Student API Work Done Here*/
 
