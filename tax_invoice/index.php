@@ -354,7 +354,7 @@
        //$words = $result . "Rupees  " . $points . " Paise";
 
        $pdf->SetFontSize('8'); // set font size
-       $pdf->SetXY(43, 61); // set the position of the box
+       $pdf->SetXY(43, 60); // set the position of the box
        $pdf->Cell(10, 196, $words, 0, 0, 'L'); // add the text, align to Center of cell
 
 
