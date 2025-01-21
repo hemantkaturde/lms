@@ -27,7 +27,7 @@ $jsonstringtoArray = json_decode($access, true);
                             <tr>
                                 <th>Date</th>
                                 <th>Timings</th>
-                                <th>Total Hours</th>
+                                <th>Class Duration</th>
                                 <th>Topics</th>
                                 <th>Trainer</th>
                                 <th>Back up Trainer</th>
