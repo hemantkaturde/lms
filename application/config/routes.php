@@ -286,6 +286,10 @@ $route['fetchleaverequestlist'] = "student/fetchleaverequestlist";
 $route['addnewleaverequest'] = "student/addnewleaverequest";
 $route['deleteleaverequestdata'] = "student/deleteleaverequestdata";
 $route['editleaverequest/(:any)'] = "student/editleaverequest/$1";
+$route['deleteaddattachment'] = "student/deleteaddattachment";
+
+
+
 
 
 

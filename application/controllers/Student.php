@@ -1459,6 +1459,24 @@
             }
         }
 
+        public function deleteaddattachment(){
+
+            $post_submit = $this->input->post();
+
+            $id = $post_submit['id'];
+            $data =array('leave_document'=>'');
+
+            $this->db->where('id', $id);
+            $this->db->update('tbl_leave', $data);
+
+            if($this->db->trans_complete()){
+                echo(json_encode(array('status'=>TRUE)));
+                $process = 'Leave Request Delete';
+                $processFunction = 'Enquiry/deleteaddattachment';
+                $this->logrecord($process,$processFunction);
+            }else { echo(json_encode(array('status'=>FALSE))); }
+        }
+
     }
 
 ?>

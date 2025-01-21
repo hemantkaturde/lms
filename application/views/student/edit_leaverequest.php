@@ -93,9 +93,10 @@ if(!empty($getLeaveRequestdata))
                                                 <p class="error leave_document_error"></p>
                                             </div>
                                             <div>
-                                             <label style="text-align: left;"  for="uploaded_file">Uploaded File</label>
                                                 <div>
-                                                  <a href="<?php echo $leave_document; ?>" target="_blank"><?php echo $leave_document; ?></a>
+                                                    <?php if($leave_document){ ?>  
+                                                        <a href="<?php echo $leave_document; ?>" target="_blank"><?php echo $leave_document; ?></a>   <i class="fa fa-times" id="deleteaddattachment" data_id ="<?php echo $id;?>"></i>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>

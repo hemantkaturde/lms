@@ -110,7 +110,7 @@ $roleText = $this->session->userdata('roleText');
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="text-align: left;"  for="leave_document">Leave Document
+                                    <label style="text-align: left;"  for="leave_document">Add Document
                                     </label>
                                     <div>
                                         <input name="file" id="fileInput" type="file" class="demoInputBox form-control" required/>

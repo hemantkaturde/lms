@@ -6463,7 +6463,26 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						}
 					});
 					return false;
-			});
+		});
+
+
+		$(document).on('click','#deleteaddattachment',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			$.ajax({
+				url : "<?php echo base_url();?>deleteaddattachment",
+				type: "POST",
+				data : 'id='+elemF.attr('data_id'),
+				success: function(data, textStatus, jqXHR)
+					{
+						window.location.href = "<?php echo base_url().'editleaverequest/'?>"+elemF.attr('data_id');
+					},
+				error: function (jqXHR, textStatus, errorThrown)
+					{
+					    //$(".loader_ajax").hide();
+					}
+		    })
+        });
 
 	</script>
 <?php } ?>
