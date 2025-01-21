@@ -272,8 +272,6 @@
          
         }else{
 
-          
-
           $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid and add_on_course_id=$add_on_course_id and paymant_type='add_on_course_invoice'");
           $current_value_amount = $current_value->fetch_assoc();
           $currentbal =  $final_amount-($current_value_amount['totalAmountcureent']+$abv);
@@ -312,8 +310,6 @@
         }else{
           $number = $final_amount;
         }
-
-      
       
         $no = floor($number);
         $point = round($number - $no, 2) * 100;
@@ -358,7 +354,7 @@
        //$words = $result . "Rupees  " . $points . " Paise";
 
        $pdf->SetFontSize('8'); // set font size
-       $pdf->SetXY(43, 59); // set the position of the box
+       $pdf->SetXY(43, 61); // set the position of the box
        $pdf->Cell(10, 196, $words, 0, 0, 'L'); // add the text, align to Center of cell
 
 
