@@ -215,7 +215,7 @@
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162,57); // set the position of the box
         // $pdf->Cell(10, 118, 'Rs.'.$total_amount_payment_transection , 0, 0, 'L'); // add the text, align to Center of cell
-        $pdf->Cell(10, 118, 'ddd' , 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 118, round($excluding_GST,2), 0, 0, 'L'); // add the text, align to Center of cell
    
          // Secand box - the user's Name
         $pdf->SetFontSize('8'); // set font size
@@ -231,7 +231,7 @@
         $pdf->SetFontSize('8'); // set font size
         $pdf->SetXY(162, 59); // set the position of the box
         // $pdf->Cell(10, 151, 'Rs.'.$result_arry['totalAmount'], 0, 0, 'L'); // add the text, align to Center of cell
-        $pdf->Cell(10, 151, round($excluding_GST,2), 0, 0, 'L'); // add the text, align to Center of cell
+        $pdf->Cell(10, 151,'Rs.'.$total_amount_payment_transection, 0, 0, 'L'); // add the text, align to Center of cell
 
         /*check paid before amount here*/
 
