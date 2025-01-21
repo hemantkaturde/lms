@@ -23,6 +23,7 @@
                                     <th>Email Address</th>
                                     <th>Course Name</th>
                                     <th>Topic Name</th>
+                                    <th>Class Duration</th>
                                     <th>Class Attended Date</th>
                                     <th>Class Attended Time</th>
                                     <th>Attendance Status</th>
