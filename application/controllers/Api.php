@@ -3779,14 +3779,14 @@ class Api extends BaseController
         $result = $this->database->data_update('tbl_leave',$DeleteLeaverequest,'id',$this->input->post('id'));
 
         if ($result > 0) {
-             echo(json_encode(array('status'=>TRUE)));
+             echo(json_encode(array('status'=>'success')));
 
              $process = 'Leave Request Delete';
              $processFunction = 'Enquiry/deleteleaverequestdata';
              $this->logrecord($process,$processFunction);
 
             }
-        else { echo(json_encode(array('status'=>FALSE))); }
+        else { echo(json_encode(array('status'=>'failure'))); }
 
     }
     
@@ -3800,11 +3800,11 @@ class Api extends BaseController
         $this->db->update('tbl_leave', $data);
 
         if($this->db->trans_complete()){
-            echo(json_encode(array('status'=>TRUE)));
+            echo(json_encode(array('status'=>'success')));
             $process = 'Leave Request Delete';
             $processFunction = 'Enquiry/deleteaddattachment';
             $this->logrecord($process,$processFunction);
-        }else { echo(json_encode(array('status'=>FALSE))); }
+        }else { echo(json_encode(array('status'=>'failure'))); }
     }
 
 
