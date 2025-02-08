@@ -1335,8 +1335,7 @@
                         $interval = $start_time->diff($end_time);
 
                         // Get the hours difference
-                        $hours_difference = $interval->h + ($interval->days * 24);
-
+                        $hours_difference = $interval->h.':'. $interval->i;
                     }
                     
                     $data = array(
