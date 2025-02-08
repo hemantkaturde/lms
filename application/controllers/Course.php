@@ -1307,6 +1307,8 @@
                 $time_table_transection_id = $this->input->post('time_table_transection_id');
                 $backup_trainer = $this->input->post('backup_trainer');
 
+
+
                 $this->form_validation->set_rules('date', 'Date', 'trim|required');
                 $this->form_validation->set_rules('timing', 'Timing', 'trim|required');
                 $this->form_validation->set_rules('topic', 'Topic', 'trim|required');
@@ -1319,9 +1321,28 @@
                     $edittimetable_response['error'] = array('backup_trainer'=>strip_tags(form_error('backup_trainer')));
                 }else{
 
+ 
+                    $explod_by_from_and_to = explode("to",trim($this->input->post('timing')));
+
+                    if (preg_match('/\bto\b/', trim($this->input->post('timing')))) {
+
+                    // if (strpos($allDataInSheet[$i]['B'], 'to') !== false) {
+                
+                        $start_time = new DateTime($explod_by_from_and_to[0]);
+                        $end_time = new DateTime($explod_by_from_and_to[1]);
+
+                        // Calculate the difference
+                        $interval = $start_time->diff($end_time);
+
+                        // Get the hours difference
+                        $hours_difference = $interval->h + ($interval->days * 24);
+
+                    }
+                    
                     $data = array(
                         'timings'=> trim($this->input->post('timing')),
                         'topic'=> trim($this->input->post('topic')),
+                        'total_hrs' =>  $hours_difference,
                         'trainer_id'=> trim($this->input->post('trainer')),
                         'backup_trainer'=> trim($this->input->post('backup_trainer')),
                     );
