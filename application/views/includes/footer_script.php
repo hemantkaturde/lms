@@ -2233,6 +2233,13 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	});
 
 
+	$(document).on('click','.cancle_admission_prfill_infto',function(e){
+			var elemF = $(this);
+			var data_id = elemF.attr('data-id');
+			$("#selected_record_id").val(data_id);
+			$("#updatecancleModal").modal('show');
+	});
+
 
 
 </script>
