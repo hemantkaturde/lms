@@ -21,19 +21,18 @@
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">
-                <table id="view_enquirylist" class="table table-bordered">
+                <table id="view_enquirylist_report" class="table table-bordered">
                     <thead>
-                                <tr>
-                                    <th>Inquiry No.</th>
-                                    <th>Inquiry Date</th>
-                                    <th>Name</th>
-                                    <th>Mobile No</th>
-                                    <th>Courses</th>
-                                    <th>Counsellor</th>
-                                    <th>Status</th>
-                                    <!-- <th>Fees</th> -->
-                                    <th>Action</th>
-                                </tr>
+                        <tr>
+                            <th>Inquiry No.</th>
+                            <th>Inquiry Date</th>
+                            <th>Name</th>
+                            <th>Mobile No</th>
+                            <th>Courses</th>
+                            <th>Counsellor</th>
+                            <th>Status</th>
+                            <!-- <th>Fees</th> -->
+                        </tr>
                     </thead>
                     <tbody>
                     </tbody>

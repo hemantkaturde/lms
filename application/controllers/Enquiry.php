@@ -1638,6 +1638,33 @@
             }
     }
 
+
+    public function fetchenquiryreport()
+    {
+        $params = $_REQUEST;
+        $totalRecords = $this->enquiry_model->getEnquiryreportCount($params); 
+        $queryRecords = $this->enquiry_model->getEnquiryreportdata($params); 
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+
+        echo json_encode($json_data);
+    
+    }
+
 }
 
  

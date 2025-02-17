@@ -886,6 +886,126 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
    }
 
 
+   public function getEnquiryreportCount($params){
+    $this->db->select('*');
+    // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
+    }
+
+
+    if($this->session->userdata('roleText')=='Counsellor'){
+
+        $this->db->where(TBL_ENQUIRY.'.counsellor_id', $this->session->userdata('userId'));
+    }
+
+    $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+    $query = $this->db->get(TBL_ENQUIRY);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+}
+
+public function getEnquiryreportdata($params){
+    $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller');
+    // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+    $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
+    $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
+    }
+
+    if($this->session->userdata('roleText')=='Counsellor'){
+
+        $this->db->where(TBL_ENQUIRY.'.counsellor_id', $this->session->userdata('userId'));
+    }
+
+    $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+    $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_ENQUIRY);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+
+            //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+             $data[$counter]['enq_number'] = $value['enq_number'];
+             $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+             $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+             $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+             // $data[$counter]['enq_email'] = $value['enq_email'];
+
+            //  if($value['payment_status']=='0'){
+            //     $data[$counter]['status'] = 'In Follow up';
+            //  }else if($value['payment_status']=='1'){
+            //     $data[$counter]['status'] = 'Admitted';
+            //  }else{
+            //     $data[$counter]['status'] = 'In Follow up';
+            //  }
+
+           
+
+
+             $course_ids    =   explode(',', $value['enq_course_id']);
+         
+             $total_fees = 0;
+             $course_name = '';
+             $i = 1;
+                foreach($course_ids as $id)
+                {
+                    $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                    if($get_course_fees){
+                        
+                        $total_fees += $get_course_fees[0]->course_total_fees;
+                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ' <br>';  
+                        $i++;  
+
+                    }else{
+
+                        $total_fees = '';
+                        $course_name = '';  
+                        $i++;  
+                    }
+                  
+                }
+             $all_course_name = trim($course_name, ', '); 
+
+
+
+             $data[$counter]['all_course_name'] = $all_course_name ;
+             $data[$counter]['counsellor_name'] = $value['counseller'];
+
+             if($value['cancle_status']=='1'){
+                   $data[$counter]['status'] = 'Cancelled';
+             }else{
+                if(!empty($value['admissionexits'])){
+                    $data[$counter]['status'] = 'Admitted';
+                }else{
+                    $data[$counter]['status'] = 'In Follow up';
+                }
+             }
+             
+            $counter++; 
+        }
+    }
+    return $data;
+}
+
+
 
 }
 
