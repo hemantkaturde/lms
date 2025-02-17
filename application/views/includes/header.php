@@ -356,6 +356,24 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
 
+                        
+                        <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
+                            <a href="#">
+                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >Staff User</span>
+                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu">
+                            <?php if (in_array("userpage", $jsonstringtoArray)){?>
+                                <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
+                            <?php } ?>
+                            <?php if (in_array("rolepage", $jsonstringtoArray)){?>
+                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Page Access </span></a></li>
+                            <?php } ?>
+                            </ul>
+                        </li>
+                    
+
+
                         <?php if($role_text=="Superadmin"){ ?>
                          <li class="<?php if($pageUrl =='settings'){ echo 'active';} ?>">
                             <a href="<?php echo base_url()."settings"; ?>"><i class="sidebar-item-icon fa fa-cog" ></i>
