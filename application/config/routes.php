@@ -289,6 +289,8 @@ $route['editleaverequest/(:any)'] = "student/editleaverequest/$1";
 $route['deleteaddattachment'] = "student/deleteaddattachment";
 
 
+$route['inquiryleadsreport'] = "student/inquiryleadsreport";
+
 
 
 

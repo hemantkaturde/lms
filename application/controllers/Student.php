@@ -1477,6 +1477,26 @@
             }else { echo(json_encode(array('status'=>FALSE))); }
         }
 
+        public function inquiryleadsreport(){
+            $this->global['pageTitle'] = 'Inquiry Report';
+            $this->loadViews("student/inquiryleadsreport", $this->global, $data, NULL);
+        }
+
+        public function taxinvoicesreport(){
+            $this->global['pageTitle'] = 'Tax Invoice Report';
+            $this->loadViews("student/taxinvoicesreport", $this->global, $data, NULL);
+        }
+
+        public function admissionreport(){
+            $this->global['pageTitle'] = 'Amission Report';
+            $this->loadViews("student/admissionreport", $this->global, $data, NULL);
+        }
+
+        public function attendancreport(){
+            $this->global['pageTitle'] = 'Attendance Report';
+            $this->loadViews("student/attendancreport", $this->global, $data, NULL);
+        }
+
     }
 
 ?>
