@@ -1227,6 +1227,26 @@ class Admin extends BaseController
     }
  }
 
+ 
+    public function inquiryleadsreport(){
+        $this->global['pageTitle'] = 'Inquiry Report';
+        $this->loadViews("reports/inquiryleadsreport", $this->global, $data, NULL);
+    }
+
+    public function taxinvoicesreport(){
+        $this->global['pageTitle'] = 'Tax Invoice Report';
+        $this->loadViews("reports/taxinvoicesreport", $this->global, $data, NULL);
+    }
+
+    public function admissionreport(){
+        $this->global['pageTitle'] = 'Amission Report';
+        $this->loadViews("reports/admissionreport", $this->global, $data, NULL);
+    }
+
+    public function attendancreport(){
+        $this->global['pageTitle'] = 'Attendance Report';
+        $this->loadViews("reports/attendancreport", $this->global, $data, NULL);
+    }
 
 }
 
