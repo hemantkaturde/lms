@@ -357,18 +357,16 @@ $jsonstringtoArray = json_decode($access, true);
 
 
                         
-                        <li class="treeview <?php if($pageUrl =='userListing' || $pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"  style="height: auto; " >
+                        <li class="treeview <?php if($pageUrl =='userListing'){ echo 'active';} ?>"  style="height: auto; " >
                             <a href="#">
-                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >Staff User</span>
+                                <i class="sidebar-item-icon fa fa-user" ></i> <span class="group-master" >Reports</span>
                                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                             </a>
                             <ul class="treeview-menu">
-                            <?php if (in_array("userpage", $jsonstringtoArray)){?>
-                                <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Users </span></a></li>
-                            <?php } ?>
-                            <?php if (in_array("rolepage", $jsonstringtoArray)){?>
-                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Page Access </span></a></li>
-                            <?php } ?>
+                                <li class="<?php if($pageUrl =='userListing'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>userListing"><i class="sidebar-item-icon fa fa-user"></i><span class="nav-label"> Inquiry Leads </span></a></li>
+                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Tax Invoices </span></a></li>
+                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Admission </span></a></li>
+                                <li class="<?php if($pageUrl =='roleListing' || $pageUrl =='addRole' || $pageUrl =='editRole'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>roleListing"><i class="sidebar-item-icon fa fa-check-square-o"></i><span class="nav-label"> Attendance </span></a></li>
                             </ul>
                         </li>
                     
