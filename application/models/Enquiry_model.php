@@ -639,6 +639,128 @@ class Enquiry_model extends CI_Model
 
     }
 
+
+    
+    public function getTaxinvoicesCountreport($params){
+        $this->db->select('*');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+
+        $this->db->where("(".TBL_ENQUIRY.".enq_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PAYMENT.".totalAmount LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PAYMENT.".payment_mode LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$params['search']['value']."%')");
+        //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
+        $this->db->where(TBL_PAYMENT.'.payment_status', 1);
+        $this->db->order_by(TBL_PAYMENT.'.payment_status', 1);
+        $query = $this->db->get(TBL_PAYMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getTaxinvoicesreport($params){
+
+        $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENQUIRY.".enq_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".totalAmount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".payment_mode LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$params['search']['value']."%')");
+        }
+        //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
+        $this->db->where(TBL_PAYMENT.'.payment_status', 1);
+      
+        $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
+      
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_PAYMENT);
+        
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+
+                if($value['paymant_type']=='regular_invoice'){
+                    $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
+
+                    if($get_before_paid_payment){
+                        $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+    
+                    }else{
+                        $previous_paymemt =0 ;
+                        
+                    }
+    
+                    $bal_amount =  $value['final_amount'] - ($value['totalAmount']+$previous_paymemt);
+                    $final_amount =  $value['final_amount'];
+
+                }else{
+
+                    $get_before_paid_payment = $this->get_before_paid_payment_add_on_course($value['paymentid'],$value['enq_id'],trim($value['add_on_course_id']));
+
+                    if($get_before_paid_payment){
+                        $previous_paymemt =  $get_before_paid_payment[0]->beforepaid;
+    
+                    }else{
+                        $previous_paymemt =0 ;
+                        
+                    }
+
+                    $get_final_amount_of_add_on_course = $this->get_final_amount_of_add_on_course($value['enq_id'],trim($value['add_on_course_id']));
+                    $amount_add_on_course_after_discount =  $get_final_amount_of_add_on_course['course_total_fees'] - $get_final_amount_of_add_on_course['discount'];
+                    $bal_amount =   $amount_add_on_course_after_discount  - ($value['totalAmount']+$previous_paymemt);
+                    $final_amount =   $amount_add_on_course_after_discount ;
+                }
+
+            
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['receipt_no'] = $value['id'];
+                 $data[$counter]['enquiry_no'] = $value['enquiry_number'];
+
+                 if($value['razorpay_payment_id']){
+                    $payment_date = $value['datetime'];
+                 }else{
+                    $payment_date = $value['payment_date'];
+                 }
+
+                 if($value['paymant_type']=='regular_invoice'){
+                    $paymant_type = 'Invoice';
+                 }else{
+                    $paymant_type = 'Add on';
+                 }
+
+                 $data[$counter]['receipt_date'] = date('d-m-Y', strtotime($payment_date));
+                 $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+                 $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+                 $data[$counter]['totalAmount'] = '₹ '.$value['totalAmount'];
+                 $data[$counter]['paid_before'] = '₹ '.$previous_paymemt;
+                 $data[$counter]['total_amount'] = '₹ '.$final_amount;
+                 $data[$counter]['amount_balance'] = '₹ '.$bal_amount;
+                 $data[$counter]['payment_mode'] = $value['payment_mode'];
+                 $data[$counter]['paymant_type'] = $paymant_type;
+                 $data[$counter]['action'] = '';
+                $counter++; 
+            }
+        }
+        return $data;
+
+
+    }
+
+
     public function check_payment_maount_lessthan_actaul($enquiry_id){
         $this->db->select('final_amount');
         $this->db->where(TBL_ENQUIRY.'.enq_id', $enquiry_id);

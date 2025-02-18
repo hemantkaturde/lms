@@ -297,6 +297,7 @@ $route['attendancreport'] = "admin/attendancreport";
 
 
 $route['fetchenquiryreport'] = "enquiry/fetchenquiryreport";
+$route['fetchTaxinvoicesreport'] = 'enquiry/fetchTaxinvoicesreport';
 
 
 
