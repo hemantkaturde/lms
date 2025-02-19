@@ -6528,7 +6528,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php } ?>
 
 
-
 <?php if($pageTitle=='Attendance Report'){ ?>
 	<script type="text/javascript">
 
@@ -6562,6 +6561,43 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	            },
 	        });
 	    });
+
+	</script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Amission Report'){ ?>
+	<script type="text/javascript">
+
+$(document).ready(function() {
+					var dt = $('#admissionreportList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "8%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "15%", "targets": 3 },
+							{ "width": "15%", "targets": 4 },
+							{ "width": "20%", "targets": 5 },
+							{ "width": "8%", "targets": 6 },
+							{ "width": "15%", "targets": 7 },
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Admissions Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchadmissions",
+							type: "post",
+						},
+					});
+	});
 
 	</script>
 <?php } ?>

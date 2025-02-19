@@ -297,7 +297,6 @@ $route['attendancreport'] = "admin/attendancreport";
 
 
 $route['fetchenquiryreport'] = "enquiry/fetchenquiryreport";
-
 $route['fetchstudentattendancereport'] = 'admin/fetchstudentattendancereport';
 
 
