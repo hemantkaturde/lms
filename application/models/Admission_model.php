@@ -470,6 +470,96 @@ class Admission_model extends CI_Model
         return $data;
     }
 
+
+    public function getAttendancereportCount($params){
+
+        $roleText = $this->session->userdata('roleText');
+        $userId = $this->session->userdata('userId');
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+        // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+        }
+
+        if($roleText=='Trainer'){
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+        } 
+        //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+     
+
+    public function getAttendancereportdata($params){
+
+        $roleText = $this->session->userdata('roleText');
+        $userId = $this->session->userdata('userId');
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+        // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COURSE.".course_name LIKE '%".$params['search']['value']."%')");
+        }
+        //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+        // $this->db->order_by(TBL_TOPIC_MEETING_LINK.'.id', 'DESC');
+
+        if($roleText=='Trainer'){
+            $this->db->where(TBL_TIMETABLE_TRANSECTIONS.'.trainer_id', $userId);
+        } 
+
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['name'] = $value['name'];
+                 $data[$counter]['mobile_number'] = $value['mobile'];
+                 $data[$counter]['email_address'] = $value['email'];
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['topic'] = $value['topic'];
+                 $data[$counter]['total_hours'] = $value['total_hours'];
+                 $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
+                 //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+                 $data[$counter]['timings'] = $value['timings'];
+
+                 if($value['attendance_status']==1){
+                      $attendance_flag= 'Attended';
+                 }
+
+                 $data[$counter]['attendance_flag'] =$attendance_flag;
+
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
     public function total_revenue(){
 
         if($this->session->userdata('roleText') =='Counsellor'){
