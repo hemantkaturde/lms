@@ -20,6 +20,21 @@
                 <div class="ibox-title">Inquiry Leads Report</div>
             </div>
             <div class="ibox-body">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                          One of three columns
+                        </div>
+                        <div class="col-sm">
+                          One of three columns
+                        </div>
+                        <div class="col-sm">
+                          One of three columns
+                        </div>
+                    </div>
+                </div>
+
               <div class="panel-body table-responsive">
                 <table id="view_enquirylist_report" class="table table-bordered">
                     <thead>
