@@ -51,7 +51,6 @@
                             </div>
                         </div>
                     </div>
-
                 <table id="view_enquirylist_report" class="table table-bordered">
                     <thead>
                         <tr>
