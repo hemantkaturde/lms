@@ -24,15 +24,15 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-4 col-form-label"><b>Date</b> <span class="required">*</span></label>
-                                <input  style="" type="text" class="form-control datepicker" value="<?=$current_date;?>" id="assign_date" name="assign_date">
+                                <label style="margin-left: -13px;!important" class="col-sm-4 col-form-label"><b>Seacrh </b> <span class="required">*</span></label>
+                                <input  style="" type="text" class="form-control"  id="assign_date" name="assign_date">
                                 <p class="error assign_team_error"></p>
                             </div>
                         </div>
 
                         <div class="col-sm">
                            <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-4 col-form-label"><b>Date</b> <span class="required">*</span></label>
+                                <label style="margin-left: -13px;!important" class="col-sm-4 col-form-label"><b>From Date</b> <span class="required">*</span></label>
                                 <input  style="" type="text" class="form-control datepicker" value="<?=$current_date;?>" id="assign_date" name="assign_date">
                                 <p class="error assign_team_error"></p>
                             </div>
@@ -40,7 +40,7 @@
 
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-4 col-form-label"><b>Date</b> <span class="required">*</span></label>
+                                <label style="margin-left: -13px;!important" class="col-sm-4 col-form-label"><b>To Date</b> <span class="required">*</span></label>
                                 <input  style="" type="text" class="form-control datepicker" value="<?=$current_date;?>" id="assign_date" name="assign_date">
                                 <p class="error assign_team_error"></p>
                             </div>
