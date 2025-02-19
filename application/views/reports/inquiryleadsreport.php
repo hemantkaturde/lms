@@ -47,9 +47,7 @@
                         </div>
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Date</b> <span class="required">*</span></label>
-                                <input  style="" type="text" class="form-control datepicker" value="<?=$current_date;?>" id="assign_date" name="assign_date">
-                                <p class="error assign_team_error"></p>
+                                <button type="button" class="btn btn-primary" id="submit_admissiom_form">Excel Export</button>
                             </div>
                         </div>
                     </div>
