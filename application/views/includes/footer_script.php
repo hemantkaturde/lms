@@ -6567,9 +6567,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 <?php if($pageTitle=='Amission Report'){ ?>
-	<script type="text/javascript">
-
-$(document).ready(function() {
+	        <script type="text/javascript">
+                $(document).ready(function() {
 					var dt = $('#admissionreportList').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
@@ -6580,7 +6579,6 @@ $(document).ready(function() {
 							{ "width": "15%", "targets": 4 },
 							{ "width": "20%", "targets": 5 },
 							{ "width": "8%", "targets": 6 },
-							{ "width": "15%", "targets": 7 },
 						],
 						responsive: true,
 						"oLanguage": {
@@ -6593,11 +6591,10 @@ $(document).ready(function() {
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchadmissions",
+							url :"<?php echo base_url();?>fetchadmissionsreport",
 							type: "post",
 						},
 					});
-	});
-
-	</script>
+	            });
+	        </script>
 <?php } ?>
