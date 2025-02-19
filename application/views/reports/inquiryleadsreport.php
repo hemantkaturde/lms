@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-sm">
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary" id="submit_admissiom_form">Excel Export</button>
+                                <button type="button" style="margin-top:30px !important" class="btn btn-primary" id="submit_admissiom_form">Excel Export</button>
                             </div>
                         </div>
                     </div>
