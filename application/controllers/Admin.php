@@ -665,6 +665,32 @@ class Admin extends BaseController
  }
 
 
+    public function fetchstudentattendancereport(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admission_model->getAttendancereportCount($params);
+        $queryRecords = $this->admission_model->getAttendancereportdata($params); 
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+
+        echo json_encode($json_data);
+    }
+
+
  public function examcheckingList(){
     $this->global['pageTitle'] = 'Check Exam';
     $this->loadViews("student/checkexam", $this->global, NULL, NULL);

@@ -6556,11 +6556,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchTaxinvoicesreport/",
+							url :"<?php echo base_url();?>fetchadmissionsreport",
 							type: "post",
 						},
 					});
-	     	});
-	</script>
+	            });
+	        </script>
 <?php } ?>
-
