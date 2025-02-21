@@ -11,42 +11,8 @@
                 </div>
                 <div class="ibox-title">Tax Invoices</div>
             </div>
-
-
-
-
             <div class="ibox-body">
-
             <div class="row" style="margin-left:4px">
-
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="email">Status</label>
-                                        
-                                        <p class="error status_error"></p>
-                                    </div>
-                                </div>
-
-                             
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="email">Status</label>
-                                        
-                                        <p class="error status_error"></p>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <div style="margin-top:22px">
-                                            <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
-                                            <input type="button" class="btn btn-primary" value="Export To Excel" id="export_to_excel" name="export_to_excel">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                 <div class="panel-body table-responsive">
                     <table id="tax_invoices" class="table table-bordered">
                         <thead>

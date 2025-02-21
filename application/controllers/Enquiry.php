@@ -1368,6 +1368,34 @@
     }
 
 
+    public function fetchTaxinvoicesreport(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->enquiry_model->getTaxinvoicesCountreport($params);
+        $queryRecords = $this->enquiry_model->getTaxinvoicesreport($params); 
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval( $totalRecords ),
+            "data"            => $data   // total data array
+            );
+
+        echo json_encode($json_data);
+
+
+    }
+
+
     public function add_addon_discount_payment(){
 
         $post_submit = $this->input->post();

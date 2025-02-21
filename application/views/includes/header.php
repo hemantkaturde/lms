@@ -362,10 +362,10 @@ $jsonstringtoArray = json_decode($access, true);
                                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="<?php if($pageUrl =='inquiryleadsreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>inquiryleadsreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Inquiry Leads </span></a></li>
-                                <li class="<?php if($pageUrl =='taxinvoicesreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>taxinvoicesreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Tax Invoices </span></a></li>
-                                <li class="<?php if($pageUrl =='admissionreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>admissionreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Admission </span></a></li>
-                                <li class="<?php if($pageUrl =='attendancreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>attendancreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Attendance </span></a></li>
+                                <li class="<?php if($pageUrl =='inquiryleadsreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>inquiryleadsreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Inquiry Leads Report</span></a></li>
+                                <li class="<?php if($pageUrl =='taxinvoicesreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>taxinvoicesreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Tax Invoices Report</span></a></li>
+                                <li class="<?php if($pageUrl =='admissionreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>admissionreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Admission Report</span></a></li>
+                                <li class="<?php if($pageUrl =='attendancreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>attendancreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Attendance Report</span></a></li>
                             </ul>
                         </li>
                     
