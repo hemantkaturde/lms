@@ -3814,7 +3814,7 @@ class Api extends BaseController
 
     /*Version API*/
     public function checkappversion(){
-         $responseData = array('android_version'=>'1.9','ios_version'=>'1.4');
+         $responseData = array('android_version'=>'1.10','ios_version'=>'1.4');
          setContentLength($responseData);
     }
 
