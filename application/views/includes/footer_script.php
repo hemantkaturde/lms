@@ -6494,8 +6494,17 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Inquiry Report'){ ?>
 	<script type="text/javascript">
-		 $(document).ready(function() {
-            var dt = $('#view_enquirylist_report').DataTable({
+		$(document).ready(function() {
+			viewenquirylistreport();
+	    });
+
+		$("#search_by_any").keyup(function () {
+			var value = $(this).val();
+		});
+
+		function viewenquirylistreport(){
+
+			var dt = $('#view_enquirylist_report').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
 	                 { "width": "8%", "targets": 0 },
@@ -6522,7 +6531,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
                     type: "post",
 	            },
 	        });
-	});
+		}
+
 
 	</script>
 <?php } ?>
