@@ -6566,7 +6566,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchenquiryreport",
+                    url :"<?php echo base_url();?>enquiry/fetchenquiryreport/"+search_by_any+"/"+from_date+"/"+to_date,
                     type: "post",
 	            },
 	        });

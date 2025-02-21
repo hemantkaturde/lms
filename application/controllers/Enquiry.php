@@ -1667,11 +1667,11 @@
     }
 
 
-    public function fetchenquiryreport()
+    public function fetchenquiryreport($search_by_any,$from_date,$to_date)
     {
         $params = $_REQUEST;
-        $totalRecords = $this->enquiry_model->getEnquiryreportCount($params); 
-        $queryRecords = $this->enquiry_model->getEnquiryreportdata($params); 
+        $totalRecords = $this->enquiry_model->getEnquiryreportCount($params,$search_by_any,$from_date,$to_date); 
+        $queryRecords = $this->enquiry_model->getEnquiryreportdata($params,$search_by_any,$from_date,$to_date); 
         $data = array();
         foreach ($queryRecords as $key => $value)
         {
