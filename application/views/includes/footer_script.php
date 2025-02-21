@@ -6541,6 +6541,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		});
 
 		function viewenquirylistreport(search_by_any,from_date,to_date){
+			$('#view_enquirylist_report').DataTable().destroy();
 
 			var dt = $('#view_enquirylist_report').DataTable({
 	            "columnDefs": [ 
