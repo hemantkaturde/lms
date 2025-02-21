@@ -6495,14 +6495,52 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Inquiry Report'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			viewenquirylistreport();
+
+			if($('#search_by_any').val()){
+				var search_by_any =  $('#search_by_any').val();
+			}else{
+				var search_by_any = 'NA';
+			}
+
+			if($('#from_date').val()){
+				var from_date =  $('#from_date').val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($('#to_date').val()){
+				var to_date =  $('#to_date').val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			viewenquirylistreport(search_by_any,from_date,to_date);
 	    });
 
 		$("#search_by_any").keyup(function () {
-			var value = $(this).val();
+			            
+			if($('#search_by_any').val()){
+				var search_by_any =  $('#search_by_any').val();
+			}else{
+				var search_by_any = 'NA';
+			}
+
+			if($('#from_date').val()){
+				var from_date =  $('#from_date').val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($('#to_date').val()){
+				var to_date =  $('#to_date').val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			viewenquirylistreport(search_by_any,from_date,to_date);
 		});
 
-		function viewenquirylistreport(){
+		function viewenquirylistreport(search_by_any,from_date,to_date){
 
 			var dt = $('#view_enquirylist_report').DataTable({
 	            "columnDefs": [ 
