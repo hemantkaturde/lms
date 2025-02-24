@@ -6579,10 +6579,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			$.ajax({
 				url : "<?php echo base_url();?>exportToExcelenquiryleads",
 				type: "POST",
-				data : formData,
-				cache: false,
-		        contentType: false,
-		        processData: false,
 				success: function(data, textStatus, jqXHR)
 				{
 
