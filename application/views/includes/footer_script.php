@@ -6595,7 +6595,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			}
 
 			$.ajax({
-				url : "<?php echo base_url();?>admin/exportToExcelenquiryleads/"+search_by_any+"/"+from_date+"/"+to_date,
+				url : "<?php echo base_url();?>enquiry/exportToExcelenquiryleads/"+search_by_any+"/"+from_date+"/"+to_date,
 				type: "POST",
 				success: function(data, textStatus, jqXHR)
 				{
