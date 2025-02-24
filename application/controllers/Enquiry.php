@@ -6,6 +6,9 @@
     use Razorpay\Api\Api;
     use Razorpay\Api\Errors\SignatureVerificationError;
 
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
     class Enquiry extends BaseController
     {
     /**
@@ -1692,6 +1695,42 @@
         echo json_encode($json_data);
     
     }
+
+
+    public function exportToExcelenquiryleads() {
+        $data = $this->enquiry_model->getenquiryDataforexporttoexcel();
+
+        // Initialize Spreadsheet
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set column headings
+        $sheet->setCellValue('A1', 'ID');
+        $sheet->setCellValue('B1', 'Name');
+        $sheet->setCellValue('C1', 'Email');
+        $sheet->setCellValue('D1', 'Created At');
+
+        // Fill data
+        $rowNumber = 2;
+        foreach ($data as $row) {
+            $sheet->setCellValue('A' . $rowNumber, $row['id']);
+            $sheet->setCellValue('B' . $rowNumber, $row['name']);
+            $sheet->setCellValue('C' . $rowNumber, $row['email']);
+            $sheet->setCellValue('D' . $rowNumber, $row['created_at']);
+            $rowNumber++;
+        }
+
+        // Set headers to download file
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="exported_data.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit();
+    }
+
+
 
 }
 

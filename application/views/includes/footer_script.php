@@ -6572,7 +6572,50 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	        });
 		}
 
+		$(document).on('click','#excel_export_report_enquiry_leads',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
 
+			$.ajax({
+				url : "<?php echo base_url();?>exportToExcelenquiryleads",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						// swal({
+						// 	title: "Examination Created!",
+						// 	//text: "",
+						// 	icon: "success",
+						// 	button: "Ok",
+						// 	},function(){ 
+								// $("#popup_modal_md").hide();
+								//window.location.href = "<?php echo base_url().'viewtimetablelisting?'?>" +'time_table_id='+time_table_id+'&course_id='+course_id_form;
+						// });						
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		//$(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+		
 	</script>
 <?php } ?>
 
