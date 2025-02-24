@@ -1010,7 +1010,7 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
 
 public function getEnquiryreportCount($params,$search_by_any,$from_date,$to_date){
    
-    $new_string = str_replace('%20', ' ', $search_by_any);
+    $new_string = trim(str_replace('%20', ' ', $search_by_any));
 
     $this->db->select('*');
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
@@ -1036,10 +1036,7 @@ public function getEnquiryreportCount($params,$search_by_any,$from_date,$to_date
 
 public function getEnquiryreportdata($params,$search_by_any,$from_date,$to_date){
 
-    $new_string = str_replace('%20', ' ', $search_by_any);
-
-    print_r($new_string);
-    exit;
+    $new_string = trim(str_replace('%20', ' ', $search_by_any));
 
     $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller');
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
