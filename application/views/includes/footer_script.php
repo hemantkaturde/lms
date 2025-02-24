@@ -6497,7 +6497,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		$(document).ready(function() {
 
 			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val();
+				var search_by_any =  $('#search_by_any').val().replace(/%20/g, " ");;
 			}else{
 				var search_by_any = 'NA';
 			}
@@ -6520,7 +6520,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		$("#search_by_any").keyup(function () {
 			            
 			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val();
+				var search_by_any =  $('#search_by_any').val().replace(/%20/g, " ");
 			}else{
 				var search_by_any = 'NA';
 			}
@@ -6577,7 +6577,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			$(".loader_ajax").show();
 
 			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val();
+				var search_by_any =  $('#search_by_any').val().replace(/%20/g, " ");;
 			}else{
 				var search_by_any = 'NA';
 			}
