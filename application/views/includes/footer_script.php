@@ -6574,13 +6574,33 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 		$(document).on('click','#excel_export_report_enquiry_leads',function(e){
 			e.preventDefault();
-			//$(".loader_ajax").show();
+			$(".loader_ajax").show();
+
+			if($('#search_by_any').val()){
+				var search_by_any =  $('#search_by_any').val();
+			}else{
+				var search_by_any = 'NA';
+			}
+
+			if($('#from_date').val()){
+				var from_date =  $('#from_date').val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($('#to_date').val()){
+				var to_date =  $('#to_date').val();
+			}else{
+				var to_date = 'NA';
+			}
 
 			$.ajax({
-				url : "<?php echo base_url();?>exportToExcelenquiryleads",
+				url : "<?php echo base_url();?>admin/exportToExcelenquiryleads/"+search_by_any+"/"+from_date+"/"+to_date,
 				type: "POST",
 				success: function(data, textStatus, jqXHR)
 				{
+
+					$(".loader_ajax").hide();
 
 					var fetchResponse = $.parseJSON(data);
 					if(fetchResponse.status == "failure")

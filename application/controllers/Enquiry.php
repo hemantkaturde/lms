@@ -1697,8 +1697,8 @@
     }
 
 
-    public function exportToExcelenquiryleads() {
-        $data = $this->enquiry_model->getenquiryDataforexporttoexcel();
+    public function exportToExcelenquiryleads($search_by_any,$from_date,$to_date) {
+        $data = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
 
         // Initialize Spreadsheet
         $spreadsheet = new Spreadsheet();
