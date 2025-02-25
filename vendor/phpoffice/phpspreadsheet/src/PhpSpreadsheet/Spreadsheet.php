@@ -4,15 +4,16 @@ namespace PhpOffice\PhpSpreadsheet;
 
 use JsonSerializable;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
-use PhpOffice\PhpSpreadsheet\Cell\IValueBinder;
 use PhpOffice\PhpSpreadsheet\Document\Properties;
 use PhpOffice\PhpSpreadsheet\Document\Security;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Worksheet\Iterator;
 use PhpOffice\PhpSpreadsheet\Worksheet\Table;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
 
 class Spreadsheet implements JsonSerializable
 {
@@ -29,8 +30,6 @@ class Spreadsheet implements JsonSerializable
         self::VISIBILITY_HIDDEN,
         self::VISIBILITY_VERY_HIDDEN,
     ];
-
-    protected int $excelCalendar = Date::CALENDAR_WINDOWS_1900;
 
     /**
      * Unique ID.
@@ -171,8 +170,6 @@ class Spreadsheet implements JsonSerializable
 
     private Theme $theme;
 
-    private ?IValueBinder $valueBinder = null;
-
     public function getTheme(): Theme
     {
         return $this->theme;
@@ -256,7 +253,7 @@ class Spreadsheet implements JsonSerializable
      */
     public function setRibbonXMLData(mixed $target, mixed $xmlData): void
     {
-        if (is_string($target) && is_string($xmlData)) {
+        if ($target !== null && $xmlData !== null) {
             $this->ribbonXMLData = ['target' => $target, 'data' => $xmlData];
         } else {
             $this->ribbonXMLData = null;
@@ -526,15 +523,6 @@ class Spreadsheet implements JsonSerializable
         return $this->getSheetByName($worksheetName) !== null;
     }
 
-    public function duplicateWorksheetByTitle(string $title): Worksheet
-    {
-        $original = $this->getSheetByNameOrThrow($title);
-        $index = $this->getIndex($original) + 1;
-        $clone = clone $original;
-
-        return $this->addSheet($clone, $index, true);
-    }
-
     /**
      * Add sheet.
      *
@@ -578,9 +566,6 @@ class Spreadsheet implements JsonSerializable
             // Adjust active sheet index if necessary
             if ($this->activeSheetIndex >= $sheetIndex) {
                 ++$this->activeSheetIndex;
-            }
-            if ($this->activeSheetIndex < 0) {
-                $this->activeSheetIndex = 0;
             }
         }
 
@@ -1060,7 +1045,17 @@ class Spreadsheet implements JsonSerializable
      */
     public function copy(): self
     {
-        return unserialize(serialize($this));
+        $filename = File::temporaryFilename();
+        $writer = new XlsxWriter($this);
+        $writer->setIncludeCharts(true);
+        $writer->save($filename);
+
+        $reader = new XlsxReader();
+        $reader->setIncludeCharts(true);
+        $reloadedSpreadsheet = $reader->load($filename);
+        unlink($filename);
+
+        return $reloadedSpreadsheet;
     }
 
     public function __clone()
@@ -1086,11 +1081,6 @@ class Spreadsheet implements JsonSerializable
     public function getCellXfByIndex(int $cellStyleIndex): Style
     {
         return $this->cellXfCollection[$cellStyleIndex];
-    }
-
-    public function getCellXfByIndexOrNull(?int $cellStyleIndex): ?Style
-    {
-        return ($cellStyleIndex === null) ? null : ($this->cellXfCollection[$cellStyleIndex] ?? null);
     }
 
     /**
@@ -1532,6 +1522,14 @@ class Spreadsheet implements JsonSerializable
     /**
      * @throws Exception
      */
+    public function __serialize(): array
+    {
+        throw new Exception('Spreadsheet objects cannot be serialized');
+    }
+
+    /**
+     * @throws Exception
+     */
     public function jsonSerialize(): mixed
     {
         throw new Exception('Spreadsheet objects cannot be json encoded');
@@ -1570,97 +1568,5 @@ class Spreadsheet implements JsonSerializable
         }
 
         return $table;
-    }
-
-    /**
-     * @return bool Success or failure
-     */
-    public function setExcelCalendar(int $baseYear): bool
-    {
-        if (($baseYear === Date::CALENDAR_WINDOWS_1900) || ($baseYear === Date::CALENDAR_MAC_1904)) {
-            $this->excelCalendar = $baseYear;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @return int Excel base date (1900 or 1904)
-     */
-    public function getExcelCalendar(): int
-    {
-        return $this->excelCalendar;
-    }
-
-    public function deleteLegacyDrawing(Worksheet $worksheet): void
-    {
-        unset($this->unparsedLoadedData['sheets'][$worksheet->getCodeName()]['legacyDrawing']);
-    }
-
-    public function getLegacyDrawing(Worksheet $worksheet): ?string
-    {
-        return $this->unparsedLoadedData['sheets'][$worksheet->getCodeName()]['legacyDrawing'] ?? null;
-    }
-
-    public function getValueBinder(): ?IValueBinder
-    {
-        return $this->valueBinder;
-    }
-
-    public function setValueBinder(?IValueBinder $valueBinder): self
-    {
-        $this->valueBinder = $valueBinder;
-
-        return $this;
-    }
-
-    /**
-     * All the PDF writers treat charts as if they occupy a single cell.
-     * This will be better most of the time.
-     * It is not needed for any other output type.
-     * It changes the contents of the spreadsheet, so you might
-     * be better off cloning the spreadsheet and then using
-     * this method on, and then writing, the clone.
-     */
-    public function mergeChartCellsForPdf(): void
-    {
-        foreach ($this->workSheetCollection as $worksheet) {
-            foreach ($worksheet->getChartCollection() as $chart) {
-                $br = $chart->getBottomRightCell();
-                $tl = $chart->getTopLeftCell();
-                if ($br !== '' && $br !== $tl) {
-                    if (!$worksheet->cellExists($br)) {
-                        $worksheet->getCell($br)->setValue(' ');
-                    }
-                    $worksheet->mergeCells("$tl:$br");
-                }
-            }
-        }
-    }
-
-    /**
-     * All the PDF writers do better with drawings than charts.
-     * This will be better some of the time.
-     * It is not needed for any other output type.
-     * It changes the contents of the spreadsheet, so you might
-     * be better off cloning the spreadsheet and then using
-     * this method on, and then writing, the clone.
-     */
-    public function mergeDrawingCellsForPdf(): void
-    {
-        foreach ($this->workSheetCollection as $worksheet) {
-            foreach ($worksheet->getDrawingCollection() as $drawing) {
-                $br = $drawing->getCoordinates2();
-                $tl = $drawing->getCoordinates();
-                if ($br !== '' && $br !== $tl) {
-                    if (!$worksheet->cellExists($br)) {
-                        $worksheet->getCell($br)->setValue(' ');
-                    }
-                    $worksheet->mergeCells("$tl:$br");
-                }
-            }
-        }
     }
 }

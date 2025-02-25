@@ -6497,7 +6497,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		$(document).ready(function() {
 
 			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val().replace(/%20/g, " ");;
+				var search_by_any =  $('#search_by_any').val();
 			}else{
 				var search_by_any = 'NA';
 			}
@@ -6520,7 +6520,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		$("#search_by_any").keyup(function () {
 			            
 			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val().replace(/%20/g, " ");
+				var search_by_any =  $('#search_by_any').val();
 			}else{
 				var search_by_any = 'NA';
 			}
@@ -6566,18 +6566,24 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>enquiry/fetchenquiryreport/"+search_by_any+"/"+from_date+"/"+to_date,
+                    url :"<?php echo base_url();?>enquiry/fetchenquiryreport",
                     type: "post",
+					data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date }, // Send as data, not in URL
+
 	            },
 	        });
 		}
+
+
+		
+
 
 		$(document).on('click','#excel_export_report_enquiry_leads',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
 
 			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val().replace(/%20/g, " ");;
+				var search_by_any =  $('#search_by_any').val();
 			}else{
 				var search_by_any = 'NA';
 			}
@@ -6595,8 +6601,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			}
 
 			$.ajax({
-				url : "<?php echo base_url();?>enquiry/exportToExcelenquiryleads/"+search_by_any+"/"+from_date+"/"+to_date,
+				url : "<?php echo base_url();?>Enquiry/exportToExcelenquiryleads",
 				type: "POST",
+				data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
 				success: function(data, textStatus, jqXHR)
 				{
 

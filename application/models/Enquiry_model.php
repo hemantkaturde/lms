@@ -1016,7 +1016,7 @@ public function getEnquiryreportCount($params,$search_by_any,$from_date,$to_date
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
 
-    if($search_by_any != "") 
+    if($search_by_any != "NA") 
     {
         $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
         $this->db->or_where(TBL_USER.".name LIKE '%".$new_string."%'");
@@ -1038,11 +1038,13 @@ public function getEnquiryreportdata($params,$search_by_any,$from_date,$to_date)
 
     $new_string = trim(str_replace('%20', ' ', $search_by_any));
 
+
     $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller');
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
     $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
-    if($search_by_any != "") 
+    
+    if($search_by_any != "NA") 
     {
         $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
         $this->db->or_where(TBL_USER.".name LIKE '%".$new_string."%'");
@@ -1140,7 +1142,7 @@ public function getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_dat
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURScE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
     $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
-    if($search_by_any != "") 
+    if($search_by_any != "NA") 
     {
         $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
         $this->db->or_where(TBL_USER.".name LIKE '%".$new_string."%'");

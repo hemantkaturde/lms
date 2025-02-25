@@ -24,6 +24,8 @@ class ReferenceHelper
 
     /**
      * Instance of this class.
+     *
+     * @var ?ReferenceHelper
      */
     private static ?ReferenceHelper $instance = null;
 
@@ -248,7 +250,7 @@ class ReferenceHelper
      * @param int $numberOfColumns Number of columns to insert/delete (negative values indicate deletion)
      * @param int $numberOfRows Number of rows to insert/delete (negative values indicate deletion)
      */
-    protected function adjustDataValidations(Worksheet $worksheet, int $numberOfColumns, int $numberOfRows, string $beforeCellAddress): void
+    protected function adjustDataValidations(Worksheet $worksheet, int $numberOfColumns, int $numberOfRows): void
     {
         $aDataValidationCollection = $worksheet->getDataValidationCollection();
         ($numberOfColumns > 0 || $numberOfRows > 0)
@@ -256,40 +258,9 @@ class ReferenceHelper
             : uksort($aDataValidationCollection, [self::class, 'cellSort']);
 
         foreach ($aDataValidationCollection as $cellAddress => $dataValidation) {
-            $formula = $dataValidation->getFormula1();
-            if ($formula !== '') {
-                $dataValidation->setFormula1(
-                    $this->updateFormulaReferences(
-                        $formula,
-                        $beforeCellAddress,
-                        $numberOfColumns,
-                        $numberOfRows,
-                        $worksheet->getTitle(),
-                        true
-                    )
-                );
-            }
-            $formula = $dataValidation->getFormula2();
-            if ($formula !== '') {
-                $dataValidation->setFormula2(
-                    $this->updateFormulaReferences(
-                        $formula,
-                        $beforeCellAddress,
-                        $numberOfColumns,
-                        $numberOfRows,
-                        $worksheet->getTitle(),
-                        true
-                    )
-                );
-            }
-            $addressParts = explode(' ', $cellAddress);
-            $newReference = '';
-            $separator = '';
-            foreach ($addressParts as $addressPart) {
-                $newReference .= $separator . $this->updateCellReference($addressPart);
-                $separator = ' ';
-            }
+            $newReference = $this->updateCellReference($cellAddress);
             if ($cellAddress !== $newReference) {
+                $dataValidation->setSqref($newReference);
                 $worksheet->setDataValidation($newReference, $dataValidation);
                 $worksheet->setDataValidation($cellAddress, null);
             }
@@ -321,14 +292,14 @@ class ReferenceHelper
      */
     protected function adjustProtectedCells(Worksheet $worksheet, int $numberOfColumns, int $numberOfRows): void
     {
-        $aProtectedCells = $worksheet->getProtectedCellRanges();
+        $aProtectedCells = $worksheet->getProtectedCells();
         ($numberOfColumns > 0 || $numberOfRows > 0)
             ? uksort($aProtectedCells, [self::class, 'cellReverseSort'])
             : uksort($aProtectedCells, [self::class, 'cellSort']);
-        foreach ($aProtectedCells as $cellAddress => $protectedRange) {
+        foreach ($aProtectedCells as $cellAddress => $value) {
             $newReference = $this->updateCellReference($cellAddress);
             if ($cellAddress !== $newReference) {
-                $worksheet->protectCells($newReference, $protectedRange->getPassword(), true);
+                $worksheet->protectCells($newReference, $value, true);
                 $worksheet->unprotectCells($cellAddress);
             }
         }
@@ -473,7 +444,7 @@ class ReferenceHelper
                 if ($cell->getDataType() === DataType::TYPE_FORMULA) {
                     // Formula should be adjusted
                     $worksheet->getCell($newCoordinate)
-                        ->setValue($this->updateFormulaReferences($cell->getValueString(), $beforeCellAddress, $numberOfColumns, $numberOfRows, $worksheet->getTitle(), true));
+                        ->setValue($this->updateFormulaReferences($cell->getValue(), $beforeCellAddress, $numberOfColumns, $numberOfRows, $worksheet->getTitle(), true));
                 } else {
                     // Cell value should not be adjusted
                     $worksheet->getCell($newCoordinate)->setValueExplicit($cell->getValue(), $cell->getDataType());
@@ -486,7 +457,7 @@ class ReferenceHelper
                         but we do still need to adjust any formulae in those cells                    */
                 if ($cell->getDataType() === DataType::TYPE_FORMULA) {
                     // Formula should be adjusted
-                    $cell->setValue($this->updateFormulaReferences($cell->getValueString(), $beforeCellAddress, $numberOfColumns, $numberOfRows, $worksheet->getTitle(), true));
+                    $cell->setValue($this->updateFormulaReferences($cell->getValue(), $beforeCellAddress, $numberOfColumns, $numberOfRows, $worksheet->getTitle(), true));
                 }
             }
         }
@@ -522,7 +493,7 @@ class ReferenceHelper
         $this->adjustConditionalFormatting($worksheet, $numberOfColumns, $numberOfRows);
 
         // Update worksheet: data validations
-        $this->adjustDataValidations($worksheet, $numberOfColumns, $numberOfRows, $beforeCellAddress);
+        $this->adjustDataValidations($worksheet, $numberOfColumns, $numberOfRows);
 
         // Update worksheet: merge cells
         $this->adjustMergeCells($worksheet);
@@ -790,7 +761,7 @@ class ReferenceHelper
             $column = $columns[$splitCount][0];
             $row = $rows[$splitCount][0];
 
-            if ($column[0] !== '$') {
+            if (!empty($column) && $column[0] !== '$') {
                 $column = ((Coordinate::columnIndexFromString($column) + $numberOfColumns) % AddressRange::MAX_COLUMN_INT) ?: AddressRange::MAX_COLUMN_INT;
                 $column = Coordinate::stringFromColumnIndex($column);
                 $rowOffset -= ($columnLength - strlen($column));
@@ -926,7 +897,7 @@ class ReferenceHelper
             foreach ($sheet->getCoordinates(false) as $coordinate) {
                 $cell = $sheet->getCell($coordinate);
                 if ($cell->getDataType() === DataType::TYPE_FORMULA) {
-                    $formula = $cell->getValueString();
+                    $formula = $cell->getValue();
                     if (str_contains($formula, $oldName)) {
                         $formula = str_replace("'" . $oldName . "'!", "'" . $newName . "'!", $formula);
                         $formula = str_replace($oldName . '!', $newName . '!', $formula);

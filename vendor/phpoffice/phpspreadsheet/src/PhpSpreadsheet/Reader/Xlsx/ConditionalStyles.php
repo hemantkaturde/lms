@@ -125,7 +125,6 @@ class ConditionalStyles
     {
         $conditionType = (string) $attributes->type;
         $operatorType = (string) $attributes->operator;
-        $priority = (int) (string) $attributes->priority;
 
         $operands = [];
         foreach ($cfRuleXml->children($this->ns['xm']) as $cfRuleOperandsXml) {
@@ -135,7 +134,6 @@ class ConditionalStyles
         $conditional = new Conditional();
         $conditional->setConditionType($conditionType);
         $conditional->setOperatorType($operatorType);
-        $conditional->setPriority($priority);
         if (
             $conditionType === Conditional::CONDITION_CONTAINSTEXT
             || $conditionType === Conditional::CONDITION_NOTCONTAINSTEXT
@@ -186,14 +184,14 @@ class ConditionalStyles
     private function setConditionalStyles(Worksheet $worksheet, array $conditionals, SimpleXMLElement $xmlExtLst): void
     {
         foreach ($conditionals as $cellRangeReference => $cfRules) {
-            ksort($cfRules); // no longer needed for Xlsx, but helps Xls
+            ksort($cfRules);
             $conditionalStyles = $this->readStyleRules($cfRules, $xmlExtLst);
 
             // Extract all cell references in $cellRangeReference
-            // N.B. In Excel UI, intersection is space and union is comma.
-            // But in Xml, intersection is comma and union is space.
-            $cellRangeReference = str_replace(['$', ' ', ',', '^'], ['', '^', ' ', ','], strtoupper($cellRangeReference));
-            $worksheet->getStyle($cellRangeReference)->setConditionalStyles($conditionalStyles);
+            $cellBlocks = explode(' ', str_replace('$', '', strtoupper($cellRangeReference)));
+            foreach ($cellBlocks as $cellBlock) {
+                $worksheet->getStyle($cellBlock)->setConditionalStyles($conditionalStyles);
+            }
         }
     }
 
@@ -207,7 +205,6 @@ class ConditionalStyles
             $objConditional = new Conditional();
             $objConditional->setConditionType((string) $cfRule['type']);
             $objConditional->setOperatorType((string) $cfRule['operator']);
-            $objConditional->setPriority((int) (string) $cfRule['priority']);
             $objConditional->setNoFormatSet(!isset($cfRule['dxfId']));
 
             if ((string) $cfRule['text'] != '') {
@@ -223,7 +220,6 @@ class ConditionalStyles
             if (count($cfRule->formula) >= 1) {
                 foreach ($cfRule->formula as $formulax) {
                     $formula = (string) $formulax;
-                    $formula = str_replace(['_xlfn.', '_xlws.'], '', $formula);
                     if ($formula === 'TRUE') {
                         $objConditional->addCondition(true);
                     } elseif ($formula === 'FALSE') {
@@ -289,34 +285,29 @@ class ConditionalStyles
     private function readColorScale(SimpleXMLElement|stdClass $cfRule): ConditionalColorScale
     {
         $colorScale = new ConditionalColorScale();
-        $count = count($cfRule->colorScale->cfvo);
-        $idx = 0;
+        $types = [];
         foreach ($cfRule->colorScale->cfvo as $cfvoXml) {
             $attr = $cfvoXml->attributes() ?? [];
             $type = (string) ($attr['type'] ?? '');
+            $types[] = $type;
             $val = $attr['val'] ?? null;
-            if ($idx === 0) {
-                $method = 'setMinimumConditionalFormatValueObject';
-            } elseif ($idx === 1 && $count === 3) {
-                $method = 'setMidpointConditionalFormatValueObject';
-            } else {
-                $method = 'setMaximumConditionalFormatValueObject';
+            if ($type === 'min') {
+                $colorScale->setMinimumConditionalFormatValueObject(new ConditionalFormatValueObject($type, $val));
+            } elseif ($type === 'percentile') {
+                $colorScale->setMidpointConditionalFormatValueObject(new ConditionalFormatValueObject($type, $val));
+            } elseif ($type === 'max') {
+                $colorScale->setMaximumConditionalFormatValueObject(new ConditionalFormatValueObject($type, $val));
             }
-            if ($type !== 'formula') {
-                $colorScale->$method(new ConditionalFormatValueObject($type, $val));
-            } else {
-                $colorScale->$method(new ConditionalFormatValueObject($type, null, $val));
-            }
-            ++$idx;
         }
         $idx = 0;
         foreach ($cfRule->colorScale->color as $color) {
+            $type = $types[$idx];
             $rgb = $this->styleReader->readColor($color);
-            if ($idx === 0) {
+            if ($type === 'min') {
                 $colorScale->setMinimumColor(new Color($rgb));
-            } elseif ($idx === 1 && $count === 3) {
+            } elseif ($type === 'percentile') {
                 $colorScale->setMidpointColor(new Color($rgb));
-            } else {
+            } elseif ($type === 'max') {
                 $colorScale->setMaximumColor(new Color($rgb));
             }
             ++$idx;

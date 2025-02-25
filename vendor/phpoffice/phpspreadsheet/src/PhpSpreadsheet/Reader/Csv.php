@@ -84,13 +84,10 @@ class Csv extends BaseReader
      */
     private static $constructorCallback;
 
-    /** Changed from true to false in release 4.0.0 */
-    public const DEFAULT_TEST_AUTODETECT = false;
-
     /**
      * Attempt autodetect line endings (deprecated after PHP8.1)?
      */
-    private bool $testAutodetect = self::DEFAULT_TEST_AUTODETECT;
+    private bool $testAutodetect = true;
 
     protected bool $castFormattedNumberToNumeric = false;
 
@@ -266,7 +263,6 @@ class Csv extends BaseReader
     {
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
-        $spreadsheet->setValueBinder($this->valueBinder);
 
         // Load into this instance
         return $this->loadIntoExisting($filename, $spreadsheet);
@@ -279,7 +275,6 @@ class Csv extends BaseReader
     {
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
-        $spreadsheet->setValueBinder($this->valueBinder);
 
         // Load into this instance
         return $this->loadStringOrFile('data://text/plain,' . urlencode($contents), $spreadsheet, true);
@@ -388,7 +383,6 @@ class Csv extends BaseReader
 
     private function loadStringOrFile2(string $filename, Spreadsheet $spreadsheet, bool $dataUri): void
     {
-
         // Open file
         if ($dataUri) {
             $this->openDataUri($filename);
@@ -418,7 +412,7 @@ class Csv extends BaseReader
         // Loop through each line of the file in turn
         $delimiter = $this->delimiter ?? '';
         $rowData = self::getCsv($fileHandle, 0, $delimiter, $this->enclosure, $this->escapeCharacter);
-        $valueBinder = $this->valueBinder ?? Cell::getValueBinder();
+        $valueBinder = Cell::getValueBinder();
         $preserveBooleanString = method_exists($valueBinder, 'getBooleanConversion') && $valueBinder->getBooleanConversion();
         $this->getTrue = Calculation::getTRUE();
         $this->getFalse = Calculation::getFALSE();
@@ -608,7 +602,6 @@ class Csv extends BaseReader
             'text/csv',
             'text/plain',
             'inode/x-empty',
-            'text/html',
         ];
 
         return in_array($type, $supportedTypes, true);

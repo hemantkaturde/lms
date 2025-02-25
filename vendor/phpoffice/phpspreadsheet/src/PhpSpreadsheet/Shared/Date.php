@@ -10,6 +10,7 @@ use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
+use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDate;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class Date
@@ -63,15 +64,15 @@ class Date
     /**
      * Set the Excel calendar (Windows 1900 or Mac 1904).
      *
-     * @param ?int $baseYear Excel base date (1900 or 1904)
+     * @param int $baseYear Excel base date (1900 or 1904)
      *
      * @return bool Success or failure
      */
-    public static function setExcelCalendar(?int $baseYear): bool
+    public static function setExcelCalendar(int $baseYear): bool
     {
         if (
-            ($baseYear === self::CALENDAR_WINDOWS_1900)
-            || ($baseYear === self::CALENDAR_MAC_1904)
+            ($baseYear == self::CALENDAR_WINDOWS_1900)
+            || ($baseYear == self::CALENDAR_MAC_1904)
         ) {
             self::$excelCalendar = $baseYear;
 
@@ -172,7 +173,7 @@ class Date
             throw new Exception("Invalid string $value supplied for datatype Date");
         }
 
-        $newValue = self::PHPToExcel($date);
+        $newValue = SharedDate::PHPToExcel($date);
         if ($newValue === false) {
             throw new Exception("Invalid string $value supplied for datatype Date");
         }
@@ -537,16 +538,11 @@ class Date
         return $dtobj->format($format);
     }
 
-    /**
-     * Round the given DateTime object to seconds.
-     */
     public static function roundMicroseconds(DateTime $dti): void
     {
         $microseconds = (int) $dti->format('u');
-        $rounded = (int) round($microseconds, -6);
-        $modify = $rounded - $microseconds;
-        if ($modify !== 0) {
-            $dti->modify(($modify > 0 ? '+' : '') . $modify . ' microseconds');
+        if ($microseconds >= 500000) {
+            $dti->modify('+1 second');
         }
     }
 }

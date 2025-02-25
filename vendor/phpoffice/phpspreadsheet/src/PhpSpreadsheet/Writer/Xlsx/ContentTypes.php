@@ -134,7 +134,7 @@ class ContentTypes extends WriterPart
             $mimeType = '';
 
             $drawing = $this->getParentWriter()->getDrawingHashTable()->getByIndex($i);
-            if ($drawing instanceof WorksheetDrawing && $drawing->getPath() !== '') {
+            if ($drawing instanceof WorksheetDrawing) {
                 $extension = strtolower($drawing->getExtension());
                 if ($drawing->getIsUrl()) {
                     $mimeType = image_type_to_mime_type($drawing->getType());
@@ -196,7 +196,7 @@ class ContentTypes extends WriterPart
             $bgImage = $spreadsheet->getSheet($i)->getBackgroundImage();
             $mimeType = $spreadsheet->getSheet($i)->getBackgroundMime();
             $extension = $spreadsheet->getSheet($i)->getBackgroundExtension();
-            if ($bgImage !== '' && !isset($aMediaContentTypes[$extension])) {
+            if ($bgImage !== '' && !isset($aMediaContentTypes[$mimeType])) {
                 $this->writeDefaultContentType($objWriter, $extension, $mimeType);
             }
         }
@@ -213,11 +213,6 @@ class ContentTypes extends WriterPart
             foreach ($unparsedLoadedData['override_content_types'] as $partName => $overrideType) {
                 $this->writeOverrideContentType($objWriter, $partName, $overrideType);
             }
-        }
-
-        // Metadata needed for Dynamic Arrays
-        if ($this->getParentWriter()->useDynamicArrays()) {
-            $this->writeOverrideContentType($objWriter, '/xl/metadata.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheetMetadata+xml');
         }
 
         $objWriter->endElement();

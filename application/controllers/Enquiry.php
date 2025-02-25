@@ -1,13 +1,16 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
     require APPPATH . '/libraries/BaseController.php';
+    require 'vendor/autoload.php';
 
     require_once(APPPATH."third_party/razorpay/razorpay-php/Razorpay.php");  
     use Razorpay\Api\Api;
     use Razorpay\Api\Errors\SignatureVerificationError;
+    // use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    // use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-    use PhpOffice\PhpSpreadsheet\Spreadsheet;
-    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+    // Include PhpSpreadsheet
+    // If installed via Composer
 
     class Enquiry extends BaseController
     {
@@ -20,6 +23,8 @@
             $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model'));
             $this->load->library('form_validation');
             $this->load->library('mail');
+            $this->load->library('excel');
+
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
             $this->datas();
@@ -1670,8 +1675,14 @@
     }
 
 
-    public function fetchenquiryreport($search_by_any,$from_date,$to_date)
+    public function fetchenquiryreport()
     {
+
+        $search_by_any = $this->input->post('search_by_any');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+
+        
         $params = $_REQUEST;
         $totalRecords = $this->enquiry_model->getEnquiryreportCount($params,$search_by_any,$from_date,$to_date); 
         $queryRecords = $this->enquiry_model->getEnquiryreportdata($params,$search_by_any,$from_date,$to_date); 
@@ -1697,37 +1708,60 @@
     }
 
 
-    public function exportToExcelenquiryleads($search_by_any,$from_date,$to_date) {
-        $data = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
+    public function exportToExcelenquiryleads() {
 
-        // Initialize Spreadsheet
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
+        $search_by_any = $this->input->post('search_by_any');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+    
 
-        // Set column headings
-        $sheet->setCellValue('A1', 'ID');
-        $sheet->setCellValue('B1', 'Name');
-        $sheet->setCellValue('C1', 'Email');
-        $sheet->setCellValue('D1', 'Created At');
+        // create file name
+        $fileName = 'Current_Order_Status_Report -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
 
-        // Fill data
-        $rowNumber = 2;
-        foreach ($data as $row) {
-            $sheet->setCellValue('A' . $rowNumber, $row['id']);
-            $sheet->setCellValue('B' . $rowNumber, $row['name']);
-            $sheet->setCellValue('C' . $rowNumber, $row['email']);
-            $sheet->setCellValue('D' . $rowNumber, $row['created_at']);
-            $rowNumber++;
+        
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
+
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, '1');
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '1');
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '1');
+            $rowCount++;
         }
 
-        // Set headers to download file
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="exported_data.xlsx"');
-        header('Cache-Control: max-age=0');
+        // foreach(range('A','W') as $columnID) {
+        //     $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        // }
+        // /*********************Autoresize column width depending upon contents END***********************/
+        
+        // $objPHPExcel->getActiveSheet()->getStyle('A1:W1')->getFont()->setBold(true); //Make heading font bold
+        
+        // /*********************Add color to heading START**********************/
+        // $objPHPExcel->getActiveSheet()
+        //             ->getStyle('A1:W1')
+        //             ->getFill()
+        //             ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+        //             ->getStartColor()
+        //             ->setARGB('99ff99');
 
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output');
-        exit();
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+          
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;Filename=$fileName.xls");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+
+
     }
 
 
