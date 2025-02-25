@@ -1732,13 +1732,13 @@
         $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
 
         // set Row
-        $rowCount = 2;
-        foreach ($empInfo as $element) {
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, '1');
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '1');
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '1');
-            $rowCount++;
-        }
+        // $rowCount = 2;
+        // foreach ($empInfo as $element) {
+        //     $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, '1');
+        //     $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '1');
+        //     $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '1');
+        //     $rowCount++;
+        // }
 
         // foreach(range('A','W') as $columnID) {
         //     $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
