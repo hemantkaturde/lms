@@ -1,8 +1,6 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
     require APPPATH . '/libraries/BaseController.php';
-    require 'vendor/autoload.php';
-
     require_once(APPPATH."third_party/razorpay/razorpay-php/Razorpay.php");  
     use Razorpay\Api\Api;
     use Razorpay\Api\Errors\SignatureVerificationError;
