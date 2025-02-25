@@ -6574,10 +6574,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	        });
 		}
 
-
-		
-
-
 		$(document).on('click','#excel_export_report_enquiry_leads',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -6644,9 +6640,59 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 
 <?php if($pageTitle=='Tax Invoice Report'){ ?>
-	<script type="text/javascript">
-		    $(document).ready(function() {	
-				var dt = $('#tax_invoices_report').DataTable({
+	    <script type="text/javascript">
+
+		        $(document).ready(function() {	
+				
+					if($('#search_by_any').val()){
+						var search_by_any =  $('#search_by_any').val();
+					}else{
+						var search_by_any = 'NA';
+					}
+
+					if($('#from_date').val()){
+						var from_date =  $('#from_date').val();
+					}else{
+						var from_date = 'NA';
+					}
+
+					if($('#to_date').val()){
+						var to_date =  $('#to_date').val();
+					}else{
+						var to_date = 'NA';
+					}
+
+					viewtaxinvoicesreport(search_by_any,from_date,to_date);
+	            });
+
+				$("#search_by_any").keyup(function () {
+			            
+					if($('#search_by_any').val()){
+						var search_by_any =  $('#search_by_any').val();
+					}else{
+						var search_by_any = 'NA';
+					}
+			
+					if($('#from_date').val()){
+						var from_date =  $('#from_date').val();
+					}else{
+						var from_date = 'NA';
+					}
+			
+					if($('#to_date').val()){
+						var to_date =  $('#to_date').val();
+					}else{
+						var to_date = 'NA';
+					}
+			
+					viewtaxinvoicesreport(search_by_any,from_date,to_date);
+				});
+
+
+				function viewtaxinvoicesreport(search_by_any,from_date,to_date){
+
+					$('#tax_invoices_report').DataTable().destroy();
+					var dt = $('#tax_invoices_report').DataTable({
 					"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
 							{ "width": "10%", "targets": 0 },
@@ -6671,10 +6717,12 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchadmissionsreport",
+							url :"<?php echo base_url();?>fetchTaxinvoicesreport",
 							type: "post",
+							data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
 						},
 					});
-	            });
-	        </script>
+				};
+
+	    </script>
 <?php } ?>

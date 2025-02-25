@@ -1377,10 +1377,15 @@
 
 
     public function fetchTaxinvoicesreport(){
+        
+        $search_by_any = $this->input->post('search_by_any');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+
 
         $params = $_REQUEST;
-        $totalRecords = $this->enquiry_model->getTaxinvoicesCountreport($params);
-        $queryRecords = $this->enquiry_model->getTaxinvoicesreport($params); 
+        $totalRecords = $this->enquiry_model->getTaxinvoicesCountreport($params,$search_by_any,$from_date,$to_date);
+        $queryRecords = $this->enquiry_model->getTaxinvoicesreport($params,$search_by_any,$from_date,$to_date); 
         $data = array();
         foreach ($queryRecords as $key => $value)
         {

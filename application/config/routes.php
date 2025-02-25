@@ -300,6 +300,7 @@ $route['fetchenquiryreport'] = "enquiry/fetchenquiryreport";
 $route['fetchstudentattendancereport'] = 'admin/fetchstudentattendancereport';
 $route['fetchadmissionsreport'] = 'admission/fetchadmissionsreport';
 $route['exportToExcelenquiryleads'] = 'enquiry/exportToExcelenquiryleads';
+$route['fetchTaxinvoicesreport'] = 'enquiry/fetchTaxinvoicesreport';
 
 
 
