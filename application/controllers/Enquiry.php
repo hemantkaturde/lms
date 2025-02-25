@@ -21,7 +21,9 @@
             $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model'));
             $this->load->library('form_validation');
             $this->load->library('mail');
-            $this->load->library('excel');
+            //$this->load->library('excel');
+            require_once APPPATH . 'third_party/PHPExcel.php'; // Load PHPExcel library
+
 
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
@@ -1723,11 +1725,37 @@
         // load excel library
         $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
 
-        print_r($empInfo);
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+
+
+        $column = 0;
+        foreach ($headers as $header) {
+            $sheet->setCellValueByColumnAndRow($column, 1, $header);
+            $column++;
+        }
+
+        // Populate data dynamically
+        $row = 2;
+        foreach ($empInfo as $record) {
+            $sheet->setCellValueByColumnAndRow(0, $row, $record['id']);       // ID
+            $sheet->setCellValueByColumnAndRow(1, $row, $record['name']);     // Full Name
+            $sheet->setCellValueByColumnAndRow(2, $row, $record['email']);    // Email Address
+            $sheet->setCellValueByColumnAndRow(3, $row, $record['phone']);    // Contact Number
+            $row++;
+        }
+
+        // Set headers to force download
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="user_report.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $writer->save('php://output');
         exit;
 
         
-        // $objPHPExcel = new PHPExcel();
         // $objPHPExcel->setActiveSheetIndex(0);
         // // set Header
         // $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
