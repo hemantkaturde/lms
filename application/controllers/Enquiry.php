@@ -1723,13 +1723,16 @@
         // load excel library
         $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
 
+        print_r($empInfo);
+        exit;
+
         
-        $objPHPExcel = new PHPExcel();
-        $objPHPExcel->setActiveSheetIndex(0);
-        // set Header
-        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
-        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
+        // $objPHPExcel = new PHPExcel();
+        // $objPHPExcel->setActiveSheetIndex(0);
+        // // set Header
+        // $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
+        // $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
+        // $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
 
         // set Row
         // $rowCount = 2;
@@ -1756,13 +1759,13 @@
         //             ->setARGB('99ff99');
 
 
-        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        // $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
           
-        header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;Filename=$fileName.xls");
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save('php://output');
+        // header('Content-Type: application/vnd.ms-excel');
+        // header("Content-Disposition: attachment;Filename=$fileName.xls");
+        // header('Cache-Control: max-age=0');
+        // $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        // $objWriter->save('php://output');
 
 
     }
