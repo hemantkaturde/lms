@@ -24,7 +24,7 @@
             $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model'));
             $this->load->library('form_validation');
             $this->load->library('mail');
-            $this->load->library('excel');
+            // $this->load->library('excel');
 
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
