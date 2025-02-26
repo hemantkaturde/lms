@@ -1716,6 +1716,39 @@
 
     public function exporttocxcelenquiryreport() {
 
+        // Set the filename
+        $filename = 'users_' . date('Ymd') . '.csv';
+        
+        // Set headers for CSV file download
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: text/csv; charset=UTF-8");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        
+        // Open output stream for writing CSV data
+        $file = fopen('php://output', 'w');
+        
+        // Add CSV column headers
+        $header = ["Username", "Name", "Gender", "Email"];
+        fputcsv($file, $header);
+        
+        // Load user data
+        //$CI =& get_instance(); // Get the CodeIgniter instance
+        //$CI->load->model('Crud_model'); // Load the model
+        //$usersData = $CI->Crud_model->getUserDetails();
+        $usersData = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
+
+        // Write user data to CSV
+        foreach ($usersData as $line) { 
+            fputcsv($file, $line);
+        }
+        
+        // Close the file and exit
+        fclose($file);
+        exit;
+        
+        
       
         // $search_by_any = $this->input->post('search_by_any');
         // $from_date = $this->input->post('from_date');
@@ -1782,18 +1815,18 @@
         //   $objWriter->save('php://output');
         // //   exit();
 
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello, World!'); // Sample Data
+        // $spreadsheet = new Spreadsheet();
+        // $sheet = $spreadsheet->getActiveSheet();
+        // $sheet->setCellValue('A1', 'Hello, World!'); // Sample Data
 
-        // Set Headers for Download
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="sample.xlsx"');
-        header('Cache-Control: max-age=0');
+        // // Set Headers for Download
+        // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        // header('Content-Disposition: attachment;filename="sample.xlsx"');
+        // header('Cache-Control: max-age=0');
 
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output'); // Output directly to browser
-        exit;
+        // $writer = new Xlsx($spreadsheet);
+        // $writer->save('php://output'); // Output directly to browser
+        // exit;
           
     }
 
