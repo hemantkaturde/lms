@@ -1715,7 +1715,6 @@
 
 
     public function exporttocxcelenquiryreport() {
-
         // Clear any previous output
         ob_clean();
         ob_start();
@@ -1732,6 +1731,9 @@
         // Open output stream
         $fp = fopen('php://output', 'w');
         
+        // Add BOM for proper UTF-8 encoding in Excel
+        fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+        
         // Add column headers
         $header = ["Username", "Name", "Gender", "Email"];
         fputcsv($fp, $header);
@@ -1744,13 +1746,14 @@
             fputcsv($fp, $line);
         }
         
-        // Close file pointer
+        // Close the file pointer
         fclose($fp);
         
-        // Send the output buffer and exit
+        // Flush output and exit
         ob_flush();
         exit;
-    
+        
+        
         
         
         
