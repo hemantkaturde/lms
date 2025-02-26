@@ -1716,37 +1716,42 @@
 
     public function exporttocxcelenquiryreport() {
 
-        // Set the filename
+        // Clear any previous output
+        ob_clean();
+        ob_start();
+        
+        // Set the filename with date
         $filename = 'users_' . date('Ymd') . '.csv';
         
-        // Set headers for CSV file download
-        header("Content-Description: File Transfer");
-        header("Content-Disposition: attachment; filename=$filename");
+        // Set headers to force download
         header("Content-Type: text/csv; charset=UTF-8");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
         header("Pragma: no-cache");
         header("Expires: 0");
         
-        // Open output stream for writing CSV data
-        $file = fopen('php://output', 'w');
+        // Open output stream
+        $fp = fopen('php://output', 'w');
         
-        // Add CSV column headers
+        // Add column headers
         $header = ["Username", "Name", "Gender", "Email"];
-        fputcsv($file, $header);
+        fputcsv($fp, $header);
         
-        // Load user data
-        //$CI =& get_instance(); // Get the CodeIgniter instance
-        //$CI->load->model('Crud_model'); // Load the model
-        //$usersData = $CI->Crud_model->getUserDetails();
-        $usersData = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
-
+        // Load user data from the model
+        $usersData = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any, $from_date, $to_date);
+        
         // Write user data to CSV
         foreach ($usersData as $line) { 
-            fputcsv($file, $line);
+            fputcsv($fp, $line);
         }
         
-        // Close the file and exit
-        fclose($file);
+        // Close file pointer
+        fclose($fp);
+        
+        // Send the output buffer and exit
+        ob_flush();
         exit;
+    
+        
         
         
       
