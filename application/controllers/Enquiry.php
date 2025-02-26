@@ -1716,42 +1716,42 @@
 
     public function exporttocxcelenquiryreport() {
         // Clear any previous output
-        ob_clean();
-        ob_start();
+        // ob_clean();
+        // ob_start();
         
-        // Set the filename with date
-        $filename = 'users_' . date('Ymd') . '.csv';
+        // // Set the filename with date
+        // $filename = 'users_' . date('Ymd') . '.csv';
         
-        // Set headers to force download
-        header("Content-Type: text/csv; charset=UTF-8");
-        header("Content-Disposition: attachment; filename=\"$filename\"");
-        header("Pragma: no-cache");
-        header("Expires: 0");
+        // // Set headers to force download
+        // header("Content-Type: text/csv; charset=UTF-8");
+        // header("Content-Disposition: attachment; filename=\"$filename\"");
+        // header("Pragma: no-cache");
+        // header("Expires: 0");
         
-        // Open output stream
-        $fp = fopen('php://output', 'w');
+        // // Open output stream
+        // $fp = fopen('php://output', 'w');
         
-        // Add BOM for proper UTF-8 encoding in Excel
-        fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+        // // Add BOM for proper UTF-8 encoding in Excel
+        // fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
         
-        // Add column headers
-        $header = ["Username", "Name", "Gender", "Email"];
-        fputcsv($fp, $header);
+        // // Add column headers
+        // $header = ["Username", "Name", "Gender", "Email"];
+        // fputcsv($fp, $header);
         
-        // Load user data from the model
-        $usersData = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any, $from_date, $to_date);
+        // // Load user data from the model
+        // $usersData = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any, $from_date, $to_date);
         
-        // Write user data to CSV
-        foreach ($usersData as $line) { 
-            fputcsv($fp, $line);
-        }
+        // // Write user data to CSV
+        // foreach ($usersData as $line) { 
+        //     fputcsv($fp, $line);
+        // }
         
-        // Close the file pointer
-        fclose($fp);
+        // // Close the file pointer
+        // fclose($fp);
         
-        // Flush output and exit
-        ob_flush();
-        exit;
+        // // Flush output and exit
+        // ob_flush();
+        // exit;
         
         
         
@@ -1835,6 +1835,27 @@
         // $writer = new Xlsx($spreadsheet);
         // $writer->save('php://output'); // Output directly to browser
         // exit;
+
+
+        
+        $spreadsheet = new Spreadsheet(); // instantiate Spreadsheet
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // manually set table data value
+        $sheet->setCellValue('A1', 'Gipsy Danger'); 
+        $sheet->setCellValue('A2', 'Gipsy Avenger');
+        $sheet->setCellValue('A3', 'Striker Eureka');
+        
+        $writer = new Xlsx($spreadsheet); // instantiate Xlsx
+ 
+        $filename = 'list-of-jaegers'; // set filename for excel file to be exported
+ 
+        header('Content-Type: application/vnd.ms-excel'); // generate excel file
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+        
+        $writer->save('php://output');	// download file 
           
     }
 
