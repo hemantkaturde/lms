@@ -1776,7 +1776,9 @@
           
           $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
           ob_end_clean(); // Clear again just in case
-          $objWriter->save('php://output');
+          //$objWriter->save('php://output');
+          $objWriter->save('file.xlsx');
+
           exit();
           
     }
