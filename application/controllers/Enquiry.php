@@ -21,9 +21,7 @@
             $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model'));
             $this->load->library('form_validation');
             $this->load->library('mail');
-            //$this->load->library('excel');
-            require_once APPPATH . 'third_party/PHPExcel.php'; // Load PHPExcel library
-
+            $this->load->library('excel');
 
             // $this->load->library('dbOperations');
             // Datas -> libraries ->BaseController / This function used load user sessions
@@ -1715,87 +1713,72 @@
 
     public function exporttocxcelenquiryreport() {
 
+      
         $search_by_any = $this->input->post('search_by_any');
         $from_date = $this->input->post('from_date');
         $to_date = $this->input->post('to_date');
     
 
-        // create file name
-        $fileName = 'Current_Order_Status_Report -'.date('d-m-Y').'.xlsx';  
-        // load excel library
-        $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
-
-        $objPHPExcel = new PHPExcel();
-        $objPHPExcel->setActiveSheetIndex(0);
-        $sheet = $objPHPExcel->getActiveSheet();
-
-
-        $column = 0;
-        foreach ($headers as $header) {
-            $sheet->setCellValueByColumnAndRow($column, 1, $header);
-            $column++;
-        }
-
-        // Populate data dynamically
-        $row = 2;
-        foreach ($empInfo as $record) {
-            $sheet->setCellValueByColumnAndRow(0, $row, $record['id']);       // ID
-            $sheet->setCellValueByColumnAndRow(1, $row, $record['name']);     // Full Name
-            $sheet->setCellValueByColumnAndRow(2, $row, $record['email']);    // Email Address
-            $sheet->setCellValueByColumnAndRow(3, $row, $record['phone']);    // Contact Number
-            $row++;
-        }
-
-        // Set headers to force download
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="user_report.xlsx"');
-        header('Cache-Control: max-age=0');
-
-        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $writer->save('php://output');
-        exit;
-
-        
-        // $objPHPExcel->setActiveSheetIndex(0);
-        // // set Header
-        // $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
-        // $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
-        // $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
-
-        // set Row
-        // $rowCount = 2;
-        // foreach ($empInfo as $element) {
-        //     $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, '1');
-        //     $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '1');
-        //     $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '1');
-        //     $rowCount++;
-        // }
-
-        // foreach(range('A','W') as $columnID) {
-        //     $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
-        // }
-        // /*********************Autoresize column width depending upon contents END***********************/
-        
-        // $objPHPExcel->getActiveSheet()->getStyle('A1:W1')->getFont()->setBold(true); //Make heading font bold
-        
-        // /*********************Add color to heading START**********************/
-        // $objPHPExcel->getActiveSheet()
-        //             ->getStyle('A1:W1')
-        //             ->getFill()
-        //             ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
-        //             ->getStartColor()
-        //             ->setARGB('99ff99');
-
-
-        // $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+          // create file name
+          $fileName = 'Current_Order_Status_Report -'.date('d-m-Y').'.xlsx';  
+          // load excel library
+          $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
           
-        // header('Content-Type: application/vnd.ms-excel');
-        // header("Content-Disposition: attachment;Filename=$fileName.xls");
-        // header('Cache-Control: max-age=0');
-        // $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        // $objWriter->save('php://output');
+          $objPHPExcel = new PHPExcel();
+          $objPHPExcel->setActiveSheetIndex(0);
+          // set Header
+          $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
+          $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
+          $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
+          $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Buyer Order Qty'); 
+          $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Buyer Delivery Date');
+          $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Raw Material Supplier');   
+          $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Type Of Raw Material');  
+          $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Gross Weight Per Pcs in Kgs');  
+          $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Raw Material Order Qty');  
+          $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Raw Material Actual Recd Qty');  
+          $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Expected Qty');  
+          $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Vendor Name');  
+          $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Vendor PO Number');
+          $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Vendor PO DATE');
+          $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'F G Part Description');
+          $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'FG Part No');
+          $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'FG Order Quantity');
+          $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'Received Quantity');
+          $objPHPExcel->getActiveSheet()->SetCellValue('S1', 'Net Weight Per Pcs in Kgs');
+          $objPHPExcel->getActiveSheet()->SetCellValue('T1', 'Vendor Delivery Date');
+          $objPHPExcel->getActiveSheet()->SetCellValue('U1', 'Remarks');
+          $objPHPExcel->getActiveSheet()->SetCellValue('V1', 'Form Name');
+          $objPHPExcel->getActiveSheet()->SetCellValue('W1', 'Status');
 
 
+          /*********************Autoresize column width depending upon contents END***********************/
+          
+          $objPHPExcel->getActiveSheet()->getStyle('A1:W1')->getFont()->setBold(true); //Make heading font bold
+          
+          /*********************Add color to heading START**********************/
+          $objPHPExcel->getActiveSheet()
+                      ->getStyle('A1:W1')
+                      ->getFill()
+                      ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                      ->getStartColor()
+                      ->setARGB('99ff99');
+
+
+          $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+    
+            
+          ob_end_clean(); // Clear output buffer
+          header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+          header("Content-Disposition: attachment; filename='report.xlsx'");
+          header("Cache-Control: max-age=0");
+          
+          $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+          ob_end_clean(); // Clear again just in case
+          $objWriter->save('php://output');
+          exit();
+          
     }
 
 

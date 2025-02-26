@@ -6576,7 +6576,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 		$(document).on('click','#excel_export_report_enquiry_leads',function(e){
 			e.preventDefault();
-			$(".loader_ajax").show();
+			// $(".loader_ajax").show();
 
 			if($('#search_by_any').val()){
 				var search_by_any =  $('#search_by_any').val();
