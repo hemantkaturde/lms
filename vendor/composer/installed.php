@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8040ca3d902f8d5917a4ab5ca0d29b4a4e4eb9e2',
+        'reference' => 'dc987fa6b371a418856c461556cb9eac41176798',
         'name' => 'codeigniter/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8040ca3d902f8d5917a4ab5ca0d29b4a4e4eb9e2',
+            'reference' => 'dc987fa6b371a418856c461556cb9eac41176798',
             'dev_requirement' => false,
         ),
         'composer/pcre' => array(
@@ -179,6 +179,15 @@
             'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),
             'reference' => 'e88da8d679acc3824ff231fdc553565b802ac016',
+            'dev_requirement' => false,
+        ),
+        'phpoffice/phpexcel' => array(
+            'pretty_version' => '1.8.1',
+            'version' => '1.8.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpoffice/phpexcel',
+            'aliases' => array(),
+            'reference' => '372c7cbb695a6f6f1e62649381aeaa37e7e70b32',
             'dev_requirement' => false,
         ),
         'phpoffice/phpspreadsheet' => array(
