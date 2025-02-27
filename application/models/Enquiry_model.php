@@ -1217,6 +1217,9 @@ public function getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_dat
 
              $data[$counter]['all_course_name'] = $all_course_name ;
              $data[$counter]['counsellor_name'] = $value['counseller'];
+             $data[$counter]['city'] = $value['city'];
+             $data[$counter]['gst_number'] = $value['gst_number'];
+             $data[$counter]['gst_holder_name'] = $value['gst_holder_name'];
 
              if($value['cancle_status']=='1'){
                    $data[$counter]['status'] = 'Cancelled';
