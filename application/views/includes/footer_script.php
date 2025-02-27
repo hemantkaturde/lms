@@ -6769,12 +6769,84 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	<script type="text/javascript">
 		
 
+		$(document).ready(function() {	
+				
+				if($('#search_by_any').val()){
+					var search_by_any =  $('#search_by_any').val();
+				}else{
+					var search_by_any = 'NA';
+				}
 
+				if($('#from_date').val()){
+					var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
 
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
 
+				viewadmissionreportreport(search_by_any,from_date,to_date);
+		});
+
+		$("#search_by_any").keyup(function () {
+					
+				if($('#search_by_any').val()){
+					var search_by_any =  $('#search_by_any').val();
+				}else{
+					var search_by_any = 'NA';
+				}
+		
+				if($('#from_date').val()){
+					var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
+		
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
+		
+				viewadmissionreportreport(search_by_any,from_date,to_date);
+		});
 
 		function viewadmissionreportreport(search_by_any,from_date,to_date){
 
+			    $(document).ready(function() {
+					var dt = $('#admissionreportList').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "8%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "15%", "targets": 3 },
+							{ "width": "15%", "targets": 4 },
+							{ "width": "20%", "targets": 5 },
+							{ "width": "8%", "targets": 6 },
+							{ "width": "15%", "targets": 7 },
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Admissions List Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchadmissions",
+							type: "post",
+						},
+					});
+	        });
+			
         }
 
     </script>
@@ -6783,9 +6855,54 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Attendance Report'){?>
 	<script type="text/javascript">
-		
-		function viewtaxinvoicesreport(search_by_any,from_date,to_date){
 
+        $(document).ready(function() {	
+				
+				if($('#search_by_any').val()){
+					var search_by_any =  $('#search_by_any').val();
+				}else{
+					var search_by_any = 'NA';
+				}
+
+				if($('#from_date').val()){
+					var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
+
+				viewattendancereport(search_by_any,from_date,to_date);
+		});
+
+		$("#search_by_any").keyup(function () {
+					
+				if($('#search_by_any').val()){
+					var search_by_any =  $('#search_by_any').val();
+				}else{
+					var search_by_any = 'NA';
+				}
+		
+				if($('#from_date').val()){
+					var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
+		
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
+		
+				viewattendancereport(search_by_any,from_date,to_date);
+		});
+		
+		function viewattendancereport(search_by_any,from_date,to_date){
 
 		}
 
