@@ -6816,7 +6816,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		});
 
 		function viewadmissionreportreport(search_by_any,from_date,to_date){
-
 			    $(document).ready(function() {
 					var dt = $('#admissionreportList').DataTable({
 						"columnDefs": [ 
@@ -6827,8 +6826,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							{ "width": "15%", "targets": 3 },
 							{ "width": "15%", "targets": 4 },
 							{ "width": "20%", "targets": 5 },
-							{ "width": "8%", "targets": 6 },
-							{ "width": "15%", "targets": 7 },
 						],
 						responsive: true,
 						"oLanguage": {
