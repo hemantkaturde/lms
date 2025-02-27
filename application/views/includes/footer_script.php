@@ -6768,7 +6768,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Amission Report'){?>
 	<script type="text/javascript">
 		
-		
+
+
+
 
 
 		function viewadmissionreportreport(search_by_any,from_date,to_date){
@@ -6782,8 +6784,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Attendance Report'){?>
 	<script type="text/javascript">
 		
-
-
 		function viewtaxinvoicesreport(search_by_any,from_date,to_date){
 
 
