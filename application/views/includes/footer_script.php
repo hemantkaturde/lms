@@ -6820,12 +6820,12 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var dt = $('#admissionreportList').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "8%", "targets": 0 },
+							{ "width": "10%", "targets": 0 },
 							{ "width": "10%", "targets": 1 },
 							{ "width": "10%", "targets": 2 },
-							{ "width": "15%", "targets": 3 },
-							{ "width": "15%", "targets": 4 },
-							{ "width": "20%", "targets": 5 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
 						],
 						responsive: true,
 						"oLanguage": {
