@@ -1783,6 +1783,74 @@
     }
 
 
+    public function exporttaxinvoicereport() {
+          
+        $search_by_any = $this->input->post('search_by_any');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+ 
+        // create file name
+        $fileName = 'Tax-Invoice-Report -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->enquiry_model->gettaxinvoiceDataforexporttoexcel($search_by_any,$from_date,$to_date);
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Receipt No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Inquiry No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Receipt Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Name'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Mobile No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Fees Amount Paid'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Fees Paid Before'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Total Fees'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Balance Fees'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Mode'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Invoice Type');  
+     
+
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['receipt_no']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['enquiry_no']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['receipt_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_fullname']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['enq_mobile']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['totalAmount']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['paid_before']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['total_amount']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['amount_balance']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['payment_mode']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['paymant_type']);
+            $rowCount++;
+        }
+
+        foreach(range('A','K') as $columnID) {
+            $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        /*********************Autoresize column width depending upon contents END***********************/
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
+        
+        /*********************Add color to heading START**********************/
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('A1:K1')
+                    ->getFill()
+                    ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('99ff99');
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+          
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'.$fileName);
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+ }
+
 
 }
 

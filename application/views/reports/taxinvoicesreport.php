@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-sm">
                             <div class="form-group">
-                                <button type="button" style="margin-top:30px !important" class="btn btn-primary" id="excel_export_report_enquiry_leads">Excel Export</button>
+                                <button type="button" style="margin-top:30px !important" class="btn btn-primary" class="excel_export_report_tax_invoice" id="excel_export_report_tax_invoice">Excel Export</button>
                             </div>
                         </div>
                     </div>
