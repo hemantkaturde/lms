@@ -1739,16 +1739,13 @@
            // set Row
            $rowCount = 2;
            foreach ($empInfo as $element) {
-               $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, '250');
-               $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '250');
-               $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '250');
-               $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, '250');
-               $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, '250');
-               $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '250');
-               $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '250');
-
-
-               
+               $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['enq_number']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['enq_date']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['enq_fullname']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_mobile']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['all_course_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['counsellor_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['status']);
                $rowCount++;
            }
 

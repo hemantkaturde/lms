@@ -1163,8 +1163,95 @@ public function getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_dat
     $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
     $query = $this->db->get(TBL_ENQUIRY);
     $fetch_result = $query->result_array();
+   
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
 
-    return $fetch_result;
+            //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+             $data[$counter]['enq_number'] = $value['enq_number'];
+             $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+             $data[$counter]['enq_fullname'] = $value['enq_fullname'];
+             $data[$counter]['enq_mobile'] = $value['enq_mobile'];
+             // $data[$counter]['enq_email'] = $value['enq_email'];
+
+            //  if($value['payment_status']=='0'){
+            //     $data[$counter]['status'] = 'In Follow up';
+            //  }else if($value['payment_status']=='1'){
+            //     $data[$counter]['status'] = 'Admitted';
+            //  }else{
+            //     $data[$counter]['status'] = 'In Follow up';
+            //  }
+
+           
+
+
+             $course_ids    =   explode(',', $value['enq_course_id']);
+         
+             $total_fees = 0;
+             $course_name = '';
+             $i = 1;
+                foreach($course_ids as $id)
+                {
+                    $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                    if($get_course_fees){
+                        
+                        $total_fees += $get_course_fees[0]->course_total_fees;
+                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ' <br>';  
+                        $i++;  
+
+                    }else{
+
+                        $total_fees = '';
+                        $course_name = '';  
+                        $i++;  
+                    }
+                  
+                }
+             $all_course_name = trim($course_name, ', '); 
+
+
+
+             $data[$counter]['all_course_name'] = $all_course_name ;
+             $data[$counter]['counsellor_name'] = $value['counseller'];
+
+             if($value['cancle_status']=='1'){
+                   $data[$counter]['status'] = 'Cancelled';
+             }else{
+                if(!empty($value['admissionexits'])){
+                    $data[$counter]['status'] = 'Admitted';
+                }else{
+                    $data[$counter]['status'] = 'In Follow up';
+                }
+             }
+
+             $data[$counter]['action'] = '';
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."payment_details/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/payment.png' alt='Payment Details' title='Payment Details'></a> | ";
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."followup/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/follow_up.png' alt='Follow Up' title='Follow Up'></a> | ";
+            //  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='Whats_up_link' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/whatsapp.png  alt='Whats Up Link' title='Whats Up Link'></a> | ";
+             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='send_brochure_link' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/send-link.png  alt='Send Brochure Link' title='Send Brochure Link'></a> | "; 
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editenquiry/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
+             
+             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."add_on_courses/".$value['enquiry_id']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/add.png' alt='Add-on courses' title='Add-on courses'></a> | ";
+
+
+             if($value['admissionexits']){
+             }else{
+                if($value['cancle_status']=='1'){
+                }else{
+                    $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_enquiry' data-id='".$value['enquiry_id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Equipment' title='Delete Enquiry'></a> "; 
+                }
+             }
+             
+            $counter++; 
+        }
+    }
+    return $data;
+
+
 }
 
 
