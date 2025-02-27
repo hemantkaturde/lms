@@ -1849,7 +1849,68 @@
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save('php://output');
- }
+    }
+
+
+    public function exportadmissionereport() {
+          
+        $search_by_any = $this->input->post('search_by_any');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+ 
+        // create file name
+        $fileName = 'Admission-Report -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->enquiry_model->getadmissionreportoexcel($search_by_any,$from_date,$to_date);
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Enquiry Id');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Mobile No/Roll No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Name'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Email');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Courses'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Admission Status'); 
+     
+
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['receipt_no']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['enquiry_no']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['receipt_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_fullname']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['enq_mobile']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['totalAmount']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['paid_before']);
+            $rowCount++;
+        }
+
+        foreach(range('A','G') as $columnID) {
+            $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        /*********************Autoresize column width depending upon contents END***********************/
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:G1')->getFont()->setBold(true); //Make heading font bold
+        
+        /*********************Add color to heading START**********************/
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('A1:G1')
+                    ->getFill()
+                    ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('99ff99');
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+          
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'.$fileName);
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+    }
 
 
 }

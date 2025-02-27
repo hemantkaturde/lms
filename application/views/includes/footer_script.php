@@ -6848,6 +6848,56 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			
         }
 
+		$(document).on('click','#excel_export_adminssion_report',function(e){
+					e.preventDefault();
+					// $(".loader_ajax").show();
+
+					if($('#search_by_any').val()){
+						var search_by_any =  $('#search_by_any').val();
+					}else{
+						var search_by_any = 'NA';
+					}
+
+					if($('#from_date').val()){
+						var from_date =  $('#from_date').val();
+					}else{
+						var from_date = 'NA';
+					}
+   
+					if($('#to_date').val()){
+						var to_date =  $('#to_date').val();
+					}else{
+						var to_date = 'NA';
+					}
+
+					$.ajax({
+						url : "<?php echo base_url();?>enquiry/exportadmissionereport",
+						type: "POST",
+						data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
+						success: function(data, textStatus, jqXHR)
+						{
+
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$(".report_type_error").html("");
+								alert('No data fond');
+							}
+							else
+							{
+								$(".report_type_error").html("");
+								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exportadmissionereport";
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+	    });
+
     </script>
 <?php } ?>
 
