@@ -1200,7 +1200,7 @@ public function getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_dat
                     if($get_course_fees){
                         
                         $total_fees += $get_course_fees[0]->course_total_fees;
-                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ' <br>';  
+                        $course_name .= $i.'-'.$get_course_fees[0]->course_name. ',';  
                         $i++;  
 
                     }else{
