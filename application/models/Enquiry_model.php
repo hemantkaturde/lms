@@ -1256,7 +1256,7 @@ public function getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_dat
 }
 
 
-public function gettaxinvoiceDataforexporttoexcel($params,$search_by_any,$from_date,$to_date){
+public function gettaxinvoiceDataforexporttoexcel($search_by_any,$from_date,$to_date){
 
     $new_string = trim(str_replace('%20', ' ', $search_by_any));
 
@@ -1276,7 +1276,6 @@ public function gettaxinvoiceDataforexporttoexcel($params,$search_by_any,$from_d
     //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
     $this->db->where(TBL_PAYMENT.'.payment_status', 1);
     $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
-    $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_PAYMENT);
     
     $fetch_result = $query->result_array();
