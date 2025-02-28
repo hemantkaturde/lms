@@ -6768,7 +6768,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Amission Report'){?>
 	<script type="text/javascript">
 		
-
 		$(document).ready(function() {	
 				
 				if($('#search_by_any').val()){
