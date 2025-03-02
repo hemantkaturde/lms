@@ -1089,6 +1089,7 @@ public function getEnquiryreportdata($params,$search_by_student,$search_by_conse
     }
 
     $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
+    $this->db->limit($params['length'],$params['start']);
     $this->db->order_by(TBL_ENQUIRY.'.enq_id', 'DESC');
     $query = $this->db->get(TBL_ENQUIRY);
     $fetch_result = $query->result_array();
