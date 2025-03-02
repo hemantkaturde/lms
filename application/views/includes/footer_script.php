@@ -6696,6 +6696,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				var search_by_consellor = 'NA';
 			}
 
+
+
 			if($('#from_date').val()){
 				var from_date =  $('#from_date').val();
 			}else{

@@ -1189,6 +1189,7 @@ public function getenquiryDataforexporttoexcel($search_by_student,$search_by_con
         $this->db->where(TBL_USER.'.roleId', 5);
     }
 
+
     if($from_date!='NA'){
         $this->db->where(TBL_ENQUIRY.'.enq_date >=', $from_date);
     }

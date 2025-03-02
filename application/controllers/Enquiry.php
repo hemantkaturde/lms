@@ -1711,10 +1711,6 @@
 
     public function exporttocxcelenquiryreport($search_by_student,$search_by_consellor,$from_date,$to_date) {
           
-           $search_by_any = $this->input->post('search_by_any');
-           $from_date = $this->input->post('from_date');
-           $to_date = $this->input->post('to_date');
-    
            // create file name
            $fileName = 'Inquiry-Leads-Report -'.date('d-m-Y').'.xlsx';  
            // load excel library
