@@ -6612,7 +6612,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    else
 				    {
 						$(".report_type_error").html("");
-				    	window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exporttocxcelenquiryreport";
+				    	window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exporttocxcelenquiryreport/"+search_by_any+"/"+from_date+"/"+to_date;
 				    }
 					
 				},

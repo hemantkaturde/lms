@@ -1714,7 +1714,7 @@
     }
 
 
-    public function exporttocxcelenquiryreport() {
+    public function exporttocxcelenquiryreport($search_by_any=NULL,$from_date=NULL,$to_date=NULL) {
           
            $search_by_any = $this->input->post('search_by_any');
            $from_date = $this->input->post('from_date');
