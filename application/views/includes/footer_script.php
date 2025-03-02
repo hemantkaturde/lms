@@ -6560,7 +6560,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 	                "sEmptyTable": "<i>No Enquiry Found.</i>",
 	            }, 
 	            "bSort" : false,
-	            "bFilter":true,
+	            "bFilter":false,
 	            "bLengthChange": true,
 	            "iDisplayLength": 10,   
 	            "bProcessing": true,

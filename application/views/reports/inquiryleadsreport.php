@@ -24,11 +24,32 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh </b></label>
-                                <input  style="" type="text" class="form-control"  id="search_by_any" name="search_by_any">
-                                <p class="error search_by_any_error"></p>
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Student</b></label>
+                                    <select class="form-control" id="search_by_student" name="search_by_student">
+                                            <option value="">Select Student</option>
+                                            <?php foreach ($getUserList as $key => $value) { ?>
+                                            <option value="<?php echo $value->userId; ?>">
+                                                <?php echo $value->name.' - '.$value->mobile; ?></option>
+                                            <?php } ?>
+                                    </select>
+                                    <p class="error search_by_consellor_error"></p>
                             </div>
                         </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Counsellor</b></label>
+                                    <select class="form-control" id="search_by_consellor" name="search_by_consellor">
+                                            <option value="">Select Counsellor</option>
+                                            <?php foreach ($getCounsellorList as $key => $value) { ?>
+                                            <option value="<?php echo $value->userId; ?>">
+                                                <?php echo $value->name.' - '.$value->mobile; ?></option>
+                                            <?php } ?>
+                                    </select>
+                                <p class="error search_by_consellor_error"></p>
+                            </div>
+                        </div>
+
 
                         <div class="col-sm">
                            <div class="form-group">
