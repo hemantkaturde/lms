@@ -1012,24 +1012,33 @@ public function getaddoncoursepaymentdetailsCount($params,$id){
    }
 
 
-public function getEnquiryreportCount($params,$search_by_any,$from_date,$to_date){
+public function getEnquiryreportCount($params,$search_by_student,$search_by_consellor,$from_date,$to_date){
    
-    $new_string = trim(str_replace('%20', ' ', $search_by_any));
-
     $this->db->select('*');
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
 
-    if($search_by_any != "NA") 
+    if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
-        $this->db->or_where(TBL_USER.".name LIKE '%".$new_string."%'");
-        $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$new_string."%'");
-        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$new_string."%')");
+        $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
     }
 
     if($this->session->userdata('roleText')=='Counsellor'){
         $this->db->where(TBL_ENQUIRY.'.counsellor_id', $this->session->userdata('userId'));
+    }
+
+
+    if($search_by_student!='NA'){
+        $this->db->where(TBL_USER.'.userId',$search_by_student);
+    }
+
+
+    if($search_by_consellor!='NA'){
+        $this->db->where(TBL_USER.'.userId',$search_by_consellor);
+        $this->db->where(TBL_USER.'.roleId', 5);
     }
 
     $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
@@ -1038,27 +1047,34 @@ public function getEnquiryreportCount($params,$search_by_any,$from_date,$to_date
     return $rowcount;
 }
 
-public function getEnquiryreportdata($params,$search_by_any,$from_date,$to_date){
-
-    $new_string = trim(str_replace('%20', ' ', $search_by_any));
-
+public function getEnquiryreportdata($params,$search_by_student,$search_by_consellor,$from_date,$to_date){
 
     $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller');
     // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
     $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
     
-    if($search_by_any != "NA") 
+    if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
-        $this->db->or_where(TBL_USER.".name LIKE '%".$new_string."%'");
-        $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$new_string."%'");
-        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$new_string."%')");
+        $this->db->where("(".TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_USER.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_email LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%')");
     }
 
     if($this->session->userdata('roleText')=='Counsellor'){
 
         $this->db->where(TBL_ENQUIRY.'.counsellor_id', $this->session->userdata('userId'));
+    }
+
+    if($search_by_student!='NA'){
+        $this->db->where(TBL_USER.'.userId',$search_by_student);
+    }
+
+
+    if($search_by_consellor!='NA'){
+        $this->db->where(TBL_USER.'.userId',$search_by_consellor);
+        $this->db->where(TBL_USER.'.roleId', 5);
     }
 
     $this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
