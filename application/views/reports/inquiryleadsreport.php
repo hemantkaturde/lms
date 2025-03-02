@@ -25,7 +25,7 @@
                         <div class="col-sm">
                             <div class="form-group">
                                 <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Student</b></label>
-                                    <select class="form-control" id="search_by_student" name="search_by_student">
+                                    <select class="form-control select2" id="search_by_student" name="search_by_student">
                                             <option value="">Select Student</option>
                                             <?php foreach ($getUserList as $key => $value) { ?>
                                             <option value="<?php echo $value->userId; ?>">
@@ -39,7 +39,7 @@
                         <div class="col-sm">
                             <div class="form-group">
                                 <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Counsellor</b></label>
-                                    <select class="form-control" id="search_by_consellor" name="search_by_consellor">
+                                    <select class="form-control select2" id="search_by_consellor" name="search_by_consellor">
                                             <option value="">Select Counsellor</option>
                                             <?php foreach ($getCounsellorList as $key => $value) { ?>
                                             <option value="<?php echo $value->userId; ?>">
@@ -93,3 +93,11 @@
         </div>
     </div>
 <!-- END PAGE CONTENT-->
+
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> 
+<script>
+    $('.select2').select2();
+</script>
