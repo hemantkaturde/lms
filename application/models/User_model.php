@@ -123,8 +123,8 @@ class User_model extends CI_Model
     function getUserList()
     {
         $this->db->select('*');
-        $this->db->from('tbl_users');
-        $this->db->where('user_flag','student');
+        $this->db->from('tbl_enquiry');
+        $this->db->group_by('tbl_enquiry.enq_mobile');
         $query = $this->db->get();
         return $query->result();
     }

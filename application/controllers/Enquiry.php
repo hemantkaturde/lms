@@ -1709,7 +1709,7 @@
     }
 
 
-    public function exporttocxcelenquiryreport($search_by_any=NULL,$from_date=NULL,$to_date=NULL) {
+    public function exporttocxcelenquiryreport($search_by_student,$search_by_consellor,$from_date,$to_date) {
           
            $search_by_any = $this->input->post('search_by_any');
            $from_date = $this->input->post('from_date');
@@ -1718,7 +1718,7 @@
            // create file name
            $fileName = 'Inquiry-Leads-Report -'.date('d-m-Y').'.xlsx';  
            // load excel library
-           $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
+           $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_student,$search_by_consellor,$from_date,$to_date);
            $objPHPExcel = new PHPExcel();
            $objPHPExcel->setActiveSheetIndex(0);
            // set Header

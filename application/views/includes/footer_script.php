@@ -13,7 +13,7 @@
 				format: 'yyyy-mm-dd' ,
 				//startDate: new Date()
 
-				startDate: new Date()
+				//startDate: new Date()
 			});
 		});
 
@@ -6523,7 +6523,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date);
 	    });
 
-		$("#search_by_student").change(function () {
+		$('#search_by_student').select2();
+		$('#search_by_consellor').select2();
+
+		$('#search_by_student').on('change', function() {
 			            
 			if($('#search_by_student').val()){
 				var search_by_student =  $('#search_by_student').val();
@@ -6551,7 +6554,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 			viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date);
 		});
-
 
 		$("#search_by_consellor").change(function () {
 			            
@@ -6582,6 +6584,70 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date);
 		});
 
+		$(document).on('change','#from_date',function(e){  
+			e.preventDefault();
+
+			if($('#search_by_student').val()){
+				var search_by_student =  $('#search_by_student').val();
+			}else{
+				var search_by_student = 'NA';
+			}
+
+			if($('#search_by_consellor').val()){
+				var search_by_consellor =  $('#search_by_consellor').val();
+			}else{
+				var search_by_consellor = 'NA';
+			}
+
+			if($('#to_date').val()){
+				var to_date =  $('#to_date').val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			if($('#from_date').val()){
+				var from_date =  $('#from_date').val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date);
+
+        });
+
+
+		$(document).on('change','#to_date',function(e){  
+			e.preventDefault();
+
+			if($('#search_by_student').val()){
+				var search_by_student =  $('#search_by_student').val();
+			}else{
+				var search_by_student = 'NA';
+			}
+
+			if($('#search_by_consellor').val()){
+				var search_by_consellor =  $('#search_by_consellor').val();
+			}else{
+				var search_by_consellor = 'NA';
+			}
+
+			if($('#to_date').val()){
+				var to_date =  $('#to_date').val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			if($('#from_date').val()){
+				var from_date =  $('#from_date').val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date);
+
+        });
+
+		
 		function viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date){
 			$('#view_enquirylist_report').DataTable().destroy();
 
@@ -6618,10 +6684,16 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			e.preventDefault();
 			// $(".loader_ajax").show();
 
-			if($('#search_by_any').val()){
-				var search_by_any =  $('#search_by_any').val();
+			if($('#search_by_student').val()){
+				var search_by_student =  $('#search_by_student').val();
 			}else{
-				var search_by_any = 'NA';
+				var search_by_student = 'NA';
+			}
+
+			if($('#search_by_consellor').val()){
+				var search_by_consellor =  $('#search_by_consellor').val();
+			}else{
+				var search_by_consellor = 'NA';
 			}
 
 			if($('#from_date').val()){
@@ -6637,9 +6709,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 			}
 
 			$.ajax({
-				url : "<?php echo base_url();?>enquiry/exporttocxcelenquiryreport",
+				url : "<?php echo base_url();?>enquiry/exporttocxcelenquiryreport/"+search_by_student+"/"+search_by_consellor+"/"+from_date+"/"+to_date,
 				type: "POST",
-				data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
 				success: function(data, textStatus, jqXHR)
 				{
 
@@ -6652,7 +6723,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				    else
 				    {
 						$(".report_type_error").html("");
-				    	window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exporttocxcelenquiryreport/"+search_by_any+"/"+from_date+"/"+to_date;
+				    	window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exporttocxcelenquiryreport/"+search_by_student+"/"+search_by_consellor+"/"+from_date+"/"+to_date;
 				    }
 					
 				},
