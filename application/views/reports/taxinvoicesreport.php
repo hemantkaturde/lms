@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Payment Mode</b></label>
                                     <select class="form-control select2 search_by_payment_mode" id="search_by_payment_mode" name="search_by_payment_mode">
-                                            <option value="">Select Student</option>
+                                            <option value="">Select Payment Mode</option>
                                             <option value="NEFT">NEFT</option>
                                             <option value="IMPS">IMPS</option>
                                             <option value="RTGS">RTGS</option>
