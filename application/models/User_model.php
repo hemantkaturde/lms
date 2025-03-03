@@ -134,6 +134,7 @@ class User_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from(TBL_ADMISSION);
+        $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_ADMISSION.'.enq_id');
         $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
         $query = $this->db->get();
         return $query->result();

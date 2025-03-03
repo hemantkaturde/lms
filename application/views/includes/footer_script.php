@@ -7016,7 +7016,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
-		$("#search_by_student").keyup(function () {
+		$("#search_by_student").change(function () {
 					
 				if($('#search_by_student').val()){
 					var search_by_student =  $('#search_by_student').val();
@@ -7040,6 +7040,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		});
 
 		function viewadmissionreportreport(search_by_student,from_date,to_date){
+			    $('#admissionreportList').DataTable().destroy();
+   
 			    $(document).ready(function() {
 					var dt = $('#admissionreportList').DataTable({
 						"columnDefs": [ 

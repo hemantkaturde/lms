@@ -204,7 +204,24 @@ class Admission_model extends CI_Model
                 $this->db->or_where(TBL_ADMISSION.".email LIKE '%".$params['search']['value']."%')");
             }
             $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
-            $this->db->order_by(TBL_ADMISSION.'.enq_id', 'DESC');
+
+
+            if($search_by_student!='NA'){
+                $this->db->where(TBL_ADMISSION.'.enq_id',$search_by_student);
+            }
+
+    
+            if($from_date!='NA'){
+                $this->db->where(TBL_ADMISSION.'.createdDtm >=', $from_date);
+            }
+    
+            if($to_date!='NA'){
+                $this->db->where(TBL_ADMISSION.'.createdDtm <=', $to_date);
+            }
+
+
+
+            $this->db->order_by(TBL_ADMISSION.'.enq_id', 'DESC');            
             $this->db->limit($params['length'],$params['start']);
             $query = $this->db->get(TBL_ADMISSION);
             $fetch_result = $query->result_array();
