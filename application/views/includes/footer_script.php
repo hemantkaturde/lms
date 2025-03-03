@@ -7039,6 +7039,57 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
+		$(document).on('change','#from_date',function(e){  
+						e.preventDefault();
+						if($('#search_by_student').val()){
+							var search_by_student =  $('#search_by_student').val();
+						}else{
+							var search_by_student = 'NA';
+						}
+
+
+						if($('#from_date').val()){
+							var from_date =  $('#from_date').val();
+						}else{
+							var from_date = 'NA';
+						}
+
+						if($('#to_date').val()){
+							var to_date =  $('#to_date').val();
+						}else{
+							var to_date = 'NA';
+						}
+			
+						viewtaxinvoicesreport(search_by_student,from_date,to_date);
+			
+		});
+			
+		$(document).on('change','#to_date',function(e){  
+			    e.preventDefault();
+			
+			    if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
+				}else{
+					var search_by_student = 'NA';
+				}
+
+
+				if($('#from_date').val()){
+				   var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
+			
+			    viewadmissionreportreport(search_by_student,from_date,to_date);
+			
+		});
+
 		function viewadmissionreportreport(search_by_student,from_date,to_date){
 			    $('#admissionreportList').DataTable().destroy();
    
@@ -7097,7 +7148,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 
 					$.ajax({
-						url : "<?php echo base_url();?>enquiry/exportadmissionereport",
+						url : "<?php echo base_url();?>enquiry/exportadmissionereport/"+search_by_student+"/"+from_date+"/"+to_date,
 						type: "POST",
 						success: function(data, textStatus, jqXHR)
 						{
@@ -7111,7 +7162,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							else
 							{
 								$(".report_type_error").html("");
-								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exportadmissionereport";
+								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exportadmissionereport/"+search_by_student+"/"+from_date+"/"+to_date;
 							}
 							
 						},

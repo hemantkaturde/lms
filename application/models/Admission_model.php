@@ -2123,6 +2123,100 @@ function studentcertificateData($params)
     }
 
 
+    public function getadmissionreportoexcel($search_by_any,$from_date,$to_date){
+
+
+        $this->db->select('*');
+        // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+        $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
+
+        // if($search_by_student!='NA'){
+        //     $this->db->where(TBL_ADMISSION.'.enq_id',$search_by_student);
+        // }
+
+        // if($from_date!='NA'){
+        //     $this->db->where(TBL_ADMISSION.'.createdDtm >=', $from_date);
+        // }
+
+        // if($to_date!='NA'){
+        //     $this->db->where(TBL_ADMISSION.'.createdDtm <=', $to_date);
+        // }
+
+        $this->db->order_by(TBL_ADMISSION.'.enq_id', 'DESC');            
+        $query = $this->db->get(TBL_ADMISSION);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $getCourseList = $this->getSelectedCourse($value['enq_id']);
+
+                if($getCourseList){
+
+                if($getCourseList[0]->enq_course_id){
+
+                    $course_ids    =   explode(',', $getCourseList[0]->enq_course_id);
+                    $total_fees = 0;
+                    $course_name = '';
+                    $i = 1;
+                    foreach($course_ids as $id)
+                    {
+                        $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                        if($get_course_fees){
+                            
+                            $total_fees += $get_course_fees[0]->course_total_fees;
+                            $course_name .= $i.') '.$get_course_fees[0]->course_name.'<br> ';  
+                            $i++;   
+                    
+                        }else{
+                    
+                            $total_fees = '';
+                            $course_name = '';  
+                            $i++;  
+                        }
+                        
+                    }
+                    $all_course_name = trim($course_name, ', '); 
+
+                }else{
+
+                    $all_course_name = ''; 
+
+                }
+            }else{
+                $all_course_name = ''; 
+            }
+
+    
+               
+                 // $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['enq_id'] = $value['enq_id'];
+                 $data[$counter]['mobile'] = $value['mobile'];
+                 $data[$counter]['createdDtm'] = $value['createdDtm'];
+                 $data[$counter]['name'] = $value['name'];
+                 $data[$counter]['email'] = $value['email'];
+                 // $data[$counter]['address'] = $value['address'];
+                 $data[$counter]['courses'] = $all_course_name;
+                
+                 if($value['cancle_status']==1){
+                   $data[$counter]['cancel'] = 'Cancelled';
+                 }else{
+                    $data[$counter]['cancel'] = 'Admitted';
+                 }
+
+                $counter++; 
+            }
+        }
+        return $data;
+
+
+}
+
+
     
     
 

@@ -1449,16 +1449,6 @@ public function gettaxinvoiceDataforexporttoexcel($search_by_student,$search_by_
 }
 
 
-public function getadmissionreportoexcel($search_by_any,$from_date,$to_date){
-
-
-
-
-
-}
-
-
-
 
 
 }
