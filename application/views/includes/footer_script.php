@@ -6494,6 +6494,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 <?php if($pageTitle=='Inquiry Report'){ ?>
 	<script type="text/javascript">
+		
+		$('#search_by_student').select2();
+		$('#search_by_consellor').select2();
+		
 		$(document).ready(function() {
 
 			if($('#search_by_student').val()){
@@ -6522,9 +6526,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 			viewenquirylistreport(search_by_student,search_by_consellor,from_date,to_date);
 	    });
-
-		$('#search_by_student').select2();
-		$('#search_by_consellor').select2();
 
 		$('#search_by_student').on('change', function() {
 			            
@@ -6744,7 +6745,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Tax Invoice Report'){ ?>
 	    <script type="text/javascript">
 				$('#search_by_student').select2();
-		        $('#search_by_consellor').select2();
+		        $('#search_by_payment_mode').select2();
 
 		        $(document).ready(function() {	
 				

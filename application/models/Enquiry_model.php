@@ -656,6 +656,23 @@ class Enquiry_model extends CI_Model
             $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$params['search']['value']."%')");
         }
 
+        if($search_by_student!='NA'){
+            $this->db->where(TBL_ENQUIRY.'.enq_id',$search_by_student);
+        }
+    
+        if($search_by_payment_mode!='NA'){
+            $this->db->where(TBL_PAYMENT.'.payment_mode',$search_by_payment_mode);
+        }
+    
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_PAYMENT.'.payment_date >=', $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_PAYMENT.'.payment_date <=', $to_date);
+        }
+
         //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
         $this->db->order_by(TBL_PAYMENT.'.payment_status', 1);
@@ -680,6 +697,25 @@ class Enquiry_model extends CI_Model
             $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$params['search']['value']."%')");
         }
+
+        if($search_by_student!='NA'){
+            $this->db->where(TBL_ENQUIRY.'.enq_id',$search_by_student);
+        }
+    
+        if($search_by_payment_mode!='NA'){
+            $this->db->where(TBL_PAYMENT.'.payment_mode',$search_by_payment_mode);
+        }
+    
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_PAYMENT.'.payment_date >=', $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_PAYMENT.'.payment_date <=', $to_date);
+        }
+
+        
         //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
         $this->db->order_by(TBL_PAYMENT.'.id', 'DESC');
