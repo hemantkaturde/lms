@@ -24,11 +24,32 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh </b></label>
-                                <input  style="" type="text" class="form-control"  id="search_by_any" name="search_by_any">
-                                <p class="error search_by_any_error"></p>
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Student</b></label>
+                                    <select class="form-control select2 search_by_student" id="search_by_student" name="search_by_student">
+                                            <option value="">Select Student</option>
+                                            <?php foreach ($getUserList as $key => $value) { ?>
+                                            <option value="<?php echo $value->enq_id; ?>">
+                                                <?php echo $value->enq_fullname.' - '.$value->enq_mobile; ?></option>
+                                            <?php } ?>
+                                    </select>
+                                    <p class="error search_by_student_error"></p>
                             </div>
                         </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Counsellor</b></label>
+                                    <select class="form-control select2" id="search_by_consellor" name="search_by_consellor">
+                                            <option value="">Select Counsellor</option>
+                                            <?php foreach ($getCounsellorList as $key => $value) { ?>
+                                            <option value="<?php echo $value->userId; ?>">
+                                                <?php echo $value->name.' - '.$value->mobile; ?></option>
+                                            <?php } ?>
+                                    </select>
+                                <p class="error search_by_consellor_error"></p>
+                            </div>
+                        </div>
+
 
                         <div class="col-sm">
                            <div class="form-group">
@@ -72,3 +93,13 @@
         </div>
     </div>
 <!-- END PAGE CONTENT-->
+
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> 
+
+
+<!-- <script>
+    $('.select2').select2();
+</script> -->

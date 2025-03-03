@@ -116,7 +116,27 @@ class User_model extends CI_Model
         $this->db->from('tbl_roles');
         $this->db->where('isDeleted',0);
         $query = $this->db->get();
-        
+        return $query->result();
+    }
+
+
+    function getUserList()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_enquiry');
+        $this->db->group_by('tbl_enquiry.enq_mobile');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+    
+    function getCounsellorList()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->where('roleId','5');
+        $query = $this->db->get();
         return $query->result();
     }
 

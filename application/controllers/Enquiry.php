@@ -1681,17 +1681,12 @@
     }
 
 
-    public function fetchenquiryreport()
+    public function fetchenquiryreport($search_by_student,$search_by_consellor,$from_date,$to_date)
     {
-
-        $search_by_any = $this->input->post('search_by_any');
-        $from_date = $this->input->post('from_date');
-        $to_date = $this->input->post('to_date');
-
-        
+    
         $params = $_REQUEST;
-        $totalRecords = $this->enquiry_model->getEnquiryreportCount($params,$search_by_any,$from_date,$to_date); 
-        $queryRecords = $this->enquiry_model->getEnquiryreportdata($params,$search_by_any,$from_date,$to_date); 
+        $totalRecords = $this->enquiry_model->getEnquiryreportCount($params,$search_by_student,$search_by_consellor,$from_date,$to_date); 
+        $queryRecords = $this->enquiry_model->getEnquiryreportdata($params,$search_by_student,$search_by_consellor,$from_date,$to_date); 
         $data = array();
         foreach ($queryRecords as $key => $value)
         {
@@ -1714,16 +1709,12 @@
     }
 
 
-    public function exporttocxcelenquiryreport() {
+    public function exporttocxcelenquiryreport($search_by_student,$search_by_consellor,$from_date,$to_date) {
           
-           $search_by_any = $this->input->post('search_by_any');
-           $from_date = $this->input->post('from_date');
-           $to_date = $this->input->post('to_date');
-    
            // create file name
            $fileName = 'Inquiry-Leads-Report -'.date('d-m-Y').'.xlsx';  
            // load excel library
-           $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_any,$from_date,$to_date);
+           $empInfo = $this->enquiry_model->getenquiryDataforexporttoexcel($search_by_student,$search_by_consellor,$from_date,$to_date);
            $objPHPExcel = new PHPExcel();
            $objPHPExcel->setActiveSheetIndex(0);
            // set Header

@@ -1256,8 +1256,9 @@ class Admin extends BaseController
  
     public function inquiryleadsreport(){
         $this->global['pageTitle'] = 'Inquiry Report';
-        
-        $this->loadViews("reports/inquiryleadsreport", $this->global, NULL, NULL);
+        $data['getUserList'] = $this->user_model->getUserList();
+        $data['getCounsellorList'] = $this->user_model->getCounsellorList();
+        $this->loadViews("reports/inquiryleadsreport", $this->global, $data, NULL);
     }
 
     public function taxinvoicesreport(){
