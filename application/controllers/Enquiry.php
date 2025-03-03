@@ -1777,11 +1777,7 @@
 
 
     public function exporttaxinvoicereport() {
-          
-        $search_by_any = $this->input->post('search_by_any');
-        $from_date = $this->input->post('from_date');
-        $to_date = $this->input->post('to_date');
- 
+        
         // create file name
         $fileName = 'Tax-Invoice-Report -'.date('d-m-Y').'.xlsx';  
         // load excel library

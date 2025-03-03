@@ -6953,9 +6953,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 
 					$.ajax({
-						url : "<?php echo base_url();?>enquiry/exporttaxinvoicereport",
+						url : "<?php echo base_url();?>enquiry/exporttaxinvoicereport/"+search_by_student+"/"+search_by_payment_mode+"/"+from_date+"/"+to_date,
 						type: "POST",
-						data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
 						success: function(data, textStatus, jqXHR)
 						{
 
@@ -6968,7 +6967,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							else
 							{
 								$(".report_type_error").html("");
-								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exporttaxinvoicereport";
+								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exporttaxinvoicereport/"+search_by_student+"/"+search_by_payment_mode+"/"+from_date+"/"+to_date;
 							}
 							
 						},
