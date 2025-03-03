@@ -2,7 +2,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Admission Listing</div>
+                <div class="ibox-title">Admission Report</div>
             </div>
             <div class="ibox-body">
                 <div class="panel-body table-responsive">
