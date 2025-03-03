@@ -1167,8 +1167,8 @@ public function getEnquiryreportdata($params,$search_by_student,$search_by_conse
 
 public function getenquiryDataforexporttoexcel($search_by_student,$search_by_consellor,$from_date,$to_date) {
     
-    $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller');
-    // $this->db->join(TBL_COURSE_TYPE, TBL_COURScE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
+    $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller,'.TBL_CITIES.'.city as city_name');
+    $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_ENQUIRY.'.enq_city');
     $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
   
@@ -1258,11 +1258,11 @@ public function getenquiryDataforexporttoexcel($search_by_student,$search_by_con
 
              $data[$counter]['all_course_name'] = $all_course_name ;
              $data[$counter]['counsellor_name'] = $value['counseller'];
-             $data[$counter]['counsellor_name'] = $value['counseller'];
+             $data[$counter]['enq_source'] = $value['enq_source'];
 
              $data[$counter]['enq_qualification'] = $value['enq_qualification'];
 
-             $data[$counter]['city'] = $value['city'];
+             $data[$counter]['city'] = $value['city_name'];
              $data[$counter]['gst_number'] = $value['gst_number'];
              $data[$counter]['gst_holder_name'] = $value['gst_holder_name'];
 
