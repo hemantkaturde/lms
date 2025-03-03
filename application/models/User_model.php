@@ -130,6 +130,15 @@ class User_model extends CI_Model
     }
 
 
+    function getAdmissionUserList()
+    {
+        $this->db->select('*');
+        $this->db->from(TBL_ADMISSION);
+        $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     
     function getCounsellorList()
     {

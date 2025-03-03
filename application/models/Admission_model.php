@@ -171,7 +171,7 @@ class Admission_model extends CI_Model
         }
 
 
-        public function getAdmissionsreportCount($params){
+        public function getAdmissionsreportCount($params,$search_by_student,$from_date,$to_date){
             $this->db->select('*');
             // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');
     
@@ -191,7 +191,7 @@ class Admission_model extends CI_Model
 
         }
 
-        public function getAdmissionsreportdata($params){
+        public function getAdmissionsreportdata($params,$search_by_student,$from_date,$to_date){
 
             $this->db->select('*');
             // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
@@ -255,13 +255,13 @@ class Admission_model extends CI_Model
 
         
                    
-                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                     // $data[$counter]['row-index'] = 'row_'.$value['courseId'];
                      $data[$counter]['enq_id'] = $value['enq_id'];
                      $data[$counter]['mobile'] = $value['mobile'];
                      $data[$counter]['createdDtm'] = $value['createdDtm'];
                      $data[$counter]['name'] = $value['name'];
                      $data[$counter]['email'] = $value['email'];
-                    // $data[$counter]['address'] = $value['address'];
+                     // $data[$counter]['address'] = $value['address'];
                      $data[$counter]['address'] = $all_course_name;
                     
                      if($value['cancle_status']==1){

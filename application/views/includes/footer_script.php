@@ -6990,12 +6990,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Amission Report'){?>
 	<script type="text/javascript">
 		
+		$('#search_by_student').select2();
+		$('#search_by_payment_mode').select2();
+		
 		$(document).ready(function() {	
 				
-				if($('#search_by_any').val()){
-					var search_by_any =  $('#search_by_any').val();
+				if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
 				}else{
-					var search_by_any = 'NA';
+					var search_by_student = 'NA';
 				}
 
 				if($('#from_date').val()){
@@ -7010,15 +7013,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var to_date = 'NA';
 				}
 
-				viewadmissionreportreport(search_by_any,from_date,to_date);
+				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
-		$("#search_by_any").keyup(function () {
+		$("#search_by_student").keyup(function () {
 					
-				if($('#search_by_any').val()){
-					var search_by_any =  $('#search_by_any').val();
+				if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
 				}else{
-					var search_by_any = 'NA';
+					var search_by_student = 'NA';
 				}
 		
 				if($('#from_date').val()){
@@ -7033,10 +7036,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var to_date = 'NA';
 				}
 		
-				viewadmissionreportreport(search_by_any,from_date,to_date);
+				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
-		function viewadmissionreportreport(search_by_any,from_date,to_date){
+		function viewadmissionreportreport(search_by_student,from_date,to_date){
 			    $(document).ready(function() {
 					var dt = $('#admissionreportList').DataTable({
 						"columnDefs": [ 
@@ -7061,7 +7064,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchadmissionsreport",
+							url :"<?php echo base_url();?>admission/fetchadmissionsreport/"+search_by_student+"/"+from_date+"/"+to_date,
 							type: "post",
 						},
 					});
@@ -7073,10 +7076,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					e.preventDefault();
 					// $(".loader_ajax").show();
 
-					if($('#search_by_any').val()){
-						var search_by_any =  $('#search_by_any').val();
+					if($('#search_by_student').val()){
+						var search_by_student =  $('#search_by_student').val();
 					}else{
-						var search_by_any = 'NA';
+						var search_by_student = 'NA';
 					}
 
 					if($('#from_date').val()){
@@ -7094,7 +7097,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					$.ajax({
 						url : "<?php echo base_url();?>enquiry/exportadmissionereport",
 						type: "POST",
-						data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
 						success: function(data, textStatus, jqXHR)
 						{
 
