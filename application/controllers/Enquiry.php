@@ -1869,7 +1869,7 @@
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['name']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['email']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['courses']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['cancle_status']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['cancel']);
             $rowCount++;
         }
 
