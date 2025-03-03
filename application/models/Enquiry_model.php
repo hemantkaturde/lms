@@ -1167,7 +1167,7 @@ public function getEnquiryreportdata($params,$search_by_student,$search_by_conse
 
 public function getenquiryDataforexporttoexcel($search_by_student,$search_by_consellor,$from_date,$to_date) {
     
-    $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller,'.TBL_CITIES.'.city as city_name');
+    $this->db->select('*,'.TBL_ADMISSION.'.enq_id as admissionexits,'.TBL_ENQUIRY.'.enq_id as enquiry_id,'.TBL_USER.'.name as counseller,'.TBL_CITIES.'.name as city_name');
     $this->db->join(TBL_CITIES, TBL_CITIES.'.id = '.TBL_ENQUIRY.'.enq_city');
     $this->db->join(TBL_ADMISSION, TBL_ADMISSION.'.enq_id = '.TBL_ENQUIRY.'.enq_id','left');
     $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_ENQUIRY.'.counsellor_id');
