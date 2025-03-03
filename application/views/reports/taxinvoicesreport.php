@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Student</b></label>
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Search By Student</b></label>
                                     <select class="form-control select2 search_by_student" id="search_by_student" name="search_by_student">
                                             <option value="">Select Student</option>
                                             <?php foreach ($getUserList as $key => $value) { ?>
@@ -31,7 +31,7 @@
 
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Payment Mode</b></label>
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Search By Payment Mode</b></label>
                                     <select class="form-control select2 search_by_payment_mode" id="search_by_payment_mode" name="search_by_payment_mode">
                                             <option value="">Select Payment Mode</option>
                                             <option value="NEFT">NEFT</option>
