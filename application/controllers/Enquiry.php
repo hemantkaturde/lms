@@ -1750,16 +1750,16 @@
                $rowCount++;
            }
 
-           foreach(range('A','K') as $columnID) {
+           foreach(range('A','L') as $columnID) {
                $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
            }
            /*********************Autoresize column width depending upon contents END***********************/
            
-           $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
+           $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
            
            /*********************Add color to heading START**********************/
            $objPHPExcel->getActiveSheet()
-                       ->getStyle('A1:K1')
+                       ->getStyle('A1:L1')
                        ->getFill()
                        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                        ->getStartColor()
