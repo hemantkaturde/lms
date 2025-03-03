@@ -17,9 +17,33 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh </b></label>
-                                <input  style="" type="text" class="form-control"  id="search_by_any" name="search_by_any">
-                                <p class="error search_by_any_error"></p>
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Student</b></label>
+                                    <select class="form-control select2 search_by_student" id="search_by_student" name="search_by_student">
+                                            <option value="">Select Student</option>
+                                            <?php foreach ($getUserList as $key => $value) { ?>
+                                            <option value="<?php echo $value->enq_id; ?>">
+                                                <?php echo $value->enq_fullname.' - '.$value->enq_mobile; ?></option>
+                                            <?php } ?>
+                                    </select>
+                                    <p class="error search_by_student_error"></p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh By Payment Mode</b></label>
+                                    <select class="form-control select2 search_by_payment_mode" id="search_by_payment_mode" name="search_by_payment_mode">
+                                            <option value="">Select Student</option>
+                                            <option value="NEFT">NEFT</option>
+                                            <option value="IMPS">IMPS</option>
+                                            <option value="RTGS">RTGS</option>
+                                            <option value="Payment Geteway">Payment Geteway</option>
+                                            <option value="Swipe">Swipe</option>
+                                            <option value="Cheque">Cheque</option>
+                                            <option value="Fee">Fee</option>
+                                            <option value="Loan">Loan</option>
+                                    </select>
+                                    <p class="error search_by_payment_mode_error"></p>
                             </div>
                         </div>
 

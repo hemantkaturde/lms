@@ -1263,6 +1263,7 @@ class Admin extends BaseController
 
     public function taxinvoicesreport(){
         $this->global['pageTitle'] = 'Tax Invoice Report';
+        $data['getUserList'] = $this->user_model->getUserList();
         $this->loadViews("reports/taxinvoicesreport", $this->global, $data, NULL);
     }
 
