@@ -6776,7 +6776,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					viewtaxinvoicesreport(search_by_student,search_by_payment_mode,from_date,to_date);
 	            });
 
-
 				$('#search_by_student').on('change', function() {
 			            
 						if($('#search_by_student').val()){
@@ -6934,23 +6933,29 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					e.preventDefault();
 					// $(".loader_ajax").show();
 
-					if($('#search_by_any').val()){
-						var search_by_any =  $('#search_by_any').val();
-					}else{
-						var search_by_any = 'NA';
-					}
+					    if($('#search_by_student').val()){
+							var search_by_student =  $('#search_by_student').val();
+						}else{
+							var search_by_student = 'NA';
+						}
 
-					if($('#from_date').val()){
-						var from_date =  $('#from_date').val();
-					}else{
-						var from_date = 'NA';
-					}
-   
-					if($('#to_date').val()){
-						var to_date =  $('#to_date').val();
-					}else{
-						var to_date = 'NA';
-					}
+						if($('#search_by_payment_mode').val()){
+							var search_by_payment_mode =  $('#search_by_payment_mode').val();
+						}else{
+							var search_by_payment_mode = 'NA';
+						}
+
+						if($('#from_date').val()){
+							var from_date =  $('#from_date').val();
+						}else{
+							var from_date = 'NA';
+						}
+	
+						if($('#to_date').val()){
+							var to_date =  $('#to_date').val();
+						}else{
+							var to_date = 'NA';
+						}
 
 					$.ajax({
 						url : "<?php echo base_url();?>enquiry/exporttaxinvoicereport/"+search_by_student+"/"+search_by_payment_mode+"/"+from_date+"/"+to_date,

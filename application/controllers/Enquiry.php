@@ -1776,12 +1776,12 @@
     }
 
 
-    public function exporttaxinvoicereport() {
+    public function exporttaxinvoicereport($search_by_student,$search_by_payment_mode,$from_date,$to_date) {
         
         // create file name
         $fileName = 'Tax-Invoice-Report -'.date('d-m-Y').'.xlsx';  
         // load excel library
-        $empInfo = $this->enquiry_model->gettaxinvoiceDataforexporttoexcel($search_by_any,$from_date,$to_date);
+        $empInfo = $this->enquiry_model->gettaxinvoiceDataforexporttoexcel($search_by_student,$search_by_payment_mode,$from_date,$to_date);
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         // set Header
