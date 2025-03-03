@@ -3,12 +3,6 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div>
-                    <button type="button" class="btn btn-primary">
-                        <a href="<?php echo base_url().'/dashboard';?>" style="color: black !important"><i
-                                class="fa fa-arrow-left"></i> Back</a>
-                    </button>
-                </div>
                 <div class="ibox-title">Tax Invoices Report</div>
             </div>
             <div class="ibox-body">
