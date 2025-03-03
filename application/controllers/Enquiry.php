@@ -1723,13 +1723,15 @@
            $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Name');
            $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Email Id');
            $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Mobile No'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Courses');
-           $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Counsellor'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Doctor / Non- Doctor'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'City'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'GST Number'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'GST Holder Name'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Status');  
+           $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Qualification'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Inquiry Source'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Courses');
+           $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Counsellor'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Doctor / Non- Doctor'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'City'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'GST Number'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'GST Holder Name'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Status');  
         
 
            // set Row
@@ -1740,26 +1742,28 @@
                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['enq_fullname']);
                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_email']);
                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['enq_mobile']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['all_course_name']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['counsellor_name']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['doctor_non_doctor']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['city']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['gst_number']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['gst_holder_name']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['status']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['enq_qualification']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['enq_source']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['all_course_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['counsellor_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['doctor_non_doctor']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['city']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['gst_number']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['gst_holder_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['status']);
                $rowCount++;
            }
 
-           foreach(range('A','L') as $columnID) {
+           foreach(range('A','N') as $columnID) {
                $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
            }
            /*********************Autoresize column width depending upon contents END***********************/
            
-           $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
+           $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->getFont()->setBold(true); //Make heading font bold
            
            /*********************Add color to heading START**********************/
            $objPHPExcel->getActiveSheet()
-                       ->getStyle('A1:L1')
+                       ->getStyle('A1:N1')
                        ->getFill()
                        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                        ->getStartColor()

@@ -1258,6 +1258,10 @@ public function getenquiryDataforexporttoexcel($search_by_student,$search_by_con
 
              $data[$counter]['all_course_name'] = $all_course_name ;
              $data[$counter]['counsellor_name'] = $value['counseller'];
+             $data[$counter]['counsellor_name'] = $value['counseller'];
+
+             $data[$counter]['enq_qualification'] = $value['enq_qualification'];
+
              $data[$counter]['city'] = $value['city'];
              $data[$counter]['gst_number'] = $value['gst_number'];
              $data[$counter]['gst_holder_name'] = $value['gst_holder_name'];
