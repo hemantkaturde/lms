@@ -1216,7 +1216,8 @@ public function getenquiryDataforexporttoexcel($search_by_student,$search_by_con
              $data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
              $data[$counter]['enq_fullname'] = $value['enq_fullname'];
              $data[$counter]['enq_mobile'] = $value['enq_mobile'];
-             // $data[$counter]['enq_email'] = $value['enq_email'];
+             $data[$counter]['enq_email'] = $value['enq_email'];
+             $data[$counter]['doctor_non_doctor'] = $value['doctor_non_doctor'];
 
             //  if($value['payment_status']=='0'){
             //     $data[$counter]['status'] = 'In Follow up';

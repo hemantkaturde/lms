@@ -1721,14 +1721,15 @@
            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Inquiry No');
            $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Inquiry Date');
            $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Name');
-           $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Mobile No'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Courses');
-           $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Counsellor'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Doctor / Non- Doctor'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'City'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'GST Number'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'GST Holder Name'); 
-           $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Status');  
+           $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Email Id');
+           $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Mobile No'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Courses');
+           $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Counsellor'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Doctor / Non- Doctor'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'City'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'GST Number'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'GST Holder Name'); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Status');  
         
 
            // set Row
@@ -1737,14 +1738,15 @@
                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['enq_number']);
                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['enq_date']);
                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['enq_fullname']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_mobile']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['all_course_name']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['counsellor_name']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['doctor_non_doctor']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['city']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['gst_number']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['gst_holder_name']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['status']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_email']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['enq_mobile']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['all_course_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['counsellor_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['doctor_non_doctor']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['city']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['gst_number']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['gst_holder_name']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['status']);
                $rowCount++;
            }
 
