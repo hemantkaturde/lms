@@ -641,19 +641,19 @@ class Enquiry_model extends CI_Model
 
 
     
-    public function getTaxinvoicesCountreport($params,$search_by_any,$from_date,$to_date){
+    public function getTaxinvoicesCountreport($params,$search_by_student,$search_by_payment_mode,$from_date,$to_date){
         $this->db->select('*');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
 
-        if($search_by_any != "NA") 
+        if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_ENQUIRY.".enq_number LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".totalAmount LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".payment_mode LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$new_string."%')");
+            $this->db->where("(".TBL_ENQUIRY.".enq_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".totalAmount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".payment_mode LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$params['search']['value']."%')");
         }
 
         //$this->db->where(TBL_PAYMENT.'.enq_id', $id);
@@ -665,22 +665,20 @@ class Enquiry_model extends CI_Model
 
     }
 
-    public function getTaxinvoicesreport($params,$search_by_any,$from_date,$to_date){
-
-        $new_string = trim(str_replace('%20', ' ', $search_by_any));
+    public function getTaxinvoicesreport($params,$search_by_student,$search_by_payment_mode,$from_date,$to_date){
 
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
 
-        if($search_by_any != "NA") 
+        if($params['search']['value'] != "")
         {
-            $this->db->where("(".TBL_ENQUIRY.".enq_number LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_ENQUIRY.".enq_fullname LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".totalAmount LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".payment_mode LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$new_string."%'");
-            $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$new_string."%')");
+            $this->db->where("(".TBL_ENQUIRY.".enq_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_fullname LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENQUIRY.".enq_mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".totalAmount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".payment_mode LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".payment_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT.".datetime LIKE '%".$params['search']['value']."%')");
         }
         //$this->db->where(TBL_ENQUIRY_FOLLOW_UP.'.enq_id', $id);
         $this->db->where(TBL_PAYMENT.'.payment_status', 1);
@@ -695,8 +693,6 @@ class Enquiry_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-
-
                 if($value['paymant_type']=='regular_invoice'){
                     $get_before_paid_payment = $this->get_before_paid_payment($value['paymentid'],$value['enq_id']);
 
