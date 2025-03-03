@@ -1848,10 +1848,6 @@
         // load excel library
         $empInfo = $this->admission_model->getadmissionreportoexcel($search_by_student,$from_date,$to_date);
 
-
-        print_r($empInfo);
-        exit;
-
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         // set Header

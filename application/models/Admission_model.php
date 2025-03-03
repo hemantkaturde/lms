@@ -2130,17 +2130,17 @@ function studentcertificateData($params)
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id','left');
         $this->db->where(TBL_ADMISSION.'.isDeleted', 0);
 
-        // if($search_by_student!='NA'){
-        //     $this->db->where(TBL_ADMISSION.'.enq_id',$search_by_student);
-        // }
+        if($search_by_student!='NA'){
+            $this->db->where(TBL_ADMISSION.'.enq_id',$search_by_student);
+        }
 
-        // if($from_date!='NA'){
-        //     $this->db->where(TBL_ADMISSION.'.createdDtm >=', $from_date);
-        // }
+        if($from_date!='NA'){
+            $this->db->where(TBL_ADMISSION.'.createdDtm >=', $from_date);
+        }
 
-        // if($to_date!='NA'){
-        //     $this->db->where(TBL_ADMISSION.'.createdDtm <=', $to_date);
-        // }
+        if($to_date!='NA'){
+            $this->db->where(TBL_ADMISSION.'.createdDtm <=', $to_date);
+        }
 
         $this->db->order_by(TBL_ADMISSION.'.enq_id', 'DESC');            
         $query = $this->db->get(TBL_ADMISSION);
