@@ -240,11 +240,11 @@
         }
 
 
-        public function fetchadmissionsreport(){
+        public function fetchadmissionsreport($search_by_student,$from_date,$to_date){
 
             $params = $_REQUEST;
-            $totalRecords = $this->admission_model->getAdmissionsreportCount($params); 
-            $queryRecords = $this->admission_model->getAdmissionsreportdata($params); 
+            $totalRecords = $this->admission_model->getAdmissionsreportCount($params,$search_by_student,$from_date,$to_date); 
+            $queryRecords = $this->admission_model->getAdmissionsreportdata($params,$search_by_student,$from_date,$to_date); 
             $data = array();
             foreach ($queryRecords as $key => $value)
             {

@@ -21,7 +21,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model'));
+            $this->load->model(array('login_model', 'enquiry_model', 'database','comman_model','admission_model'));
             $this->load->library('form_validation');
             $this->load->library('mail');
             $this->load->library('excel');
@@ -1776,12 +1776,14 @@
     }
 
 
+    public function exporttaxinvoicereport($search_by_student,$search_by_payment_mode,$from_date,$to_date) {
+        
     public function exporttaxinvoicereport($search_by_student,$search_by_consellor,$from_date,$to_date) {
 
         // create file name
         $fileName = 'Tax-Invoice-Report -'.date('d-m-Y').'.xlsx';  
         // load excel library
-        $empInfo = $this->enquiry_model->gettaxinvoiceDataforexporttoexcel($search_by_student,$search_by_consellor,$from_date,$to_date);
+        $empInfo = $this->enquiry_model->gettaxinvoiceDataforexporttoexcel($search_by_any,$from_date,$to_date);
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         // set Header
@@ -1841,16 +1843,13 @@
     }
 
 
-    public function exportadmissionereport() {
+    public function exportadmissionereport($search_by_student,$from_date,$to_date) {
           
-        $search_by_any = $this->input->post('search_by_any');
-        $from_date = $this->input->post('from_date');
-        $to_date = $this->input->post('to_date');
- 
         // create file name
         $fileName = 'Admission-Report -'.date('d-m-Y').'.xlsx';  
         // load excel library
-        $empInfo = $this->enquiry_model->getadmissionreportoexcel($search_by_any,$from_date,$to_date);
+        $empInfo = $this->admission_model->getadmissionreportoexcel($search_by_student,$from_date,$to_date);
+
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         // set Header
@@ -1866,13 +1865,13 @@
         // set Row
         $rowCount = 2;
         foreach ($empInfo as $element) {
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['receipt_no']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['enquiry_no']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['receipt_date']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['enq_fullname']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['enq_mobile']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['totalAmount']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['paid_before']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['enq_id']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['mobile']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['createdDtm']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['email']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['courses']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['cancel']);
             $rowCount++;
         }
 

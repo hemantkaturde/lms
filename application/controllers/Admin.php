@@ -1269,6 +1269,7 @@ class Admin extends BaseController
 
     public function admissionreport(){
         $this->global['pageTitle'] = 'Amission Report';
+        $data['getAdmissionUserList'] = $this->user_model->getAdmissionUserList();
         $this->loadViews("reports/admissionreport", $this->global, $data, NULL);
     }
 

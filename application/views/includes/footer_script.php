@@ -6776,7 +6776,6 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					viewtaxinvoicesreport(search_by_student,search_by_payment_mode,from_date,to_date);
 	            });
 
-
 				$('#search_by_student').on('change', function() {
 			            
 						if($('#search_by_student').val()){
@@ -6934,23 +6933,29 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					e.preventDefault();
 					// $(".loader_ajax").show();
 
-					if($('#search_by_any').val()){
-						var search_by_any =  $('#search_by_any').val();
-					}else{
-						var search_by_any = 'NA';
-					}
+					    if($('#search_by_student').val()){
+							var search_by_student =  $('#search_by_student').val();
+						}else{
+							var search_by_student = 'NA';
+						}
 
-					if($('#from_date').val()){
-						var from_date =  $('#from_date').val();
-					}else{
-						var from_date = 'NA';
-					}
-   
-					if($('#to_date').val()){
-						var to_date =  $('#to_date').val();
-					}else{
-						var to_date = 'NA';
-					}
+						if($('#search_by_payment_mode').val()){
+							var search_by_payment_mode =  $('#search_by_payment_mode').val();
+						}else{
+							var search_by_payment_mode = 'NA';
+						}
+
+						if($('#from_date').val()){
+							var from_date =  $('#from_date').val();
+						}else{
+							var from_date = 'NA';
+						}
+	
+						if($('#to_date').val()){
+							var to_date =  $('#to_date').val();
+						}else{
+							var to_date = 'NA';
+						}
 
 					$.ajax({
 						url : "<?php echo base_url();?>enquiry/exporttaxinvoicereport/"+search_by_student+"/"+search_by_payment_mode+"/"+from_date+"/"+to_date,
@@ -6985,12 +6990,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Amission Report'){?>
 	<script type="text/javascript">
 		
+		$('#search_by_student').select2();
+		$('#search_by_payment_mode').select2();
+		
 		$(document).ready(function() {	
 				
-				if($('#search_by_any').val()){
-					var search_by_any =  $('#search_by_any').val();
+				if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
 				}else{
-					var search_by_any = 'NA';
+					var search_by_student = 'NA';
 				}
 
 				if($('#from_date').val()){
@@ -7005,15 +7013,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var to_date = 'NA';
 				}
 
-				viewadmissionreportreport(search_by_any,from_date,to_date);
+				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
-		$("#search_by_any").keyup(function () {
+		$("#search_by_student").change(function () {
 					
-				if($('#search_by_any').val()){
-					var search_by_any =  $('#search_by_any').val();
+				if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
 				}else{
-					var search_by_any = 'NA';
+					var search_by_student = 'NA';
 				}
 		
 				if($('#from_date').val()){
@@ -7028,10 +7036,63 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var to_date = 'NA';
 				}
 		
-				viewadmissionreportreport(search_by_any,from_date,to_date);
+				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
-		function viewadmissionreportreport(search_by_any,from_date,to_date){
+		$(document).on('change','#from_date',function(e){  
+						e.preventDefault();
+						if($('#search_by_student').val()){
+							var search_by_student =  $('#search_by_student').val();
+						}else{
+							var search_by_student = 'NA';
+						}
+
+
+						if($('#from_date').val()){
+							var from_date =  $('#from_date').val();
+						}else{
+							var from_date = 'NA';
+						}
+
+						if($('#to_date').val()){
+							var to_date =  $('#to_date').val();
+						}else{
+							var to_date = 'NA';
+						}
+			
+						viewtaxinvoicesreport(search_by_student,from_date,to_date);
+			
+		});
+			
+		$(document).on('change','#to_date',function(e){  
+			    e.preventDefault();
+			
+			    if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
+				}else{
+					var search_by_student = 'NA';
+				}
+
+
+				if($('#from_date').val()){
+				   var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
+			
+			    viewadmissionreportreport(search_by_student,from_date,to_date);
+			
+		});
+
+		function viewadmissionreportreport(search_by_student,from_date,to_date){
+			    $('#admissionreportList').DataTable().destroy();
+   
 			    $(document).ready(function() {
 					var dt = $('#admissionreportList').DataTable({
 						"columnDefs": [ 
@@ -7056,7 +7117,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchadmissionsreport",
+							url :"<?php echo base_url();?>admission/fetchadmissionsreport/"+search_by_student+"/"+from_date+"/"+to_date,
 							type: "post",
 						},
 					});
@@ -7068,10 +7129,10 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					e.preventDefault();
 					// $(".loader_ajax").show();
 
-					if($('#search_by_any').val()){
-						var search_by_any =  $('#search_by_any').val();
+					if($('#search_by_student').val()){
+						var search_by_student =  $('#search_by_student').val();
 					}else{
-						var search_by_any = 'NA';
+						var search_by_student = 'NA';
 					}
 
 					if($('#from_date').val()){
@@ -7087,9 +7148,8 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					}
 
 					$.ajax({
-						url : "<?php echo base_url();?>enquiry/exportadmissionereport",
+						url : "<?php echo base_url();?>enquiry/exportadmissionereport/"+search_by_student+"/"+from_date+"/"+to_date,
 						type: "POST",
-						data: { 'search_by_any': search_by_any, 'from_date': from_date, 'to_date': to_date },
 						success: function(data, textStatus, jqXHR)
 						{
 
@@ -7102,7 +7162,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							else
 							{
 								$(".report_type_error").html("");
-								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exportadmissionereport";
+								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/exportadmissionereport/"+search_by_student+"/"+from_date+"/"+to_date;
 							}
 							
 						},
