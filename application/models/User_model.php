@@ -130,6 +130,16 @@ class User_model extends CI_Model
     }
 
 
+    function getstudnetList()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->where('user_flag','student');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
     function getAdmissionUserList()
     {
         $this->db->select('*');

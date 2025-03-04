@@ -7181,8 +7181,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Attendance Report'){?>
 	<script type="text/javascript">
 
-$('#search_by_student').select2();
-		$('#search_by_payment_mode').select2();
+        $('#search_by_student').select2();
 		
 		$(document).ready(function() {	
 				
@@ -7204,7 +7203,7 @@ $('#search_by_student').select2();
 					var to_date = 'NA';
 				}
 
-				viewadmissionreportreport(search_by_student,from_date,to_date);
+				viewattendancereport(search_by_student,from_date,to_date);
 		});
 
 		$("#search_by_student").change(function () {
@@ -7281,7 +7280,7 @@ $('#search_by_student').select2();
 			
 		});
 		
-		function viewattendancereport(search_by_any,from_date,to_date){
+		function viewattendancereport(search_by_student,from_date,to_date){
 			var dt = $('#view_attendance_report').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -7306,7 +7305,7 @@ $('#search_by_student').select2();
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>admin/fetchstudentattendancereport",
+                    url :"<?php echo base_url();?>admin/fetchstudentattendancereport/"+search_by_student+"/"+from_date+"/"+to_date,
                     type: "post",
 	            },
 	        });

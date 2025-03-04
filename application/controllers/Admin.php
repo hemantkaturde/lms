@@ -665,11 +665,11 @@ class Admin extends BaseController
  }
 
 
-    public function fetchstudentattendancereport(){
+    public function fetchstudentattendancereport($search_by_student,$from_date,$to_date){
 
         $params = $_REQUEST;
-        $totalRecords = $this->admission_model->getAttendancereportCount($params);
-        $queryRecords = $this->admission_model->getAttendancereportdata($params); 
+        $totalRecords = $this->admission_model->getAttendancereportCount($params,$search_by_student,$from_date,$to_date);
+        $queryRecords = $this->admission_model->getAttendancereportdata($params,$search_by_student,$from_date,$to_date); 
         $data = array();
         foreach ($queryRecords as $key => $value)
         {
@@ -1275,7 +1275,7 @@ class Admin extends BaseController
 
     public function attendancreport(){
         $this->global['pageTitle'] = 'Attendance Report';
-        $data['getAdmissionUserList'] = $this->user_model->getAdmissionUserList();
+        $data['getstudnetList'] = $this->user_model->getstudnetList();
         $this->loadViews("reports/attendancreport", $this->global, $data, NULL);
     }
 

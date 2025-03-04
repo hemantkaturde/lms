@@ -13,7 +13,7 @@
                                 <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Search By Student</b></label>
                                     <select class="form-control select2 search_by_student" id="search_by_student" name="search_by_student">
                                             <option value="">Select Student</option>
-                                            <?php foreach ($getAdmissionUserList as $key => $value) { ?>
+                                            <?php foreach ($getstudnetList as $key => $value) { ?>
                                             <option value="<?php echo $value->enq_id; ?>">
                                                 <?php echo $value->name.' - '.$value->email.' - '.$value->mobile; ?></option>
                                             <?php } ?>
