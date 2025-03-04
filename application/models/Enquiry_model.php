@@ -1358,7 +1358,12 @@ public function gettaxinvoiceDataforexporttoexcel($search_by_student,$search_by_
         }
 
         if($search_by_payment_mode!='NA'){
-            $this->db->where(TBL_PAYMENT.'.payment_mode',$search_by_payment_mode);
+
+            if($search_by_payment_mode=='Payment_Geteway'){
+                $this->db->where(TBL_PAYMENT.'.payment_mode','Payment Geteway');
+            }else{
+                $this->db->where(TBL_PAYMENT.'.payment_mode',$search_by_payment_mode);
+            }
         }
 
 
