@@ -1339,8 +1339,6 @@ public function getenquiryDataforexporttoexcel($search_by_student,$search_by_con
 
 
 public function gettaxinvoiceDataforexporttoexcel($search_by_student,$search_by_payment_mode,$from_date,$to_date){
-public function gettaxinvoiceDataforexporttoexcel($search_by_any,$from_date,$to_date){
-
         $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
         $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
 
