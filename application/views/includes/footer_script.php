@@ -7281,6 +7281,9 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 		});
 		
 		function viewattendancereport(search_by_student,from_date,to_date){
+			
+			$('#view_attendance_report').DataTable().destroy();
+
 			var dt = $('#view_attendance_report').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },

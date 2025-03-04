@@ -14,7 +14,7 @@
                                     <select class="form-control select2 search_by_student" id="search_by_student" name="search_by_student">
                                             <option value="">Select Student</option>
                                             <?php foreach ($getstudnetList as $key => $value) { ?>
-                                            <option value="<?php echo $value->enq_id; ?>">
+                                            <option value="<?php echo $value->userId; ?>">
                                                 <?php echo $value->name.' - '.$value->email.' - '.$value->mobile; ?></option>
                                             <?php } ?>
                                     </select>
