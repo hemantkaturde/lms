@@ -616,6 +616,14 @@ class Admission_model extends CI_Model
         if($search_by_student!=='NA'){
             $this->db->where(TBL_USER.'.userId', $search_by_student);
         }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_ATTENDANCE.'.createdDtm >=', $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_ATTENDANCE.'.createdDtm <=', $to_date);
+        }
       
         //$this->db->where(TBL_ENQUIRY.'.isDeleted', 0);
         $query = $this->db->get(TBL_ATTENDANCE);
@@ -647,6 +655,16 @@ class Admission_model extends CI_Model
         if($search_by_student!=='NA'){
             $this->db->where(TBL_USER.'.userId', $search_by_student);
         }
+
+        
+        if($from_date!='NA'){
+            $this->db->where(TBL_ATTENDANCE.'.createdDtm >=', $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_ATTENDANCE.'.createdDtm <=', $to_date);
+        }
+
 
         $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
         $this->db->limit($params['length'],$params['start']);
