@@ -7181,12 +7181,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 <?php if($pageTitle=='Attendance Report'){?>
 	<script type="text/javascript">
 
-        $(document).ready(function() {	
+$('#search_by_student').select2();
+		$('#search_by_payment_mode').select2();
+		
+		$(document).ready(function() {	
 				
-				if($('#search_by_any').val()){
-					var search_by_any =  $('#search_by_any').val();
+				if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
 				}else{
-					var search_by_any = 'NA';
+					var search_by_student = 'NA';
 				}
 
 				if($('#from_date').val()){
@@ -7201,15 +7204,15 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var to_date = 'NA';
 				}
 
-				viewattendancereport(search_by_any,from_date,to_date);
+				viewadmissionreportreport(search_by_student,from_date,to_date);
 		});
 
-		$("#search_by_any").keyup(function () {
+		$("#search_by_student").change(function () {
 					
-				if($('#search_by_any').val()){
-					var search_by_any =  $('#search_by_any').val();
+				if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
 				}else{
-					var search_by_any = 'NA';
+					var search_by_student = 'NA';
 				}
 		
 				if($('#from_date').val()){
@@ -7224,10 +7227,89 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 					var to_date = 'NA';
 				}
 		
-				viewattendancereport(search_by_any,from_date,to_date);
+				viewattendancereport(search_by_student,from_date,to_date);
+		});
+
+		$(document).on('change','#from_date',function(e){  
+						e.preventDefault();
+						if($('#search_by_student').val()){
+							var search_by_student =  $('#search_by_student').val();
+						}else{
+							var search_by_student = 'NA';
+						}
+
+
+						if($('#from_date').val()){
+							var from_date =  $('#from_date').val();
+						}else{
+							var from_date = 'NA';
+						}
+
+						if($('#to_date').val()){
+							var to_date =  $('#to_date').val();
+						}else{
+							var to_date = 'NA';
+						}
+			
+						viewattendancereport(search_by_student,from_date,to_date);
+			
+		});
+			
+		$(document).on('change','#to_date',function(e){  
+			    e.preventDefault();
+			
+			    if($('#search_by_student').val()){
+					var search_by_student =  $('#search_by_student').val();
+				}else{
+					var search_by_student = 'NA';
+				}
+
+
+				if($('#from_date').val()){
+				   var from_date =  $('#from_date').val();
+				}else{
+					var from_date = 'NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date =  $('#to_date').val();
+				}else{
+					var to_date = 'NA';
+				}
+			
+			    viewattendancereport(search_by_student,from_date,to_date);
+			
 		});
 		
 		function viewattendancereport(search_by_any,from_date,to_date){
+			var dt = $('#view_attendance_report').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	                 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "10%", "targets": 7 },
+					 { "width": "10%", "targets": 8 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Attendance Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchstudentattendance",
+                    type: "post",
+	            },
+	        });
 
 		}
 
