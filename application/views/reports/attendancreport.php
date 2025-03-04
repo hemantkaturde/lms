@@ -7,12 +7,18 @@
             </div>
             <div class="ibox-body">
               <div class="panel-body table-responsive">
-              <div class="row">
+                    <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Seacrh </b></label>
-                                <input  style="" type="text" class="form-control"  id="search_by_any" name="search_by_any">
-                                <p class="error search_by_any_error"></p>
+                                <label style="margin-left: -13px;!important" class="col-sm-12 col-form-label"><b>Search By Student</b></label>
+                                    <select class="form-control select2 search_by_student" id="search_by_student" name="search_by_student">
+                                            <option value="">Select Student</option>
+                                            <?php foreach ($getAdmissionUserList as $key => $value) { ?>
+                                            <option value="<?php echo $value->enq_id; ?>">
+                                                <?php echo $value->name.' - '.$value->email.' - '.$value->mobile; ?></option>
+                                            <?php } ?>
+                                    </select>
+                                    <p class="error search_by_student_error"></p>
                             </div>
                         </div>
 
@@ -33,10 +39,11 @@
                         </div>
                         <div class="col-sm">
                             <div class="form-group">
-                                <button type="button" style="margin-top:30px !important" class="btn btn-primary" id="excel_export_report">Excel Export</button>
+                                <button type="button" style="margin-top:30px !important" class="btn btn-primary" id="excel_export_attendance_report">Excel Export</button>
                             </div>
                         </div>
                     </div>
+
                 <table id="view_attendance_report" class="table table-bordered">
                     <thead>
                                 <tr>

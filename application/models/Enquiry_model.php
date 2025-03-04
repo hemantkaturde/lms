@@ -932,7 +932,7 @@ class Enquiry_model extends CI_Model
     }
 
 
-public function getaddoncoursepaymentdetailsCount($params,$id){
+    public function getaddoncoursepaymentdetailsCount($params,$id){
         $this->db->select('*');
         $this->db->from('tbl_payment_transaction');
         // $this->db->where('tbl_enquiry.isDeleted', 0);
