@@ -7306,7 +7306,7 @@ $('#search_by_student').select2();
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchstudentattendance",
+                    url :"<?php echo base_url();?>admin/fetchstudentattendancereport",
                     type: "post",
 	            },
 	        });
