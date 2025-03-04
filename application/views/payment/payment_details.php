@@ -374,7 +374,7 @@
                                                 <option value="NEFT">NEFT</option>
                                                 <option value="IMPS">IMPS</option>
                                                 <option value="RTGS">RTGS</option>
-                                                <option value="Payment Geteway">Payment Geteway</option>
+                                                <option value="Payment Geteway">Payment Gateway</option>
                                                 <option value="Swipe">Swipe</option>
                                                 <option value="Cheque">Cheque</option>
                                                 <!-- <option value="Cash">Cash</option> -->
