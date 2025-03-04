@@ -1778,8 +1778,6 @@
 
     public function exporttaxinvoicereport($search_by_student,$search_by_payment_mode,$from_date,$to_date) {
         
-    public function exporttaxinvoicereport($search_by_student,$search_by_consellor,$from_date,$to_date) {
-
         // create file name
         $fileName = 'Tax-Invoice-Report -'.date('d-m-Y').'.xlsx';  
         // load excel library
