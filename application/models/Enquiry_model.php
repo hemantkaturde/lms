@@ -703,7 +703,12 @@ class Enquiry_model extends CI_Model
         }
     
         if($search_by_payment_mode!='NA'){
-            $this->db->where(TBL_PAYMENT.'.payment_mode',$search_by_payment_mode);
+
+            if($search_by_payment_mode=='Payment_Geteway'){
+                $this->db->where(TBL_PAYMENT.'.payment_mode','Payment Geteway');
+            }else{
+                $this->db->where(TBL_PAYMENT.'.payment_mode',$search_by_payment_mode);
+            }
         }
     
     
@@ -1334,8 +1339,6 @@ public function getenquiryDataforexporttoexcel($search_by_student,$search_by_con
 
 
 public function gettaxinvoiceDataforexporttoexcel($search_by_any,$from_date,$to_date){
-
-    $new_string = trim(str_replace('%20', ' ', $search_by_any));
 
     $this->db->select('*,'.TBL_PAYMENT.'.id as paymentid');
     $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_PAYMENT.'.enquiry_id');
