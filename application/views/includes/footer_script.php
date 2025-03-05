@@ -7315,5 +7315,54 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 
 		}
 
+		$(document).on('click','#excel_export_attendance_report',function(e){
+					e.preventDefault();
+					// $(".loader_ajax").show();
+
+					if($('#search_by_student').val()){
+						var search_by_student =  $('#search_by_student').val();
+					}else{
+						var search_by_student = 'NA';
+					}
+
+					if($('#from_date').val()){
+						var from_date =  $('#from_date').val();
+					}else{
+						var from_date = 'NA';
+					}
+   
+					if($('#to_date').val()){
+						var to_date =  $('#to_date').val();
+					}else{
+						var to_date = 'NA';
+					}
+
+					$.ajax({
+						url : "<?php echo base_url();?>enquiry/excelexportattendancereport/"+search_by_student+"/"+from_date+"/"+to_date,
+						type: "POST",
+						success: function(data, textStatus, jqXHR)
+						{
+
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$(".report_type_error").html("");
+								alert('No data fond');
+							}
+							else
+							{
+								$(".report_type_error").html("");
+								window.location.href = "<?php echo ADMIN_PATH;?>enquiry/excelexportattendancereport/"+search_by_student+"/"+from_date+"/"+to_date;
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+	    });
+
     </script>
 <?php } ?>

@@ -700,6 +700,64 @@ class Admission_model extends CI_Model
         return $data;
     }
 
+
+    public function getattendnacereportoexcel($search_by_student,$from_date,$to_date){
+
+        $roleText = $this->session->userdata('roleText');
+        $userId = $this->session->userdata('userId');
+
+        $this->db->select('*');
+        $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
+        $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
+        $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
+        // $this->db->join(TBL_TOPIC_MEETING_LINK, TBL_TOPIC_MEETING_LINK.'.id = '.TBL_ATTENDANCE.'.meeting_id');
+
+        if($search_by_student!=='NA'){
+            $this->db->where(TBL_USER.'.userId', $search_by_student);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_ATTENDANCE.'.createdDtm >=', $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_ATTENDANCE.'.createdDtm <=', $to_date);
+        }
+
+
+        $this->db->order_by(TBL_TIMETABLE_TRANSECTIONS.'.id', 'DESC');
+        $query = $this->db->get(TBL_ATTENDANCE);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                //  $data[$counter]['row-index'] = 'row_'.$value['courseId'];
+                 $data[$counter]['name'] = $value['name'];
+                 $data[$counter]['mobile_number'] = $value['mobile'];
+                 $data[$counter]['email_address'] = $value['email'];
+                 $data[$counter]['course_name'] = $value['course_name'];
+                 $data[$counter]['topic'] = $value['topic'];
+                 $data[$counter]['total_hours'] = $value['total_hours'];
+                 $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
+                 //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
+                 $data[$counter]['timings'] = $value['timings'];
+
+                 if($value['attendance_status']==1){
+                      $attendance_flag= 'Attended';
+                 }
+
+                 $data[$counter]['attendance_flag'] =$attendance_flag;
+
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
     public function total_revenue(){
 
         if($this->session->userdata('roleText') =='Counsellor'){

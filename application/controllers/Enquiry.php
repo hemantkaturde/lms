@@ -1898,6 +1898,66 @@
         $objWriter->save('php://output');
     }
 
+    public function excelexportattendancereport($search_by_student,$from_date,$to_date){
+
+        // create file name
+        $fileName = 'Attendance-Report -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->admission_model->getattendnacereportoexcel($search_by_student,$from_date,$to_date);
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Student Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Mobile No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Email Address');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Course Name'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Topic Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Class Duration'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Class Attended Date'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Class Attended Time'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Attendance Status'); 
+
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['mobile_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['email_address']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['course_name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['topic']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['total_hours']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['class_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['timings']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['attendance_flag']);
+            $rowCount++;
+        }
+
+        foreach(range('A','I') as $columnID) {
+            $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        /*********************Autoresize column width depending upon contents END***********************/
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true); //Make heading font bold
+        
+        /*********************Add color to heading START**********************/
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('A1:I1')
+                    ->getFill()
+                    ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('99ff99');
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+          
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'.$fileName);
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+    }
+
 
 }
 
