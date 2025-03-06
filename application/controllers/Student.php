@@ -202,9 +202,11 @@
 
                 $student_id = $this->input->post('student_id');
                 $course_check = $this->input->post('course_check');
+                $restrict = $this->input->post('restrict');
 
                 $data = array(
                     'book_issued'      => json_encode($course_check),
+                    'restrict'      => json_encode($restrict),
                 );
                 /* Update Course */
 

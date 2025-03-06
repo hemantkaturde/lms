@@ -1417,7 +1417,7 @@ public function updateEvbtrNumber($certificate_id,$data){
 
 public function getCourseDetailsforBooksAddedornot($id){
 
-    $this->db->select('enq_course_id,book_issued');
+    $this->db->select('enq_course_id,book_issued,restrict');
     $this->db->join(TBL_USERS_ENQUIRES, TBL_USERS_ENQUIRES.'.user_id = '.TBL_USER.'.userId');
     $this->db->join(TBL_ENQUIRY, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
     $this->db->where(TBL_USER.'.userId', $id);
