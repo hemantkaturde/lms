@@ -67,6 +67,7 @@
                                                     <label class="cursor-pointer d-block custom-control-label" for="customCheck1"><?=$get_course_fees[0]->course_name?></label>
                                                 </div>
                                             </tr>
+                                            
                                             <tr>
                                                 <div class="custom-control">
                                                     <input type="checkbox" class="form-check-input" id="restrict" name="restrict[]" value="<?=$get_course_fees[0]->courseId?>" <?php echo $checked; ?>>
