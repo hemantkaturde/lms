@@ -60,21 +60,17 @@
 
                                 <ul class="list-group">
                                     <li class="list-group-item rounded-0">
-                                        <table>
-                                            <tr>
-                                                <div class="custom-control">
-                                                    <input type="checkbox" class="form-check-input" id="course_check" name="course_check[]" value="<?=$get_course_fees[0]->courseId?>" <?php echo $checked; ?>>
-                                                    <label class="cursor-pointer d-block custom-control-label" for="customCheck1"><?=$get_course_fees[0]->course_name?></label>
-                                                </div>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <div class="custom-control">
-                                                    <input type="checkbox" class="form-check-input" id="restrict" name="restrict[]" value="<?=$get_course_fees[0]->courseId?>" <?php echo $checked; ?>>
-                                                    <label class="cursor-pointer d-block custom-control-label" for="customCheck1">Course Restriction</label>
-                                                </div>
-                                            </tr>
-                                        </table>
+                                        
+                                        <div class="custom-control">
+                                            <input type="checkbox" class="form-check-input" id="course_check" name="course_check[]" value="<?=$get_course_fees[0]->courseId?>" <?php echo $checked; ?>>
+                                            <label class="cursor-pointer d-block custom-control-label" for="customCheck1"><?=$get_course_fees[0]->course_name?></label>
+                                        </div>
+
+                                        <div class="custom-control">
+                                            <input type="checkbox" class="form-check-input" id="restrict" name="restrict[]" value="<?=$get_course_fees[0]->courseId?>" <?php echo $checked; ?>>
+                                            <label class="cursor-pointer d-block custom-control-label" for="customCheck1">Course Restriction</label>
+                                        </div>
+
                                     </li>
                                 </ul>
                 
