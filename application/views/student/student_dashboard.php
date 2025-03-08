@@ -318,9 +318,7 @@
                     <td><?=$value['title'] ?></td>
                     <td><?=$value['date'] ?></td>
                     <td><?=$value['classtime'] ?></td>
-                  
-                    <td>
-
+                
 					<?php  
 					
 					$array_of_course_id = json_decode($value['courserestrictId'], true); ?>
@@ -328,7 +326,7 @@
 						<td></td>
 						<td> <button style="background:grey,color:#FFFF">Please pay the Balance fees. Contact Admin</button></td>
 					  <?php }else{ ?>
-						<td><?=$value['link_url'] ?></td>
+						<td>
 						    <?php  if($value['iscancle']!=1){ ?>
 								<?php if($value['attendance_alreday_exits']!='1'){ ?>
 									<?php if($value['link_url']){ ?>
@@ -341,8 +339,8 @@
 								<?php } }else{ ?>
 									<b>Cancelled</b>
 								<?php } ?>
-					  <?php } ?>
-                    </td>
+					        <?php } ?>
+                        </td>
                 </tr>
              <?php }  ?>   
             </tbody>
