@@ -641,10 +641,11 @@ class Student_model extends CI_Model
 
                     $data[$counter]['action'] = '';
                     if($course_restrict=='Yes'){
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+                           $data[$counter]['action'] .= '<button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button>';
                     }else{
-                        $data[$counter]['action'] .= '<button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button>';
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+                    
                     }
                    
                  $counter++; 
