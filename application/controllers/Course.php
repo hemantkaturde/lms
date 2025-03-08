@@ -1001,6 +1001,7 @@
                                 'to_date' => date('Y-m-d', strtotime($this->input->post('to_date'))),
                                 'month_name' => $getMonth.'-'.$getYear
                             );
+
             
                             $this->form_validation->set_rules('form_date', 'From Date', 'trim|required');
                             $this->form_validation->set_rules('to_date', 'To Date', 'trim|required');
@@ -1127,12 +1128,19 @@
                                                                                     $insertArr['from_date'] =  date('Y-m-d', strtotime($this->input->post('form_date')));
                                                                                     
                                                                                     $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
-                                                                                    $insertArr['date'] = date('Y-m-d', strtotime($allDataInSheet[$i]['A']));
+                                                                                    $date_export_date = $allDataInSheet[$i]['A'];
+
+                                                                                    $formatted_date = str_replace("/", "-", $date_export_date );
+                                                                                    $insertArr['date'] = date('Y-m-d', strtotime($formatted_date));
+
+                                                                    
                                                                                     $insertArr['timings'] =$allDataInSheet[$i]['B'];
                                                                                     $insertArr['topic'] = $allDataInSheet[$i]['C'];
                                                                                     $insertArr['trainer_id'] = trim($getTrianerid[0]->userId);
                                                                                     $insertArr['total_hrs'] =  $hours_difference;
                                                                                     $timetabledata[] = $insertArr;
+
+                                                                                    
                                                                                     $passdataToOrderAPi = $this->course_model->insertBlukTimetabledata($insertArr);
                                                                                 }else{
                                                                                     $savetimetable_response['status'] = 'failure';
