@@ -461,7 +461,7 @@ class Admission_model extends CI_Model
                     $check_course_restricted_or_not =$this->checkcourserestrictedornotvalue($userId);
 
 
-                    print_r($check_course_restricted_or_not);
+                    print_r($check_course_restricted_or_not[0]['restrict']);
                     exit;
 
                  
