@@ -325,7 +325,7 @@
 					
 					$array_of_course_id = json_decode($value['courserestrictId'], true); ?>
 				  	<?php if (in_array($value['courseId'], $array_of_course_id)) { ?>
-						<td> <button style="background:grey,color:#FFFF">Please Pay The Balance Fees. Contact Admin</button></td>
+						<td> <button style="background:grey,color:#FFFF">Please pay the Balance fees. Contact Admin</button></td>
 					  <?php }else{ ?>
 						<td><?=$value['link_url'] ?></td>
 						    <?php  if($value['iscancle']!=1){ ?>
