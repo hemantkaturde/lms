@@ -694,7 +694,7 @@ class Admission_model extends CI_Model
                  $data[$counter]['email_address'] = $value['email'];
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['topic'] = $value['topic'];
-                 $data[$counter]['total_hours'] = $value['total_hrs'];
+                 $data[$counter]['total_hrs'] = $value['total_hrs'];
                  $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
                  //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['timings'] = $value['timings'];
@@ -752,7 +752,7 @@ class Admission_model extends CI_Model
                  $data[$counter]['email_address'] = $value['email'];
                  $data[$counter]['course_name'] = $value['course_name'];
                  $data[$counter]['topic'] = $value['topic'];
-                 $data[$counter]['total_hours'] = $value['total_hours'];
+                 $data[$counter]['total_hours'] = $value['total_hrs'];
                  $data[$counter]['class_date'] =  date('d-m-Y', strtotime($value['date']));
                  //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
                  $data[$counter]['timings'] = $value['timings'];
