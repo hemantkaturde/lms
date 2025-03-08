@@ -570,11 +570,9 @@ class Student_model extends CI_Model
                         $course_mode_offline = '';
                     }
 
-                //    print_r($valueid['book_issued']);
-                //    exit;
+        
 
                     $course_id = json_decode($valueid['book_issued']);
-
 
                      if($course_id){
 
@@ -590,6 +588,28 @@ class Student_model extends CI_Model
                     }else{
                         $course_issued ='No';
                     }
+
+
+
+                    $course_restrict_id = json_decode($valueid['restrict']);
+
+                    if($course_restrict_id){
+
+                           if (in_array($value['courseId'], $course_restrict_id))
+                           {
+                               $course_restrict ='Yes';
+                           }
+                           else
+                           {
+                               $course_restrict ='No';
+                           }
+                       
+                   }else{
+                       $course_restrict ='No';
+                   }
+
+
+
                     
                     // $course_name = array();
                     // $course_name ="";
@@ -615,8 +635,15 @@ class Student_model extends CI_Model
 
                     $data[$counter]['action'] = '';
 
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+                    if($course_restrict='Yes'){
+                        $data[$counter]['action'] .= '<button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button></td>';
+
+                    }else{
+
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+    
+                    }
 
                  $counter++; 
             }
