@@ -321,9 +321,15 @@
                     <td><?=$value['link_url'] ?></td>
                     <td>
 
-					<?php  if (in_array($value['courseId'], $value['courserestrictId'])) { ?>
+					<?php  
+					
+					
+					print_r($value['courserestrictId']);
+					exit;
+					
+					if (in_array($value['courseId'], $value['courserestrictId'])) { ?>
 
-						
+
 							
 					  <?php }else{ ?>
 						    <?php  if($value['iscancle']!=1){ ?>
