@@ -591,22 +591,7 @@ class Student_model extends CI_Model
 
 
 
-                    $course_restrict_id = json_decode($valueid['restrict']);
-
-                    if($course_restrict_id){
-
-                           if (in_array($value['courseId'], $course_restrict_id))
-                           {
-                               $course_restrict ='Yes';
-                           }
-                           else
-                           {
-                               $course_restrict ='No';
-                           }
-                       
-                   }else{
-                       $course_restrict ='No';
-                   }
+                   
 
 
 
@@ -635,16 +620,29 @@ class Student_model extends CI_Model
 
                     $data[$counter]['action'] = '';
 
-                    if($course_restrict=='Yes'){
-                        $data[$counter]['action'] .= '<button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button></td>';
 
-                    }else{
+                    $course_restrict_id = json_decode($valueid['restrict']);
 
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
-    
-                    }
+                    if($course_restrict_id){
 
+                           if (in_array($value['courseId'], $course_restrict_id))
+                           {
+                            //    $course_restrict ='Yes';
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+        
+                           }
+                           else
+                           {
+                              
+                           }
+                       
+                   }else{
+                      
+                   }
+
+
+                   
                  $counter++; 
             }
         }
