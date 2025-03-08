@@ -610,10 +610,6 @@ class Student_model extends CI_Model
                    }
 
 
-                   print_r($course_restrict);
-                   exit;
-
-
 
 
                    
@@ -641,7 +637,7 @@ class Student_model extends CI_Model
 
                    // $data[$counter]['course_issued'] =  rtrim($course_name,',');
 
-                    $data[$counter]['course_issued'] =  $course_issued;
+                    $data[$counter]['course_issued'] =  $course_restrict;
 
                     $data[$counter]['action'] = '';
 
