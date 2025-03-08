@@ -1130,10 +1130,13 @@
                                                                                     $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
                                                                                     $date_export_date = $allDataInSheet[$i]['A'];
 
+                                                                                    print_r($date_export_date);
+                                                                                    exit;
+
                                                                                     $formatted_date = str_replace("/", "-", $date_export_date );
                                                                                     $insertArr['date'] = date('Y-m-d', strtotime($formatted_date));
 
-                                                                                    
+
                                                                     
                                                                                     $insertArr['timings'] =$allDataInSheet[$i]['B'];
                                                                                     $insertArr['topic'] = $allDataInSheet[$i]['C'];
