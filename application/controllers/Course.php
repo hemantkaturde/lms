@@ -1133,6 +1133,7 @@
                                                                                     $formatted_date = str_replace("/", "-", $date_export_date );
                                                                                     $insertArr['date'] = date('Y-m-d', strtotime($formatted_date));
 
+                                                                                    
                                                                     
                                                                                     $insertArr['timings'] =$allDataInSheet[$i]['B'];
                                                                                     $insertArr['topic'] = $allDataInSheet[$i]['C'];
