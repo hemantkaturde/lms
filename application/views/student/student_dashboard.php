@@ -323,11 +323,9 @@
 
 					<?php  
 					
+					$array_of_course_id = json_decode($value['courserestrictId'], true);
 					
-					print_r($value['courserestrictId']);
-					exit;
-					
-					if (in_array($value['courseId'], $value['courserestrictId'])) { ?>
+					if (in_array($value['courseId'], $array_of_course_id)) { ?>
 
 
 							
