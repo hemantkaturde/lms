@@ -1132,7 +1132,7 @@
 
                                                                                     $formatted_date = DateTime::createFromFormat("d-m-y",$date_export_date)->format("m-d-Y");
                                                                                   
-                                                                                 //   $formatted_date = str_replace("/", "-", $date_export_date );
+                                                                                    //$formatted_date = str_replace("/", "-", $date_export_date );
                                                                                     $insertArr['date'] = date('Y-m-d', strtotime($formatted_date));
 
 

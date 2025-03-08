@@ -19,6 +19,7 @@
                                 <th>Mobile / Roll Number</th>
                                 <th>E mail</th>
                                 <th>Course Books Issued to Student</th>
+                                <th>Course Restricted</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

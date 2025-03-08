@@ -129,10 +129,20 @@ class Student_model extends CI_Model
                     $course_name .= $this->getCoursenamebyid($bookissued_value)[0]['course_name'].',';        
                 }
 
+
+                $course_restrict_id = json_decode($value['restrict']);
+                
+                // $course_name = array();
+                $course_name_restrict ="";
+                foreach ($course_restrict_id as $key => $restrictissued_value) {
+                    $course_name_restrict .= $this->getCoursenamebyid($restrictissued_value)[0]['course_name'].',';        
+                }
+
                  $data[$counter]['name']    = $value['name'];
                  $data[$counter]['mobile']  = $value['mobile'];
                  $data[$counter]['email']   = $value['email'];
-                 $data[$counter]['user_flag']   =  rtrim($course_name,','); ;
+                 $data[$counter]['user_flag']   =  rtrim($course_name,',');
+                 $data[$counter]['course_restricted']   =  rtrim($course_name_restrict,','); ;
                  $data[$counter]['action'] .= "";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstudent/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentbookissued/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Edit Enquiry' title='Book Issued or Not'></a> | ";
