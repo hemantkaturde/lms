@@ -158,8 +158,8 @@ class Admission_model extends CI_Model
                         $roleText = $this->session->userdata('roleText');
                         if($roleText=='Admin' || $roleText=='Superadmin'){
                             /* Comment Old Logic */
-                            // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancel Admission' title='Cancel Admission'></a>&nbsp";
-                            $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission_prfill_infto' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancel Admission' title='Cancel Admission'></a>&nbsp";
+                             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancel Admission' title='Cancel Admission'></a>&nbsp";
+                            // $data[$counter]['action'] .= "<a style='cursor: pointer;' class='cancle_admission_prfill_infto' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/cancle.png alt='Cancel Admission' title='Cancel Admission'></a>&nbsp";
                             $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_admission' data-id='".$value['id']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Admission' title='Delete Admission'></a>&nbsp";    
                         }
                      }
