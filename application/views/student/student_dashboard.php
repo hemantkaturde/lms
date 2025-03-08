@@ -321,20 +321,24 @@
                     <td><?=$value['link_url'] ?></td>
                     <td>
 
-					<?php  if($value['iscancle']!=1){ ?>
+					<?php  if (in_array($value['courseId'], $value['courserestrictId'])) { ?>
 
-					 <?php if($value['attendance_alreday_exits']!='1'){ ?>
-						<?php if($value['link_url']){ ?>
-							<button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
-						<?php } ?>
-								<button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
-							    <button id="print_id_card" class="print_id_card" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
-                       <?php }else {?>
-						<b>Attended</b>
-                     <?php } }else{ ?>
-						<b>Cancelled</b>
-					 <?php } ?>
-
+						
+							
+					  <?php }else{ ?>
+						    <?php  if($value['iscancle']!=1){ ?>
+								<?php if($value['attendance_alreday_exits']!='1'){ ?>
+									<?php if($value['link_url']){ ?>
+										<button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
+									<?php } ?>
+											<button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
+											<button id="print_id_card" class="print_id_card" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Print Id Card</button>
+								<?php }else {?>
+									<b>Attended</b>
+								<?php } }else{ ?>
+									<b>Cancelled</b>
+								<?php } ?>
+					  <?php } ?>
                     </td>
                 </tr>
              <?php }  ?>   
