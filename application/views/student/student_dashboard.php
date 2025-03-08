@@ -321,7 +321,7 @@
                    
                     <?php 
 		
-					if($value['courserestrictId']){ ?>
+					if($value['courserestrictId']!=='null'){ ?>
 						<?php $array_of_course_id = json_decode($value['courserestrictId'], true); ?>
 						<?php if (in_array($value['courseId'], $array_of_course_id)) { ?>
 							<td></td>
