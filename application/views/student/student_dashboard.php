@@ -322,7 +322,7 @@
                   
                     <?php 
 		
-					if($value['courserestrictId']==null){ ?>
+					if($value['courserestrictId']){ ?>
 
                         <td>
 							<?php  if($value['iscancle']!=1){ ?>
