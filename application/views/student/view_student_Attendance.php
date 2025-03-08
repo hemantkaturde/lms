@@ -22,6 +22,7 @@
                                     <th>Student Name</th>
                                     <th>Course Name</th>
                                     <th>Topic Name</th>
+                                    <th>Class Duration</th>
                                     <th>Class Timing</th>
                                     <th>Attendance Status</th>
                                 </tr>

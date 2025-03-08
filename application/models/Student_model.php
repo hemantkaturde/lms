@@ -1004,7 +1004,7 @@ public function getstudentAttendanceCount($params,$userId){
 
 public function getstudentAttendancedata($params,$userId){
 
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_TIMETABLE_TRANSECTIONS.'.total_hrs as total_calculated_hrs');
     $this->db->join(TBL_COURSE, TBL_COURSE.'.courseId = '.TBL_ATTENDANCE.'.course_id');
     $this->db->join(TBL_USER, TBL_USER.'.userId  = '.TBL_ATTENDANCE.'.user_id');
     $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.id = '.TBL_ATTENDANCE.'.topic_id');
@@ -1036,6 +1036,7 @@ public function getstudentAttendancedata($params,$userId){
              $data[$counter]['course_name'] = $value['course_name'];
              //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
              $data[$counter]['topic'] = $value['topic'];
+             $data[$counter]['total_hrs'] = $value['total_calculated_hrs'];
              $data[$counter]['timings'] = $value['timings'];
 
              if($value['attendance_status']==1){
