@@ -145,7 +145,7 @@ class Student_model extends CI_Model
                  $data[$counter]['course_restricted']   =  rtrim($course_name_restrict,','); ;
                  $data[$counter]['action'] .= "";
                  $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstudent/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/edit.png' alt='Edit Enquiry' title='Edit Enquiry'></a> | ";
-                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentbookissued/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Edit Enquiry' title='Book Issued or Not / Coursr Restriction'></a> | ";
+                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studentbookissued/".$value['userId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='Edit Enquiry' title='Book Issued or Not / Course Restriction'></a> | ";
                  $data[$counter]['action'] .= "<a style='cursor: pointer;' class='delete_student' data-id='".$value['userId']."'><img width='20' src=".ICONPATH."/delete.png alt='Delete Student' title='Delete Student'></a>"; 
 
                 $counter++; 
