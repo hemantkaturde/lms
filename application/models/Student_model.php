@@ -1036,7 +1036,14 @@ public function getstudentAttendancedata($params,$userId){
              $data[$counter]['course_name'] = $value['course_name'];
              //$data[$counter]['enq_date'] = date('d-m-Y', strtotime($value['enq_date']));
              $data[$counter]['topic'] = $value['topic'];
-             $data[$counter]['total_hrs'] = $value['total_calculated_hrs'];
+             
+             if($value['total_calculated_hrs']){
+                $data[$counter]['total_hrs'] = $value['total_calculated_hrs'].' hours';
+             }else{
+                $data[$counter]['total_hrs'] = '';
+             }
+
+           
              $data[$counter]['timings'] = $value['timings'];
 
              if($value['attendance_status']==1){
