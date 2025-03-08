@@ -635,7 +635,7 @@ class Student_model extends CI_Model
 
                     $data[$counter]['action'] = '';
 
-                    if($course_restrict='Yes'){
+                    if($course_restrict=='Yes'){
                         $data[$counter]['action'] .= '<button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button></td>';
 
                     }else{
