@@ -4346,7 +4346,7 @@ if($pageTitle=='Role Listing' || $pageTitle=='Add New Role' || $pageTitle=='Edit
 							else if(fetchResponse.status == 'success')
 							{
 								swal({
-									title: "Changes Updated Successfully",
+									title: "Courses Updated Successfully",
 									//text: "",
 									icon: "success",
 									button: "Ok",
