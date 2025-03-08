@@ -590,6 +590,31 @@ class Student_model extends CI_Model
                     }
 
 
+                            
+
+                    $course_restrict_id = json_decode($valueid['restrict']);
+
+                    if($course_restrict_id){
+
+                           if (in_array($value['courseId'], $course_restrict_id))
+                           {
+                               $course_restrict ='Yes';
+                           }
+                           else
+                           {
+                               $course_restrict ='No';
+                           }
+                       
+                   }else{
+                       $course_restrict ='No';
+                   }
+
+
+                   print_r($course_restrict);
+                   exit;
+
+
+
 
                    
 
@@ -621,30 +646,8 @@ class Student_model extends CI_Model
                     $data[$counter]['action'] = '';
 
 
-                         $course_restrict_id = json_decode($valueid['restrict']);
-
-                        if($course_restrict_id){
-
-                               if (in_array($value['courseId'], $course_restrict_id))
-                               {
-                                   $course_restrict ='Yes';
-                               }
-                               else
-                               {
-                                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
-            
-                               }
-                        
-                       }else{
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
-    
-                       }
-
-
-                    // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                    // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
 
                  $counter++; 
             }
