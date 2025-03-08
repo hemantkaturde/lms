@@ -452,14 +452,18 @@ class Admission_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                     $checkattendance = $this->checkifAttendanceisexits($userId,$value['courseId'],$value['topicid']);
-
                     if($checkattendance){
-
                         $attendance_alreday_exits = 1 ;
-
                     }else{
                         $attendance_alreday_exits = 0 ;
                     }
+
+                    $check_course_restricted_or_not =$this->checkcourserestrictedornotvalue($userId);
+
+
+                    print_r($check_course_restricted_or_not);
+                    exit;
+
                  
                     // $data[$counter]['courseId'] = $value['courseId'];
                     $data[$counter]['course_name'] = $value['course_name'];
@@ -486,6 +490,17 @@ class Admission_model extends CI_Model
  
        return $data;
 
+    }
+
+
+
+    public function checkcourserestrictedornotvalue($userId){
+        $this->db->select('*');
+        $this->db->where(TBL_USER.'.userId', $userId);
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_USER);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
     }
 
 
