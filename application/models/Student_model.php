@@ -572,7 +572,7 @@ class Student_model extends CI_Model
 
         
 
-                    $course_id = json_decode($value['book_issued']);
+                    $course_id = json_decode($valueid['book_issued']);
 
                      if($course_id){
 
