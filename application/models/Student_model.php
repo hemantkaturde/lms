@@ -502,7 +502,7 @@ class Student_model extends CI_Model
         $pageUrl =$this->uri->segment(1);
 
 
-        $this->db->select(TBL_ENQUIRY.'.enq_course_id,'.TBL_USER.'.book_issued');
+        $this->db->select(TBL_ENQUIRY.'.enq_course_id,'.TBL_USER.'.book_issued,'.TBL_USER.'.restrict');
         $this->db->join(TBL_USERS_ENQUIRES, TBL_ENQUIRY.'.enq_id = '.TBL_USERS_ENQUIRES.'.enq_id');
         $this->db->join(TBL_USER, TBL_USER.'.userId = '.TBL_USERS_ENQUIRES.'.user_id');
         $this->db->where(TBL_USERS_ENQUIRES.'.user_id',$userId);
@@ -592,7 +592,7 @@ class Student_model extends CI_Model
 
                             
 
-                    $course_restrict_id = json_decode($value['restrict']);
+                    $course_restrict_id = json_decode($valueid['restrict']);
 
                     if($course_restrict_id){
 
@@ -641,10 +641,13 @@ class Student_model extends CI_Model
 
                     $data[$counter]['action'] = '';
 
+                    if($course_restrict=='Yes'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
+                    }else{
 
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstudentscoursetopis/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/books.png' alt='View Topics' title='View Topics'></a> ";
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."studenttimetableListing/".$value['courseId']."' style='cursor: pointer;'><img width='20' src='".ICONPATH."/timetable.png' alt='Time Table' title='Time Table'></a> ";
-
+                    }
+                   
                  $counter++; 
             }
         }
