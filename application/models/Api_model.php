@@ -2614,6 +2614,15 @@ public function upcoming_class_links($userId){
                 }else{
                     $attendance_alreday_exits = 0 ;
                 }
+
+
+                $check_course_restricted_or_not =$this->checkcourserestrictedornotvalue($userId);
+
+                if($check_course_restricted_or_not[0]['restrict']!=='null'){
+                    $restrict = json_decode($check_course_restricted_or_not[0]['restrict']);
+                }else{
+                    $restrict ='';
+                }
              
                 // $data[$counter]['courseId'] = $value['courseId'];
                 $data[$counter]['course_name'] = $value['course_name'];
@@ -2625,6 +2634,7 @@ public function upcoming_class_links($userId){
                 $data[$counter]['meeting_id'] = $value['meeting_id'];
                 $data[$counter]['topicid'] = $value['topicid'];
                 $data[$counter]['userid'] =  $userId;
+                $data[$counter]['courserestrictId'] = $restrict;
                 $data[$counter]['courseId'] = $value['courseId'];
                 $data[$counter]['iscancle'] = $value['iscancle'];
                 $data[$counter]['attendance_alreday_exits'] =  $attendance_alreday_exits;
@@ -2640,6 +2650,17 @@ public function upcoming_class_links($userId){
 
    return $data;
 
+}
+
+
+
+public function checkcourserestrictedornotvalue($userId){
+    $this->db->select('*');
+    $this->db->where(TBL_USER.'.userId', $userId);
+    $this->db->limit(1);
+    $query = $this->db->get(TBL_USER);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 }
 
 
