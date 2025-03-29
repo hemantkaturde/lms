@@ -4,6 +4,7 @@ require APPPATH . '/libraries/BaseController.php';
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
 
 class Api extends BaseController
 {
@@ -16,7 +17,7 @@ class Api extends BaseController
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+        header("Access-Control-Allow-Credentials: true");
 
          parent::__construct();
          $this->load->model(array('Api_model','enquiry_model','event','user_model','course_model','student_model','admission_model','database'));
