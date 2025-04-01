@@ -68,7 +68,7 @@ class Api extends BaseController
     /*User Details*/
     public function getuserdetails(){
 
-       // $userdetails = validateServiceRequest();
+        $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $post_submit = $this->input->post();
         if ($this->form_validation->run() == FALSE)
