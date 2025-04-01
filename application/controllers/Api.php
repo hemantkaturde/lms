@@ -2,7 +2,7 @@
 
 require APPPATH . '/libraries/BaseController.php';
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, authtoken");
 header("Access-Control-Allow-Credentials: true");
 
