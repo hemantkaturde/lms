@@ -68,12 +68,6 @@ class Api extends BaseController
     /*User Details*/
     public function getuserdetails(){
 
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: POST");
-        header("Access-Control-Allow-Headers: Content-Type, Authorization");
-        header("Access-Control-Allow-Credentials: true");
-
-
         $userdetails = validateServiceRequest();
         $this->form_validation->set_rules('userid', 'Userid', 'trim|required');
         $post_submit = $this->input->post();
