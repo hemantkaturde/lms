@@ -671,6 +671,9 @@ if (!function_exists(('savelogInformation')))
 
 if (!function_exists('validateServiceRequest'))
 {
+
+    print_r('asfadfda');
+    exit;
 	function validateServiceRequest() //Authenticate user
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
