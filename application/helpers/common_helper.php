@@ -671,50 +671,61 @@ if (!function_exists(('savelogInformation')))
 
 if (!function_exists('validateServiceRequest'))
 {
-
 	function validateServiceRequest() //Authenticate user
 	{
-        print_r($_SERVER['REQUEST_METHOD']);
-        exit;
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-
-					//echo '<pre>';print_r($_SERVER);echo '</pre>'; exit;
-					if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
-						exit;
-					} elseif (isset($_SERVER['HTTP_AUTHTOKEN']) && trim($_SERVER['HTTP_AUTHTOKEN']) != '') {
-
-                        print_r($_SERVER['HTTP_AUTHTOKEN']);
-                        exit;
-						//$keys = authtokenDecrypt($_SERVER['HTTP_AUTHTOKEN']);
-						$keys = explode(':',$_SERVER['HTTP_AUTHTOKEN']);
-						if(isset($keys[0],$keys[1])) {
-							$ci = &get_instance();
-							/************USER*************/
-							$ci->db->select('BaseTbl.userId,BaseTbl.user_flag,BaseTbl.email, BaseTbl.password, BaseTbl.name,BaseTbl.status,BaseTbl.roleId, Roles.role,Roles.access,BaseTbl.profile_pic,BaseTbl.username,BaseTbl.mobile');
-                            $ci->db->from('tbl_users as BaseTbl');
-                            $ci->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
-							$ci->db->where('BaseTbl.authtoken', trim($keys[0]));
-							$ci->db->where('BaseTbl.userId', trim($keys[1]));
-							//$ci->db->where(TBL_USER.'.status', 1);
-							$query = $ci->db->get(TBL_USER);
-							$getUsers = $query->result_array();
+		// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		// 			//echo '<pre>';print_r($_SERVER);echo '</pre>'; exit;
+		// 			if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+		// 				exit;
+		// 			} elseif (isset($_SERVER['HTTP_AUTHTOKEN']) && trim($_SERVER['HTTP_AUTHTOKEN']) != '') {
+		// 				//$keys = authtokenDecrypt($_SERVER['HTTP_AUTHTOKEN']);
+		// 				$keys = explode(':',$_SERVER['HTTP_AUTHTOKEN']);
+		// 				if(isset($keys[0],$keys[1])) {
+		// 					$ci = &get_instance();
+		// 					/************USER*************/
+		// 					$ci->db->select('BaseTbl.userId,BaseTbl.user_flag,BaseTbl.email, BaseTbl.password, BaseTbl.name,BaseTbl.status,BaseTbl.roleId, Roles.role,Roles.access,BaseTbl.profile_pic,BaseTbl.username,BaseTbl.mobile');
+        //                     $ci->db->from('tbl_users as BaseTbl');
+        //                     $ci->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+		// 					$ci->db->where('BaseTbl.authtoken', trim($keys[0]));
+		// 					$ci->db->where('BaseTbl.userId', trim($keys[1]));
+		// 					//$ci->db->where(TBL_USER.'.status', 1);
+		// 					$query = $ci->db->get(TBL_USER);
+		// 					$getUsers = $query->result_array();
 							
-							if ($query->num_rows() > 0) {
-								return $getUsers[0];
-							}  else {
-								accessUnAuthorized();
-							}
-						} else {
-							accessUnAuthorized();
-						}
-					} else {
-						accessUnAuthorized();
-					}
-		}else{
+		// 					if ($query->num_rows() > 0) {
+		// 						return $getUsers[0];
+		// 					}  else {
+		// 						accessUnAuthorized();
+		// 					}
+		// 				} else {
+		// 					accessUnAuthorized();
+		// 				}
+		// 			} else {
+		// 				accessUnAuthorized();
+		// 			}
+		// }else{
 
-			validateMethod();
-		}			
+		// 	validateMethod();
+		// }
+        
+        
+        $ci = &get_instance();
+        /************USER*************/
+        $ci->db->select('BaseTbl.userId,BaseTbl.user_flag,BaseTbl.email, BaseTbl.password, BaseTbl.name,BaseTbl.status,BaseTbl.roleId, Roles.role,Roles.access,BaseTbl.profile_pic,BaseTbl.username,BaseTbl.mobile');
+        $ci->db->from('tbl_users as BaseTbl');
+        $ci->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+        // $ci->db->where('BaseTbl.authtoken', trim($keys[0]));
+        // $ci->db->where('BaseTbl.userId', trim($keys[1]));
+        //$ci->db->where(TBL_USER.'.status', 1);
+        $query = $ci->db->get(TBL_USER);
+        $getUsers = $query->result_array();
+        
+        if ($query->num_rows() > 0) {
+            return $getUsers[0];
+        }  else {
+            accessUnAuthorized();
+        }
+
 	}	
 }
 
