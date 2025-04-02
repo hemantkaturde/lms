@@ -673,7 +673,7 @@ if (!function_exists('validateServiceRequest'))
 {
 	function validateServiceRequest() //Authenticate user
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					//echo '<pre>';print_r($_SERVER);echo '</pre>'; exit;
 					if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
 						exit;
