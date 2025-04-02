@@ -719,12 +719,12 @@ if (!function_exists('validateServiceRequest'))
         //$ci->db->where(TBL_USER.'.status', 1);
         $query = $ci->db->get(TBL_USER);
         $getUsers = $query->result_array();
-        
-        if ($query->num_rows() > 0) {
-            return $getUsers[0];
-        }  else {
-            accessUnAuthorized();
-        }
+        return $getUsers[0];
+        // if ($query->num_rows() > 0) {
+        //     return $getUsers[0];
+        // }  else {
+        //     accessUnAuthorized();
+        // }
 
 	}	
 }
