@@ -674,6 +674,8 @@ if (!function_exists('validateServiceRequest'))
 
 	function validateServiceRequest() //Authenticate user
 	{
+        print_r($_SERVER['REQUEST_METHOD']);
+        exit;
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
