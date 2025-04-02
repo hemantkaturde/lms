@@ -62,7 +62,7 @@ define("TEMPALTE_PATH",ADMIN_PATH.'/templates');
 |
 */
 $config['index_page'] = '';
-$config['allowed_origins'] = ['http://localhost:5173'];
+$config['allowed_origins'] = ['http://localhost:5173/'];
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
