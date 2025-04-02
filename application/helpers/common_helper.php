@@ -674,17 +674,16 @@ if (!function_exists('validateServiceRequest'))
 
 	function validateServiceRequest() //Authenticate user
 	{
-        print_r($_SERVER);
-        exit;
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            print_r($_SERVER);
-            exit;
 
 					//echo '<pre>';print_r($_SERVER);echo '</pre>'; exit;
 					if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
 						exit;
 					} elseif (isset($_SERVER['HTTP_AUTHTOKEN']) && trim($_SERVER['HTTP_AUTHTOKEN']) != '') {
+
+                        print_r($_SERVER['HTTP_AUTHTOKEN']);
+                        exit;
 						//$keys = authtokenDecrypt($_SERVER['HTTP_AUTHTOKEN']);
 						$keys = explode(':',$_SERVER['HTTP_AUTHTOKEN']);
 						if(isset($keys[0],$keys[1])) {
