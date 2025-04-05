@@ -341,37 +341,37 @@ $jsonstringtoArray = json_decode($access, true);
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="form-group">
-                     <label style="text-align: left;"  for="fees">Fees<span class="required">*</span>
+                     <label style="text-align: left;"  for="fees">Tution / Training Fees<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="fees1" name="fees"  placeholder="Enter Fees" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="fees1" name="fees"  placeholder="Enter Tution / Training Fees" class="form-control col-md-12 col-xs-12">
                         <p class="error fees_error"></p>
                      </div>
                   </div>
 
                   <div class="form-group">
-                     <label style="text-align: left;"  for="certificate_cost">Certificate Cost
+                     <label style="text-align: left;"  for="certificate_cost">Exam Fees
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="certificate_cost1" name="certificate_cost" placeholder="Enter Certificate Cost" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="certificate_cost1" name="certificate_cost" placeholder="Enter Exam Fees" class="form-control col-md-12 col-xs-12">
                         <p class="error certificate_cost_error"></p>
                      </div>
                    </div>
 
                    <div class="form-group">
-                     <label style="text-align: left;"  for="kit_cost">Apron Cost/Courier Charges
+                     <label style="text-align: left;"  for="kit_cost">Book Cost
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="kit_cost1" name="kit_cost" placeholder="Apron Cost/Courier Charges" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="kit_cost1" name="kit_cost" placeholder="Enter Book Cost" class="form-control col-md-12 col-xs-12">
                         <p class="error kit_cost_error"></p>
                      </div>
                    </div>
 
                    <div class="form-group">
-                     <label style="text-align: left;"  for="one_time_admission_fees">One time admission fees
+                     <label style="text-align: left;"  for="one_time_admission_fees">Admin Fees
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="one_time_admission_fees1"  placeholder="Enter One time admission fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="one_time_admission_fees1"  placeholder="Enter Admin Fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
                         <p class="error one_time_admission_fees_error"></p>
                      </div>
                   </div>
