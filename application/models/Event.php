@@ -36,7 +36,7 @@ class Event extends CI_Model{
 		$query = $this->db->select(TBL_TIMETABLE_TRANSECTIONS.'.id as id,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as time,'.TBL_TIMETABLE_TRANSECTIONS.'.topic as event,'.TBL_USER.'.name as trainer,a.name as backup_trainername,'.TBL_TOPIC_MEETING_LINK.'.link_url as topic_link')
 		                     ->from(TBL_TIMETABLE)
 							 ->join(TBL_TIMETABLE_TRANSECTIONS,TBL_TIMETABLE.'.id = '.TBL_TIMETABLE_TRANSECTIONS.'.time_table_id')
-							 ->join(TBL_TOPIC_MEETING_LINK,TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id')
+							 ->join(TBL_TOPIC_MEETING_LINK,TBL_TOPIC_MEETING_LINK.'.time_table_transection_id = '.TBL_TIMETABLE_TRANSECTIONS.'.id','left')
 							 ->join(TBL_USER,TBL_USER.'.userId  = '.TBL_TIMETABLE_TRANSECTIONS.'.trainer_id')
 							 ->join(TBL_USER.' as a','a.userId  = '.TBL_TIMETABLE_TRANSECTIONS.'.backup_trainer','left')
 							 ->join(TBL_ROLES,TBL_ROLES.'.roleId = '.TBL_USER.'.roleId')
