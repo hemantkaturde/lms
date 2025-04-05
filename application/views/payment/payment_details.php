@@ -412,7 +412,7 @@
                                             class="required">*</span>
                                     </label>
                                     <div>
-                                        <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
+                                        <input type="datetime-text" class="form-control datepicker" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
 
                                         <p class="error payment_date_error"></p>
                                     </div>
