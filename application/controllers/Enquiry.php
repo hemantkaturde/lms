@@ -854,6 +854,11 @@
             $this->global['pageTitle'] = 'Enquiry Payment Details';
             $data['enquiry_id'] = $id;
             $data['followDataenquiry'] = $this->enquiry_model->getEnquiryInfo($id);
+
+            // print_r( $data['followDataenquiry']);
+            // exit;
+
+
             $data['getEnquirypaymentInfo'] = $this->enquiry_model->getEnquirypaymentInfo($id);
             $data['gettotalpaidEnquirypaymentInfo'] = $this->enquiry_model->gettotalpaidEnquirypaymentInfo($id);
             $data['getadditionalInfo'] = $this->enquiry_model->getadditionalInfo($id);

@@ -311,7 +311,7 @@ class Enquiry_model extends CI_Model
 
 
     public function getCourseInfo($id){
-        $this->db->select('courseId,course_total_fees,course_name');
+        $this->db->select('courseId,course_total_fees,course_name,mainCourse_condition,sponsored_condition,regular_condition');
         $this->db->from('tbl_course');
         $this->db->where('tbl_course.isDeleted', 0);
         //$this->db->where('tbl_enquiry.payment_status', 1);
