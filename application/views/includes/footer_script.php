@@ -428,9 +428,9 @@
 			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
             
 			
-		    var  total_tax = total_fees_befor_tax * 18 / 118;
-
+		    var  total_tax = total_fees_befor_tax * 18 / 100;
 			var cgst_value = total_tax / 2;
+
 
 			$("#cgst").val(cgst_value.toFixed(2));
 
