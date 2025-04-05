@@ -427,8 +427,8 @@
 			}
 			var total_fees_befor_tax = parseFloat(fees) + parseFloat(certificate_cost) + parseFloat(kit_cost) + parseFloat(one_time_admission_fees);
             
-			
-		    var  total_tax = total_fees_befor_tax * 18 / 100;
+
+		    var total_tax = total_fees_befor_tax * 18 / 100;
 			var cgst_value = total_tax / 2;
 
 
@@ -438,7 +438,9 @@
 
 		    $("#sgst").val(sgst_value.toFixed(2));
 
-			$("#total_course_fees").val( Math.round(total_fees_befor_tax));
+			var final_total_cost_grand_total = total_fees_befor_tax +total_tax;
+
+			$("#total_course_fees").val( Math.round(final_total_cost_grand_total));
 
 
 			/*old Logic 19-04-2023*/
