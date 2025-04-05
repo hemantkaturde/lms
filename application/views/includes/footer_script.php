@@ -222,17 +222,21 @@
 
 					 $('#trainer1').val(data[0].trainer_id); 
 
-					 $('#mainCourse').val(data[0].mainCourse_condition); 
-					 $('#sponsored').val(data[0].sponsored_condition); 
-					 $('#regular').val(data[0].regular_condition); 
+					//  $('#mainCourse').val(data[0].mainCourse_condition); 
+					//  $('#sponsored').val(data[0].sponsored_condition); 
+					//  $('#regular').val(data[0].regular_condition); 
+	
 
+					//  if(data[0].mainCourse_condition=='Main'){
+					// 	// $("#mainCourse").attr("checked", "true");
+					// 	$('#mainCourse').prop('checked', true)
+					//  }else{
+					// 	//$(".course_mode_online1").attr("checked", "flase");
+					//  }
 
-					 if(data[0].mainCourse_condition=='Main'){
-						// $("#mainCourse").attr("checked", "true");
-						$('#mainCourse').prop('checked', true)
-					 }else{
-						//$(".course_mode_online1").attr("checked", "flase");
-					 }
+					 $('#mainCourse').attr('checked', true)
+					 $('#sponsored').attr('checked', true)
+					 $('#regular').attr('checked', true)
 
 
 					 if(data[0].course_books==1){

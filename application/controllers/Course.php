@@ -273,6 +273,11 @@
                     'course_onetime_adm_fees'=>$this->input->post('one_time_admission_fees'),
                     'course_books'=>$this->input->post('course_books1'),
                     //'course_remark' => $this->input->post('remarks'),
+
+                    'mainCourse_condition'=>$this->input->post('mainCourse'),
+                    'sponsored_condition'=>$this->input->post('sponsored'),
+                    'regular_condition'=>$this->input->post('regular'),
+
                     'course_mode_online'=>$course_mode_online,
                     'course_mode_offline'=>$course_mode_offline,
                     'course_cgst' => $cgst_tax,
@@ -292,7 +297,12 @@
                 $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
                 //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
-                
+                if($this->input->post('mainCourse') || $this->input->post('sponsored') || $this->input->post('regular')){
+                    $course_type_required = '';
+                }else{
+                   
+                    $course_type_required = 'Course Type Required';
+                }
               
 
                 if($this->form_validation->run() == FALSE){
