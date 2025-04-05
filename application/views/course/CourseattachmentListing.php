@@ -116,7 +116,7 @@
                                             class="required">*</span>
                                     </label>
                                     <div>
-                                        <input maxlength="25" type="text" id="topic_name_1" name="topic_name_1"
+                                        <input type="text" id="topic_name_1" name="topic_name_1"
                                             placeholder="Enter Topic / Chapter Name" autocomplete="off"
                                             class="form-control col-md-12 col-xs-12">
                                         <input type="hidden" id="course_id_1_post" name="course_id_1_post"
