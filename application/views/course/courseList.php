@@ -330,9 +330,10 @@ $jsonstringtoArray = json_decode($access, true);
                    <label style="text-align: left;"  for="course_mode">Select Course Type <span class="required">*</span>
                    </label>
                            <div>
-                              <input type="checkbox" class="mainCourse" id="mainCourse" name="mainCourse"  value="Main">Main Course
-                              <input type="checkbox" class="sponsored"  id="sponsored" name="sponsored"  value="Sponsored">Sponsored
-                              <input type="checkbox" class="regular" id="regular" name="regular" value="Regular">Regular
+                              
+                              <input type="checkbox" class="mainCourseedit" id="mainCourseedit" name="mainCourseedit"  value="Main">Main Course
+                              <input type="checkbox" class="sponsorededit"  id="sponsorededit" name="sponsorededit"  value="Sponsored">Sponsored
+                              <input type="checkbox" class="regularedit" id="regularedit" name="regularedit" value="Regular">Regular
                            </div>
                    </label>
                    <p class="error course_mode_error"></p>
@@ -419,7 +420,7 @@ $jsonstringtoArray = json_decode($access, true);
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <script>
     $(document).ready(function () {

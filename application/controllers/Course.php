@@ -274,9 +274,9 @@
                     'course_books'=>$this->input->post('course_books1'),
                     //'course_remark' => $this->input->post('remarks'),
 
-                    'mainCourse_condition'=>$this->input->post('mainCourse'),
-                    'sponsored_condition'=>$this->input->post('sponsored'),
-                    'regular_condition'=>$this->input->post('regular'),
+                    'mainCourse_condition'=>$this->input->post('mainCourseedit'),
+                    'sponsored_condition'=>$this->input->post('sponsorededit'),
+                    'regular_condition'=>$this->input->post('regularedit'),
 
                     'course_mode_online'=>$course_mode_online,
                     'course_mode_offline'=>$course_mode_offline,
@@ -297,7 +297,7 @@
                 $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
                 //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
-                if($this->input->post('mainCourse') || $this->input->post('sponsored') || $this->input->post('regular')){
+                if($this->input->post('mainCourseedit') || $this->input->post('sponsorededit') || $this->input->post('regularedit')){
                     $course_type_required = '';
                 }else{
                    
