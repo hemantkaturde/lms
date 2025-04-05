@@ -356,6 +356,7 @@ $jsonstringtoArray = json_decode($access, true);
                         <?php } ?>
 
                         
+                        <?php if($role_text==="Superadmin" || $role_text==="Admin"){ ?>
                         <li class="treeview <?php if($pageUrl =='inquiryleadsreport' || $pageUrl =='taxinvoicesreport' || $pageUrl =='admissionreport' || $pageUrl =='attendancreport'){ echo 'active';} ?>"  style="height: auto; " >
                             <a href="#">
                                 <i class="sidebar-item-icon fa fa-file-excel-o" ></i> <span class="group-master" >Reports</span>
@@ -368,6 +369,7 @@ $jsonstringtoArray = json_decode($access, true);
                                 <li class="<?php if($pageUrl =='attendancreport'){ echo 'active';} ?>"><a href="<?php echo base_url(); ?>attendancreport"><i class="sidebar-item-icon fa fa-files-o"></i><span class="nav-label"> Attendance Report</span></a></li>
                             </ul>
                         </li>
+                        <?php } ?>
                     
 
 
