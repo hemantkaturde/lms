@@ -133,24 +133,35 @@
                         $total_fees = 0;
                         $course_name = '';
                         $i = 1;
-                        foreach($course_ids as $id)
-                        {
-                            $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
-                            if($get_course_fees){
-                                
-                                $total_fees += $get_course_fees[0]->course_total_fees;
-                                //$course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> ';  
-                                $i++;   
-                        
-                            }else{
-                        
-                                $total_fees = '';
-                                //$course_name = '';  
-                                $i++;  
-                            }
-                            
-                        }
 
+                        /*check if there is any main course in selected courses*/
+                        $checking_main_course = $this->enquiry_model->checking_main_course($course_ids);
+                        // print_r($checking_main_course);
+                        // exit;
+
+                        if($checking_main_course[0]->mainCourse_condition){
+
+                            $total_fees += $checking_main_course[0]->course_total_fees;
+                        }else{
+                            foreach($course_ids as $id)
+                            {
+                                $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                                if($get_course_fees){
+                                    
+                                    $total_fees += $get_course_fees[0]->course_total_fees;
+                                    //$course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> ';  
+                                    $i++;   
+                            
+                                }else{
+                            
+                                    $total_fees = '';
+                                    //$course_name = '';  
+                                    $i++;  
+                                }
+                                
+                            }
+
+                        }
 
                 }else{
                     $courses = '';

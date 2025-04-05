@@ -60,6 +60,24 @@ class Enquiry_model extends CI_Model
             return $query->result();
         }
 
+
+        public function checking_main_course($course_ids)
+        {
+
+        
+
+            $this->db->select('mainCourse_condition,courseId,course_total_fees');
+           // $this->db->join('tbl_course', 'tbl_course.courseId = tbl_enquiry.enq_course_id');
+            // $this->db->join('tbl_course_type', 'tbl_course.course_type_id = tbl_course_type.ct_id');
+             $this->db->from('tbl_course');
+           // $this->db->where('tbl_enquiry.isDeleted', 0);
+            //$this->db->where('tbl_enquiry.enq_id', $enqId);
+            $this->db->where_in('tbl_course.courseId', $course_ids);
+            $this->db->where('tbl_course.mainCourse_condition IS NOT NULL');
+            $query = $this->db->get();
+            return $query->result();
+        }
+
     public function getEnquiryCount($params){
         $this->db->select('*');
         // $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_ENQUIRY.'.course_type_id','left');

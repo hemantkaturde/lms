@@ -40,31 +40,31 @@
                         </tr>
                         <tr>
                             <td><?php
-                     $course_ids    =   explode(',', $followDataenquiry[0]->enq_course_id);
-                     $total_fees = 0;
-                     $course_name = '';
-                     $i = 1;
-                     foreach($course_ids as $id)
-                     {
-                         $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
-                         if($get_course_fees){
-                             
-                             $total_fees += $get_course_fees[0]->course_total_fees;
-                             $course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> <br> ';  
-                             $i++;   
-                     
-                         }else{
-                     
-                             $total_fees = '';
-                             $course_name = '';  
-                             $i++;  
-                         }
-                         
-                     }
-                     $all_course_name = trim($course_name, ', '); 
+                                $course_ids    =   explode(',', $followDataenquiry[0]->enq_course_id);
+                                $total_fees = 0;
+                                $course_name = '';
+                                $i = 1;
+                                foreach($course_ids as $id)
+                                {
+                                    $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
+                                    if($get_course_fees){
+                                        
+                                        $total_fees += $get_course_fees[0]->course_total_fees;
+                                        $course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> <br> ';  
+                                        $i++;   
+                                
+                                    }else{
+                                
+                                        $total_fees = '';
+                                        $course_name = '';  
+                                        $i++;  
+                                    }
+                                    
+                                }
+                                $all_course_name = trim($course_name, ', '); 
                             
-                     echo '<p>'.$all_course_name .'</p>'; 
-                    //  echo '<p>'.'<b><H4 style="color: #d2ae6d;">Total Fees</b> :'.' ₹ '.$total_fees .'</H4></p>'; 
+                                echo '<p>'.$all_course_name .'</p>'; 
+                                //echo '<p>'.'<b><H4 style="color: #d2ae6d;">Total Fees</b> :'.' ₹ '.$total_fees .'</H4></p>'; 
                      ?></td>
                         </tr>
                     </table>
@@ -412,7 +412,7 @@
                                             class="required">*</span>
                                     </label>
                                     <div>
-                                        <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
+                                        <input type="datetime-text" class="form-control datepicker" id="payment_date" name="payment_date" placeholder="dd-mm-yyyy" autocomplete="off" required>
 
                                         <p class="error payment_date_error"></p>
                                     </div>
