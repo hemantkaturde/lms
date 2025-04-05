@@ -66,7 +66,7 @@ class Course_model extends CI_Model
         {
 
 
-            $this->db->select('BaseTbl.*,BaseTbl.courseId,BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books,BaseTbl.trainer_id,BaseTbl.mainCourse_condition,BaseTbl.sponsored_condition,BaseTbl.regular_condition');
+            $this->db->select('BaseTbl.*,BaseTbl.courseId,BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date, BaseTbl.course_fees, BaseTbl.course_cert_cost, BaseTbl.course_onetime_adm_fees, BaseTbl.course_kit_cost, BaseTbl.course_remark, BaseTbl.course_type_id, BaseTbl.course_books,BaseTbl.trainer_id,BaseTbl.mainCourse_condition as mainCourse_condition1,BaseTbl.sponsored_condition as sponsored_condition1,BaseTbl.regular_condition as regular_condition1');
             $this->db->from('tbl_course as BaseTbl');
             $this->db->where('BaseTbl.isDeleted', 0);
             $this->db->where('BaseTbl.courseId', $courseId);

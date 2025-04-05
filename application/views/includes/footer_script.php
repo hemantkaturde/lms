@@ -223,29 +223,24 @@
 					 $('#trainer1').val(data[0].trainer_id); 
 
 
-					 if(data[0].mainCourse_condition=='Main'){
+					 if(data[0].mainCourse_condition1=='Main'){
 						// $("#mainCourse").attr("checked", "true");
-						$('.mainCourseedit').attr('checked', true)
+						$('.mainCourseedit').attr('checked', "true")
 					 }else{
-						$(".mainCourseedit").attr("checked", "flase");
+						//$(".mainCourseedit").attr("checked", "flase");
+					 }
+					 
+					 if(data[0].sponsored_condition1=='Sponsored'){
+						$(".sponsorededit").attr("checked", "true");
+					 }else{
+						//$(".course_mode_online1").attr("checked", "flase");
 					 }
 
-					if(data[0].sponsored_condition=='Sponsored'){
-						// $("#mainCourse").attr("checked", "true");
-						$('.sponsorededit').attr('checked', true)
-					}else{
-						$('.sponsorededit').attr('checked', "flase")
-					}
-
-
-					if(data[0].regular_condition=='Regular'){
-						// $("#mainCourse").attr("checked", "true");
-						$('.regularedit').attr('checked', true)
-					}else{
-						$('.regularedit').attr('checked', "flase")
-					}
-
-									 
+					 if(data[0].regular_condition1=='Regular'){
+						$(".regularedit").attr("checked", "true");
+					 }else{
+						//$(".course_mode_online1").attr("checked", "flase");
+					 }
 
 					 if(data[0].course_books==1){
 						$('.radio_yes1').attr("checked", "checked");
