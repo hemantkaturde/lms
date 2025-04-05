@@ -137,6 +137,17 @@ $jsonstringtoArray = json_decode($access, true);
                      <p class="error course_mode_error"></p>
                   </div>
 
+                  <div class="form-group">
+                   <label style="text-align: left;"  for="course_mode">Select Course Type <span class="required">*</span>
+                   </label>
+                           <div>
+                              <input type="checkbox" id="mainCourse" value="main">Main Course
+                              <input type="checkbox" id="sponsored" value="sponsored">Sponsored
+                              <input type="checkbox" id="regular" value="regular">Regular
+                           </div>
+                   </label>
+                   <p class="error course_mode_error"></p>
+                  </div>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
 
@@ -313,6 +324,19 @@ $jsonstringtoArray = json_decode($access, true);
                      </div>
                      <p class="error course_mode_error"></p>
                   </div>
+
+                  
+                  <div class="form-group">
+                   <label style="text-align: left;"  for="course_mode">Select Course Type <span class="required">*</span>
+                   </label>
+                           <div>
+                              <input type="checkbox" id="mainCourse" value="main">Main Course
+                              <input type="checkbox" id="sponsored" value="sponsored">Sponsored
+                              <input type="checkbox" id="regular" value="regular">Regular
+                           </div>
+                   </label>
+                   <p class="error course_mode_error"></p>
+                  </div>
                   
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -394,3 +418,23 @@ $jsonstringtoArray = json_decode($access, true);
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+      $('input[type="checkbox"]').change(function () {
+        // Reset all first
+        $('#mainCourse, #sponsored, #regular').prop('disabled', false);
+
+        // Apply disable logic
+        if ($('#mainCourse').is(':checked')) {
+          $('#sponsored, #regular').prop('disabled', true);
+        } else if ($('#sponsored').is(':checked')) {
+          $('#mainCourse').prop('disabled', true);
+        } else if ($('#regular').is(':checked')) {
+          $('#mainCourse').prop('disabled', true);
+        }
+      });
+    });
+  </script>
