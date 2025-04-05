@@ -48,9 +48,15 @@
                                 {
                                     $get_course_fees =  $this->enquiry_model->getCourseInfo($id);
                                     if($get_course_fees){
+
+                                        if($get_course_fees[0]->mainCourse_condition){
+                                            $course_type =$get_course_fees[0]->mainCourse_condition;
+                                        }else if($get_course_fees[0]->sponsored_condition){
+                                            $course_type =$get_course_fees[0]->sponsored_condition;
+                                        }
                                         
                                         $total_fees += $get_course_fees[0]->course_total_fees;
-                                        $course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') <br> <br> ';  
+                                        $course_name .= $i.') '.$get_course_fees[0]->course_name.'&nbsp&nbsp( Rs '.$get_course_fees[0]->course_total_fees. ') '.' - '.$course_type.'<br> <br> ' ;  
                                         $i++;   
                                 
                                     }else{
