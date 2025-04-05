@@ -183,7 +183,7 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="one_time_admission_fees">Admin Fees
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="one_time_admission_fees"  placeholder="Enter One time Admin fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="one_time_admission_fees"  placeholder="Enter Admin fees" name="one_time_admission_fees" class="form-control col-md-12 col-xs-12">
                         <p class="error one_time_admission_fees_error"></p>
                      </div>
                   </div>
