@@ -138,15 +138,15 @@ $jsonstringtoArray = json_decode($access, true);
                   </div>
 
                   <div class="form-group">
-                   <label style="text-align: left;"  for="course_mode">Select Course Type <span class="required">*</span>
+                   <label style="text-align: left;"  for="course_type_condition">Select Course Type <span class="required">*</span>
                    </label>
                            <div>
-                              <input type="checkbox" id="mainCourse" value="main">Main Course
-                              <input type="checkbox" id="sponsored" value="sponsored">Sponsored
-                              <input type="checkbox" id="regular" value="regular">Regular
+                              <input type="checkbox" id="mainCourse" name="mainCourse"  value="Main">Main Course
+                              <input type="checkbox" id="sponsored" name="sponsored"  value="Sponsored">Sponsored
+                              <input type="checkbox" id="regular" name="regular" value="Regular">Regular
                            </div>
                    </label>
-                   <p class="error course_mode_error"></p>
+                   <p class="error course_type_condition_error"></p>
                   </div>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -330,9 +330,9 @@ $jsonstringtoArray = json_decode($access, true);
                    <label style="text-align: left;"  for="course_mode">Select Course Type <span class="required">*</span>
                    </label>
                            <div>
-                              <input type="checkbox" id="mainCourse" value="main">Main Course
-                              <input type="checkbox" id="sponsored" value="sponsored">Sponsored
-                              <input type="checkbox" id="regular" value="regular">Regular
+                              <input type="checkbox" class="mainCourse" id="mainCourse" name="mainCourse"  value="Main">Main Course
+                              <input type="checkbox" class="sponsored"  id="sponsored" name="sponsored"  value="Sponsored">Sponsored
+                              <input type="checkbox" class="regular" id="regular" name="regular" value="Regular">Regular
                            </div>
                    </label>
                    <p class="error course_mode_error"></p>
@@ -426,7 +426,6 @@ $jsonstringtoArray = json_decode($access, true);
       $('input[type="checkbox"]').change(function () {
         // Reset all first
         $('#mainCourse, #sponsored, #regular').prop('disabled', false);
-
         // Apply disable logic
         if ($('#mainCourse').is(':checked')) {
           $('#sponsored, #regular').prop('disabled', true);

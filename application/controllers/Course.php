@@ -141,6 +141,11 @@
                     //'course_remark' => $this->input->post('remarks'),
                     'course_mode_online'=>$course_mode_online,
                     'course_mode_offline'=>$course_mode_offline,
+
+                    'mainCourse_condition'=>$this->input->post('mainCourse'),
+                    'sponsored_condition'=>$this->input->post('sponsored'),
+                    'regular_condition'=>$this->input->post('regular'),
+
                     'course_cgst' => $cgst_tax,
                     'course_cgst_tax_value' => $cgst_tax_value,
                     'course_sgst' => $sgst_tax,
@@ -166,9 +171,17 @@
                     $required_checkbox = '';
                 }
 
+                if($this->input->post('mainCourse') || $this->input->post('sponsored') || $this->input->post('regular')){
+                    $course_type_required = '';
+                }else{
+                   
+                    $course_type_required = 'Course Type Required';
+                }
+
+
                 if($this->form_validation->run() == FALSE){
                     $createcourse_response['status'] = 'failure';
-                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox);
+                    $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox,'course_type_condition'=>$course_type_required);
                 }else{
 
                     /*check If course name is unique*/
@@ -176,12 +189,12 @@
 
                     if($check_uniqe){
                         $createcourse_response['status'] = 'failure';
-                        $createcourse_response['error'] = array('course_name'=>'Course Name Already Exist', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                        $createcourse_response['error'] = array('course_name'=>'Course Name Already Exist', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'','course_type_condition'=>'');
                     }else{
                         $saveCoursedata = $this->course_model->saveCoursedata('',$data);
                         if($saveCoursedata){
                             $createcourse_response['status'] = 'success';
-                            $createcourse_response['error'] = array('course_name'=>'', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'');
+                            $createcourse_response['error'] = array('course_name'=>'', 'fees'=>'', 'course_type'=>'', 'description'=>'','certificate_cost'=>'','kit_cost'=>'','one_time_admission_fees'=>'','course_books'=>'','course_type_condition'=>'');
                         }
                     }
                 }

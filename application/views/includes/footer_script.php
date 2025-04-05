@@ -209,8 +209,7 @@
                 success:function(data)  
                 {  
 
-					//alert(data[0].course_books);
-
+		
                      $('#editCourse').modal('show');
                      $('#course_name1').val(data[0].course_name);  
                      $('#fees1').val(data[0].course_fees);  
@@ -222,6 +221,19 @@
                      $('#kit_cost1').val(data[0].course_kit_cost);  
 
 					 $('#trainer1').val(data[0].trainer_id); 
+
+					 $('#mainCourse').val(data[0].mainCourse_condition); 
+					 $('#sponsored').val(data[0].sponsored_condition); 
+					 $('#regular').val(data[0].regular_condition); 
+
+
+					 if(data[0].mainCourse_condition=='Main'){
+						// $("#mainCourse").attr("checked", "true");
+						$('#mainCourse').prop('checked', true)
+					 }else{
+						//$(".course_mode_online1").attr("checked", "flase");
+					 }
+
 
 					 if(data[0].course_books==1){
 						$('.radio_yes1').attr("checked", "checked");
