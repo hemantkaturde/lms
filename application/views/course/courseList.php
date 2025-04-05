@@ -155,7 +155,7 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="fees">Tution / Training Fees<span class="required">*</span>
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="fees" name="fees"  placeholder="Tution / Training Fees" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="fees" name="fees"  placeholder="Enter Tution / Training Fees" class="form-control col-md-12 col-xs-12">
                         <p class="error fees_error"></p>
                      </div>
                   </div>
@@ -164,7 +164,7 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="certificate_cost">Exam Fees
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="certificate_cost" name="certificate_cost" placeholder="Exam Fees" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="certificate_cost" name="certificate_cost" placeholder="Enter Exam Fees" class="form-control col-md-12 col-xs-12">
                         <p class="error certificate_cost_error"></p>
                      </div>
                    </div>
@@ -173,7 +173,7 @@ $jsonstringtoArray = json_decode($access, true);
                      <label style="text-align: left;"  for="kit_cost"> Book Cost
                      </label>
                      <div >
-                        <input autocomplete="off" autocomplete="off"  type="number" id="kit_cost" name="kit_cost" placeholder="Book Cost" class="form-control col-md-12 col-xs-12">
+                        <input autocomplete="off" autocomplete="off"  type="number" id="kit_cost" name="kit_cost" placeholder="Enter Book Cost" class="form-control col-md-12 col-xs-12">
                         <p class="error kit_cost_error"></p>
                      </div>
                    </div>
