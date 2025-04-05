@@ -436,5 +436,24 @@ $jsonstringtoArray = json_decode($access, true);
           $('#mainCourse').prop('disabled', true);
         }
       });
+
+
+
+      $('input[type="checkbox"]').change(function () {
+        // Reset all first
+        $('#mainCourseedit, #sponsorededit, #regularedit').prop('disabled', false);
+        // Apply disable logic
+        if ($('#mainCourseedit').is(':checked')) {
+          $('#sponsorededit, #regularedit').prop('disabled', true);
+        } else if ($('#sponsorededit').is(':checked')) {
+          $('#mainCourseedit').prop('disabled', true);
+        } else if ($('#regularedit').is(':checked')) {
+          $('#mainCourseedit').prop('disabled', true);
+        }
+      });
+
     });
+
+
+    
   </script>
