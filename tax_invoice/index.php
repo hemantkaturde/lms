@@ -36,8 +36,15 @@ if ($paymant_type == 'regular_invoice') {
             $result = $conn->query("SELECT * FROM tbl_course where courseId=$id");
             $get_course_fees = $result->fetch_assoc();
             if ($get_course_fees) {
+
+                if($get_course_fees['mainCourse_condition']=='Main'){
+                    $course_type_condition = '';
+                }else{
+                    $course_type_condition = '-'.$get_course_fees['sponsored_condition'];
+                }
+
                 $total_fees+= $get_course_fees['course_total_fees'];
-                $course_name.= $i . ') ' . $get_course_fees['course_name'] . ' ( Rs ' . $get_course_fees['course_total_fees'] . ' )  ';
+                $course_name.= $i . ') ' . $get_course_fees['course_name'] . ' ( Rs ' . $get_course_fees['course_total_fees'] . ' )  '.$course_type_condition.'  <br>';
                 $i++;
             } else {
                 $total_fees = '';
@@ -77,6 +84,15 @@ if ($paymant_type == 'regular_invoice') {
     $total_amount_payment_transection = $result_arry['totalAmount'];
 }
 
+$startYear = date("y"); // Current year in 2 digits
+$endYear = date("y", strtotime("+1 year")); // Next year in 2 digits
+$financial_year = $startYear . '-' . $endYear;
+
+if($result_arry['conser_name']){
+    $couns_name= $result_arry['conser_name'];
+}else{
+    $couns_name= $result_arry['counsellor_name'];
+}
 
 $mpdf = new \Mpdf\Mpdf();
 $html = '<html><body>
@@ -87,9 +103,9 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
 <img src="iictn-logo-v.png" width="70%;" style="margin-left:0%;">
 
 <h4 align="center" style="font-size:11px;margin-top:15px">Tax Invoice</h4>
-<div style="float:left;width:45%;font-size:11px;"><b>Date : </b><?php echo $receipt_date;?></div>
+<div style="float:left;width:45%;font-size:11px;"><b>Date : </b>'.date('d-m-Y', strtotime($result_arry['datetime'])).'</div>
 <div style="float:right;width:45%;text-align:right;font-size:11px;"><b>Invoice No:
-        Web/21-22/<?php echo $voucher_number;?></b></div>
+        Web/'.$financial_year.'/'.$result_arry['invoice_number'].'</b></div>
 <p>
 <div style="float:right;width:45%;text-align:right;font-size:11px;"><b>GSTIN - 27AADCI0005P1ZN</b></div>
 </p>
@@ -99,7 +115,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Paid by </b></div>
         </td>
         <td style="border-top:1px solid black;padding-left:20px;text-transform: capitalize;">
-            <div align="left"><?php echo $received_from;?></div>
+            <div align="left">'.$result_arry['enq_fullname'].'</div>
         </td>
     </tr>
     <tr>
@@ -107,7 +123,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Description</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"><?php echo $narration;?></div>
+            <div align="left"></div>
         </td>
     </tr>
     <tr>
@@ -115,7 +131,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Email</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"><?php echo $email;?></div>
+            <div align="left">'.$result_arry['enq_email'].'</div>
         </td>
     </tr>
     <tr>
@@ -123,7 +139,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Mobile</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"><?php echo $mobile;?></div>
+            <div align="left">'.$result_arry['enq_mobile'].'</div>
         </td>
     </tr>
     <tr>
@@ -131,7 +147,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Counsellor Name</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"><?php echo $counsellerName;?></div>
+            <div align="left">'.$couns_name.'</div>
         </td>
     </tr>
     <tr>
@@ -139,7 +155,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Payment Mode</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"><?php echo $pmt_mode_val;?></div>
+            <div align="left">'.$result_arry['payment_mode'].'</div>
         </td>
     </tr>
     <tr>
@@ -148,9 +164,32 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Joined Courses</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"><?php echo $str1;?></div>
+            <div align="left">'.$all_course_name.'</div>
         </td>
     </tr>
+ 
+    <tr>
+        <td colspan="2" style="padding: 0; border: none;">
+        <table  cellspacing="0" cellpadding="0" style=" width: 100%;">
+            <tr>
+            <td style="width: 75%; font-weight: bold;">GST Holder Name : '.$gst_holder_name.'</td>
+            <td style="width: 25%; font-weight: bold;">GST No. : '.$gst_number.'</td>
+            </tr>
+        </table>
+        </td>
+   </tr>
+
+    <tr>
+        <td colspan="2" style="padding: 0; border: none;">
+        <table  cellspacing="0" cellpadding="6" style=" width: 100%;">
+            <tr>
+            <td style="width: 100%; font-weight: bold;">Note : To claim GST credits or setoffs, fees must be paid through an account linked with GST-registered account holder only.</td>
+            </tr>
+        </table>
+        </td>
+   </tr>
+
+    
 </table>
 <table width="100%" cellspacing="0" cellpadding="3">
     <tr>
