@@ -156,11 +156,6 @@ if($result_arry['prepared_by']){
 }
 
 
-if($paymant_type=='regular_invoice'){
-    $number = $result_arry['final_amount'];
-  }else{
-    $number = $final_amount;
-  }
 
   $no = floor($total_amount_payment_transection);
   $point = round($number - $no, 2) * 100;
