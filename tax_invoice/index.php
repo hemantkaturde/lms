@@ -94,6 +94,115 @@ if($result_arry['conser_name']){
     $couns_name= $result_arry['counsellor_name'];
 }
 
+
+
+$excluding_GST = $total_amount_payment_transection * 100 / 118;
+      
+$cgst_amount = $excluding_GST * 9 /100;
+$sgst_amount = $excluding_GST * 9 /100;
+
+$paid_amount = $total_amount_payment_transection-$excluding_GST;
+
+if($paymant_type=='regular_invoice'){
+
+    $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id!=$paymentid and tbl_payment_transaction.id < $paymentid  and paymant_type='regular_invoice'");
+    $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
+  
+
+    if($result_arry_result_previous_amount['totalAmount']){
+    $abv = $result_arry_result_previous_amount['totalAmount'];
+    }else{
+    $abv = 0;
+    }
+}else{
+    $result_previous_amount = $conn->query("SELECT sum(totalAmount) as totalAmount FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id!=$paymentid and tbl_payment_transaction.id < $paymentid and add_on_course_id=$add_on_course_id and paymant_type='add_on_course_invoice'");
+    $result_arry_result_previous_amount = $result_previous_amount->fetch_assoc();
+  
+
+    if($result_arry_result_previous_amount['totalAmount']){
+    $abv = $result_arry_result_previous_amount['totalAmount'];
+    }else{
+    $abv = 0;
+    }
+}
+
+if($paymant_type=='regular_invoice'){
+    $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid and paymant_type='regular_invoice'");
+    $current_value_amount = $current_value->fetch_assoc();
+    $currentbal = $result_arry['final_amount']-($current_value_amount['totalAmountcureent']+$abv);
+    //$currentbal =  $total_amount_payment_transection-($current_value_amount['totalAmountcureent']+$abv);
+   
+  }else{
+
+    $current_value = $conn->query("SELECT sum(totalAmount) as totalAmountcureent FROM tbl_payment_transaction where tbl_payment_transaction.enquiry_id=$enq_id and tbl_payment_transaction.id=$paymentid and add_on_course_id=$add_on_course_id and paymant_type='add_on_course_invoice'");
+    $current_value_amount = $current_value->fetch_assoc();
+    $currentbal =  $final_amount-($current_value_amount['totalAmountcureent']+$abv);
+  }
+
+
+  if($paymant_type=='regular_invoice'){
+    $total_inc_amount= $result_arry['final_amount'];
+
+  }else{
+    $total_inc_amount= $final_amount;
+
+  }
+
+
+if($result_arry['prepared_by']){
+    $prepared_by= $result_arry['prepared_by'];
+}else{
+    $prepared_by = 'Auto Generated';
+}
+
+
+if($paymant_type=='regular_invoice'){
+    $number = $result_arry['final_amount'];
+  }else{
+    $number = $final_amount;
+  }
+
+  $no = floor($total_amount_payment_transection);
+  $point = round($number - $no, 2) * 100;
+  $hundred = null;
+  $digits_1 = strlen($no);
+  $i = 0;
+  $str = array();
+  $words = array('0' => '', '1' => 'One', '2' => 'Two',
+   '3' => 'Three', '4' => 'Four', '5' => 'Five', '6' => 'Six',
+   '7' => 'Seven', '8' => 'Eight', '9' => 'Nine',
+   '10' => 'Ten', '11' => 'Eleven', '12' => 'Twelve',
+   '13' => 'Thirteen', '14' => 'Fourteen',
+   '15' => 'Fifteen', '16' => 'Sixteen', '17' => 'Seventeen',
+   '18' => 'Eighteen', '19' =>'Nineteen', '20' => 'Twenty',
+   '30' => 'Thirty', '40' => 'Forty', '50' => 'Fifty',
+   '60' => 'Sixty', '70' => 'Seventy',
+   '80' => 'Eighty', '90' => 'Ninety');
+  $digits = array('', 'Hundred', 'Thousand', 'Lakh', 'Crore');
+  while ($i < $digits_1) {
+    $divider = ($i == 2) ? 10 : 100;
+    $number = floor($no % $divider);
+    $no = floor($no / $divider);
+    $i += ($divider == 10) ? 1 : 2;
+    if ($number) {
+       $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+       $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+       $str [] = ($number < 21) ? $words[$number] .
+           " " . $digits[$counter] . $plural . " " . $hundred
+           :
+           $words[floor($number / 10) * 10]
+           . " " . $words[$number % 10] . " "
+           . $digits[$counter] . $plural . " " . $hundred;
+    } else $str[] = null;
+ }
+ $str = array_reverse($str);
+ $result = implode('', $str);
+ $points = ($point) ?
+   "." . $words[$point / 10] . " " . 
+         $words[$point = $point % 10] : '';
+ $words = $result . "Rupees Only";
+
+
 $mpdf = new \Mpdf\Mpdf();
 $html = '<html><body>
 <style>
@@ -188,49 +297,50 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
         </table>
         </td>
    </tr>
+   
 
     
 </table>
 <table width="100%" cellspacing="0" cellpadding="3">
     <tr>
-        <td>&nbsp; </td>
+        <td>Total Amount [Incl. of (Admin Fee, Exam Fees, Book, 18% GST & Tuition/Training fee) for each course]*</td>
         <td rowspan="1" align="center" style="background-color:#c7a25b;"><b> INR. </b></td>
     </tr>
     <tr>
         <td rowspan="1" align="right" width="80%;" style="border-bottom:0px;border-top:0px;"><b> Paid Amount </b></td>
-        <td><?php echo $rupee_1;?></td>
+        <td>'.round($excluding_GST,2).'</td>
     </tr>
     <tr>
         <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> CGST 9% </b></td>
-        <td><?php echo $rupee_3;?></td>
+        <td>'. round($cgst_amount,2).'</td>
     </tr>
     <tr>
         <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> SGST 9% </b></td>
-        <td><?php echo $rupee_3;?></td>
+        <td>'.round($sgst_amount,2).'</td>
     </tr>
     <tr>
         <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> Amount Receivable</b></td>
-        <td><?php echo $rupee_6;?></td>
+        <td>'.$total_amount_payment_transection.'</td>
     </tr>
     <tr>
         <td rowspan="1" align="right"><b> Paid Before </b></td>
-        <td><?php echo $paidbefore;?></td>
+        <td>'.$abv.'</td>
     </tr>
     <tr>
         <td rowspan="1" align="right"><b> Balance Amount </b></td>
-        <td><?php echo $balamount1;?></td>
+        <td>'. $currentbal.'</td>
     </tr>
 
     <tr>
         <td rowspan="1" align="right"><b> Total Amount </b>(Incl. of Course fee + 18% GST+ Admin Fee) </td>
-        <td><?php echo $balamount;?></td>
+        <td>'.$total_inc_amount.'</td>
     </tr>
     <tr>
         <td rowspan="1" align="right"><b> Bill Prepared By : </b></td>
-        <td><?php echo $prepared_by;?></td>
+        <td>'.$prepared_by.'</td>
     </tr>
     <tr>
-        <td colspan="2" style="background-color:#c7a25b;"><b>Amount in word:</b> <?php echo $in_words;?></td>
+        <td colspan="2" style="background-color:#c7a25b;"><b>Amount in word:</b> '.$words.'</td>
     </tr>
 </table>
 <div class="terms_conditions">
