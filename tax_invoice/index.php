@@ -514,4 +514,4 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
 </html>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('invoice_hemant.pdf', 'D'); // Outputs the PDF
+$mpdf->Output('Tax_invoice.pdf', 'D'); // Outputs the PDF
