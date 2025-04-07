@@ -302,7 +302,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
         <td rowspan="1" align="center" style="background-color:#c7a25b;"><b> INR. </b></td>
     </tr>
     <tr>
-        <td rowspan="1" align="right" width="80%;" style="border-bottom:0px;border-top:0px;"><b> Paid Amount </b></td>
+        <td rowspan="1" align="right" width="80%;" style="border-bottom:0px;border-top:0px;"><b> Gross Amount </b></td>
         <td>'.round($excluding_GST,2).'</td>
     </tr>
     <tr>
@@ -314,7 +314,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
         <td>'.round($sgst_amount,2).'</td>
     </tr>
     <tr>
-        <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> Amount Receivable</b></td>
+        <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> Net Amount Paid</b></td>
         <td>'.$total_amount_payment_transection.'</td>
     </tr>
     <tr>
@@ -327,7 +327,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
     </tr>
 
     <tr>
-        <td rowspan="1" align="right"><b> Total Amount </b>(Incl. of Course fee + 18% GST+ Admin Fee) </td>
+        <td rowspan="1" align="right"><b> Total Amount </b></td>
         <td>'.$total_inc_amount.'</td>
     </tr>
     <tr>
