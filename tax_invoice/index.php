@@ -370,29 +370,28 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
     <!--    <p>10. Excel Sheet filled by the applicant with correct details</p>-->
     <!--</div>-->
 
-    <table
-        style="width: 80%; margin: 0 auto; border-collapse: collapse; text-align: left; font-weight: 700;margin-bottom:10px">
-        <tbody>
-            <tr>
-                <td style="padding: 8px;">1. Photo (Passport Size)</td>
-                <td style="padding: 8px;">2. Aadhar (both side)</td>
-                <td style="padding: 8px;">3. Active Mobile Number</td>
-                <td style="padding: 8px;">4. Valid Email ID</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px;">5. 10th Marksheet</td>
-                <td style="padding: 8px;">6. 12th Marksheet</td>
-                <td style="padding: 8px;">7. Graduation Marksheet</td>
-                <td style="padding: 8px;">8. Students Signature</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px;" colspan="3">9. Degree Certificate / All Semester Marksheet & Internship
-                    Certificate</td>
-                <td style="padding: 8px;">10. Excel Sheet filled by the applicant with correct details</td>
-            </tr>
-        </tbody>
-         
-    </table>
+  <table
+    style="width: 80%; margin: 0 auto; border-collapse: collapse; text-align: left; font-weight: 700; margin-bottom:10px; border-top: 2px solid black;">
+    <tbody>
+        <tr>
+            <td style="padding: 8px;">1. Photo (Passport Size)</td>
+            <td style="padding: 8px;">2. Aadhar (both side)</td>
+            <td style="padding: 8px;">3. Active Mobile Number</td>
+            <td style="padding: 8px;">4. Valid Email ID</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;">5. 10th Marksheet</td>
+            <td style="padding: 8px;">6. 12th Marksheet</td>
+            <td style="padding: 8px;">7. Graduation Marksheet</td>
+            <td style="padding: 8px;">8. Students Signature</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;" colspan="3">9. Degree Certificate / All Semester Marksheet & Internship Certificate</td>
+            <td style="padding: 8px;">10. Excel Sheet filled by the applicant with correct details</td>
+        </tr>
+    </tbody>
+</table>
+
 
     <p style="text-align:justify;">
         2. Students must fill and submit the Admission form to enable themselves to be added to online/offline study
