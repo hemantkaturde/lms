@@ -287,7 +287,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
         <td colspan="2" style="padding: 0; border: none;">
         <table  cellspacing="0" cellpadding="6" style=" width: 100%;">
             <tr>
-            <td style="width: 100%; font-weight: bold;">Note : To claim GST credits or setoffs, fees must be paid through an account linked with GST-registered account holder only.</td>
+            <td style="width: 100%; font-weight: bold;font-size:9px">Note : To claim GST credits or setoffs, fees must be paid through an account linked with GST-registered account holder only.</td>
             </tr>
         </table>
         </td>
@@ -298,7 +298,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
 </table>
 <table width="100%" cellspacing="0" cellpadding="3">
     <tr>
-        <td>Total Amount [Incl. of (Admin Fee, Exam Fees, Book, 18% GST & Tuition/Training fee) for each course]*</td>
+        <td> <b style="font-size:9px">Total Amount [Incl. of (Admin Fee, Exam Fees, Book, 18% GST & Tuition/Training fee) for each course]*</b></td>
         <td rowspan="1" align="center" style="background-color:#c7a25b;"><b> INR. </b></td>
     </tr>
     <tr>
