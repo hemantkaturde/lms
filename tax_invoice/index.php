@@ -287,7 +287,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
         <td colspan="2" style="padding: 0; border: none;">
         <table  cellspacing="0" cellpadding="6" style=" width: 100%;">
             <tr>
-            <td style="width: 100%; font-weight: bold;">Note : To claim GST credits or setoffs, fees must be paid through an account linked with GST-registered account holder only.</td>
+            <td style="width: 100%; font-weight: bold;font-size:9px">Note : To claim GST credits or setoffs, fees must be paid through an account linked with GST-registered account holder only.</td>
             </tr>
         </table>
         </td>
@@ -298,11 +298,11 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
 </table>
 <table width="100%" cellspacing="0" cellpadding="3">
     <tr>
-        <td>Total Amount [Incl. of (Admin Fee, Exam Fees, Book, 18% GST & Tuition/Training fee) for each course]*</td>
+        <td> <b style="font-size:9px">Total Amount [Incl. of (Admin Fee, Exam Fees, Book, 18% GST & Tuition/Training fee) for each course]*</b></td>
         <td rowspan="1" align="center" style="background-color:#c7a25b;"><b> INR. </b></td>
     </tr>
     <tr>
-        <td rowspan="1" align="right" width="80%;" style="border-bottom:0px;border-top:0px;"><b> Paid Amount </b></td>
+        <td rowspan="1" align="right" width="80%;" style="border-bottom:0px;border-top:0px;"><b> Gross Amount </b></td>
         <td>'.round($excluding_GST,2).'</td>
     </tr>
     <tr>
@@ -314,7 +314,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
         <td>'.round($sgst_amount,2).'</td>
     </tr>
     <tr>
-        <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> Amount Receivable</b></td>
+        <td rowspan="1" align="right" style="border-bottom:0px;border-top:0px;"><b> Net Amount Paid</b></td>
         <td>'.$total_amount_payment_transection.'</td>
     </tr>
     <tr>
@@ -327,7 +327,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
     </tr>
 
     <tr>
-        <td rowspan="1" align="right"><b> Total Amount </b>(Incl. of Course fee + 18% GST+ Admin Fee) </td>
+        <td rowspan="1" align="right"><b> Total Amount </b></td>
         <td>'.$total_inc_amount.'</td>
     </tr>
     <tr>
@@ -370,29 +370,28 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
     <!--    <p>10. Excel Sheet filled by the applicant with correct details</p>-->
     <!--</div>-->
 
-    <table
-        style="width: 80%; margin: 0 auto; border-collapse: collapse; text-align: left; font-weight: 700;margin-bottom:10px">
-        <tbody>
-            <tr>
-                <td style="padding: 8px;">1. Photo (Passport Size)</td>
-                <td style="padding: 8px;">2. Aadhar (both side)</td>
-                <td style="padding: 8px;">3. Active Mobile Number</td>
-                <td style="padding: 8px;">4. Valid Email ID</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px;">5. 10th Marksheet</td>
-                <td style="padding: 8px;">6. 12th Marksheet</td>
-                <td style="padding: 8px;">7. Graduation Marksheet</td>
-                <td style="padding: 8px;">8. Students Signature</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px;" colspan="3">9. Degree Certificate / All Semester Marksheet & Internship
-                    Certificate</td>
-                <td style="padding: 8px;">10. Excel Sheet filled by the applicant with correct details</td>
-            </tr>
-        </tbody>
-         
-    </table>
+  <table
+    style="width: 80%; margin: 0 auto; border-collapse: collapse; text-align: left; font-weight: 700; margin-bottom:10px; border-top: 2px solid black;">
+    <tbody>
+        <tr>
+            <td style="padding: 8px;">1. Photo (Passport Size)</td>
+            <td style="padding: 8px;">2. Aadhar (both side)</td>
+            <td style="padding: 8px;">3. Active Mobile Number</td>
+            <td style="padding: 8px;">4. Valid Email ID</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;">5. 10th Marksheet</td>
+            <td style="padding: 8px;">6. 12th Marksheet</td>
+            <td style="padding: 8px;">7. Graduation Marksheet</td>
+            <td style="padding: 8px;">8. Students Signature</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;" colspan="3">9. Degree Certificate / All Semester Marksheet & Internship Certificate</td>
+            <td style="padding: 8px;">10. Excel Sheet filled by the applicant with correct details</td>
+        </tr>
+    </tbody>
+</table>
+
 
     <p style="text-align:justify;">
         2. Students must fill and submit the Admission form to enable themselves to be added to online/offline study
