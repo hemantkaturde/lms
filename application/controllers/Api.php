@@ -3836,6 +3836,26 @@ class Api extends BaseController
     }
 
 
+    public function getEnquiryInfo(){
+
+        if($this->input->post('enq_id')) {
+            $topics = $this->Api_model->getEnquiryInfo($this->input->post('enq_id'));
+            if($topics){
+                $status = 'Success';
+                $message = 'Data Found';
+                $data = $topics;
+            }else{
+                $status = 'Failure';
+                $message = 'No Data Found';
+                $data = '';   
+            }
+            $responseData = array('status' => $status,'message'=> $message,'data' => $data);
+            setContentLength($responseData);
+        }
+
+    }
+
+
 }
 
 ?>
