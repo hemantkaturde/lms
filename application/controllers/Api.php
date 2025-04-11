@@ -1023,6 +1023,7 @@ class Api extends BaseController
         }
 
     }
+    
 
 
     /*class for create Add Course*/
@@ -3855,6 +3856,23 @@ class Api extends BaseController
 
     }
 
+    public function deleteEnquiry()
+    {
+        $post_submit = $this->input->post();
+
+        $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
+        $result = $this->database->data_update('tbl_enquiry',$enquiryInfo,'enq_id',$this->input->post('id'));
+
+        if ($result > 0) {
+             echo(json_encode(array('status'=>TRUE)));
+
+             $process = 'Enquiry Delete';
+             $processFunction = 'Enquiry/deleteEnquiry';
+             $this->logrecord($process,$processFunction);
+
+            }
+        else { echo(json_encode(array('status'=>FALSE))); }
+    }
 
 }
 
