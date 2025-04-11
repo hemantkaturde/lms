@@ -3860,6 +3860,10 @@ class Api extends BaseController
     {
         $post_submit = $this->input->post();
 
+        print_r($post_submit);
+        exit;
+
+
         $enquiryInfo = array('isDeleted'=>1,'updatedBy'=> $this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
         $result = $this->database->data_update('tbl_enquiry',$enquiryInfo,'enq_id',$this->input->post('id'));
 
