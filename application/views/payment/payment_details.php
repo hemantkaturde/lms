@@ -407,7 +407,7 @@
                                     </label>
                                     <div>
                                         <input autocomplete="off" autocomplete="off" type="text" id="description"
-                                            name="description"  placeholder="Enter Description" maxlength="50"
+                                            name="description" value="In order to start the course, Applicant must pay the full course fees in advance; partial payment will result in delayed or limited access to the class." placeholder="Enter Description" maxlength="50"
                                             class="form-control col-md-12 col-xs-12">
                                         <p class="error description_error"></p>
                                     </div>
