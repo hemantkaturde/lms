@@ -1108,6 +1108,11 @@ class Api extends BaseController
                 'course_mode_offline'=>$course_mode_offline,
                 'course_cgst' => $cgst_tax,
                 'course_cgst_tax_value' => $cgst_tax_value,
+
+                'mainCourse_condition'=>$this->input->post('mainCourse'),
+                'sponsored_condition'=>$this->input->post('sponsored'),
+                'regular_condition'=>$this->input->post('regular'),
+
                 'course_sgst' => $sgst_tax,
                 'course_sgst_tax_value' => $sgst_tax_value,
                 'course_total_fees' => $total_course_fees
@@ -1131,9 +1136,15 @@ class Api extends BaseController
                 $required_checkbox = '';
             }
 
+            if($this->input->post('mainCourse') || $this->input->post('sponsored') || $this->input->post('regular')){
+                $course_type_required = '';
+            }else{
+                $course_type_required = 'Course Type Required';
+            }
+
             if($this->form_validation->run() == FALSE){
                 $createcourse_response['status'] = 'failure';
-                $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox);
+                $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_mode'=>$required_checkbox,'course_type_condition'=>$course_type_required);
             }else{
 
                 /*check If course name is unique*/
@@ -1249,6 +1260,11 @@ class Api extends BaseController
                 'course_mode_offline'=>$course_mode_offline,
                 'course_cgst' => $cgst_tax,
                 'course_cgst_tax_value' => $cgst_tax_value,
+
+                'mainCourse_condition'=>$this->input->post('mainCourse'),
+                'sponsored_condition'=>$this->input->post('sponsored'),
+                'regular_condition'=>$this->input->post('regular'),
+
                 'course_sgst' => $sgst_tax,
                 'course_sgst_tax_value' => $sgst_tax_value,
                 'course_total_fees' => $total_course_fees
@@ -1265,10 +1281,15 @@ class Api extends BaseController
             $this->form_validation->set_rules('course_books', 'Course Books', 'trim');
             //$this->form_validation->set_rules('remarks', 'remarks', 'trim');
 
+            if($this->input->post('mainCourse') || $this->input->post('sponsored') || $this->input->post('regular')){
+                $course_type_required = '';
+            }else{
+                $course_type_required = 'Course Type Required';
+            }
             
             if($this->form_validation->run() == FALSE){
                 $createcourse_response['status'] = 'failure';
-                $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')));
+                $createcourse_response['error'] = array('course_name'=>strip_tags(form_error('course_name')), 'fees'=>strip_tags(form_error('fees')), 'course_type'=>strip_tags(form_error('course_type')), /*'description'=>strip_tags(form_error('description')),*/'certificate_cost'=>strip_tags(form_error('certificate_cost')),'kit_cost'=>strip_tags(form_error('kit_cost')),'one_time_admission_fees'=>strip_tags(form_error('one_time_admission_fees')),'course_books'=>strip_tags(form_error('course_books')),'course_type_condition'=>$course_type_required);
             }else{
 
                 // if($this->input->post('course_mode_online')!=1){
