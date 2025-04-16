@@ -166,7 +166,7 @@ class Api_model extends CI_Model
 
     /*get All Course List*/
     public function getCourseData($data){
-        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name,BaseTbl.course_total_fees,BaseTbl.course_books,BaseTbl.course_mode_online,BaseTbl.course_mode_offline,BaseTbl.course_cert_cost,BaseTbl.course_onetime_adm_fees,BaseTbl.course_kit_cost,BaseTbl.course_cgst_tax_value,BaseTbl.course_sgst_tax_value,BaseTbl.course_total_fees,Type.ct_id as course_type_id');
+        $this->db->select('BaseTbl.courseId , BaseTbl.course_name, BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name,BaseTbl.course_total_fees,BaseTbl.course_books,BaseTbl.course_mode_online,BaseTbl.course_mode_offline,BaseTbl.course_cert_cost,BaseTbl.course_onetime_adm_fees,BaseTbl.course_kit_cost,BaseTbl.course_cgst_tax_value,BaseTbl.course_sgst_tax_value,BaseTbl.course_total_fees,Type.ct_id as course_type_id,tbl_course.mainCourse_condition as mainCourse,tbl_course.sponsored_condition as sponsored,tbl_course.regular_condition as regular');
         $this->db->from('tbl_course as BaseTbl');
         $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
 
