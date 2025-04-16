@@ -17,6 +17,8 @@ $paymant_type = $result_arry['paymant_type'];
 $add_on_course_id = $result_arry['add_on_course_id'];
 $enquiry_id = $result_arry['enquiry_id'];
 $gst_number = $result_arry['gst_number'];
+$description = $result_arry['description'];
+
 $gst_holder_name = $result_arry['gst_holder_name'];
 if ($paymant_type == 'regular_invoice') {
     $course_ids = explode(',', $enquiry_course_ids);
@@ -44,7 +46,7 @@ if ($paymant_type == 'regular_invoice') {
                 }
 
                 $total_fees+= $get_course_fees['course_total_fees'];
-                $course_name.= $i . ') ' . $get_course_fees['course_name'] . ' ( Rs ' . $get_course_fees['course_total_fees'] . ' )  '.$course_type_condition.'  <br>';
+                $course_name.= $i . ') ' . $get_course_fees['course_name'].' '.$course_type_condition.'  <br>';
                 $i++;
             } else {
                 $total_fees = '';
@@ -227,7 +229,7 @@ td{border-right:1px solid #000;font-size:11px;border-bottom:1px solid #000;paddi
             <div align="left"><b>Description</b></div>
         </td>
         <td style="padding-left:20px;">
-            <div align="left"></div>
+            <div align="left">'.$description.'</div>
         </td>
     </tr>
     <tr>
