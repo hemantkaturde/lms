@@ -247,13 +247,13 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
 
 
-                if($get_course_fees['mainCourse_condition']=='Main'){
-                  $course_type_condition = '';
-                }else{
-                    $course_type_condition = '-'.$get_course_fees['sponsored_condition'];
-                }
+                  if($get_course_fees['mainCourse_condition']=='Main'){
+                    $course_type_condition = '';
+                  }else{
+                      $course_type_condition = '-'.$get_course_fees['sponsored_condition'];
+                  }
 
-                if($get_course_fees['mainCourse_condition']=='Main'){
+            
                   if ($get_course_fees) {
                     $total_fees += $get_course_fees['course_total_fees'];
                     $course_name .= $i . '-' . $get_course_fees['course_name'] .$course_type_condition. ' <br>';
@@ -263,19 +263,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                     $course_name = '';  
                     $i++;  
                   }
-              }else{
-
-                if ($get_course_fees) {
-                  $total_fees += $get_course_fees['course_total_fees'];
-                  $course_name .= $i . '-' . $get_course_fees['course_name'] . ' <br>';
-                  $i++;  
-                } else {
-                  $total_fees = '';
-                  $course_name = '';  
-                  $i++;  
-                }
-
-              }
+              
               ?>
               <tr>
                 <td><?= $get_course_fees['course_name'] ?></td>
