@@ -249,26 +249,21 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
 
                   if($get_course_fees['mainCourse_condition']=='Main'){
                     $course_type_condition = '';
-
-                    if ($get_course_fees) {
-                      $total_fees += $get_course_fees['course_total_fees'];
-                      $course_name .= $i . '-' . $get_course_fees['course_name'].' <br>';
-                      $i++;  
-                    } else {
-                      $total_fees = '';
-                      $course_name = '';  
-                      $i++;  
-                    }
-
+                    
                   }else{
                       $course_type_condition = '-'.$get_course_fees['sponsored_condition'];
-                      $total_fees = '';
-                      $course_name = '';  
-                      $i++;  
-
                   }
 
             
+                  if ($get_course_fees) {
+                    $total_fees += $get_course_fees['course_total_fees'];
+                    $course_name .= $i . '-' . $get_course_fees['course_name'].' <br>';
+                    $i++;  
+                  } else {
+                    $total_fees = '';
+                    $course_name = '';  
+                    $i++;  
+                  }
               
               ?>
               <tr>
