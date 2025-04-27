@@ -256,7 +256,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
             
                   if ($get_course_fees) {
                     $total_fees += $get_course_fees['course_total_fees'];
-                    $course_name .= $i . '-' . $get_course_fees['course_name'] .$course_type_condition. ' <br>';
+                    $course_name .= $i . '-' . $get_course_fees['course_name'].' <br>';
                     $i++;  
                   } else {
                     $total_fees = '';
@@ -266,7 +266,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
               
               ?>
               <tr>
-                <td><?= $get_course_fees['course_name'] ?></td>
+                <td><?= $get_course_fees['course_name'].'-'.$course_type_condition ?></td>
                 <td><?= '₹ ' . $get_course_fees['course_fees'] ?></td>
                 <td><?= '₹ ' . $get_course_fees['course_cert_cost'] ?></td>
                 <td><?= '₹ ' . $get_course_fees['course_kit_cost'] ?></td>
