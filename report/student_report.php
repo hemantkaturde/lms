@@ -256,7 +256,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
             
                   if ($get_course_fees) {
 
-                    if ($get_course_fees['mainCourse_condition'] = 'Main') {
+                    if ($get_course_fees['mainCourse_condition'] == 'Main') {
                         $total_fees += $get_course_fees['course_total_fees'];
                     }
 
