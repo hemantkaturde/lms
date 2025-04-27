@@ -233,7 +233,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
               <th>Total Course Fees</th>
             </tr>
           </thead>
-          <tbody> 
+          <!-- <tbody> 
             <?php 
             while ($row = $resultStudentEnquirydetails->fetch_array()) { 
               $course_ids = explode(',', $row['enq_course_id']);
@@ -289,7 +289,73 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 <td><b><?= '₹ ' . $total_fees ?></b></td>
               </tr>
               <?php } ?>
-          </tbody>
+          </tbody> -->
+          <tbody> 
+    <?php 
+    while ($row = $resultStudentEnquirydetails->fetch_array()) { 
+        $course_ids = explode(',', $row['enq_course_id']);
+        $total_fees = 0;
+        $course_name = '';
+        $i = 1;
+        $show_total_column = true; // Flag to control whether to show total column
+
+        foreach ($course_ids as $id) {
+            $getStudentEnquiryCourses = "SELECT * FROM tbl_course WHERE courseId = $id";
+            $resultStudentEnquiryCourses = $conn->query($getStudentEnquiryCourses);
+            $get_course_fees = $resultStudentEnquiryCourses->fetch_array();
+
+            if($get_course_fees['mainCourse_condition']=='Main'){
+                $course_type_condition = '';
+            } else {
+                $course_type_condition = '-' . $get_course_fees['sponsored_condition'];
+                
+                // If the course is sponsored, do not calculate total fees and hide the total column
+                if ($get_course_fees['sponsored_condition'] == 'sponsored') {
+                    $show_total_column = false;
+                }
+            }
+
+            if ($get_course_fees) {
+                $course_name .= $i . '-' . $get_course_fees['course_name'] . '<br>';
+                $i++;  
+                
+                if ($show_total_column) {
+                    $total_fees += $get_course_fees['course_total_fees'];
+                }
+            } else {
+                $total_fees = '';
+                $course_name = '';  
+                $i++;  
+            }
+    ?>
+    <tr>
+        <td><?= $get_course_fees['course_name'] . '<b>' . $course_type_condition . '</b>' ?></td>
+        <td><?= '₹ ' . $get_course_fees['course_fees'] ?></td>
+        <td><?= '₹ ' . $get_course_fees['course_cert_cost'] ?></td>
+        <td><?= '₹ ' . $get_course_fees['course_kit_cost'] ?></td>
+        <td><?= '₹ ' . $get_course_fees['course_onetime_adm_fees'] ?></td>
+        <td><?= $get_course_fees['course_cgst_tax_value'] ?></td>
+        <td><?= $get_course_fees['course_sgst_tax_value'] ?></td>
+        <td><?= '₹ ' . $get_course_fees['course_total_fees'] ?></td>
+    </tr>
+    <?php } ?>
+
+    <!-- Display Total Row only if the course is not sponsored -->
+    <?php if ($show_total_column) { ?>
+    <tr>
+        <td><b>Total Course Fees</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b><?= '₹ ' . $total_fees ?></b></td>
+    </tr>
+    <?php } ?>
+    <?php } ?>
+</tbody>
+
         </table>
       </div>
     </div>
