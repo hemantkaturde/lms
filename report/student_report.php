@@ -266,7 +266,8 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
               
               ?>
               <tr>
-                <td><?= $get_course_fees['course_name'].'-'.$course_type_condition ?></td>
+                <td><?= $get_course_fees['course_name'].'<b>'.$course_type_condition.'</b>'?></td>
+               <? if($get_course_fees['mainCourse_condition']=='Main'){ ?>
                 <td><?= '₹ ' . $get_course_fees['course_fees'] ?></td>
                 <td><?= '₹ ' . $get_course_fees['course_cert_cost'] ?></td>
                 <td><?= '₹ ' . $get_course_fees['course_kit_cost'] ?></td>
@@ -274,6 +275,16 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 <td><?= $get_course_fees['course_cgst_tax_value'] ?></td>
                 <td><?= $get_course_fees['course_sgst_tax_value'] ?></td>
                 <td><?= '₹ ' . $get_course_fees['course_total_fees'] ?></td>
+                <?php }else{?>
+
+                  <td><?= '₹ ' . $get_course_fees['course_fees'] ?></td>
+                  <td><?= '₹ ' . $get_course_fees['course_cert_cost'] ?></td>
+                  <td><?= '₹ ' . $get_course_fees['course_kit_cost'] ?></td>
+                  <td><?= '₹ ' . $get_course_fees['course_onetime_adm_fees'] ?></td>
+                  <td><?= $get_course_fees['course_cgst_tax_value'] ?></td>
+                  <td><?= $get_course_fees['course_sgst_tax_value'] ?></td>
+                  <td><?= '₹ ' . $get_course_fees['course_total_fees'] ?></td>
+                <?php } ?>
               </tr>
               <?php } ?>
 
