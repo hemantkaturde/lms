@@ -297,7 +297,6 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
         $total_fees = 0;
         $course_name = '';
         $i = 1;
-        $show_total_column = true; // Flag to control whether to show total column
 
         foreach ($course_ids as $id) {
             $getStudentEnquiryCourses = "SELECT * FROM tbl_course WHERE courseId = $id";
@@ -308,18 +307,14 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
                 $course_type_condition = '';
             } else {
                 $course_type_condition = '-' . $get_course_fees['sponsored_condition'];
-                
-                // If the course is sponsored, do not calculate total fees and hide the total column
-                if ($get_course_fees['sponsored_condition'] == 'sponsored') {
-                    $show_total_column = false;
-                }
             }
 
             if ($get_course_fees) {
                 $course_name .= $i . '-' . $get_course_fees['course_name'] . '<br>';
                 $i++;  
-                
-                if ($show_total_column) {
+
+                // Check if the course is sponsored, skip adding to total fees if sponsored
+                if ($get_course_fees['sponsored_condition'] != 'sponsored') {
                     $total_fees += $get_course_fees['course_total_fees'];
                 }
             } else {
@@ -340,8 +335,7 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
     </tr>
     <?php } ?>
 
-    <!-- Display Total Row only if the course is not sponsored -->
-    <?php if ($show_total_column) { ?>
+    <!-- Display Total Row -->
     <tr>
         <td><b>Total Course Fees</b></td>
         <td></td>
@@ -352,7 +346,6 @@ $resultStudentEnquirydetails = $conn->query($getStudentEnquirydetails);
         <td></td>
         <td><b><?= '₹ ' . $total_fees ?></b></td>
     </tr>
-    <?php } ?>
     <?php } ?>
 </tbody>
 
