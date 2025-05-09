@@ -312,9 +312,13 @@
             <tbody>
 
              <?php foreach ($upcoming_class_links as $key => $value) {
+
+print_r($value['courserestrictId']);
+exit;
+
                ?>
                 <tr>
-                    <td><?=$value['courserestrictId'] ?></td>
+                    <td><?=$value['course_name'] ?></td>
                     <td><?=$value['title'] ?></td>
                     <td><?=$value['date'] ?></td>
                     <td><?=$value['classtime'] ?></td>
