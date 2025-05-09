@@ -313,9 +313,7 @@
 
              <?php 
 			 
-			 
-			 print_r($upcoming_class_links);
-			 exit;
+
 			 
 			 foreach ($upcoming_class_links as $key => $value) {
                ?>
@@ -337,11 +335,11 @@
 							<td><button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button></td>
 					
 						<?php }else{ ?>
-							<td><?=$value['link_url'] ?></td>
+							<td><?=$value['meeting_link'] ?></td>
 							<td>
 								<?php  if($value['iscancle']!=1){ ?>
 								<?php if($value['attendance_alreday_exits']!='1'){ ?>
-									<?php if($value['link_url']){ ?>
+									<?php if($value['meeting_link']){ ?>
 										<button id="join_link" class="join_link" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>"  meeting_link="<?=$value['link_url']?>" >JOIN</button>
 									<?php } ?>
 											<button id="attend_manually" class="attend_manually" user-id="<?=$value['userid']?>" topic-id="<?=$value['topicid']?>" course-id="<?=$value['courseId']?>" meeting_id="<?=$value['meeting_id']?>">Click To Attend</button>
