@@ -312,10 +312,6 @@
             <tbody>
 
              <?php foreach ($upcoming_class_links as $key => $value) {
-
-print_r($value['courserestrictId']);
-exit;
-
                ?>
                 <tr>
                     <td><?=$value['course_name'] ?></td>
@@ -325,7 +321,7 @@ exit;
                    
                     <?php 
 		
-					if($value['courserestrictId']!=='null'){ ?>
+					if($value['courserestrictId']){ ?>
 						<?php $array_of_course_id = json_decode($value['courserestrictId'], true); ?>
 						<?php if (in_array($value['courseId'], $array_of_course_id)) { ?>
 							<td></td>
