@@ -318,8 +318,8 @@
 			 foreach ($upcoming_class_links as $key => $value) {
                ?>
                 <tr>
-                    <td><?=$value['course_name'] ?></td>
-                    <td><?=$value['title'] ?></td>
+                    <td><?=$value['attendance_alreday_exits'] ?></td>
+                    <td><?=$value['iscancle'] ?></td>
                     <td><?=$value['date'] ?></td>
                     <td><?=$value['classtime'] ?></td>
                    
