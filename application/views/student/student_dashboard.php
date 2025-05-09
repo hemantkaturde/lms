@@ -322,7 +322,10 @@
                     <?php 
 		
 					if($value['courserestrictId']!=='null'){ ?>
-						<?php $array_of_course_id = json_decode($value['courserestrictId'], true); ?>
+						<?php $array_of_course_id = json_decode($value['courserestrictId'], true);
+						if($array_of_course_id){
+						?>
+						
 						<?php if (in_array($value['courseId'], $array_of_course_id)) { ?>
 							<td></td>
 							<td><button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button></td>
@@ -343,7 +346,7 @@
 									<b>Cancelled</b>
 								<?php } ?>
 							</td>
-						<?php } ?>
+						<?php } } ?>
 
 					<?php }else{  ?>
 						<td>
