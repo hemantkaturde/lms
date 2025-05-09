@@ -461,7 +461,7 @@ class Admission_model extends CI_Model
                     $check_course_restricted_or_not =$this->checkcourserestrictedornotvalue($userId);
 
                     //$data[$counter]['courseId'] = $value['courseId'];
-                    $data[$counter]['course_name'] = 'sss';
+                    $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['title'] = $value['topic'];
                     $data[$counter]['classtime'] = $value['classtime'];
                     $data[$counter]['meeting_link'] = $value['meeting_link'];
