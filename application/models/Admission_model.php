@@ -430,7 +430,7 @@ class Admission_model extends CI_Model
 
          foreach ($course_ids as $key => $value) {
            
-        $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime,'.TBL_TOPIC_MEETING_LINK.'.link_url as meeting_link');
+        $this->db->select('*,'.TBL_TOPIC_MEETING_LINK.'.id as meeting_id,'.TBL_TIMETABLE_TRANSECTIONS.'.id as topicid,'.TBL_TIMETABLE_TRANSECTIONS.'.timings as classtime');
         $this->db->join(TBL_COURSE_TYPE, TBL_COURSE_TYPE.'.ct_id = '.TBL_COURSE.'.course_type_id');
 
         $this->db->join(TBL_TIMETABLE_TRANSECTIONS, TBL_TIMETABLE_TRANSECTIONS.'.course_id = '.TBL_COURSE.'.courseId');
@@ -464,7 +464,7 @@ class Admission_model extends CI_Model
                     $data[$counter]['course_name'] = $value['course_name'];
                     $data[$counter]['title'] = $value['topic'];
                     $data[$counter]['classtime'] = $value['classtime'];
-                    $data[$counter]['meeting_link'] = $value['meeting_link'];
+                    $data[$counter]['link_url'] = $value['link_url'];
                     $data[$counter]['createdDtm'] = $value['createdDtm'];
                     $data[$counter]['date'] = $value['date'];
                     $data[$counter]['meeting_id'] = $value['meeting_id'];
