@@ -311,7 +311,13 @@
             </thead>
             <tbody>
 
-             <?php foreach ($upcoming_class_links as $key => $value) {
+             <?php 
+			 
+			 
+			 print_r($upcoming_class_links);
+			 exit;
+			 
+			 foreach ($upcoming_class_links as $key => $value) {
                ?>
                 <tr>
                     <td><?=$value['course_name'] ?></td>
