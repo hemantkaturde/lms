@@ -335,7 +335,7 @@
 							<td><button style="background:grey,color: #ffff"> Please pay the Balance fees. Contact admin</button></td>
 					
 						<?php }else{ ?>
-							<td><?=$value['meeting_link'] ?></td>
+							<td><?=$value['meeting_link'] ?> ddddddd</td>
 							<td>
 								<?php  if($value['iscancle']!=1){ ?>
 								<?php if($value['attendance_alreday_exits']!='1'){ ?>
