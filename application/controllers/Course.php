@@ -1159,11 +1159,11 @@
                                                                                     echo $date->format("d-m-Y");
 
                                                                                     // print_r($allDataInSheet[$i]['A']);
-                                                                                    exit;
+                                                                                  //  exit;
                                                                                   
                                                                                     //$formatted_date = str_replace("/", "-", $date_export_date );
                                                                                     // $insertArr['date'] = date('Y-m-d', strtotime($formatted_date));
-                                                                                    $insertArr['date'] = $date->format("d-m-Y");
+                                                                                    $insertArr['date'] = $date->format("Y-m-d");
 
                                                                     
                                                                                     $insertArr['timings'] =$allDataInSheet[$i]['B'];
