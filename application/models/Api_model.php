@@ -2364,6 +2364,12 @@ class Api_model extends CI_Model
                   $data[$counter]['course_sgst_tax_value'] = $getCourseInfo[0]->course_sgst_tax_value;
                   $data[$counter]['course_total_fees'] = $getCourseInfo[0]->course_total_fees;
                   $data[$counter]['course_type_id'] = $getCourseInfo[0]->course_type_id;
+
+                  $data[$counter]['mainCourse'] = $getCourseInfo[0]->mainCourse_condition;
+                  $data[$counter]['sponsored'] = $getCourseInfo[0]->sponsored_condition;
+                  $data[$counter]['regular'] = $getCourseInfo[0]->regular_condition;
+
+
                   $counter++; 
             }
         }
@@ -2375,7 +2381,7 @@ class Api_model extends CI_Model
 
     public function getcourseinfobyidforstudent($course_id){
     
-        $this->db->select('BaseTbl.courseId,BaseTbl.course_name,BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name,BaseTbl.course_total_fees,BaseTbl.course_books,BaseTbl.course_mode_online,BaseTbl.course_mode_offline,BaseTbl.course_cert_cost,BaseTbl.course_onetime_adm_fees,BaseTbl.course_kit_cost,BaseTbl.course_cgst_tax_value,BaseTbl.course_sgst_tax_value,BaseTbl.course_total_fees,Type.ct_id as course_type_id');
+        $this->db->select('BaseTbl.courseId,BaseTbl.course_name,BaseTbl.course_desc, BaseTbl.course_date,BaseTbl.createdDtm, BaseTbl.course_fees, Type.ct_name,BaseTbl.course_total_fees,BaseTbl.course_books,BaseTbl.course_mode_online,BaseTbl.course_mode_offline,BaseTbl.course_cert_cost,BaseTbl.course_onetime_adm_fees,BaseTbl.course_kit_cost,BaseTbl.course_cgst_tax_value,BaseTbl.course_sgst_tax_value,BaseTbl.course_total_fees,Type.ct_id as course_type_id,BaseTbl.mainCourse_condition as mainCourse,BaseTbl.sponsored_condition as sponsored,BaseTbl.regular_condition as regular');
         $this->db->from('tbl_course as BaseTbl');
         $this->db->join('tbl_course_type as Type', 'Type.ct_id = BaseTbl.course_type_id','left');
         $this->db->where('BaseTbl.courseId', $course_id);
