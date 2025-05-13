@@ -1156,7 +1156,7 @@
 
                                                                                     // $formatted_date = DateTime::createFromFormat("d-m-y",$date_export_date)->format("m-d-Y");
 
-                                                                                    print_r( date('Y-m-d', strtotime($this->input->post('to_date'))));
+                                                                                    print_r( date('Y-m-d', strtotime($allDataInSheet[$i]['A'])));
                                                                                     exit;
                                                                                   
                                                                                     //$formatted_date = str_replace("/", "-", $date_export_date );
