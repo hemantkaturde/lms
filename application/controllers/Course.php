@@ -1155,7 +1155,7 @@
 
                                                                                     $formatted_date = DateTime::createFromFormat("d-m-y",$date_export_date)->format("m-d-Y");
 
-                                                                                    print_r($formatted_date);
+                                                                                    print_r($date_export_date);
                                                                                     exit;
                                                                                   
                                                                                     //$formatted_date = str_replace("/", "-", $date_export_date );
