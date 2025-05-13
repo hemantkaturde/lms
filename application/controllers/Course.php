@@ -1153,9 +1153,10 @@
                                                                                     $insertArr['to_date'] = date('Y-m-d', strtotime($this->input->post('to_date')));
                                                                                     $date_export_date = $allDataInSheet[$i]['A'];
 
-                                                                                    $formatted_date = DateTime::createFromFormat("d-m-y",$date_export_date)->format("m-d-Y");
 
-                                                                                    print_r($date_export_date);
+                                                                                    // $formatted_date = DateTime::createFromFormat("d-m-y",$date_export_date)->format("m-d-Y");
+
+                                                                                    print_r( date('Y-m-d', strtotime($this->input->post('to_date'))));
                                                                                     exit;
                                                                                   
                                                                                     //$formatted_date = str_replace("/", "-", $date_export_date );
